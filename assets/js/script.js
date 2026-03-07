@@ -1,16 +1,3 @@
-// mobile menu
-
-const menuBtn = document.getElementById("menuBtn");
-const navMenu = document.getElementById("navMenu");
-
-menuBtn.onclick = () => {
-
-navMenu.classList.toggle("show");
-
-};
-
-// typing animation
-
 const text = [
 "Data Analytics Enthusiast",
 "Software Developer",
@@ -34,10 +21,8 @@ letter = currentText.slice(0, ++index);
 document.getElementById("typing").textContent = letter;
 
 if(letter.length === currentText.length){
-
 count++;
 index = 0;
-
 }
 
 setTimeout(type,120);
@@ -45,3 +30,5 @@ setTimeout(type,120);
 }
 
 type();
+
+particlesJS.load('particles-js','https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json');
