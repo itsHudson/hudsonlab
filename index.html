@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -22,12 +22,13 @@
     <header class="site-header">
         <div class="container navbar">
             <a href="#home" class="brand">
-                <span class="brand-dot"></span>
+                <span class="brand-mark"></span>
                 Hudson
             </a>
 
             <nav class="main-nav">
                 <a href="#about">About</a>
+                <a href="#experience">Experience</a>
                 <a href="#education">Education</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
@@ -35,7 +36,7 @@
                 <a href="#contact">Contact</a>
             </nav>
 
-            <a href="#contact" class="nav-button">Contact Me</a>
+            <a href="#contact" class="nav-cta">Let’s Talk</a>
         </div>
     </header>
 
@@ -43,13 +44,14 @@
     <!-- HERO -->
     <!-- ========================= -->
     <section class="hero-section" id="home">
-        <div class="container hero-layout">
-            <div class="hero-left">
-                <p class="hero-kicker">Computer Science Undergraduate</p>
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <p class="hero-label">Computer Science Undergraduate · APU</p>
 
                 <h1>
-                    I build structured software projects
-                    and explore practical
+                    Building practical software,
+                    growing through real experience,
+                    and exploring
                     <span>data-driven solutions</span>
                 </h1>
 
@@ -59,43 +61,49 @@
                 </h2>
 
                 <p class="hero-description">
-                    I am Hudson, a Computer Science student at Asia Pacific University.
-                    My interests include software development, data analytics, system design,
-                    and building academic projects that solve real-world problems with clear logic.
+                    I am Hudson, a Computer Science student with interests in software
+                    development, data analytics, and structured problem solving. My
+                    background combines academic system development with real-world
+                    customer service and operations experience.
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary">Explore Projects</a>
-                    <a href="#certifications" class="btn btn-secondary">View Certifications</a>
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#experience" class="btn btn-secondary">See Experience</a>
                 </div>
 
-                <div class="hero-summary">
-                    <div class="summary-box">
-                        <strong>Software</strong>
-                        <span>System building and structured programming</span>
+                <div class="hero-metrics">
+                    <div class="metric-card">
+                        <strong>3+</strong>
+                        <span>Academic Projects</span>
                     </div>
 
-                    <div class="summary-box">
-                        <strong>Analytics</strong>
-                        <span>Data-focused learning and technical exploration</span>
+                    <div class="metric-card">
+                        <strong>7+</strong>
+                        <span>Certifications & Badges</span>
                     </div>
 
-                    <div class="summary-box">
-                        <strong>Growth</strong>
-                        <span>Continuous learning through projects and certifications</span>
+                    <div class="metric-card">
+                        <strong>5+ yrs</strong>
+                        <span>Work Experience</span>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-right">
-                <div class="profile-panel">
-                    <div class="profile-image-shell">
-                        <img src="assets/images/ProfileHUDSOnPixar.png" alt="Hudson profile photo" />
+            <div class="hero-visual">
+                <div class="profile-card">
+                    <div class="profile-image-wrap">
+                        <img src="assets/images/ProfileHUDSOnPixar.png" alt="Hudson profile image" />
                     </div>
 
-                    <div class="profile-info">
-                        <h3>Hudson</h3>
-                        <p>Computer Science Student · APU</p>
+                    <div class="profile-body">
+                        <div class="profile-top">
+                            <div>
+                                <h3>Hudson</h3>
+                                <p>Software · Analytics · Operations</p>
+                            </div>
+                            <span class="status-pill">Open to Opportunities</span>
+                        </div>
 
                         <div class="profile-tags">
                             <span>Software Development</span>
@@ -117,19 +125,19 @@
                     </div>
                 </div>
 
-                <div class="hero-mini-card hero-mini-card-top">
-                    <i class="fa-solid fa-code"></i>
+                <div class="floating-note floating-note-1">
+                    <i class="fa-solid fa-briefcase"></i>
                     <div>
-                        <strong>Academic Projects</strong>
-                        <p>Python, Java, C and web-based development work</p>
+                        <strong>Professional Experience</strong>
+                        <p>Customer support, outlet operations, team leadership</p>
                     </div>
                 </div>
 
-                <div class="hero-mini-card hero-mini-card-bottom">
+                <div class="floating-note floating-note-2">
                     <i class="fa-solid fa-certificate"></i>
                     <div>
-                        <strong>Industry Learning</strong>
-                        <p>Cisco Networking Academy and Red Hat certifications</p>
+                        <strong>Technical Learning</strong>
+                        <p>Cisco Networking Academy and Red Hat badges</p>
                     </div>
                 </div>
             </div>
@@ -142,48 +150,194 @@
     <section class="section" id="about">
         <div class="container">
             <div class="section-heading">
-                <p class="section-label">About Me</p>
-                <h2>A student portfolio focused on technical growth and practical problem solving</h2>
+                <p class="section-kicker">About Me</p>
+                <h2>A student portfolio shaped by both academic learning and real working experience</h2>
             </div>
 
             <div class="about-layout">
-                <div class="about-main panel">
+                <div class="panel about-main">
                     <p>
-                        I am currently pursuing a degree in Computer Science with a focus on Data Analytics.
-                        Through academic coursework and technical projects, I have developed foundations in
-                        programming, databases, software engineering, and structured problem solving.
+                        I am currently pursuing a degree in Computer Science with a focus on
+                        Data Analytics. Through university projects, I have developed a growing
+                        foundation in programming, database systems, software engineering, and
+                        analytical thinking.
                     </p>
 
                     <p>
-                        I enjoy building systems that are logical, organized, and useful. My long-term goal
-                        is to grow into a software engineer and data-oriented professional who can contribute
-                        to better systems, better workflows, and better decisions.
+                        What makes my profile different is that I also bring real-world work
+                        experience from customer service and outlet operations. This helped me
+                        build communication, problem-solving, leadership, and adaptability skills
+                        alongside my technical journey.
+                    </p>
+
+                    <p>
+                        My long-term goal is to grow into a capable software engineer and
+                        data-oriented professional who can build efficient systems and contribute
+                        to meaningful improvements through technology.
                     </p>
                 </div>
 
-                <div class="about-grid">
-                    <div class="panel about-card">
+                <div class="about-cards">
+                    <div class="panel info-card">
                         <i class="fa-solid fa-laptop-code"></i>
                         <h3>Software Development</h3>
-                        <p>Focused on structured applications, modular logic, and clean implementation.</p>
+                        <p>Building structured academic systems with clear logic and modular design.</p>
                     </div>
 
-                    <div class="panel about-card">
-                        <i class="fa-solid fa-chart-line"></i>
+                    <div class="panel info-card">
+                        <i class="fa-solid fa-chart-column"></i>
                         <h3>Data Analytics</h3>
-                        <p>Interested in data interpretation, analytical tools, and insight-driven work.</p>
+                        <p>Interested in insight, interpretation, and data-driven improvement.</p>
                     </div>
 
-                    <div class="panel about-card">
-                        <i class="fa-solid fa-database"></i>
-                        <h3>Database Thinking</h3>
-                        <p>Knowledge of SQL, DBMS concepts, and data structure organization.</p>
+                    <div class="panel info-card">
+                        <i class="fa-solid fa-users"></i>
+                        <h3>Team & Service</h3>
+                        <p>Experienced in communication, support, teamwork, and operations.</p>
                     </div>
 
-                    <div class="panel about-card">
+                    <div class="panel info-card">
                         <i class="fa-solid fa-brain"></i>
-                        <h3>Continuous Improvement</h3>
-                        <p>Always learning through coursework, certifications, and technical practice.</p>
+                        <h3>Continuous Growth</h3>
+                        <p>Always learning through coursework, certifications, and practical work.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- EXPERIENCE -->
+    <!-- ========================= -->
+    <section class="section section-soft" id="experience">
+        <div class="container">
+            <div class="section-heading">
+                <p class="section-kicker">Experience</p>
+                <h2>Professional Experience & Career Journey</h2>
+            </div>
+
+            <div class="experience-layout">
+                <div class="experience-highlight panel">
+                    <div class="experience-image">
+                        <img src="assets/images/Work_Webhelp.png" alt="Webhelp work experience" />
+                    </div>
+
+                    <div class="experience-highlight-content">
+                        <span class="experience-badge">Most Recent Role</span>
+                        <h3>Customer Service Executive</h3>
+                        <h4>Webhelp · Full-time</h4>
+                        <p class="experience-meta">
+                            Sep 2023 – Dec 2023 · 4 months · Kuala Lumpur, Malaysia · Hybrid
+                        </p>
+
+                        <p>
+                            Supported Taiwan Foodpanda users across inquiries, escalations, and
+                            resolution channels while maintaining strong CSAT, SLA compliance,
+                            and effective communication in a fast-paced support environment.
+                        </p>
+
+                        <ul class="experience-points">
+                            <li>Delivered prompt support across live chat, email, and call channels</li>
+                            <li>Handled high-volume escalations with first-contact resolution focus</li>
+                            <li>Worked in a global team environment using empathy and problem solving</li>
+                            <li>Collected and interpreted feedback trends to support SOP and FAQ improvement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-list">
+                    <article class="timeline-card panel">
+                        <div class="timeline-line-dot"></div>
+                        <div class="timeline-card-content">
+                            <span class="timeline-date">Jan 2022 – Aug 2023</span>
+                            <h3>Operation Outlet Manager</h3>
+                            <h4>AC Cake House (M) Sdn. Bhd. · Full-time</h4>
+                            <p>
+                                Supervised outlet operations, team training, SOP implementation,
+                                customer experience, stock control, and daily performance execution.
+                            </p>
+                            <div class="tag-list">
+                                <span>Leadership</span>
+                                <span>Operations</span>
+                                <span>Customer Experience</span>
+                                <span>Inventory Control</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline-card panel">
+                        <div class="timeline-line-dot"></div>
+                        <div class="timeline-card-content">
+                            <span class="timeline-date">Dec 2021 – Jan 2022</span>
+                            <h3>Operation Outlet Manager – Pavilion Bukit Jalil Outlet</h3>
+                            <h4>AC Cake House · Full-time</h4>
+                            <p>
+                                Managed outlet-level execution, daily monitoring, and operational
+                                continuity in a retail environment.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="timeline-card panel">
+                        <div class="timeline-line-dot"></div>
+                        <div class="timeline-card-content">
+                            <span class="timeline-date">Nov 2021 – Dec 2021</span>
+                            <h3>Outlet Operation Manager – Pavilion KL Outlet</h3>
+                            <h4>AC Cake House · Full-time</h4>
+                            <p>
+                                Supported outlet administration and operations while ensuring service flow,
+                                coordination, and execution quality.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="timeline-card panel">
+                        <div class="timeline-line-dot"></div>
+                        <div class="timeline-card-content">
+                            <span class="timeline-date">Dec 2020 – Nov 2021</span>
+                            <h3>Administrator & Outlet Manager</h3>
+                            <h4>Sri Petaling & Puchong Jaya Outlet · Full-time</h4>
+                            <p>
+                                Managed outlet administration and operations with responsibilities in team
+                                coordination, service handling, and workflow support.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="timeline-card panel">
+                        <div class="timeline-line-dot"></div>
+                        <div class="timeline-card-content">
+                            <span class="timeline-date">Sep 2020 – Dec 2020</span>
+                            <h3>Administrative & Operations Manager</h3>
+                            <h4>Sri Petaling Outlet · Internship</h4>
+                            <p>
+                                Supported administration, operations, and process execution while developing
+                                practical business and management exposure.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="timeline-card panel">
+                        <div class="timeline-line-dot"></div>
+                        <div class="timeline-card-content">
+                            <span class="timeline-date">2017 – 2020</span>
+                            <h3>Customer Service, Cashier & Bakery Roles</h3>
+                            <h4>Retail & Outlet-Based Positions</h4>
+                            <p>
+                                Built a strong early foundation in customer handling, cash management,
+                                billing, service standards, and daily operational support.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="experience-gallery">
+                    <div class="panel gallery-card">
+                        <img src="assets/images/Work_ACCakeHouse.png" alt="AC Cake House experience" />
+                        <div class="gallery-card-body">
+                            <h3>Operations Experience</h3>
+                            <p>Retail outlet management, workflow supervision, and team coordination.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -193,29 +347,28 @@
     <!-- ========================= -->
     <!-- EDUCATION -->
     <!-- ========================= -->
-    <section class="section section-alt" id="education">
+    <section class="section" id="education">
         <div class="container">
             <div class="section-heading">
-                <p class="section-label">Education</p>
+                <p class="section-kicker">Education</p>
                 <h2>Academic Background</h2>
             </div>
 
-            <div class="timeline-item panel">
-                <div class="timeline-icon">
+            <div class="education-card panel">
+                <div class="education-icon">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
 
-                <div class="timeline-body">
-                    <span class="timeline-badge">Current</span>
+                <div class="education-content">
+                    <span class="education-pill">Current</span>
                     <h3>Asia Pacific University (APU)</h3>
                     <h4>Bachelor of Computer Science (Data Analytics)</h4>
-
                     <p>
                         Key modules include Data Structures, Database Systems, Machine Learning,
                         Data Mining, Software Engineering, and programming-related coursework.
                     </p>
 
-                    <div class="pill-row">
+                    <div class="tag-list">
                         <span>Data Structures</span>
                         <span>DBMS</span>
                         <span>Machine Learning</span>
@@ -229,60 +382,48 @@
     <!-- ========================= -->
     <!-- SKILLS -->
     <!-- ========================= -->
-    <section class="section" id="skills">
+    <section class="section section-soft" id="skills">
         <div class="container">
             <div class="section-heading">
-                <p class="section-label">Skills</p>
-                <h2>Technical Skills</h2>
+                <p class="section-kicker">Skills</p>
+                <h2>Technical Skills & Strengths</h2>
             </div>
 
-            <div class="skills-layout">
-                <div class="panel skill-panel">
-                    <div class="skill-icon">
-                        <i class="fa-brands fa-python"></i>
-                    </div>
+            <div class="skills-grid">
+                <div class="panel skill-card">
+                    <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
                     <h3>Python</h3>
-                    <p>Used for system building, scripting, automation, and academic software projects.</p>
+                    <p>Used for academic systems, scripting, problem solving, and logic implementation.</p>
                 </div>
 
-                <div class="panel skill-panel">
-                    <div class="skill-icon">
-                        <i class="fa-brands fa-java"></i>
-                    </div>
+                <div class="panel skill-card">
+                    <div class="skill-icon"><i class="fa-brands fa-java"></i></div>
                     <h3>Java</h3>
-                    <p>Applied in object-oriented programming and structured application design.</p>
+                    <p>Applied in object-oriented programming and structured software development.</p>
                 </div>
 
-                <div class="panel skill-panel">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
+                <div class="panel skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
                     <h3>C / C++</h3>
-                    <p>Used for programming fundamentals, system logic, and algorithm practice.</p>
+                    <p>Used for programming fundamentals, system logic, and algorithm-based tasks.</p>
                 </div>
 
-                <div class="panel skill-panel">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-database"></i>
-                    </div>
+                <div class="panel skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
                     <h3>SQL / DBMS</h3>
-                    <p>Knowledge of relational databases, structured querying, and data organization.</p>
+                    <p>Knowledge of relational databases, querying, and structured data design.</p>
                 </div>
 
-                <div class="panel skill-panel">
-                    <div class="skill-icon">
-                        <i class="fa-brands fa-html5"></i>
-                    </div>
+                <div class="panel skill-card">
+                    <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
                     <h3>HTML / CSS</h3>
-                    <p>Used to create clean interfaces and front-end layouts for web-related work.</p>
+                    <p>Used to create clean front-end layouts and user-facing project pages.</p>
                 </div>
 
-                <div class="panel skill-panel">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-chart-column"></i>
-                    </div>
+                <div class="panel skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-chart-line"></i></div>
                     <h3>Analytics Tools</h3>
-                    <p>Exposure to SAS, R, and data-oriented academic workflows.</p>
+                    <p>Exposure to SAS, R, and data-focused learning workflows.</p>
                 </div>
             </div>
         </div>
@@ -291,40 +432,39 @@
     <!-- ========================= -->
     <!-- PROJECTS -->
     <!-- ========================= -->
-    <section class="section section-alt" id="projects">
+    <section class="section" id="projects">
         <div class="container">
             <div class="section-heading">
-                <p class="section-label">Projects</p>
+                <p class="section-kicker">Projects</p>
                 <h2>Featured Academic Projects</h2>
             </div>
 
-            <div class="projects-layout">
-                <article class="panel project-panel featured-project">
-                    <div class="project-header">
-                        <span class="project-badge">Python Project</span>
+            <div class="projects-grid">
+                <article class="panel project-card featured-project">
+                    <div class="project-top">
+                        <span class="project-type">Python Project</span>
                         <i class="fa-solid fa-school"></i>
                     </div>
 
                     <h3>Classroom Management System</h3>
 
                     <p>
-                        A Python-based system designed to manage classroom attendance,
-                        student records, and schedules using modular programming
-                        and file handling concepts.
+                        A Python-based system for managing classroom attendance, student records,
+                        and schedules using modular programming and file handling concepts.
                     </p>
 
-                    <div class="pill-row">
+                    <div class="tag-list">
                         <span>Python</span>
-                        <span>File Handling</span>
                         <span>Modular Design</span>
+                        <span>File Handling</span>
                     </div>
 
                     <a href="#" class="project-link">GitHub Repository</a>
                 </article>
 
-                <article class="panel project-panel">
-                    <div class="project-header">
-                        <span class="project-badge">Java Project</span>
+                <article class="panel project-card">
+                    <div class="project-top">
+                        <span class="project-type">Java Project</span>
                         <i class="fa-solid fa-notes-medical"></i>
                     </div>
 
@@ -335,7 +475,7 @@
                         appointments, and billing in a simulated healthcare environment.
                     </p>
 
-                    <div class="pill-row">
+                    <div class="tag-list">
                         <span>Java</span>
                         <span>OOP</span>
                         <span>System Design</span>
@@ -344,20 +484,20 @@
                     <a href="#" class="project-link">GitHub Repository</a>
                 </article>
 
-                <article class="panel project-panel">
-                    <div class="project-header">
-                        <span class="project-badge">C Project</span>
+                <article class="panel project-card">
+                    <div class="project-top">
+                        <span class="project-type">C Project</span>
                         <i class="fa-solid fa-bus"></i>
                     </div>
 
                     <h3>Bus Reservation System</h3>
 
                     <p>
-                        A C programming project that simulates a reservation workflow
-                        supporting booking, cancellation, and reporting.
+                        A C programming project that simulates booking, cancellation,
+                        and reporting within a reservation workflow.
                     </p>
 
-                    <div class="pill-row">
+                    <div class="tag-list">
                         <span>C</span>
                         <span>Reservation</span>
                         <span>Structured Logic</span>
@@ -372,105 +512,61 @@
     <!-- ========================= -->
     <!-- CERTIFICATIONS -->
     <!-- ========================= -->
-    <section class="section" id="certifications">
+    <section class="section section-soft" id="certifications">
         <div class="container">
             <div class="section-heading">
-                <p class="section-label">Certifications</p>
-                <h2>Licenses, Certifications & Technical Learning</h2>
+                <p class="section-kicker">Certifications</p>
+                <h2>Licenses, Certifications & Industry Learning</h2>
             </div>
 
-            <div class="certifications-layout">
-                <div class="certification-intro panel">
-                    <h3>Professional Learning Track</h3>
-                    <p>
-                        Alongside academic coursework, I actively build my technical foundation
-                        through external certifications and industry-aligned learning programs.
-                    </p>
-
-                    <ul class="cert-list">
-                        <li>Cisco Networking Academy certifications in data, networking, and cybersecurity</li>
-                        <li>Red Hat System Administration learning pathway</li>
-                        <li>Technical participation through Learn-A-Thon and related programs</li>
-                    </ul>
+            <div class="cert-grid">
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_DAE.png" alt="Data Analytics Essentials badge" /></div>
+                    <h3>Data Analytics Essentials</h3>
+                    <p>Cisco Networking Academy</p>
+                    <span>Issued Jan 2026</span>
                 </div>
 
-                <div class="certification-showcase">
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_DAE.png" alt="Data Analytics Essentials badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>Data Analytics Essentials</h3>
-                            <p>Cisco Networking Academy</p>
-                            <span>Issued Jan 2026</span>
-                        </div>
-                    </div>
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_ITDS.png" alt="Introduction to Data Science badge" /></div>
+                    <h3>Introduction to Data Science</h3>
+                    <p>Cisco Networking Academy</p>
+                    <span>Issued Jan 2026</span>
+                </div>
 
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_ITDS.png" alt="Introduction to Data Science badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>Introduction to Data Science</h3>
-                            <p>Cisco Networking Academy</p>
-                            <span>Issued Jan 2026</span>
-                        </div>
-                    </div>
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_ITC.png" alt="Introduction to Cybersecurity badge" /></div>
+                    <h3>Introduction to Cybersecurity</h3>
+                    <p>Cisco Networking Academy</p>
+                    <span>Issued Jan 2026</span>
+                </div>
 
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_ITC.png" alt="Introduction to Cybersecurity badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>Introduction to Cybersecurity</h3>
-                            <p>Cisco Networking Academy</p>
-                            <span>Issued Jan 2026</span>
-                        </div>
-                    </div>
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_NALAT.png" alt="Learn-A-Thon badge" /></div>
+                    <h3>Learn-A-Thon 2025</h3>
+                    <p>Cisco Networking Academy</p>
+                    <span>Issued Oct 2025</span>
+                </div>
 
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_NALAT.png" alt="Learn-A-Thon badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>Learn-A-Thon 2025</h3>
-                            <p>Cisco Networking Academy</p>
-                            <span>Issued Oct 2025</span>
-                        </div>
-                    </div>
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_RHSA2.png" alt="Red Hat System Administration II badge" /></div>
+                    <h3>Red Hat System Administration II</h3>
+                    <p>Red Hat</p>
+                    <span>Issued Oct 2025</span>
+                </div>
 
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_RHSA2.png" alt="Red Hat System Administration II badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>Red Hat System Administration II</h3>
-                            <p>Red Hat</p>
-                            <span>Issued Oct 2025</span>
-                        </div>
-                    </div>
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_RHSA1.png" alt="Red Hat System Administration I badge" /></div>
+                    <h3>Red Hat System Administration I</h3>
+                    <p>Red Hat</p>
+                    <span>Issued Jul 2025</span>
+                </div>
 
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_RHSA1.png" alt="Red Hat System Administration I badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>Red Hat System Administration I</h3>
-                            <p>Red Hat</p>
-                            <span>Issued Jul 2025</span>
-                        </div>
-                    </div>
-
-                    <div class="panel cert-card">
-                        <div class="cert-image-box">
-                            <img src="assets/images/Badge_CCNAITN.png" alt="CCNAv7 Introduction to Networks badge" />
-                        </div>
-                        <div class="cert-content">
-                            <h3>CCNAv7: Introduction to Networks</h3>
-                            <p>Cisco Networking Academy</p>
-                            <span>Issued Nov 2024</span>
-                        </div>
-                    </div>
+                <div class="panel cert-card">
+                    <div class="cert-image"><img src="assets/images/Badge_CCNAITN.png" alt="CCNAv7 Introduction to Networks badge" /></div>
+                    <h3>CCNAv7: Introduction to Networks</h3>
+                    <p>Cisco Networking Academy</p>
+                    <span>Issued Nov 2024</span>
                 </div>
             </div>
         </div>
@@ -479,32 +575,32 @@
     <!-- ========================= -->
     <!-- CONTACT -->
     <!-- ========================= -->
-    <section class="section section-alt" id="contact">
+    <section class="section" id="contact">
         <div class="container">
-            <div class="contact-banner">
-                <div class="contact-left">
-                    <p class="section-label">Contact</p>
-                    <h2>Let’s connect and build something meaningful</h2>
+            <div class="contact-section-card">
+                <div class="contact-copy">
+                    <p class="section-kicker">Contact</p>
+                    <h2>Let’s connect</h2>
                     <p>
-                        I am open to networking, collaboration, internships,
-                        and discussions related to software and data.
+                        I am open to internships, networking, collaboration,
+                        and opportunities related to software and data.
                     </p>
                 </div>
 
-                <div class="contact-right">
-                    <div class="panel contact-box">
+                <div class="contact-grid">
+                    <div class="panel contact-card">
                         <i class="fa-solid fa-envelope"></i>
                         <h3>Email</h3>
                         <p>hudson.officer23@gmail.com</p>
                     </div>
 
-                    <div class="panel contact-box">
+                    <div class="panel contact-card">
                         <i class="fa-brands fa-linkedin"></i>
                         <h3>LinkedIn</h3>
                         <p>linkedin.com/in/hudsonc200</p>
                     </div>
 
-                    <div class="panel contact-box">
+                    <div class="panel contact-card">
                         <i class="fa-brands fa-github"></i>
                         <h3>GitHub</h3>
                         <p>Add your GitHub profile link here</p>
@@ -518,15 +614,15 @@
     <!-- FOOTER -->
     <!-- ========================= -->
     <footer class="site-footer">
-        <div class="container footer-layout">
+        <div class="container footer-wrap">
             <div>
                 <h3>Hudson</h3>
                 <p>Computer Science Portfolio</p>
             </div>
 
-            <div class="footer-nav">
+            <div class="footer-links">
                 <a href="#about">About</a>
-                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
                 <a href="#certifications">Certifications</a>
                 <a href="#contact">Contact</a>
