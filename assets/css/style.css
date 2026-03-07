@@ -27,6 +27,7 @@ padding:20px 0;
 nav a{
 margin-left:20px;
 color:#bbb;
+text-decoration:none;
 }
 
 .hero{
@@ -53,6 +54,7 @@ background:#38bdf8;
 padding:12px 20px;
 border-radius:8px;
 color:black;
+text-decoration:none;
 }
 
 .btn-outline{
