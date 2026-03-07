@@ -1,4 +1,4 @@
-const text=[
+const words=[
 "Software Developer",
 "Data Analytics Enthusiast",
 "Computer Science Student"
@@ -6,19 +6,19 @@ const text=[
 
 let i=0
 let j=0
-let current=""
-let letter=""
+let current=''
+let letter=''
 
 function type(){
 
-if(i===text.length){
+if(i===words.length){
 i=0
 }
 
-current=text[i]
+current=words[i]
 letter=current.slice(0,++j)
 
-document.getElementById("typing").textContent=letter
+document.getElementById('typing').textContent=letter
 
 if(letter.length===current.length){
 i++
