@@ -1,32 +1,43 @@
-const words=[
-"Software Developer",
-"Data Analytics Enthusiast",
-"Computer Science Student"
-]
+const words = [
+    "Software Developer",
+    "Data Analytics Enthusiast",
+    "Computer Science Student"
+];
 
-let i=0
-let j=0
-let current=''
-let letter=''
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
 
-function type(){
+const typingElement = document.getElementById("typing");
 
-if(i===words.length){
-i=0
+function typeEffect() {
+    const currentWord = words[wordIndex];
+
+    if (!isDeleting) {
+        charIndex++;
+        typingElement.textContent = currentWord.substring(0, charIndex);
+
+        if (charIndex === currentWord.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, 1200);
+            return;
+        }
+    } else {
+        charIndex--;
+        typingElement.textContent = currentWord.substring(0, charIndex);
+
+        if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex++;
+
+            if (wordIndex === words.length) {
+                wordIndex = 0;
+            }
+        }
+    }
+
+    const speed = isDeleting ? 50 : 90;
+    setTimeout(typeEffect, speed);
 }
 
-current=words[i]
-letter=current.slice(0,++j)
-
-document.getElementById('typing').textContent=letter
-
-if(letter.length===current.length){
-i++
-j=0
-}
-
-setTimeout(type,120)
-
-}
-
-type()
+typeEffect();
