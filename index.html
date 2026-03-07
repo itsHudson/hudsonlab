@@ -16,6 +16,10 @@
 </head>
 <body>
 
+    <div class="page-blur blur-1"></div>
+    <div class="page-blur blur-2"></div>
+    <div class="grid-overlay"></div>
+
     <header class="site-header">
         <div class="container navbar">
             <a href="#home" class="brand">
@@ -23,7 +27,7 @@
                 Hudson
             </a>
 
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
                 <a href="#education">Education</a>
@@ -33,23 +37,30 @@
                 <a href="#contact">Contact</a>
             </nav>
 
-            <a href="#contact" class="nav-cta">Let’s Talk</a>
+            <div class="nav-right">
+                <a href="#contact" class="nav-cta">Let’s Talk</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
     <section class="hero-section" id="home">
         <div class="container hero-grid">
-            <div class="hero-content">
+            <div class="hero-content reveal">
                 <div class="hero-pill-row">
                     <span class="hero-pill">Computer Science Undergraduate · APU</span>
                     <span class="hero-pill hero-pill-soft">ENTJ · Strategic Builder</span>
                 </div>
 
+                <p class="hero-intro">Hello, I’m Hudson</p>
+
                 <h1>
-                    Building practical software,
-                    leading with structure,
-                    and exploring
-                    <span>data-driven solutions</span>
+                    Designing
+                    <span>structured digital solutions</span>
+                    with clarity, logic,
+                    and long-term growth in mind.
                 </h1>
 
                 <h2 class="typing-row">
@@ -58,15 +69,21 @@
                 </h2>
 
                 <p class="hero-description">
-                    I am Hudson, a Computer Science student with interests in software
-                    development, data analytics, and structured problem solving. My
-                    background combines academic system development with practical
-                    working experience in customer support, operations, and team coordination.
+                    I am a Computer Science student who enjoys building practical systems,
+                    improving workflows, and exploring software and data-driven solutions.
+                    My journey combines academic development, technical learning, and
+                    real-world operational experience.
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#experience" class="btn btn-secondary">See Experience</a>
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        View Projects
+                    </a>
+                    <a href="#experience" class="btn btn-secondary">
+                        <i class="fa-solid fa-briefcase"></i>
+                        See Experience
+                    </a>
                 </div>
 
                 <div class="hero-metrics">
@@ -81,13 +98,16 @@
                     </div>
 
                     <div class="metric-card">
-                        <strong>5+ yrs</strong>
-                        <span>Work Experience</span>
+                        <strong>5+ Years</strong>
+                        <span>Professional Experience</span>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-visual">
+            <div class="hero-visual reveal reveal-delay-1">
+                <div class="orbit-ring orbit-ring-1"></div>
+                <div class="orbit-ring orbit-ring-2"></div>
+
                 <div class="profile-card">
                     <div class="profile-image-wrap">
                         <img src="assets/images/ProfileHUDSOnPixar.png" alt="Hudson profile image" />
@@ -126,14 +146,14 @@
                     <i class="fa-solid fa-briefcase"></i>
                     <div>
                         <strong>Professional Experience</strong>
-                        <p>Customer support, outlet operations, service leadership</p>
+                        <p>Customer support, operations, and leadership exposure</p>
                     </div>
                 </div>
 
                 <div class="floating-note floating-note-2">
                     <i class="fa-solid fa-certificate"></i>
                     <div>
-                        <strong>Technical Learning</strong>
+                        <strong>Technical Growth</strong>
                         <p>Cisco Networking Academy and Red Hat certifications</p>
                     </div>
                 </div>
@@ -143,57 +163,71 @@
 
     <section class="section" id="about">
         <div class="container">
-            <div class="section-heading">
+            <div class="section-heading reveal">
                 <p class="section-kicker">About Me</p>
-                <h2>A student portfolio shaped by academic learning, real experience, and a strategic mindset</h2>
+                <h2>A portfolio built on academic growth, practical experience, and structured execution</h2>
             </div>
 
             <div class="about-layout">
-                <div class="panel about-main">
+                <div class="panel about-main reveal">
                     <p>
                         I am currently pursuing a degree in Computer Science with a focus on
-                        Data Analytics. Through university coursework and technical projects,
-                        I have developed a growing foundation in programming, database systems,
-                        software engineering, and analytical thinking.
+                        Data Analytics. Through coursework and technical projects, I have developed
+                        a growing foundation in programming, databases, software engineering,
+                        and analytical thinking.
                     </p>
 
                     <p>
-                        Beyond academics, I also bring practical work experience in customer
-                        service and outlet operations. This helped me strengthen communication,
-                        leadership, adaptability, and the ability to perform well in fast-paced
-                        environments.
+                        Beyond academics, I bring practical industry experience in customer service,
+                        outlet operations, and team coordination. That experience helped strengthen
+                        my communication, adaptability, and ability to stay effective in
+                        fast-moving environments.
                     </p>
 
                     <p>
                         My working style is highly structured and goal-oriented. I enjoy planning,
-                        improving systems, and turning complex tasks into organized execution —
-                        which aligns strongly with my ENTJ personality.
+                        improving systems, and turning complexity into organized execution.
                     </p>
+
+                    <div class="about-highlight-row">
+                        <div class="about-highlight">
+                            <span>Focus</span>
+                            <strong>Software + Data</strong>
+                        </div>
+                        <div class="about-highlight">
+                            <span>Strength</span>
+                            <strong>Structured Thinking</strong>
+                        </div>
+                        <div class="about-highlight">
+                            <span>Style</span>
+                            <strong>Strategic & Practical</strong>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="about-cards">
-                    <div class="panel info-card">
+                    <div class="panel info-card reveal reveal-delay-1">
                         <i class="fa-solid fa-laptop-code"></i>
                         <h3>Software Development</h3>
-                        <p>Building structured academic systems with clean logic and modular design.</p>
+                        <p>Building structured systems with clean logic, clear flow, and modular thinking.</p>
                     </div>
 
-                    <div class="panel info-card">
+                    <div class="panel info-card reveal reveal-delay-2">
                         <i class="fa-solid fa-chart-column"></i>
                         <h3>Data Analytics</h3>
-                        <p>Interested in insight, interpretation, and data-informed improvement.</p>
+                        <p>Interested in extracting insights and supporting decisions through data understanding.</p>
                     </div>
 
-                    <div class="panel info-card">
+                    <div class="panel info-card reveal reveal-delay-3">
                         <i class="fa-solid fa-chess-king"></i>
-                        <h3>ENTJ Strength</h3>
-                        <p>Strategic, organized, decisive, and comfortable leading toward outcomes.</p>
+                        <h3>Leadership Mindset</h3>
+                        <p>Strategic, organized, and comfortable managing work toward defined outcomes.</p>
                     </div>
 
-                    <div class="panel info-card">
+                    <div class="panel info-card reveal reveal-delay-4">
                         <i class="fa-solid fa-users"></i>
                         <h3>Team & Service</h3>
-                        <p>Experienced in teamwork, support, customer handling, and operations flow.</p>
+                        <p>Experienced in collaboration, support, service handling, and workflow coordination.</p>
                     </div>
                 </div>
             </div>
@@ -202,150 +236,148 @@
 
     <section class="section section-soft" id="experience">
         <div class="container">
-            <div class="section-heading experience-heading">
+            <div class="section-heading experience-heading reveal">
                 <div>
                     <p class="section-kicker">Experience</p>
                     <h2>Professional Experience & Career Journey</h2>
                 </div>
                 <p class="experience-heading-text">
-                    Built through customer-facing support, outlet leadership,
-                    workflow discipline, and practical execution in fast-moving environments.
+                    Developed through customer-facing roles, outlet leadership, operations management,
+                    and practical problem solving in fast-paced environments.
                 </p>
             </div>
 
-            <div class="experience-redesign">
-                <div class="experience-overview panel">
-                    <div class="experience-overview-top">
-                        <span class="experience-badge">Professional Snapshot</span>
-                        <h3>Service, operations, leadership, and execution</h3>
-                        <p>
-                            My working background strengthened the way I approach tasks:
-                            structured, calm under pressure, and focused on outcomes. It
-                            also gave me practical strengths in customer communication,
-                            operations management, service flow, and team coordination.
-                        </p>
-                    </div>
-
-                    <div class="experience-strength-grid">
-                        <div class="mini-strength-card">
-                            <i class="fa-solid fa-headset"></i>
-                            <h4>Customer Support</h4>
-                            <p>Handled inquiries, escalations, and multi-channel service support.</p>
-                        </div>
-
-                        <div class="mini-strength-card">
-                            <i class="fa-solid fa-people-group"></i>
-                            <h4>Team Coordination</h4>
-                            <p>Worked with service teams and outlet-based working environments.</p>
-                        </div>
-
-                        <div class="mini-strength-card">
-                            <i class="fa-solid fa-store"></i>
-                            <h4>Operations</h4>
-                            <p>Managed workflow quality, service flow, and practical daily execution.</p>
-                        </div>
-
-                        <div class="mini-strength-card">
-                            <i class="fa-solid fa-bolt"></i>
-                            <h4>Fast-Paced Work</h4>
-                            <p>Built resilience and problem solving under real operational pressure.</p>
-                        </div>
-                    </div>
+            <div class="experience-overview panel reveal">
+                <div class="experience-overview-top">
+                    <span class="experience-badge">Professional Snapshot</span>
+                    <h3>Service, operations, leadership, and execution</h3>
+                    <p>
+                        My professional background shaped the way I approach work:
+                        calm under pressure, structured in execution, and focused on outcomes.
+                    </p>
                 </div>
 
-                <div class="experience-cards-grid">
-                    <article class="panel experience-entry-card featured-experience">
-                        <div class="experience-entry-top">
+                <div class="experience-strength-grid">
+                    <div class="mini-strength-card">
+                        <i class="fa-solid fa-headset"></i>
+                        <h4>Customer Support</h4>
+                        <p>Handled inquiries, escalations, and service quality across multiple channels.</p>
+                    </div>
+
+                    <div class="mini-strength-card">
+                        <i class="fa-solid fa-people-group"></i>
+                        <h4>Team Coordination</h4>
+                        <p>Worked closely with teams to maintain smooth service and daily operations.</p>
+                    </div>
+
+                    <div class="mini-strength-card">
+                        <i class="fa-solid fa-store"></i>
+                        <h4>Operations</h4>
+                        <p>Managed execution, workflow discipline, customer experience, and outlet quality.</p>
+                    </div>
+
+                    <div class="mini-strength-card">
+                        <i class="fa-solid fa-bolt"></i>
+                        <h4>Fast-Paced Work</h4>
+                        <p>Built resilience and decision making under practical working pressure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="panel timeline-card">
+                        <div class="timeline-top">
                             <span class="entry-date">Sep 2023 – Dec 2023</span>
                             <span class="entry-type">Most Recent</span>
                         </div>
-
                         <h3>Customer Service Executive</h3>
                         <h4>Webhelp · Full-time</h4>
                         <p class="entry-meta">Kuala Lumpur, Malaysia · Hybrid</p>
-
                         <p>
-                            Supported Taiwan Foodpanda users across inquiries, escalations,
-                            and resolution channels while maintaining strong CSAT,
-                            SLA compliance, and first-contact resolution focus.
+                            Supported Taiwan Foodpanda users through chat, email, and calls while
+                            maintaining service quality, empathy, and resolution efficiency.
                         </p>
+                    </div>
+                </div>
 
-                        <ul class="entry-points">
-                            <li>Delivered support through chat, email, and call channels</li>
-                            <li>Maintained service quality in a high-volume environment</li>
-                            <li>Worked in a global support setting using empathy and precision</li>
-                        </ul>
-                    </article>
-
-                    <article class="panel experience-entry-card">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="panel timeline-card">
                         <span class="entry-date">Jan 2022 – Aug 2023</span>
                         <h3>Operation Outlet Manager</h3>
                         <h4>AC Cake House (M) Sdn. Bhd. · Full-time</h4>
                         <p>
-                            Supervised outlet operations, customer experience, stock control,
-                            training, and daily team execution.
+                            Supervised outlet operations, customer experience, stock management,
+                            team execution, and daily workflow quality.
                         </p>
-                        <div class="tag-list">
-                            <span>Leadership</span>
-                            <span>Operations</span>
-                            <span>Inventory</span>
-                        </div>
-                    </article>
+                    </div>
+                </div>
 
-                    <article class="panel experience-entry-card">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="panel timeline-card">
                         <span class="entry-date">Dec 2021 – Jan 2022</span>
                         <h3>Operation Outlet Manager</h3>
                         <h4>Pavilion Bukit Jalil Outlet · Full-time</h4>
                         <p>
-                            Managed outlet-level monitoring, operational continuity,
-                            and workflow execution in a retail environment.
+                            Managed operational continuity and service execution in a retail environment.
                         </p>
-                    </article>
+                    </div>
+                </div>
 
-                    <article class="panel experience-entry-card">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="panel timeline-card">
                         <span class="entry-date">Nov 2021 – Dec 2021</span>
                         <h3>Outlet Operation Manager</h3>
                         <h4>Pavilion KL Outlet · Full-time</h4>
                         <p>
-                            Supported outlet administration, service flow, and execution quality
-                            across day-to-day operations.
+                            Supported day-to-day operations, workflow coordination, and service consistency.
                         </p>
-                    </article>
+                    </div>
+                </div>
 
-                    <article class="panel experience-entry-card">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="panel timeline-card">
                         <span class="entry-date">Dec 2020 – Nov 2021</span>
                         <h3>Administrator & Outlet Manager</h3>
                         <h4>Sri Petaling & Puchong Jaya Outlet · Full-time</h4>
                         <p>
-                            Handled administration, workflow coordination, and overall outlet support.
+                            Handled administration, workflow coordination, outlet-level support,
+                            and execution planning.
                         </p>
-                    </article>
+                    </div>
+                </div>
 
-                    <article class="panel experience-entry-card">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="panel timeline-card">
                         <span class="entry-date">2017 – 2020</span>
                         <h3>Customer Service, Cashier & Bakery Roles</h3>
                         <h4>Retail & Outlet-Based Positions</h4>
                         <p>
-                            Built early working foundations in customer handling, billing,
-                            cash management, and service discipline.
+                            Built early foundations in customer handling, billing, cash flow,
+                            and service discipline.
                         </p>
-                    </article>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-showcase panel reveal">
+                <div class="experience-showcase-image">
+                    <img src="assets/images/Work_ACCakeHouse.png" alt="AC Cake House experience image" />
                 </div>
 
-                <div class="experience-showcase panel">
-                    <div class="experience-showcase-image">
-                        <img src="assets/images/Work_ACCakeHouse.png" alt="AC Cake House experience image" />
-                    </div>
-
-                    <div class="experience-showcase-content">
-                        <span class="experience-badge">Operations Showcase</span>
-                        <h3>Retail operations and execution experience</h3>
-                        <p>
-                            This part of my journey strengthened my ability to manage service flow,
-                            support outlet-level execution, and work closely with teams in practical,
-                            real-world business settings.
-                        </p>
-                    </div>
+                <div class="experience-showcase-content">
+                    <span class="experience-badge">Operations Showcase</span>
+                    <h3>Real-world operations and execution experience</h3>
+                    <p>
+                        My operations journey strengthened my ability to manage service flow,
+                        handle real-world pressure, and support consistent execution in business environments.
+                    </p>
                 </div>
             </div>
         </div>
@@ -353,12 +385,12 @@
 
     <section class="section" id="education">
         <div class="container">
-            <div class="section-heading">
+            <div class="section-heading reveal">
                 <p class="section-kicker">Education</p>
                 <h2>Academic Background</h2>
             </div>
 
-            <div class="education-card panel">
+            <div class="education-card panel reveal">
                 <div class="education-logo-box">
                     <img src="assets/images/Edu_APU.png" alt="Asia Pacific University logo" />
                 </div>
@@ -368,7 +400,7 @@
                     <h3>Asia Pacific University (APU)</h3>
                     <h4>Bachelor of Computer Science (Data Analytics)</h4>
                     <p>
-                        Key modules include Data Structures, Database Systems, Machine Learning,
+                        Key areas include Data Structures, Database Systems, Machine Learning,
                         Data Mining, Software Engineering, and programming-related coursework.
                     </p>
 
@@ -385,46 +417,46 @@
 
     <section class="section section-soft" id="skills">
         <div class="container">
-            <div class="section-heading">
+            <div class="section-heading reveal">
                 <p class="section-kicker">Skills</p>
                 <h2>Technical Skills & Strengths</h2>
             </div>
 
             <div class="skills-grid">
-                <div class="panel skill-card">
+                <div class="panel skill-card reveal">
                     <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
                     <h3>Python</h3>
-                    <p>Used for academic systems, scripting, logic development, and structured problem solving.</p>
+                    <p>Used for structured logic, scripting, academic systems, and problem solving.</p>
                 </div>
 
-                <div class="panel skill-card">
+                <div class="panel skill-card reveal reveal-delay-1">
                     <div class="skill-icon"><i class="fa-brands fa-java"></i></div>
                     <h3>Java</h3>
-                    <p>Applied in object-oriented programming and structured software development.</p>
+                    <p>Applied in object-oriented programming, system development, and academic projects.</p>
                 </div>
 
-                <div class="panel skill-card">
+                <div class="panel skill-card reveal reveal-delay-2">
                     <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
                     <h3>C / C++</h3>
-                    <p>Used for programming fundamentals, system logic, and algorithm-based tasks.</p>
+                    <p>Used for programming fundamentals, system logic, and algorithm-based coursework.</p>
                 </div>
 
-                <div class="panel skill-card">
+                <div class="panel skill-card reveal reveal-delay-3">
                     <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
                     <h3>SQL / DBMS</h3>
-                    <p>Knowledge of relational databases, querying, and structured data design.</p>
+                    <p>Knowledge of relational databases, querying, and structured data organization.</p>
                 </div>
 
-                <div class="panel skill-card">
+                <div class="panel skill-card reveal reveal-delay-4">
                     <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
                     <h3>HTML / CSS</h3>
-                    <p>Used to create clean front-end layouts and user-facing project pages.</p>
+                    <p>Used to build clean front-end interfaces and polished user-facing layouts.</p>
                 </div>
 
-                <div class="panel skill-card">
+                <div class="panel skill-card reveal reveal-delay-5">
                     <div class="skill-icon"><i class="fa-solid fa-chart-line"></i></div>
                     <h3>Analytics Tools</h3>
-                    <p>Exposure to SAS, R, and data-focused academic workflows.</p>
+                    <p>Exposure to SAS, R, and academic data workflows for analysis and interpretation.</p>
                 </div>
             </div>
         </div>
@@ -432,13 +464,13 @@
 
     <section class="section" id="projects">
         <div class="container">
-            <div class="section-heading">
+            <div class="section-heading reveal">
                 <p class="section-kicker">Projects</p>
                 <h2>Featured Academic Projects</h2>
             </div>
 
             <div class="projects-grid">
-                <article class="panel project-card featured-project">
+                <article class="panel project-card featured-project reveal">
                     <div class="project-top">
                         <span class="project-type">Python Project</span>
                         <i class="fa-solid fa-school"></i>
@@ -447,7 +479,7 @@
                     <h3>Classroom Management System</h3>
 
                     <p>
-                        A Python-based system for managing classroom attendance, student records,
+                        A Python-based system for managing attendance, student records,
                         and schedules using modular programming and file handling concepts.
                     </p>
 
@@ -457,10 +489,10 @@
                         <span>File Handling</span>
                     </div>
 
-                    <a href="#" class="project-link">GitHub Repository</a>
+                    <a href="#" class="project-link">GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </article>
 
-                <article class="panel project-card">
+                <article class="panel project-card reveal reveal-delay-1">
                     <div class="project-top">
                         <span class="project-type">Java Project</span>
                         <i class="fa-solid fa-notes-medical"></i>
@@ -469,8 +501,8 @@
                     <h3>APU Medical Centre System</h3>
 
                     <p>
-                        A Java object-oriented application that manages patient records,
-                        appointments, and billing in a simulated healthcare environment.
+                        A Java application that manages patient records, appointments,
+                        and billing in a simulated healthcare system.
                     </p>
 
                     <div class="tag-list">
@@ -479,10 +511,10 @@
                         <span>System Design</span>
                     </div>
 
-                    <a href="#" class="project-link">GitHub Repository</a>
+                    <a href="#" class="project-link">GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </article>
 
-                <article class="panel project-card">
+                <article class="panel project-card reveal reveal-delay-2">
                     <div class="project-top">
                         <span class="project-type">C Project</span>
                         <i class="fa-solid fa-bus"></i>
@@ -491,8 +523,8 @@
                     <h3>Bus Reservation System</h3>
 
                     <p>
-                        A C programming project that simulates booking, cancellation,
-                        and reporting within a reservation workflow.
+                        A C project that simulates booking, cancellation, and reporting
+                        within a reservation workflow.
                     </p>
 
                     <div class="tag-list">
@@ -501,7 +533,7 @@
                         <span>Structured Logic</span>
                     </div>
 
-                    <a href="#" class="project-link">GitHub Repository</a>
+                    <a href="#" class="project-link">GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </article>
             </div>
         </div>
@@ -509,55 +541,55 @@
 
     <section class="section section-soft" id="certifications">
         <div class="container">
-            <div class="section-heading">
+            <div class="section-heading reveal">
                 <p class="section-kicker">Certifications</p>
                 <h2>Licenses, Certifications & Industry Learning</h2>
             </div>
 
             <div class="cert-grid">
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal">
                     <div class="cert-image"><img src="assets/images/Badge_DAE.png" alt="Data Analytics Essentials badge" /></div>
                     <h3>Data Analytics Essentials</h3>
                     <p>Cisco Networking Academy</p>
                     <span>Issued Jan 2026</span>
                 </div>
 
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal reveal-delay-1">
                     <div class="cert-image"><img src="assets/images/Badge_ITDS.png" alt="Introduction to Data Science badge" /></div>
                     <h3>Introduction to Data Science</h3>
                     <p>Cisco Networking Academy</p>
                     <span>Issued Jan 2026</span>
                 </div>
 
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal reveal-delay-2">
                     <div class="cert-image"><img src="assets/images/Badge_ITC.png" alt="Introduction to Cybersecurity badge" /></div>
                     <h3>Introduction to Cybersecurity</h3>
                     <p>Cisco Networking Academy</p>
                     <span>Issued Jan 2026</span>
                 </div>
 
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal reveal-delay-3">
                     <div class="cert-image"><img src="assets/images/Badge_NALAT.png" alt="Learn-A-Thon badge" /></div>
                     <h3>Learn-A-Thon 2025</h3>
                     <p>Cisco Networking Academy</p>
                     <span>Issued Oct 2025</span>
                 </div>
 
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal reveal-delay-4">
                     <div class="cert-image"><img src="assets/images/Badge_RHSA2.png" alt="Red Hat System Administration II badge" /></div>
                     <h3>Red Hat System Administration II</h3>
                     <p>Red Hat</p>
                     <span>Issued Oct 2025</span>
                 </div>
 
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal reveal-delay-5">
                     <div class="cert-image"><img src="assets/images/Badge_RHSA1.png" alt="Red Hat System Administration I badge" /></div>
                     <h3>Red Hat System Administration I</h3>
                     <p>Red Hat</p>
                     <span>Issued Jul 2025</span>
                 </div>
 
-                <div class="panel cert-card">
+                <div class="panel cert-card reveal reveal-delay-6">
                     <div class="cert-image"><img src="assets/images/Badge_CCNAITN.png" alt="CCNAv7 Introduction to Networks badge" /></div>
                     <h3>CCNAv7: Introduction to Networks</h3>
                     <p>Cisco Networking Academy</p>
@@ -569,10 +601,10 @@
 
     <section class="section" id="contact">
         <div class="container">
-            <div class="contact-section-card">
+            <div class="contact-section-card reveal">
                 <div class="contact-copy">
                     <p class="section-kicker">Contact</p>
-                    <h2>Let’s connect</h2>
+                    <h2>Let’s build something meaningful together</h2>
                     <p>
                         I am open to internships, networking, collaboration,
                         and opportunities related to software and data.
@@ -580,23 +612,23 @@
                 </div>
 
                 <div class="contact-grid">
-                    <div class="panel contact-card">
+                    <a class="panel contact-card" href="mailto:hudson.officer23@gmail.com">
                         <i class="fa-solid fa-envelope"></i>
                         <h3>Email</h3>
                         <p>hudson.officer23@gmail.com</p>
-                    </div>
+                    </a>
 
-                    <div class="panel contact-card">
+                    <a class="panel contact-card" href="https://www.linkedin.com/in/hudsonc200" target="_blank">
                         <i class="fa-brands fa-linkedin"></i>
                         <h3>LinkedIn</h3>
                         <p>linkedin.com/in/hudsonc200</p>
-                    </div>
+                    </a>
 
-                    <div class="panel contact-card">
+                    <a class="panel contact-card" href="#" target="_blank">
                         <i class="fa-brands fa-github"></i>
                         <h3>GitHub</h3>
                         <p>Add your GitHub profile link here</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -604,16 +636,16 @@
 
     <footer class="site-footer">
         <div class="container footer-unique">
-            <div class="footer-signature">
+            <div class="footer-signature reveal">
                 <p class="footer-mini-label">Closing Note</p>
-                <h3>Built with structure, curiosity, and long-term growth in mind.</h3>
+                <h3>Built with structure, curiosity, and continuous improvement in mind.</h3>
                 <p>
                     This portfolio reflects how I work: organized, strategic, and focused on
-                    continuous improvement across software, analytics, and real-world execution.
+                    growth across software, analytics, and real-world execution.
                 </p>
             </div>
 
-            <div class="footer-identity">
+            <div class="footer-identity reveal reveal-delay-1">
                 <div class="footer-badge-group">
                     <span>ENTJ</span>
                     <span>Computer Science</span>
@@ -632,6 +664,10 @@
             </div>
         </div>
     </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
     <script src="assets/js/script.js"></script>
 </body>
