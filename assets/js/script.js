@@ -36,7 +36,7 @@ function typeEffect() {
         }
     }
 
-    const speed = isDeleting ? 50 : 90;
+    const speed = isDeleting ? 45 : 85;
     setTimeout(typeEffect, speed);
 }
 
