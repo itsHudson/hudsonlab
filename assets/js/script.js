@@ -45,7 +45,6 @@ function typeEffect() {
 
 typeEffect();
 
-/* MOBILE MENU */
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
 
@@ -54,15 +53,14 @@ if (menuToggle && mainNav) {
         mainNav.classList.toggle("show");
     });
 
-    const navLinks = mainNav.querySelectorAll("a");
-    navLinks.forEach(link => {
+    const menuLinks = mainNav.querySelectorAll("a");
+    menuLinks.forEach(link => {
         link.addEventListener("click", () => {
             mainNav.classList.remove("show");
         });
     });
 }
 
-/* ACTIVE NAV LINK */
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".main-nav a");
 
@@ -90,7 +88,6 @@ function setActiveNav() {
 window.addEventListener("scroll", setActiveNav);
 setActiveNav();
 
-/* REVEAL ON SCROLL */
 const revealElements = document.querySelectorAll(".reveal");
 
 const revealObserver = new IntersectionObserver((entries) => {
@@ -107,7 +104,6 @@ revealElements.forEach(element => {
     revealObserver.observe(element);
 });
 
-/* BACK TO TOP */
 const backToTop = document.getElementById("backToTop");
 
 function handleBackToTop() {
