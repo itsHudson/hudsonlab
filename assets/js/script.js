@@ -1,34 +1,32 @@
-const text = [
-"Data Analytics Enthusiast",
+const text=[
 "Software Developer",
+"Data Analytics Enthusiast",
 "Computer Science Student"
-];
+]
 
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
+let i=0
+let j=0
+let current=""
+let letter=""
 
 function type(){
 
-if(count === text.length){
-count = 0;
+if(i===text.length){
+i=0
 }
 
-currentText = text[count];
-letter = currentText.slice(0, ++index);
+current=text[i]
+letter=current.slice(0,++j)
 
-document.getElementById("typing").textContent = letter;
+document.getElementById("typing").textContent=letter
 
-if(letter.length === currentText.length){
-count++;
-index = 0;
+if(letter.length===current.length){
+i++
+j=0
 }
 
-setTimeout(type,120);
+setTimeout(type,120)
 
 }
 
-type();
-
-particlesJS.load('particles-js','https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json');
+type()
