@@ -233,6 +233,32 @@ const skills = {
     ]
   },
 
+  r: {
+    icon: "📊",
+    name: "R",
+    description:
+      "R represents analytical modelling, statistical reasoning, and a stronger connection between data and interpretable insights.",
+    meaning:
+      "A technology aligned with deeper analytical work, data interpretation, and evidence-based exploration.",
+    direction:
+      "Statistical analysis · modelling · insight generation",
+    projects: [
+      {
+        name: "Analytical Exploration",
+        summary:
+          "R reflects a growing direction toward data analysis and the ability to interpret patterns with technical depth.",
+        tech: "R",
+        github: "Available upon request",
+        thumb: "Statistics · Analysis · Insight",
+        features: [
+          "Analytical reasoning",
+          "Data interpretation support",
+          "Strong relevance to data-centric work"
+        ]
+      }
+    ]
+  },
+
   sas: {
     icon: "📈",
     name: "SAS",
@@ -261,22 +287,18 @@ const skills = {
 };
 
 const skillButtons = document.querySelectorAll(".orbit-skill");
-
 const skillIcon = document.getElementById("skillIcon");
 const skillName = document.getElementById("skillName");
 const skillDescription = document.getElementById("skillDescription");
 const skillMeaning = document.getElementById("skillMeaning");
 const skillDirection = document.getElementById("skillDirection");
-
 const projectList = document.getElementById("projectList");
-
 const projectName = document.getElementById("projectName");
 const projectSummary = document.getElementById("projectSummary");
 const projectTech = document.getElementById("projectTech");
 const projectGithub = document.getElementById("projectGithub");
 const projectFeatures = document.getElementById("projectFeatures");
 const projectThumbPreview = document.getElementById("projectThumbPreview");
-
 const orbitShell = document.getElementById("orbitShell");
 
 let orbitRotation = 0;
@@ -288,7 +310,7 @@ function updateOrbitRotation() {
   orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
 }
 
-function renderProjectDetail(project, selectedIndex = 0) {
+function renderProjectDetail(project, selectedIndex) {
   projectName.textContent = project.name;
   projectSummary.textContent = project.summary;
   projectTech.textContent = project.tech;
@@ -300,8 +322,8 @@ function renderProjectDetail(project, selectedIndex = 0) {
   }
 
   projectThumbPreview.textContent = project.thumb;
-
   projectFeatures.innerHTML = "";
+
   project.features.forEach((feature) => {
     const li = document.createElement("li");
     li.textContent = feature;
@@ -374,27 +396,19 @@ window.addEventListener("mouseup", () => {
   orbitShell.classList.remove("dragging");
 });
 
-orbitShell.addEventListener(
-  "touchstart",
-  (event) => {
-    isDragging = true;
-    startX = event.touches[0].clientX;
-    startRotation = orbitRotation;
-    orbitShell.classList.add("dragging");
-  },
-  { passive: true }
-);
+orbitShell.addEventListener("touchstart", (event) => {
+  isDragging = true;
+  startX = event.touches[0].clientX;
+  startRotation = orbitRotation;
+  orbitShell.classList.add("dragging");
+}, { passive: true });
 
-window.addEventListener(
-  "touchmove",
-  (event) => {
-    if (!isDragging) return;
-    const delta = event.touches[0].clientX - startX;
-    orbitRotation = startRotation + delta * 0.6;
-    updateOrbitRotation();
-  },
-  { passive: true }
-);
+window.addEventListener("touchmove", (event) => {
+  if (!isDragging) return;
+  const delta = event.touches[0].clientX - startX;
+  orbitRotation = startRotation + delta * 0.6;
+  updateOrbitRotation();
+}, { passive: true });
 
 window.addEventListener("touchend", () => {
   isDragging = false;
