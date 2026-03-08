@@ -1,25 +1,16 @@
-{
-  "name": "@rollup/rollup-linux-x64-gnu",
-  "version": "4.59.0",
-  "os": [
-    "linux"
-  ],
-  "cpu": [
-    "x64"
-  ],
-  "files": [
-    "rollup.linux-x64-gnu.node"
-  ],
-  "description": "Native bindings for Rollup",
-  "author": "Lukas Taegert-Atkinson",
-  "homepage": "https://rollupjs.org/",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rollup/rollup.git"
-  },
-  "libc": [
-    "glibc"
-  ],
-  "main": "./rollup.linux-x64-gnu.node"
+import React, { useState } from 'react';
+import Home from './Home/Home';
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+  };
+
+  if (currentPage === 'home') {
+    return <Home onNavigate={handleNavigate} />;
+  }
+
+  return <Home onNavigate={handleNavigate} />;
 }
