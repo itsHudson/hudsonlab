@@ -1,52 +1,146 @@
-.skill-globe-layout{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; }
-.skill-globe-shell{
-    position:relative; width:min(560px, 100%); aspect-ratio:1/1; margin-inline:auto;
-    border-radius:50%;
-    background:radial-gradient(circle at center, rgba(37,99,235,0.12), rgba(6,11,32,0.92) 68%);
-    border:1px solid rgba(255,255,255,0.08);
-    box-shadow:0 0 0 1px rgba(37,99,235,0.06), 0 0 60px rgba(37,99,235,0.16);
-    overflow:hidden;
+/* =========================================================
+   SKILL GLOBE
+   ========================================================= */
+
+.skill-globe-section{
+    position: relative;
+    padding: 120px 0;
 }
-.skill-globe-shell::before{
-    content:""; position:absolute; inset:10%; border-radius:50%;
-    background-image:radial-gradient(rgba(147,197,253,0.12) 1px, transparent 1px);
-    background-size:18px 18px; opacity:0.45; animation:RotateGlobeSlow 22s linear infinite;
+
+.skill-globe-wrapper{
+    position: relative;
+    width: 520px;
+    height: 520px;
+    margin: auto;
 }
+
+/* =============================
+   Globe Core
+   ============================= */
+
 .skill-globe-core{
-    position:absolute; inset:17%; border-radius:50%;
-    background:radial-gradient(circle at center, rgba(59,130,246,0.18), rgba(37,99,235,0.04) 48%, transparent 70%);
-    border:1px solid rgba(59,130,246,0.16);
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center,
+        rgba(80,150,255,0.25),
+        rgba(20,30,50,0.9));
+
+    box-shadow:
+        0 0 60px rgba(80,150,255,0.4),
+        inset 0 0 60px rgba(80,150,255,0.2);
+
+    animation: globe-spin 60s linear infinite;
 }
-.skill-globe-orbit{ position:absolute; border-radius:50%; border:1px solid rgba(96,165,250,0.12); }
-.skill-globe-orbit-one{ inset:8%; animation:RotateGlobeSlow 16s linear infinite; }
-.skill-globe-orbit-two{ inset:17%; animation:RotateGlobeSlowReverse 20s linear infinite; }
-.skill-globe-orbit-three{ inset:28%; animation:RotateGlobeSlow 13s linear infinite; }
-.skill-icon-button{
-    position:absolute; width:72px; height:72px; border-radius:50%; border:1px solid rgba(255,255,255,0.16);
-    background:rgba(15,23,42,0.7); color:#ffffff; display:flex; align-items:center; justify-content:center;
-    cursor:pointer; transition:var(--TransitionValue); box-shadow:0 10px 30px rgba(0,0,0,0.18);
+
+/* =============================
+   Globe Grid
+   ============================= */
+
+.skill-globe-core::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+
+    background-size:40px 40px;
+
+    mask-image: radial-gradient(circle, black 60%, transparent 70%);
 }
-.skill-icon-button i{ font-size:1.7rem; }
-.skill-icon-button:hover, .skill-icon-button.is-active{ transform:translateY(-4px) scale(1.05); border-color:rgba(255,255,255,0.34); box-shadow:0 0 24px rgba(96,165,250,0.32); }
-.skill-nodejs{ top:16%; left:40%; color:#6ee7b7; }
-.skill-javascript{ top:10%; right:22%; color:#fde047; }
-.skill-java{ top:42%; left:10%; color:#fb923c; }
-.skill-python{ bottom:18%; left:22%; color:#60a5fa; }
-.skill-database{ bottom:15%; right:18%; color:#93c5fd; }
-.skill-html{ top:32%; right:10%; color:#f97316; }
-.skill-analytics{ bottom:34%; right:34%; color:#c084fc; }
-.skill-detail-panel{ padding:28px; min-height:420px; }
-.skill-detail-header h3{ margin:0; font-size:2rem; letter-spacing:-0.04em; }
-.skill-detail-header p{ margin:10px 0 0; color:var(--MutedTextColor); }
-.skill-detail-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
-.skill-detail-tags span{ padding:8px 12px; border-radius:999px; background:rgba(37,99,235,0.08); color:var(--PrimaryColor); font-weight:700; font-size:0.88rem; }
-.skill-related-projects{ margin-top:26px; }
-.skill-related-projects h4{ margin:0 0 14px; font-size:1rem; }
-.skill-related-project-grid{ display:grid; gap:14px; }
-.skill-related-project-card{ padding:16px 18px; border-radius:18px; background:rgba(255,255,255,0.68); border:1px solid rgba(255,255,255,0.8); }
-.skill-related-project-card h5{ margin:0 0 6px; font-size:1rem; }
-.skill-related-project-card p{ margin:0; color:var(--MutedTextColor); font-size:0.92rem; }
-@keyframes RotateGlobeSlow{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
-@keyframes RotateGlobeSlowReverse{ from{ transform:rotate(360deg); } to{ transform:rotate(0deg); } }
-@media (max-width:1150px){ .skill-globe-layout{ grid-template-columns:1fr; } .skill-detail-panel{ min-height:auto; } }
-@media (max-width:640px){ .skill-globe-shell{ width:min(420px, 100%); } .skill-icon-button{ width:60px; height:60px; } .skill-icon-button i{ font-size:1.4rem; } }
+
+/* =============================
+   Orbit Ring
+   ============================= */
+
+.skill-orbit{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    animation: orbit-spin 25s linear infinite;
+}
+
+/* =============================
+   Skill Icons
+   ============================= */
+
+.skill-icon{
+    position:absolute;
+
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    background:rgba(20,25,40,0.9);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(8px);
+
+    transition:0.35s;
+    cursor:pointer;
+}
+
+.skill-icon:hover{
+    transform:scale(1.25);
+
+    box-shadow:
+        0 0 25px rgba(90,160,255,0.8),
+        0 0 60px rgba(90,160,255,0.6);
+}
+
+/* =============================
+   Positioning Icons
+   ============================= */
+
+.skill-icon:nth-child(1){ top:-10px; left:230px; }
+.skill-icon:nth-child(2){ top:90px; left:430px; }
+.skill-icon:nth-child(3){ top:260px; left:460px; }
+.skill-icon:nth-child(4){ top:420px; left:350px; }
+.skill-icon:nth-child(5){ top:460px; left:150px; }
+.skill-icon:nth-child(6){ top:330px; left:-10px; }
+.skill-icon:nth-child(7){ top:140px; left:-30px; }
+
+/* =============================
+   Animations
+   ============================= */
+
+@keyframes orbit-spin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+}
+
+@keyframes globe-spin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(-360deg); }
+}
+
+/* =============================
+   Mobile
+   ============================= */
+
+@media(max-width:768px){
+
+.skill-globe-wrapper{
+    width:360px;
+    height:360px;
+}
+
+.skill-icon{
+    width:48px;
+    height:48px;
+    font-size:18px;
+}
+
+}

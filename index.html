@@ -1,88 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hudson | Professional Portfolio</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/base/variables.css">
-    <link rel="stylesheet" href="assets/css/base/reset.css">
-    <link rel="stylesheet" href="assets/css/base/layout.css">
+<title>Hudson | Professional Portfolio</title>
 
-    <link rel="stylesheet" href="assets/css/components/header.css">
-    <link rel="stylesheet" href="assets/css/components/hero.css">
-    <link rel="stylesheet" href="assets/css/components/sections.css">
-    <link rel="stylesheet" href="assets/css/components/cards.css">
-    <link rel="stylesheet" href="assets/css/components/footer.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet" href="assets/css/features/skill-globe.css">
-    <link rel="stylesheet" href="assets/css/features/project-modal.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/pages/home.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- MASTER CSS -->
+<link rel="stylesheet" href="assets/css/app.css">
+
 </head>
+
 <body>
-    <div class="scroll-progress" id="ScrollProgress"></div>
-    <div class="page-blur blur-left"></div>
-    <div class="page-blur blur-right"></div>
-    <div class="grid-overlay"></div>
 
-    <div id="HeaderComponent"></div>
+<div class="scroll-progress" id="ScrollProgress"></div>
 
-    <main>
-        <div id="HeroComponent"></div>
-        <div class="section-divider"></div>
-        <div id="AboutComponent"></div>
-        <div class="section-divider"></div>
-        <div id="HighlightsComponent"></div>
-        <div class="section-divider"></div>
-        <div id="ExperienceComponent"></div>
-        <div class="section-divider"></div>
-        <div id="SwotComponent"></div>
-        <div class="section-divider"></div>
-        <div id="EducationComponent"></div>
-        <div class="section-divider"></div>
-        <div id="SkillsComponent"></div>
-        <div class="section-divider"></div>
-        <div id="ProjectsComponent"></div>
-        <div class="section-divider"></div>
-        <div id="CertificationsComponent"></div>
-        <div class="section-divider"></div>
-        <div id="GithubComponent"></div>
-        <div class="section-divider"></div>
-        <div id="ExploreComponent"></div>
-        <div class="section-divider"></div>
-        <div id="ContactComponent"></div>
-    </main>
+<div class="page-blur blur-left"></div>
+<div class="page-blur blur-right"></div>
 
-    <div id="FooterComponent"></div>
+<div class="grid-overlay"></div>
 
-    <button class="back-to-top" id="BackToTop" aria-label="Back to top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
+<div id="HeaderComponent"></div>
 
-    <div class="project-modal" id="ProjectModal" aria-hidden="true">
-        <div class="project-modal-backdrop" data-close-modal="true"></div>
-        <div class="project-modal-card panel">
-            <button class="project-modal-close" id="CloseProjectModal" aria-label="Close project modal">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div id="ProjectModalContent"></div>
-        </div>
-    </div>
+<main>
 
-    <script src="assets/js/core/component-loader.js"></script>
-    <script src="assets/js/core/navigation.js"></script>
-    <script src="assets/js/core/typing.js"></script>
-    <script src="assets/js/core/reveal.js"></script>
-    <script src="assets/js/core/scroll.js"></script>
-    <script src="assets/js/core/experience.js"></script>
-    <script src="assets/js/features/skill-globe.js"></script>
-    <script src="assets/js/features/project-modal.js"></script>
-    <script src="assets/js/pages/home.js"></script>
+<div id="HeroComponent"></div>
+<div class="section-divider"></div>
+
+<div id="AboutComponent"></div>
+<div class="section-divider"></div>
+
+<div id="HighlightsComponent"></div>
+<div class="section-divider"></div>
+
+<div id="ExperienceComponent"></div>
+<div class="section-divider"></div>
+
+<div id="SwotComponent"></div>
+<div class="section-divider"></div>
+
+<div id="EducationComponent"></div>
+<div class="section-divider"></div>
+
+<div id="SkillsComponent"></div>
+<div class="section-divider"></div>
+
+<div id="ProjectsComponent"></div>
+<div class="section-divider"></div>
+
+<div id="CertificationsComponent"></div>
+<div class="section-divider"></div>
+
+<div id="GithubComponent"></div>
+<div class="section-divider"></div>
+
+<div id="ExploreComponent"></div>
+<div class="section-divider"></div>
+
+<div id="ContactComponent"></div>
+
+</main>
+
+<div id="FooterComponent"></div>
+
+<button class="back-to-top" id="BackToTop" aria-label="Back to top">
+<i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<div class="project-modal" id="ProjectModal" aria-hidden="true">
+
+<div class="project-modal-backdrop" data-close-modal="true"></div>
+
+<div class="project-modal-card panel">
+
+<button class="project-modal-close" id="CloseProjectModal">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div id="ProjectModalContent"></div>
+
+</div>
+
+</div>
+
+<!-- MASTER JS -->
+<script src="assets/js/app.js"></script>
+
 </body>
 </html>
