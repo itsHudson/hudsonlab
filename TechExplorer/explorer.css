@@ -1,160 +1,168 @@
-.explorer-layout {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 24px;
-  align-items: start;
+.explorer-grid{
+
+margin-top:40px;
+
+display:grid;
+grid-template-columns:300px 1fr 1fr;
+
+gap:30px;
+
+align-items:start;
+
 }
 
-.orbit-panel,
-.skill-panel,
-.project-detail-panel {
-  padding: 24px;
+
+
+/* SKILL ORBIT */
+
+.skill-orbit{
+
+position:relative;
+
+height:300px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
 }
 
-.orbit-shell {
-  position: relative;
-  width: min(100%, 420px);
-  aspect-ratio: 1 / 1;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+
+.orbit-skill{
+
+position:absolute;
+
+padding:12px 18px;
+
+border-radius:20px;
+
+border:1px solid #e3e8ef;
+
+background:white;
+
+cursor:pointer;
+
+transition:all .25s;
+
+font-weight:600;
+
 }
 
-.orbit-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(61, 220, 255, 0.16);
+
+
+.orbit-skill:hover{
+
+transform:scale(1.05);
+
+background:#eef2ff;
+
 }
 
-.orbit-ring-1 {
-  width: 100%;
-  height: 100%;
+
+
+.orbit-skill.active{
+
+background:#2563eb;
+
+color:white;
+
 }
 
-.orbit-ring-2 {
-  width: 72%;
-  height: 72%;
+
+
+.orbit-skill:nth-child(1){
+
+top:20px;
+
 }
 
-.orbit-core {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle, rgba(61, 220, 255, 0.22), rgba(61, 220, 255, 0.06));
-  border: 1px solid rgba(61, 220, 255, 0.22);
-  box-shadow: 0 0 24px rgba(61, 220, 255, 0.18);
-  font-weight: 800;
-  letter-spacing: 0.18em;
+
+
+.orbit-skill:nth-child(2){
+
+bottom:20px;
+
+left:30px;
+
 }
 
-.orbit-skill {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 1px solid rgba(61, 220, 255, 0.16);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
-  font-size: 1.4rem;
-  cursor: pointer;
-  transition: 0.25s ease;
+
+
+.orbit-skill:nth-child(3){
+
+bottom:20px;
+
+right:30px;
+
 }
 
-.orbit-skill:hover,
-.orbit-skill.active {
-  border-color: rgba(61, 220, 255, 0.42);
-  box-shadow: 0 0 18px rgba(61, 220, 255, 0.18);
-  color: var(--accent);
+
+
+/* SKILL INFO */
+
+.skill-info{
+
+padding:25px;
+
 }
 
-.skill-header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-  align-items: center;
+
+
+.project-preview{
+
+margin-top:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
 }
 
-.skill-icon-large {
-  width: 74px;
-  height: 74px;
-  border-radius: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  background: rgba(61, 220, 255, 0.08);
-  border: 1px solid rgba(61, 220, 255, 0.18);
+
+
+.project-preview-card{
+
+border:1px solid #e3e8ef;
+
+background:white;
+
+padding:12px;
+
+border-radius:8px;
+
+text-align:left;
+
+cursor:pointer;
+
 }
 
-.skill-header h2 {
-  margin: 0 0 8px;
-  font-size: 1.6rem;
+
+
+.project-preview-card:hover{
+
+background:#f8fafc;
+
 }
 
-.skill-header p {
-  margin: 0;
-  color: var(--text-soft);
-  line-height: 1.8;
+
+
+/* PROJECT DETAIL */
+
+.project-detail{
+
+padding:25px;
+
 }
 
-.project-preview-grid {
-  display: grid;
-  gap: 14px;
-}
 
-.project-preview-card {
-  text-align: left;
-  border: 1px solid rgba(61, 220, 255, 0.14);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-main);
-  border-radius: 18px;
-  padding: 18px;
-  transition: 0.25s ease;
-  cursor: pointer;
-}
 
-.project-preview-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(61, 220, 255, 0.28);
-}
+.project-detail ul{
 
-.project-preview-card strong,
-.project-preview-card span {
-  display: block;
-}
+padding-left:18px;
 
-.project-preview-card strong {
-  margin-bottom: 8px;
-}
+color:#6b7280;
 
-.project-preview-card span,
-.project-detail-summary {
-  color: var(--text-soft);
-  line-height: 1.8;
-}
-
-.project-detail-panel {
-  margin-top: 24px;
-  display: grid;
-  gap: 18px;
-}
-
-.project-detail-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-@media (max-width: 980px) {
-  .explorer-layout,
-  .project-detail-grid {
-    grid-template-columns: 1fr;
-  }
 }

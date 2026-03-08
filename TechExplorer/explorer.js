@@ -1,25 +1,24 @@
 const skills = {
 
 python:{
-icon:"🐍",
 name:"Python",
-description:"Python is used for scripting, automation and structured programming tasks.",
+description:"Python is widely used for automation, scripting and data analysis.",
 
 projects:[
 
 {
 name:"MyGoPandai Online Learning Platform",
 
-summary:"A web-based learning platform with structured modules for multiple user roles.",
+summary:"A web-based learning platform with multiple user roles.",
 
 tech:"HTML, CSS, ASP.NET, SQL Server",
 
 github:"https://github.com/itsHudson/MyGoPandai",
 
 features:[
-"Role based login system",
-"Instructor and learner modules",
-"Course management system"
+"Role based login",
+"Instructor dashboard",
+"Course management"
 ]
 
 }
@@ -29,25 +28,24 @@ features:[
 },
 
 cpp:{
-icon:"💠",
 name:"C++",
-description:"C++ is used to implement data structures and algorithm based systems.",
+description:"C++ is used for system development and data structure implementation.",
 
 projects:[
 
 {
 name:"Bus Reservation System",
 
-summary:"A system to manage bus seat reservations and passenger information.",
+summary:"A system that manages seat reservations and passenger data.",
 
 tech:"C++",
 
 github:"https://github.com/itsHudson/BusReservationSystem",
 
 features:[
-"Seat reservation system",
-"Passenger management",
-"File storage system"
+"Seat reservation",
+"Passenger record system",
+"File storage"
 ]
 
 }
@@ -57,24 +55,23 @@ features:[
 },
 
 java:{
-icon:"☕",
 name:"Java",
-description:"Java is used for object-oriented system development and application design.",
+description:"Java is used for object oriented programming and application design.",
 
 projects:[
 
 {
 name:"OODJ Medical System",
 
-summary:"A Java project for managing clinic patient information.",
+summary:"A system that manages clinic patient records.",
 
 tech:"Java",
 
 github:"https://github.com/itsHudson/OODJMedicalSystem",
 
 features:[
-"Object oriented programming design",
-"Patient record management",
+"Patient record system",
+"Object oriented architecture",
 "Clinic workflow simulation"
 ]
 
@@ -90,7 +87,6 @@ features:[
 
 const skillButtons=document.querySelectorAll(".orbit-skill");
 
-const skillIcon=document.getElementById("skillIcon");
 const skillName=document.getElementById("skillName");
 const skillDescription=document.getElementById("skillDescription");
 
@@ -131,9 +127,6 @@ function renderSkill(skillKey){
 
 const skill=skills[skillKey];
 
-if(!skill) return;
-
-skillIcon.textContent=skill.icon;
 skillName.textContent=skill.name;
 skillDescription.textContent=skill.description;
 
@@ -147,6 +140,7 @@ card.className="project-preview-card";
 
 card.innerHTML=`
 <strong>${project.name}</strong>
+<br>
 <span>${project.summary}</span>
 `;
 
@@ -155,7 +149,9 @@ card.onclick=()=>renderProjectDetail(project);
 projectList.appendChild(card);
 
 if(index===0){
+
 renderProjectDetail(project);
+
 }
 
 });
