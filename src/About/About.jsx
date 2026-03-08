@@ -1,23 +1,27 @@
 import React from 'react';
 import './about.css';
-import ProfileCard from './ProfileCard';
+import ProfileSection from './ProfileSection';
 import PersonalityENTJ from './PersonalityENTJ';
+import GoalsSection from './GoalsSection';
 
-export default function About() {
+export default function About({ onNavigate }) {
   return (
-    <section className="section-shell about-shell">
-      <div className="section-header">
-        <span className="section-tag">About</span>
-        <h2 className="section-title">Strategic, analytical, and execution-focused.</h2>
-        <p className="section-subtitle">
-          HUDSONLAB presents Hudson Chia as a systems-minded student who blends data,
-          problem solving, communication, and leadership into one digital identity.
-        </p>
-      </div>
+    <section className="page-shell">
+      <div className="content-wrap about-wrap">
+        <div>
+          <div className="section-kicker">About</div>
+          <h1 className="page-title">
+            Personal <span>Profile</span>
+          </h1>
+          <p className="page-intro">
+            This page only focuses on identity, mindset, and direction. No certifications, no work
+            experience, and no project details are mixed in here.
+          </p>
+        </div>
 
-      <div className="about-grid">
-        <ProfileCard />
+        <ProfileSection />
         <PersonalityENTJ />
+        <GoalsSection onNavigate={onNavigate} />
       </div>
     </section>
   );

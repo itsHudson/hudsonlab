@@ -1,40 +1,34 @@
 import React from 'react';
 import entjImage from '../Images/MBTI_ENTJ.png';
 
-const traits = [
-  { label: 'Leadership', value: '95%' },
-  { label: 'Strategy', value: '93%' },
-  { label: 'Execution', value: '90%' },
-  { label: 'Analysis', value: '88%' }
-];
-
 export default function PersonalityENTJ() {
+  const traits = [
+    'Strategic decision making',
+    'Natural preference for structure',
+    'Clear execution mindset',
+    'Comfortable leading systems and processes',
+  ];
+
   return (
-    <article className="glass-panel personality-panel">
-      <div className="personality-header">
-        <div>
-          <span className="mini-tag">Personality Lens</span>
-          <h3>ENTJ</h3>
-        </div>
-        <img src={entjImage} alt="ENTJ" />
+    <section className="panel entj-grid">
+      <div className="entj-copy">
+        <div className="section-kicker">Personality</div>
+        <h2>ENTJ Work Style</h2>
+        <p>
+          ENTJ traits align well with how I approach technology: plan clearly, organize the system,
+          and move efficiently toward the result. I like interfaces and workflows that feel intentional
+          rather than overloaded.
+        </p>
+        <ul className="entj-list">
+          {traits.map((trait) => (
+            <li key={trait}>{trait}</li>
+          ))}
+        </ul>
       </div>
-      <p>
-        ENTJ reflects my preferred style: take initiative, create structure, improve
-        systems, and move ideas into action with clarity.
-      </p>
-      <div className="trait-list">
-        {traits.map((trait) => (
-          <div key={trait.label} className="trait-row">
-            <div className="trait-top">
-              <span>{trait.label}</span>
-              <span>{trait.value}</span>
-            </div>
-            <div className="trait-bar">
-              <span style={{ width: trait.value }} />
-            </div>
-          </div>
-        ))}
+
+      <div className="entj-image-frame">
+        <img src={entjImage} alt="ENTJ personality visual" className="entj-image" />
       </div>
-    </article>
+    </section>
   );
 }

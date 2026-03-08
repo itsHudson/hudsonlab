@@ -1,19 +1,29 @@
 import React from 'react';
 import './education.css';
-import EducationTimeline from './EducationTimeline';
+import EducationCard from './EducationCard';
+import EducationDetail from './EducationDetail';
+import educationItems from '../Data/education';
 
 export default function Education() {
+  const mainEducation = educationItems[0];
+
   return (
-    <section className="section-shell">
-      <div className="section-header">
-        <span className="section-tag">Education</span>
-        <h2 className="section-title">Academic path visualized as signal lines.</h2>
-        <p className="section-subtitle">
-          Education is presented as a clean timeline beam, keeping the visual language of
-          the website futuristic while still showing your academic progression clearly.
-        </p>
+    <section className="page-shell">
+      <div className="content-wrap education-wrap">
+        <div>
+          <div className="section-kicker">Education</div>
+          <h1 className="page-title">
+            Academic <span>Profile</span>
+          </h1>
+          <p className="page-intro">
+            Education stays independent here. This page is only for academic background and current
+            study focus.
+          </p>
+        </div>
+
+        <EducationCard item={mainEducation} />
+        <EducationDetail item={mainEducation} />
       </div>
-      <EducationTimeline />
     </section>
   );
 }

@@ -1,9 +1,5 @@
 import React from 'react';
 
-export default function PageTransition({ children, activeKey }) {
-  return (
-    <main key={activeKey} className="page-transition">
-      {children}
-    </main>
-  );
+export default function PageTransition({ children }) {
+  return <main className="page-transition">{children}</main>;
 }

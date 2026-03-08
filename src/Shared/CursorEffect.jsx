@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 export default function CursorEffect() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: -100, y: -100 });
 
   useEffect(() => {
     const handleMove = (event) => {
@@ -13,15 +13,10 @@ export default function CursorEffect() {
   }, []);
 
   return (
-    <>
-      <div
-        className="cursor-glow"
-        style={{ transform: `translate(${position.x - 90}px, ${position.y - 90}px)` }}
-      />
-      <div
-        className="cursor-dot"
-        style={{ transform: `translate(${position.x - 5}px, ${position.y - 5}px)` }}
-      />
-    </>
+    <div
+      className="cursor-effect"
+      style={{ left: `${position.x}px`, top: `${position.y}px` }}
+      aria-hidden="true"
+    />
   );
 }

@@ -1,35 +1,36 @@
-import React, { useState } from 'react';
-import GlowButton from './GlowButton';
-import './shared.css';
+import React from 'react';
 
-export default function Navbar({ items, activeSection, onNavigate }) {
-  const [open, setOpen] = useState(false);
+const links = [
+  { label: 'Home', page: 'home' },
+  { label: 'About', page: 'about' },
+  { label: 'Tech Explorer', page: 'techexplorer' },
+  { label: 'Experience', page: 'experience' },
+  { label: 'Education', page: 'education' },
+  { label: 'Certifications', page: 'certifications' },
+  { label: 'Contact', page: 'contact' },
+];
 
+export default function Navbar({ currentPage, onNavigate }) {
   return (
-    <header className="nav-shell">
-      <div className="nav-brand" onClick={() => onNavigate('Home')}>
-        <span className="nav-brand-main">HUDSONLAB</span>
-        <span className="nav-brand-sub">Interactive Orbit Portfolio</span>
-      </div>
-
-      <button className="nav-toggle" onClick={() => setOpen((value) => !value)}>
-        {open ? 'Close' : 'Menu'}
+    <header className="navbar">
+      <button className="brand-mark" onClick={() => onNavigate('home')} aria-label="Go to home">
+        <span className="brand-dot" />
+        <span className="brand-copy">
+          <strong>HUDSONLAB</strong>
+          <span>Interactive Portfolio</span>
+        </span>
       </button>
 
-      <nav className={`nav-links ${open ? 'open' : ''}`}>
-        {items.map((item) => (
+      <nav className="nav-links">
+        {links.map((link) => (
           <button
-            key={item}
-            className={`nav-link ${activeSection === item ? 'active' : ''}`}
-            onClick={() => {
-              onNavigate(item);
-              setOpen(false);
-            }}
+            key={link.page}
+            className={`nav-link ${currentPage === link.page ? 'active' : ''}`}
+            onClick={() => onNavigate(link.page)}
           >
-            {item}
+            {link.label}
           </button>
         ))}
-        <GlowButton onClick={() => onNavigate('Contact')}>Connect</GlowButton>
       </nav>
     </header>
   );

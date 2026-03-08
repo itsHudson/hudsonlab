@@ -1,86 +1,67 @@
-.education-layout {
+.education-wrap {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 24px;
-  padding: 24px;
+  gap: 22px;
 }
 
-.education-visual {
-  min-height: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.04);
+.education-card-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 18px;
+  padding: 20px;
+  align-items: center;
 }
 
-.education-visual img {
+.education-card-image {
   width: 100%;
-  height: 100%;
-  display: block;
+  border-radius: 22px;
   object-fit: cover;
 }
 
-.education-track {
-  position: relative;
-  display: grid;
-  gap: 22px;
-  padding-left: 30px;
-}
-
-.education-line {
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, rgba(0,245,255,0.8), rgba(0,245,255,0.1));
-}
-
-.education-node {
-  position: relative;
-}
-
-.education-pulse {
-  position: absolute;
-  left: -30px;
-  top: 30px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #00f5ff;
-  box-shadow: 0 0 18px rgba(0,245,255,0.8);
-}
-
-.education-card {
-  padding: 22px;
-}
-
-.education-period {
-  color: #00f5ff;
-  font-size: 0.92rem;
-}
-
-.education-card h3,
-.education-card h4 {
-  margin: 10px 0;
-}
-
-.education-card h4 {
-  color: #bfefff;
-  font-weight: 500;
-}
-
-.education-card p {
-  color: #95b8d1;
-  line-height: 1.8;
-}
-
-.education-card strong {
+.education-card-copy strong,
+.education-card-copy span,
+.education-card-copy p {
   display: block;
-  margin-top: 16px;
 }
 
-@media (max-width: 980px) {
-  .education-layout {
+.education-card-copy strong {
+  font-size: 1.4rem;
+}
+
+.education-card-copy span {
+  margin-top: 8px;
+  color: var(--text-soft);
+}
+
+.education-card-copy p {
+  margin: 10px 0 0;
+  color: var(--text-dim);
+}
+
+.education-detail-panel {
+  padding: 24px;
+}
+
+.education-detail-panel h2 {
+  margin: 6px 0 0;
+  font-size: 2rem;
+}
+
+.education-detail-subtitle,
+.education-detail-text {
+  color: var(--text-soft);
+}
+
+.education-list-block {
+  margin-top: 20px;
+}
+
+.education-list-block strong {
+  display: block;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 760px) {
+  .education-card-shell {
     grid-template-columns: 1fr;
   }
 }

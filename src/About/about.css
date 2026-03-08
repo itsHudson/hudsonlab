@@ -1,115 +1,84 @@
-.about-grid {
+.about-wrap {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 24px;
+  gap: 22px;
 }
 
-.profile-card,
-.personality-panel {
-  padding: 28px;
-}
-
-.profile-card {
+.about-profile-grid,
+.entj-grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 0.86fr 1.14fr;
   gap: 24px;
+  padding: 24px;
 }
 
-.profile-card-visual {
+.about-image-frame,
+.entj-image-frame {
+  min-height: 320px;
   border-radius: 24px;
   overflow: hidden;
-  min-height: 320px;
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
-.profile-card-visual img,
-.personality-header img {
+.about-profile-image,
+.entj-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.profile-card-content h3,
-.personality-header h3 {
-  margin: 0;
-  font-size: 2rem;
+.about-copy-block,
+.entj-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.profile-role {
-  color: #00f5ff;
-  margin: 10px 0 16px;
+.about-copy-block h2,
+.entj-copy h2,
+.goals-panel h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
 }
 
-.profile-card-content p,
-.personality-panel p {
-  color: #95b8d1;
-  line-height: 1.9;
+.about-copy-block p,
+.entj-copy p,
+.goals-panel p {
+  margin: 0 0 16px;
+  color: var(--text-soft);
+  line-height: 1.8;
 }
 
 .about-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
 }
 
-.about-tags span,
-.mini-tag {
-  border-radius: 999px;
-  border: 1px solid rgba(0,245,255,0.2);
-  padding: 8px 12px;
-  background: rgba(0,245,255,0.08);
-  color: #00f5ff;
+.entj-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--text-soft);
+  line-height: 1.9;
 }
 
-.personality-header {
+.goals-panel {
+  padding: 24px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 18px;
-}
-
-.personality-header img {
-  width: 110px;
-  height: 110px;
-  object-fit: contain;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.04);
-  padding: 8px;
-}
-
-.trait-list {
-  margin-top: 22px;
-  display: grid;
-  gap: 16px;
-}
-
-.trait-top {
-  display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
 }
 
-.trait-bar {
-  height: 10px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 999px;
-  overflow: hidden;
+.goals-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.trait-bar span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, rgba(0,245,255,0.4), #00f5ff);
-  box-shadow: 0 0 18px rgba(0,245,255,0.4);
-}
-
-@media (max-width: 980px) {
-  .about-grid,
-  .profile-card {
+@media (max-width: 860px) {
+  .about-profile-grid,
+  .entj-grid {
     grid-template-columns: 1fr;
   }
 }

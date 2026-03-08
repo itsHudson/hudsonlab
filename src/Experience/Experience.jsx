@@ -1,19 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './experience.css';
-import CareerTimeline from './CareerTimeline';
+import experienceItems from '../Data/experience';
+import ExperienceCard from './ExperienceCard';
+import ExperienceDetail from './ExperienceDetail';
 
 export default function Experience() {
+  const [selectedId, setSelectedId] = useState(experienceItems[0].id);
+  const selected = experienceItems.find((item) => item.id === selectedId) || experienceItems[0];
+
   return (
-    <section className="section-shell">
-      <div className="section-header">
-        <span className="section-tag">Experience</span>
-        <h2 className="section-title">Professional track with leadership under pressure.</h2>
-        <p className="section-subtitle">
-          From service operations to management responsibility, the timeline below shows
-          practical experience that shaped communication, resilience, and execution.
-        </p>
+    <section className="page-shell">
+      <div className="content-wrap experience-wrap">
+        <div>
+          <div className="section-kicker">Experience</div>
+          <h1 className="page-title">
+            Work <span>History</span>
+          </h1>
+          <p className="page-intro">
+            This page only focuses on experience. Click a role preview to open more detailed
+            responsibilities and achievements.
+          </p>
+        </div>
+
+        <div className="experience-grid">
+          <div className="experience-list">
+            {experienceItems.map((item) => (
+              <ExperienceCard
+                key={item.id}
+                item={item}
+                active={item.id === selectedId}
+                onOpen={() => setSelectedId(item.id)}
+              />
+            ))}
+          </div>
+
+          <ExperienceDetail item={selected} />
+        </div>
       </div>
-      <CareerTimeline />
     </section>
   );
 }
