@@ -118,6 +118,20 @@ button{
     right:-60px;
 }
 
+/* SCROLL PROGRESS */
+
+.scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    background:linear-gradient(90deg,#2563eb,#7c9eff);
+    z-index:2000;
+    transition:width 0.1s linear;
+    box-shadow:0 0 18px rgba(37,99,235,0.4);
+}
+
 /* HEADER */
 
 .site-header{
@@ -579,6 +593,18 @@ button{
     font-weight:800;
     letter-spacing:0.08em;
     text-transform:uppercase;
+}
+
+/* DIVIDER */
+
+.section-divider{
+    height:1px;
+    background:linear-gradient(90deg,
+        transparent,
+        rgba(37,99,235,0.3),
+        transparent);
+    margin:0 auto;
+    width:min(1180px, 92%);
 }
 
 /* ABOUT */
@@ -1099,7 +1125,9 @@ button{
 }
 
 .skill-card h3,
-.skill-card p{
+.skill-card p,
+.skill-meta,
+.skill-bar{
     position:relative;
     z-index:1;
 }
@@ -1111,6 +1139,32 @@ button{
 .skill-card p{
     margin:0;
     color:var(--muted);
+}
+
+.skill-meta{
+    margin-top:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    font-size:0.88rem;
+    color:#64748b;
+    font-weight:700;
+}
+
+.skill-bar{
+    height:9px;
+    background:#e5e7eb;
+    border-radius:999px;
+    margin-top:10px;
+    overflow:hidden;
+}
+
+.skill-progress{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#2563eb,#4f7cff);
+    border-radius:999px;
+    transition:width 1.1s ease;
 }
 
 /* PROJECTS */
@@ -1161,6 +1215,26 @@ button{
 
 .featured-project{
     background:linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(244,249,255,0.78) 100%);
+}
+
+.project-image{
+    margin:-8px -8px 20px;
+    border-radius:20px;
+    overflow:hidden;
+    height:200px;
+    position:relative;
+    z-index:1;
+}
+
+.project-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.45s ease;
+}
+
+.project-card:hover .project-image img{
+    transform:scale(1.06);
 }
 
 .project-top{
@@ -1221,6 +1295,10 @@ button{
     z-index:1;
 }
 
+.project-link:hover{
+    text-decoration:underline;
+}
+
 /* CERT */
 
 .cert-grid{
@@ -1272,6 +1350,56 @@ button{
 .cert-card span{
     color:#738092;
     font-size:0.9rem;
+}
+
+/* GITHUB */
+
+.github-stats{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+}
+
+.github-card{
+    padding:28px;
+    text-align:center;
+    transition:var(--transition);
+}
+
+.github-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow-main);
+}
+
+.github-icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:rgba(37,99,235,0.1);
+    color:var(--primary);
+    font-size:1.3rem;
+}
+
+.github-card h3{
+    margin:0;
+    font-size:1.05rem;
+}
+
+.github-card strong{
+    display:block;
+    font-size:2rem;
+    margin-top:10px;
+    color:#2563eb;
+    letter-spacing:-0.04em;
+}
+
+.github-card p{
+    margin:10px 0 0;
+    color:var(--muted);
 }
 
 /* CONTACT */
@@ -1445,7 +1573,8 @@ button{
     .hero-metrics,
     .skills-grid,
     .contact-grid,
-    .highlights-grid{
+    .highlights-grid,
+    .github-stats{
         grid-template-columns:repeat(2, 1fr);
     }
 
@@ -1518,7 +1647,8 @@ button{
     .projects-grid-advanced,
     .cert-grid,
     .contact-grid,
-    .swot-grid{
+    .swot-grid,
+    .github-stats{
         grid-template-columns:1fr;
     }
 
@@ -1577,7 +1707,7 @@ button{
 
     .btn{
         width:100%;
-        max-width:260px;
+        max-width:280px;
     }
 
     .contact-section-card{
@@ -1610,8 +1740,13 @@ button{
     .contact-card,
     .personality-card,
     .highlight-card,
-    .swot-card{
+    .swot-card,
+    .github-card{
         padding:22px;
+    }
+
+    .project-image{
+        height:180px;
     }
 
     .back-to-top{

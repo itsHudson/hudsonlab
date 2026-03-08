@@ -79,6 +79,7 @@ function setActiveNav() {
     navLinks.forEach(link => {
         link.classList.remove("active");
         const href = link.getAttribute("href");
+
         if (href === `#${currentSection}`) {
             link.classList.add("active");
         }
@@ -89,11 +90,20 @@ window.addEventListener("scroll", setActiveNav);
 setActiveNav();
 
 const revealElements = document.querySelectorAll(".reveal");
+const skillProgressBars = document.querySelectorAll(".skill-progress");
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add("show");
+
+            if (entry.target.classList.contains("skill-card")) {
+                const progress = entry.target.querySelector(".skill-progress");
+                if (progress) {
+                    const targetWidth = progress.getAttribute("data-width");
+                    progress.style.width = targetWidth;
+                }
+            }
         }
     });
 }, {
@@ -127,3 +137,19 @@ if (backToTop) {
         });
     });
 }
+
+const progressBar = document.getElementById("scrollProgress");
+
+function updateProgressBar() {
+    if (!progressBar) return;
+
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    progressBar.style.width = `${progress}%`;
+}
+
+window.addEventListener("scroll", updateProgressBar);
+window.addEventListener("load", updateProgressBar);
+updateProgressBar();

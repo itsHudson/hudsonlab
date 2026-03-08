@@ -15,6 +15,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <div class="page-blur blur-1"></div>
     <div class="page-blur blur-2"></div>
@@ -36,6 +37,7 @@
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
                 <a href="#certifications">Certifications</a>
+                <a href="#github">GitHub</a>
                 <a href="#contact">Contact</a>
             </nav>
 
@@ -81,6 +83,12 @@
                         <i class="fa-solid fa-arrow-right"></i>
                         View Projects
                     </a>
+
+                    <a href="assets/files/Hudson_CV.pdf" class="btn btn-secondary" download>
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        Download Resume
+                    </a>
+
                     <a href="#contact" class="btn btn-secondary">
                         <i class="fa-solid fa-paper-plane"></i>
                         Contact Me
@@ -133,10 +141,10 @@
                             <a href="mailto:hudson.officer23@gmail.com" aria-label="Email">
                                 <i class="fa-solid fa-envelope"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/hudsonc200" target="_blank" aria-label="LinkedIn">
+                            <a href="https://www.linkedin.com/in/hudsonc200" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                                 <i class="fa-brands fa-linkedin-in"></i>
                             </a>
-                            <a href="#" target="_blank" aria-label="GitHub">
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                                 <i class="fa-brands fa-github"></i>
                             </a>
                         </div>
@@ -161,6 +169,8 @@
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section class="section" id="about">
         <div class="container">
@@ -255,6 +265,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section class="section section-soft" id="highlights">
         <div class="container">
             <div class="section-heading reveal">
@@ -301,6 +313,8 @@
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section class="section" id="experience">
         <div class="container">
@@ -510,6 +524,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section class="section section-soft" id="swot">
         <div class="container">
             <div class="section-heading reveal">
@@ -565,6 +581,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section class="section" id="education">
         <div class="container">
             <div class="section-heading reveal">
@@ -597,6 +615,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section class="section section-soft" id="skills">
         <div class="container">
             <div class="section-heading reveal">
@@ -609,40 +629,84 @@
                     <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
                     <h3>Python</h3>
                     <p>Used for scripting, logic development, and academic systems.</p>
+                    <div class="skill-meta">
+                        <span>Core Development</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85%"></div>
+                    </div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-1">
                     <div class="skill-icon"><i class="fa-brands fa-java"></i></div>
                     <h3>Java</h3>
                     <p>Applied in object-oriented programming and structured application development.</p>
+                    <div class="skill-meta">
+                        <span>OOP & Applications</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80%"></div>
+                    </div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-2">
                     <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
                     <h3>C / C++</h3>
                     <p>Used for programming fundamentals, system logic, and algorithm practice.</p>
+                    <div class="skill-meta">
+                        <span>Logic & Algorithms</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="75%"></div>
+                    </div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-3">
                     <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
                     <h3>SQL / DBMS</h3>
                     <p>Knowledge of database queries, relational design, and structured data handling.</p>
+                    <div class="skill-meta">
+                        <span>Database Handling</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="78%"></div>
+                    </div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-4">
                     <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
                     <h3>HTML / CSS</h3>
                     <p>Used to create clean user interfaces and portfolio-style front-end layouts.</p>
+                    <div class="skill-meta">
+                        <span>Front-End UI</span>
+                        <span>82%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="82%"></div>
+                    </div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-5">
                     <div class="skill-icon"><i class="fa-solid fa-chart-line"></i></div>
                     <h3>Analytics Tools</h3>
                     <p>Exposure to SAS, R, and data-related academic workflows.</p>
+                    <div class="skill-meta">
+                        <span>Analytics Workflow</span>
+                        <span>72%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="72%"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section class="section" id="projects">
         <div class="container">
@@ -653,6 +717,10 @@
 
             <div class="projects-grid-advanced">
                 <article class="panel project-card featured-project reveal">
+                    <div class="project-image">
+                        <img src="assets/images/project_classroom.png" alt="Classroom Management System preview" />
+                    </div>
+
                     <div class="project-top">
                         <span class="project-type">Python Project</span>
                         <i class="fa-solid fa-school"></i>
@@ -671,10 +739,17 @@
                         <span>File Handling</span>
                     </div>
 
-                    <a href="#" class="project-link">GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
+                        GitHub Repository
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
                 </article>
 
                 <article class="panel project-card reveal reveal-delay-1">
+                    <div class="project-image">
+                        <img src="assets/images/project_medical.png" alt="APU Medical Centre System preview" />
+                    </div>
+
                     <div class="project-top">
                         <span class="project-type">Java Project</span>
                         <i class="fa-solid fa-notes-medical"></i>
@@ -693,10 +768,17 @@
                         <span>System Design</span>
                     </div>
 
-                    <a href="#" class="project-link">GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
+                        GitHub Repository
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
                 </article>
 
                 <article class="panel project-card reveal reveal-delay-2">
+                    <div class="project-image">
+                        <img src="assets/images/project_bus.png" alt="Bus Reservation System preview" />
+                    </div>
+
                     <div class="project-top">
                         <span class="project-type">C Project</span>
                         <i class="fa-solid fa-bus"></i>
@@ -715,11 +797,16 @@
                         <span>Structured Logic</span>
                     </div>
 
-                    <a href="#" class="project-link">GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
+                        GitHub Repository
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
                 </article>
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section class="section section-soft" id="certifications">
         <div class="container">
@@ -781,6 +868,48 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
+    <section class="section" id="github">
+        <div class="container">
+            <div class="section-heading reveal">
+                <p class="section-kicker">GitHub</p>
+                <h2>Development Activity</h2>
+            </div>
+
+            <div class="github-stats">
+                <div class="panel github-card reveal">
+                    <div class="github-icon">
+                        <i class="fa-solid fa-folder-tree"></i>
+                    </div>
+                    <h3>Projects</h3>
+                    <strong>10+</strong>
+                    <p>Academic and personal coding projects built across different modules and systems.</p>
+                </div>
+
+                <div class="panel github-card reveal reveal-delay-1">
+                    <div class="github-icon">
+                        <i class="fa-solid fa-code-branch"></i>
+                    </div>
+                    <h3>Languages</h3>
+                    <strong>6</strong>
+                    <p>Python, Java, C/C++, SQL, HTML, and CSS used in practical coursework and portfolio work.</p>
+                </div>
+
+                <div class="panel github-card reveal reveal-delay-2">
+                    <div class="github-icon">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3>Focus</h3>
+                    <strong>Software</strong>
+                    <p>Structured development, problem solving, system logic, and data-oriented learning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
     <section class="section" id="contact">
         <div class="container">
             <div class="contact-section-card reveal">
@@ -800,13 +929,13 @@
                         <p>hudson.officer23@gmail.com</p>
                     </a>
 
-                    <a class="panel contact-card" href="https://www.linkedin.com/in/hudsonc200" target="_blank">
+                    <a class="panel contact-card" href="https://www.linkedin.com/in/hudsonc200" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-linkedin"></i>
                         <h3>LinkedIn</h3>
                         <p>linkedin.com/in/hudsonc200</p>
                     </a>
 
-                    <a class="panel contact-card" href="#" target="_blank">
+                    <a class="panel contact-card" href="#" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-github"></i>
                         <h3>GitHub</h3>
                         <p>Add your GitHub profile link here</p>
