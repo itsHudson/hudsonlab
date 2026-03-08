@@ -26,87 +26,174 @@
 
   <main class="page-shell">
     <span class="small-chip">Technology Explorer</span>
-    <h1 class="page-title">Technology, Systems, and the Work Behind Them</h1>
+
+    <h1 class="page-title">A Curated View of the Technologies I Build With</h1>
+
     <p class="page-subtitle">
-      This explorer connects technologies with the systems and ideas built through them.
-      Drag the orbit, select a technology, and discover how each one translates into actual work.
+      This explorer is designed as a premium overview of the technical languages,
+      systems, and concepts that shape the way I build. It is not only a list of skills,
+      but a structured map of the tools, directions, and areas of work that define my technical identity.
     </p>
 
-    <section class="explorer-grid">
-      <div class="glass-card orbit-panel reveal">
-        <div class="orbit-shell" id="orbitShell">
-          <div class="orbit-core">TECH</div>
+    <section class="explorer-stage">
+      <div class="glass-card explorer-hero-band reveal">
+        <div class="explorer-hero-copy">
+          <h2>Technology is not just what I know.</h2>
+          <p>
+            It is the language through which I design systems, think through structure,
+            and turn ideas into things that work.
+          </p>
+        </div>
 
-          <button class="orbit-skill active" data-skill="python" style="--angle: 0deg;">
-            🐍
-            <span>Python</span>
-          </button>
-
-          <button class="orbit-skill" data-skill="cpp" style="--angle: 60deg;">
-            💠
-            <span>C++</span>
-          </button>
-
-          <button class="orbit-skill" data-skill="java" style="--angle: 120deg;">
-            ☕
-            <span>Java</span>
-          </button>
-
-          <button class="orbit-skill" data-skill="html" style="--angle: 180deg;">
-            🌐
-            <span>HTML</span>
-          </button>
-
-          <button class="orbit-skill" data-skill="css" style="--angle: 240deg;">
-            🎨
-            <span>CSS</span>
-          </button>
-
-          <button class="orbit-skill" data-skill="sql" style="--angle: 300deg;">
-            🗄️
-            <span>SQL</span>
-          </button>
+        <div class="explorer-hero-meta">
+          <div class="hero-meta-item">
+            <strong>11+</strong>
+            <span>technical areas mapped</span>
+          </div>
+          <div class="hero-meta-item">
+            <strong>multi-domain</strong>
+            <span>systems · data · web · logic</span>
+          </div>
         </div>
       </div>
 
-      <div class="glass-card skill-info reveal-delay">
-        <div class="skill-header">
-          <div class="skill-icon-large" id="skillIcon">🐍</div>
-          <div>
-            <h2 id="skillName">Python</h2>
-            <p id="skillDescription">
-              Python is used for automation, scripting, and data-oriented problem solving.
-            </p>
+      <div class="explorer-grid">
+        <div class="glass-card orbit-panel reveal-delay">
+          <div class="orbit-panel-head">
+            <span class="orbit-label">Technology Universe</span>
+            <p>Drag to rotate</p>
+          </div>
+
+          <div class="orbit-shell" id="orbitShell">
+            <div class="orbit-back-ring orbit-back-ring-1"></div>
+            <div class="orbit-back-ring orbit-back-ring-2"></div>
+            <div class="orbit-back-ring orbit-back-ring-3"></div>
+
+            <div class="orbit-core">
+              <div class="orbit-core-inner">
+                <span>TECH</span>
+              </div>
+            </div>
+
+            <button class="orbit-skill active" data-skill="python" style="--angle: 0deg;">
+              <span class="orbit-emoji">🐍</span>
+              <span class="orbit-text">Python</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="java" style="--angle: 32deg;">
+              <span class="orbit-emoji">☕</span>
+              <span class="orbit-text">Java</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="cpp" style="--angle: 64deg;">
+              <span class="orbit-emoji">💠</span>
+              <span class="orbit-text">C++</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="c" style="--angle: 96deg;">
+              <span class="orbit-emoji">🧩</span>
+              <span class="orbit-text">C</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="assembly" style="--angle: 128deg;">
+              <span class="orbit-emoji">⚙️</span>
+              <span class="orbit-text">Assembly</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="html" style="--angle: 160deg;">
+              <span class="orbit-emoji">🌐</span>
+              <span class="orbit-text">HTML</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="css" style="--angle: 192deg;">
+              <span class="orbit-emoji">🎨</span>
+              <span class="orbit-text">CSS</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="javascript" style="--angle: 224deg;">
+              <span class="orbit-emoji">⚡</span>
+              <span class="orbit-text">JavaScript</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="sql" style="--angle: 256deg;">
+              <span class="orbit-emoji">🗄️</span>
+              <span class="orbit-text">SQL</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="r" style="--angle: 288deg;">
+              <span class="orbit-emoji">📊</span>
+              <span class="orbit-text">R</span>
+            </button>
+
+            <button class="orbit-skill" data-skill="sas" style="--angle: 320deg;">
+              <span class="orbit-emoji">📈</span>
+              <span class="orbit-text">SAS</span>
+            </button>
           </div>
         </div>
 
-        <div class="skill-project-list">
-          <h3>Connected Work</h3>
-          <div id="projectList" class="project-preview"></div>
-        </div>
-      </div>
-
-      <div class="glass-card project-detail reveal-delay-2">
-        <h2 id="projectName">Project Details</h2>
-        <p id="projectSummary">Select a project to view details.</p>
-
-        <div class="project-meta">
-          <div class="project-meta-box">
-            <strong>Technology</strong>
-            <span id="projectTech">-</span>
+        <div class="glass-card skill-info reveal-delay-2">
+          <div class="skill-header">
+            <div class="skill-icon-large" id="skillIcon">🐍</div>
+            <div>
+              <p class="skill-mini-label">Selected Technology</p>
+              <h2 id="skillName">Python</h2>
+              <p id="skillDescription">
+                Python is used for automation, scripting, and data-oriented problem solving.
+              </p>
+            </div>
           </div>
 
-          <div class="project-meta-box">
-            <strong>GitHub</strong>
-            <span id="projectGithub">-</span>
+          <div class="skill-content-grid">
+            <div class="skill-info-box">
+              <strong>What it represents</strong>
+              <p id="skillMeaning">
+                Structured logic, flexibility, and strong utility across technical workflows.
+              </p>
+            </div>
+
+            <div class="skill-info-box">
+              <strong>Primary direction</strong>
+              <p id="skillDirection">
+                Automation · data workflows · scripting
+              </p>
+            </div>
+          </div>
+
+          <div class="skill-project-list">
+            <h3>Connected Work</h3>
+            <div id="projectList" class="project-preview"></div>
           </div>
         </div>
 
-        <h3>Highlights</h3>
-        <ul id="projectFeatures" class="info-list"></ul>
+        <div class="glass-card project-detail reveal-delay-2">
+          <div class="project-detail-top">
+            <p class="project-mini-label">Project / Application Layer</p>
+            <h2 id="projectName">Project Details</h2>
+          </div>
 
-        <div class="project-thumb-preview" id="projectThumbPreview">
-          Technology preview area
+          <p id="projectSummary">Select a project to view details.</p>
+
+          <div class="project-meta">
+            <div class="project-meta-box">
+              <strong>Technology</strong>
+              <span id="projectTech">-</span>
+            </div>
+
+            <div class="project-meta-box">
+              <strong>GitHub</strong>
+              <span id="projectGithub">-</span>
+            </div>
+          </div>
+
+          <div class="project-thumb-preview" id="projectThumbPreview">
+            Technology preview area
+          </div>
+
+          <div class="project-highlight-section">
+            <h3>Highlights</h3>
+            <ul id="projectFeatures" class="info-list"></ul>
+          </div>
         </div>
       </div>
     </section>
