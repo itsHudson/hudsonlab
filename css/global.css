@@ -1,14 +1,14 @@
 :root {
   --bg-main: #f6f1ea;
-  --bg-soft: #fffaf4;
+  --bg-soft: #FF971D;
   --bg-card: rgba(255, 255, 255, 0.78);
   --line: rgba(120, 89, 58, 0.14);
 
   --text-main: #2f241c;
   --text-soft: #746457;
 
-  --accent: #c96a2b;
-  --accent-2: #e08a3a;
+  --accent: #FF971D;
+  --accent-2: #FF971D;
   --accent-soft: rgba(201, 106, 43, 0.12);
 
   --shadow: 0 18px 45px rgba(90, 55, 24, 0.1);
