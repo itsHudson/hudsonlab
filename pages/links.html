@@ -1,84 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hudson | My Links</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/base/variables.css" />
-    <link rel="stylesheet" href="../assets/css/base/reset.css" />
-    <link rel="stylesheet" href="../assets/css/base/layout.css" />
-    <link rel="stylesheet" href="../assets/css/components/header.css" />
-    <link rel="stylesheet" href="../assets/css/components/sections.css" />
-    <link rel="stylesheet" href="../assets/css/components/cards.css" />
-    <link rel="stylesheet" href="../assets/css/pages/subpage.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Links | Hudson Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../assets/css/base/layout.css">
+    <link rel="stylesheet" href="../assets/css/pages/subpage.css">
 </head>
 <body>
-    <div class="scroll-progress" id="ScrollProgress"></div>
-    <div class="page-blur blur-1"></div>
-    <div class="page-blur blur-2"></div>
-    <div class="grid-overlay"></div>
+    <section class="subpage-section">
+        <div class="container subpage-shell">
+            <a href="../index.html" class="subpage-back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <div class="subpage-heading">
+                <p class="section-kicker">My Links</p>
+                <h1>Find me online</h1>
+                <p>Use this page as your quick access area for portfolio, social, and professional links.</p>
+            </div>
 
-    <header class="site-header">
-        <div class="container navbar">
-            <a href="../index.html" class="brand"><span class="brand-mark"></span>Hudson</a>
-            <nav class="main-nav" id="MainNav">
-                <a href="../index.html">Home</a>
-                <a href="../index.html#github">GitHub</a>
-                <a href="../index.html#contact">Contact</a>
-            </nav>
-            <div class="nav-right">
-                <a href="../index.html#contact" class="nav-cta">Let’s Talk</a>
-                <button class="menu-toggle" id="MenuToggle" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+            <div class="subpage-card-grid">
+                <div class="subpage-card panel">
+                    <img src="../assets/images/Links_Overview.svg" alt="Links overview image">
+                    <h3>Main Links</h3>
+                    <ul>
+                        <li><a href="mailto:hudson.officer23@gmail.com">Email</a></li>
+                        <li><a href="https://www.linkedin.com/in/hudsonc200" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="#">Add your GitHub profile here</a></li>
+                    </ul>
+                </div>
+                <div class="subpage-card panel">
+                    <h3>Optional Add-ons</h3>
+                    <ul>
+                        <li>GitHub Pages website link</li>
+                        <li>Resume download link</li>
+                        <li>Project repository links</li>
+                        <li>Certification verification links</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </header>
-
-    <section class="subpage-hero section">
-        <div class="container reveal">
-            <a class="subpage-back-link" href="../index.html#explore"><i class="fa-solid fa-arrow-left"></i>Back to home</a>
-            <p class="section-kicker">Links</p>
-            <h1>My <span>Links</span></h1>
-            <p>Keep all public links in one place. This is cleaner than putting every link on the homepage.</p>
-        </div>
     </section>
-
-    <section class="section">
-        <div class="container subpage-link-list">
-            <a class="panel subpage-link-item reveal" href="https://www.linkedin.com/in/hudsonc200" target="_blank" rel="noopener noreferrer">
-                <div>
-                    <strong>LinkedIn</strong>
-                    <span>Professional profile and networking page</span>
-                </div>
-                <span class="subpage-link-button">Open <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-            </a>
-
-            <a class="panel subpage-link-item reveal reveal-delay-1" href="mailto:hudson.officer23@gmail.com">
-                <div>
-                    <strong>Email</strong>
-                    <span>Direct contact for internship or collaboration</span>
-                </div>
-                <span class="subpage-link-button">Open <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-            </a>
-
-            <a class="panel subpage-link-item reveal reveal-delay-2" href="#" target="_blank" rel="noopener noreferrer">
-                <div>
-                    <strong>GitHub</strong>
-                    <span>Replace # with your real GitHub profile link</span>
-                </div>
-                <span class="subpage-link-button">Open <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-            </a>
-        </div>
-    </section>
-
-    <footer class="site-footer">
-        <div class="container footer-minimal reveal"><p class="footer-copyright">© 2026 Hudson Portfolio</p></div>
-    </footer>
-
-    <button class="back-to-top" id="BackToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-    <script type="module" src="../assets/js/pages/subpage.js"></script>
+    <script src="../assets/js/pages/subpage.js"></script>
 </body>
 </html>

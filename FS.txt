@@ -1,0 +1,87 @@
+HUDSONLAB/
+│
+├── index.html
+├── README.md
+│
+├── assets/
+│   │
+│   ├── css/
+│   │   │
+│   │   ├── base/
+│   │   │   ├── layout.css
+│   │   │   ├── reset.css
+│   │   │   └── variables.css
+│   │   │
+│   │   ├── components/
+│   │   │   ├── cards.css
+│   │   │   ├── footer.css
+│   │   │   ├── header.css
+│   │   │   ├── hero.css
+│   │   │   └── sections.css
+│   │   │
+│   │   ├── features/
+│   │   │   ├── project-modal.css
+│   │   │   └── skill-globe.css
+│   │   │
+│   │   └── pages/
+│   │       ├── home.css
+│   │       └── subpage.css
+│   │
+│   ├── data/
+│   │   └── projects.json
+│   │
+│   ├── files/
+│   │   └── Hudson_CV.pdf
+│   │
+│   ├── images/
+│   │   ├── Badge_CCNAITN.png
+│   │   ├── Badge_DAE.png
+│   │   ├── Badge_ITC.png
+│   │   ├── Badge_ITDS.png
+│   │   ├── Badge_NALAT.png
+│   │   ├── Badge_RHSA1.png
+│   │   ├── Badge_RHSA2.png
+│   │   ├── Edu_APU.png
+│   │   ├── MBTI_ENTJ.png
+│   │   ├── ProfileHUDSONPixar.png
+│   │   ├── Work_ACCakeHouse.png
+│   │   └── Work_Webhelp.png
+│   │
+│   └── js/
+│       │
+│       ├── core/
+│       │   ├── component-loader.js
+│       │   ├── experience.js
+│       │   ├── navigation.js
+│       │   ├── reveal.js
+│       │   ├── scroll.js
+│       │   └── typing.js
+│       │
+│       ├── features/
+│       │   ├── project-modal.js
+│       │   └── skill-globe.js
+│       │
+│       └── pages/
+│           ├── home.js
+│           └── subpage.js
+│
+├── components/
+│   ├── about.html
+│   ├── certifications.html
+│   ├── contact.html
+│   ├── education.html
+│   ├── experience.html
+│   ├── explore.html
+│   ├── footer.html
+│   ├── github.html
+│   ├── header.html
+│   ├── hero.html
+│   ├── highlights.html
+│   ├── projects.html
+│   ├── skills.html
+│   └── swot.html
+│
+└── pages/
+    ├── achievements.html
+    ├── guestbook.html
+    └── links.html

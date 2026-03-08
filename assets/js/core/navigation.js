@@ -1,49 +1,46 @@
-export function InitializeMobileMenu() {
+function SetupNavigation() {
     const MenuToggleButton = document.getElementById("MenuToggle");
     const MainNavigation = document.getElementById("MainNav");
 
-    if (!MenuToggleButton || !MainNavigation) {
-        return;
+    if (MenuToggleButton && MainNavigation) {
+        MenuToggleButton.addEventListener("click", () => {
+            MainNavigation.classList.toggle("show");
+        });
+
+        const NavigationLinks = MainNavigation.querySelectorAll("a");
+        NavigationLinks.forEach((CurrentLink) => {
+            CurrentLink.addEventListener("click", () => {
+                MainNavigation.classList.remove("show");
+            });
+        });
     }
 
-    MenuToggleButton.addEventListener("click", () => {
-        MainNavigation.classList.toggle("show");
-    });
+    const SectionList = document.querySelectorAll("section[id]");
+    const NavigationLinkList = document.querySelectorAll(".main-nav a");
 
-    const NavigationLinks = MainNavigation.querySelectorAll("a");
-
-    NavigationLinks.forEach((CurrentLink) => {
-        CurrentLink.addEventListener("click", () => {
-            MainNavigation.classList.remove("show");
-        });
-    });
-}
-
-export function InitializeActiveNavigation() {
-    const AllSections = document.querySelectorAll("section[id]");
-    const NavigationLinks = document.querySelectorAll(".main-nav a");
-
-    function UpdateActiveNavigation() {
+    function SetActiveNavigationLink() {
         let CurrentSectionId = "";
 
-        AllSections.forEach((CurrentSection) => {
+        SectionList.forEach((CurrentSection) => {
             const SectionTopPosition = CurrentSection.offsetTop - 140;
-            const SectionHeight = CurrentSection.offsetHeight;
+            const SectionHeightValue = CurrentSection.offsetHeight;
 
-            if (window.scrollY >= SectionTopPosition && window.scrollY < SectionTopPosition + SectionHeight) {
-                CurrentSectionId = CurrentSection.getAttribute("id") || "";
+            if (window.scrollY >= SectionTopPosition && window.scrollY < SectionTopPosition + SectionHeightValue) {
+                CurrentSectionId = CurrentSection.getAttribute("id");
             }
         });
 
-        NavigationLinks.forEach((CurrentLink) => {
-            CurrentLink.classList.remove("active");
-
-            if (CurrentLink.getAttribute("href") === `#${CurrentSectionId}`) {
-                CurrentLink.classList.add("active");
+        NavigationLinkList.forEach((CurrentNavigationLink) => {
+            CurrentNavigationLink.classList.remove("active");
+            const LinkTarget = CurrentNavigationLink.getAttribute("href");
+            if (LinkTarget === `#${CurrentSectionId}`) {
+                CurrentNavigationLink.classList.add("active");
             }
         });
     }
 
-    window.addEventListener("scroll", UpdateActiveNavigation);
-    UpdateActiveNavigation();
+    window.addEventListener("scroll", SetActiveNavigationLink);
+    SetActiveNavigationLink();
 }
+
+document.addEventListener("AllComponentsLoaded", SetupNavigation);

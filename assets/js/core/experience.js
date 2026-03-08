@@ -1,44 +1,42 @@
-export function InitializeExperienceAccordion() {
-    const ExperienceItems = document.querySelectorAll(".experience-item");
+function SetupExperienceAccordion() {
+    const ExperienceItemList = document.querySelectorAll(".experience-item");
 
-    ExperienceItems.forEach((CurrentItem) => {
+    ExperienceItemList.forEach((CurrentItem) => {
         const SummaryButton = CurrentItem.querySelector(".experience-summary");
-        const DetailArea = CurrentItem.querySelector(".experience-details");
+        const DetailBox = CurrentItem.querySelector(".experience-details");
 
-        if (CurrentItem.classList.contains("active") && DetailArea) {
-            DetailArea.style.maxHeight = `${DetailArea.scrollHeight}px`;
+        if (CurrentItem.classList.contains("active") && DetailBox) {
+            DetailBox.style.maxHeight = `${DetailBox.scrollHeight}px`;
         }
 
-        if (!SummaryButton || !DetailArea) {
-            return;
-        }
+        if (SummaryButton && DetailBox) {
+            SummaryButton.addEventListener("click", () => {
+                const IsCurrentItemActive = CurrentItem.classList.contains("active");
 
-        SummaryButton.addEventListener("click", () => {
-            const IsCurrentItemOpen = CurrentItem.classList.contains("active");
+                ExperienceItemList.forEach((OtherItem) => {
+                    const OtherDetailBox = OtherItem.querySelector(".experience-details");
+                    OtherItem.classList.remove("active");
+                    if (OtherDetailBox) {
+                        OtherDetailBox.style.maxHeight = null;
+                    }
+                });
 
-            ExperienceItems.forEach((OtherItem) => {
-                const OtherDetailArea = OtherItem.querySelector(".experience-details");
-                OtherItem.classList.remove("active");
-
-                if (OtherDetailArea) {
-                    OtherDetailArea.style.maxHeight = null;
+                if (!IsCurrentItemActive) {
+                    CurrentItem.classList.add("active");
+                    DetailBox.style.maxHeight = `${DetailBox.scrollHeight}px`;
                 }
             });
-
-            if (!IsCurrentItemOpen) {
-                CurrentItem.classList.add("active");
-                DetailArea.style.maxHeight = `${DetailArea.scrollHeight}px`;
-            }
-        });
+        }
     });
 
     window.addEventListener("resize", () => {
-        ExperienceItems.forEach((CurrentItem) => {
-            const DetailArea = CurrentItem.querySelector(".experience-details");
-
-            if (CurrentItem.classList.contains("active") && DetailArea) {
-                DetailArea.style.maxHeight = `${DetailArea.scrollHeight}px`;
+        ExperienceItemList.forEach((CurrentItem) => {
+            const DetailBox = CurrentItem.querySelector(".experience-details");
+            if (CurrentItem.classList.contains("active") && DetailBox) {
+                DetailBox.style.maxHeight = `${DetailBox.scrollHeight}px`;
             }
         });
     });
 }
+
+document.addEventListener("AllComponentsLoaded", SetupExperienceAccordion);

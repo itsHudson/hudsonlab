@@ -1,0 +1,52 @@
+<section class="section section-soft" id="skills">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">Skills</p>
+            <h2>Interactive Skills Globe</h2>
+            <p class="section-support-text">Click a skill icon to show related projects below.</p>
+        </div>
+
+        <div class="skill-globe-layout reveal">
+            <div class="skill-globe-shell">
+                <div class="skill-globe-core"></div>
+                <div class="skill-globe-orbit skill-globe-orbit-one"></div>
+                <div class="skill-globe-orbit skill-globe-orbit-two"></div>
+                <div class="skill-globe-orbit skill-globe-orbit-three"></div>
+
+                <button class="skill-icon-button skill-python is-active" data-skill-key="python" aria-label="Python skill">
+                    <i class="fa-brands fa-python"></i>
+                </button>
+                <button class="skill-icon-button skill-java" data-skill-key="java" aria-label="Java skill">
+                    <i class="fa-brands fa-java"></i>
+                </button>
+                <button class="skill-icon-button skill-cpp" data-skill-key="c_cpp" aria-label="C and C++ skill">
+                    <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="skill-icon-button skill-database" data-skill-key="sql" aria-label="SQL and DBMS skill">
+                    <i class="fa-solid fa-database"></i>
+                </button>
+                <button class="skill-icon-button skill-html" data-skill-key="htmlcss" aria-label="HTML and CSS skill">
+                    <i class="fa-brands fa-html5"></i>
+                </button>
+                <button class="skill-icon-button skill-analytics" data-skill-key="analytics" aria-label="Analytics skill">
+                    <i class="fa-solid fa-chart-line"></i>
+                </button>
+            </div>
+
+            <div class="panel skill-detail-panel" id="SkillDetailPanel">
+                <div class="skill-detail-header">
+                    <p class="mini-kicker" id="SkillMiniTitle">Selected Skill</p>
+                    <h3 id="SkillTitle">Python</h3>
+                    <p id="SkillDescription">Used for scripting, logic development, and academic systems.</p>
+                </div>
+
+                <div class="skill-detail-tags" id="SkillTagList"></div>
+
+                <div class="skill-related-projects">
+                    <h4>Related Projects</h4>
+                    <div class="skill-related-project-grid" id="SkillProjectList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

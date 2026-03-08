@@ -1,11 +1,12 @@
-export function InitializeBackToTopButton() {
+function SetupScrollUtilities() {
     const BackToTopButton = document.getElementById("BackToTop");
-
-    if (!BackToTopButton) {
-        return;
-    }
+    const ScrollProgressBar = document.getElementById("ScrollProgress");
 
     function UpdateBackToTopButton() {
+        if (!BackToTopButton) {
+            return;
+        }
+
         if (window.scrollY > 400) {
             BackToTopButton.classList.add("show");
         } else {
@@ -13,33 +14,29 @@ export function InitializeBackToTopButton() {
         }
     }
 
-    window.addEventListener("scroll", UpdateBackToTopButton);
-    UpdateBackToTopButton();
+    function UpdateProgressBar() {
+        if (!ScrollProgressBar) {
+            return;
+        }
 
-    BackToTopButton.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        const ScrollTopValue = document.documentElement.scrollTop || document.body.scrollTop;
+        const ScrollHeightValue = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const ProgressWidthValue = ScrollHeightValue > 0 ? (ScrollTopValue / ScrollHeightValue) * 100 : 0;
+        ScrollProgressBar.style.width = `${ProgressWidthValue}%`;
+    }
+
+    if (BackToTopButton) {
+        BackToTopButton.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
-    });
-}
-
-export function InitializeScrollProgressBar() {
-    const ScrollProgressBar = document.getElementById("ScrollProgress");
-
-    if (!ScrollProgressBar) {
-        return;
     }
 
-    function UpdateScrollProgressBar() {
-        const ScrollTopPosition = document.documentElement.scrollTop || document.body.scrollTop;
-        const TotalScrollableHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const ScrollPercentage = TotalScrollableHeight > 0 ? (ScrollTopPosition / TotalScrollableHeight) * 100 : 0;
+    window.addEventListener("scroll", UpdateBackToTopButton);
+    window.addEventListener("scroll", UpdateProgressBar);
+    window.addEventListener("load", UpdateProgressBar);
 
-        ScrollProgressBar.style.width = `${ScrollPercentage}%`;
-    }
-
-    window.addEventListener("scroll", UpdateScrollProgressBar);
-    window.addEventListener("load", UpdateScrollProgressBar);
-    UpdateScrollProgressBar();
+    UpdateBackToTopButton();
+    UpdateProgressBar();
 }
+
+document.addEventListener("AllComponentsLoaded", SetupScrollUtilities);

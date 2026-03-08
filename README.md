@@ -1,42 +1,23 @@
-# HUDSONLAB Split Version
+# HUDSONLAB Polished Portfolio Template
 
-## Main idea
-This version keeps:
-- one main home page
-- separate CSS by category
-- separate JS by category
-- extra subpages for Explore cards
+This is a runnable modular portfolio template for Hudson.
 
-## Important files
-- `index.html` = main homepage
-- `pages/achievements.html` = achievements page
-- `pages/guestbook.html` = guestbook page
-- `pages/links.html` = links page
+## Main file
+- `index.html`
 
-## CSS folders
-- `assets/css/base/` = reset, variables, layout
-- `assets/css/components/` = header, section heading, reusable cards
-- `assets/css/pages/` = page specific styling
+## Important folders
+- `components/` for homepage sections
+- `pages/` for extra pages
+- `assets/css/` for styling
+- `assets/js/` for logic
+- `assets/images/` for images
+- `assets/files/` for downloadable files
 
-## JS folders
-- `assets/js/core/` = shared logic
-- `assets/js/pages/` = page entry files
+## Replace later
+- Add real image files in `assets/images/`
+- Replace `assets/files/Hudson_CV.pdf` with the real CV
+- Replace `#` GitHub links with the real GitHub profile or repositories
 
-## Image files you still need in your real project
-Make sure these files exist in `assets/images/`:
-- `ProfileHUDSOnPixar.png`
-- `MBTI_ENTJ.png`
-- `Work_Webhelp.png`
-- `Work_ACCakeHouse.png`
-- `Edu_APU.png`
-- `Badge_DAE.png`
-- `Badge_ITDS.png`
-- `Badge_ITC.png`
-- `Badge_NALAT.png`
-- `Badge_RHSA1.png`
-- `Badge_RHSA2.png`
-- `Badge_CCNAITN.png`
-
-## Resume file
-Put your resume here:
-- `assets/files/Hudson_CV.pdf`
+## Local test
+For the best result, run with a local server such as VS Code Live Server.
+GitHub Pages will also work correctly.

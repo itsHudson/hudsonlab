@@ -1,98 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hudson | Achievements</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/base/variables.css" />
-    <link rel="stylesheet" href="../assets/css/base/reset.css" />
-    <link rel="stylesheet" href="../assets/css/base/layout.css" />
-    <link rel="stylesheet" href="../assets/css/components/header.css" />
-    <link rel="stylesheet" href="../assets/css/components/sections.css" />
-    <link rel="stylesheet" href="../assets/css/components/cards.css" />
-    <link rel="stylesheet" href="../assets/css/pages/subpage.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements | Hudson Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/base/variables.css">
+    <link rel="stylesheet" href="../assets/css/base/reset.css">
+    <link rel="stylesheet" href="../assets/css/base/layout.css">
+    <link rel="stylesheet" href="../assets/css/pages/subpage.css">
 </head>
 <body>
-    <div class="scroll-progress" id="ScrollProgress"></div>
-    <div class="page-blur blur-1"></div>
-    <div class="page-blur blur-2"></div>
-    <div class="grid-overlay"></div>
-
-    <header class="site-header">
-        <div class="container navbar">
-            <a href="../index.html" class="brand"><span class="brand-mark"></span>Hudson</a>
-            <nav class="main-nav" id="MainNav">
-                <a href="../index.html">Home</a>
-                <a href="../index.html#projects">Projects</a>
-                <a href="../index.html#certifications">Certifications</a>
-                <a href="../index.html#contact">Contact</a>
-            </nav>
-            <div class="nav-right">
-                <a href="../index.html#contact" class="nav-cta">Let’s Talk</a>
-                <button class="menu-toggle" id="MenuToggle" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
-            </div>
-        </div>
-    </header>
-
-    <section class="subpage-hero section">
-        <div class="container reveal">
-            <a class="subpage-back-link" href="../index.html#explore"><i class="fa-solid fa-arrow-left"></i>Back to home</a>
-            <p class="section-kicker">Milestones & Victories</p>
-            <h1>My <span>Achievements</span></h1>
-            <p>Use this page when you want to show more details without making the homepage too long.</p>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container subpage-two-column">
-            <div class="panel subpage-wide-card reveal">
-                <p class="section-kicker">Featured Highlight</p>
-                <h2>Certification journey and continuous learning</h2>
-                <p class="section-subtext">This area is good for your biggest story, strongest badge, or latest achievement.</p>
-                <ul class="subpage-list">
-                    <li>Show your strongest certification first.</li>
-                    <li>Add 2 to 4 sentences to explain why it matters.</li>
-                    <li>Link it to your learning path, project work, or future internship goal.</li>
-                </ul>
+    <section class="subpage-section">
+        <div class="container subpage-shell">
+            <a href="../index.html" class="subpage-back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <div class="subpage-heading">
+                <p class="section-kicker">Achievements</p>
+                <h1>Milestones and accomplishments</h1>
+                <p>Here are the key achievements, certifications, and academic highlights in my learning journey.</p>
             </div>
 
-            <div class="panel subpage-card reveal reveal-delay-1">
-                <div class="subpage-card-icon"><i class="fa-solid fa-star"></i></div>
-                <h3>Best Practice</h3>
-                <p>Put your latest, strongest, or most relevant achievement at the top of the page.</p>
+            <div class="subpage-card-grid">
+                <div class="subpage-card panel">
+                    <img src="../assets/images/Achievement_Overview.svg" alt="Achievement overview image">
+                    <h3>Certification Growth</h3>
+                    <p>Built a growing certification profile through Cisco Networking Academy and Red Hat learning pathways.</p>
+                </div>
+                <div class="subpage-card panel">
+                    <h3>Key Recognition</h3>
+                    <ul>
+                        <li>Red Hat System Administration I</li>
+                        <li>Red Hat System Administration II</li>
+                        <li>CCNAv7: Introduction to Networks</li>
+                        <li>Data Analytics Essentials</li>
+                        <li>Introduction to Data Science</li>
+                        <li>Introduction to Cybersecurity</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
-
-    <section class="section section-soft">
-        <div class="container">
-            <div class="section-heading reveal">
-                <p class="section-kicker">Badges</p>
-                <h2>Certificate Gallery</h2>
-            </div>
-
-            <div class="subpage-badge-grid">
-                <div class="panel subpage-badge-item reveal"><img src="../assets/images/Badge_DAE.png" alt="Data Analytics Essentials badge" /><strong>Data Analytics Essentials</strong></div>
-                <div class="panel subpage-badge-item reveal reveal-delay-1"><img src="../assets/images/Badge_ITDS.png" alt="Introduction to Data Science badge" /><strong>Introduction to Data Science</strong></div>
-                <div class="panel subpage-badge-item reveal reveal-delay-2"><img src="../assets/images/Badge_ITC.png" alt="Introduction to Cybersecurity badge" /><strong>Introduction to Cybersecurity</strong></div>
-                <div class="panel subpage-badge-item reveal reveal-delay-3"><img src="../assets/images/Badge_NALAT.png" alt="Learn-A-Thon badge" /><strong>Learn-A-Thon 2025</strong></div>
-                <div class="panel subpage-badge-item reveal"><img src="../assets/images/Badge_RHSA1.png" alt="Red Hat System Administration I badge" /><strong>RHSA I</strong></div>
-                <div class="panel subpage-badge-item reveal reveal-delay-1"><img src="../assets/images/Badge_RHSA2.png" alt="Red Hat System Administration II badge" /><strong>RHSA II</strong></div>
-                <div class="panel subpage-badge-item reveal reveal-delay-2"><img src="../assets/images/Badge_CCNAITN.png" alt="CCNA badge" /><strong>CCNA Introduction to Networks</strong></div>
-                <div class="panel subpage-badge-item reveal reveal-delay-3"><img src="../assets/images/MBTI_ENTJ.png" alt="ENTJ image" /><strong>Personal Work Style</strong></div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="site-footer">
-        <div class="container footer-minimal reveal"><p class="footer-copyright">© 2026 Hudson Portfolio</p></div>
-    </footer>
-
-    <button class="back-to-top" id="BackToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-    <script type="module" src="../assets/js/pages/subpage.js"></script>
+    <script src="../assets/js/pages/subpage.js"></script>
 </body>
 </html>

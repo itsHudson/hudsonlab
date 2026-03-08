@@ -1,8 +1,9 @@
-import { InitializeMobileMenu } from "../core/navigation.js";
-import { InitializeRevealEffects } from "../core/reveal.js";
-import { InitializeBackToTopButton, InitializeScrollProgressBar } from "../core/scroll.js";
+function SetCurrentYear() {
+    const YearElementList = document.querySelectorAll("[data-current-year]");
+    const CurrentYearValue = new Date().getFullYear();
+    YearElementList.forEach((CurrentElement) => {
+        CurrentElement.textContent = CurrentYearValue;
+    });
+}
 
-InitializeMobileMenu();
-InitializeRevealEffects();
-InitializeBackToTopButton();
-InitializeScrollProgressBar();
+window.addEventListener("load", SetCurrentYear);

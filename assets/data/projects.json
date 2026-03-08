@@ -1,0 +1,55 @@
+{
+  "ProjectList": [
+    {
+      "ProjectKey": "classroom",
+      "ProjectName": "Classroom Management System",
+      "ProjectCategory": "Python Project",
+      "ProjectSummary": "A Python-based system for managing attendance, student records, and schedules using modular programming and file handling concepts.",
+      "TechnologyList": [
+        "Python",
+        "Modular Design",
+        "File Handling"
+      ],
+      "DetailPointList": [
+        "Manages attendance and student information in one system.",
+        "Uses modular programming to keep features organized.",
+        "Applies file handling for data storage and retrieval."
+      ],
+      "RepositoryUrl": "#"
+    },
+    {
+      "ProjectKey": "medical",
+      "ProjectName": "APU Medical Centre System",
+      "ProjectCategory": "Java Project",
+      "ProjectSummary": "A Java object-oriented application that manages patient records, appointments, and billing in a simulated healthcare environment.",
+      "TechnologyList": [
+        "Java",
+        "OOP",
+        "System Design"
+      ],
+      "DetailPointList": [
+        "Built with object-oriented programming structure.",
+        "Covers patient records, appointments, and billing flow.",
+        "Strengthens system design and application logic skills."
+      ],
+      "RepositoryUrl": "#"
+    },
+    {
+      "ProjectKey": "bus",
+      "ProjectName": "Bus Reservation System",
+      "ProjectCategory": "C Project",
+      "ProjectSummary": "A C programming project that simulates booking, cancellation, and reporting within a reservation workflow.",
+      "TechnologyList": [
+        "C",
+        "Reservation",
+        "Structured Logic"
+      ],
+      "DetailPointList": [
+        "Simulates booking and cancellation flow.",
+        "Uses structured programming logic.",
+        "Strengthens problem solving with process-based design."
+      ],
+      "RepositoryUrl": "#"
+    }
+  ]
+}
