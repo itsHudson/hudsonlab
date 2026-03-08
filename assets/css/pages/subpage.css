@@ -1,0 +1,138 @@
+.subpage-hero{
+    padding:72px 0 30px;
+}
+
+.subpage-hero h1{
+    margin:0;
+    font-size:clamp(2.8rem, 6vw, 5rem);
+    line-height:0.96;
+    letter-spacing:-0.08em;
+}
+
+.subpage-hero h1 span{
+    background:linear-gradient(135deg, var(--primary), #8b5cf6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+
+.subpage-hero p{
+    margin:16px 0 0;
+    color:var(--muted);
+    font-size:1.08rem;
+}
+
+.subpage-back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+    color:var(--primary);
+    font-weight:800;
+}
+
+.subpage-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+}
+
+.subpage-card{
+    padding:24px;
+}
+
+.subpage-card h3{
+    margin:16px 0 8px;
+    font-size:1.2rem;
+}
+
+.subpage-card p,
+.subpage-card li,
+.subpage-card span{
+    color:var(--muted);
+}
+
+.subpage-card-icon{
+    width:64px;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:rgba(37,99,235,0.1);
+    color:var(--primary);
+    font-size:1.5rem;
+}
+
+.subpage-list{
+    margin:16px 0 0;
+    padding-left:18px;
+}
+
+.subpage-wide-card{
+    padding:28px;
+}
+
+.subpage-two-column{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:22px;
+}
+
+.subpage-badge-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+}
+
+.subpage-badge-item{
+    padding:22px;
+    text-align:center;
+}
+
+.subpage-badge-item img{
+    max-height:100px;
+    object-fit:contain;
+    margin:0 auto 14px;
+}
+
+.subpage-link-list{
+    display:grid;
+    gap:18px;
+}
+
+.subpage-link-item{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    align-items:center;
+    padding:22px 24px;
+}
+
+.subpage-link-item strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.subpage-link-button{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    border-radius:999px;
+    background:rgba(37,99,235,0.1);
+    color:var(--primary);
+    font-weight:800;
+}
+
+@media (max-width: 1150px){
+    .subpage-grid,
+    .subpage-badge-grid{ grid-template-columns:repeat(2, 1fr); }
+    .subpage-two-column{ grid-template-columns:1fr; }
+}
+
+@media (max-width: 760px){
+    .subpage-grid,
+    .subpage-badge-grid{ grid-template-columns:1fr; }
+    .subpage-link-item{ flex-direction:column; align-items:flex-start; }
+}

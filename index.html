@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hudson | Portfolio</title>
 
-    <link rel="stylesheet" href="assets/css/style.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/base/variables.css" />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/layout.css" />
+    <link rel="stylesheet" href="assets/css/components/header.css" />
+    <link rel="stylesheet" href="assets/css/components/sections.css" />
+    <link rel="stylesheet" href="assets/css/components/cards.css" />
+    <link rel="stylesheet" href="assets/css/pages/home.css" />
 </head>
 <body>
-    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress" id="ScrollProgress"></div>
 
     <div class="page-blur blur-1"></div>
     <div class="page-blur blur-2"></div>
@@ -28,7 +32,7 @@
                 Hudson
             </a>
 
-            <nav class="main-nav" id="mainNav">
+            <nav class="main-nav" id="MainNav">
                 <a href="#about">About</a>
                 <a href="#highlights">Highlights</a>
                 <a href="#experience">Experience</a>
@@ -38,12 +42,13 @@
                 <a href="#projects">Projects</a>
                 <a href="#certifications">Certifications</a>
                 <a href="#github">GitHub</a>
+                <a href="#explore">Explore</a>
                 <a href="#contact">Contact</a>
             </nav>
 
             <div class="nav-right">
                 <a href="#contact" class="nav-cta">Let’s Talk</a>
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <button class="menu-toggle" id="MenuToggle" aria-label="Toggle menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -70,7 +75,7 @@
                     <div class="hero-typing-wrap">
                         <span class="hero-typing-label">Focused on</span>
                         <h2 class="typing-row typing-row-advanced">
-                            <span id="typing"></span>
+                            <span id="TypingText"></span>
                             <span class="cursor">|</span>
                         </h2>
                     </div>
@@ -366,7 +371,6 @@
             </div>
 
             <div class="experience-accordion">
-
                 <article class="experience-item panel reveal active">
                     <button class="experience-summary" type="button">
                         <div class="experience-summary-left">
@@ -455,15 +459,11 @@
                             <span class="experience-date">Dec 2021 – Jan 2022</span>
                             <h3>Operation Outlet Manager</h3>
                             <h4>Pavilion Bukit Jalil Outlet · Full-time</h4>
-                            <p>
-                                Oversaw outlet-level monitoring, operational continuity, and service execution.
-                            </p>
+                            <p>Oversaw outlet-level monitoring, operational continuity, and service execution.</p>
                         </div>
 
                         <div class="experience-summary-right">
-                            <span class="experience-toggle-icon">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
+                            <span class="experience-toggle-icon"><i class="fa-solid fa-plus"></i></span>
                         </div>
                     </button>
 
@@ -484,15 +484,11 @@
                             <span class="experience-date">Nov 2021 – Dec 2021</span>
                             <h3>Outlet Operation Manager</h3>
                             <h4>Pavilion KL Outlet · Full-time</h4>
-                            <p>
-                                Supported daily administration, workflow coordination, and service quality.
-                            </p>
+                            <p>Supported daily administration, workflow coordination, and service quality.</p>
                         </div>
 
                         <div class="experience-summary-right">
-                            <span class="experience-toggle-icon">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
+                            <span class="experience-toggle-icon"><i class="fa-solid fa-plus"></i></span>
                         </div>
                     </button>
 
@@ -513,15 +509,11 @@
                             <span class="experience-date">Dec 2020 – Nov 2021</span>
                             <h3>Administrator & Outlet Manager</h3>
                             <h4>Sri Petaling & Puchong Jaya Outlet · Full-time</h4>
-                            <p>
-                                Handled administration, outlet workflow support, and practical execution planning.
-                            </p>
+                            <p>Handled administration, outlet workflow support, and practical execution planning.</p>
                         </div>
 
                         <div class="experience-summary-right">
-                            <span class="experience-toggle-icon">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
+                            <span class="experience-toggle-icon"><i class="fa-solid fa-plus"></i></span>
                         </div>
                     </button>
 
@@ -542,15 +534,11 @@
                             <span class="experience-date">Sep 2020 – Dec 2020</span>
                             <h3>Administrative & Operations Manager</h3>
                             <h4>Sri Petaling Outlet · Internship</h4>
-                            <p>
-                                Supported operational coordination, administration, and outlet-level execution.
-                            </p>
+                            <p>Supported operational coordination, administration, and outlet-level execution.</p>
                         </div>
 
                         <div class="experience-summary-right">
-                            <span class="experience-toggle-icon">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
+                            <span class="experience-toggle-icon"><i class="fa-solid fa-plus"></i></span>
                         </div>
                     </button>
 
@@ -578,9 +566,7 @@
 
                         <div class="experience-summary-right">
                             <span class="experience-chip experience-chip-soft">Earlier Experience</span>
-                            <span class="experience-toggle-icon">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
+                            <span class="experience-toggle-icon"><i class="fa-solid fa-plus"></i></span>
                         </div>
                     </button>
 
@@ -605,7 +591,6 @@
                         </div>
                     </div>
                 </article>
-
             </div>
         </div>
     </section>
@@ -719,9 +704,7 @@
                         <span>Core Development</span>
                         <span>85%</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="85%"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-1">
@@ -732,9 +715,7 @@
                         <span>OOP & Applications</span>
                         <span>80%</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="80%"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-2">
@@ -745,9 +726,7 @@
                         <span>Logic & Algorithms</span>
                         <span>75%</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="75%"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-3">
@@ -758,9 +737,7 @@
                         <span>Database Handling</span>
                         <span>78%</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="78%"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="78%"></div></div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-4">
@@ -771,9 +748,7 @@
                         <span>Front-End UI</span>
                         <span>82%</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="82%"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="82%"></div></div>
                 </div>
 
                 <div class="panel skill-card reveal reveal-delay-5">
@@ -784,9 +759,7 @@
                         <span>Analytics Workflow</span>
                         <span>72%</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="72%"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="72%"></div></div>
                 </div>
             </div>
         </div>
@@ -803,8 +776,8 @@
 
             <div class="projects-grid-advanced">
                 <article class="panel project-card featured-project reveal">
-                    <div class="project-image">
-                        <img src="assets/images/project_classroom.png" alt="Classroom Management System preview" />
+                    <div class="project-image project-image-placeholder">
+                        <div class="project-image-fallback">Classroom Management System</div>
                     </div>
 
                     <div class="project-top">
@@ -813,7 +786,6 @@
                     </div>
 
                     <h3>Classroom Management System</h3>
-
                     <p>
                         A Python-based system for managing attendance, student records,
                         and schedules using modular programming and file handling concepts.
@@ -826,14 +798,13 @@
                     </div>
 
                     <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                        GitHub Repository
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 </article>
 
                 <article class="panel project-card reveal reveal-delay-1">
-                    <div class="project-image">
-                        <img src="assets/images/project_medical.png" alt="APU Medical Centre System preview" />
+                    <div class="project-image project-image-placeholder">
+                        <div class="project-image-fallback">APU Medical Centre System</div>
                     </div>
 
                     <div class="project-top">
@@ -842,7 +813,6 @@
                     </div>
 
                     <h3>APU Medical Centre System</h3>
-
                     <p>
                         A Java object-oriented application that manages patient records,
                         appointments, and billing in a simulated healthcare environment.
@@ -855,14 +825,13 @@
                     </div>
 
                     <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                        GitHub Repository
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 </article>
 
                 <article class="panel project-card reveal reveal-delay-2">
-                    <div class="project-image">
-                        <img src="assets/images/project_bus.png" alt="Bus Reservation System preview" />
+                    <div class="project-image project-image-placeholder">
+                        <div class="project-image-fallback">Bus Reservation System</div>
                     </div>
 
                     <div class="project-top">
@@ -871,7 +840,6 @@
                     </div>
 
                     <h3>Bus Reservation System</h3>
-
                     <p>
                         A C programming project that simulates booking, cancellation,
                         and reporting within a reservation workflow.
@@ -884,8 +852,7 @@
                     </div>
 
                     <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                        GitHub Repository
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        GitHub Repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 </article>
             </div>
@@ -965,31 +932,60 @@
 
             <div class="github-stats">
                 <div class="panel github-card reveal">
-                    <div class="github-icon">
-                        <i class="fa-solid fa-folder-tree"></i>
-                    </div>
+                    <div class="github-icon"><i class="fa-solid fa-folder-tree"></i></div>
                     <h3>Projects</h3>
                     <strong>10+</strong>
                     <p>Academic and personal coding projects built across different modules and systems.</p>
                 </div>
 
                 <div class="panel github-card reveal reveal-delay-1">
-                    <div class="github-icon">
-                        <i class="fa-solid fa-code-branch"></i>
-                    </div>
+                    <div class="github-icon"><i class="fa-solid fa-code-branch"></i></div>
                     <h3>Languages</h3>
                     <strong>6</strong>
                     <p>Python, Java, C/C++, SQL, HTML, and CSS used in practical coursework and portfolio work.</p>
                 </div>
 
                 <div class="panel github-card reveal reveal-delay-2">
-                    <div class="github-icon">
-                        <i class="fa-solid fa-bullseye"></i>
-                    </div>
+                    <div class="github-icon"><i class="fa-solid fa-bullseye"></i></div>
                     <h3>Focus</h3>
                     <strong>Software</strong>
                     <p>Structured development, problem solving, system logic, and data-oriented learning.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section section-soft" id="explore">
+        <div class="container">
+            <div class="section-heading reveal section-heading-center">
+                <p class="section-kicker">Explore More</p>
+                <h2>More to Explore</h2>
+                <p class="section-subtext">Keep the homepage clean. Put full details in separate pages.</p>
+            </div>
+
+            <div class="explore-grid">
+                <a class="panel explore-card explore-card-purple reveal" href="pages/guestbook.html">
+                    <div class="explore-card-icon"><i class="fa-regular fa-book-open"></i></div>
+                    <h3>Guestbook</h3>
+                    <p>Leave a message and see simple sample feedback layout.</p>
+                    <span>Explore →</span>
+                </a>
+
+                <a class="panel explore-card explore-card-orange reveal reveal-delay-1" href="pages/achievements.html">
+                    <div class="explore-card-icon"><i class="fa-solid fa-trophy"></i></div>
+                    <h3>Achievements</h3>
+                    <p>Show your milestones, badges, certificates, and key accomplishments.</p>
+                    <span>Explore →</span>
+                </a>
+
+                <a class="panel explore-card explore-card-blue reveal reveal-delay-2" href="pages/links.html">
+                    <div class="explore-card-icon"><i class="fa-solid fa-link"></i></div>
+                    <h3>My Links</h3>
+                    <p>Put GitHub, LinkedIn, email, and any other portfolio related links here.</p>
+                    <span>Explore →</span>
+                </a>
             </div>
         </div>
     </section>
@@ -1037,10 +1033,10 @@
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <button class="back-to-top" id="BackToTop" aria-label="Back to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <script src="assets/js/script.js"></script>
+    <script type="module" src="assets/js/pages/home.js"></script>
 </body>
 </html>
