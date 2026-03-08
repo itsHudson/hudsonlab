@@ -11,13 +11,13 @@
 
 .cert-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 34px rgba(90, 55, 24, 0.14);
+  box-shadow: 0 20px 34px rgba(76, 45, 17, 0.12);
 }
 
 .cert-badge {
   aspect-ratio: 1 / 1;
   margin-bottom: 16px;
-  background: rgba(255, 255, 255, 0.55);
+  background: linear-gradient(180deg, #fff9f3 0%, #ffffff 100%);
 }
 
 .cert-badge img {
@@ -27,14 +27,20 @@
   padding: 14px;
 }
 
-.cert-card h3 {
+.cert-copy h3 {
   margin: 0 0 8px;
   font-size: 1.02rem;
 }
 
-.cert-card p {
-  margin: 0;
+.cert-copy p {
+  margin: 0 0 8px;
   color: var(--text-soft);
+}
+
+.cert-copy span {
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 @media (max-width: 980px) {
