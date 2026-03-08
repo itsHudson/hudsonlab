@@ -595,3 +595,125 @@ a {
     font-size: clamp(2.7rem, 12vw, 4.8rem);
   }
 }
+
+
+/* =========================
+   ICON SYSTEM
+========================= */
+
+.home-link-icon{
+
+width:52px;
+height:52px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:14px;
+
+background:linear-gradient(
+135deg,
+rgba(255,122,24,0.12),
+rgba(255,179,71,0.12)
+);
+
+border:1px solid rgba(255,122,24,0.22);
+
+font-weight:700;
+font-size:20px;
+
+color:var(--accent);
+
+transition:all .25s ease;
+
+}
+
+.home-link-card:hover .home-link-icon{
+
+transform:scale(1.08);
+box-shadow:0 12px 24px rgba(255,122,24,0.25);
+
+}
+
+
+/* =========================
+   PREMIUM CARD DEPTH
+========================= */
+
+.home-link-card{
+
+transition:
+transform .25s ease,
+box-shadow .25s ease,
+border-color .25s ease;
+
+}
+
+.home-link-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 30px 60px rgba(0,0,0,0.08),
+0 0 40px rgba(255,122,24,0.08);
+
+}
+
+
+/* =========================
+   HERO TEXT REFINEMENT
+========================= */
+
+.hero-title{
+
+font-weight:800;
+
+letter-spacing:-0.05em;
+
+}
+
+.hero-desc{
+
+font-size:16px;
+
+}
+
+
+/* =========================
+   BUTTON PREMIUM EFFECT
+========================= */
+
+.primary-btn{
+
+background:linear-gradient(
+135deg,
+#ff7a18,
+#ffb347
+);
+
+box-shadow:
+0 10px 30px rgba(255,122,24,0.25);
+
+}
+
+.primary-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 20px 40px rgba(255,122,24,0.35);
+
+}
+
+.secondary-btn{
+
+border:1px solid rgba(255,122,24,0.25);
+
+}
+
+.secondary-btn:hover{
+
+background:rgba(255,122,24,0.05);
+
+}
