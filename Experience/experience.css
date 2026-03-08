@@ -10,7 +10,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, rgba(201, 106, 43, 0.2), rgba(224, 138, 58, 0.3));
+  background: linear-gradient(to bottom, rgba(255, 122, 24, 0.22), rgba(255, 179, 71, 0.28));
 }
 
 .experience-card {
@@ -29,7 +29,7 @@
   height: 14px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(201, 106, 43, 0.12);
+  box-shadow: 0 0 0 6px rgba(255, 122, 24, 0.12);
 }
 
 .experience-image {
@@ -49,12 +49,11 @@
 }
 
 .experience-content h2 {
-  margin: 0 0 8px;
+  margin: 0 0 12px;
 }
 
-.experience-content h3 {
+.experience-content p {
   margin: 0 0 14px;
-  color: #8f7765;
 }
 
 @media (max-width: 980px) {

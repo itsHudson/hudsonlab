@@ -3,19 +3,19 @@ const skills = {
     icon: "🐍",
     name: "Python",
     description:
-      "Python is used for automation, scripting, and building data analytics tools. It is widely adopted for building efficient and maintainable applications.",
+      "Python is used for automation, scripting, and building data-oriented workflows with strong readability and efficiency.",
     projects: [
       {
-        name: "MyGoPandai Online Learning Platform",
+        name: "Technology Automation Concepts",
         summary:
-          "A full web-based learning platform designed to support course modules, instructors, and student learning workflows.",
-        tech: "HTML · CSS · ASP.NET · SQL Server",
-        github: "https://github.com/itsHudson/MyGoPandai",
-        thumb: "Platform / Web Project",
+          "Python represents my interest in automation, logic flow, and building tools that simplify structured tasks.",
+        tech: "Python",
+        github: "To be added",
+        thumb: "Automation · Logic · Data Thinking",
         features: [
-          "Role based authentication",
-          "Course module management",
-          "Instructor dashboard"
+          "Readable logic structure",
+          "Strong scripting capability",
+          "Useful for automation and analysis"
         ]
       }
     ]
@@ -25,19 +25,19 @@ const skills = {
     icon: "💠",
     name: "C++",
     description:
-      "C++ is used to build high performance systems and implement data structure algorithms.",
+      "C++ is used to build high performance systems and implement data structure driven solutions.",
     projects: [
       {
         name: "Bus Reservation System",
         summary:
-          "A structured reservation system built with data structures to simulate real ticket booking workflows.",
+          "A structured reservation system built with logic focused on data organization, booking flow, and system behavior.",
         tech: "C++",
         github: "https://github.com/itsHudson/BusReservationSystem",
-        thumb: "System / Reservation Project",
+        thumb: "Data Structures · System Logic",
         features: [
           "Seat reservation logic",
-          "Passenger record management",
-          "File based data storage"
+          "Passenger data handling",
+          "File-based workflow"
         ]
       }
     ]
@@ -47,19 +47,85 @@ const skills = {
     icon: "☕",
     name: "Java",
     description:
-      "Java is used to design object-oriented applications and simulate real world system workflows.",
+      "Java is used to design object-oriented applications and simulate real-world system workflows.",
     projects: [
       {
         name: "OODJ Medical System",
         summary:
-          "A clinic management simulation built using object oriented design principles.",
+          "A clinic system concept developed with object-oriented thinking and structured system design.",
         tech: "Java",
         github: "https://github.com/itsHudson/OODJMedicalSystem",
-        thumb: "Clinic / OOP Project",
+        thumb: "Object-Oriented Design · Structured Applications",
         features: [
-          "Patient record management",
-          "Doctor appointment simulation",
-          "OOP architecture"
+          "Patient record flow",
+          "System structure through OOP",
+          "Practical application modeling"
+        ]
+      }
+    ]
+  },
+
+  html: {
+    icon: "🌐",
+    name: "HTML",
+    description:
+      "HTML provides the foundational structure for presenting systems, information, and digital experiences on the web.",
+    projects: [
+      {
+        name: "Personal Brand Website",
+        summary:
+          "This website itself reflects how structure, hierarchy, and intention shape a public-facing digital presence.",
+        tech: "HTML",
+        github: "To be added",
+        thumb: "Structure · Semantic Layout · Web Foundation",
+        features: [
+          "Semantic structure",
+          "Content hierarchy",
+          "Public-facing layout logic"
+        ]
+      }
+    ]
+  },
+
+  css: {
+    icon: "🎨",
+    name: "CSS",
+    description:
+      "CSS allows me to shape visual identity, interaction quality, typography hierarchy, and design atmosphere.",
+    projects: [
+      {
+        name: "Visual Interface Direction",
+        summary:
+          "CSS is where interface tone, movement, premium spacing, and visual consistency come together.",
+        tech: "CSS",
+        github: "To be added",
+        thumb: "Design System · Visual Identity · Motion",
+        features: [
+          "Typography control",
+          "Premium layout spacing",
+          "Color, motion, and interaction"
+        ]
+      }
+    ]
+  },
+
+  sql: {
+    icon: "🗄️",
+    name: "SQL",
+    description:
+      "SQL is essential for structured data, relational thinking, and systems that rely on information architecture.",
+    projects: [
+      {
+        name: "MyGoPandai Data Foundation",
+        summary:
+          "Database structure and relational logic are central to how digital systems remain useful, organized, and scalable.",
+        tech: "SQL · SQL Server",
+        github: "https://github.com/itsHudson/MyGoPandai",
+        thumb: "Database Logic · Structured Information",
+        features: [
+          "Relational data design",
+          "Query-based structure",
+          "Scalable backend thinking"
         ]
       }
     ]
@@ -96,7 +162,13 @@ function renderProjectDetail(project) {
   projectName.textContent = project.name;
   projectSummary.textContent = project.summary;
   projectTech.textContent = project.tech;
-  projectGithub.innerHTML = `<a href="${project.github}" target="_blank">${project.github}</a>`;
+
+  if (project.github && project.github !== "To be added") {
+    projectGithub.innerHTML = `<a href="${project.github}" target="_blank">${project.github}</a>`;
+  } else {
+    projectGithub.textContent = "Available upon request";
+  }
+
   projectThumbPreview.textContent = project.thumb;
 
   projectFeatures.innerHTML = "";
