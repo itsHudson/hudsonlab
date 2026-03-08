@@ -1,0 +1,30 @@
+.experience-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 24px;
+}
+
+.experience-gap-top {
+  margin-top: 24px;
+}
+
+.experience-image {
+  min-height: 260px;
+}
+
+.experience-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.experience-period {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@media (max-width: 980px) {
+  .experience-card {
+    grid-template-columns: 1fr;
+  }
+}
