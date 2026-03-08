@@ -233,32 +233,6 @@ const skills = {
     ]
   },
 
-  r: {
-    icon: "📊",
-    name: "R",
-    description:
-      "R represents analytical modelling, statistical reasoning, and a stronger connection between data and interpretable insights.",
-    meaning:
-      "A technology aligned with deeper analytical work, data interpretation, and evidence-based exploration.",
-    direction:
-      "Statistical analysis · modelling · insight generation",
-    projects: [
-      {
-        name: "Analytical Exploration",
-        summary:
-          "R reflects a growing direction toward data analysis and the ability to interpret patterns with technical depth.",
-        tech: "R",
-        github: "Available upon request",
-        thumb: "Statistics · Analysis · Insight",
-        features: [
-          "Analytical reasoning",
-          "Data interpretation support",
-          "Strong relevance to data-centric work"
-        ]
-      }
-    ]
-  },
-
   sas: {
     icon: "📈",
     name: "SAS",
@@ -314,13 +288,13 @@ function updateOrbitRotation() {
   orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
 }
 
-function renderProjectDetail(project) {
+function renderProjectDetail(project, selectedIndex = 0) {
   projectName.textContent = project.name;
   projectSummary.textContent = project.summary;
   projectTech.textContent = project.tech;
 
   if (project.github && project.github !== "Available upon request") {
-    projectGithub.innerHTML = `<a href="${project.github}" target="_blank">${project.github}</a>`;
+    projectGithub.innerHTML = `<a href="${project.github}" target="_blank" rel="noopener noreferrer">${project.github}</a>`;
   } else {
     projectGithub.textContent = "Available upon request";
   }
@@ -328,11 +302,15 @@ function renderProjectDetail(project) {
   projectThumbPreview.textContent = project.thumb;
 
   projectFeatures.innerHTML = "";
-
   project.features.forEach((feature) => {
     const li = document.createElement("li");
     li.textContent = feature;
     projectFeatures.appendChild(li);
+  });
+
+  const cards = document.querySelectorAll(".project-preview-card");
+  cards.forEach((card, index) => {
+    card.classList.toggle("active", index === selectedIndex);
   });
 }
 
@@ -357,21 +335,24 @@ function renderSkill(skillKey) {
       <p>${project.summary}</p>
     `;
 
-    card.onclick = () => renderProjectDetail(project);
+    card.addEventListener("click", () => {
+      renderProjectDetail(project, index);
+    });
+
     projectList.appendChild(card);
 
     if (index === 0) {
-      renderProjectDetail(project);
+      renderProjectDetail(project, 0);
     }
   });
 }
 
 skillButtons.forEach((btn) => {
-  btn.onclick = () => {
+  btn.addEventListener("click", () => {
     skillButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     renderSkill(btn.dataset.skill);
-  };
+  });
 });
 
 orbitShell.addEventListener("mousedown", (event) => {
@@ -393,19 +374,27 @@ window.addEventListener("mouseup", () => {
   orbitShell.classList.remove("dragging");
 });
 
-orbitShell.addEventListener("touchstart", (event) => {
-  isDragging = true;
-  startX = event.touches[0].clientX;
-  startRotation = orbitRotation;
-  orbitShell.classList.add("dragging");
-}, { passive: true });
+orbitShell.addEventListener(
+  "touchstart",
+  (event) => {
+    isDragging = true;
+    startX = event.touches[0].clientX;
+    startRotation = orbitRotation;
+    orbitShell.classList.add("dragging");
+  },
+  { passive: true }
+);
 
-window.addEventListener("touchmove", (event) => {
-  if (!isDragging) return;
-  const delta = event.touches[0].clientX - startX;
-  orbitRotation = startRotation + delta * 0.6;
-  updateOrbitRotation();
-}, { passive: true });
+window.addEventListener(
+  "touchmove",
+  (event) => {
+    if (!isDragging) return;
+    const delta = event.touches[0].clientX - startX;
+    orbitRotation = startRotation + delta * 0.6;
+    updateOrbitRotation();
+  },
+  { passive: true }
+);
 
 window.addEventListener("touchend", () => {
   isDragging = false;

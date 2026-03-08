@@ -1,3 +1,67 @@
+:root {
+  --bg-1: #fff7f1;
+  --bg-2: #fffdfb;
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-strong: #ffffff;
+  --line: rgba(145, 104, 65, 0.14);
+  --line-strong: rgba(255, 122, 24, 0.2);
+  --accent: #ff7a18;
+  --accent-soft: rgba(255, 122, 24, 0.08);
+  --text-main: #24160b;
+  --text-soft: #5d4635;
+  --text-muted: #866b58;
+  --shadow-soft: 0 20px 45px rgba(76, 45, 17, 0.08);
+  --shadow-card: 0 14px 30px rgba(76, 45, 17, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at top left, rgba(255, 122, 24, 0.08), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(255, 170, 95, 0.08), transparent 30%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page-shell {
+  width: min(1400px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 48px 0 72px;
+}
+
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+}
+
 .explorer-stage {
   display: grid;
   gap: 30px;
@@ -15,22 +79,23 @@
   margin: 0 0 8px;
   color: var(--accent);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .explorer-hero-copy h2 {
   margin: 0 0 10px;
-  font-size: 1.7rem;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
+  font-size: clamp(1.8rem, 2.4vw, 2.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1.06;
 }
 
 .explorer-hero-copy p:last-child {
   margin: 0;
   color: var(--text-soft);
-  line-height: 1.95;
+  line-height: 1.9;
+  max-width: 62ch;
 }
 
 .explorer-hero-meta {
@@ -41,7 +106,7 @@
 
 .hero-meta-item {
   padding: 18px;
-  border-radius: 18px;
+  border-radius: 20px;
   background: rgba(255, 122, 24, 0.06);
   border: 1px solid rgba(255, 122, 24, 0.12);
 }
@@ -55,6 +120,7 @@
   margin-bottom: 6px;
   color: var(--accent);
   font-size: 1.08rem;
+  font-weight: 800;
 }
 
 .hero-meta-item span {
@@ -99,7 +165,7 @@
 .orbit-label {
   color: var(--accent);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -114,6 +180,7 @@
   touch-action: none;
   user-select: none;
   cursor: grab;
+  isolation: isolate;
 }
 
 .orbit-shell.dragging {
@@ -127,6 +194,7 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 122, 24, 0.14), transparent 65%);
   filter: blur(4px);
+  z-index: 0;
 }
 
 .orbit-back-ring {
@@ -164,6 +232,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 16px 34px rgba(255, 122, 24, 0.1);
+  z-index: 2;
 }
 
 .orbit-core-inner {
@@ -179,7 +248,7 @@
 
 .orbit-core-inner span {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.18em;
   font-size: 0.92rem;
 }
@@ -189,6 +258,7 @@
   left: 50%;
   top: 50%;
   transform:
+    translate(-50%, -50%)
     rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
     translateY(-168px)
     rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1));
@@ -196,7 +266,7 @@
   height: 98px;
   border-radius: 24px;
   border: 1px solid var(--line);
-  background: white;
+  background: var(--surface-strong);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -205,6 +275,7 @@
   cursor: pointer;
   transition: 0.28s ease;
   box-shadow: 0 12px 24px rgba(76, 45, 17, 0.06);
+  z-index: 3;
 }
 
 .orbit-emoji {
@@ -214,7 +285,7 @@
 
 .orbit-text {
   font-size: 0.74rem;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
 }
 
@@ -224,6 +295,7 @@
   color: var(--accent);
   box-shadow: 0 22px 34px rgba(255, 122, 24, 0.15);
   transform:
+    translate(-50%, -50%)
     rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
     translateY(-168px)
     rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1))
@@ -256,7 +328,7 @@
   margin: 0 0 6px;
   color: var(--accent);
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -349,7 +421,8 @@
   transition: 0.25s ease;
 }
 
-.project-preview-card:hover {
+.project-preview-card:hover,
+.project-preview-card.active {
   transform: translateY(-4px);
   border-color: rgba(255, 122, 24, 0.35);
   box-shadow: 0 16px 28px rgba(76, 45, 17, 0.08);
@@ -410,6 +483,7 @@
 
 .project-meta-box a {
   color: var(--accent);
+  font-weight: 600;
 }
 
 .project-thumb-preview {
@@ -425,7 +499,7 @@
   align-items: center;
   justify-content: center;
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
   padding: 22px;
 }
@@ -435,7 +509,18 @@
 }
 
 .project-highlight-section h3 {
+  margin: 0 0 12px;
+}
+
+.project-highlight-section ul {
   margin: 0;
+  padding-left: 20px;
+}
+
+.project-highlight-section li {
+  color: var(--text-soft);
+  line-height: 1.9;
+  margin-bottom: 6px;
 }
 
 @media (max-width: 1180px) {
@@ -454,14 +539,60 @@
 }
 
 @media (max-width: 760px) {
+  .page-shell {
+    width: min(100% - 24px, 100%);
+    padding: 24px 0 56px;
+  }
+
+  .explorer-hero-band,
+  .orbit-panel,
+  .skill-info,
+  .project-detail {
+    padding: 20px;
+  }
+
   .skill-content-grid,
   .project-meta,
-  .explorer-hero-meta,
-  .section-row {
+  .explorer-hero-meta {
     grid-template-columns: 1fr;
   }
 
   .section-row {
     display: grid;
+  }
+
+  .orbit-skill {
+    width: 78px;
+    height: 78px;
+    border-radius: 20px;
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
+      translateY(-138px)
+      rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1));
+  }
+
+  .orbit-skill:hover,
+  .orbit-skill.active {
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
+      translateY(-138px)
+      rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1))
+      scale(1.04);
+  }
+
+  .orbit-text {
+    font-size: 0.68rem;
+  }
+
+  .orbit-core {
+    width: 122px;
+    height: 122px;
+  }
+
+  .orbit-core-inner {
+    width: 82px;
+    height: 82px;
   }
 }
