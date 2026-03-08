@@ -581,7 +581,7 @@ button{
     text-transform:uppercase;
 }
 
-/* ABOUT ADVANCED */
+/* ABOUT */
 
 .about-advanced-layout{
     display:grid;
@@ -725,6 +725,48 @@ button{
     font-size:0.95rem;
 }
 
+/* HIGHLIGHTS */
+
+.highlights-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+}
+
+.highlight-card{
+    padding:24px;
+    transition:var(--transition);
+}
+
+.highlight-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-main);
+}
+
+.highlight-card i{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:rgba(37,99,235,0.12);
+    color:var(--primary);
+    font-size:1.2rem;
+    margin-bottom:14px;
+}
+
+.highlight-card h3{
+    margin:0 0 10px;
+    font-size:1.05rem;
+}
+
+.highlight-card p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.95rem;
+}
+
 /* EXPERIENCE */
 
 .experience-heading{
@@ -833,44 +875,14 @@ button{
     color:var(--muted);
 }
 
-.experience-snapshot-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:18px;
-    margin-bottom:28px;
-}
-
-.mini-strength-card{
-    padding:20px;
-    transition:var(--transition);
-}
-
-.mini-strength-card:hover{
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-main);
-}
-
-.mini-strength-card i{
-    width:46px;
-    height:46px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:14px;
-    background:rgba(37,99,235,0.12);
-    color:var(--primary);
-    margin-bottom:12px;
-}
-
-.mini-strength-card h4{
-    margin:0 0 8px;
-    font-size:1rem;
-}
-
-.mini-strength-card p{
-    margin:0;
+.timeline-points{
+    margin:14px 0 0;
+    padding-left:18px;
     color:var(--muted);
-    font-size:0.92rem;
+}
+
+.timeline-points li{
+    margin-bottom:8px;
 }
 
 .experience-showcase{
@@ -917,6 +929,52 @@ button{
 .experience-showcase-content p{
     margin:0;
     color:var(--muted);
+}
+
+/* SWOT */
+
+.swot-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+}
+
+.swot-card{
+    padding:24px;
+    transition:var(--transition);
+}
+
+.swot-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-main);
+}
+
+.swot-icon{
+    width:54px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:rgba(37,99,235,0.12);
+    color:var(--primary);
+    font-size:1.25rem;
+    margin-bottom:14px;
+}
+
+.swot-card h3{
+    margin:0 0 12px;
+    font-size:1.08rem;
+}
+
+.swot-card ul{
+    margin:0;
+    padding-left:18px;
+    color:var(--muted);
+}
+
+.swot-card li{
+    margin-bottom:8px;
 }
 
 /* EDUCATION */
@@ -1281,7 +1339,7 @@ button{
     word-break:break-word;
 }
 
-/* FOOTER MINIMAL */
+/* FOOTER */
 
 .site-footer{
     padding:28px 0 30px;
@@ -1387,7 +1445,7 @@ button{
     .hero-metrics,
     .skills-grid,
     .contact-grid,
-    .experience-snapshot-grid{
+    .highlights-grid{
         grid-template-columns:repeat(2, 1fr);
     }
 
@@ -1399,8 +1457,9 @@ button{
         grid-column:span 2;
     }
 
-    .cert-grid{
-        grid-template-columns:repeat(3, 1fr);
+    .cert-grid,
+    .swot-grid{
+        grid-template-columns:repeat(2, 1fr);
     }
 
     .floating-note{
@@ -1454,11 +1513,12 @@ button{
     .hero-metrics,
     .about-highlight-row,
     .about-cards-grid,
-    .experience-snapshot-grid,
+    .highlights-grid,
     .skills-grid,
     .projects-grid-advanced,
     .cert-grid,
-    .contact-grid{
+    .contact-grid,
+    .swot-grid{
         grid-template-columns:1fr;
     }
 
@@ -1548,7 +1608,9 @@ button{
     .skill-card,
     .cert-card,
     .contact-card,
-    .personality-card{
+    .personality-card,
+    .highlight-card,
+    .swot-card{
         padding:22px;
     }
 
