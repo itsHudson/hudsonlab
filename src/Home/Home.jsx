@@ -1,14 +1,14 @@
-import React from 'react';
-import './home.css';
-import HeroIntro from './HeroIntro';
-import NavigationCards from './NavigationCards';
+import React from "react";
+import "./home.css";
+import HeroIntro from "./HeroIntro";
+import NavigationCards from "./NavigationCards";
 
-export default function Home({ onNavigate }) {
+export default function Home({ navigate }) {
   return (
-    <section className="page-shell home-shell">
-      <div className="content-wrap home-wrap">
-        <HeroIntro onNavigate={onNavigate} />
-        <NavigationCards onNavigate={onNavigate} />
+    <section className="page-section home-page">
+      <div className="home-layout">
+        <HeroIntro navigate={navigate} />
+        <NavigationCards navigate={navigate} />
       </div>
     </section>
   );

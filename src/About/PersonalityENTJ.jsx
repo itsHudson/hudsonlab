@@ -1,34 +1,28 @@
-import React from 'react';
-import entjImage from '../Images/MBTI_ENTJ.png';
+import React from "react";
+import entjImage from "../Images/MBTI_ENTJ.png";
 
 export default function PersonalityENTJ() {
-  const traits = [
-    'Strategic decision making',
-    'Natural preference for structure',
-    'Clear execution mindset',
-    'Comfortable leading systems and processes',
-  ];
-
   return (
-    <section className="panel entj-grid">
-      <div className="entj-copy">
-        <div className="section-kicker">Personality</div>
-        <h2>ENTJ Work Style</h2>
+    <div className="glass-card about-block section-grid-2">
+      <div className="about-copy">
+        <h2>Personality and Work Style</h2>
         <p>
-          ENTJ traits align well with how I approach technology: plan clearly, organize the system,
-          and move efficiently toward the result. I like interfaces and workflows that feel intentional
-          rather than overloaded.
+          As an ENTJ personality type, I naturally approach problems with
+          strategic thinking, leadership, and a results-oriented mindset. I
+          enjoy organizing complex systems, planning structured processes, and
+          improving solutions through logic and efficiency.
         </p>
-        <ul className="entj-list">
-          {traits.map((trait) => (
-            <li key={trait}>{trait}</li>
-          ))}
+        <ul className="info-list">
+          <li>Strategic and goal-focused approach</li>
+          <li>Comfortable with responsibility and planning</li>
+          <li>Strong preference for organized execution</li>
+          <li>Interested in practical, high-impact solutions</li>
         </ul>
       </div>
 
-      <div className="entj-image-frame">
-        <img src={entjImage} alt="ENTJ personality visual" className="entj-image" />
+      <div className="visual-image-card about-visual-side">
+        <img src={entjImage} alt="ENTJ personality visual" />
       </div>
-    </section>
+    </div>
   );
 }

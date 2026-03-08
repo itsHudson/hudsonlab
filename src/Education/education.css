@@ -1,67 +1,30 @@
-.education-wrap {
-  display: grid;
-  gap: 22px;
-}
-
-.education-card-shell {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 18px;
-  padding: 20px;
-  align-items: center;
-}
-
-.education-card-image {
-  width: 100%;
-  border-radius: 22px;
-  object-fit: cover;
-}
-
-.education-card-copy strong,
-.education-card-copy span,
-.education-card-copy p {
-  display: block;
-}
-
-.education-card-copy strong {
-  font-size: 1.4rem;
-}
-
-.education-card-copy span {
-  margin-top: 8px;
-  color: var(--text-soft);
-}
-
-.education-card-copy p {
-  margin: 10px 0 0;
-  color: var(--text-dim);
-}
-
-.education-detail-panel {
+.education-card {
   padding: 24px;
 }
 
-.education-detail-panel h2 {
-  margin: 6px 0 0;
-  font-size: 2rem;
+.education-image {
+  min-height: 320px;
 }
 
-.education-detail-subtitle,
-.education-detail-text {
-  color: var(--text-soft);
+.education-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.education-list-block {
-  margin-top: 20px;
+.education-copy h2 {
+  margin: 0 0 8px;
+  font-size: 1.7rem;
 }
 
-.education-list-block strong {
-  display: block;
-  margin-bottom: 12px;
+.education-copy h3 {
+  margin: 0 0 8px;
+  color: #dceef7;
+  font-size: 1.1rem;
 }
 
-@media (max-width: 760px) {
-  .education-card-shell {
-    grid-template-columns: 1fr;
-  }
+.education-period {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-weight: 700;
 }

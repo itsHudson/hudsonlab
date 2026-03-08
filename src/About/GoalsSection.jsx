@@ -1,25 +1,15 @@
-import React from 'react';
+import React from "react";
 
-export default function GoalsSection({ onNavigate }) {
+export default function GoalsSection() {
   return (
-    <section className="panel goals-panel">
-      <div>
-        <div className="section-kicker">Direction</div>
-        <h2>Current Goals</h2>
-        <p>
-          Continue growing in system design, technical implementation, data-oriented thinking, and
-          professional portfolio presentation while connecting each skill to real project evidence.
-        </p>
-      </div>
-
-      <div className="goals-actions">
-        <button className="glow-button primary" onClick={() => onNavigate('techexplorer')}>
-          Go to Tech Explorer
-        </button>
-        <button className="glow-button" onClick={() => onNavigate('experience')}>
-          View Experience
-        </button>
-      </div>
-    </section>
+    <div className="glass-card about-block goals-block">
+      <h2>Future Direction</h2>
+      <p>
+        My goal is to grow as a technology professional who can design
+        impactful systems, analyze data intelligently, and contribute to modern
+        digital solutions. I aim to combine software engineering, system logic,
+        and data thinking in a way that creates real value.
+      </p>
+    </div>
   );
 }

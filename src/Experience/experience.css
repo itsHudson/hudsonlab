@@ -1,123 +1,44 @@
-.experience-wrap {
+.experience-grid {
   display: grid;
   gap: 24px;
 }
 
-.experience-grid {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 18px;
-  align-items: start;
-}
-
-.experience-list {
-  display: grid;
-  gap: 14px;
-}
-
 .experience-card {
-  padding: 16px;
-  border: 1px solid var(--line);
-  cursor: pointer;
   display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 14px;
-  text-align: left;
-  transition: transform 0.22s ease, border-color 0.22s ease;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 24px;
+  padding: 22px;
 }
 
-.experience-card:hover,
-.experience-card.active {
-  transform: translateY(-2px);
-  border-color: rgba(88, 204, 255, 0.28);
+.experience-image {
+  min-height: 260px;
 }
 
-.experience-card-image {
+.experience-image img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 18px;
+  height: 100%;
   object-fit: cover;
 }
 
-.experience-card-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.experience-copy h2 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
 }
 
-.experience-card-copy strong {
-  font-size: 1rem;
+.experience-copy h3 {
+  margin: 0 0 8px;
+  color: #d8edf8;
+  font-size: 1.1rem;
 }
 
-.experience-card-copy span {
-  color: var(--text-soft);
-  margin-top: 6px;
-}
-
-.experience-card-copy p {
-  margin: 10px 0 0;
-  color: var(--text-dim);
-}
-
-.experience-detail-panel {
-  padding: 24px;
-}
-
-.experience-detail-top {
-  display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 18px;
-  align-items: center;
-}
-
-.experience-detail-top h2 {
-  margin: 6px 0 0;
-  font-size: 2rem;
-}
-
-.experience-role-line,
-.experience-detail-text {
-  color: var(--text-soft);
-}
-
-.experience-detail-image {
-  width: 100%;
-  border-radius: 24px;
-  object-fit: cover;
-}
-
-.experience-columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 20px;
-}
-
-.experience-columns strong {
-  display: block;
-  margin-bottom: 12px;
-}
-
-.experience-columns ul {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--text-soft);
-  line-height: 1.9;
+.experience-period {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 @media (max-width: 980px) {
-  .experience-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
   .experience-card {
-    grid-template-columns: 84px 1fr;
-  }
-
-  .experience-detail-top,
-  .experience-columns {
     grid-template-columns: 1fr;
   }
 }

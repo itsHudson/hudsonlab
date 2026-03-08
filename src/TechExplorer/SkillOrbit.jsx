@@ -1,31 +1,29 @@
-import React from 'react';
-import SkillNode from './SkillNode';
+import React from "react";
 
 export default function SkillOrbit({ skills, selectedSkillId, onSelectSkill }) {
   return (
-    <section className="panel orbit-shell">
-      <div className="orbit-stage">
-        <div className="orbit-ring orbit-ring-outer" />
-        <div className="orbit-ring orbit-ring-mid" />
-        <div className="orbit-ring orbit-ring-inner" />
+    <div className="glass-card orbit-panel">
+      <div className="orbit-shell">
+        <div className="orbit-ring orbit-ring-1" />
+        <div className="orbit-ring orbit-ring-2" />
         <div className="orbit-core">
-          <strong>TECH</strong>
-          <span>Explorer</span>
+          <span>TECH</span>
         </div>
 
         {skills.map((skill, index) => {
           const angle = (360 / skills.length) * index;
           return (
-            <SkillNode
+            <button
               key={skill.id}
-              skill={skill}
-              angle={angle}
-              active={skill.id === selectedSkillId}
+              className={`orbit-skill ${selectedSkillId === skill.id ? "active" : ""}`}
+              style={{ transform: `rotate(${angle}deg) translateY(-175px) rotate(-${angle}deg)` }}
               onClick={() => onSelectSkill(skill.id)}
-            />
+            >
+              {skill.icon}
+            </button>
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
-import './certifications.css';
-import certifications from '../Data/certifications';
-import CertificationGrid from './CertificationGrid';
-import CertificationDetail from './CertificationDetail';
+import React from "react";
+import "./certifications.css";
+import certifications from "../Data/certifications";
 
 export default function Certifications() {
-  const [selectedId, setSelectedId] = useState(certifications[0].id);
-  const selected = certifications.find((item) => item.id === selectedId) || certifications[0];
-
   return (
-    <section className="page-shell">
-      <div className="content-wrap certifications-wrap">
-        <div>
-          <div className="section-kicker">Certifications</div>
-          <h1 className="page-title">
-            Badge <span>Gallery</span>
-          </h1>
-          <p className="page-intro">
-            This page only contains certification items. Click a badge to preview the certificate
-            details and issuing organization.
-          </p>
-        </div>
+    <section className="page-section">
+      <span className="small-chip">Certifications</span>
+      <h1 className="page-title">Certification Badges</h1>
+      <p className="page-subtitle">
+        This section focuses only on certification achievements and learning
+        credentials.
+      </p>
 
-        <CertificationGrid
-          items={certifications}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-        />
-        <CertificationDetail item={selected} />
+      <div className="cert-grid">
+        {certifications.map((item) => (
+          <div key={item.id} className="glass-card cert-card">
+            <div className="visual-image-card cert-badge">
+              <img src={item.image} alt={item.title} />
+            </div>
+
+            <div className="cert-copy">
+              <h3>{item.title}</h3>
+              <p>{item.issuer}</p>
+              <span>{item.year}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

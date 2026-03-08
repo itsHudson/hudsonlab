@@ -1,14 +1,23 @@
-import React from 'react';
+import React from "react";
 
-export default function ExperienceCard({ item, active, onOpen }) {
+export default function ExperienceCard({ item }) {
   return (
-    <button className={`experience-card panel ${active ? 'active' : ''}`} onClick={onOpen}>
-      <img src={item.image} alt={item.company} className="experience-card-image" />
-      <div className="experience-card-copy">
-        <strong>{item.company}</strong>
-        <span>{item.role}</span>
-        <p>{item.period}</p>
+    <div className="glass-card experience-card">
+      <div className="visual-image-card experience-image">
+        <img src={item.image} alt={item.company} />
       </div>
-    </button>
+
+      <div className="experience-copy">
+        <h2>{item.company}</h2>
+        <h3>{item.role}</h3>
+        <p className="experience-period">{item.period}</p>
+
+        <ul className="info-list">
+          {item.points.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

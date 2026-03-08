@@ -1,31 +1,27 @@
-import React from 'react';
-import profileImage from '../Images/ProfileHUDSOnPixar.png';
+import React from "react";
+import profileImage from "../Images/ProfileHUDSOnPixar.png";
 
 export default function ProfileSection() {
   return (
-    <section className="panel about-profile-grid">
-      <div className="about-image-frame">
-        <img src={profileImage} alt="Hudson Chia" className="about-profile-image" />
+    <div className="glass-card about-block section-grid-2">
+      <div className="visual-image-card about-profile-image">
+        <img src={profileImage} alt="Hudson Chia" />
       </div>
 
-      <div className="about-copy-block">
-        <h2>Hudson Chia</h2>
+      <div className="about-copy">
+        <h2>Professional Introduction</h2>
         <p>
-          I am a Computer Science student with a Data Analytics focus who enjoys building systems that
-          feel structured, practical, and easy to understand. I like work that connects logic,
-          execution, and visual clarity.
+          I am a Computer Science student with a strong interest in building
+          practical software systems and exploring data-driven solutions. My
+          work focuses on combining structured programming, system design, and
+          analytical thinking to solve real-world problems.
         </p>
         <p>
-          My preferred way of presenting information is simple: show the most important idea first,
-          then let people click to explore the details page by page.
+          I enjoy developing applications that transform ideas into functional
+          systems, whether through software development, database design, or
+          data analysis.
         </p>
-        <div className="about-tags">
-          <span className="tag">Computer Science</span>
-          <span className="tag">Data Analytics</span>
-          <span className="tag">Interactive Portfolio</span>
-          <span className="tag">Structured Thinking</span>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }

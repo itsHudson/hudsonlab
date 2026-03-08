@@ -1,53 +1,52 @@
-import React from 'react';
+import React from "react";
 
-const cards = [
+const items = [
   {
-    title: 'About',
-    page: 'about',
-    text: 'Personal profile, mindset, work style, and goals.',
+    key: "about",
+    title: "About",
+    text: "Learn more about who I am, my mindset, and my professional direction."
   },
   {
-    title: 'Tech Explorer',
-    page: 'techexplorer',
-    text: 'Interactive skill orbit connected directly to related projects.',
+    key: "tech",
+    title: "Tech Explorer",
+    text: "Explore skills through an interactive orbit and view related projects."
   },
   {
-    title: 'Experience',
-    page: 'experience',
-    text: 'Preview work history and open individual role details.',
+    key: "experience",
+    title: "Experience",
+    text: "View my work roles, responsibilities, and practical exposure."
   },
   {
-    title: 'Education',
-    page: 'education',
-    text: 'Academic profile and current specialization.',
+    key: "education",
+    title: "Education",
+    text: "See my academic background and specialization."
   },
   {
-    title: 'Certifications',
-    page: 'certifications',
-    text: 'Badge-led certification gallery with clean category separation.',
+    key: "certifications",
+    title: "Certifications",
+    text: "Browse my certification badges and professional learning progress."
   },
   {
-    title: 'Contact',
-    page: 'contact',
-    text: 'Connect through GitHub, LinkedIn, or email.',
-  },
+    key: "contact",
+    title: "Contact",
+    text: "Find my public links and ways to connect."
+  }
 ];
 
-export default function NavigationCards({ onNavigate }) {
+export default function NavigationCards({ navigate }) {
   return (
-    <section className="home-links-section">
-      <div className="section-kicker">Quick Access</div>
-      <div className="home-link-grid">
-        {cards.map((card) => (
-          <button key={card.page} className="home-link-card panel" onClick={() => onNavigate(card.page)}>
-            <div className="home-link-top">
-              <strong>{card.title}</strong>
-              <span>View</span>
-            </div>
-            <p>{card.text}</p>
-          </button>
-        ))}
-      </div>
-    </section>
+    <div className="home-nav-grid">
+      {items.map((item) => (
+        <button
+          key={item.key}
+          className="glass-card home-nav-card"
+          onClick={() => navigate(item.key)}
+        >
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <span className="home-nav-arrow">View More →</span>
+        </button>
+      ))}
+    </div>
   );
 }

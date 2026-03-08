@@ -1,16 +1,19 @@
-import eduImage from '../Images/Edu_APU.png';
+import eduAPU from "../Images/Edu_APU.png";
 
-const educationItems = [
+const educationData = [
   {
-    id: 'apu',
-    school: 'Asia Pacific University',
-    program: 'BSc Computer Science (Data Analytics)',
-    period: 'Current Study',
-    image: eduImage,
-    description:
-      'Current academic focus on computing fundamentals, practical software development, and data-oriented problem solving with structured project work.',
-    focus: ['Computer Science', 'Data Analytics', 'Programming', 'System Design'],
-  },
+    id: "apu",
+    institution: "Asia Pacific University (APU)",
+    program: "Bachelor of Computer Science (Data Analytics)",
+    period: "Current Academic Program",
+    image: eduAPU,
+    focusAreas: [
+      "Data Mining and Predictive Modeling",
+      "Data Structures and Algorithms",
+      "Concurrent and Parallel Programming",
+      "Web Application Development"
+    ]
+  }
 ];
 
-export default educationItems;
+export default educationData;

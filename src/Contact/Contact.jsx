@@ -1,47 +1,30 @@
-import React from 'react';
-import './contact.css';
-
-const links = [
-  {
-    label: 'GitHub',
-    value: 'github.com/itshudson',
-    href: 'https://github.com/itshudson',
-  },
-  {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/hudsonc200',
-    href: 'https://www.linkedin.com/in/hudsonc200/',
-  },
-  {
-    label: 'Email',
-    value: 'Update with your preferred public email',
-    href: 'mailto:your-email@example.com',
-  },
-];
+import React from "react";
+import "./contact.css";
 
 export default function Contact() {
   return (
-    <section className="page-shell">
-      <div className="content-wrap contact-wrap">
-        <div>
-          <div className="section-kicker">Contact</div>
-          <h1 className="page-title">
-            Let’s <span>Connect</span>
-          </h1>
-          <p className="page-intro">
-            A simple contact page with no extra categories mixed in. Use this section only for direct
-            connection points.
-          </p>
+    <section className="page-section">
+      <span className="small-chip">Contact</span>
+      <h1 className="page-title">Let’s Connect</h1>
+      <p className="page-subtitle">
+        This section contains only public contact and connection links.
+      </p>
+
+      <div className="contact-grid">
+        <div className="glass-card contact-box">
+          <h2>Email</h2>
+          <p>hudsonchia@example.com</p>
         </div>
 
-        <section className="contact-grid">
-          {links.map((item) => (
-            <a key={item.label} className="panel contact-card" href={item.href} target="_blank" rel="noreferrer">
-              <strong>{item.label}</strong>
-              <span>{item.value}</span>
-            </a>
-          ))}
-        </section>
+        <div className="glass-card contact-box">
+          <h2>GitHub</h2>
+          <p>https://github.com/itshudson</p>
+        </div>
+
+        <div className="glass-card contact-box">
+          <h2>LinkedIn</h2>
+          <p>To be added</p>
+        </div>
       </div>
     </section>
   );
