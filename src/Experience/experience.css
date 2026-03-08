@@ -1,0 +1,50 @@
+.career-track {
+  display: grid;
+  gap: 22px;
+}
+
+.career-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  padding: 22px;
+}
+
+.career-image {
+  min-height: 220px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+
+.career-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.career-period {
+  color: #00f5ff;
+}
+
+.career-content h3,
+.career-content h4 {
+  margin: 10px 0;
+}
+
+.career-content h4 {
+  color: #bfefff;
+  font-weight: 500;
+}
+
+.career-content p {
+  color: #95b8d1;
+  line-height: 1.85;
+}
+
+@media (max-width: 800px) {
+  .career-row {
+    grid-template-columns: 1fr;
+  }
+}
