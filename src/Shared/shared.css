@@ -266,3 +266,35 @@ button {
     padding: 108px 18px 32px;
   }
 }
+
+.glow-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.glow-btn:hover {
+  transform: translateY(-3px);
+}
+
+.primary-glow-btn {
+  background: linear-gradient(135deg, #00f5ff, #7af7ff);
+  color: #04111f;
+  box-shadow: 0 0 26px rgba(0, 245, 255, 0.32);
+}
+
+.secondary-glow-btn {
+  background: rgba(255, 255, 255, 0.04);
+  color: #eaf8ff;
+  border: 1px solid rgba(0, 245, 255, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.secondary-glow-btn:hover {
+  box-shadow: 0 0 18px rgba(0, 245, 255, 0.16);
+}
