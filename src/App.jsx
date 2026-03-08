@@ -12,7 +12,6 @@ import Certifications from "./Certifications/Certifications";
 import Contact from "./Contact/Contact";
 
 export default function App() {
-
   const [page, setPage] = useState("home");
 
   const navigate = (target) => {
@@ -21,48 +20,30 @@ export default function App() {
   };
 
   const renderPage = () => {
-
     switch (page) {
-
       case "about":
         return <About />;
-
       case "tech":
         return <TechExplorer />;
-
       case "experience":
         return <Experience />;
-
       case "education":
         return <Education />;
-
       case "certifications":
         return <Certifications />;
-
       case "contact":
         return <Contact />;
-
       case "home":
       default:
         return <Home navigate={navigate} />;
     }
-
   };
 
   return (
-
     <div className="app-shell">
-
-      <Navbar navigate={navigate} />
-
-      <main className="page-container">
-        {renderPage()}
-      </main>
-
+      <Navbar navigate={navigate} currentPage={page} />
+      <main className="page-container">{renderPage()}</main>
       <Footer />
-
     </div>
-
   );
-
 }
