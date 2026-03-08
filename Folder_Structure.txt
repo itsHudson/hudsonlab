@@ -1,0 +1,75 @@
+HUDSONLAB/
+│
+├── index.html
+├── package.json
+├── vite.config.js
+│
+└── src/
+    │
+    ├── About/
+    │   ├── about.css
+    │   ├── About.jsx
+    │   ├── PersonalityENTJ.jsx
+    │   └── ProfileCard.jsx
+    │
+    ├── Certifications/
+    │   ├── CertificationOrbit.jsx
+    │   ├── certifications.css
+    │   └── Certifications.jsx
+    │
+    ├── Contact/
+    │   ├── contact.css
+    │   └── Contact.jsx
+    │
+    ├── Education/
+    │   ├── education.css
+    │   ├── Education.jsx
+    │   └── EducationTimeline.jsx
+    │
+    ├── Experience/
+    │   ├── CareerTimeline.jsx
+    │   ├── experience.css
+    │   └── Experience.jsx
+    │
+    ├── Home/
+    │   ├── home.css
+    │   ├── Home.jsx
+    │   ├── IntroText.jsx
+    │   ├── OrbitMenu.jsx
+    │   ├── ParticleBackground.jsx
+    │   └── TechGlobe.jsx
+    │
+    ├── Images/
+    │   ├── Badge_CCNAITN.png
+    │   ├── Badge_DAE.png
+    │   ├── Badge_ITC.png
+    │   ├── Badge_ITDS.png
+    │   ├── Badge_NALAT.png
+    │   ├── Badge_RHSA1.png
+    │   ├── Badge_RHSA2.png
+    │   ├── Edu_APU.png
+    │   ├── MBTI_ENTJ.png
+    │   ├── ProfileHUDSOnPixar.png
+    │   ├── Work_ACCakeHouse.png
+    │   └── Work_Webhelp.png
+    │
+    ├── Projects/
+    │   ├── ProjectDetail.jsx
+    │   ├── ProjectPanel.jsx
+    │   ├── projects.css
+    │   └── Projects.jsx
+    │
+    ├── Shared/
+    │   ├── CursorEffect.jsx
+    │   ├── GlowButton.jsx
+    │   ├── Navbar.jsx
+    │   └── PageTransition.jsx
+    │
+    ├── Skills/
+    │   ├── SkillNode.jsx
+    │   ├── skills.css
+    │   ├── Skills.jsx
+    │   └── SkillSphere.jsx
+    │
+    ├── App.jsx
+    └── Main.jsx
