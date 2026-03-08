@@ -1,5 +1,5 @@
 .education-image {
-  min-height: 320px;
+  min-height: 340px;
 }
 
 .education-image img {
@@ -11,4 +11,41 @@
 .education-period {
   color: var(--accent);
   font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.education-copy h2 {
+  margin: 0 0 8px;
+}
+
+.education-copy h3 {
+  margin: 0 0 18px;
+  color: #8f7765;
+}
+
+.education-focus-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.focus-box {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(201, 106, 43, 0.08);
+  border: 1px solid rgba(201, 106, 43, 0.12);
+}
+
+.focus-box strong,
+.focus-box span {
+  display: block;
+}
+
+.focus-box strong {
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+
+.focus-box span {
+  color: var(--text-soft);
+  line-height: 1.8;
 }

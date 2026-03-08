@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="education.css" />
 </head>
 <body>
+  <div class="page-noise"></div>
+  <div class="floating-blob blob-one"></div>
+  <div class="floating-blob blob-two"></div>
+
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand" href="../index.html">HUDSONLAB</a>
@@ -30,20 +34,33 @@
       This page focuses only on academic information, specialization, and study direction.
     </p>
 
-    <section class="glass-card block-card content-grid-2">
+    <section class="glass-card block-card content-grid-2 reveal">
       <div class="visual-image-card education-image">
-        <img src="../Images/Edu_APU.png" alt="APU" />
+        <img src="../Images/Edu_APU.png" alt="Asia Pacific University" />
       </div>
-      <div>
+      <div class="education-copy">
+        <p class="education-period">Current Academic Program</p>
         <h2>Asia Pacific University (APU)</h2>
         <h3>Bachelor of Computer Science (Data Analytics)</h3>
-        <p class="education-period">Current Academic Program</p>
-        <ul class="info-list">
-          <li>Data Mining and Predictive Modeling</li>
-          <li>Data Structures and Algorithms</li>
-          <li>Concurrent and Parallel Programming</li>
-          <li>Web Application Development</li>
-        </ul>
+
+        <div class="education-focus-grid">
+          <div class="focus-box">
+            <strong>Analytics</strong>
+            <span>Data Mining and Predictive Modeling</span>
+          </div>
+          <div class="focus-box">
+            <strong>Programming</strong>
+            <span>Data Structures and Algorithms</span>
+          </div>
+          <div class="focus-box">
+            <strong>Systems</strong>
+            <span>Concurrent and Parallel Programming</span>
+          </div>
+          <div class="focus-box">
+            <strong>Web</strong>
+            <span>Web Application Development</span>
+          </div>
+        </div>
       </div>
     </section>
   </main>

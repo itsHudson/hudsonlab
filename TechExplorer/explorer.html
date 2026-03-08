@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="explorer.css" />
 </head>
 <body>
+  <div class="page-noise"></div>
+  <div class="floating-blob blob-one"></div>
+  <div class="floating-blob blob-two"></div>
+
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand" href="../index.html">HUDSONLAB</a>
@@ -25,63 +29,57 @@
 
   <main class="page-shell">
     <span class="small-chip">Tech Explorer</span>
-    <h1 class="page-title">Skills Connected to Real Projects</h1>
+    <h1 class="page-title">Technology & Projects</h1>
     <p class="page-subtitle">
-      Click a skill in the orbit to view the related project work.
+      Explore my technical skills and the projects built using them.
     </p>
 
-    <section class="explorer-layout">
-      <div class="glass-card orbit-panel">
+    <section class="explorer-grid">
+      <div class="glass-card orbit-panel reveal">
         <div class="orbit-shell">
-          <div class="orbit-ring orbit-ring-1"></div>
-          <div class="orbit-ring orbit-ring-2"></div>
           <div class="orbit-core">TECH</div>
 
-          <button class="orbit-skill active" data-skill="python" style="transform: rotate(0deg) translateY(-175px) rotate(0deg)">🐍</button>
-          <button class="orbit-skill" data-skill="java" style="transform: rotate(60deg) translateY(-175px) rotate(-60deg)">☕</button>
-          <button class="orbit-skill" data-skill="cpp" style="transform: rotate(120deg) translateY(-175px) rotate(-120deg)">💠</button>
-          <button class="orbit-skill" data-skill="sql" style="transform: rotate(180deg) translateY(-175px) rotate(-180deg)">🗄️</button>
-          <button class="orbit-skill" data-skill="web" style="transform: rotate(240deg) translateY(-175px) rotate(-240deg)">🌐</button>
-          <button class="orbit-skill" data-skill="assembly" style="transform: rotate(300deg) translateY(-175px) rotate(-300deg)">⚙️</button>
+          <button class="orbit-skill active" data-skill="python" style="--angle: 0deg;">🐍<span>Python</span></button>
+          <button class="orbit-skill" data-skill="cpp" style="--angle: 120deg;">💠<span>C++</span></button>
+          <button class="orbit-skill" data-skill="java" style="--angle: 240deg;">☕<span>Java</span></button>
         </div>
       </div>
 
-      <div class="glass-card skill-panel">
+      <div class="glass-card skill-info reveal-delay">
         <div class="skill-header">
           <div class="skill-icon-large" id="skillIcon">🐍</div>
           <div>
             <h2 id="skillName">Python</h2>
             <p id="skillDescription">
-              Used for scripting, automation, and structured problem solving in data-related and logical tasks.
+              Python is widely used for automation, scripting and data analysis.
             </p>
           </div>
         </div>
 
         <div class="skill-project-list">
           <h3>Related Projects</h3>
-          <div class="project-preview-grid" id="projectList"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="glass-card project-detail-panel" id="projectDetail">
-      <h2 id="projectName">Project Details</h2>
-      <p class="project-detail-summary" id="projectSummary">Select a project to view details.</p>
-
-      <div class="project-detail-grid">
-        <div class="glass-card block-card">
-          <h3>Technologies</h3>
-          <p id="projectTech">-</p>
-        </div>
-        <div class="glass-card block-card">
-          <h3>GitHub</h3>
-          <p id="projectGithub">To be added</p>
+          <div id="projectList" class="project-preview"></div>
         </div>
       </div>
 
-      <div class="glass-card block-card">
+      <div class="glass-card project-detail reveal-delay-2">
+        <h2 id="projectName">Project Details</h2>
+        <p id="projectSummary">Select a project to view details.</p>
+
+        <div class="project-meta">
+          <div class="project-meta-box">
+            <strong>Technology</strong>
+            <span id="projectTech">-</span>
+          </div>
+
+          <div class="project-meta-box">
+            <strong>GitHub</strong>
+            <span id="projectGithub">-</span>
+          </div>
+        </div>
+
         <h3>Key Features</h3>
-        <ul class="info-list" id="projectFeatures"></ul>
+        <ul id="projectFeatures" class="info-list"></ul>
       </div>
     </section>
   </main>

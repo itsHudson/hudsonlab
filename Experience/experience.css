@@ -1,15 +1,39 @@
+.experience-timeline {
+  position: relative;
+  display: grid;
+  gap: 26px;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(201, 106, 43, 0.2), rgba(224, 138, 58, 0.3));
+}
+
 .experience-card {
+  position: relative;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 24px;
+  margin-left: 42px;
 }
 
-.experience-gap-top {
-  margin-top: 24px;
+.experience-dot {
+  position: absolute;
+  left: -36px;
+  top: 28px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(201, 106, 43, 0.12);
 }
 
 .experience-image {
-  min-height: 260px;
+  min-height: 270px;
 }
 
 .experience-image img {
@@ -21,6 +45,16 @@
 .experience-period {
   color: var(--accent);
   font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.experience-content h2 {
+  margin: 0 0 8px;
+}
+
+.experience-content h3 {
+  margin: 0 0 14px;
+  color: #8f7765;
 }
 
 @media (max-width: 980px) {

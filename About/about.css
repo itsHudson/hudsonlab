@@ -3,11 +3,43 @@
 }
 
 .about-profile-image {
-  min-height: 340px;
+  min-height: 360px;
 }
 
 .about-profile-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.about-copy p {
+  margin: 0 0 14px;
+}
+
+.about-traits {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.trait-item {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(201, 106, 43, 0.08);
+  border: 1px solid rgba(201, 106, 43, 0.12);
+}
+
+.trait-item strong,
+.trait-item span {
+  display: block;
+}
+
+.trait-item strong {
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+
+.trait-item span {
+  color: var(--text-soft);
+  line-height: 1.8;
 }

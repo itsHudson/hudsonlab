@@ -6,11 +6,18 @@
 
 .cert-card {
   padding: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 34px rgba(90, 55, 24, 0.14);
 }
 
 .cert-badge {
   aspect-ratio: 1 / 1;
   margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .cert-badge img {
