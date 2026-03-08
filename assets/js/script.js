@@ -1,8 +1,8 @@
 const words = [
     "Software Developer",
-    "Data Analytics Enthusiast",
-    "Computer Science Student",
-    "Structured Problem Solver"
+    "Data Analytics Learner",
+    "System Builder",
+    "Problem Solver"
 ];
 
 let wordIndex = 0;
@@ -90,7 +90,6 @@ window.addEventListener("scroll", setActiveNav);
 setActiveNav();
 
 const revealElements = document.querySelectorAll(".reveal");
-const skillProgressBars = document.querySelectorAll(".skill-progress");
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
