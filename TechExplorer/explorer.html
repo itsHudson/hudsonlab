@@ -1,93 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tech Explorer | HUDSONLAB</title>
-  <link rel="stylesheet" href="../css/global.css" />
-  <link rel="stylesheet" href="explorer.css" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tech Explorer | HUDSONLAB</title>
+
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="explorer.css">
+
 </head>
 <body>
-  <div class="page-noise"></div>
-  <div class="floating-blob blob-one"></div>
-  <div class="floating-blob blob-two"></div>
 
-  <header class="site-header">
-    <div class="site-header-inner">
-      <a class="brand" href="../index.html">HUDSONLAB</a>
-      <nav class="top-nav">
-        <a href="../index.html">Home</a>
-        <a href="../About/about.html">About</a>
-        <a href="explorer.html" class="active">Tech Explorer</a>
-        <a href="../Experience/experience.html">Experience</a>
-        <a href="../Education/education.html">Education</a>
-        <a href="../Certifications/certifications.html">Certifications</a>
-        <a href="../Contact/contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="page-shell">
-    <span class="small-chip">Tech Explorer</span>
-    <h1 class="page-title">Technology & Projects</h1>
-    <p class="page-subtitle">
-      Explore my technical skills and the projects built using them.
-    </p>
+<header class="site-header">
+<div class="site-header-inner">
 
-    <section class="explorer-grid">
-      <div class="glass-card orbit-panel reveal">
-        <div class="orbit-shell">
-          <div class="orbit-core">TECH</div>
+<a class="brand" href="../index.html">HUDSONLAB</a>
 
-          <button class="orbit-skill active" data-skill="python" style="--angle: 0deg;">🐍<span>Python</span></button>
-          <button class="orbit-skill" data-skill="cpp" style="--angle: 120deg;">💠<span>C++</span></button>
-          <button class="orbit-skill" data-skill="java" style="--angle: 240deg;">☕<span>Java</span></button>
-        </div>
-      </div>
+<nav class="top-nav">
 
-      <div class="glass-card skill-info reveal-delay">
-        <div class="skill-header">
-          <div class="skill-icon-large" id="skillIcon">🐍</div>
-          <div>
-            <h2 id="skillName">Python</h2>
-            <p id="skillDescription">
-              Python is widely used for automation, scripting and data analysis.
-            </p>
-          </div>
-        </div>
+<a href="../index.html">Home</a>
+<a href="../About/about.html">About</a>
+<a href="explorer.html" class="active">Tech Explorer</a>
+<a href="../Experience/experience.html">Experience</a>
+<a href="../Education/education.html">Education</a>
+<a href="../Certifications/certifications.html">Certifications</a>
+<a href="../Contact/contact.html">Contact</a>
 
-        <div class="skill-project-list">
-          <h3>Related Projects</h3>
-          <div id="projectList" class="project-preview"></div>
-        </div>
-      </div>
+</nav>
+</div>
+</header>
 
-      <div class="glass-card project-detail reveal-delay-2">
-        <h2 id="projectName">Project Details</h2>
-        <p id="projectSummary">Select a project to view details.</p>
 
-        <div class="project-meta">
-          <div class="project-meta-box">
-            <strong>Technology</strong>
-            <span id="projectTech">-</span>
-          </div>
+<main class="page-shell">
 
-          <div class="project-meta-box">
-            <strong>GitHub</strong>
-            <span id="projectGithub">-</span>
-          </div>
-        </div>
+<span class="small-chip">Technology Explorer</span>
 
-        <h3>Key Features</h3>
-        <ul id="projectFeatures" class="info-list"></ul>
-      </div>
-    </section>
-  </main>
+<h1 class="page-title">Skills & Projects</h1>
 
-  <footer class="site-footer">
-    <p>© 2026 HUDSONLAB · Built by Hudson Chia</p>
-  </footer>
+<p class="page-subtitle">
+Explore the technologies I work with and the systems I have developed using them.
+Select a technology to view related projects and implementation details.
+</p>
 
-  <script src="explorer.js"></script>
+
+<section class="explorer-grid">
+
+
+<div class="glass-card orbit-panel">
+
+<div class="orbit-shell">
+
+<div class="orbit-core">TECH</div>
+
+<button class="orbit-skill active" data-skill="python" style="--angle:0deg">
+🐍
+<span>Python</span>
+</button>
+
+<button class="orbit-skill" data-skill="cpp" style="--angle:120deg">
+💠
+<span>C++</span>
+</button>
+
+<button class="orbit-skill" data-skill="java" style="--angle:240deg">
+☕
+<span>Java</span>
+</button>
+
+</div>
+</div>
+
+
+
+<div class="glass-card skill-info">
+
+<div class="skill-header">
+
+<div class="skill-icon-large" id="skillIcon">🐍</div>
+
+<div>
+<h2 id="skillName">Python</h2>
+
+<p id="skillDescription">
+Python is widely used for automation, scripting, and data analytics tasks.
+</p>
+
+</div>
+</div>
+
+
+<div class="skill-project-list">
+
+<h3>Projects Built With This Technology</h3>
+
+<div id="projectList" class="project-preview"></div>
+
+</div>
+
+</div>
+
+
+
+<div class="glass-card project-detail">
+
+<h2 id="projectName">Project Details</h2>
+
+<p id="projectSummary">
+Select a project to view details.
+</p>
+
+
+<div class="project-meta">
+
+<div class="project-meta-box">
+<strong>Technology</strong>
+<span id="projectTech">-</span>
+</div>
+
+<div class="project-meta-box">
+<strong>GitHub</strong>
+<span id="projectGithub">-</span>
+</div>
+
+</div>
+
+
+<h3>Key Features</h3>
+
+<ul id="projectFeatures" class="info-list"></ul>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+
+<footer class="site-footer">
+<p>© 2026 HUDSONLAB · Built by Hudson Chia</p>
+</footer>
+
+<script src="explorer.js"></script>
+
 </body>
 </html>
