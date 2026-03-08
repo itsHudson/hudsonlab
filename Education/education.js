@@ -1,1 +1,1 @@
-console.log("Education page loaded.");
+console.log('Education page loaded.');

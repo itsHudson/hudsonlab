@@ -1,1 +1,1 @@
-console.log("Certifications page loaded.");
+console.log('Credentials page loaded.');

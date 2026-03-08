@@ -1,1 +1,1 @@
-console.log("Contact page loaded.");
+console.log('Connect page loaded.');
