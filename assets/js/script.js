@@ -152,3 +152,45 @@ function updateProgressBar() {
 window.addEventListener("scroll", updateProgressBar);
 window.addEventListener("load", updateProgressBar);
 updateProgressBar();
+
+/* EXPERIENCE ACCORDION */
+
+const experienceItems = document.querySelectorAll(".experience-item");
+
+experienceItems.forEach(item => {
+    const trigger = item.querySelector(".experience-summary");
+    const details = item.querySelector(".experience-details");
+
+    if (item.classList.contains("active") && details) {
+        details.style.maxHeight = details.scrollHeight + "px";
+    }
+
+    if (trigger && details) {
+        trigger.addEventListener("click", () => {
+            const isActive = item.classList.contains("active");
+
+            experienceItems.forEach(otherItem => {
+                const otherDetails = otherItem.querySelector(".experience-details");
+                otherItem.classList.remove("active");
+
+                if (otherDetails) {
+                    otherDetails.style.maxHeight = null;
+                }
+            });
+
+            if (!isActive) {
+                item.classList.add("active");
+                details.style.maxHeight = details.scrollHeight + "px";
+            }
+        });
+    }
+});
+
+window.addEventListener("resize", () => {
+    experienceItems.forEach(item => {
+        const details = item.querySelector(".experience-details");
+        if (item.classList.contains("active") && details) {
+            details.style.maxHeight = details.scrollHeight + "px";
+        }
+    });
+});
