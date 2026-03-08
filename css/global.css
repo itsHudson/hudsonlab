@@ -549,3 +549,45 @@ a {
     font-size: clamp(2.7rem, 12vw, 4.8rem);
   }
 }
+
+
+/* =========================
+   Premium Particle System
+========================= */
+
+.page-particles{
+
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+
+}
+
+.page-particles span{
+
+position:absolute;
+background:rgba(255,122,24,0.14);
+border-radius:50%;
+
+animation:particleFloat linear infinite;
+
+}
+
+@keyframes particleFloat{
+
+0%{
+transform:translateY(0);
+opacity:0.15;
+}
+
+50%{
+opacity:0.45;
+}
+
+100%{
+transform:translateY(-140px);
+opacity:0;
+}
+
+}
