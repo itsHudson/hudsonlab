@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tech Explorer | HUDSONLAB</title>
+  <title>Technology Explorer | HUDSONLAB</title>
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="explorer.css" />
 </head>
@@ -15,28 +15,25 @@
       <nav class="top-nav">
         <a href="../index.html">Home</a>
         <a href="../About/about.html">About</a>
-        <a href="explorer.html" class="active">Tech Explorer</a>
-        <a href="../Experience/experience.html">Experience</a>
+        <a href="explorer.html" class="active">Technology Explorer</a>
+        <a href="../Experience/experience.html">Journey</a>
         <a href="../Education/education.html">Education</a>
-        <a href="../Certifications/certifications.html">Certifications</a>
-        <a href="../Contact/contact.html">Contact</a>
+        <a href="../Certifications/certifications.html">Credentials</a>
+        <a href="../Contact/contact.html">Connect</a>
       </nav>
     </div>
   </header>
 
   <main class="page-shell">
     <span class="small-chip">Technology Explorer</span>
-
-    <h1 class="page-title">Skills & Projects</h1>
-
+    <h1 class="page-title">Technology, Systems, and the Work Behind Them</h1>
     <p class="page-subtitle">
-      Explore the technologies I work with and the projects developed using
-      them. Drag the orbit to rotate the skill nodes, then select a technology
-      to view related project details.
+      This explorer connects technologies with the systems and ideas built through them.
+      Drag the orbit, select a technology, and discover how each one translates into actual work.
     </p>
 
     <section class="explorer-grid">
-      <div class="glass-card orbit-panel">
+      <div class="glass-card orbit-panel reveal">
         <div class="orbit-shell" id="orbitShell">
           <div class="orbit-core">TECH</div>
 
@@ -45,41 +42,53 @@
             <span>Python</span>
           </button>
 
-          <button class="orbit-skill" data-skill="cpp" style="--angle: 120deg;">
+          <button class="orbit-skill" data-skill="cpp" style="--angle: 60deg;">
             💠
             <span>C++</span>
           </button>
 
-          <button class="orbit-skill" data-skill="java" style="--angle: 240deg;">
+          <button class="orbit-skill" data-skill="java" style="--angle: 120deg;">
             ☕
             <span>Java</span>
+          </button>
+
+          <button class="orbit-skill" data-skill="html" style="--angle: 180deg;">
+            🌐
+            <span>HTML</span>
+          </button>
+
+          <button class="orbit-skill" data-skill="css" style="--angle: 240deg;">
+            🎨
+            <span>CSS</span>
+          </button>
+
+          <button class="orbit-skill" data-skill="sql" style="--angle: 300deg;">
+            🗄️
+            <span>SQL</span>
           </button>
         </div>
       </div>
 
-      <div class="glass-card skill-info">
+      <div class="glass-card skill-info reveal-delay">
         <div class="skill-header">
           <div class="skill-icon-large" id="skillIcon">🐍</div>
           <div>
             <h2 id="skillName">Python</h2>
             <p id="skillDescription">
-              Python is widely used for automation, scripting, and data analytics tasks.
+              Python is used for automation, scripting, and data-oriented problem solving.
             </p>
           </div>
         </div>
 
         <div class="skill-project-list">
-          <h3>Projects Built With This Technology</h3>
+          <h3>Connected Work</h3>
           <div id="projectList" class="project-preview"></div>
         </div>
       </div>
 
-      <div class="glass-card project-detail">
+      <div class="glass-card project-detail reveal-delay-2">
         <h2 id="projectName">Project Details</h2>
-
-        <p id="projectSummary">
-          Select a project to view details.
-        </p>
+        <p id="projectSummary">Select a project to view details.</p>
 
         <div class="project-meta">
           <div class="project-meta-box">
@@ -93,18 +102,18 @@
           </div>
         </div>
 
-        <h3>Key Features</h3>
+        <h3>Highlights</h3>
         <ul id="projectFeatures" class="info-list"></ul>
 
         <div class="project-thumb-preview" id="projectThumbPreview">
-          Project preview area
+          Technology preview area
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 HUDSONLAB · Built by Hudson Chia</p>
+    <p>© 2026 HUDSONLAB · Designed and built for public presence</p>
   </footer>
 
   <script src="explorer.js"></script>

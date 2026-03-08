@@ -6,7 +6,7 @@ function goTo(path) {
   const holder = document.createElement("div");
   holder.className = "page-particles";
 
-  for (let i = 0; i < 18; i += 1) {
+  for (let i = 0; i < 20; i += 1) {
     const dot = document.createElement("span");
     const size = Math.random() * 10 + 6;
     dot.style.width = `${size}px`;
