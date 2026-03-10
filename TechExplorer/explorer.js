@@ -26,31 +26,31 @@ const iconHtml = {
 };
 
 const techOrder = [
-  { key: "mysql", ring: 1, angle: 0, radius: 94, label: "MySQL" },
-  { key: "sqlserver", ring: 1, angle: 180, radius: 94, label: "SQL Server" },
+  { key: "mysql", ring: 1, angle: 0, radius: 102, label: "MySQL" },
+  { key: "sqlserver", ring: 1, angle: 180, radius: 102, label: "SQL Server" },
 
-  { key: "linux", ring: 2, angle: 0, radius: 136, label: "Linux" },
+  { key: "linux", ring: 2, angle: 0, radius: 155, label: "Linux" },
 
-  { key: "visualstudio", ring: 3, angle: 0, radius: 195, label: "Visual Studio" },
-  { key: "vscode", ring: 3, angle: 45, radius: 195, label: "VS Code" },
-  { key: "netbeans", ring: 3, angle: 90, radius: 195, label: "NetBeans" },
-  { key: "codeblocks", ring: 3, angle: 135, radius: 195, label: "Code::Blocks" },
-  { key: "git", ring: 3, angle: 225, radius: 195, label: "Git" },
-  { key: "github", ring: 3, angle: 270, radius: 195, label: "GitHub" },
-  { key: "aspnet", ring: 3, angle: 315, radius: 195, label: "ASP.NET" },
+  { key: "visualstudio", ring: 3, angle: 0, radius: 225, label: "Visual Studio" },
+  { key: "vscode", ring: 3, angle: 45, radius: 225, label: "VS Code" },
+  { key: "netbeans", ring: 3, angle: 90, radius: 225, label: "NetBeans" },
+  { key: "codeblocks", ring: 3, angle: 135, radius: 225, label: "Code::Blocks" },
+  { key: "git", ring: 3, angle: 225, radius: 225, label: "Git" },
+  { key: "github", ring: 3, angle: 270, radius: 225, label: "GitHub" },
+  { key: "aspnet", ring: 3, angle: 315, radius: 225, label: "ASP.NET" },
 
-  { key: "assembly", ring: 4, angle: 0, radius: 258, label: "Assembly" },
-  { key: "c", ring: 4, angle: 30, radius: 258, label: "C" },
-  { key: "cpp", ring: 4, angle: 60, radius: 258, label: "C++" },
-  { key: "csharp", ring: 4, angle: 90, radius: 258, label: "C#" },
-  { key: "css", ring: 4, angle: 120, radius: 258, label: "CSS" },
-  { key: "java", ring: 4, angle: 150, radius: 258, label: "Java" },
-  { key: "python", ring: 4, angle: 180, radius: 258, label: "Python" },
-  { key: "javascript", ring: 4, angle: 210, radius: 258, label: "JavaScript" },
-  { key: "r", ring: 4, angle: 240, radius: 258, label: "R" },
-  { key: "sql", ring: 4, angle: 270, radius: 258, label: "SQL" },
-  { key: "html5", ring: 4, angle: 300, radius: 258, label: "HTML5" },
-  { key: "sas", ring: 4, angle: 330, radius: 258, label: "SAS" }
+  { key: "assembly", ring: 4, angle: 0, radius: 310, label: "Assembly" },
+  { key: "c", ring: 4, angle: 30, radius: 310, label: "C" },
+  { key: "cpp", ring: 4, angle: 60, radius: 310, label: "C++" },
+  { key: "csharp", ring: 4, angle: 90, radius: 310, label: "C#" },
+  { key: "css", ring: 4, angle: 120, radius: 310, label: "CSS" },
+  { key: "java", ring: 4, angle: 150, radius: 310, label: "Java" },
+  { key: "python", ring: 4, angle: 180, radius: 310, label: "Python" },
+  { key: "javascript", ring: 4, angle: 210, radius: 310, label: "JavaScript" },
+  { key: "r", ring: 4, angle: 240, radius: 310, label: "R" },
+  { key: "sql", ring: 4, angle: 270, radius: 310, label: "SQL" },
+  { key: "html5", ring: 4, angle: 300, radius: 310, label: "HTML5" },
+  { key: "sas", ring: 4, angle: 330, radius: 310, label: "SAS" }
 ];
 
 const skills = {
@@ -576,6 +576,7 @@ let velocity = 0;
 let inertiaFrame = null;
 let autoRotateFrame = null;
 let isPausedByInteraction = false;
+let autoRotateTimeout = null;
 
 function updateOrbitRotation() {
   orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
@@ -598,7 +599,7 @@ function createOrbitNodes() {
 
     button.innerHTML = `
       <div class="orbit-logo-wrap">${skills[item.key].icon}</div>
-      <span class="orbit-text">${item.label}</span>
+      <span class="orbit-node-label">${item.label}</span>
     `;
 
     button.addEventListener("click", () => {
@@ -726,7 +727,12 @@ function startAutoRotate() {
 
 function pauseAutoRotateTemporarily() {
   isPausedByInteraction = true;
-  setTimeout(() => {
+
+  if (autoRotateTimeout) {
+    clearTimeout(autoRotateTimeout);
+  }
+
+  autoRotateTimeout = setTimeout(() => {
     isPausedByInteraction = false;
   }, 1800);
 }
@@ -756,10 +762,7 @@ function endDrag() {
   isDragging = false;
   orbitShell.classList.remove("dragging");
   startInertia();
-
-  setTimeout(() => {
-    isPausedByInteraction = false;
-  }, 1800);
+  pauseAutoRotateTemporarily();
 }
 
 orbitShell.addEventListener("mousedown", (event) => {

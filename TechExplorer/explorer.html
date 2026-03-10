@@ -48,9 +48,9 @@
           <p class="explorer-band-label">Design Intent</p>
           <h2>Technology, arranged as a living rotating system.</h2>
           <p>
-            The compass sits at the centre as the main visual layer, while the
-            detail panels on the left and right explain each selected technology
-            and its connected project direction.
+            The compass appears first as the main visual layer, while the two
+            detail panels below explain the selected technology and its connected
+            project direction in a clearer, more structured way.
           </p>
         </div>
 
@@ -66,9 +66,57 @@
         </div>
       </div>
 
-      <div class="explorer-grid">
+      <!-- TOP: COMPASS -->
+      <div class="glass-card orbit-panel reveal-delay">
+        <div class="orbit-panel-head">
+          <div>
+            <span class="orbit-label">Technology Compass</span>
+            <h3>Auto-rotating map</h3>
+          </div>
+          <p>Drag or click a logo</p>
+        </div>
+
+        <div class="orbit-shell" id="orbitShell">
+          <div class="orbit-ambient-glow orbit-ambient-glow-a"></div>
+          <div class="orbit-ambient-glow orbit-ambient-glow-b"></div>
+
+          <div class="orbit-ring orbit-ring-1"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+          <div class="orbit-ring orbit-ring-3"></div>
+          <div class="orbit-ring orbit-ring-4"></div>
+
+          <div class="orbit-cross orbit-cross-horizontal"></div>
+          <div class="orbit-cross orbit-cross-vertical"></div>
+          <div class="orbit-cross orbit-cross-diagonal-a"></div>
+          <div class="orbit-cross orbit-cross-diagonal-b"></div>
+
+          <div class="orbit-axis-label orbit-axis-n">N</div>
+          <div class="orbit-axis-label orbit-axis-e">E</div>
+          <div class="orbit-axis-label orbit-axis-s">S</div>
+          <div class="orbit-axis-label orbit-axis-w">W</div>
+
+          <div class="orbit-core">
+            <div class="orbit-core-inner">
+              <span>TECH</span>
+            </div>
+          </div>
+
+          <div id="orbitNodes"></div>
+        </div>
+
+        <div class="orbit-footer-note">
+          <p>
+            The compass rotates automatically as a living visual layer. You can
+            drag it manually and click any logo to inspect the selected
+            technology and its connected work below.
+          </p>
+        </div>
+      </div>
+
+      <!-- BOTTOM: TWO PANELS -->
+      <div class="explorer-detail-grid">
         <!-- LEFT -->
-        <div class="glass-card skill-info reveal-delay">
+        <div class="glass-card skill-info reveal-delay-2" id="selectedPanel">
           <div class="skill-header">
             <div class="skill-icon-large" id="skillIconWrap">
               <div id="skillIconImage" class="skill-inline-icon"></div>
@@ -114,55 +162,8 @@
           </div>
         </div>
 
-        <!-- CENTER -->
-        <div class="glass-card orbit-panel reveal-delay-2">
-          <div class="orbit-panel-head">
-            <div>
-              <span class="orbit-label">Technology Compass</span>
-              <h3>Auto-rotating map</h3>
-            </div>
-            <p>Drag or click a logo</p>
-          </div>
-
-          <div class="orbit-shell" id="orbitShell">
-            <div class="orbit-ambient-glow orbit-ambient-glow-a"></div>
-            <div class="orbit-ambient-glow orbit-ambient-glow-b"></div>
-
-            <div class="orbit-ring orbit-ring-1"></div>
-            <div class="orbit-ring orbit-ring-2"></div>
-            <div class="orbit-ring orbit-ring-3"></div>
-            <div class="orbit-ring orbit-ring-4"></div>
-
-            <div class="orbit-cross orbit-cross-horizontal"></div>
-            <div class="orbit-cross orbit-cross-vertical"></div>
-            <div class="orbit-cross orbit-cross-diagonal-a"></div>
-            <div class="orbit-cross orbit-cross-diagonal-b"></div>
-
-            <div class="orbit-axis-label orbit-axis-n">N</div>
-            <div class="orbit-axis-label orbit-axis-e">E</div>
-            <div class="orbit-axis-label orbit-axis-s">S</div>
-            <div class="orbit-axis-label orbit-axis-w">W</div>
-
-            <div class="orbit-core">
-              <div class="orbit-core-inner">
-                <span>TECH</span>
-              </div>
-            </div>
-
-            <div id="orbitNodes"></div>
-          </div>
-
-          <div class="orbit-footer-note">
-            <p>
-              The compass rotates automatically as a living visual layer. You can
-              also drag it manually and click any logo to inspect the selected
-              technology and its connected work.
-            </p>
-          </div>
-        </div>
-
         <!-- RIGHT -->
-        <div class="glass-card project-detail reveal-delay">
+        <div class="glass-card project-detail reveal-delay-2" id="projectPanel">
           <div class="project-detail-top">
             <p class="project-mini-label">Project / Application Layer</p>
             <h2 id="projectName">Project Details</h2>
