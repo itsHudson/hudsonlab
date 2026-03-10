@@ -1,56 +1,58 @@
 const iconHtml = {
-  mysql: '<i class="devicon-mysql-original colored" aria-hidden="true"></i>',
+  mysql: '<img src="../Images/TE_MySQL.png" alt="MySQL">',
   sqlserver: '<img src="../Images/TE_SQLServer.png" alt="Microsoft SQL Server">',
-  linux: '<i class="devicon-linux-plain colored" aria-hidden="true"></i>',
+  ubuntu: '<img src="../Images/TE_Ubuntu.png" alt="Ubuntu">',
 
-  visualstudio: '<i class="devicon-visualstudio-plain colored" aria-hidden="true"></i>',
-  vscode: '<i class="devicon-vscode-plain colored" aria-hidden="true"></i>',
-  netbeans: '<i class="devicon-apache-line colored" aria-hidden="true"></i>',
-  codeblocks: '<img src="https://img.icons8.com/color/480/code-blocks.png" alt="Code::Blocks">',
-  git: '<i class="devicon-git-plain colored" aria-hidden="true"></i>',
-  github: '<i class="devicon-github-original" aria-hidden="true"></i>',
-  aspnet: '<i class="devicon-dot-net-plain colored" aria-hidden="true"></i>',
+  visualstudio: '<img src="../Images/TE_VisualStudio.png" alt="Visual Studio">',
+  vscode: '<img src="../Images/TE_VisualStudioCode.png" alt="Visual Studio Code">',
+  netbeans: '<img src="../Images/TE_ApacheNetbeans.png" alt="Apache NetBeans">',
+  codeblocks: '<img src="../Images/TE_CodeBlock.png" alt="Code::Blocks">',
+  git: '<img src="../Images/TE_Git.png" alt="Git">',
+  github: '<img src="../Images/TE_GitHub.png" alt="GitHub">',
+  aspnet: '<img src="../Images/TE_ASP.NET.png" alt="ASP.NET">',
+  figma: '<img src="../Images/TE_Figma.png" alt="Figma">',
+  slack: '<img src="../Images/TE_Slack.png" alt="Slack">',
 
-  assembly: '<div class="custom-asm-badge" aria-hidden="true">ASM</div>',
-  c: '<i class="devicon-c-plain colored" aria-hidden="true"></i>',
-  cpp: '<i class="devicon-cplusplus-plain colored" aria-hidden="true"></i>',
-  csharp: '<i class="devicon-csharp-plain colored" aria-hidden="true"></i>',
-  css: '<i class="devicon-css3-plain colored" aria-hidden="true"></i>',
-  java: '<i class="devicon-java-plain colored" aria-hidden="true"></i>',
-  python: '<i class="devicon-python-plain colored" aria-hidden="true"></i>',
-  javascript: '<i class="devicon-javascript-plain colored" aria-hidden="true"></i>',
-  r: '<i class="devicon-r-plain colored" aria-hidden="true"></i>',
-  sql: '<i class="devicon-azuresqldatabase-plain colored" aria-hidden="true"></i>',
-  html5: '<i class="devicon-html5-plain colored" aria-hidden="true"></i>',
-  sas: '<div class="custom-sas-badge" aria-hidden="true">SAS</div>'
+  assembly: '<img src="../Images/TE_Assembly.png" alt="Assembly">',
+  c: '<img src="../Images/TE_C.png" alt="C">',
+  cpp: '<img src="../Images/TE_C%2B%2B.png" alt="C++">',
+  csharp: '<img src="../Images/TE_C%23.png" alt="C#">',
+  css3: '<img src="../Images/TE_CSS3.png" alt="CSS3">',
+  java: '<img src="../Images/TE_Java.png" alt="Java">',
+  javascript: '<img src="../Images/TE_JavaScript.png" alt="JavaScript">',
+  python: '<img src="../Images/TE_Python.png" alt="Python">',
+  r: '<img src="../Images/TE_R.png" alt="R">',
+  html5: '<img src="../Images/TE_HTML5.png" alt="HTML5">',
+  sas: '<img src="../Images/TE_SAS.png" alt="SAS">'
 };
 
 const techOrder = [
   { key: "mysql", ring: 1, angle: 0, radius: 102, label: "MySQL" },
   { key: "sqlserver", ring: 1, angle: 180, radius: 102, label: "SQL Server" },
 
-  { key: "linux", ring: 2, angle: 0, radius: 155, label: "Linux" },
+  { key: "ubuntu", ring: 2, angle: 0, radius: 155, label: "Ubuntu" },
 
-  { key: "visualstudio", ring: 3, angle: 0, radius: 225, label: "Visual Studio" },
-  { key: "vscode", ring: 3, angle: 45, radius: 225, label: "VS Code" },
-  { key: "netbeans", ring: 3, angle: 90, radius: 225, label: "NetBeans" },
-  { key: "codeblocks", ring: 3, angle: 135, radius: 225, label: "Code::Blocks" },
-  { key: "git", ring: 3, angle: 225, radius: 225, label: "Git" },
-  { key: "github", ring: 3, angle: 270, radius: 225, label: "GitHub" },
-  { key: "aspnet", ring: 3, angle: 315, radius: 225, label: "ASP.NET" },
+  { key: "visualstudio", ring: 3, angle: 0, radius: 245, label: "Visual Studio" },
+  { key: "vscode", ring: 3, angle: 40, radius: 245, label: "VS Code" },
+  { key: "netbeans", ring: 3, angle: 80, radius: 245, label: "NetBeans" },
+  { key: "codeblocks", ring: 3, angle: 120, radius: 245, label: "Code::Blocks" },
+  { key: "git", ring: 3, angle: 160, radius: 245, label: "Git" },
+  { key: "github", ring: 3, angle: 200, radius: 245, label: "GitHub" },
+  { key: "aspnet", ring: 3, angle: 240, radius: 245, label: "ASP.NET" },
+  { key: "figma", ring: 3, angle: 280, radius: 245, label: "Figma" },
+  { key: "slack", ring: 3, angle: 320, radius: 245, label: "Slack" },
 
-  { key: "assembly", ring: 4, angle: 0, radius: 310, label: "Assembly" },
-  { key: "c", ring: 4, angle: 30, radius: 310, label: "C" },
-  { key: "cpp", ring: 4, angle: 60, radius: 310, label: "C++" },
-  { key: "csharp", ring: 4, angle: 90, radius: 310, label: "C#" },
-  { key: "css", ring: 4, angle: 120, radius: 310, label: "CSS" },
-  { key: "java", ring: 4, angle: 150, radius: 310, label: "Java" },
-  { key: "python", ring: 4, angle: 180, radius: 310, label: "Python" },
-  { key: "javascript", ring: 4, angle: 210, radius: 310, label: "JavaScript" },
-  { key: "r", ring: 4, angle: 240, radius: 310, label: "R" },
-  { key: "sql", ring: 4, angle: 270, radius: 310, label: "SQL" },
-  { key: "html5", ring: 4, angle: 300, radius: 310, label: "HTML5" },
-  { key: "sas", ring: 4, angle: 330, radius: 310, label: "SAS" }
+  { key: "assembly", ring: 4, angle: 0, radius: 330, label: "Assembly" },
+  { key: "c", ring: 4, angle: 32.72, radius: 330, label: "C" },
+  { key: "cpp", ring: 4, angle: 65.45, radius: 330, label: "C++" },
+  { key: "csharp", ring: 4, angle: 98.18, radius: 330, label: "C#" },
+  { key: "css3", ring: 4, angle: 130.90, radius: 330, label: "CSS3" },
+  { key: "java", ring: 4, angle: 163.63, radius: 330, label: "Java" },
+  { key: "javascript", ring: 4, angle: 196.36, radius: 330, label: "JavaScript" },
+  { key: "python", ring: 4, angle: 229.09, radius: 330, label: "Python" },
+  { key: "r", ring: 4, angle: 261.81, radius: 330, label: "R" },
+  { key: "html5", ring: 4, angle: 294.54, radius: 330, label: "HTML5" },
+  { key: "sas", ring: 4, angle: 327.27, radius: 330, label: "SAS" }
 ];
 
 const skills = {
@@ -98,23 +100,23 @@ const skills = {
     ]
   },
 
-  linux: {
-    name: "Linux (Ubuntu)",
-    icon: iconHtml.linux,
-    description: "Linux represents operating-system awareness, command-line confidence, and a stronger understanding of how software interacts with execution environments.",
-    meaning: "An environment that reflects system understanding, platform awareness, and technical workflow discipline.",
-    direction: "Operating systems · command line · platform understanding",
+  ubuntu: {
+    name: "Ubuntu",
+    icon: iconHtml.ubuntu,
+    description: "Ubuntu represents environment awareness, command-line confidence, and stronger understanding of how software interacts with real execution systems.",
+    meaning: "An environment that reflects platform understanding, workflow discipline, and technical familiarity beyond application-only development.",
+    direction: "Operating systems · terminal workflow · environment understanding",
     projects: [
       {
         name: "System Environment Direction",
-        summary: "Linux supports stronger familiarity with environments, processes, and technical workflow behaviour beyond application-only development.",
-        tech: "Linux · Ubuntu",
+        summary: "Ubuntu supports stronger familiarity with development environments, processes, and system-level workflow behaviour.",
+        tech: "Ubuntu",
         github: "Available upon request",
-        thumb: "Environment Awareness · System Thinking · Technical Workflow",
+        thumb: "Environment Awareness · Terminal Workflow · Platform Thinking",
         features: [
-          "Builds stronger execution-environment awareness",
-          "Supports terminal-based and system-level thinking",
-          "Strengthens technical confidence beyond UI-level work"
+          "Builds stronger command-line confidence",
+          "Supports system-level technical familiarity",
+          "Strengthens development environment awareness"
         ]
       }
     ]
@@ -274,6 +276,50 @@ const skills = {
     ]
   },
 
+  figma: {
+    name: "Figma",
+    icon: iconHtml.figma,
+    description: "Figma represents interface planning, layout thinking, and the visual design process behind cleaner digital product experiences.",
+    meaning: "A collaborative design environment for shaping interface ideas before implementation.",
+    direction: "UI planning · layout design · collaborative prototyping",
+    projects: [
+      {
+        name: "Interface Concept Direction",
+        summary: "Figma supports the visual planning stage of interface thinking, helping organise layout, spacing, and hierarchy before development.",
+        tech: "Figma",
+        github: "Available upon request",
+        thumb: "UI Planning · Prototyping · Visual Structure",
+        features: [
+          "Supports interface ideation and layout planning",
+          "Useful for cleaner visual hierarchy decisions",
+          "Helps bridge design thinking and development"
+        ]
+      }
+    ]
+  },
+
+  slack: {
+    name: "Slack",
+    icon: iconHtml.slack,
+    description: "Slack represents communication flow, collaboration, and the coordination layer often needed around technical and project-based work.",
+    meaning: "A collaborative platform that supports teamwork, updates, and communication around ongoing development and delivery.",
+    direction: "Team communication · coordination · collaborative workflow",
+    projects: [
+      {
+        name: "Collaboration Workflow Support",
+        summary: "Slack reflects the communication side of technical work, where progress, coordination, and team interaction help support delivery.",
+        tech: "Slack",
+        github: "Available upon request",
+        thumb: "Collaboration · Updates · Team Coordination",
+        features: [
+          "Supports team communication and project flow",
+          "Useful for collaborative technical environments",
+          "Helps connect work, updates, and coordination"
+        ]
+      }
+    ]
+  },
+
   assembly: {
     name: "Assembly",
     icon: iconHtml.assembly,
@@ -362,17 +408,17 @@ const skills = {
     ]
   },
 
-  css: {
-    name: "CSS",
-    icon: iconHtml.css,
-    description: "CSS represents visual identity, layout rhythm, spacing control, and the design system layer that shapes interface atmosphere.",
+  css3: {
+    name: "CSS3",
+    icon: iconHtml.css3,
+    description: "CSS3 represents visual identity, layout rhythm, spacing control, and the design system layer that shapes interface atmosphere.",
     meaning: "The language of presentation, hierarchy, motion, and premium visual communication on the web.",
     direction: "Design systems · interface styling · visual language",
     projects: [
       {
         name: "HUDSONLAB Interface Design",
-        summary: "CSS gives structure, branding, premium spacing, responsive design, and polished motion to the overall digital experience.",
-        tech: "CSS",
+        summary: "CSS3 gives structure, branding, premium spacing, responsive design, and polished motion to the overall digital experience.",
+        tech: "CSS3",
         github: "Available upon request",
         thumb: "Visual Identity · Layout Rhythm · Design Control",
         features: [
@@ -418,28 +464,6 @@ const skills = {
     ]
   },
 
-  python: {
-    name: "Python",
-    icon: iconHtml.python,
-    description: "Python represents flexibility, speed, and the ability to create useful technical solutions through scripting, automation, and structured logic.",
-    meaning: "A language that supports practical problem solving, analytical thinking, and systems that benefit from adaptability.",
-    direction: "Automation · scripting · data-oriented workflows",
-    projects: [
-      {
-        name: "Technology Automation Concepts",
-        summary: "Python reflects my interest in building structured technical workflows that simplify tasks and strengthen analytical processes.",
-        tech: "Python",
-        github: "Available upon request",
-        thumb: "Automation · Logic · Data Thinking",
-        features: [
-          "Useful for scripting and automation",
-          "Strong readability for structured development",
-          "Well suited for flexible technical workflows"
-        ]
-      }
-    ]
-  },
-
   javascript: {
     name: "JavaScript",
     icon: iconHtml.javascript,
@@ -462,6 +486,28 @@ const skills = {
     ]
   },
 
+  python: {
+    name: "Python",
+    icon: iconHtml.python,
+    description: "Python represents flexibility, speed, and the ability to create useful technical solutions through scripting, automation, and structured logic.",
+    meaning: "A language that supports practical problem solving, analytical thinking, and systems that benefit from adaptability.",
+    direction: "Automation · scripting · data-oriented workflows",
+    projects: [
+      {
+        name: "Technology Automation Concepts",
+        summary: "Python reflects my interest in building structured technical workflows that simplify tasks and strengthen analytical processes.",
+        tech: "Python",
+        github: "Available upon request",
+        thumb: "Automation · Logic · Data Thinking",
+        features: [
+          "Useful for scripting and automation",
+          "Strong readability for structured development",
+          "Well suited for flexible technical workflows"
+        ]
+      }
+    ]
+  },
+
   r: {
     name: "R",
     icon: iconHtml.r,
@@ -479,28 +525,6 @@ const skills = {
           "Supports statistical and analytical work",
           "Useful for model interpretation",
           "Strengthens evidence-based analysis"
-        ]
-      }
-    ]
-  },
-
-  sql: {
-    name: "SQL",
-    icon: iconHtml.sql,
-    description: "SQL represents structured data logic, query thinking, and the relational architecture required to organise information meaningfully.",
-    meaning: "A core technology for systems that depend on clarity, relationships, and reliable data retrieval.",
-    direction: "Relational data · query logic · structured systems",
-    projects: [
-      {
-        name: "MyGoPandai Data Foundation",
-        summary: "SQL supports relational database work, query-based data access, and the logical structure behind application-level information systems.",
-        tech: "SQL · SQL Server",
-        github: "Available upon request",
-        thumb: "Query Logic · Database Structure · Information Modelling",
-        features: [
-          "Supports relational data handling",
-          "Useful for schema and query thinking",
-          "Critical for data-driven application logic"
         ]
       }
     ]
@@ -553,6 +577,7 @@ const skills = {
 
 const orbitNodes = document.getElementById("orbitNodes");
 const orbitShell = document.getElementById("orbitShell");
+const activeLinkLine = document.getElementById("activeLinkLine");
 
 const skillIconImage = document.getElementById("skillIconImage");
 const skillName = document.getElementById("skillName");
@@ -580,6 +605,7 @@ let autoRotateTimeout = null;
 
 function updateOrbitRotation() {
   orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
+  updateActiveLink();
 }
 
 function createOrbitNodes() {
@@ -609,6 +635,8 @@ function createOrbitNodes() {
 
     orbitNodes.appendChild(button);
   });
+
+  orbitShell.classList.add("has-active");
 }
 
 function renderProjectDetail(project) {
@@ -679,6 +707,26 @@ function setActiveSkill(skillKey) {
   });
 
   renderSkill(skillKey);
+  updateActiveLink();
+}
+
+function updateActiveLink() {
+  const activeButton = orbitNodes.querySelector(".orbit-skill.active");
+  if (!activeButton || !activeLinkLine) return;
+
+  const shellRect = orbitShell.getBoundingClientRect();
+  const activeRect = activeButton.getBoundingClientRect();
+
+  const centerX = shellRect.width / 2;
+  const centerY = shellRect.height / 2;
+
+  const targetX = (activeRect.left - shellRect.left) + (activeRect.width / 2);
+  const targetY = (activeRect.top - shellRect.top) + (activeRect.height / 2);
+
+  activeLinkLine.setAttribute("x1", centerX.toFixed(2));
+  activeLinkLine.setAttribute("y1", centerY.toFixed(2));
+  activeLinkLine.setAttribute("x2", targetX.toFixed(2));
+  activeLinkLine.setAttribute("y2", targetY.toFixed(2));
 }
 
 function stopInertia() {
@@ -797,6 +845,10 @@ window.addEventListener(
 
 window.addEventListener("touchend", () => {
   endDrag();
+});
+
+window.addEventListener("resize", () => {
+  updateActiveLink();
 });
 
 createOrbitNodes();

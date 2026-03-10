@@ -7,11 +7,6 @@
 
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="explorer.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-  />
 </head>
 <body>
   <header class="site-header">
@@ -57,21 +52,20 @@
         <div class="explorer-hero-meta">
           <div class="hero-meta-item">
             <strong>4 Rings</strong>
-            <span>database · environment · tools · languages</span>
+            <span>data · environment · workflow · languages</span>
           </div>
           <div class="hero-meta-item">
-            <strong>22 Nodes</strong>
+            <strong>24 Nodes</strong>
             <span>interactive technologies inside one rotating compass</span>
           </div>
         </div>
       </div>
 
-      <!-- TOP: COMPASS -->
       <div class="glass-card orbit-panel reveal-delay">
         <div class="orbit-panel-head">
           <div>
             <span class="orbit-label">Technology Compass</span>
-            <h3>Auto-rotating map</h3>
+            <h3>Interactive technical map</h3>
           </div>
           <p>Drag or click a logo</p>
         </div>
@@ -79,6 +73,11 @@
         <div class="orbit-shell" id="orbitShell">
           <div class="orbit-ambient-glow orbit-ambient-glow-a"></div>
           <div class="orbit-ambient-glow orbit-ambient-glow-b"></div>
+
+          <div class="orbit-ring-label orbit-ring-label-1">Data Layer</div>
+          <div class="orbit-ring-label orbit-ring-label-2">Environment</div>
+          <div class="orbit-ring-label orbit-ring-label-3">Workflow Layer</div>
+          <div class="orbit-ring-label orbit-ring-label-4">Language Layer</div>
 
           <div class="orbit-ring orbit-ring-1"></div>
           <div class="orbit-ring orbit-ring-2"></div>
@@ -95,7 +94,14 @@
           <div class="orbit-axis-label orbit-axis-s">S</div>
           <div class="orbit-axis-label orbit-axis-w">W</div>
 
+          <svg class="active-link-layer" id="activeLinkLayer" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <line id="activeLinkLine" x1="500" y1="500" x2="500" y2="500"></line>
+          </svg>
+
           <div class="orbit-core">
+            <div class="orbit-core-pulse orbit-core-pulse-1"></div>
+            <div class="orbit-core-pulse orbit-core-pulse-2"></div>
+
             <div class="orbit-core-inner">
               <span>TECH</span>
             </div>
@@ -113,9 +119,7 @@
         </div>
       </div>
 
-      <!-- BOTTOM: TWO PANELS -->
       <div class="explorer-detail-grid">
-        <!-- LEFT -->
         <div class="glass-card skill-info reveal-delay-2" id="selectedPanel">
           <div class="skill-header">
             <div class="skill-icon-large" id="skillIconWrap">
@@ -162,7 +166,6 @@
           </div>
         </div>
 
-        <!-- RIGHT -->
         <div class="glass-card project-detail reveal-delay-2" id="projectPanel">
           <div class="project-detail-top">
             <p class="project-mini-label">Project / Application Layer</p>
