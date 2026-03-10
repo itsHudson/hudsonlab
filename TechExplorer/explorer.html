@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="explorer.css" />
 
-  <!-- Devicon -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
@@ -37,22 +36,21 @@
     <h1 class="page-title">A Curated Compass of the Technologies I Build With</h1>
 
     <p class="page-subtitle">
-      This explorer is designed as a layered technical compass — a more visual and
-      premium way to present the platforms, environments, tools, and languages that
-      shape how I think about structure, systems, design, development, and applied
-      technical work.
+      This explorer is designed as a rotating technical compass — a more visual
+      and premium way to present the platforms, environments, tools, and
+      languages that shape how I think about systems, structure, design,
+      development, and applied technical work.
     </p>
 
     <section class="explorer-stage">
       <div class="glass-card explorer-hero-band reveal">
         <div class="explorer-hero-copy">
           <p class="explorer-band-label">Design Intent</p>
-          <h2>Technology, arranged as a rotating system of capability.</h2>
+          <h2>Technology, arranged as a living rotating system.</h2>
           <p>
-            Each ring represents a different layer of technical direction — from
-            database systems and operating environments, to development platforms,
-            to programming languages used across software, web, analytics, and
-            system-oriented work.
+            The compass sits at the centre as the main visual layer, while the
+            detail panels on the left and right explain each selected technology
+            and its connected project direction.
           </p>
         </div>
 
@@ -63,60 +61,14 @@
           </div>
           <div class="hero-meta-item">
             <strong>22 Nodes</strong>
-            <span>interactive technologies inside one technical compass</span>
+            <span>interactive technologies inside one rotating compass</span>
           </div>
         </div>
       </div>
 
       <div class="explorer-grid">
-        <!-- LEFT: ORBIT -->
-        <div class="glass-card orbit-panel reveal-delay">
-          <div class="orbit-panel-head">
-            <div>
-              <span class="orbit-label">Technology Compass</span>
-              <h3>Explore the rotating map</h3>
-            </div>
-            <p>Drag to rotate</p>
-          </div>
-
-          <div class="orbit-shell" id="orbitShell">
-            <div class="orbit-bg-glow"></div>
-
-            <div class="orbit-ring orbit-ring-1"></div>
-            <div class="orbit-ring orbit-ring-2"></div>
-            <div class="orbit-ring orbit-ring-3"></div>
-            <div class="orbit-ring orbit-ring-4"></div>
-
-            <div class="orbit-cross orbit-cross-horizontal"></div>
-            <div class="orbit-cross orbit-cross-vertical"></div>
-            <div class="orbit-cross orbit-cross-diagonal-a"></div>
-            <div class="orbit-cross orbit-cross-diagonal-b"></div>
-
-            <div class="orbit-axis-label orbit-axis-n">N</div>
-            <div class="orbit-axis-label orbit-axis-e">E</div>
-            <div class="orbit-axis-label orbit-axis-s">S</div>
-            <div class="orbit-axis-label orbit-axis-w">W</div>
-
-            <div class="orbit-core">
-              <div class="orbit-core-inner">
-                <span>TECH</span>
-              </div>
-            </div>
-
-            <div id="orbitNodes"></div>
-          </div>
-
-          <div class="orbit-footer-note">
-            <p>
-              This compass is designed as a more editorial and visual way to
-              present technical breadth — combining portfolio storytelling,
-              interaction, and structured categorisation in a single interface.
-            </p>
-          </div>
-        </div>
-
-        <!-- MIDDLE: SELECTED TECHNOLOGY -->
-        <div class="glass-card skill-info reveal-delay-2">
+        <!-- LEFT -->
+        <div class="glass-card skill-info reveal-delay">
           <div class="skill-header">
             <div class="skill-icon-large" id="skillIconWrap">
               <div id="skillIconImage" class="skill-inline-icon"></div>
@@ -162,8 +114,55 @@
           </div>
         </div>
 
-        <!-- RIGHT: PROJECT / APPLICATION LAYER -->
-        <div class="glass-card project-detail reveal-delay-2">
+        <!-- CENTER -->
+        <div class="glass-card orbit-panel reveal-delay-2">
+          <div class="orbit-panel-head">
+            <div>
+              <span class="orbit-label">Technology Compass</span>
+              <h3>Auto-rotating map</h3>
+            </div>
+            <p>Drag or click a logo</p>
+          </div>
+
+          <div class="orbit-shell" id="orbitShell">
+            <div class="orbit-ambient-glow orbit-ambient-glow-a"></div>
+            <div class="orbit-ambient-glow orbit-ambient-glow-b"></div>
+
+            <div class="orbit-ring orbit-ring-1"></div>
+            <div class="orbit-ring orbit-ring-2"></div>
+            <div class="orbit-ring orbit-ring-3"></div>
+            <div class="orbit-ring orbit-ring-4"></div>
+
+            <div class="orbit-cross orbit-cross-horizontal"></div>
+            <div class="orbit-cross orbit-cross-vertical"></div>
+            <div class="orbit-cross orbit-cross-diagonal-a"></div>
+            <div class="orbit-cross orbit-cross-diagonal-b"></div>
+
+            <div class="orbit-axis-label orbit-axis-n">N</div>
+            <div class="orbit-axis-label orbit-axis-e">E</div>
+            <div class="orbit-axis-label orbit-axis-s">S</div>
+            <div class="orbit-axis-label orbit-axis-w">W</div>
+
+            <div class="orbit-core">
+              <div class="orbit-core-inner">
+                <span>TECH</span>
+              </div>
+            </div>
+
+            <div id="orbitNodes"></div>
+          </div>
+
+          <div class="orbit-footer-note">
+            <p>
+              The compass rotates automatically as a living visual layer. You can
+              also drag it manually and click any logo to inspect the selected
+              technology and its connected work.
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="glass-card project-detail reveal-delay">
           <div class="project-detail-top">
             <p class="project-mini-label">Project / Application Layer</p>
             <h2 id="projectName">Project Details</h2>

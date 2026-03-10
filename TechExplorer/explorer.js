@@ -31,26 +31,26 @@ const techOrder = [
 
   { key: "linux", ring: 2, angle: 0, radius: 136, label: "Linux" },
 
-  { key: "visualstudio", ring: 3, angle: 0, radius: 190, label: "Visual Studio" },
-  { key: "vscode", ring: 3, angle: 45, radius: 190, label: "VS Code" },
-  { key: "netbeans", ring: 3, angle: 90, radius: 190, label: "NetBeans" },
-  { key: "codeblocks", ring: 3, angle: 135, radius: 190, label: "Code::Blocks" },
-  { key: "git", ring: 3, angle: 225, radius: 190, label: "Git" },
-  { key: "github", ring: 3, angle: 270, radius: 190, label: "GitHub" },
-  { key: "aspnet", ring: 3, angle: 315, radius: 190, label: "ASP.NET" },
+  { key: "visualstudio", ring: 3, angle: 0, radius: 195, label: "Visual Studio" },
+  { key: "vscode", ring: 3, angle: 45, radius: 195, label: "VS Code" },
+  { key: "netbeans", ring: 3, angle: 90, radius: 195, label: "NetBeans" },
+  { key: "codeblocks", ring: 3, angle: 135, radius: 195, label: "Code::Blocks" },
+  { key: "git", ring: 3, angle: 225, radius: 195, label: "Git" },
+  { key: "github", ring: 3, angle: 270, radius: 195, label: "GitHub" },
+  { key: "aspnet", ring: 3, angle: 315, radius: 195, label: "ASP.NET" },
 
-  { key: "assembly", ring: 4, angle: 0, radius: 250, label: "Assembly" },
-  { key: "c", ring: 4, angle: 30, radius: 250, label: "C" },
-  { key: "cpp", ring: 4, angle: 60, radius: 250, label: "C++" },
-  { key: "csharp", ring: 4, angle: 90, radius: 250, label: "C#" },
-  { key: "css", ring: 4, angle: 120, radius: 250, label: "CSS" },
-  { key: "java", ring: 4, angle: 150, radius: 250, label: "Java" },
-  { key: "python", ring: 4, angle: 180, radius: 250, label: "Python" },
-  { key: "javascript", ring: 4, angle: 210, radius: 250, label: "JavaScript" },
-  { key: "r", ring: 4, angle: 240, radius: 250, label: "R" },
-  { key: "sql", ring: 4, angle: 270, radius: 250, label: "SQL" },
-  { key: "html5", ring: 4, angle: 300, radius: 250, label: "HTML5" },
-  { key: "sas", ring: 4, angle: 330, radius: 250, label: "SAS" }
+  { key: "assembly", ring: 4, angle: 0, radius: 258, label: "Assembly" },
+  { key: "c", ring: 4, angle: 30, radius: 258, label: "C" },
+  { key: "cpp", ring: 4, angle: 60, radius: 258, label: "C++" },
+  { key: "csharp", ring: 4, angle: 90, radius: 258, label: "C#" },
+  { key: "css", ring: 4, angle: 120, radius: 258, label: "CSS" },
+  { key: "java", ring: 4, angle: 150, radius: 258, label: "Java" },
+  { key: "python", ring: 4, angle: 180, radius: 258, label: "Python" },
+  { key: "javascript", ring: 4, angle: 210, radius: 258, label: "JavaScript" },
+  { key: "r", ring: 4, angle: 240, radius: 258, label: "R" },
+  { key: "sql", ring: 4, angle: 270, radius: 258, label: "SQL" },
+  { key: "html5", ring: 4, angle: 300, radius: 258, label: "HTML5" },
+  { key: "sas", ring: 4, angle: 330, radius: 258, label: "SAS" }
 ];
 
 const skills = {
@@ -573,7 +573,9 @@ let startX = 0;
 let startRotation = 0;
 let currentSkillKey = "mysql";
 let velocity = 0;
-let animationFrameId = null;
+let inertiaFrame = null;
+let autoRotateFrame = null;
+let isPausedByInteraction = false;
 
 function updateOrbitRotation() {
   orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
@@ -587,8 +589,9 @@ function createOrbitNodes() {
     button.className = "orbit-skill";
     button.dataset.skill = item.key;
     button.dataset.ring = String(item.ring);
-    button.setAttribute("type", "button");
+    button.type = "button";
     button.setAttribute("aria-label", item.label);
+    button.title = item.label;
 
     button.style.setProperty("--angle", `${item.angle}deg`);
     button.style.setProperty("--radius", `${item.radius}px`);
@@ -600,6 +603,7 @@ function createOrbitNodes() {
 
     button.addEventListener("click", () => {
       setActiveSkill(item.key);
+      pauseAutoRotateTemporarily();
     });
 
     orbitNodes.appendChild(button);
@@ -677,9 +681,9 @@ function setActiveSkill(skillKey) {
 }
 
 function stopInertia() {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = null;
+  if (inertiaFrame) {
+    cancelAnimationFrame(inertiaFrame);
+    inertiaFrame = null;
   }
 }
 
@@ -691,21 +695,46 @@ function startInertia() {
 
     if (Math.abs(velocity) < 0.02) {
       velocity = 0;
-      animationFrameId = null;
+      inertiaFrame = null;
       return;
     }
 
     orbitRotation += velocity;
     updateOrbitRotation();
-    animationFrameId = requestAnimationFrame(step);
+    inertiaFrame = requestAnimationFrame(step);
   };
 
-  animationFrameId = requestAnimationFrame(step);
+  inertiaFrame = requestAnimationFrame(step);
+}
+
+function startAutoRotate() {
+  if (autoRotateFrame) {
+    cancelAnimationFrame(autoRotateFrame);
+  }
+
+  const loop = () => {
+    if (!isDragging && !isPausedByInteraction && Math.abs(velocity) < 0.02) {
+      orbitRotation += 0.08;
+      updateOrbitRotation();
+    }
+
+    autoRotateFrame = requestAnimationFrame(loop);
+  };
+
+  autoRotateFrame = requestAnimationFrame(loop);
+}
+
+function pauseAutoRotateTemporarily() {
+  isPausedByInteraction = true;
+  setTimeout(() => {
+    isPausedByInteraction = false;
+  }, 1800);
 }
 
 function startDrag(clientX) {
   stopInertia();
   isDragging = true;
+  isPausedByInteraction = true;
   startX = clientX;
   startRotation = orbitRotation;
   orbitShell.classList.add("dragging");
@@ -727,6 +756,10 @@ function endDrag() {
   isDragging = false;
   orbitShell.classList.remove("dragging");
   startInertia();
+
+  setTimeout(() => {
+    isPausedByInteraction = false;
+  }, 1800);
 }
 
 orbitShell.addEventListener("mousedown", (event) => {
@@ -766,3 +799,4 @@ window.addEventListener("touchend", () => {
 createOrbitNodes();
 updateOrbitRotation();
 setActiveSkill(currentSkillKey);
+startAutoRotate();
