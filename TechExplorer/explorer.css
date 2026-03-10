@@ -157,13 +157,14 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  color: rgba(255, 122, 24, 0.44);
+  color: rgba(255, 122, 24, 0.58);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   pointer-events: none;
   z-index: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .orbit-ring-label-1 {
@@ -193,25 +194,26 @@
 .orbit-ring-1 {
   width: 210px;
   height: 210px;
-  border: 1.5px dashed rgba(255, 122, 24, 0.30);
+  border: 1.8px dashed rgba(255, 122, 24, 0.38);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.32) inset;
 }
 
 .orbit-ring-2 {
   width: 340px;
   height: 340px;
-  border: 1px solid rgba(255, 122, 24, 0.14);
+  border: 1.35px solid rgba(255, 122, 24, 0.22);
 }
 
 .orbit-ring-3 {
   width: 490px;
   height: 490px;
-  border: 1px dashed rgba(255, 122, 24, 0.18);
+  border: 1.2px dashed rgba(255, 122, 24, 0.26);
 }
 
 .orbit-ring-4 {
   width: 660px;
   height: 660px;
-  border: 1px solid rgba(255, 122, 24, 0.12);
+  border: 1.25px solid rgba(255, 122, 24, 0.20);
 }
 
 .orbit-cross {
@@ -222,7 +224,7 @@
   background: linear-gradient(
     180deg,
     rgba(255, 122, 24, 0),
-    rgba(255, 122, 24, 0.10),
+    rgba(255, 122, 24, 0.16),
     rgba(255, 122, 24, 0)
   );
   pointer-events: none;
@@ -231,13 +233,13 @@
 
 .orbit-cross-horizontal {
   width: 660px;
-  height: 1px;
+  height: 1.2px;
   transform: translate(-50%, -50%) rotate(0deg);
 }
 
 .orbit-cross-vertical {
   width: 660px;
-  height: 1px;
+  height: 1.2px;
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
@@ -245,12 +247,14 @@
   width: 660px;
   height: 1px;
   transform: translate(-50%, -50%) rotate(45deg);
+  opacity: 0.82;
 }
 
 .orbit-cross-diagonal-b {
   width: 660px;
   height: 1px;
   transform: translate(-50%, -50%) rotate(-45deg);
+  opacity: 0.82;
 }
 
 .orbit-axis-label {
@@ -258,8 +262,9 @@
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: rgba(255, 122, 24, 0.62);
+  color: rgba(255, 122, 24, 0.66);
   z-index: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .orbit-axis-n {
@@ -329,7 +334,7 @@
   background:
     radial-gradient(circle at center, rgba(255, 122, 24, 0.14), transparent 68%),
     linear-gradient(180deg, #fff8f2 0%, #ffffff 100%);
-  border: 1px solid rgba(255, 122, 24, 0.18);
+  border: 1px solid rgba(255, 122, 24, 0.20);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -342,14 +347,14 @@
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 122, 24, 0.08);
+  border: 1px solid rgba(255, 122, 24, 0.10);
 }
 
 .orbit-core-pulse {
   position: absolute;
   inset: -12px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 122, 24, 0.12);
+  border: 1px solid rgba(255, 122, 24, 0.14);
   pointer-events: none;
 }
 
@@ -465,7 +470,7 @@
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  border: 1px dashed rgba(255, 122, 24, 0.28);
+  border: 1px dashed rgba(255, 122, 24, 0.30);
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.22s ease, transform 0.22s ease;
