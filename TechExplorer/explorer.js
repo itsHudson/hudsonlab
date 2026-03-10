@@ -81,6 +81,25 @@ const skillMeta = {
   sas: { layer: "Language Layer", relatedSummary: "R" }
 };
 
+const overviewState = {
+  name: "Technology Overview",
+  description: "Click any technology inside the compass to inspect its role, direction, and connected project perspective.",
+  meaning: "A curated technical ecosystem that groups tools, environments, and languages into a more visual system view.",
+  direction: "Exploration · systems thinking · technical presentation",
+  layer: "Overview Mode",
+  relatedSummary: "Select a logo to inspect details",
+  projectName: "Project Details",
+  projectSummary: "Select a technology from the compass to view its related project direction.",
+  projectTech: "-",
+  projectGithub: "-",
+  projectThumb: "Technology preview area",
+  projectFeatures: [
+    "Click a logo to enter focus mode",
+    "Click empty space to return to overview mode",
+    "Explore the ecosystem as a visual technical map"
+  ]
+};
+
 const skills = {
   mysql: {
     name: "MySQL",
@@ -605,6 +624,7 @@ const orbitNodes = document.getElementById("orbitNodes");
 const orbitShell = document.getElementById("orbitShell");
 const particleLayer = document.getElementById("particleLayer");
 const coreLabel = document.getElementById("coreLabel");
+const orbitCore = document.getElementById("orbitCore");
 
 const skillIconImage = document.getElementById("skillIconImage");
 const skillName = document.getElementById("skillName");
@@ -645,7 +665,7 @@ const particles = [
 let isDragging = false;
 let startX = 0;
 let startRing3Rotation = 0;
-let currentSkillKey = "mysql";
+let currentSkillKey = null;
 let velocity = 0;
 let inertiaFrame = null;
 let autoRotateFrame = null;
@@ -669,11 +689,15 @@ function createOrbitNodes() {
     button.style.setProperty("--ring-rotation", `${ringRotation[item.ring]}deg`);
 
     button.innerHTML = `
-      <div class="orbit-logo-wrap">${skills[item.key].icon}</div>
+      <div class="orbit-logo-wrap">
+        <span class="orbit-halo"></span>
+        ${skills[item.key].icon}
+      </div>
       <span class="orbit-node-label">${item.label}</span>
     `;
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       setActiveSkill(item.key);
       pauseAutoRotateTemporarily();
     });
@@ -718,12 +742,45 @@ function renderProjectDetail(project) {
   });
 }
 
+function renderOverviewState() {
+  skillIconImage.innerHTML = "";
+  skillName.textContent = overviewState.name;
+  skillDescription.textContent = overviewState.description;
+  skillMeaning.textContent = overviewState.meaning;
+  skillDirection.textContent = overviewState.direction;
+  skillLayer.textContent = overviewState.layer;
+  skillRelatedSummary.textContent = overviewState.relatedSummary;
+
+  projectList.innerHTML = `
+    <div class="project-preview-card active">
+      <strong>Interactive Exploration</strong>
+      <p>
+        Choose a technology from the compass to reveal its meaning, direction,
+        and project/application layer.
+      </p>
+    </div>
+  `;
+
+  projectName.textContent = overviewState.projectName;
+  projectSummary.textContent = overviewState.projectSummary;
+  projectTech.textContent = overviewState.projectTech;
+  projectGithub.textContent = overviewState.projectGithub;
+  projectThumbPreview.textContent = overviewState.projectThumb;
+
+  projectFeatures.innerHTML = "";
+  overviewState.projectFeatures.forEach((feature) => {
+    const li = document.createElement("li");
+    li.textContent = feature;
+    projectFeatures.appendChild(li);
+  });
+
+  coreLabel.textContent = "TECH";
+}
+
 function renderSkill(skillKey) {
   const skill = skills[skillKey];
   const meta = skillMeta[skillKey];
   if (!skill || !meta) return;
-
-  currentSkillKey = skillKey;
 
   skillIconImage.innerHTML = skill.icon;
   skillName.textContent = skill.name;
@@ -764,10 +821,14 @@ function renderSkill(skillKey) {
 }
 
 function updateNodeFocus() {
-  document.querySelectorAll(".orbit-skill").forEach((button) => {
-    const isActive = button.dataset.skill === currentSkillKey;
+  const buttons = document.querySelectorAll(".orbit-skill");
+
+  buttons.forEach((button) => {
+    const isActive = currentSkillKey !== null && button.dataset.skill === currentSkillKey;
     button.classList.toggle("active", isActive);
   });
+
+  orbitShell.classList.toggle("focus-mode", currentSkillKey !== null);
 }
 
 function applyRingRotations() {
@@ -793,7 +854,14 @@ function stepParticles() {
 }
 
 function setActiveSkill(skillKey) {
+  currentSkillKey = skillKey;
   renderSkill(skillKey);
+  updateNodeFocus();
+}
+
+function clearActiveSkill() {
+  currentSkillKey = null;
+  renderOverviewState();
   updateNodeFocus();
 }
 
@@ -921,8 +989,19 @@ window.addEventListener("touchend", () => {
   endDrag();
 });
 
+orbitShell.addEventListener("click", (event) => {
+  if (event.target.closest(".orbit-skill")) return;
+  clearActiveSkill();
+});
+
+orbitCore.addEventListener("click", (event) => {
+  event.stopPropagation();
+  clearActiveSkill();
+});
+
 createOrbitNodes();
 createParticles();
 applyRingRotations();
-setActiveSkill(currentSkillKey);
+renderOverviewState();
+updateNodeFocus();
 startAutoRotate();

@@ -70,7 +70,7 @@
           <p>Drag or click a logo</p>
         </div>
 
-        <div class="orbit-shell has-active" id="orbitShell">
+        <div class="orbit-shell" id="orbitShell">
           <div class="orbit-ambient-glow orbit-ambient-glow-a"></div>
           <div class="orbit-ambient-glow orbit-ambient-glow-b"></div>
 
@@ -96,7 +96,7 @@
 
           <div class="particle-layer" id="particleLayer" aria-hidden="true"></div>
 
-          <div class="orbit-core">
+          <div class="orbit-core" id="orbitCore">
             <div class="orbit-core-pulse orbit-core-pulse-1"></div>
             <div class="orbit-core-pulse orbit-core-pulse-2"></div>
             <div class="orbit-core-pulse orbit-core-pulse-3"></div>
@@ -112,9 +112,8 @@
         <div class="orbit-footer-note">
           <p>
             Each ring moves with a different rhythm to create a more cinematic,
-            system-like visual effect. The outer language layer rotates gently in
-            reverse, while subtle particles add a sense of controlled motion and
-            depth.
+            system-like visual effect. Click a logo to enter focus mode, or
+            click the empty compass area to return to full overview.
           </p>
         </div>
       </div>
@@ -128,11 +127,10 @@
 
             <div>
               <p class="skill-mini-label">Selected Technology</p>
-              <h2 id="skillName">MySQL</h2>
+              <h2 id="skillName">Technology Overview</h2>
               <p id="skillDescription">
-                MySQL represents structured relational data, practical database
-                design, and the ability to organise application data clearly and
-                reliably.
+                Click any technology inside the compass to inspect its role,
+                direction, and connected project perspective.
               </p>
             </div>
           </div>
@@ -141,15 +139,15 @@
             <div class="skill-info-box">
               <strong>What it represents</strong>
               <p id="skillMeaning">
-                Data organisation, relational thinking, and strong support for
-                application-level information systems.
+                A curated technical ecosystem that groups tools, environments,
+                and languages into a more visual system view.
               </p>
             </div>
 
             <div class="skill-info-box">
               <strong>Primary direction</strong>
               <p id="skillDirection">
-                Relational databases · structured storage · application backends
+                Exploration · systems thinking · technical presentation
               </p>
             </div>
           </div>
@@ -157,12 +155,12 @@
           <div class="skill-content-grid secondary-grid">
             <div class="skill-info-box">
               <strong>Layer</strong>
-              <p id="skillLayer">Data Layer</p>
+              <p id="skillLayer">Overview Mode</p>
             </div>
 
             <div class="skill-info-box">
               <strong>Closest to</strong>
-              <p id="skillRelatedSummary">SQL Server · ASP.NET</p>
+              <p id="skillRelatedSummary">Select a logo to inspect details</p>
             </div>
           </div>
 
@@ -174,7 +172,15 @@
               <span class="section-row-note">Selected applications and related directions</span>
             </div>
 
-            <div id="projectList" class="project-preview"></div>
+            <div id="projectList" class="project-preview">
+              <div class="project-preview-card active">
+                <strong>Interactive Exploration</strong>
+                <p>
+                  Choose a technology from the compass to reveal its meaning,
+                  direction, and project/application layer.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -184,7 +190,9 @@
             <h2 id="projectName">Project Details</h2>
           </div>
 
-          <p id="projectSummary">Select a project to view details.</p>
+          <p id="projectSummary">
+            Select a technology from the compass to view its related project direction.
+          </p>
 
           <div class="project-meta">
             <div class="project-meta-box">
@@ -208,7 +216,11 @@
               <span class="section-row-note">The qualities and capabilities this area supports</span>
             </div>
 
-            <ul id="projectFeatures" class="info-list"></ul>
+            <ul id="projectFeatures" class="info-list">
+              <li>Click a logo to enter focus mode</li>
+              <li>Click empty space to return to overview mode</li>
+              <li>Explore the ecosystem as a visual technical map</li>
+            </ul>
           </div>
         </div>
       </div>
