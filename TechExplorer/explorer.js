@@ -56,121 +56,29 @@ const techOrder = [
 ];
 
 const skillMeta = {
-  mysql: {
-    layer: "Data Layer",
-    related: ["sqlserver", "aspnet"],
-    relatedSummary: "SQL Server · ASP.NET"
-  },
-  sqlserver: {
-    layer: "Data Layer",
-    related: ["mysql", "aspnet", "visualstudio", "csharp"],
-    relatedSummary: "MySQL · ASP.NET · C#"
-  },
-  ubuntu: {
-    layer: "Environment",
-    related: ["python", "git", "github"],
-    relatedSummary: "Python · Git · GitHub"
-  },
-  visualstudio: {
-    layer: "Workflow Layer",
-    related: ["aspnet", "csharp", "sqlserver"],
-    relatedSummary: "ASP.NET · C# · SQL Server"
-  },
-  vscode: {
-    layer: "Workflow Layer",
-    related: ["html5", "css3", "javascript", "python"],
-    relatedSummary: "HTML5 · CSS3 · JavaScript"
-  },
-  netbeans: {
-    layer: "Workflow Layer",
-    related: ["java"],
-    relatedSummary: "Java"
-  },
-  codeblocks: {
-    layer: "Workflow Layer",
-    related: ["c", "cpp"],
-    relatedSummary: "C · C++"
-  },
-  git: {
-    layer: "Workflow Layer",
-    related: ["github", "vscode", "visualstudio"],
-    relatedSummary: "GitHub · VS Code · Visual Studio"
-  },
-  github: {
-    layer: "Workflow Layer",
-    related: ["git", "vscode"],
-    relatedSummary: "Git · VS Code"
-  },
-  aspnet: {
-    layer: "Workflow Layer",
-    related: ["visualstudio", "csharp", "sqlserver"],
-    relatedSummary: "Visual Studio · C# · SQL Server"
-  },
-  figma: {
-    layer: "Workflow Layer",
-    related: ["html5", "css3", "javascript"],
-    relatedSummary: "HTML5 · CSS3 · JavaScript"
-  },
-  slack: {
-    layer: "Workflow Layer",
-    related: ["github", "figma"],
-    relatedSummary: "GitHub · Figma"
-  },
-  assembly: {
-    layer: "Language Layer",
-    related: ["c"],
-    relatedSummary: "C"
-  },
-  c: {
-    layer: "Language Layer",
-    related: ["cpp", "codeblocks", "assembly"],
-    relatedSummary: "C++ · Code::Blocks · Assembly"
-  },
-  cpp: {
-    layer: "Language Layer",
-    related: ["c", "codeblocks"],
-    relatedSummary: "C · Code::Blocks"
-  },
-  csharp: {
-    layer: "Language Layer",
-    related: ["visualstudio", "aspnet", "sqlserver"],
-    relatedSummary: "Visual Studio · ASP.NET · SQL Server"
-  },
-  css3: {
-    layer: "Language Layer",
-    related: ["html5", "javascript", "figma", "vscode"],
-    relatedSummary: "HTML5 · JavaScript · Figma"
-  },
-  java: {
-    layer: "Language Layer",
-    related: ["netbeans"],
-    relatedSummary: "NetBeans"
-  },
-  javascript: {
-    layer: "Language Layer",
-    related: ["html5", "css3", "vscode", "figma"],
-    relatedSummary: "HTML5 · CSS3 · VS Code"
-  },
-  python: {
-    layer: "Language Layer",
-    related: ["ubuntu", "vscode"],
-    relatedSummary: "Ubuntu · VS Code"
-  },
-  r: {
-    layer: "Language Layer",
-    related: ["sas"],
-    relatedSummary: "SAS"
-  },
-  html5: {
-    layer: "Language Layer",
-    related: ["css3", "javascript", "figma", "vscode"],
-    relatedSummary: "CSS3 · JavaScript · Figma"
-  },
-  sas: {
-    layer: "Language Layer",
-    related: ["r"],
-    relatedSummary: "R"
-  }
+  mysql: { layer: "Data Layer", relatedSummary: "SQL Server · ASP.NET" },
+  sqlserver: { layer: "Data Layer", relatedSummary: "MySQL · ASP.NET · C#" },
+  ubuntu: { layer: "Environment", relatedSummary: "Python · Git · GitHub" },
+  visualstudio: { layer: "Workflow Layer", relatedSummary: "ASP.NET · C# · SQL Server" },
+  vscode: { layer: "Workflow Layer", relatedSummary: "HTML5 · CSS3 · JavaScript" },
+  netbeans: { layer: "Workflow Layer", relatedSummary: "Java" },
+  codeblocks: { layer: "Workflow Layer", relatedSummary: "C · C++" },
+  git: { layer: "Workflow Layer", relatedSummary: "GitHub · VS Code · Visual Studio" },
+  github: { layer: "Workflow Layer", relatedSummary: "Git · VS Code" },
+  aspnet: { layer: "Workflow Layer", relatedSummary: "Visual Studio · C# · SQL Server" },
+  figma: { layer: "Workflow Layer", relatedSummary: "HTML5 · CSS3 · JavaScript" },
+  slack: { layer: "Workflow Layer", relatedSummary: "GitHub · Figma" },
+  assembly: { layer: "Language Layer", relatedSummary: "C" },
+  c: { layer: "Language Layer", relatedSummary: "C++ · Code::Blocks · Assembly" },
+  cpp: { layer: "Language Layer", relatedSummary: "C · Code::Blocks" },
+  csharp: { layer: "Language Layer", relatedSummary: "Visual Studio · ASP.NET · SQL Server" },
+  css3: { layer: "Language Layer", relatedSummary: "HTML5 · JavaScript · Figma" },
+  java: { layer: "Language Layer", relatedSummary: "NetBeans" },
+  javascript: { layer: "Language Layer", relatedSummary: "HTML5 · CSS3 · VS Code" },
+  python: { layer: "Language Layer", relatedSummary: "Ubuntu · VS Code" },
+  r: { layer: "Language Layer", relatedSummary: "SAS" },
+  html5: { layer: "Language Layer", relatedSummary: "CSS3 · JavaScript · Figma" },
+  sas: { layer: "Language Layer", relatedSummary: "R" }
 };
 
 const skills = {
@@ -695,8 +603,7 @@ const skills = {
 
 const orbitNodes = document.getElementById("orbitNodes");
 const orbitShell = document.getElementById("orbitShell");
-const activeLinkLine = document.getElementById("activeLinkLine");
-const relationshipLinks = document.getElementById("relationshipLinks");
+const particleLayer = document.getElementById("particleLayer");
 const coreLabel = document.getElementById("coreLabel");
 
 const skillIconImage = document.getElementById("skillIconImage");
@@ -728,6 +635,13 @@ const ringSpeed = {
   4: -0.028
 };
 
+const particles = [
+  { id: "p1", ring: 1, angle: 18, radius: 105, speed: 0.12, active: true },
+  { id: "p2", ring: 2, angle: 120, radius: 170, speed: 0.05, active: false },
+  { id: "p3", ring: 3, angle: 245, radius: 250, speed: 0.085, active: false },
+  { id: "p4", ring: 4, angle: 300, radius: 335, speed: -0.04, active: false }
+];
+
 let isDragging = false;
 let startX = 0;
 let startRing3Rotation = 0;
@@ -737,20 +651,6 @@ let inertiaFrame = null;
 let autoRotateFrame = null;
 let isPausedByInteraction = false;
 let autoRotateTimeout = null;
-
-function getNodeBySkill(skillKey) {
-  return orbitNodes.querySelector(`.orbit-skill[data-skill="${skillKey}"]`);
-}
-
-function applyRingRotations() {
-  document.querySelectorAll(".orbit-skill").forEach((node) => {
-    const ring = node.dataset.ring;
-    node.style.setProperty("--ring-rotation", `${ringRotation[ring]}deg`);
-  });
-
-  updateActiveLink();
-  updateRelationshipLinks();
-}
 
 function createOrbitNodes() {
   orbitNodes.innerHTML = "";
@@ -779,6 +679,21 @@ function createOrbitNodes() {
     });
 
     orbitNodes.appendChild(button);
+  });
+}
+
+function createParticles() {
+  particleLayer.innerHTML = "";
+
+  particles.forEach((particle) => {
+    const dot = document.createElement("span");
+    dot.className = particle.active ? "orbit-particle active-particle" : "orbit-particle";
+    dot.dataset.id = particle.id;
+    dot.dataset.ring = String(particle.ring);
+    dot.style.setProperty("--angle", `${particle.angle}deg`);
+    dot.style.setProperty("--radius", `${particle.radius}px`);
+    dot.style.setProperty("--ring-rotation", `${ringRotation[particle.ring]}deg`);
+    particleLayer.appendChild(dot);
   });
 }
 
@@ -849,76 +764,37 @@ function renderSkill(skillKey) {
 }
 
 function updateNodeFocus() {
-  const meta = skillMeta[currentSkillKey];
-  const related = new Set(meta.related);
-
   document.querySelectorAll(".orbit-skill").forEach((button) => {
-    const key = button.dataset.skill;
-    const isActive = key === currentSkillKey;
-    const isRelated = related.has(key);
-
+    const isActive = button.dataset.skill === currentSkillKey;
     button.classList.toggle("active", isActive);
-    button.classList.toggle("is-related", isRelated && !isActive);
+  });
+}
+
+function applyRingRotations() {
+  document.querySelectorAll(".orbit-skill").forEach((node) => {
+    const ring = node.dataset.ring;
+    node.style.setProperty("--ring-rotation", `${ringRotation[ring]}deg`);
+  });
+
+  document.querySelectorAll(".orbit-particle").forEach((particle) => {
+    const ring = particle.dataset.ring;
+    particle.style.setProperty("--ring-rotation", `${ringRotation[ring]}deg`);
+  });
+}
+
+function stepParticles() {
+  particles.forEach((particle) => {
+    particle.angle += particle.speed;
+    const el = particleLayer.querySelector(`[data-id="${particle.id}"]`);
+    if (el) {
+      el.style.setProperty("--angle", `${particle.angle}deg`);
+    }
   });
 }
 
 function setActiveSkill(skillKey) {
   renderSkill(skillKey);
   updateNodeFocus();
-  updateActiveLink();
-  updateRelationshipLinks();
-}
-
-function getButtonCenter(button) {
-  const shellRect = orbitShell.getBoundingClientRect();
-  const rect = button.getBoundingClientRect();
-
-  return {
-    x: (rect.left - shellRect.left) + rect.width / 2,
-    y: (rect.top - shellRect.top) + rect.height / 2
-  };
-}
-
-function updateActiveLink() {
-  const activeButton = getNodeBySkill(currentSkillKey);
-  if (!activeButton || !activeLinkLine) return;
-
-  const shellRect = orbitShell.getBoundingClientRect();
-  const centerX = shellRect.width / 2;
-  const centerY = shellRect.height / 2;
-
-  const target = getButtonCenter(activeButton);
-
-  activeLinkLine.setAttribute("x1", centerX.toFixed(2));
-  activeLinkLine.setAttribute("y1", centerY.toFixed(2));
-  activeLinkLine.setAttribute("x2", target.x.toFixed(2));
-  activeLinkLine.setAttribute("y2", target.y.toFixed(2));
-}
-
-function updateRelationshipLinks() {
-  if (!relationshipLinks) return;
-
-  relationshipLinks.innerHTML = "";
-
-  const activeButton = getNodeBySkill(currentSkillKey);
-  const meta = skillMeta[currentSkillKey];
-  if (!activeButton || !meta) return;
-
-  const from = getButtonCenter(activeButton);
-
-  meta.related.forEach((relatedKey) => {
-    const relatedButton = getNodeBySkill(relatedKey);
-    if (!relatedButton) return;
-
-    const to = getButtonCenter(relatedButton);
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("class", "relationship-link");
-    line.setAttribute("x1", from.x.toFixed(2));
-    line.setAttribute("y1", from.y.toFixed(2));
-    line.setAttribute("x2", to.x.toFixed(2));
-    line.setAttribute("y2", to.y.toFixed(2));
-    relationshipLinks.appendChild(line);
-  });
 }
 
 function stopInertia() {
@@ -959,8 +835,10 @@ function startAutoRotate() {
       ringRotation[2] += ringSpeed[2];
       ringRotation[3] += ringSpeed[3];
       ringRotation[4] += ringSpeed[4];
-      applyRingRotations();
     }
+
+    applyRingRotations();
+    stepParticles();
 
     autoRotateFrame = requestAnimationFrame(loop);
   };
@@ -1043,12 +921,8 @@ window.addEventListener("touchend", () => {
   endDrag();
 });
 
-window.addEventListener("resize", () => {
-  updateActiveLink();
-  updateRelationshipLinks();
-});
-
 createOrbitNodes();
+createParticles();
 applyRingRotations();
 setActiveSkill(currentSkillKey);
 startAutoRotate();

@@ -274,7 +274,8 @@
   transform: translateY(-50%);
 }
 
-.link-layer {
+/* PARTICLES */
+.particle-layer {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -282,20 +283,29 @@
   overflow: visible;
 }
 
-.active-link-line {
-  stroke: rgba(255, 122, 24, 0.78);
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 7px rgba(255, 122, 24, 0.26));
-  stroke-dasharray: 8 8;
-  animation: linkDash 8s linear infinite;
+.orbit-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 122, 24, 0.95), rgba(255, 122, 24, 0.08));
+  box-shadow: 0 0 12px rgba(255, 122, 24, 0.22);
+  left: 50%;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotate(calc(var(--angle) + var(--ring-rotation, 0deg)))
+    translateY(calc(var(--radius) * -1));
+  opacity: 0.4;
 }
 
-.relationship-link {
-  stroke: rgba(255, 122, 24, 0.26);
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  opacity: 0.85;
+.orbit-particle.active-particle {
+  width: 10px;
+  height: 10px;
+  opacity: 0.78;
+  box-shadow:
+    0 0 14px rgba(255, 122, 24, 0.30),
+    0 0 24px rgba(255, 179, 71, 0.18);
 }
 
 .orbit-core {
@@ -335,7 +345,11 @@
 }
 
 .orbit-core-pulse-2 {
-  animation: pulseOrbit 3.2s ease-out 1.4s infinite;
+  animation: pulseOrbit 3.2s ease-out 1.1s infinite;
+}
+
+.orbit-core-pulse-3 {
+  animation: pulseOrbit 3.2s ease-out 2.0s infinite;
 }
 
 .orbit-core-inner {
@@ -386,11 +400,7 @@
     rotate(calc((var(--angle) + var(--ring-rotation, 0deg)) * -1));
   transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
   z-index: 4;
-  opacity: 0.34;
-}
-
-.orbit-skill.is-related {
-  opacity: 0.78;
+  opacity: 0.20;
 }
 
 .orbit-shell.has-active .orbit-skill.active {
@@ -398,7 +408,7 @@
 }
 
 .orbit-shell.has-active .orbit-skill:not(.active):hover {
-  opacity: 0.92;
+  opacity: 0.72;
 }
 
 .orbit-skill[data-ring="1"] { --size: 66px; }
@@ -414,7 +424,7 @@
     rotate(calc((var(--angle) + var(--ring-rotation, 0deg)) * -1))
     scale(1.12);
   filter: drop-shadow(0 0 10px rgba(255, 122, 24, 0.24));
-  opacity: 1;
+  opacity: 0.72;
 }
 
 .orbit-skill.active {
@@ -719,20 +729,11 @@
   }
   70% {
     opacity: 0;
-    transform: scale(1.12);
+    transform: scale(1.14);
   }
   100% {
     opacity: 0;
-    transform: scale(1.12);
-  }
-}
-
-@keyframes linkDash {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: 120;
+    transform: scale(1.14);
   }
 }
 
