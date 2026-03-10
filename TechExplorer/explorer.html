@@ -4,13 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Technology Explorer | HUDSONLAB</title>
+
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="explorer.css" />
+
+  <!-- Devicon -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+  />
 </head>
 <body>
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand" href="../index.html">HUDSONLAB</a>
+
       <nav class="top-nav">
         <a href="../index.html">Home</a>
         <a href="../About/about.html">About</a>
@@ -25,21 +33,26 @@
 
   <main class="page-shell">
     <span class="small-chip">Technology Explorer</span>
+
     <h1 class="page-title">A Curated Compass of the Technologies I Build With</h1>
+
     <p class="page-subtitle">
-      This explorer is designed as a rotating technical compass — a visual system that maps the tools,
-      platforms, languages, and environments that shape how I think, build, and solve problems.
+      This explorer is designed as a layered technical compass — a more visual and
+      premium way to present the platforms, environments, tools, and languages that
+      shape how I think about structure, systems, design, development, and applied
+      technical work.
     </p>
 
     <section class="explorer-stage">
       <div class="glass-card explorer-hero-band reveal">
         <div class="explorer-hero-copy">
           <p class="explorer-band-label">Design Intent</p>
-          <h2>Technology, arranged as a structured universe of capability.</h2>
+          <h2>Technology, arranged as a rotating system of capability.</h2>
           <p>
-            Each ring reflects a different layer of technical thinking — from databases and operating environments,
-            to development platforms, to programming languages used across software, system logic, web development,
-            and analytics.
+            Each ring represents a different layer of technical direction — from
+            database systems and operating environments, to development platforms,
+            to programming languages used across software, web, analytics, and
+            system-oriented work.
           </p>
         </div>
 
@@ -49,13 +62,14 @@
             <span>database · environment · tools · languages</span>
           </div>
           <div class="hero-meta-item">
-            <strong>23 Nodes</strong>
-            <span>interactive technologies in one rotating compass</span>
+            <strong>22 Nodes</strong>
+            <span>interactive technologies inside one technical compass</span>
           </div>
         </div>
       </div>
 
       <div class="explorer-grid">
+        <!-- LEFT: ORBIT -->
         <div class="glass-card orbit-panel reveal-delay">
           <div class="orbit-panel-head">
             <div>
@@ -78,6 +92,11 @@
             <div class="orbit-cross orbit-cross-diagonal-a"></div>
             <div class="orbit-cross orbit-cross-diagonal-b"></div>
 
+            <div class="orbit-axis-label orbit-axis-n">N</div>
+            <div class="orbit-axis-label orbit-axis-e">E</div>
+            <div class="orbit-axis-label orbit-axis-s">S</div>
+            <div class="orbit-axis-label orbit-axis-w">W</div>
+
             <div class="orbit-core">
               <div class="orbit-core-inner">
                 <span>TECH</span>
@@ -89,23 +108,27 @@
 
           <div class="orbit-footer-note">
             <p>
-              This compass uses layered circular positioning to present technical breadth in a more visual,
-              premium, and structured way — combining portfolio clarity with interactive presentation.
+              This compass is designed as a more editorial and visual way to
+              present technical breadth — combining portfolio storytelling,
+              interaction, and structured categorisation in a single interface.
             </p>
           </div>
         </div>
 
+        <!-- MIDDLE: SELECTED TECHNOLOGY -->
         <div class="glass-card skill-info reveal-delay-2">
           <div class="skill-header">
             <div class="skill-icon-large" id="skillIconWrap">
               <div id="skillIconImage" class="skill-inline-icon"></div>
             </div>
+
             <div>
               <p class="skill-mini-label">Selected Technology</p>
               <h2 id="skillName">MySQL</h2>
               <p id="skillDescription">
-                MySQL represents structured relational data, practical database design, and the ability
-                to organise application data clearly and reliably.
+                MySQL represents structured relational data, practical database
+                design, and the ability to organise application data clearly and
+                reliably.
               </p>
             </div>
           </div>
@@ -114,9 +137,11 @@
             <div class="skill-info-box">
               <strong>What it represents</strong>
               <p id="skillMeaning">
-                Data organisation, relational thinking, and strong support for application-level information systems.
+                Data organisation, relational thinking, and strong support for
+                application-level information systems.
               </p>
             </div>
+
             <div class="skill-info-box">
               <strong>Primary direction</strong>
               <p id="skillDirection">
@@ -132,10 +157,12 @@
               <h3>Connected Work</h3>
               <span class="section-row-note">Selected applications and related directions</span>
             </div>
+
             <div id="projectList" class="project-preview"></div>
           </div>
         </div>
 
+        <!-- RIGHT: PROJECT / APPLICATION LAYER -->
         <div class="glass-card project-detail reveal-delay-2">
           <div class="project-detail-top">
             <p class="project-mini-label">Project / Application Layer</p>
@@ -149,6 +176,7 @@
               <strong>Technology</strong>
               <span id="projectTech">-</span>
             </div>
+
             <div class="project-meta-box">
               <strong>GitHub</strong>
               <span id="projectGithub">-</span>
@@ -164,6 +192,7 @@
               <h3>Highlights</h3>
               <span class="section-row-note">The qualities and capabilities this area supports</span>
             </div>
+
             <ul id="projectFeatures" class="info-list"></ul>
           </div>
         </div>

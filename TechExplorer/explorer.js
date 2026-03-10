@@ -1,81 +1,62 @@
-function createBadgeSVG(label, primary, secondary, textColor) {
-  const safeLabel = label.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  return `
-    <svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="g-${safeLabel}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${primary}"></stop>
-          <stop offset="100%" stop-color="${secondary}"></stop>
-        </linearGradient>
-      </defs>
-      <rect x="6" y="6" width="52" height="52" rx="16" fill="url(#g-${safeLabel})"></rect>
-      <rect x="6.5" y="6.5" width="51" height="51" rx="15.5" fill="none" stroke="rgba(255,255,255,0.35)"></rect>
-      <text x="32" y="37" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="${textColor}">${safeLabel}</text>
-    </svg>
-  `;
-}
+const iconHtml = {
+  mysql: '<i class="devicon-mysql-original colored" aria-hidden="true"></i>',
+  sqlserver: '<img src="../Images/TE_SQLServer.png" alt="Microsoft SQL Server">',
+  linux: '<i class="devicon-linux-plain colored" aria-hidden="true"></i>',
 
-const iconSet = {
-  mysql: createBadgeSVG("My", "#0f5e7a", "#1f8cb3", "#ffffff"),
-  sqlserver: createBadgeSVG("MS", "#b21f1f", "#ff5f6d", "#ffffff"),
-  os: createBadgeSVG("OS", "#5f4b8b", "#8f75d6", "#ffffff"),
+  visualstudio: '<i class="devicon-visualstudio-plain colored" aria-hidden="true"></i>',
+  vscode: '<i class="devicon-vscode-plain colored" aria-hidden="true"></i>',
+  netbeans: '<i class="devicon-apache-line colored" aria-hidden="true"></i>',
+  codeblocks: '<img src="https://img.icons8.com/color/480/code-blocks.png" alt="Code::Blocks">',
+  git: '<i class="devicon-git-plain colored" aria-hidden="true"></i>',
+  github: '<i class="devicon-github-original" aria-hidden="true"></i>',
+  aspnet: '<i class="devicon-dot-net-plain colored" aria-hidden="true"></i>',
 
-  visualstudio: createBadgeSVG("VS", "#5a2ea6", "#8f5cff", "#ffffff"),
-  vscode: createBadgeSVG("VC", "#007acc", "#3ea6ff", "#ffffff"),
-  netbeans: createBadgeSVG("NB", "#1f9d55", "#37c97d", "#ffffff"),
-  codeblocks: createBadgeSVG("CB", "#ef7d00", "#ffb347", "#ffffff"),
-  mingw: createBadgeSVG("MG", "#4b5563", "#7b8794", "#ffffff"),
-  git: createBadgeSVG("Git", "#f1502f", "#ff8a50", "#ffffff"),
-  github: createBadgeSVG("GH", "#111827", "#374151", "#ffffff"),
-  aspnet: createBadgeSVG(".N", "#5c2d91", "#8f63cf", "#ffffff"),
-
-  assembly: createBadgeSVG("ASM", "#6b7280", "#9ca3af", "#ffffff"),
-  c: createBadgeSVG("C", "#00599c", "#2d7fd3", "#ffffff"),
-  cpp: createBadgeSVG("C++", "#004482", "#3b82f6", "#ffffff"),
-  csharp: createBadgeSVG("C#", "#6a1577", "#a855f7", "#ffffff"),
-  css: createBadgeSVG("CSS", "#1b73ba", "#3ba3ff", "#ffffff"),
-  java: createBadgeSVG("J", "#f89820", "#ffb347", "#ffffff"),
-  python: createBadgeSVG("Py", "#3776ab", "#ffd343", "#1f2937"),
-  javascript: createBadgeSVG("JS", "#f7df1e", "#ffd54d", "#1f2937"),
-  r: createBadgeSVG("R", "#276dc3", "#8fa9d6", "#ffffff"),
-  sql: createBadgeSVG("SQL", "#0f766e", "#14b8a6", "#ffffff"),
-  html5: createBadgeSVG("H5", "#e34f26", "#ff8a50", "#ffffff"),
-  sas: createBadgeSVG("SAS", "#2563eb", "#60a5fa", "#ffffff")
+  assembly: '<div class="custom-asm-badge" aria-hidden="true">ASM</div>',
+  c: '<i class="devicon-c-plain colored" aria-hidden="true"></i>',
+  cpp: '<i class="devicon-cplusplus-plain colored" aria-hidden="true"></i>',
+  csharp: '<i class="devicon-csharp-plain colored" aria-hidden="true"></i>',
+  css: '<i class="devicon-css3-plain colored" aria-hidden="true"></i>',
+  java: '<i class="devicon-java-plain colored" aria-hidden="true"></i>',
+  python: '<i class="devicon-python-plain colored" aria-hidden="true"></i>',
+  javascript: '<i class="devicon-javascript-plain colored" aria-hidden="true"></i>',
+  r: '<i class="devicon-r-plain colored" aria-hidden="true"></i>',
+  sql: '<i class="devicon-azuresqldatabase-plain colored" aria-hidden="true"></i>',
+  html5: '<i class="devicon-html5-plain colored" aria-hidden="true"></i>',
+  sas: '<div class="custom-sas-badge" aria-hidden="true">SAS</div>'
 };
 
 const techOrder = [
-  { key: "mysql", ring: 1, angle: 0, radius: 90, label: "MySQL" },
-  { key: "sqlserver", ring: 1, angle: 180, radius: 90, label: "MS SQL" },
+  { key: "mysql", ring: 1, angle: 0, radius: 94, label: "MySQL" },
+  { key: "sqlserver", ring: 1, angle: 180, radius: 94, label: "SQL Server" },
 
-  { key: "os", ring: 2, angle: 0, radius: 125, label: "OS" },
+  { key: "linux", ring: 2, angle: 0, radius: 136, label: "Linux" },
 
-  { key: "visualstudio", ring: 3, angle: 0, radius: 169, label: "Visual Studio" },
-  { key: "vscode", ring: 3, angle: 45, radius: 169, label: "VS Code" },
-  { key: "netbeans", ring: 3, angle: 90, radius: 169, label: "NetBeans" },
-  { key: "codeblocks", ring: 3, angle: 135, radius: 169, label: "Code::Blocks" },
-  { key: "mingw", ring: 3, angle: 180, radius: 169, label: "MinGW" },
-  { key: "git", ring: 3, angle: 225, radius: 169, label: "Git" },
-  { key: "github", ring: 3, angle: 270, radius: 169, label: "GitHub" },
-  { key: "aspnet", ring: 3, angle: 315, radius: 169, label: "ASP.NET" },
+  { key: "visualstudio", ring: 3, angle: 0, radius: 190, label: "Visual Studio" },
+  { key: "vscode", ring: 3, angle: 45, radius: 190, label: "VS Code" },
+  { key: "netbeans", ring: 3, angle: 90, radius: 190, label: "NetBeans" },
+  { key: "codeblocks", ring: 3, angle: 135, radius: 190, label: "Code::Blocks" },
+  { key: "git", ring: 3, angle: 225, radius: 190, label: "Git" },
+  { key: "github", ring: 3, angle: 270, radius: 190, label: "GitHub" },
+  { key: "aspnet", ring: 3, angle: 315, radius: 190, label: "ASP.NET" },
 
-  { key: "assembly", ring: 4, angle: 0, radius: 215, label: "Assembly" },
-  { key: "c", ring: 4, angle: 30, radius: 215, label: "C" },
-  { key: "cpp", ring: 4, angle: 60, radius: 215, label: "C++" },
-  { key: "csharp", ring: 4, angle: 90, radius: 215, label: "C#" },
-  { key: "css", ring: 4, angle: 120, radius: 215, label: "CSS" },
-  { key: "java", ring: 4, angle: 150, radius: 215, label: "Java" },
-  { key: "python", ring: 4, angle: 180, radius: 215, label: "Python" },
-  { key: "javascript", ring: 4, angle: 210, radius: 215, label: "JavaScript" },
-  { key: "r", ring: 4, angle: 240, radius: 215, label: "R" },
-  { key: "sql", ring: 4, angle: 270, radius: 215, label: "SQL" },
-  { key: "html5", ring: 4, angle: 300, radius: 215, label: "HTML5" },
-  { key: "sas", ring: 4, angle: 330, radius: 215, label: "SAS" }
+  { key: "assembly", ring: 4, angle: 0, radius: 250, label: "Assembly" },
+  { key: "c", ring: 4, angle: 30, radius: 250, label: "C" },
+  { key: "cpp", ring: 4, angle: 60, radius: 250, label: "C++" },
+  { key: "csharp", ring: 4, angle: 90, radius: 250, label: "C#" },
+  { key: "css", ring: 4, angle: 120, radius: 250, label: "CSS" },
+  { key: "java", ring: 4, angle: 150, radius: 250, label: "Java" },
+  { key: "python", ring: 4, angle: 180, radius: 250, label: "Python" },
+  { key: "javascript", ring: 4, angle: 210, radius: 250, label: "JavaScript" },
+  { key: "r", ring: 4, angle: 240, radius: 250, label: "R" },
+  { key: "sql", ring: 4, angle: 270, radius: 250, label: "SQL" },
+  { key: "html5", ring: 4, angle: 300, radius: 250, label: "HTML5" },
+  { key: "sas", ring: 4, angle: 330, radius: 250, label: "SAS" }
 ];
 
 const skills = {
   mysql: {
     name: "MySQL",
-    icon: iconSet.mysql,
+    icon: iconHtml.mysql,
     description: "MySQL represents structured relational data, practical database design, and the ability to organise application data clearly and reliably.",
     meaning: "Data organisation, relational thinking, and strong support for application-level information systems.",
     direction: "Relational databases · structured storage · application backends",
@@ -97,14 +78,14 @@ const skills = {
 
   sqlserver: {
     name: "Microsoft SQL Server",
-    icon: iconSet.sqlserver,
-    description: "Microsoft SQL Server represents enterprise-style relational data management, strong schema control, and the backbone of database-driven applications.",
+    icon: iconHtml.sqlserver,
+    description: "Microsoft SQL Server represents enterprise-style relational data management, stronger schema control, and the backbone of database-driven application systems.",
     meaning: "A more structured and platform-oriented database environment for reliable system data handling.",
     direction: "Database systems · SQL Server development · structured application data",
     projects: [
       {
         name: "MyGoPandai Database Structure",
-        summary: "SQL Server is used as a core data layer for managing users, courses, content, and system relationships in a structured application environment.",
+        summary: "SQL Server is used as a core data layer for managing users, lessons, courses, records, and relationships inside a structured web application environment.",
         tech: "Microsoft SQL Server",
         github: "Available upon request",
         thumb: "Schema Design · Data Integrity · System Records",
@@ -117,23 +98,23 @@ const skills = {
     ]
   },
 
-  os: {
-    name: "Operating Systems",
-    icon: iconSet.os,
-    description: "Operating Systems represent the environment where software executes, resources are managed, and technical work connects directly to real machine behaviour.",
-    meaning: "An understanding of systems, execution context, memory awareness, and how software interacts with the platform beneath it.",
-    direction: "System environment · execution context · platform understanding",
+  linux: {
+    name: "Linux (Ubuntu)",
+    icon: iconHtml.linux,
+    description: "Linux represents operating-system awareness, command-line confidence, and a stronger understanding of how software interacts with execution environments.",
+    meaning: "An environment that reflects system understanding, platform awareness, and technical workflow discipline.",
+    direction: "Operating systems · command line · platform understanding",
     projects: [
       {
-        name: "System-Level Learning Direction",
-        summary: "Operating system knowledge supports lower-level understanding of process behaviour, execution flow, and technical control across software environments.",
-        tech: "Operating Systems",
+        name: "System Environment Direction",
+        summary: "Linux supports stronger familiarity with environments, processes, and technical workflow behaviour beyond application-only development.",
+        tech: "Linux · Ubuntu",
         github: "Available upon request",
-        thumb: "Execution Context · System Awareness · Resource Logic",
+        thumb: "Environment Awareness · System Thinking · Technical Workflow",
         features: [
-          "Builds stronger understanding of system execution",
-          "Supports low-level programming awareness",
-          "Strengthens technical problem-solving foundations"
+          "Builds stronger execution-environment awareness",
+          "Supports terminal-based and system-level thinking",
+          "Strengthens technical confidence beyond UI-level work"
         ]
       }
     ]
@@ -141,7 +122,7 @@ const skills = {
 
   visualstudio: {
     name: "Visual Studio",
-    icon: iconSet.visualstudio,
+    icon: iconHtml.visualstudio,
     description: "Visual Studio represents full-scale application development, especially for structured .NET projects and larger software workflows.",
     meaning: "A professional IDE aligned with application architecture, backend logic, and organised project structure.",
     direction: ".NET development · application architecture · IDE workflow",
@@ -163,7 +144,7 @@ const skills = {
 
   vscode: {
     name: "Visual Studio Code",
-    icon: iconSet.vscode,
+    icon: iconHtml.vscode,
     description: "Visual Studio Code represents lightweight and flexible coding, ideal for front-end work, scripting, and fast project navigation.",
     meaning: "A clean and efficient development environment for modern coding workflows and web-oriented tasks.",
     direction: "Web development · scripting · lightweight coding workflow",
@@ -185,7 +166,7 @@ const skills = {
 
   netbeans: {
     name: "Apache NetBeans",
-    icon: iconSet.netbeans,
+    icon: iconHtml.netbeans,
     description: "Apache NetBeans represents structured Java development and class-oriented software construction in an academic and project-based environment.",
     meaning: "A Java-focused IDE that supports object-oriented development and organised application structure.",
     direction: "Java IDE workflow · OOP development · project organisation",
@@ -207,8 +188,8 @@ const skills = {
 
   codeblocks: {
     name: "Code::Blocks",
-    icon: iconSet.codeblocks,
-    description: "Code::Blocks represents foundational C and C++ development with a focus on algorithms, system logic, and structured programming practice.",
+    icon: iconHtml.codeblocks,
+    description: "Code::Blocks represents foundational C and C++ development with emphasis on algorithms, system logic, and structured programming practice.",
     meaning: "A lightweight IDE used for building programming fundamentals and algorithmic thinking.",
     direction: "C/C++ development · algorithms · structured programming",
     projects: [
@@ -227,31 +208,9 @@ const skills = {
     ]
   },
 
-  mingw: {
-    name: "MinGW",
-    icon: iconSet.mingw,
-    description: "MinGW represents compiler-level tooling, native build workflows, and practical support for C and C++ development on Windows environments.",
-    meaning: "A toolchain environment that connects source code, compilation, and executable generation.",
-    direction: "Compilation workflow · native builds · C/C++ toolchain",
-    projects: [
-      {
-        name: "Native Build Workflow",
-        summary: "MinGW supports the compilation and execution process for C and C++ projects, strengthening understanding of toolchains and build flow.",
-        tech: "MinGW",
-        github: "Available upon request",
-        thumb: "Compiler Toolchain · Build Flow · Native Execution",
-        features: [
-          "Supports native C/C++ compilation",
-          "Improves understanding of build workflows",
-          "Useful for systems and lower-level programming"
-        ]
-      }
-    ]
-  },
-
   git: {
     name: "Git",
-    icon: iconSet.git,
+    icon: iconHtml.git,
     description: "Git represents version control, development discipline, and the ability to manage code changes systematically over time.",
     meaning: "A core tool for maintaining software history, collaboration readiness, and controlled project evolution.",
     direction: "Version control · code history · development workflow",
@@ -273,7 +232,7 @@ const skills = {
 
   github: {
     name: "GitHub",
-    icon: iconSet.github,
+    icon: iconHtml.github,
     description: "GitHub represents project visibility, repository management, and a public-facing layer for code sharing and technical presentation.",
     meaning: "A platform that connects code, portfolio presence, and collaboration-ready software publishing.",
     direction: "Repository hosting · portfolio presentation · code sharing",
@@ -295,7 +254,7 @@ const skills = {
 
   aspnet: {
     name: "ASP.NET",
-    icon: iconSet.aspnet,
+    icon: iconHtml.aspnet,
     description: "ASP.NET represents structured web application development using server-side logic, page-driven architecture, and integrated backend workflows.",
     meaning: "A framework aligned with database-connected systems, role-based applications, and scalable web functionality.",
     direction: "Web application development · server-side logic · .NET systems",
@@ -317,7 +276,7 @@ const skills = {
 
   assembly: {
     name: "Assembly",
-    icon: iconSet.assembly,
+    icon: iconHtml.assembly,
     description: "Assembly represents direct system-level control, low-level execution awareness, and precise understanding of how logic maps into machine behaviour.",
     meaning: "A technical area that reflects discipline, detail, and deeper interest in how systems operate underneath abstraction.",
     direction: "Low-level systems · execution flow · technical precision",
@@ -339,7 +298,7 @@ const skills = {
 
   c: {
     name: "C",
-    icon: iconSet.c,
+    icon: iconHtml.c,
     description: "C represents programming fundamentals, system behaviour awareness, and a disciplined approach to structured problem solving.",
     meaning: "A foundational language that strengthens logic, memory awareness, and technical discipline.",
     direction: "Programming fundamentals · system behaviour · core logic",
@@ -361,7 +320,7 @@ const skills = {
 
   cpp: {
     name: "C++",
-    icon: iconSet.cpp,
+    icon: iconHtml.cpp,
     description: "C++ represents systems thinking, data structures, and performance-aware programming with stronger control over implementation logic.",
     meaning: "A language closely tied to algorithms, structural design, and computational efficiency.",
     direction: "Data structures · algorithmic thinking · performance-minded programming",
@@ -383,7 +342,7 @@ const skills = {
 
   csharp: {
     name: "C#",
-    icon: iconSet.csharp,
+    icon: iconHtml.csharp,
     description: "C# represents application structure, object-oriented design, and backend logic for modern .NET-based systems.",
     meaning: "A language that supports scalable application development, clean architecture, and structured business logic.",
     direction: ".NET development · OOP · application logic",
@@ -405,7 +364,7 @@ const skills = {
 
   css: {
     name: "CSS",
-    icon: iconSet.css,
+    icon: iconHtml.css,
     description: "CSS represents visual identity, layout rhythm, spacing control, and the design system layer that shapes interface atmosphere.",
     meaning: "The language of presentation, hierarchy, motion, and premium visual communication on the web.",
     direction: "Design systems · interface styling · visual language",
@@ -427,7 +386,7 @@ const skills = {
 
   java: {
     name: "Java",
-    icon: iconSet.java,
+    icon: iconHtml.java,
     description: "Java represents object-oriented thinking, structured application design, and class-based development. It is especially connected to OODJ and Concurrent Programming through system modelling, thread-based logic, and disciplined software architecture.",
     meaning: "A language that supports disciplined design, strong abstraction, and both object-oriented and concurrent system development.",
     direction: "OODJ · Concurrent Programming · structured application design",
@@ -461,7 +420,7 @@ const skills = {
 
   python: {
     name: "Python",
-    icon: iconSet.python,
+    icon: iconHtml.python,
     description: "Python represents flexibility, speed, and the ability to create useful technical solutions through scripting, automation, and structured logic.",
     meaning: "A language that supports practical problem solving, analytical thinking, and systems that benefit from adaptability.",
     direction: "Automation · scripting · data-oriented workflows",
@@ -483,7 +442,7 @@ const skills = {
 
   javascript: {
     name: "JavaScript",
-    icon: iconSet.javascript,
+    icon: iconHtml.javascript,
     description: "JavaScript represents movement, interactivity, responsiveness, and the behaviour layer that turns static structure into dynamic digital experience.",
     meaning: "A language that connects interface, motion, and real-time user interaction.",
     direction: "Interaction · behaviour · dynamic interfaces",
@@ -505,7 +464,7 @@ const skills = {
 
   r: {
     name: "R",
-    icon: iconSet.r,
+    icon: iconHtml.r,
     description: "R represents analytical modelling, statistical reasoning, and the ability to interpret data through a more evidence-driven technical lens.",
     meaning: "A technology aligned with deeper analysis, modelling logic, and insight generation.",
     direction: "Statistical analysis · modelling · insight generation",
@@ -527,7 +486,7 @@ const skills = {
 
   sql: {
     name: "SQL",
-    icon: iconSet.sql,
+    icon: iconHtml.sql,
     description: "SQL represents structured data logic, query thinking, and the relational architecture required to organise information meaningfully.",
     meaning: "A core technology for systems that depend on clarity, relationships, and reliable data retrieval.",
     direction: "Relational data · query logic · structured systems",
@@ -549,7 +508,7 @@ const skills = {
 
   html5: {
     name: "HTML5",
-    icon: iconSet.html5,
+    icon: iconHtml.html5,
     description: "HTML5 represents semantic structure, page hierarchy, and the foundational architecture of public-facing web experiences.",
     meaning: "The layer where content becomes clearly structured, navigable, and presentation-ready on the web.",
     direction: "Semantic structure · page architecture · web foundation",
@@ -571,7 +530,7 @@ const skills = {
 
   sas: {
     name: "SAS",
-    icon: iconSet.sas,
+    icon: iconHtml.sas,
     description: "SAS represents analytical workflow, predictive thinking, and an applied approach to structured data modelling in a business-oriented context.",
     meaning: "A toolset connected to predictive modelling, analytics workflow, and practical data-driven insight.",
     direction: "Predictive modelling · business analytics · data workflows",
@@ -613,6 +572,8 @@ let isDragging = false;
 let startX = 0;
 let startRotation = 0;
 let currentSkillKey = "mysql";
+let velocity = 0;
+let animationFrameId = null;
 
 function updateOrbitRotation() {
   orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
@@ -626,6 +587,9 @@ function createOrbitNodes() {
     button.className = "orbit-skill";
     button.dataset.skill = item.key;
     button.dataset.ring = String(item.ring);
+    button.setAttribute("type", "button");
+    button.setAttribute("aria-label", item.label);
+
     button.style.setProperty("--angle", `${item.angle}deg`);
     button.style.setProperty("--radius", `${item.radius}px`);
 
@@ -691,6 +655,7 @@ function renderSkill(skillKey) {
       document.querySelectorAll(".project-preview-card").forEach((item) => {
         item.classList.remove("active");
       });
+
       card.classList.add("active");
       renderProjectDetail(project);
     });
@@ -711,7 +676,35 @@ function setActiveSkill(skillKey) {
   renderSkill(skillKey);
 }
 
+function stopInertia() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
+
+function startInertia() {
+  stopInertia();
+
+  const step = () => {
+    velocity *= 0.95;
+
+    if (Math.abs(velocity) < 0.02) {
+      velocity = 0;
+      animationFrameId = null;
+      return;
+    }
+
+    orbitRotation += velocity;
+    updateOrbitRotation();
+    animationFrameId = requestAnimationFrame(step);
+  };
+
+  animationFrameId = requestAnimationFrame(step);
+}
+
 function startDrag(clientX) {
+  stopInertia();
   isDragging = true;
   startX = clientX;
   startRotation = orbitRotation;
@@ -720,14 +713,20 @@ function startDrag(clientX) {
 
 function moveDrag(clientX) {
   if (!isDragging) return;
+
   const delta = clientX - startX;
-  orbitRotation = startRotation + delta * 0.55;
+  const nextRotation = startRotation + delta * 0.55;
+  velocity = nextRotation - orbitRotation;
+  orbitRotation = nextRotation;
   updateOrbitRotation();
 }
 
 function endDrag() {
+  if (!isDragging) return;
+
   isDragging = false;
   orbitShell.classList.remove("dragging");
+  startInertia();
 }
 
 orbitShell.addEventListener("mousedown", (event) => {
