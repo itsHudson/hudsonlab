@@ -592,10 +592,23 @@ const projectGithub = document.getElementById("projectGithub");
 const projectFeatures = document.getElementById("projectFeatures");
 const projectThumbPreview = document.getElementById("projectThumbPreview");
 
-let orbitRotation = 0;
+const ringRotation = {
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0
+};
+
+const ringSpeed = {
+  1: 0.035,   // data layer
+  2: 0.06,    // environment
+  3: 0.11,    // workflow layer
+  4: -0.028   // language layer reverse
+};
+
 let isDragging = false;
 let startX = 0;
-let startRotation = 0;
+let startRing3Rotation = 0;
 let currentSkillKey = "mysql";
 let velocity = 0;
 let inertiaFrame = null;
@@ -603,8 +616,17 @@ let autoRotateFrame = null;
 let isPausedByInteraction = false;
 let autoRotateTimeout = null;
 
-function updateOrbitRotation() {
-  orbitShell.style.setProperty("--orbit-rotation", `${orbitRotation}deg`);
+function applyRingRotations() {
+  orbitShell.style.setProperty("--ring1-rotation", `${ringRotation[1]}deg`);
+  orbitShell.style.setProperty("--ring2-rotation", `${ringRotation[2]}deg`);
+  orbitShell.style.setProperty("--ring3-rotation", `${ringRotation[3]}deg`);
+  orbitShell.style.setProperty("--ring4-rotation", `${ringRotation[4]}deg`);
+
+  document.querySelectorAll(".orbit-skill").forEach((node) => {
+    const ring = node.dataset.ring;
+    node.style.setProperty("--ring-rotation", `${ringRotation[ring]}deg`);
+  });
+
   updateActiveLink();
 }
 
@@ -622,6 +644,7 @@ function createOrbitNodes() {
 
     button.style.setProperty("--angle", `${item.angle}deg`);
     button.style.setProperty("--radius", `${item.radius}px`);
+    button.style.setProperty("--ring-rotation", `${ringRotation[item.ring]}deg`);
 
     button.innerHTML = `
       <div class="orbit-logo-wrap">${skills[item.key].icon}</div>
@@ -710,8 +733,12 @@ function setActiveSkill(skillKey) {
   updateActiveLink();
 }
 
+function getActiveButton() {
+  return orbitNodes.querySelector(`.orbit-skill[data-skill="${currentSkillKey}"]`);
+}
+
 function updateActiveLink() {
-  const activeButton = orbitNodes.querySelector(".orbit-skill.active");
+  const activeButton = getActiveButton();
   if (!activeButton || !activeLinkLine) return;
 
   const shellRect = orbitShell.getBoundingClientRect();
@@ -740,7 +767,7 @@ function startInertia() {
   stopInertia();
 
   const step = () => {
-    velocity *= 0.95;
+    velocity *= 0.94;
 
     if (Math.abs(velocity) < 0.02) {
       velocity = 0;
@@ -748,8 +775,8 @@ function startInertia() {
       return;
     }
 
-    orbitRotation += velocity;
-    updateOrbitRotation();
+    ringRotation[3] += velocity;
+    applyRingRotations();
     inertiaFrame = requestAnimationFrame(step);
   };
 
@@ -763,8 +790,11 @@ function startAutoRotate() {
 
   const loop = () => {
     if (!isDragging && !isPausedByInteraction && Math.abs(velocity) < 0.02) {
-      orbitRotation += 0.08;
-      updateOrbitRotation();
+      ringRotation[1] += ringSpeed[1];
+      ringRotation[2] += ringSpeed[2];
+      ringRotation[3] += ringSpeed[3];
+      ringRotation[4] += ringSpeed[4];
+      applyRingRotations();
     }
 
     autoRotateFrame = requestAnimationFrame(loop);
@@ -790,7 +820,7 @@ function startDrag(clientX) {
   isDragging = true;
   isPausedByInteraction = true;
   startX = clientX;
-  startRotation = orbitRotation;
+  startRing3Rotation = ringRotation[3];
   orbitShell.classList.add("dragging");
 }
 
@@ -798,10 +828,11 @@ function moveDrag(clientX) {
   if (!isDragging) return;
 
   const delta = clientX - startX;
-  const nextRotation = startRotation + delta * 0.55;
-  velocity = nextRotation - orbitRotation;
-  orbitRotation = nextRotation;
-  updateOrbitRotation();
+  const nextRotation = startRing3Rotation + delta * 0.55;
+  velocity = nextRotation - ringRotation[3];
+
+  ringRotation[3] = nextRotation;
+  applyRingRotations();
 }
 
 function endDrag() {
@@ -852,6 +883,6 @@ window.addEventListener("resize", () => {
 });
 
 createOrbitNodes();
-updateOrbitRotation();
+applyRingRotations();
 setActiveSkill(currentSkillKey);
 startAutoRotate();

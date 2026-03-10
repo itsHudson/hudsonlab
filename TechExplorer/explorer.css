@@ -374,9 +374,9 @@
   box-shadow: none;
   transform:
     translate(-50%, -50%)
-    rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
+    rotate(calc(var(--angle) + var(--ring-rotation, 0deg)))
     translateY(calc(var(--radius) * -1))
-    rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1));
+    rotate(calc((var(--angle) + var(--ring-rotation, 0deg)) * -1));
   transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
   z-index: 4;
   opacity: 0.52;
@@ -390,18 +390,18 @@
   opacity: 0.92;
 }
 
-.orbit-skill[data-ring="1"] { --size: 76px; }
-.orbit-skill[data-ring="2"] { --size: 70px; }
-.orbit-skill[data-ring="3"] { --size: 66px; }
-.orbit-skill[data-ring="4"] { --size: 58px; }
+.orbit-skill[data-ring="1"] { --size: 66px; }
+.orbit-skill[data-ring="2"] { --size: 60px; }
+.orbit-skill[data-ring="3"] { --size: 56px; }
+.orbit-skill[data-ring="4"] { --size: 50px; }
 
 .orbit-skill:hover {
   transform:
     translate(-50%, -50%)
-    rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
+    rotate(calc(var(--angle) + var(--ring-rotation, 0deg)))
     translateY(calc(var(--radius) * -1))
-    rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1))
-    scale(1.13);
+    rotate(calc((var(--angle) + var(--ring-rotation, 0deg)) * -1))
+    scale(1.12);
   filter: drop-shadow(0 0 10px rgba(255, 122, 24, 0.24));
   opacity: 1;
 }
@@ -409,10 +409,10 @@
 .orbit-skill.active {
   transform:
     translate(-50%, -50%)
-    rotate(calc(var(--angle) + var(--orbit-rotation, 0deg)))
+    rotate(calc(var(--angle) + var(--ring-rotation, 0deg)))
     translateY(calc(var(--radius) * -1))
-    rotate(calc((var(--angle) + var(--orbit-rotation, 0deg)) * -1))
-    scale(1.18);
+    rotate(calc((var(--angle) + var(--ring-rotation, 0deg)) * -1))
+    scale(1.16);
   filter:
     drop-shadow(0 0 14px rgba(255, 122, 24, 0.30))
     drop-shadow(0 0 26px rgba(255, 179, 71, 0.16));
@@ -777,10 +777,10 @@
   .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 225px)); }
   .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 278px)); }
 
-  .orbit-skill[data-ring="1"] { --size: 70px; }
-  .orbit-skill[data-ring="2"] { --size: 64px; }
-  .orbit-skill[data-ring="3"] { --size: 60px; }
-  .orbit-skill[data-ring="4"] { --size: 52px; }
+  .orbit-skill[data-ring="1"] { --size: 62px; }
+  .orbit-skill[data-ring="2"] { --size: 58px; }
+  .orbit-skill[data-ring="3"] { --size: 54px; }
+  .orbit-skill[data-ring="4"] { --size: 48px; }
 }
 
 /* PHONE */
@@ -830,11 +830,6 @@
     width: 90px;
     height: 90px;
   }
-
-  .orbit-skill[data-ring="1"] { --radius: 102px !important; }
-  .orbit-skill[data-ring="2"] { --radius: 155px !important; }
-  .orbit-skill[data-ring="3"] { --radius: 225px !important; }
-  .orbit-skill[data-ring="4"] { --radius: 308px !important; }
 
   .orbit-node-label {
     font-size: 0.68rem;
