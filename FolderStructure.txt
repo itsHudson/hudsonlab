@@ -6,7 +6,8 @@ hudsonlab/
 │   └── global.css
 │
 ├── js/
-│   └── navigation.js
+│   ├── navigation.js
+│   └── particles.js
 │
 ├── About/
 │   ├── about.html
