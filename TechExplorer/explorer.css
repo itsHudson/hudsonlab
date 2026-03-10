@@ -274,7 +274,7 @@
   transform: translateY(-50%);
 }
 
-.active-link-layer {
+.link-layer {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -282,13 +282,20 @@
   overflow: visible;
 }
 
-#activeLinkLine {
+.active-link-line {
   stroke: rgba(255, 122, 24, 0.78);
   stroke-width: 2.2;
   stroke-linecap: round;
   filter: drop-shadow(0 0 7px rgba(255, 122, 24, 0.26));
   stroke-dasharray: 8 8;
   animation: linkDash 8s linear infinite;
+}
+
+.relationship-link {
+  stroke: rgba(255, 122, 24, 0.26);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0.85;
 }
 
 .orbit-core {
@@ -379,7 +386,11 @@
     rotate(calc((var(--angle) + var(--ring-rotation, 0deg)) * -1));
   transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
   z-index: 4;
-  opacity: 0.52;
+  opacity: 0.34;
+}
+
+.orbit-skill.is-related {
+  opacity: 0.78;
 }
 
 .orbit-shell.has-active .orbit-skill.active {
@@ -547,6 +558,10 @@
   grid-template-columns: 1fr 1fr;
   gap: 14px;
   margin-bottom: 22px;
+}
+
+.secondary-grid {
+  margin-top: -8px;
 }
 
 .skill-info-box {

@@ -43,9 +43,9 @@
           <p class="explorer-band-label">Design Intent</p>
           <h2>Technology, arranged as a living rotating system.</h2>
           <p>
-            The compass appears first as the main visual layer, while the two
-            detail panels below explain the selected technology and its connected
-            project direction in a clearer, more structured way.
+            The compass appears first as the main visual layer, while the detail
+            panels below explain the selected technology, its role, and its
+            connected ecosystem in a clearer and more structured way.
           </p>
         </div>
 
@@ -70,7 +70,7 @@
           <p>Drag or click a logo</p>
         </div>
 
-        <div class="orbit-shell" id="orbitShell">
+        <div class="orbit-shell has-active" id="orbitShell">
           <div class="orbit-ambient-glow orbit-ambient-glow-a"></div>
           <div class="orbit-ambient-glow orbit-ambient-glow-b"></div>
 
@@ -94,8 +94,9 @@
           <div class="orbit-axis-label orbit-axis-s">S</div>
           <div class="orbit-axis-label orbit-axis-w">W</div>
 
-          <svg class="active-link-layer" id="activeLinkLayer" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-            <line id="activeLinkLine" x1="500" y1="500" x2="500" y2="500"></line>
+          <svg class="link-layer" id="linkLayer" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <line id="activeLinkLine" class="active-link-line" x1="500" y1="500" x2="500" y2="500"></line>
+            <g id="relationshipLinks"></g>
           </svg>
 
           <div class="orbit-core">
@@ -103,7 +104,7 @@
             <div class="orbit-core-pulse orbit-core-pulse-2"></div>
 
             <div class="orbit-core-inner">
-              <span>TECH</span>
+              <span id="coreLabel">TECH</span>
             </div>
           </div>
 
@@ -114,7 +115,8 @@
           <p>
             Each ring moves with a different rhythm to create a more cinematic,
             system-like visual effect. The outer language layer rotates gently in
-            reverse for added contrast and depth.
+            reverse, while selected technologies reveal connected relationships
+            across the ecosystem.
           </p>
         </div>
       </div>
@@ -151,6 +153,18 @@
               <p id="skillDirection">
                 Relational databases · structured storage · application backends
               </p>
+            </div>
+          </div>
+
+          <div class="skill-content-grid secondary-grid">
+            <div class="skill-info-box">
+              <strong>Layer</strong>
+              <p id="skillLayer">Data Layer</p>
+            </div>
+
+            <div class="skill-info-box">
+              <strong>Closest to</strong>
+              <p id="skillRelatedSummary">SQL Server · ASP.NET</p>
             </div>
           </div>
 

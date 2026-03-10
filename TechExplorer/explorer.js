@@ -55,6 +55,124 @@ const techOrder = [
   { key: "sas", ring: 4, angle: 327.27, radius: 330, label: "SAS" }
 ];
 
+const skillMeta = {
+  mysql: {
+    layer: "Data Layer",
+    related: ["sqlserver", "aspnet"],
+    relatedSummary: "SQL Server · ASP.NET"
+  },
+  sqlserver: {
+    layer: "Data Layer",
+    related: ["mysql", "aspnet", "visualstudio", "csharp"],
+    relatedSummary: "MySQL · ASP.NET · C#"
+  },
+  ubuntu: {
+    layer: "Environment",
+    related: ["python", "git", "github"],
+    relatedSummary: "Python · Git · GitHub"
+  },
+  visualstudio: {
+    layer: "Workflow Layer",
+    related: ["aspnet", "csharp", "sqlserver"],
+    relatedSummary: "ASP.NET · C# · SQL Server"
+  },
+  vscode: {
+    layer: "Workflow Layer",
+    related: ["html5", "css3", "javascript", "python"],
+    relatedSummary: "HTML5 · CSS3 · JavaScript"
+  },
+  netbeans: {
+    layer: "Workflow Layer",
+    related: ["java"],
+    relatedSummary: "Java"
+  },
+  codeblocks: {
+    layer: "Workflow Layer",
+    related: ["c", "cpp"],
+    relatedSummary: "C · C++"
+  },
+  git: {
+    layer: "Workflow Layer",
+    related: ["github", "vscode", "visualstudio"],
+    relatedSummary: "GitHub · VS Code · Visual Studio"
+  },
+  github: {
+    layer: "Workflow Layer",
+    related: ["git", "vscode"],
+    relatedSummary: "Git · VS Code"
+  },
+  aspnet: {
+    layer: "Workflow Layer",
+    related: ["visualstudio", "csharp", "sqlserver"],
+    relatedSummary: "Visual Studio · C# · SQL Server"
+  },
+  figma: {
+    layer: "Workflow Layer",
+    related: ["html5", "css3", "javascript"],
+    relatedSummary: "HTML5 · CSS3 · JavaScript"
+  },
+  slack: {
+    layer: "Workflow Layer",
+    related: ["github", "figma"],
+    relatedSummary: "GitHub · Figma"
+  },
+  assembly: {
+    layer: "Language Layer",
+    related: ["c"],
+    relatedSummary: "C"
+  },
+  c: {
+    layer: "Language Layer",
+    related: ["cpp", "codeblocks", "assembly"],
+    relatedSummary: "C++ · Code::Blocks · Assembly"
+  },
+  cpp: {
+    layer: "Language Layer",
+    related: ["c", "codeblocks"],
+    relatedSummary: "C · Code::Blocks"
+  },
+  csharp: {
+    layer: "Language Layer",
+    related: ["visualstudio", "aspnet", "sqlserver"],
+    relatedSummary: "Visual Studio · ASP.NET · SQL Server"
+  },
+  css3: {
+    layer: "Language Layer",
+    related: ["html5", "javascript", "figma", "vscode"],
+    relatedSummary: "HTML5 · JavaScript · Figma"
+  },
+  java: {
+    layer: "Language Layer",
+    related: ["netbeans"],
+    relatedSummary: "NetBeans"
+  },
+  javascript: {
+    layer: "Language Layer",
+    related: ["html5", "css3", "vscode", "figma"],
+    relatedSummary: "HTML5 · CSS3 · VS Code"
+  },
+  python: {
+    layer: "Language Layer",
+    related: ["ubuntu", "vscode"],
+    relatedSummary: "Ubuntu · VS Code"
+  },
+  r: {
+    layer: "Language Layer",
+    related: ["sas"],
+    relatedSummary: "SAS"
+  },
+  html5: {
+    layer: "Language Layer",
+    related: ["css3", "javascript", "figma", "vscode"],
+    relatedSummary: "CSS3 · JavaScript · Figma"
+  },
+  sas: {
+    layer: "Language Layer",
+    related: ["r"],
+    relatedSummary: "R"
+  }
+};
+
 const skills = {
   mysql: {
     name: "MySQL",
@@ -578,12 +696,16 @@ const skills = {
 const orbitNodes = document.getElementById("orbitNodes");
 const orbitShell = document.getElementById("orbitShell");
 const activeLinkLine = document.getElementById("activeLinkLine");
+const relationshipLinks = document.getElementById("relationshipLinks");
+const coreLabel = document.getElementById("coreLabel");
 
 const skillIconImage = document.getElementById("skillIconImage");
 const skillName = document.getElementById("skillName");
 const skillDescription = document.getElementById("skillDescription");
 const skillMeaning = document.getElementById("skillMeaning");
 const skillDirection = document.getElementById("skillDirection");
+const skillLayer = document.getElementById("skillLayer");
+const skillRelatedSummary = document.getElementById("skillRelatedSummary");
 const projectList = document.getElementById("projectList");
 const projectName = document.getElementById("projectName");
 const projectSummary = document.getElementById("projectSummary");
@@ -600,10 +722,10 @@ const ringRotation = {
 };
 
 const ringSpeed = {
-  1: 0.035,   // data layer
-  2: 0.06,    // environment
-  3: 0.11,    // workflow layer
-  4: -0.028   // language layer reverse
+  1: 0.035,
+  2: 0.06,
+  3: 0.11,
+  4: -0.028
 };
 
 let isDragging = false;
@@ -616,18 +738,18 @@ let autoRotateFrame = null;
 let isPausedByInteraction = false;
 let autoRotateTimeout = null;
 
-function applyRingRotations() {
-  orbitShell.style.setProperty("--ring1-rotation", `${ringRotation[1]}deg`);
-  orbitShell.style.setProperty("--ring2-rotation", `${ringRotation[2]}deg`);
-  orbitShell.style.setProperty("--ring3-rotation", `${ringRotation[3]}deg`);
-  orbitShell.style.setProperty("--ring4-rotation", `${ringRotation[4]}deg`);
+function getNodeBySkill(skillKey) {
+  return orbitNodes.querySelector(`.orbit-skill[data-skill="${skillKey}"]`);
+}
 
+function applyRingRotations() {
   document.querySelectorAll(".orbit-skill").forEach((node) => {
     const ring = node.dataset.ring;
     node.style.setProperty("--ring-rotation", `${ringRotation[ring]}deg`);
   });
 
   updateActiveLink();
+  updateRelationshipLinks();
 }
 
 function createOrbitNodes() {
@@ -658,8 +780,6 @@ function createOrbitNodes() {
 
     orbitNodes.appendChild(button);
   });
-
-  orbitShell.classList.add("has-active");
 }
 
 function renderProjectDetail(project) {
@@ -685,7 +805,8 @@ function renderProjectDetail(project) {
 
 function renderSkill(skillKey) {
   const skill = skills[skillKey];
-  if (!skill) return;
+  const meta = skillMeta[skillKey];
+  if (!skill || !meta) return;
 
   currentSkillKey = skillKey;
 
@@ -694,6 +815,9 @@ function renderSkill(skillKey) {
   skillDescription.textContent = skill.description;
   skillMeaning.textContent = skill.meaning;
   skillDirection.textContent = skill.direction;
+  skillLayer.textContent = meta.layer;
+  skillRelatedSummary.textContent = meta.relatedSummary;
+  coreLabel.textContent = meta.layer.replace(" Layer", "").toUpperCase();
 
   projectList.innerHTML = "";
 
@@ -724,36 +848,77 @@ function renderSkill(skillKey) {
   });
 }
 
-function setActiveSkill(skillKey) {
-  document.querySelectorAll(".orbit-skill").forEach((button) => {
-    button.classList.toggle("active", button.dataset.skill === skillKey);
-  });
+function updateNodeFocus() {
+  const meta = skillMeta[currentSkillKey];
+  const related = new Set(meta.related);
 
-  renderSkill(skillKey);
-  updateActiveLink();
+  document.querySelectorAll(".orbit-skill").forEach((button) => {
+    const key = button.dataset.skill;
+    const isActive = key === currentSkillKey;
+    const isRelated = related.has(key);
+
+    button.classList.toggle("active", isActive);
+    button.classList.toggle("is-related", isRelated && !isActive);
+  });
 }
 
-function getActiveButton() {
-  return orbitNodes.querySelector(`.orbit-skill[data-skill="${currentSkillKey}"]`);
+function setActiveSkill(skillKey) {
+  renderSkill(skillKey);
+  updateNodeFocus();
+  updateActiveLink();
+  updateRelationshipLinks();
+}
+
+function getButtonCenter(button) {
+  const shellRect = orbitShell.getBoundingClientRect();
+  const rect = button.getBoundingClientRect();
+
+  return {
+    x: (rect.left - shellRect.left) + rect.width / 2,
+    y: (rect.top - shellRect.top) + rect.height / 2
+  };
 }
 
 function updateActiveLink() {
-  const activeButton = getActiveButton();
+  const activeButton = getNodeBySkill(currentSkillKey);
   if (!activeButton || !activeLinkLine) return;
 
   const shellRect = orbitShell.getBoundingClientRect();
-  const activeRect = activeButton.getBoundingClientRect();
-
   const centerX = shellRect.width / 2;
   const centerY = shellRect.height / 2;
 
-  const targetX = (activeRect.left - shellRect.left) + (activeRect.width / 2);
-  const targetY = (activeRect.top - shellRect.top) + (activeRect.height / 2);
+  const target = getButtonCenter(activeButton);
 
   activeLinkLine.setAttribute("x1", centerX.toFixed(2));
   activeLinkLine.setAttribute("y1", centerY.toFixed(2));
-  activeLinkLine.setAttribute("x2", targetX.toFixed(2));
-  activeLinkLine.setAttribute("y2", targetY.toFixed(2));
+  activeLinkLine.setAttribute("x2", target.x.toFixed(2));
+  activeLinkLine.setAttribute("y2", target.y.toFixed(2));
+}
+
+function updateRelationshipLinks() {
+  if (!relationshipLinks) return;
+
+  relationshipLinks.innerHTML = "";
+
+  const activeButton = getNodeBySkill(currentSkillKey);
+  const meta = skillMeta[currentSkillKey];
+  if (!activeButton || !meta) return;
+
+  const from = getButtonCenter(activeButton);
+
+  meta.related.forEach((relatedKey) => {
+    const relatedButton = getNodeBySkill(relatedKey);
+    if (!relatedButton) return;
+
+    const to = getButtonCenter(relatedButton);
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("class", "relationship-link");
+    line.setAttribute("x1", from.x.toFixed(2));
+    line.setAttribute("y1", from.y.toFixed(2));
+    line.setAttribute("x2", to.x.toFixed(2));
+    line.setAttribute("y2", to.y.toFixed(2));
+    relationshipLinks.appendChild(line);
+  });
 }
 
 function stopInertia() {
@@ -880,6 +1045,7 @@ window.addEventListener("touchend", () => {
 
 window.addEventListener("resize", () => {
   updateActiveLink();
+  updateRelationshipLinks();
 });
 
 createOrbitNodes();
