@@ -1,166 +1,848 @@
 /* PAGE */
 
-.education-shell{
-display:flex;
-flex-direction:column;
-gap:90px;
+.education-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
 }
-
 
 /* HERO */
 
-.education-hero{
-max-width:900px;
+.education-hero {
+  max-width: 920px;
 }
 
-.education-hero-title{
-margin:14px 0 16px;
-font-size:clamp(3.4rem,6vw,5.5rem);
-line-height:.9;
-letter-spacing:-0.06em;
-font-weight:800;
+.education-hero-title {
+  margin: 14px 0 16px;
+  font-size: clamp(3.3rem, 6vw, 5.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  font-weight: 800;
 }
 
-.education-hero-title span{
-display:block;
-color:var(--text-soft);
-font-size:.65em;
-margin-top:10px;
+.education-hero-title span {
+  display: block;
+  color: var(--text-soft);
+  font-size: 0.66em;
+  margin-top: 10px;
 }
 
-.education-hero-subtitle{
-max-width:600px;
-line-height:1.9;
-color:var(--text-soft);
+.education-hero-subtitle {
+  max-width: 640px;
+  line-height: 1.95;
+  color: var(--text-soft);
 }
 
+/* GENERIC */
 
-/* STAGES */
-
-.education-stage-grid{
-display:grid;
-grid-template-columns:180px 1fr;
-gap:36px;
-align-items:center;
+.education-section-label {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.education-stage{
-padding:32px;
-border-radius:var(--radius-xl);
-background:var(--bg-card);
-border:1px solid var(--line);
-box-shadow:var(--shadow-md);
-transition:all .25s ease;
+.education-system-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 22px;
+  margin-bottom: 22px;
 }
 
-.education-stage:hover{
-transform:translateY(-4px);
-box-shadow:var(--shadow-lg);
+.education-system-head h2 {
+  margin: 0;
+  letter-spacing: -0.03em;
+  font-size: 1.65rem;
 }
 
-.education-logo{
-display:flex;
-align-items:center;
-justify-content:center;
+.education-system-note {
+  max-width: 500px;
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.85;
+  font-size: 0.95rem;
 }
 
-.education-logo img{
-max-width:140px;
-height:auto;
+/* KNOWLEDGE SYSTEM */
+
+.knowledge-system-card {
+  position: relative;
+  padding: 28px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 122, 24, 0.08), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(255, 179, 71, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 248, 242, 0.85) 0%, rgba(255, 255, 255, 0.98) 100%);
+  border: 1px solid rgba(255, 122, 24, 0.12);
+  box-shadow: 0 18px 40px rgba(76, 45, 17, 0.08);
+  overflow: hidden;
 }
 
-.education-stage-label{
-margin:0 0 8px;
-font-size:.8rem;
-letter-spacing:.08em;
-text-transform:uppercase;
-color:var(--accent);
-font-weight:700;
+.knowledge-tree-shell {
+  position: relative;
+  min-height: 760px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.92) 100%);
+  border: 1px solid rgba(145, 104, 65, 0.08);
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.education-stage-content h2{
-margin:0 0 8px;
-font-size:1.4rem;
-letter-spacing:-.02em;
+.tree-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.education-program{
-margin:0 0 12px;
-font-weight:700;
-font-size:1.05rem;
+.tree-glow-a {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 122, 24, 0.14), transparent 70%);
+  left: 50%;
+  top: 24%;
+  transform: translateX(-50%);
 }
 
-.education-program span{
-color:var(--text-soft);
+.tree-glow-b {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 179, 71, 0.14), transparent 72%);
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
 }
 
-.education-specialism{
-margin:0 0 14px;
-font-weight:600;
-color:var(--accent);
+.tree-trunk {
+  position: absolute;
+  left: 50%;
+  bottom: 78px;
+  width: 24px;
+  height: 540px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 179, 71, 0.16) 0%,
+      rgba(255, 122, 24, 0.34) 40%,
+      rgba(173, 96, 28, 0.56) 100%
+    );
+  box-shadow:
+    0 0 0 1px rgba(255, 122, 24, 0.06),
+    0 10px 24px rgba(76, 45, 17, 0.10);
+  z-index: 1;
 }
 
-.education-description{
-line-height:1.9;
-color:var(--text-soft);
-max-width:620px;
+.tree-trunk-line {
+  position: absolute;
+  left: 50%;
+  bottom: 78px;
+  width: 2px;
+  height: 540px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.62),
+    rgba(255, 255, 255, 0.10)
+  );
+  z-index: 2;
 }
 
+/* NODES */
 
-/* TRANSITION */
-
-.education-transition{
-display:flex;
-align-items:center;
-gap:16px;
+.tree-node {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 4;
 }
 
-.transition-line{
-flex:1;
-height:1px;
-background:linear-gradient(90deg,transparent,var(--accent),transparent);
-opacity:.4;
+.tree-node-dot {
+  position: absolute;
+  left: 50%;
+  top: 22px;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 0 0 6px rgba(255, 122, 24, 0.10),
+    0 0 20px rgba(255, 122, 24, 0.18);
 }
 
-.education-transition p{
-margin:0;
-font-size:.9rem;
-color:var(--text-muted);
-font-weight:600;
+.tree-node-card {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 250px;
+  max-width: 290px;
+  padding: 18px 18px 18px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 122, 24, 0.12);
+  box-shadow: 0 16px 30px rgba(76, 45, 17, 0.08);
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
+.tree-node-card strong {
+  color: var(--text-main);
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.tree-node-card span:last-child {
+  color: var(--text-soft);
+  line-height: 1.7;
+  font-size: 0.92rem;
+}
+
+.tree-node-level {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tree-node:hover .tree-node-card,
+.tree-node.active .tree-node-card {
+  transform: translateY(-4px);
+  border-color: rgba(255, 122, 24, 0.28);
+  box-shadow:
+    0 22px 36px rgba(76, 45, 17, 0.10),
+    0 0 0 1px rgba(255, 122, 24, 0.06);
+}
+
+.tree-node.active .tree-node-dot {
+  box-shadow:
+    0 0 0 8px rgba(255, 122, 24, 0.14),
+    0 0 26px rgba(255, 122, 24, 0.25);
+}
+
+.tree-node-foundation {
+  bottom: 104px;
+}
+
+.tree-node-growth {
+  top: 322px;
+}
+
+.tree-node-specialisation {
+  top: 108px;
+}
+
+/* BRANCHES */
+
+.tree-branch {
+  position: absolute;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 122, 24, 0.16),
+    rgba(255, 122, 24, 0.46),
+    rgba(255, 179, 71, 0.16)
+  );
+  transform-origin: left center;
+  z-index: 2;
+}
+
+.tree-branch-left {
+  right: 50%;
+}
+
+.tree-branch-right {
+  left: 50%;
+}
+
+.tree-branch-foundation {
+  width: 180px;
+  bottom: 170px;
+  transform: rotate(-26deg);
+}
+
+.tree-branch-growth {
+  width: 180px;
+  top: 384px;
+  transform: rotate(24deg);
+}
+
+.tree-branch-specialisation-a {
+  width: 210px;
+  top: 190px;
+  transform: rotate(-26deg);
+}
+
+.tree-branch-specialisation-b {
+  width: 210px;
+  top: 190px;
+  transform: rotate(26deg);
+}
+
+/* LEAVES */
+
+.knowledge-leaf {
+  position: absolute;
+  border: 1px solid rgba(255, 122, 24, 0.14);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 22px rgba(76, 45, 17, 0.06);
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+  z-index: 4;
+}
+
+.knowledge-leaf:hover,
+.knowledge-leaf.active {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 28px rgba(76, 45, 17, 0.08);
+}
+
+.knowledge-leaf-management {
+  left: calc(50% - 270px);
+  bottom: 212px;
+}
+
+.knowledge-leaf-discipline {
+  left: calc(50% - 246px);
+  bottom: 122px;
+}
+
+.knowledge-leaf-logic {
+  right: calc(50% - 268px);
+  top: 422px;
+}
+
+.knowledge-leaf-systems {
+  right: calc(50% - 238px);
+  top: 336px;
+}
+
+.knowledge-leaf-programming {
+  left: calc(50% - 306px);
+  top: 126px;
+}
+
+.knowledge-leaf-analytics {
+  left: calc(50% - 248px);
+  top: 72px;
+}
+
+.knowledge-leaf-problemsolving {
+  right: calc(50% - 270px);
+  top: 82px;
+}
+
+.knowledge-leaf-computing {
+  right: calc(50% - 230px);
+  top: 160px;
+}
+
+/* DETAIL GRID */
+
+.education-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.education-detail-panel,
+.education-impact-panel {
+  padding: 28px;
+}
+
+.education-detail-head {
+  margin-bottom: 18px;
+}
+
+.education-detail-head h2 {
+  margin: 0 0 8px;
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
+}
+
+.education-detail-subtitle {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.85;
+}
+
+.education-detail-logo {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 18px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: rgba(255, 122, 24, 0.05);
+  border: 1px solid rgba(255, 122, 24, 0.10);
+}
+
+.education-detail-logo img {
+  max-width: 150px;
+  max-height: 74px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.education-detail-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.education-info-box {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 122, 24, 0.06);
+  border: 1px solid rgba(255, 122, 24, 0.12);
+}
+
+.education-info-box strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.education-info-box p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+.education-info-box-wide {
+  margin-top: 0;
+}
+
+.impact-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.impact-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 122, 24, 0.08);
+  border: 1px solid rgba(255, 122, 24, 0.14);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.impact-chip-soft {
+  background: rgba(145, 104, 65, 0.06);
+  border-color: rgba(145, 104, 65, 0.12);
+  color: var(--text-soft);
+}
+
+.education-divider {
+  height: 1px;
+  background: rgba(145, 104, 65, 0.10);
+  margin: 22px 0;
+}
+
+.section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.section-row h3 {
+  margin: 0;
+}
+
+.section-row-note {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.education-quote-box {
+  padding: 18px 20px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at left top, rgba(255, 122, 24, 0.08), transparent 55%),
+    linear-gradient(180deg, #fff8f2 0%, #ffffff 100%);
+  border: 1px solid rgba(255, 122, 24, 0.12);
+  color: var(--text-soft);
+  line-height: 1.9;
+  font-weight: 600;
+}
+
+/* LEVELS */
+
+.education-levels {
+  padding-top: 8px;
+}
+
+.education-level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.education-level-card {
+  position: relative;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 248, 242, 0.96) 100%);
+  box-shadow: 0 14px 28px rgba(76, 45, 17, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.education-level-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(76, 45, 17, 0.08);
+}
+
+.education-level-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.16rem;
+  letter-spacing: -0.02em;
+}
+
+.education-level-card p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.85;
+}
+
+.level-number {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
 
 /* CLOSING */
 
-.education-closing{
-text-align:center;
-margin-top:10px;
+.education-closing {
+  text-align: center;
+  margin-top: 4px;
+  padding-bottom: 10px;
 }
 
-.education-closing p{
-font-size:1.3rem;
-font-weight:600;
-letter-spacing:-.02em;
+.education-closing p {
+  font-size: 1.28rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
 }
 
-.education-closing span{
-display:block;
-color:var(--accent);
-margin-top:6px;
+.education-closing span {
+  display: block;
+  color: var(--accent);
+  margin-top: 6px;
 }
 
+/* REVEAL DEFAULT */
+
+.reveal,
+.reveal-delay,
+.reveal-delay-2 {
+  opacity: 0;
+  transform: translateY(30px);
+}
 
 /* RESPONSIVE */
 
-@media (max-width:900px){
+@media (max-width: 1200px) {
+  .knowledge-tree-shell {
+    min-height: 820px;
+  }
 
-.education-stage-grid{
-grid-template-columns:1fr;
-text-align:center;
+  .tree-node-card {
+    min-width: 220px;
+    max-width: 250px;
+  }
+
+  .knowledge-leaf-management {
+    left: calc(50% - 240px);
+  }
+
+  .knowledge-leaf-discipline {
+    left: calc(50% - 222px);
+  }
+
+  .knowledge-leaf-logic {
+    right: calc(50% - 236px);
+  }
+
+  .knowledge-leaf-systems {
+    right: calc(50% - 212px);
+  }
+
+  .knowledge-leaf-programming {
+    left: calc(50% - 260px);
+  }
+
+  .knowledge-leaf-analytics {
+    left: calc(50% - 210px);
+  }
+
+  .knowledge-leaf-problemsolving {
+    right: calc(50% - 232px);
+  }
+
+  .knowledge-leaf-computing {
+    right: calc(50% - 198px);
+  }
 }
 
-.education-logo{
-margin-bottom:10px;
+@media (max-width: 980px) {
+  .education-system-head,
+  .section-row {
+    display: grid;
+  }
+
+  .education-detail-grid,
+  .education-level-grid,
+  .education-detail-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-tree-shell {
+    min-height: 980px;
+  }
+
+  .tree-trunk,
+  .tree-trunk-line {
+    left: 70px;
+    transform: none;
+  }
+
+  .tree-node {
+    left: 70px;
+    transform: none;
+  }
+
+  .tree-node-dot {
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .tree-node-card {
+    margin-left: 24px;
+    min-width: 0;
+    width: min(100%, 330px);
+    max-width: 330px;
+  }
+
+  .tree-node-specialisation {
+    top: 90px;
+  }
+
+  .tree-node-growth {
+    top: 372px;
+  }
+
+  .tree-node-foundation {
+    bottom: 100px;
+  }
+
+  .tree-branch {
+    left: 70px;
+    right: auto;
+    transform-origin: left center;
+  }
+
+  .tree-branch-foundation {
+    width: 120px;
+    bottom: 166px;
+    transform: rotate(18deg);
+  }
+
+  .tree-branch-growth {
+    width: 120px;
+    top: 434px;
+    transform: rotate(-18deg);
+  }
+
+  .tree-branch-specialisation-a {
+    width: 130px;
+    top: 156px;
+    transform: rotate(18deg);
+  }
+
+  .tree-branch-specialisation-b {
+    display: none;
+  }
+
+  .knowledge-leaf {
+    font-size: 0.8rem;
+    padding: 9px 13px;
+  }
+
+  .knowledge-leaf-programming {
+    left: 220px;
+    top: 86px;
+  }
+
+  .knowledge-leaf-analytics {
+    left: 248px;
+    top: 156px;
+  }
+
+  .knowledge-leaf-computing {
+    left: 228px;
+    top: 226px;
+    right: auto;
+  }
+
+  .knowledge-leaf-problemsolving {
+    left: 250px;
+    top: 294px;
+    right: auto;
+  }
+
+  .knowledge-leaf-systems {
+    left: 220px;
+    top: 442px;
+    right: auto;
+  }
+
+  .knowledge-leaf-logic {
+    left: 248px;
+    top: 514px;
+    right: auto;
+  }
+
+  .knowledge-leaf-management {
+    left: 218px;
+    bottom: 180px;
+  }
+
+  .knowledge-leaf-discipline {
+    left: 246px;
+    bottom: 108px;
+  }
 }
 
+@media (max-width: 680px) {
+  .education-shell {
+    gap: 28px;
+  }
+
+  .knowledge-system-card {
+    padding: 18px;
+  }
+
+  .knowledge-tree-shell {
+    min-height: 1040px;
+  }
+
+  .tree-trunk,
+  .tree-trunk-line,
+  .tree-node {
+    left: 48px;
+  }
+
+  .tree-node-card {
+    width: calc(100% - 84px);
+    max-width: none;
+    margin-left: 20px;
+    padding: 16px 16px 16px 18px;
+  }
+
+  .tree-node-specialisation {
+    top: 82px;
+  }
+
+  .tree-node-growth {
+    top: 404px;
+  }
+
+  .tree-node-foundation {
+    bottom: 104px;
+  }
+
+  .tree-branch-foundation,
+  .tree-branch-growth,
+  .tree-branch-specialisation-a {
+    left: 48px;
+    width: 84px;
+  }
+
+  .knowledge-leaf-programming {
+    left: 128px;
+    top: 214px;
+  }
+
+  .knowledge-leaf-analytics {
+    left: 190px;
+    top: 276px;
+  }
+
+  .knowledge-leaf-computing {
+    left: 128px;
+    top: 338px;
+  }
+
+  .knowledge-leaf-problemsolving {
+    left: 190px;
+    top: 400px;
+  }
+
+  .knowledge-leaf-systems {
+    left: 128px;
+    top: 560px;
+  }
+
+  .knowledge-leaf-logic {
+    left: 190px;
+    top: 622px;
+  }
+
+  .knowledge-leaf-management {
+    left: 128px;
+    bottom: 200px;
+  }
+
+  .knowledge-leaf-discipline {
+    left: 190px;
+    bottom: 128px;
+  }
+
+  .education-detail-panel,
+  .education-impact-panel,
+  .education-level-card {
+    padding: 22px;
+  }
+
+  .education-closing p {
+    font-size: 1.16rem;
+  }
 }

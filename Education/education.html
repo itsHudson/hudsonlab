@@ -1,158 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Education | HUDSONLAB</title>
+  <title>Education | HUDSONLAB</title>
 
-<link rel="stylesheet" href="../css/global.css">
-<link rel="stylesheet" href="education.css">
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="education.css" />
 </head>
 
 <body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="../index.html">HUDSONLAB</a>
 
-<header class="site-header">
-<div class="site-header-inner">
+      <nav class="top-nav">
+        <a href="../index.html">Home</a>
+        <a href="../About/about.html">About</a>
+        <a href="../TechExplorer/explorer.html">Technology Compass</a>
+        <a href="../Experience/experience.html">Journey</a>
+        <a href="education.html" class="active">Education</a>
+        <a href="../Certifications/certifications.html">Credentials</a>
+        <a href="../Contact/contact.html">Connect</a>
+      </nav>
+    </div>
+  </header>
 
-<a class="brand" href="../index.html">HUDSONLAB</a>
+  <main class="page-shell education-shell">
+    <!-- HERO -->
+    <section class="education-hero reveal">
+      <span class="small-chip">Education</span>
 
-<nav class="top-nav">
-<a href="../index.html">Home</a>
-<a href="../About/about.html">About</a>
-<a href="../TechExplorer/explorer.html">Technology Compass</a>
-<a href="../Experience/experience.html">Journey</a>
-<a href="education.html" class="active">Education</a>
-<a href="../Certifications/certifications.html">Credentials</a>
-<a href="../Contact/contact.html">Connect</a>
-</nav>
+      <h1 class="education-hero-title">
+        From foundation
+        <span>to systems thinking.</span>
+      </h1>
 
-</div>
-</header>
+      <p class="education-hero-subtitle">
+        A learning journey shaped through management, computing, and the gradual
+        growth of structured technical thinking.
+      </p>
+    </section>
 
+    <!-- KNOWLEDGE SYSTEM -->
+    <section class="education-system reveal-delay">
+      <div class="education-system-head">
+        <div>
+          <p class="education-section-label">Knowledge Growth System</p>
+          <h2>Where academic growth became technical direction</h2>
+        </div>
 
-<main class="page-shell education-shell">
+        <p class="education-system-note">
+          A hybrid visual system of tree growth and academic levels — showing how
+          each stage contributed to stronger problem solving, systems thinking,
+          and analytical direction.
+        </p>
+      </div>
 
-<!-- HERO -->
+      <div class="knowledge-system-card">
+        <div class="knowledge-tree-shell" id="knowledgeTreeShell">
+          <!-- Background glow -->
+          <div class="tree-glow tree-glow-a"></div>
+          <div class="tree-glow tree-glow-b"></div>
 
-<section class="education-hero reveal">
+          <!-- Center trunk -->
+          <div class="tree-trunk"></div>
+          <div class="tree-trunk-line"></div>
 
-<span class="small-chip">Education</span>
+          <!-- Stage nodes -->
+          <button class="tree-node tree-node-foundation active" data-node="ucsi" type="button">
+            <span class="tree-node-dot"></span>
+            <span class="tree-node-card">
+              <span class="tree-node-level">Level 1 · Foundation</span>
+              <strong>UCSI University</strong>
+              <span>Diploma in Management</span>
+            </span>
+          </button>
 
-<h1 class="education-hero-title">
-From management thinking
-<span>to systems thinking.</span>
-</h1>
+          <button class="tree-node tree-node-growth" data-node="growth" type="button">
+            <span class="tree-node-dot"></span>
+            <span class="tree-node-card">
+              <span class="tree-node-level">Level 2 · Growth</span>
+              <strong>Transition Phase</strong>
+              <span>Programming · systems thinking · academic shift</span>
+            </span>
+          </button>
 
-<p class="education-hero-subtitle">
-An academic path shaped through discipline,
-technology, and the pursuit of structured thinking.
-</p>
+          <button class="tree-node tree-node-specialisation" data-node="apu" type="button">
+            <span class="tree-node-dot"></span>
+            <span class="tree-node-card">
+              <span class="tree-node-level">Level 3 · Specialisation</span>
+              <strong>Asia Pacific University</strong>
+              <span>BSc (Hons) Computer Science · Data Analytics</span>
+            </span>
+          </button>
 
-</section>
+          <!-- Branches -->
+          <div class="tree-branch tree-branch-left tree-branch-foundation"></div>
+          <div class="tree-branch tree-branch-right tree-branch-growth"></div>
+          <div class="tree-branch tree-branch-left tree-branch-specialisation-a"></div>
+          <div class="tree-branch tree-branch-right tree-branch-specialisation-b"></div>
 
+          <!-- Leaves / knowledge points -->
+          <button class="knowledge-leaf knowledge-leaf-management" data-node="ucsi" type="button">
+            Management
+          </button>
 
-<!-- UCSI -->
+          <button class="knowledge-leaf knowledge-leaf-discipline" data-node="ucsi" type="button">
+            Discipline
+          </button>
 
-<section class="education-stage education-stage-ucsi reveal">
+          <button class="knowledge-leaf knowledge-leaf-logic" data-node="growth" type="button">
+            Structured Logic
+          </button>
 
-<div class="education-stage-grid">
+          <button class="knowledge-leaf knowledge-leaf-systems" data-node="growth" type="button">
+            Systems Thinking
+          </button>
 
-<div class="education-logo">
-<img src="../Images/Edu_UCSI.png" alt="UCSI University">
-</div>
+          <button class="knowledge-leaf knowledge-leaf-programming" data-node="apu" type="button">
+            Programming
+          </button>
 
-<div class="education-stage-content">
+          <button class="knowledge-leaf knowledge-leaf-analytics" data-node="apu" type="button">
+            Data Analytics
+          </button>
 
-<p class="education-stage-label">Earlier Academic Beginning</p>
+          <button class="knowledge-leaf knowledge-leaf-problemsolving" data-node="apu" type="button">
+            Problem Solving
+          </button>
 
-<h2>UCSI University</h2>
+          <button class="knowledge-leaf knowledge-leaf-computing" data-node="apu" type="button">
+            Computer Science
+          </button>
+        </div>
+      </div>
+    </section>
 
-<p class="education-program">
-Diploma in Management
-</p>
+    <!-- DETAIL PANEL -->
+    <section class="education-detail-grid">
+      <div class="glass-card education-detail-panel reveal-delay-2">
+        <div class="education-detail-head">
+          <p class="education-section-label">Stage in Focus</p>
+          <h2 id="eduStageTitle">UCSI University</h2>
+          <p id="eduStageSubtitle" class="education-detail-subtitle">
+            Diploma in Management
+          </p>
+        </div>
 
-<p class="education-description">
-Where structured learning first began — building discipline,
-perspective, and the foundations that later supported
-a shift toward technology and systems thinking.
-</p>
+        <div class="education-detail-logo" id="eduLogoWrap">
+          <img src="../Images/Edu_UCSI.png" alt="UCSI University" id="eduLogoImage" />
+        </div>
 
-</div>
+        <div class="education-detail-info-grid">
+          <div class="education-info-box">
+            <strong>Academic level</strong>
+            <p id="eduLevel">Level 1 · Foundation</p>
+          </div>
 
-</div>
+          <div class="education-info-box">
+            <strong>Core direction</strong>
+            <p id="eduDirection">
+              Management thinking · discipline · foundational perspective
+            </p>
+          </div>
+        </div>
 
-</section>
+        <div class="education-info-box education-info-box-wide">
+          <strong>Description</strong>
+          <p id="eduDescription">
+            This stage built the earliest academic discipline, perspective, and
+            structured learning habits that later supported the move into
+            technology and systems thinking.
+          </p>
+        </div>
+      </div>
 
+      <div class="glass-card education-impact-panel reveal-delay-2">
+        <div class="education-detail-head">
+          <p class="education-section-label">What It Built</p>
+          <h2 id="eduImpactTitle">Foundational qualities</h2>
+          <p id="eduImpactSummary" class="education-detail-subtitle">
+            The mindset and qualities shaped through this stage.
+          </p>
+        </div>
 
-<!-- TRANSITION -->
+        <div class="impact-chip-grid" id="impactChipGrid">
+          <span class="impact-chip">Discipline</span>
+          <span class="impact-chip">Structured learning</span>
+          <span class="impact-chip">Perspective</span>
+          <span class="impact-chip">Academic maturity</span>
+        </div>
 
-<section class="education-transition reveal-delay">
+        <div class="education-divider"></div>
 
-<div class="transition-line"></div>
+        <div class="education-tech-link">
+          <div class="section-row">
+            <h3>Connected technical direction</h3>
+            <span class="section-row-note">A bridge toward the Technology Compass</span>
+          </div>
 
-<p>
-A transition toward technology and systems.
-</p>
+          <div class="impact-chip-grid impact-chip-grid-tech" id="techChipGrid">
+            <span class="impact-chip impact-chip-soft">Management foundation</span>
+            <span class="impact-chip impact-chip-soft">Transition readiness</span>
+          </div>
+        </div>
 
-<div class="transition-line"></div>
+        <div class="education-divider"></div>
 
-</section>
+        <div class="education-quote-box" id="eduQuoteBox">
+          “The beginning of structured academic growth.”
+        </div>
+      </div>
+    </section>
 
+    <!-- ACADEMIC LEVELS -->
+    <section class="education-levels reveal-delay-2">
+      <div class="education-system-head">
+        <div>
+          <p class="education-section-label">Academic Evolution Ladder</p>
+          <h2>Three levels of growth</h2>
+        </div>
 
-<!-- APU -->
+        <p class="education-system-note">
+          A simpler reading of the same journey — from foundation, to growth,
+          to specialisation.
+        </p>
+      </div>
 
-<section class="education-stage education-stage-apu reveal-delay">
+      <div class="education-level-grid">
+        <article class="education-level-card level-card-1">
+          <span class="level-number">01</span>
+          <h3>Foundation</h3>
+          <p>Management thinking, discipline, perspective, and learning habits.</p>
+        </article>
 
-<div class="education-stage-grid">
+        <article class="education-level-card level-card-2">
+          <span class="level-number">02</span>
+          <h3>Growth</h3>
+          <p>Transition into technical thinking, systems awareness, and logic.</p>
+        </article>
 
-<div class="education-logo">
-<img src="../Images/Edu_APU.png" alt="Asia Pacific University">
-</div>
+        <article class="education-level-card level-card-3">
+          <span class="level-number">03</span>
+          <h3>Specialisation</h3>
+          <p>Computer Science, analytics, problem solving, and digital systems.</p>
+        </article>
+      </div>
+    </section>
 
-<div class="education-stage-content">
+    <!-- CLOSING -->
+    <section class="education-closing reveal-delay-2">
+      <p>
+        Education built the structure.<br />
+        <span>Systems became the mindset.</span>
+      </p>
+    </section>
+  </main>
 
-<p class="education-stage-label">Current Academic Track</p>
-
-<h2>Asia Pacific University</h2>
-
-<p class="education-program">
-Bachelor of Science (Honours)<br>
-<span>Computer Science</span>
-</p>
-
-<p class="education-specialism">
-Specialism — Data Analytics
-</p>
-
-<p class="education-description">
-Where discipline evolved into computing,
-data analysis, and a stronger focus on
-systems thinking and digital problem solving.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CLOSING -->
-
-<section class="education-closing reveal-delay">
-
-<p>
-Education built the foundation.<br>
-<span>Systems became the mindset.</span>
-</p>
-
-</section>
-
-
-</main>
-
-<script src="education.js"></script>
-
+  <script src="education.js"></script>
 </body>
 </html>
