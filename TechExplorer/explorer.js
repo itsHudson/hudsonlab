@@ -31,8 +31,8 @@ const techOrder = [
   { key: "mysql", ring: 1, angle: 0, radius: 102, label: "MySQL" },
   { key: "sqlserver", ring: 1, angle: 180, radius: 102, label: "SQL Server" },
 
-  { key: "ubuntu", ring: 2, angle: 40, radius: 155, label: "Ubuntu" },
-  { key: "rocky", ring: 2, angle: 220, radius: 155, label: "Rocky Linux" },
+  { key: "ubuntu", ring: 2, angle: 30, radius: 155, label: "Ubuntu" },
+  { key: "rocky", ring: 2, angle: 210, radius: 155, label: "Rocky Linux" },
 
   { key: "visualstudio", ring: 3, angle: 0, radius: 245, label: "Visual Studio" },
   { key: "vscode", ring: 3, angle: 40, radius: 245, label: "VS Code" },
