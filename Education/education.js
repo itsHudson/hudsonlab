@@ -1,29 +1,17 @@
-console.log("EDU.SYS loaded.");
+console.log("Education page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
-  const revealItems = document.querySelectorAll(".sys-reveal, .sys-reveal-delay, .sys-reveal-stagger");
-  const meterBars = document.querySelectorAll(".meter-bar span");
+  const revealElements = document.querySelectorAll(".edu-reveal, .edu-reveal-delay, .edu-stagger");
   const tiltCards = document.querySelectorAll(".tilt-card");
-  const progressionNodes = document.querySelectorAll(".progression-node");
-  const staggerGroups = document.querySelectorAll(".focus-grid, .foundation-grid, .modules-grid");
+  const staggerCards = document.querySelectorAll(".edu-stagger");
 
   const revealObserver = new IntersectionObserver(
     function (entries, observer) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          const target = entry.target;
-
-          if (target.classList.contains("sys-reveal-stagger")) {
-            target.style.transition = "opacity 0.75s ease, transform 0.75s ease";
-            target.style.opacity = "1";
-            target.style.transform = "translateY(0)";
-          } else {
-            target.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-            target.style.opacity = "1";
-            target.style.transform = "translateY(0)";
-          }
-
-          observer.unobserve(target);
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          observer.unobserve(entry.target);
         }
       });
     },
@@ -32,45 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   );
 
-  revealItems.forEach(function (item, index) {
-    if (item.classList.contains("sys-reveal-delay")) {
-      item.style.transitionDelay = "0.12s";
-    }
-
-    if (item.classList.contains("sys-reveal-stagger")) {
-      const staggerIndex = index % 6;
-      item.style.transitionDelay = (staggerIndex * 0.08) + "s";
-    }
-
-    revealObserver.observe(item);
+  revealElements.forEach(function (element) {
+    element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+    revealObserver.observe(element);
   });
 
-  const meterObserver = new IntersectionObserver(
-    function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          const bars = entry.target.querySelectorAll(".meter-bar span");
-
-          bars.forEach(function (bar) {
-            const widthValue = bar.getAttribute("data-width");
-            if (widthValue) {
-              bar.style.width = widthValue;
-            }
-          });
-
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.3
-    }
-  );
-
-  document.querySelectorAll(".education-subpanel").forEach(function (panel) {
-    if (panel.querySelector(".meter-bar span")) {
-      meterObserver.observe(panel);
-    }
+  staggerCards.forEach(function (card, index) {
+    card.style.transitionDelay = (index * 0.08) + "s";
   });
 
   tiltCards.forEach(function (card) {
@@ -83,8 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      const rotateY = ((x / rect.width) - 0.5) * 2.8;
-      const rotateX = ((y / rect.height) - 0.5) * -2.2;
+      const rotateY = ((x / rect.width) - 0.5) * 2.4;
+      const rotateX = ((y / rect.height) - 0.5) * -1.8;
 
       card.style.transform =
         "perspective(1000px) rotateX(" +
@@ -96,32 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     card.addEventListener("mouseleave", function () {
       card.style.transform = "";
-    });
-  });
-
-  progressionNodes.forEach(function (node) {
-    node.addEventListener("mouseenter", function () {
-      node.style.transform = "translateY(-4px)";
-    });
-
-    node.addEventListener("mouseleave", function () {
-      node.style.transform = "";
-    });
-  });
-
-  staggerGroups.forEach(function (group) {
-    const children = group.children;
-
-    Array.from(children).forEach(function (child, index) {
-      if (
-        child.classList.contains("focus-box") ||
-        child.classList.contains("foundation-box") ||
-        child.classList.contains("module-card")
-      ) {
-        child.classList.add("sys-reveal-stagger");
-        child.style.transitionDelay = (index * 0.08) + "s";
-        revealObserver.observe(child);
-      }
     });
   });
 });
