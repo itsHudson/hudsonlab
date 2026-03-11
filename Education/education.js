@@ -1,9 +1,10 @@
-console.log("Education page loaded.");
+console.log("Education Signature Version loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   const revealElements = document.querySelectorAll(".edu-reveal, .edu-reveal-delay, .edu-stagger");
   const tiltCards = document.querySelectorAll(".tilt-card");
-  const staggerCards = document.querySelectorAll(".edu-stagger");
+  const staggerNodes = document.querySelectorAll(".edu-stagger");
+  const evolutionLine = document.querySelector(".evolution-line");
 
   const revealObserver = new IntersectionObserver(
     function (entries, observer) {
@@ -21,12 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   revealElements.forEach(function (element) {
-    element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+    element.style.transition = "opacity 0.82s ease, transform 0.82s ease";
     revealObserver.observe(element);
   });
 
-  staggerCards.forEach(function (card, index) {
-    card.style.transitionDelay = (index * 0.08) + "s";
+  staggerNodes.forEach(function (node, index) {
+    node.style.transitionDelay = (index * 0.12) + "s";
   });
 
   tiltCards.forEach(function (card) {
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      const rotateY = ((x / rect.width) - 0.5) * 2.4;
+      const rotateY = ((x / rect.width) - 0.5) * 2.2;
       const rotateX = ((y / rect.height) - 0.5) * -1.8;
 
       card.style.transform =
@@ -54,4 +55,28 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.transform = "";
     });
   });
+
+  if (evolutionLine) {
+    const lineObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            evolutionLine.style.transform = "scaleY(1)";
+            evolutionLine.style.opacity = "1";
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.24
+      }
+    );
+
+    evolutionLine.style.transformOrigin = "top center";
+    evolutionLine.style.transform = "scaleY(0)";
+    evolutionLine.style.opacity = "0.4";
+    evolutionLine.style.transition = "transform 1.2s ease, opacity 1s ease";
+
+    lineObserver.observe(document.querySelector(".education-evolution"));
+  }
 });
