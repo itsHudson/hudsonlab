@@ -31,8 +31,8 @@ const techOrder = [
   { key: "mysql", ring: 1, angle: 0, radius: 102, label: "MySQL" },
   { key: "sqlserver", ring: 1, angle: 180, radius: 102, label: "SQL Server" },
 
-  { key: "ubuntu", ring: 2, angle: 0, radius: 155, label: "Ubuntu" },
-  { key: "rocky", ring: 2, angle: 180, radius: 155, label: "Rocky Linux" },
+  { key: "ubuntu", ring: 2, angle: 45, radius: 155, label: "Ubuntu" },
+  { key: "rocky", ring: 2, angle: 225, radius: 155, label: "Rocky Linux" },
 
   { key: "visualstudio", ring: 3, angle: 0, radius: 245, label: "Visual Studio" },
   { key: "vscode", ring: 3, angle: 40, radius: 245, label: "VS Code" },
@@ -60,7 +60,7 @@ const techOrder = [
 const skillMeta = {
   mysql: { layer: "Data Layer", relatedSummary: "SQL Server · ASP.NET" },
   sqlserver: { layer: "Data Layer", relatedSummary: "MySQL · ASP.NET · C#" },
-  ubuntu: { layer: "Environment", relatedSummary: "Python · Git · GitHub" },
+  ubuntu: { layer: "Environment", relatedSummary: "Rocky Linux · Python · Git · GitHub" },
   rocky: { layer: "Environment", relatedSummary: "Ubuntu · Python · Git" },
   visualstudio: { layer: "Workflow Layer", relatedSummary: "ASP.NET · C# · SQL Server" },
   vscode: { layer: "Workflow Layer", relatedSummary: "HTML5 · CSS3 · JavaScript" },
@@ -78,7 +78,7 @@ const skillMeta = {
   css3: { layer: "Language Layer", relatedSummary: "HTML5 · JavaScript · Figma" },
   java: { layer: "Language Layer", relatedSummary: "NetBeans" },
   javascript: { layer: "Language Layer", relatedSummary: "HTML5 · CSS3 · VS Code" },
-  python: { layer: "Language Layer", relatedSummary: "Ubuntu · VS Code" },
+  python: { layer: "Language Layer", relatedSummary: "Ubuntu · Rocky Linux · VS Code" },
   r: { layer: "Language Layer", relatedSummary: "SAS" },
   html5: { layer: "Language Layer", relatedSummary: "CSS3 · JavaScript · Figma" },
   sas: { layer: "Language Layer", relatedSummary: "R" }
@@ -173,20 +173,20 @@ const skills = {
   rocky: {
     name: "Rocky Linux",
     icon: iconHtml.rocky,
-    description: "Rocky Linux represents enterprise-oriented environment awareness, server-side stability, and stronger familiarity with professional Linux-based systems.",
-    meaning: "A reliable Linux environment that reflects system administration awareness, backend platform familiarity, and practical infrastructure thinking.",
-    direction: "Linux systems · server environments · platform stability",
+    description: "Rocky Linux represents enterprise-oriented Linux system knowledge and server-side platform awareness.",
+    meaning: "It reflects familiarity with enterprise Linux environments and system stability used in production infrastructures.",
+    direction: "Linux systems · server environments · infrastructure platform",
     projects: [
       {
-        name: "Enterprise Environment Direction",
-        summary: "Rocky Linux reflects stronger awareness of professional Linux environments, stable system platforms, and backend-oriented technical workflow.",
+        name: "Enterprise Linux Environment",
+        summary: "Rocky Linux reflects understanding of enterprise Linux platforms used for backend services and stable server environments.",
         tech: "Rocky Linux",
         github: "Available upon request",
-        thumb: "Linux Stability · Server Environment · System Platform Thinking",
+        thumb: "Enterprise Linux · System Stability · Server Environment",
         features: [
-          "Represents enterprise-style Linux familiarity",
-          "Supports backend and server environment awareness",
-          "Builds stronger platform and infrastructure understanding"
+          "Enterprise-grade Linux distribution",
+          "Stable backend server environment",
+          "Platform-level infrastructure awareness"
         ]
       }
     ]

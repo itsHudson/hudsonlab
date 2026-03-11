@@ -170,10 +170,10 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  color: rgba(255, 122, 24, 0.58);
-  font-size: 0.74rem;
+  color: rgba(255, 122, 24, 0.50);
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   pointer-events: none;
   z-index: 1;
@@ -181,19 +181,19 @@
 }
 
 .orbit-ring-label-1 {
-  transform: translate(-50%, calc(-50% - 135px));
+  transform: translate(-50%, calc(-50% - 128px));
 }
 
 .orbit-ring-label-2 {
-  transform: translate(-50%, calc(-50% - 200px));
+  transform: translate(-50%, calc(-50% - 192px));
 }
 
 .orbit-ring-label-3 {
-  transform: translate(-50%, calc(-50% - 285px));
+  transform: translate(-50%, calc(-50% - 278px));
 }
 
 .orbit-ring-label-4 {
-  transform: translate(-50%, calc(-50% - 372px));
+  transform: translate(-50%, calc(-50% - 365px));
 }
 
 .orbit-ring {
@@ -482,9 +482,10 @@
 }
 
 .orbit-logo-wrap img {
-  width: 100%;
-  height: 100%;
+  width: 84%;
+  height: 84%;
   object-fit: contain;
+  object-position: center;
   display: block;
 }
 
@@ -833,10 +834,10 @@
     width: 560px;
   }
 
-  .orbit-ring-label-1 { transform: translate(-50%, calc(-50% - 124px)); }
-  .orbit-ring-label-2 { transform: translate(-50%, calc(-50% - 180px)); }
-  .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 248px)); }
-  .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 312px)); }
+  .orbit-ring-label-1 { transform: translate(-50%, calc(-50% - 120px)); }
+  .orbit-ring-label-2 { transform: translate(-50%, calc(-50% - 172px)); }
+  .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 242px)); }
+  .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 304px)); }
 }
 
 /* SMALL TABLET */
@@ -862,10 +863,10 @@
     width: 500px;
   }
 
-  .orbit-ring-label-1 { transform: translate(-50%, calc(-50% - 116px)); }
-  .orbit-ring-label-2 { transform: translate(-50%, calc(-50% - 165px)); }
-  .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 225px)); }
-  .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 278px)); }
+  .orbit-ring-label-1 { transform: translate(-50%, calc(-50% - 112px)); }
+  .orbit-ring-label-2 { transform: translate(-50%, calc(-50% - 158px)); }
+  .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 218px)); }
+  .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 270px)); }
 
   .orbit-skill[data-ring="1"] { --size: 62px; }
   .orbit-skill[data-ring="2"] { --size: 58px; }
@@ -873,7 +874,6 @@
   .orbit-skill[data-ring="4"] { --size: 48px; }
 }
 
-/* PHONE */
 @media (max-width: 720px) {
   .explorer-detail-grid,
   .explorer-hero-meta,
@@ -906,10 +906,10 @@
     width: 430px;
   }
 
-  .orbit-ring-label-1 { transform: translate(-50%, calc(-50% - 100px)); }
-  .orbit-ring-label-2 { transform: translate(-50%, calc(-50% - 145px)); }
-  .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 192px)); }
-  .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 234px)); }
+  .orbit-ring-label-1 { transform: translate(-50%, calc(-50% - 96px)); }
+  .orbit-ring-label-2 { transform: translate(-50%, calc(-50% - 138px)); }
+  .orbit-ring-label-3 { transform: translate(-50%, calc(-50% - 184px)); }
+  .orbit-ring-label-4 { transform: translate(-50%, calc(-50% - 226px)); }
 
   .orbit-core {
     width: 132px;
