@@ -2,6 +2,7 @@ const iconHtml = {
   mysql: '<img src="../Images/TE_MySQL.png" alt="MySQL">',
   sqlserver: '<img src="../Images/TE_SQLServer.png" alt="Microsoft SQL Server">',
   ubuntu: '<img src="../Images/TE_Ubuntu.png" alt="Ubuntu">',
+  rocky: '<img src="../Images/TE_Rocky.png" alt="Rocky Linux">',
 
   visualstudio: '<img src="../Images/TE_VisualStudio.png" alt="Visual Studio">',
   vscode: '<img src="../Images/TE_VisualStudioCode.png" alt="Visual Studio Code">',
@@ -31,6 +32,7 @@ const techOrder = [
   { key: "sqlserver", ring: 1, angle: 180, radius: 102, label: "SQL Server" },
 
   { key: "ubuntu", ring: 2, angle: 0, radius: 155, label: "Ubuntu" },
+  { key: "rocky", ring: 2, angle: 180, radius: 155, label: "Rocky Linux" },
 
   { key: "visualstudio", ring: 3, angle: 0, radius: 245, label: "Visual Studio" },
   { key: "vscode", ring: 3, angle: 40, radius: 245, label: "VS Code" },
@@ -59,6 +61,7 @@ const skillMeta = {
   mysql: { layer: "Data Layer", relatedSummary: "SQL Server · ASP.NET" },
   sqlserver: { layer: "Data Layer", relatedSummary: "MySQL · ASP.NET · C#" },
   ubuntu: { layer: "Environment", relatedSummary: "Python · Git · GitHub" },
+  rocky: { layer: "Environment", relatedSummary: "Ubuntu · Python · Git" },
   visualstudio: { layer: "Workflow Layer", relatedSummary: "ASP.NET · C# · SQL Server" },
   vscode: { layer: "Workflow Layer", relatedSummary: "HTML5 · CSS3 · JavaScript" },
   netbeans: { layer: "Workflow Layer", relatedSummary: "Java" },
@@ -162,6 +165,28 @@ const skills = {
           "Builds stronger command-line confidence",
           "Supports system-level technical familiarity",
           "Strengthens development environment awareness"
+        ]
+      }
+    ]
+  },
+
+  rocky: {
+    name: "Rocky Linux",
+    icon: iconHtml.rocky,
+    description: "Rocky Linux represents enterprise-oriented environment awareness, server-side stability, and stronger familiarity with professional Linux-based systems.",
+    meaning: "A reliable Linux environment that reflects system administration awareness, backend platform familiarity, and practical infrastructure thinking.",
+    direction: "Linux systems · server environments · platform stability",
+    projects: [
+      {
+        name: "Enterprise Environment Direction",
+        summary: "Rocky Linux reflects stronger awareness of professional Linux environments, stable system platforms, and backend-oriented technical workflow.",
+        tech: "Rocky Linux",
+        github: "Available upon request",
+        thumb: "Linux Stability · Server Environment · System Platform Thinking",
+        features: [
+          "Represents enterprise-style Linux familiarity",
+          "Supports backend and server environment awareness",
+          "Builds stronger platform and infrastructure understanding"
         ]
       }
     ]
