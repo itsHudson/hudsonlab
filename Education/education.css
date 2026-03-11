@@ -282,6 +282,23 @@
   z-index: 1;
 }
 
+.cognitive-axis::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 122, 24, 0),
+    rgba(255, 122, 24, 0.9),
+    rgba(255, 122, 24, 0)
+  );
+  filter: blur(6px);
+  animation: energyFlow 3s linear infinite;
+}
+
 .cognitive-axis-glow {
   position: absolute;
   left: 50%;
@@ -394,6 +411,7 @@
     0 0 0 7px rgba(255, 122, 24, 0.08),
     0 0 20px rgba(255, 122, 24, 0.18);
   z-index: 5;
+  transition: box-shadow 0.25s ease;
 }
 
 .node-pulse {
@@ -473,6 +491,12 @@
     0 0 24px rgba(255, 122, 24, 0.24);
 }
 
+.cognitive-node:hover .node-core {
+  box-shadow:
+    0 0 0 10px rgba(255, 122, 24, 0.15),
+    0 0 40px rgba(255, 122, 24, 0.35);
+}
+
 /* =========================================================
    MODULE TAGS
 ========================================================= */
@@ -489,7 +513,7 @@
   letter-spacing: 0.01em;
   box-shadow: 0 12px 22px rgba(76, 45, 17, 0.06);
   cursor: pointer;
-  transition: transform 0.22s ease, opacity 0.22s ease, box-shadow 0.22s ease;
+  transition: transform 0.22s ease, opacity 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
   z-index: 4;
 }
 
@@ -497,6 +521,11 @@
 .module-tag.active {
   transform: translateY(-4px);
   box-shadow: 0 18px 28px rgba(76, 45, 17, 0.08);
+}
+
+.module-tag.active {
+  background: rgba(255, 122, 24, 0.15);
+  box-shadow: 0 0 18px rgba(255, 122, 24, 0.25);
 }
 
 .module-tag-left-1 {
@@ -634,6 +663,12 @@
 .blueprint-detail-panel {
   padding: 24px;
   border-radius: 28px;
+  transition: all 0.35s ease;
+}
+
+.detail-panel-animate {
+  transform: translateY(6px);
+  opacity: 0.7;
 }
 
 .detail-panel-topline {
@@ -875,6 +910,23 @@
 }
 
 /* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+  margin-top: 80px;
+  padding: 28px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer-inner {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
    REVEAL
 ========================================================= */
 
@@ -921,6 +973,23 @@
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1.45);
+  }
+}
+
+@keyframes energyFlow {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
   }
 }
 

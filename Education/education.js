@@ -64,26 +64,27 @@ function initializeNeuralBlueprint() {
 
     transition: {
       statusText: "Transition Node Active",
-      title: "Academic Transition Phase",
-      subtitle: "From management orientation to technical structure",
+      title: "Professional Transition",
+      subtitle: "5+ Years Industry Experience → Return to Computer Science",
       level: "Node 02 · Transition",
-      direction: "Systems thinking · structured logic · technical reorientation",
+      direction: "Industry experience · career reinvention · technical shift",
       description:
-        "This stage represents the internal shift toward technology. It is where learning direction became more computational, more structured, and more aligned with logic, systems, and digital problem solving.",
+        "After spending more than five years working in industry, I made the decision to return to university and pursue a degree in Computer Science. This transition marked a turning point — shifting from operational experience toward deeper technical knowledge, programming, and systems-oriented thinking.",
       qualities: [
-        "Systems thinking",
-        "Structured logic",
+        "Industry perspective",
+        "Practical experience",
         "Adaptability",
-        "Cognitive shift"
+        "Career reinvention"
       ],
       technologies: [
-        "Programming readiness",
-        "Problem framing",
-        "System awareness"
+        "Programming",
+        "Computer Science",
+        "Data Analytics",
+        "Systems thinking"
       ],
-      quote: "“The stage where structure became more computational.”",
+      quote: "Experience built perspective. Education reshaped the direction.",
       logo: "../Images/Edu_APU.png",
-      logoAlt: "Academic transition"
+      logoAlt: "Professional transition"
     },
 
     specialisation: {
@@ -116,6 +117,7 @@ function initializeNeuralBlueprint() {
   const nodes = document.querySelectorAll(".cognitive-node");
   const moduleTags = document.querySelectorAll(".module-tag");
 
+  const detailPanel = document.getElementById("educationDetailPanel");
   const detailStatusText = document.getElementById("detailStatusText");
   const detailTitle = document.getElementById("detailTitle");
   const detailSubtitle = document.getElementById("detailSubtitle");
@@ -132,40 +134,46 @@ function initializeNeuralBlueprint() {
     const activeData = nodeData[nodeKey];
     if (!activeData) return;
 
-    detailStatusText.textContent = activeData.statusText;
-    detailTitle.textContent = activeData.title;
-    detailSubtitle.textContent = activeData.subtitle;
-    detailLevel.textContent = activeData.level;
-    detailDirection.textContent = activeData.direction;
-    detailDescription.textContent = activeData.description;
-    detailQuote.textContent = activeData.quote;
+    detailPanel.classList.add("detail-panel-animate");
 
-    detailLogo.src = activeData.logo;
-    detailLogo.alt = activeData.logoAlt;
+    setTimeout(() => {
+      detailStatusText.textContent = activeData.statusText;
+      detailTitle.textContent = activeData.title;
+      detailSubtitle.textContent = activeData.subtitle;
+      detailLevel.textContent = activeData.level;
+      detailDirection.textContent = activeData.direction;
+      detailDescription.textContent = activeData.description;
+      detailQuote.textContent = activeData.quote;
 
-    qualityChipGrid.innerHTML = "";
-    activeData.qualities.forEach((item) => {
-      const chip = document.createElement("span");
-      chip.className = "detail-chip";
-      chip.textContent = item;
-      qualityChipGrid.appendChild(chip);
-    });
+      detailLogo.src = activeData.logo;
+      detailLogo.alt = activeData.logoAlt;
 
-    techChipGrid.innerHTML = "";
-    activeData.technologies.forEach((item) => {
-      const chip = document.createElement("span");
-      chip.className = "detail-chip detail-chip-soft";
-      chip.textContent = item;
-      techChipGrid.appendChild(chip);
-    });
+      qualityChipGrid.innerHTML = "";
+      activeData.qualities.forEach((item) => {
+        const chip = document.createElement("span");
+        chip.className = "detail-chip";
+        chip.textContent = item;
+        qualityChipGrid.appendChild(chip);
+      });
 
-    nodes.forEach((node) => {
-      node.classList.toggle("active", node.dataset.node === nodeKey);
-    });
+      techChipGrid.innerHTML = "";
+      activeData.technologies.forEach((item) => {
+        const chip = document.createElement("span");
+        chip.className = "detail-chip detail-chip-soft";
+        chip.textContent = item;
+        techChipGrid.appendChild(chip);
+      });
 
-    moduleTags.forEach((tag) => {
-      tag.classList.toggle("active", tag.dataset.node === nodeKey);
-    });
+      nodes.forEach((node) => {
+        node.classList.toggle("active", node.dataset.node === nodeKey);
+      });
+
+      moduleTags.forEach((tag) => {
+        tag.classList.toggle("active", tag.dataset.node === nodeKey);
+      });
+
+      detailPanel.classList.remove("detail-panel-animate");
+    }, 180);
   }
 
   nodes.forEach((node) => {
