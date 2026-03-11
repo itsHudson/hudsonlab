@@ -1,31 +1,31 @@
-console.log("Education page loaded");
+console.log("Neural Blueprint Education page loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
-  initializeReveal();
-  initializeEducationSystem();
+  initializeRevealMotion();
+  initializeNeuralBlueprint();
 });
 
-function initializeReveal() {
+function initializeRevealMotion() {
   const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          let delay = "0s";
+        if (!entry.isIntersecting) return;
 
-          if (entry.target.classList.contains("reveal-delay")) {
-            delay = "0.12s";
-          }
+        let delay = "0s";
 
-          if (entry.target.classList.contains("reveal-delay-2")) {
-            delay = "0.22s";
-          }
-
-          entry.target.style.transition = `opacity 0.8s ease ${delay}, transform 0.8s ease ${delay}`;
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
+        if (entry.target.classList.contains("reveal-delay")) {
+          delay = "0.12s";
         }
+
+        if (entry.target.classList.contains("reveal-delay-2")) {
+          delay = "0.22s";
+        }
+
+        entry.target.style.transition = `opacity 0.85s ease ${delay}, transform 0.85s ease ${delay}`;
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
       });
     },
     { threshold: 0.12 }
@@ -36,127 +36,149 @@ function initializeReveal() {
   });
 }
 
-function initializeEducationSystem() {
-  const stageData = {
-    ucsi: {
+function initializeNeuralBlueprint() {
+  const nodeData = {
+    foundation: {
+      statusText: "Foundation Node Active",
       title: "UCSI University",
       subtitle: "Diploma in Management",
-      level: "Level 1 · Foundation",
-      direction: "Management thinking · discipline · foundational perspective",
+      level: "Node 01 · Foundation",
+      direction: "Management thinking · discipline · academic foundation",
       description:
-        "This stage built the earliest academic discipline, perspective, and structured learning habits that later supported the move into technology and systems thinking.",
-      impactTitle: "Foundational qualities",
-      impactSummary: "The mindset and qualities shaped through this stage.",
-      impactChips: ["Discipline", "Structured learning", "Perspective", "Academic maturity"],
-      techChips: ["Management foundation", "Transition readiness"],
+        "This stage established early discipline, perspective, and structured learning habits. It became the first internal layer that later supported the transition into technical thinking and systems-oriented study.",
+      qualities: [
+        "Discipline",
+        "Perspective",
+        "Structured learning",
+        "Academic maturity"
+      ],
+      technologies: [
+        "Transition readiness",
+        "Structured progression",
+        "Concept organisation"
+      ],
       quote: "“The beginning of structured academic growth.”",
       logo: "../Images/Edu_UCSI.png",
       logoAlt: "UCSI University"
     },
 
-    growth: {
+    transition: {
+      statusText: "Transition Node Active",
       title: "Academic Transition Phase",
-      subtitle: "From management thinking to technical thinking",
-      level: "Level 2 · Growth",
-      direction: "Programming logic · systems awareness · stronger technical direction",
+      subtitle: "From management orientation to technical structure",
+      level: "Node 02 · Transition",
+      direction: "Systems thinking · structured logic · technical reorientation",
       description:
-        "This stage represents the shift from an earlier management foundation into computing, structured logic, and the kind of systems thinking that prepares the path toward computer science.",
-      impactTitle: "Growth qualities",
-      impactSummary: "The bridge that connected foundation with specialisation.",
-      impactChips: ["Structured logic", "Systems thinking", "Adaptability", "Academic transition"],
-      techChips: ["Programming readiness", "Technical exploration", "System awareness"],
-      quote: "“The stage where direction became more technical.”",
+        "This stage represents the internal shift toward technology. It is where learning direction became more computational, more structured, and more aligned with logic, systems, and digital problem solving.",
+      qualities: [
+        "Systems thinking",
+        "Structured logic",
+        "Adaptability",
+        "Cognitive shift"
+      ],
+      technologies: [
+        "Programming readiness",
+        "Problem framing",
+        "System awareness"
+      ],
+      quote: "“The stage where structure became more computational.”",
       logo: "../Images/Edu_APU.png",
       logoAlt: "Academic transition"
     },
 
-    apu: {
+    specialisation: {
+      statusText: "Specialisation Node Active",
       title: "Asia Pacific University",
       subtitle: "Bachelor of Science (Honours) in Computer Science · Data Analytics",
-      level: "Level 3 · Specialisation",
-      direction: "Computer Science · analytics · problem solving · digital systems",
+      level: "Node 03 · Specialisation",
+      direction: "Computer Science · analytics · technical problem solving",
       description:
-        "This stage deepened the journey into computing through technical problem solving, analytical thinking, systems design, and a stronger specialism in data analytics.",
-      impactTitle: "Specialised qualities",
-      impactSummary: "The stronger technical direction shaped through current study.",
-      impactChips: ["Computer Science", "Data Analytics", "Problem solving", "Systems thinking"],
-      techChips: ["Java", "Python", "SQL", "SAS", "Technical projects"],
-      quote: "“Where structured discipline evolved into systems and analytics thinking.”",
+        "This stage deepened academic growth into computing, analytics, and systems. It sharpened problem solving, strengthened technical confidence, and made the language of systems central to how ideas are interpreted and built.",
+      qualities: [
+        "Computer Science",
+        "Data Analytics",
+        "Problem solving",
+        "Systems mindset"
+      ],
+      technologies: [
+        "Java",
+        "Python",
+        "SQL",
+        "SAS",
+        "Technical projects"
+      ],
+      quote: "“Where structured learning evolved into systems and analytics thinking.”",
       logo: "../Images/Edu_APU.png",
       logoAlt: "Asia Pacific University"
     }
   };
 
-  const stageTitle = document.getElementById("eduStageTitle");
-  const stageSubtitle = document.getElementById("eduStageSubtitle");
-  const stageLevel = document.getElementById("eduLevel");
-  const stageDirection = document.getElementById("eduDirection");
-  const stageDescription = document.getElementById("eduDescription");
+  const nodes = document.querySelectorAll(".cognitive-node");
+  const moduleTags = document.querySelectorAll(".module-tag");
 
-  const impactTitle = document.getElementById("eduImpactTitle");
-  const impactSummary = document.getElementById("eduImpactSummary");
-  const impactChipGrid = document.getElementById("impactChipGrid");
+  const detailStatusText = document.getElementById("detailStatusText");
+  const detailTitle = document.getElementById("detailTitle");
+  const detailSubtitle = document.getElementById("detailSubtitle");
+  const detailLevel = document.getElementById("detailLevel");
+  const detailDirection = document.getElementById("detailDirection");
+  const detailDescription = document.getElementById("detailDescription");
+  const detailQuote = document.getElementById("detailQuote");
+  const detailLogo = document.getElementById("detailLogo");
+
+  const qualityChipGrid = document.getElementById("qualityChipGrid");
   const techChipGrid = document.getElementById("techChipGrid");
-  const quoteBox = document.getElementById("eduQuoteBox");
 
-  const logoImage = document.getElementById("eduLogoImage");
+  function renderNode(nodeKey) {
+    const activeData = nodeData[nodeKey];
+    if (!activeData) return;
 
-  const nodeButtons = document.querySelectorAll(".tree-node");
-  const leafButtons = document.querySelectorAll(".knowledge-leaf");
+    detailStatusText.textContent = activeData.statusText;
+    detailTitle.textContent = activeData.title;
+    detailSubtitle.textContent = activeData.subtitle;
+    detailLevel.textContent = activeData.level;
+    detailDirection.textContent = activeData.direction;
+    detailDescription.textContent = activeData.description;
+    detailQuote.textContent = activeData.quote;
 
-  function renderStage(stageKey) {
-    const stage = stageData[stageKey];
-    if (!stage) return;
+    detailLogo.src = activeData.logo;
+    detailLogo.alt = activeData.logoAlt;
 
-    stageTitle.textContent = stage.title;
-    stageSubtitle.textContent = stage.subtitle;
-    stageLevel.textContent = stage.level;
-    stageDirection.textContent = stage.direction;
-    stageDescription.textContent = stage.description;
-
-    impactTitle.textContent = stage.impactTitle;
-    impactSummary.textContent = stage.impactSummary;
-    quoteBox.textContent = stage.quote;
-
-    logoImage.src = stage.logo;
-    logoImage.alt = stage.logoAlt;
-
-    impactChipGrid.innerHTML = "";
-    stage.impactChips.forEach((item) => {
+    qualityChipGrid.innerHTML = "";
+    activeData.qualities.forEach((item) => {
       const chip = document.createElement("span");
-      chip.className = "impact-chip";
+      chip.className = "detail-chip";
       chip.textContent = item;
-      impactChipGrid.appendChild(chip);
+      qualityChipGrid.appendChild(chip);
     });
 
     techChipGrid.innerHTML = "";
-    stage.techChips.forEach((item) => {
+    activeData.technologies.forEach((item) => {
       const chip = document.createElement("span");
-      chip.className = "impact-chip impact-chip-soft";
+      chip.className = "detail-chip detail-chip-soft";
       chip.textContent = item;
       techChipGrid.appendChild(chip);
     });
 
-    nodeButtons.forEach((button) => {
-      button.classList.toggle("active", button.dataset.node === stageKey);
+    nodes.forEach((node) => {
+      node.classList.toggle("active", node.dataset.node === nodeKey);
     });
 
-    leafButtons.forEach((button) => {
-      button.classList.toggle("active", button.dataset.node === stageKey);
+    moduleTags.forEach((tag) => {
+      tag.classList.toggle("active", tag.dataset.node === nodeKey);
     });
   }
 
-  nodeButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      renderStage(button.dataset.node);
+  nodes.forEach((node) => {
+    node.addEventListener("click", function () {
+      renderNode(node.dataset.node);
     });
   });
 
-  leafButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      renderStage(button.dataset.node);
+  moduleTags.forEach((tag) => {
+    tag.addEventListener("click", function () {
+      renderNode(tag.dataset.node);
     });
   });
 
-  renderStage("ucsi");
+  renderNode("foundation");
 }
