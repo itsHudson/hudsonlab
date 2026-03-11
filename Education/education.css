@@ -1,3 +1,5 @@
+/* PAGE */
+
 .education-shell{
 display:flex;
 flex-direction:column;
@@ -12,73 +14,80 @@ max-width:900px;
 }
 
 .education-hero-title{
-font-size:clamp(2.8rem,5vw,4.5rem);
-line-height:1;
-letter-spacing:-0.05em;
-margin:16px 0;
+margin:14px 0 16px;
+font-size:clamp(3.4rem,6vw,5.5rem);
+line-height:.9;
+letter-spacing:-0.06em;
+font-weight:800;
 }
 
 .education-hero-title span{
 display:block;
 color:var(--text-soft);
-font-size:0.75em;
+font-size:.65em;
+margin-top:10px;
 }
 
 .education-hero-subtitle{
-max-width:560px;
-color:var(--text-soft);
+max-width:600px;
 line-height:1.9;
+color:var(--text-soft);
 }
 
 
-/* STAGE */
+/* STAGES */
+
+.education-stage-grid{
+display:grid;
+grid-template-columns:180px 1fr;
+gap:36px;
+align-items:center;
+}
 
 .education-stage{
-padding:40px;
+padding:32px;
 border-radius:var(--radius-xl);
-border:1px solid var(--line);
 background:var(--bg-card);
+border:1px solid var(--line);
 box-shadow:var(--shadow-md);
-transition:transform .25s ease;
+transition:all .25s ease;
 }
 
 .education-stage:hover{
 transform:translateY(-4px);
-}
-
-.education-stage-grid{
-display:grid;
-grid-template-columns:200px 1fr;
-gap:40px;
-align-items:center;
+box-shadow:var(--shadow-lg);
 }
 
 .education-logo{
 display:flex;
+align-items:center;
 justify-content:center;
 }
 
 .education-logo img{
-max-width:150px;
+max-width:140px;
+height:auto;
 }
 
 .education-stage-label{
+margin:0 0 8px;
+font-size:.8rem;
+letter-spacing:.08em;
+text-transform:uppercase;
 color:var(--accent);
 font-weight:700;
-font-size:.8rem;
-letter-spacing:.1em;
-text-transform:uppercase;
-margin-bottom:6px;
 }
 
-.education-stage h2{
-margin:0;
-font-size:1.6rem;
+.education-stage-content h2{
+margin:0 0 8px;
+font-size:1.4rem;
+letter-spacing:-.02em;
 }
 
 .education-program{
-margin:8px 0 14px;
-font-weight:600;
+margin:0 0 12px;
+font-weight:700;
+font-size:1.05rem;
 }
 
 .education-program span{
@@ -86,14 +95,38 @@ color:var(--text-soft);
 }
 
 .education-specialism{
+margin:0 0 14px;
+font-weight:600;
 color:var(--accent);
-margin-bottom:10px;
 }
 
 .education-description{
-color:var(--text-soft);
 line-height:1.9;
+color:var(--text-soft);
 max-width:620px;
+}
+
+
+/* TRANSITION */
+
+.education-transition{
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.transition-line{
+flex:1;
+height:1px;
+background:linear-gradient(90deg,transparent,var(--accent),transparent);
+opacity:.4;
+}
+
+.education-transition p{
+margin:0;
+font-size:.9rem;
+color:var(--text-muted);
+font-weight:600;
 }
 
 
@@ -101,34 +134,33 @@ max-width:620px;
 
 .education-closing{
 text-align:center;
-margin-top:40px;
+margin-top:10px;
 }
 
 .education-closing p{
-font-size:clamp(2rem,4vw,3rem);
-line-height:1.1;
-letter-spacing:-0.05em;
+font-size:1.3rem;
+font-weight:600;
+letter-spacing:-.02em;
 }
 
 .education-closing span{
 display:block;
-color:var(--text-soft);
-font-size:.7em;
-margin-top:10px;
+color:var(--accent);
+margin-top:6px;
 }
 
 
-/* MOBILE */
+/* RESPONSIVE */
 
-@media(max-width:900px){
+@media (max-width:900px){
 
 .education-stage-grid{
 grid-template-columns:1fr;
 text-align:center;
 }
 
-.education-description{
-margin:auto;
+.education-logo{
+margin-bottom:10px;
 }
 
 }
