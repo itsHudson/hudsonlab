@@ -51,7 +51,7 @@ function initializeTechnologyCompass() {
     netbeans: '<img src="../Images/TE_ApacheNetbeans.png" alt="Apache NetBeans">',
     codeblocks: '<img src="../Images/TE_CodeBlock.png" alt="Code::Blocks">',
     git: '<img src="../Images/TE_Git.png" alt="Git">',
-    github: '<img src="../Images/TE_Github.png" alt="GitHub">',
+    github: '<img src="../Images/TE_GitHub.png" alt="GitHub">',
     aspnet: '<img src="../Images/TE_ASP.NET.png" alt="ASP.NET">',
     figma: '<img src="../Images/TE_Figma.png" alt="Figma">',
     slack: '<img src="../Images/TE_Slack.png" alt="Slack">',
@@ -81,7 +81,7 @@ function initializeTechnologyCompass() {
     { key: "netbeans", ring: 3, angle: 80, radius: 245, label: "NetBeans" },
     { key: "codeblocks", ring: 3, angle: 120, radius: 245, label: "Code::Blocks" },
     { key: "git", ring: 3, angle: 160, radius: 245, label: "Git" },
-    { key: "github", ring: 3, angle: 200, radius: 245, label: "GitHub" },
+    { key: "gitHub", ring: 3, angle: 200, radius: 245, label: "GitHub" },
     { key: "aspnet", ring: 3, angle: 240, radius: 245, label: "ASP.NET" },
     { key: "figma", ring: 3, angle: 280, radius: 245, label: "Figma" },
     { key: "slack", ring: 3, angle: 320, radius: 245, label: "Slack" },
@@ -136,7 +136,7 @@ function initializeTechnologyCompass() {
     projectName: "Project Details",
     projectSummary: "Select a technology from the compass to view its related project direction.",
     projectTech: "-",
-    projectGithub: "-",
+    projectGitHub: "-",
     projectThumb: "Technology preview area",
     projectFeatures: [
       "Click a logo to enter focus mode",
@@ -704,7 +704,7 @@ function initializeTechnologyCompass() {
   const projectName = document.getElementById("projectName");
   const projectSummary = document.getElementById("projectSummary");
   const projectTech = document.getElementById("projectTech");
-  const projectGithub = document.getElementById("projectGithub");
+  const projectGitHub = document.getElementById("projectGitHub");
   const projectFeatures = document.getElementById("projectFeatures");
   const projectThumbPreview = document.getElementById("projectThumbPreview");
 
@@ -793,12 +793,12 @@ function initializeTechnologyCompass() {
     projectTech.textContent = project.tech;
 
     if (project.github && project.github !== "Available upon request") {
-      projectGithub.innerHTML =
+      projectGitHub.innerHTML =
         '<a href="' + project.github + '" target="_blank" rel="noopener noreferrer">' +
         project.github +
         "</a>";
     } else {
-      projectGithub.textContent = "Available upon request";
+      projectGitHub.textContent = "Available upon request";
     }
 
     projectThumbPreview.textContent = project.thumb;
@@ -832,7 +832,7 @@ function initializeTechnologyCompass() {
     projectName.textContent = overviewState.projectName;
     projectSummary.textContent = overviewState.projectSummary;
     projectTech.textContent = overviewState.projectTech;
-    projectGithub.textContent = overviewState.projectGithub;
+    projectGitHub.textContent = overviewState.projectGitHub;
     projectThumbPreview.textContent = overviewState.projectThumb;
 
     projectFeatures.innerHTML = "";
