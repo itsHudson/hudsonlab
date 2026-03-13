@@ -25,7 +25,8 @@ function initializeRevealMotion() {
           delay = "0.22s";
         }
 
-        entry.target.style.transition = "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
+        entry.target.style.transition =
+          "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
       });
@@ -50,7 +51,7 @@ function initializeTechnologyCompass() {
     netbeans: '<img src="../Images/TE_ApacheNetbeans.png" alt="Apache NetBeans">',
     codeblocks: '<img src="../Images/TE_CodeBlock.png" alt="Code::Blocks">',
     git: '<img src="../Images/TE_Git.png" alt="Git">',
-    github: '<img src="../Images/TE_GitHub.png" alt="GitHub">',
+    github: '<img src="../Images/TE_Github.png" alt="GitHub">',
     aspnet: '<img src="../Images/TE_ASP.NET.png" alt="ASP.NET">',
     figma: '<img src="../Images/TE_Figma.png" alt="Figma">',
     slack: '<img src="../Images/TE_Slack.png" alt="Slack">',
@@ -758,7 +759,7 @@ function initializeTechnologyCompass() {
         '<div class="orbit-logo-wrap">' +
           '<span class="orbit-halo"></span>' +
           skills[item.key].icon +
-        '</div>' +
+        "</div>" +
         '<span class="orbit-node-label">' + item.label + "</span>";
 
       button.addEventListener("click", function (event) {
@@ -792,7 +793,10 @@ function initializeTechnologyCompass() {
     projectTech.textContent = project.tech;
 
     if (project.github && project.github !== "Available upon request") {
-      projectGithub.innerHTML = '<a href="' + project.github + '" target="_blank" rel="noopener noreferrer">' + project.github + "</a>";
+      projectGithub.innerHTML =
+        '<a href="' + project.github + '" target="_blank" rel="noopener noreferrer">' +
+        project.github +
+        "</a>";
     } else {
       projectGithub.textContent = "Available upon request";
     }
