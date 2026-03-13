@@ -8,25 +8,11 @@
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="education.css" />
 </head>
-<body>
-  <header class="site-header">
-    <div class="site-header-inner">
-      <a class="brand" href="../index.html">HUDSONLAB</a>
+<body data-page="education">
 
-      <nav class="top-nav">
-        <a href="../index.html">Home</a>
-        <a href="../About/about.html">About</a>
-        <a href="../TechExplorer/explorer.html">Technology Compass</a>
-        <a href="../Experience/experience.html">Journey</a>
-        <a href="education.html" class="active">Education</a>
-        <a href="../Certifications/certifications.html">Credentials</a>
-        <a href="../Contact/contact.html">Connect</a>
-      </nav>
-    </div>
-  </header>
+  <div id="header"></div>
 
   <main class="page-shell education-shell">
-    <!-- HERO -->
     <section class="education-hero reveal">
       <span class="small-chip">Education</span>
 
@@ -41,7 +27,6 @@
       </p>
     </section>
 
-    <!-- BLUEPRINT HEAD -->
     <section class="education-blueprint-intro reveal-delay">
       <div>
         <p class="education-section-label">Neural Blueprint</p>
@@ -55,7 +40,6 @@
       </p>
     </section>
 
-    <!-- MAIN BLUEPRINT -->
     <section class="education-blueprint-stage reveal-delay-2">
       <div class="blueprint-frame">
         <div class="blueprint-scanline"></div>
@@ -76,7 +60,6 @@
         </div>
 
         <div class="blueprint-layout">
-          <!-- LEFT / CENTER SYSTEM -->
           <div class="blueprint-core-panel">
             <div class="blueprint-core-head">
               <div>
@@ -98,7 +81,6 @@
               <div class="signal-beam signal-beam-a"></div>
               <div class="signal-beam signal-beam-b"></div>
 
-              <!-- FOUNDATION NODE -->
               <button class="cognitive-node cognitive-node-foundation active" data-node="foundation" type="button">
                 <span class="node-core"></span>
                 <span class="node-pulse node-pulse-1"></span>
@@ -111,7 +93,6 @@
                 </span>
               </button>
 
-              <!-- TRANSITION NODE -->
               <button class="cognitive-node cognitive-node-transition" data-node="transition" type="button">
                 <span class="node-core"></span>
                 <span class="node-pulse node-pulse-1"></span>
@@ -124,7 +105,6 @@
                 </span>
               </button>
 
-              <!-- SPECIALISATION NODE -->
               <button class="cognitive-node cognitive-node-specialisation" data-node="specialisation" type="button">
                 <span class="node-core"></span>
                 <span class="node-pulse node-pulse-1"></span>
@@ -137,7 +117,6 @@
                 </span>
               </button>
 
-              <!-- MODULE TAGS -->
               <button class="module-tag module-tag-left-1" data-node="foundation" type="button">
                 Management
               </button>
@@ -170,7 +149,6 @@
                 Problem Solving
               </button>
 
-              <!-- CONNECTORS -->
               <div class="connector connector-foundation-left-a"></div>
               <div class="connector connector-foundation-left-b"></div>
               <div class="connector connector-transition-right-a"></div>
@@ -190,7 +168,6 @@
             </div>
           </div>
 
-          <!-- RIGHT DETAIL PANEL -->
           <div class="blueprint-detail-panel glass-card" id="educationDetailPanel">
             <div class="detail-panel-topline">
               <span class="detail-panel-mini">Live Node Detail</span>
@@ -271,7 +248,6 @@
       </div>
     </section>
 
-    <!-- IMPACT MODULES -->
     <section class="education-impact-stage reveal-delay-2">
       <div class="education-blueprint-intro education-blueprint-intro-impact">
         <div>
@@ -316,7 +292,6 @@
       </div>
     </section>
 
-    <!-- CLOSING -->
     <section class="education-closing reveal-delay-2">
       <p>
         Education built the internal architecture.<br />
@@ -325,12 +300,10 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer-inner">
-      © 2026 HUDSONLAB · Built with structure, detail, and intent
-    </div>
-  </footer>
+  <div id="footer"></div>
 
+  <script src="../js/layout.js"></script>
+  <script src="../js/navigation.js"></script>
   <script src="education.js"></script>
 </body>
 </html>

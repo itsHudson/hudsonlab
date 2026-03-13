@@ -9,9 +9,11 @@ function initializeRevealMotion() {
   const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
         let delay = "0s";
 
@@ -23,7 +25,7 @@ function initializeRevealMotion() {
           delay = "0.22s";
         }
 
-        entry.target.style.transition = `opacity 0.85s ease ${delay}, transform 0.85s ease ${delay}`;
+        entry.target.style.transition = "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
       });
@@ -31,7 +33,7 @@ function initializeRevealMotion() {
     { threshold: 0.12 }
   );
 
-  revealElements.forEach((element) => {
+  revealElements.forEach(function (element) {
     observer.observe(element);
   });
 }
@@ -132,11 +134,14 @@ function initializeNeuralBlueprint() {
 
   function renderNode(nodeKey) {
     const activeData = nodeData[nodeKey];
-    if (!activeData) return;
+
+    if (!activeData) {
+      return;
+    }
 
     detailPanel.classList.add("detail-panel-animate");
 
-    setTimeout(() => {
+    setTimeout(function () {
       detailStatusText.textContent = activeData.statusText;
       detailTitle.textContent = activeData.title;
       detailSubtitle.textContent = activeData.subtitle;
@@ -149,7 +154,7 @@ function initializeNeuralBlueprint() {
       detailLogo.alt = activeData.logoAlt;
 
       qualityChipGrid.innerHTML = "";
-      activeData.qualities.forEach((item) => {
+      activeData.qualities.forEach(function (item) {
         const chip = document.createElement("span");
         chip.className = "detail-chip";
         chip.textContent = item;
@@ -157,18 +162,18 @@ function initializeNeuralBlueprint() {
       });
 
       techChipGrid.innerHTML = "";
-      activeData.technologies.forEach((item) => {
+      activeData.technologies.forEach(function (item) {
         const chip = document.createElement("span");
         chip.className = "detail-chip detail-chip-soft";
         chip.textContent = item;
         techChipGrid.appendChild(chip);
       });
 
-      nodes.forEach((node) => {
+      nodes.forEach(function (node) {
         node.classList.toggle("active", node.dataset.node === nodeKey);
       });
 
-      moduleTags.forEach((tag) => {
+      moduleTags.forEach(function (tag) {
         tag.classList.toggle("active", tag.dataset.node === nodeKey);
       });
 
@@ -176,13 +181,13 @@ function initializeNeuralBlueprint() {
     }, 180);
   }
 
-  nodes.forEach((node) => {
+  nodes.forEach(function (node) {
     node.addEventListener("click", function () {
       renderNode(node.dataset.node);
     });
   });
 
-  moduleTags.forEach((tag) => {
+  moduleTags.forEach(function (tag) {
     tag.addEventListener("click", function () {
       renderNode(tag.dataset.node);
     });
