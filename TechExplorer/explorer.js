@@ -58,7 +58,7 @@ function initializeTechnologyCompass() {
     assembly: '<img src="../Images/TE_Assembly.png" alt="Assembly">',
     c: '<img src="../Images/TE_C.png" alt="C">',
     cpp: '<img src="../Images/TE_C++.png" alt="C++">',
-    csharp: '<img src="../Images/TE_C#.png" alt="C#">',
+    csharp: '<img src="../Images/TE_C%23.png" alt="C#">',
     css3: '<img src="../Images/TE_CSS3.png" alt="CSS3">',
     java: '<img src="../Images/TE_Java.png" alt="Java">',
     javascript: '<img src="../Images/TE_JavaScript.png" alt="JavaScript">',

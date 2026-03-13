@@ -2,12 +2,6 @@ function getBasePath() {
   const path = window.location.pathname.toLowerCase();
 
   if (
-    path.includes("/about/") ||
-    path.includes("/techexplorer/") ||
-    path.includes("/experience/") ||
-    path.includes("/education/") ||
-    path.includes("/certifications/") ||
-    path.includes("/contact/") ||
     path.includes("/journey/retail-foundation/") ||
     path.includes("/journey/business-education/") ||
     path.includes("/journey/operations-leadership/") ||
@@ -17,7 +11,15 @@ function getBasePath() {
     return "../../";
   }
 
-  if (path.includes("/journey/")) {
+  if (
+    path.includes("/about/") ||
+    path.includes("/techexplorer/") ||
+    path.includes("/experience/") ||
+    path.includes("/education/") ||
+    path.includes("/certifications/") ||
+    path.includes("/contact/") ||
+    path.includes("/journey/")
+  ) {
     return "../";
   }
 
@@ -39,6 +41,7 @@ function loadComponent(id, filePath, callback) {
       if (!response.ok) {
         throw new Error("Failed to load " + filePath);
       }
+
       return response.text();
     })
     .then(function (data) {
