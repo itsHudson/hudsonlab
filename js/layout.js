@@ -7,8 +7,17 @@ function getBasePath() {
     path.includes("/experience/") ||
     path.includes("/education/") ||
     path.includes("/certifications/") ||
-    path.includes("/contact/")
+    path.includes("/contact/") ||
+    path.includes("/journey/retail-foundation/") ||
+    path.includes("/journey/business-education/") ||
+    path.includes("/journey/operations-leadership/") ||
+    path.includes("/journey/global-support/") ||
+    path.includes("/journey/technology-transition/")
   ) {
+    return "../../";
+  }
+
+  if (path.includes("/journey/")) {
     return "../";
   }
 
