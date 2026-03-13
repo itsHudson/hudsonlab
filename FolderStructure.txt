@@ -41,19 +41,16 @@ hudsonlab/
 │   ├── detail.css
 │   ├── detail.js
 │   │
-│   ├── business-education/
+│   ├── ac-cake-house/
 │   │   └── index.html
 │   │
-│   ├── global-support/
+│   ├── asia-pacific-university/
 │   │   └── index.html
 │   │
-│   ├── operations-leadership/
+│   ├── ucsi-university/
 │   │   └── index.html
 │   │
-│   ├── retail-foundation/
-│   │   └── index.html
-│   │
-│   └── technology-transition/
+│   └── webhelp-malaysia/
 │       └── index.html
 │
 ├── TechExplorer/
@@ -62,44 +59,47 @@ hudsonlab/
 │   └── explorer.js
 │
 └── Images/
-├── Badge_CCNAITN.png
-├── Badge_DAE.png
-├── Badge_ITC.png
-├── Badge_ITDS.png
-├── Badge_NALAT.png
-├── Badge_RHSA1.png
-├── Badge_RHSA2.png
-│
-├── Edu_APU.png
-├── Edu_UCSI.png
-│
-├── MBTI_ENTJ.png
-├── ProfileHUDSOnPixar.png
-│
-├── Work_ACCakeHouse.png
-├── Work_Webhelp.png
-│
-├── TE_ApacheNetbeans.png
-├── TE_ASP.NET.png
-├── TE_Assembly.png
-├── TE_C.png
-├── TE_C#.png
-├── TE_C++.png
-├── TE_CodeBlock.png
-├── TE_CSS3.png
-├── TE_Figma.png
-├── TE_Git.png
-├── TE_GitHub.png
-├── TE_HTML5.png
-├── TE_Java.png
-├── TE_JavaScript.png
-├── TE_MySQL.png
-├── TE_Python.png
-├── TE_R.png
-├── TE_Rocky.png
-├── TE_SAS.png
-├── TE_Slack.png
-├── TE_SQLServer.png
-├── TE_Ubuntu.png
-├── TE_VisualStudio.png
-└── TE_VisualStudioCode.png
+    ├── Badge_CCNAITN.png
+    ├── Badge_DAE.png
+    ├── Badge_ITC.png
+    ├── Badge_ITDS.png
+    ├── Badge_NALAT.png
+    ├── Badge_RHSA1.png
+    ├── Badge_RHSA2.png
+    │
+    ├── Edu_APU.png
+    ├── Edu_UCSI.png
+    │
+    ├── JO_Malaysia.png
+    ├── JO_Taiwan.png
+    │
+    ├── MBTI_ENTJ.png
+    ├── ProfileHUDSOnPixar.png
+    │
+    ├── Work_ACCakeHouse.png
+    ├── Work_Webhelp.png
+    │
+    ├── TE_ApacheNetbeans.png
+    ├── TE_ASP.NET.png
+    ├── TE_Assembly.png
+    ├── TE_C.png
+    ├── TE_C#.png
+    ├── TE_C++.png
+    ├── TE_CodeBlock.png
+    ├── TE_CSS3.png
+    ├── TE_Figma.png
+    ├── TE_Git.png
+    ├── TE_GitHub.png
+    ├── TE_HTML5.png
+    ├── TE_Java.png
+    ├── TE_JavaScript.png
+    ├── TE_MySQL.png
+    ├── TE_Python.png
+    ├── TE_R.png
+    ├── TE_Rocky.png
+    ├── TE_SAS.png
+    ├── TE_Slack.png
+    ├── TE_SQLServer.png
+    ├── TE_Ubuntu.png
+    ├── TE_VisualStudio.png
+    └── TE_VisualStudioCode.png
