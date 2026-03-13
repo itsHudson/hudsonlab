@@ -72,7 +72,7 @@ hudsonlab/
     ├── TE_CSS3.png
     ├── TE_Figma.png
     ├── TE_Git.png
-    ├── TE_Github.png
+    ├── TE_GitHub.png
     ├── TE_HTML5.png
     ├── TE_Java.png
     ├── TE_JavaScript.png
