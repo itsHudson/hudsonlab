@@ -414,6 +414,38 @@
   text-transform: uppercase;
 }
 
+.journey-node-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.journey-flag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 9px 4px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 122, 24, 0.12);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 16px rgba(76, 45, 17, 0.04);
+}
+
+.journey-flag-badge img {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  flex: 0 0 18px;
+}
+
 .journey-node-content h3 {
   margin: 0 0 6px;
   font-size: 1.08rem;
@@ -952,6 +984,23 @@
     font-size: 0.9rem;
     line-height: 1.62;
   }
+
+  .journey-node-badges {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .journey-flag-badge {
+    min-height: 26px;
+    padding: 4px 8px 4px 5px;
+    font-size: 0.68rem;
+  }
+
+  .journey-flag-badge img {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -991,5 +1040,13 @@
 
   .journey-node-content p {
     font-size: 0.88rem;
+  }
+
+  .journey-flag-badge span {
+    display: none;
+  }
+
+  .journey-flag-badge {
+    padding-right: 5px;
   }
 }

@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function activateDefaultNode() {
-    const defaultCard = document.querySelector('.journey-node-card[data-node="08"]');
+    const defaultCard = document.querySelector('.journey-node-card[data-node="01"]');
 
     if (defaultCard) {
       setActiveNode(defaultCard);
