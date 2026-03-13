@@ -19,10 +19,15 @@
 
 .journey-intro-band {
   display: grid;
-  grid-template-columns: 1.14fr 0.86fr;
+  grid-template-columns: 1.12fr 0.88fr;
   gap: 24px;
-  align-items: center;
+  align-items: stretch;
   padding: 28px 30px;
+}
+
+.journey-intro-copy {
+  display: grid;
+  align-content: center;
 }
 
 .journey-intro-copy h2 {
@@ -30,15 +35,19 @@
   font-size: 1.76rem;
   line-height: 1.08;
   letter-spacing: -0.035em;
+  max-width: 14ch;
 }
 
 .journey-intro-copy p:last-child {
   margin: 0;
   color: var(--text-soft);
   line-height: 1.92;
+  max-width: 62ch;
 }
 
 .journey-intro-note {
+  display: grid;
+  align-content: center;
   padding: 22px;
   border-radius: 24px;
   background: rgba(255, 122, 24, 0.06);
@@ -62,7 +71,7 @@
 
 .journey-system-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+  grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
   gap: 24px;
   align-items: start;
 }
@@ -167,8 +176,8 @@
 .journey-grid-line-vertical {
   position: absolute;
   left: 50%;
-  top: 36px;
-  bottom: 36px;
+  top: 34px;
+  bottom: 34px;
   width: 2px;
   transform: translateX(-50%);
   background: linear-gradient(
@@ -234,25 +243,25 @@
 .journey-spine {
   position: relative;
   display: grid;
-  gap: 26px;
-  padding: 18px 0;
+  gap: 22px;
+  padding: 16px 0;
   z-index: 2;
 }
 
 .journey-node-card {
   position: relative;
-  width: calc(50% + 72px);
+  width: calc(50% + 70px);
   transition: transform 0.24s ease, opacity 0.24s ease, filter 0.24s ease;
 }
 
 .journey-node-card:nth-child(odd) {
   justify-self: end;
-  padding-right: 74px;
+  padding-right: 72px;
 }
 
 .journey-node-card:nth-child(even) {
   justify-self: start;
-  padding-left: 74px;
+  padding-left: 72px;
 }
 
 .journey-node-trigger {
@@ -260,7 +269,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   padding: 0;
   border: none;
   background: transparent;
@@ -279,7 +288,7 @@
 .journey-node-connector {
   position: absolute;
   top: 50%;
-  width: 68px;
+  width: 66px;
   height: 2px;
   background: linear-gradient(
     90deg,
@@ -292,18 +301,18 @@
 }
 
 .journey-node-card:nth-child(odd) .journey-node-connector {
-  right: -68px;
+  right: -66px;
 }
 
 .journey-node-card:nth-child(even) .journey-node-connector {
-  left: -68px;
+  left: -66px;
 }
 
 .journey-node-core {
   position: relative;
-  flex: 0 0 56px;
-  width: 56px;
-  height: 56px;
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -356,14 +365,17 @@
 
 .journey-node-content {
   width: 100%;
-  padding: 20px 22px;
-  border-radius: 24px;
+  min-height: 124px;
+  padding: 18px 20px;
+  border-radius: 22px;
   border: 1px solid rgba(145, 104, 65, 0.10);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 248, 242, 0.95) 100%);
   box-shadow: 0 16px 34px rgba(76, 45, 17, 0.06);
   position: relative;
   overflow: hidden;
+  display: grid;
+  align-content: start;
   transition:
     transform 0.18s ease,
     box-shadow 0.24s ease,
@@ -394,25 +406,28 @@
 
 .journey-node-version {
   display: inline-flex;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
   color: var(--accent);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .journey-node-content h3 {
-  margin: 0 0 8px;
-  font-size: 1.14rem;
+  margin: 0 0 6px;
+  font-size: 1.08rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  max-width: 20ch;
 }
 
 .journey-node-content p {
   margin: 0;
   color: var(--text-soft);
-  line-height: 1.8;
+  line-height: 1.68;
+  font-size: 0.94rem;
+  max-width: 31ch;
 }
 
 .journey-node-card:hover .journey-node-content,
@@ -511,7 +526,7 @@
 
 .journey-insight-panel h2 {
   margin: 0;
-  font-size: 1.56rem;
+  font-size: 1.52rem;
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
@@ -525,7 +540,7 @@
 .journey-insight-summary {
   margin: 0;
   color: var(--text-soft);
-  line-height: 1.95;
+  line-height: 1.92;
 }
 
 .journey-insight-tags {
@@ -663,6 +678,7 @@
   margin: 0;
   color: var(--text-soft);
   line-height: 1.95;
+  max-width: 78ch;
 }
 
 .reveal,
@@ -753,27 +769,34 @@
     grid-template-columns: 1fr;
   }
 
+  .journey-intro-copy h2,
+  .journey-intro-copy p:last-child,
+  .journey-bottom-note p:last-child {
+    max-width: none;
+  }
+
   .journey-node-card,
   .journey-node-card:nth-child(odd),
   .journey-node-card:nth-child(even) {
-    width: calc(100% - 44px);
+    width: calc(100% - 46px);
     justify-self: end;
     padding-right: 0;
-    padding-left: 44px;
+    padding-left: 46px;
   }
 
   .journey-node-trigger,
   .journey-node-card:nth-child(odd) .journey-node-trigger {
     flex-direction: row;
+    align-items: flex-start;
   }
 
   .journey-grid-line-vertical {
-    left: 22px;
+    left: 26px;
     transform: none;
   }
 
   .journey-grid-ring {
-    left: 22px;
+    left: 26px;
     transform: none;
   }
 
@@ -784,9 +807,18 @@
 
   .journey-node-card:nth-child(odd) .journey-node-connector,
   .journey-node-card:nth-child(even) .journey-node-connector {
-    left: -44px;
+    left: -46px;
     right: auto;
-    width: 44px;
+    width: 46px;
+  }
+
+  .journey-node-content {
+    min-height: auto;
+  }
+
+  .journey-node-content h3,
+  .journey-node-content p {
+    max-width: none;
   }
 
   .journey-mini-metrics {
@@ -802,15 +834,59 @@
     padding: 22px;
   }
 
+  .journey-machine-topbar {
+    align-items: flex-start;
+  }
+
+  .journey-node-card,
+  .journey-node-card:nth-child(odd),
+  .journey-node-card:nth-child(even) {
+    width: calc(100% - 40px);
+    padding-left: 40px;
+  }
+
+  .journey-node-card:nth-child(odd) .journey-node-connector,
+  .journey-node-card:nth-child(even) .journey-node-connector {
+    left: -40px;
+    width: 40px;
+  }
+
+  .journey-grid-line-vertical,
+  .journey-grid-ring {
+    left: 20px;
+  }
+
+  .journey-node-core {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .journey-node-core-ring {
+    width: 32px;
+    height: 32px;
+  }
+
+  .journey-node-core-dot {
+    width: 12px;
+    height: 12px;
+  }
+
   .journey-node-content {
-    padding: 18px;
+    padding: 16px 17px;
+    border-radius: 20px;
   }
 
   .journey-node-content h3 {
-    font-size: 1.04rem;
+    font-size: 1rem;
+  }
+
+  .journey-node-content p {
+    font-size: 0.9rem;
+    line-height: 1.62;
   }
 
   .journey-insight-panel h2 {
-    font-size: 1.36rem;
+    font-size: 1.32rem;
   }
 }
