@@ -83,8 +83,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, transparent 0%, rgba(255, 122, 24, 0.03) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 122, 24, 0.03) 50%, transparent 100%);
   pointer-events: none;
 }
 
@@ -92,8 +91,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255, 122, 24, 0.09), transparent 18%);
+  background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255, 122, 24, 0.09), transparent 18%);
   opacity: 0.9;
   pointer-events: none;
   transition: background 0.18s ease;
