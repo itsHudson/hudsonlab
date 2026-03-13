@@ -50,7 +50,7 @@ function initializeTechnologyCompass() {
     netbeans: '<img src="../Images/TE_ApacheNetbeans.png" alt="Apache NetBeans">',
     codeblocks: '<img src="../Images/TE_CodeBlock.png" alt="Code::Blocks">',
     git: '<img src="../Images/TE_Git.png" alt="Git">',
-    github: '<img src="../Images/TE_Github.png" alt="GitHub">',
+    github: '<img src="../Images/TE_GitHub.png" alt="GitHub">',
     aspnet: '<img src="../Images/TE_ASP.NET.png" alt="ASP.NET">',
     figma: '<img src="../Images/TE_Figma.png" alt="Figma">',
     slack: '<img src="../Images/TE_Slack.png" alt="Slack">',
