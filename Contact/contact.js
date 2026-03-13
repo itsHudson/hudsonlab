@@ -1,1 +1,3 @@
-console.log('Connect page loaded.');
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Connect page loaded.");
+});

@@ -2,10 +2,15 @@ hudsonlab/
 │
 ├── index.html
 │
+├── Components/
+│   ├── header.html
+│   └── footer.html
+│
 ├── css/
 │   └── global.css
 │
 ├── js/
+│   ├── layout.js
 │   ├── navigation.js
 │   └── particles.js
 │
@@ -47,8 +52,37 @@ hudsonlab/
     ├── Badge_NALAT.png
     ├── Badge_RHSA1.png
     ├── Badge_RHSA2.png
+    │
     ├── Edu_APU.png
+    ├── Edu_UCSI.png
+    │
     ├── MBTI_ENTJ.png
     ├── ProfileHUDSOnPixar.png
+    │
     ├── Work_ACCakeHouse.png
-    └── Work_Webhelp.png
+    ├── Work_Webhelp.png
+    │
+    ├── TE_ApacheNetbeans.png
+    ├── TE_ASP.NET.png
+    ├── TE_Assembly.png
+    ├── TE_C.png
+    ├── TE_C#.png
+    ├── TE_C++.png
+    ├── TE_CodeBlock.png
+    ├── TE_CSS3.png
+    ├── TE_Figma.png
+    ├── TE_Git.png
+    ├── TE_Github.png
+    ├── TE_HTML5.png
+    ├── TE_Java.png
+    ├── TE_JavaScript.png
+    ├── TE_MySQL.png
+    ├── TE_Python.png
+    ├── TE_R.png
+    ├── TE_Rocky.png
+    ├── TE_SAS.png
+    ├── TE_Slack.png
+    ├── TE_SQLServer.png
+    ├── TE_Ubuntu.png
+    ├── TE_VisualStudio.png
+    └── TE_VisualStudioCode.png
