@@ -492,6 +492,16 @@
     linear-gradient(180deg, rgba(255, 248, 242, 0.90) 0%, rgba(255, 255, 255, 0.98) 100%);
 }
 
+.journey-insight-panel-header {
+  display: grid;
+  gap: 8px;
+}
+
+.journey-insight-main {
+  display: grid;
+  gap: 14px;
+}
+
 .journey-insight-meta {
   display: flex;
   align-items: center;
@@ -775,6 +785,14 @@
     max-width: none;
   }
 
+  .journey-insight-panel {
+    gap: 20px;
+  }
+
+  .journey-insight-panel-header {
+    gap: 10px;
+  }
+
   .journey-node-card,
   .journey-node-card:nth-child(odd),
   .journey-node-card:nth-child(even) {
@@ -836,6 +854,55 @@
 
   .journey-machine-topbar {
     align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .journey-machine-topbar-left,
+  .journey-machine-topbar-right {
+    width: 100%;
+  }
+
+  .journey-machine-topbar-right {
+    justify-content: flex-start;
+  }
+
+  .journey-insight-panel {
+    padding-top: 20px;
+  }
+
+  .journey-insight-panel-header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(145, 104, 65, 0.10);
+  }
+
+  .journey-insight-main {
+    gap: 12px;
+  }
+
+  .journey-insight-panel h2 {
+    font-size: 1.28rem;
+    line-height: 1.12;
+  }
+
+  .journey-insight-summary {
+    line-height: 1.82;
+    font-size: 0.95rem;
+  }
+
+  .journey-tag {
+    min-height: 32px;
+    padding: 6px 11px;
+    font-size: 0.78rem;
+  }
+
+  .journey-map-grid {
+    gap: 10px;
+  }
+
+  .journey-map-card {
+    padding: 13px 14px;
+    border-radius: 16px;
   }
 
   .journey-node-card,
@@ -885,8 +952,44 @@
     font-size: 0.9rem;
     line-height: 1.62;
   }
+}
 
-  .journey-insight-panel h2 {
-    font-size: 1.32rem;
+@media (max-width: 520px) {
+  .journey-intro-band,
+  .journey-machine,
+  .journey-insight-panel,
+  .journey-bottom-note {
+    padding: 18px;
+  }
+
+  .journey-chip,
+  .journey-chip-soft,
+  .journey-insight-node,
+  .journey-insight-year {
+    font-size: 0.72rem;
+  }
+
+  .journey-readmore-button {
+    width: 100%;
+  }
+
+  .journey-insight-actions {
+    display: block;
+  }
+
+  .journey-node-trigger {
+    gap: 12px;
+  }
+
+  .journey-node-content {
+    padding: 14px 15px;
+  }
+
+  .journey-node-content h3 {
+    font-size: 0.96rem;
+  }
+
+  .journey-node-content p {
+    font-size: 0.88rem;
   }
 }
