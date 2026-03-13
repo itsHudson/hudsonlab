@@ -12,146 +12,351 @@
 
   <div id="header"></div>
 
-  <main class="page-shell">
+  <main class="page-shell journey-page-shell">
     <span class="small-chip">Journey</span>
 
     <h1 class="page-title">
-      A Decision Engine Shaped by Work, Leadership, and Technology
+      A Career System Built Through Experience, Leadership, and Technology
     </h1>
 
     <p class="page-subtitle">
-      This journey is presented as a system of major transitions rather than a
-      traditional timeline. Each phase reflects a key decision, a new layer of
-      capability, and a deeper shift toward systems, data, and technical thinking.
+      This journey is presented as a connected vertical node system. Each node marks
+      a major stage of growth, while the insight panel reveals a short overview before
+      continuing to a dedicated full story page.
     </p>
 
-    <section class="journey-engine-stage">
+    <section class="journey-system-stage">
 
-      <section class="glass-card journey-editorial-band reveal">
-        <div class="journey-editorial-copy">
-          <p class="journey-section-label">Decision Engine</p>
-          <h2>Every major phase changed the direction of the system.</h2>
+      <section class="glass-card journey-intro-band reveal">
+        <div class="journey-intro-copy">
+          <p class="journey-section-label">Career Signal System</p>
+          <h2>Eight connected nodes. Four major destinations. One evolving direction.</h2>
           <p>
-            Retail built operational awareness. Business education added structure.
-            Leadership introduced performance thinking. Global support sharpened
-            systems discipline. Technology transformed the direction entirely.
+            From frontline service and business education to operations leadership,
+            global support, and data-driven computing, each transition added a new
+            layer of capability. Click any node to inspect the phase, then continue
+            to the full organisation story.
           </p>
         </div>
 
-        <div class="journey-editorial-note">
+        <div class="journey-intro-note">
+          <p class="journey-note-title">How to explore</p>
           <p>
-            Select a decision node below to open the full detail page for that phase.
+            Select a node on the spine to update the live insight panel. Use
+            <strong>Read Full Story</strong> to jump into the related organisation page.
           </p>
         </div>
       </section>
 
-      <section class="glass-card engine-shell reveal-delay">
-        <div class="engine-topbar">
-          <div class="engine-topbar-left">
-            <span class="engine-chip">HUDSONLAB / JOURNEY ENGINE</span>
-            <span class="engine-chip engine-chip-soft">DECISION SYSTEM ACTIVE</span>
-          </div>
+      <section class="journey-system-layout reveal-delay">
+        <div class="glass-card journey-machine" id="journeyMachine">
+          <div class="journey-machine-topbar">
+            <div class="journey-machine-topbar-left">
+              <span class="journey-chip">HUDSONLAB / JOURNEY ENGINE</span>
+              <span class="journey-chip journey-chip-soft">8 NODES LOADED</span>
+            </div>
 
-          <div class="engine-topbar-right">
-            <span class="engine-status-dot"></span>
-            <span class="engine-status-text">5 Major Phases Loaded</span>
-          </div>
-        </div>
-
-        <div class="engine-grid">
-          <div class="engine-column">
-            <p class="engine-column-label">Input Layer</p>
-
-            <a class="engine-node-card node-retail" href="./retail-foundation/index.html">
-              <span class="engine-node-version">Node 01</span>
-              <h3>Retail Foundation</h3>
-              <p>Customer service, POS operations, and frontline business exposure.</p>
-            </a>
-
-            <a class="engine-node-card node-business" href="./business-education/index.html">
-              <span class="engine-node-version">Node 02</span>
-              <h3>Business Education</h3>
-              <p>Business administration, finance, marketing, and operational understanding.</p>
-            </a>
-          </div>
-
-          <div class="engine-column engine-column-center">
-            <p class="engine-column-label">Processing Layer</p>
-
-            <a class="engine-node-card node-operations featured-node" href="./operations-leadership/index.html">
-              <span class="engine-node-version">Node 03</span>
-              <h3>Operations Leadership</h3>
-              <p>Team leadership, KPI-driven improvements, and management execution.</p>
-            </a>
-
-            <div class="signal-core">
-              <div class="signal-core-ring signal-core-ring-1"></div>
-              <div class="signal-core-ring signal-core-ring-2"></div>
-              <div class="signal-core-inner">
-                <span>SHIFT</span>
-              </div>
+            <div class="journey-machine-topbar-right">
+              <span class="journey-status-dot"></span>
+              <span class="journey-status-text" id="journeyStatusText">Node 08 active</span>
             </div>
           </div>
 
-          <div class="engine-column">
-            <p class="engine-column-label">Output Layer</p>
+          <div class="journey-machine-shell">
+            <div class="journey-grid-line" aria-hidden="true">
+              <span class="journey-grid-line-vertical"></span>
+              <span class="journey-grid-ring ring-1"></span>
+              <span class="journey-grid-ring ring-2"></span>
+              <span class="journey-grid-ring ring-3"></span>
+            </div>
 
-            <a class="engine-node-card node-global" href="./global-support/index.html">
-              <span class="engine-node-version">Node 04</span>
-              <h3>Global Support Systems</h3>
-              <p>High-volume support, SLA discipline, and global service execution.</p>
-            </a>
+            <div class="journey-spine" id="journeySpine">
 
-            <a class="engine-node-card node-tech" href="./technology-transition/index.html">
-              <span class="engine-node-version">Node 05</span>
-              <h3>Technology Transition</h3>
-              <p>Computer science, data analytics, programming, and system design.</p>
-            </a>
+              <article
+                class="journey-node-card is-active reveal"
+                data-node="08"
+                data-year="Present"
+                data-title="Building a Data-Driven Future"
+                data-org="Career Direction"
+                data-summary="Today, the journey combines real business experience, leadership exposure, and technical data analytics training to build solutions that improve decision-making and create meaningful impact."
+                data-skills="Data Strategy|Analytical Thinking|Decision Support|Future Direction"
+                data-link="./asia-pacific-university/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 08">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 08</span>
+                    <h3>Building a Data-Driven Future</h3>
+                    <p>Real business experience + technical data analytics direction.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal-delay"
+                data-node="07"
+                data-year="2024–Present"
+                data-title="Transition Into Technology & Data"
+                data-org="Asia Pacific University (APU)"
+                data-summary="Recognising the growing importance of technology and data-driven decision making, this phase marks the transition into Computer Science with a specialism in Data Analytics, focusing on software development, machine learning, databases, and intelligent systems."
+                data-skills="Programming|Data Analytics|Machine Learning|System Design"
+                data-link="./asia-pacific-university/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 07">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 07</span>
+                    <h3>Transition Into Technology &amp; Data</h3>
+                    <p>BSc (Hons) in Computer Science with a specialism in Data Analytics.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal"
+                data-node="06"
+                data-year="2023"
+                data-title="Expanding Into Global Customer Experience"
+                data-org="Webhelp Malaysia"
+                data-summary="Working in a high-volume global support environment supporting Taiwan Foodpanda users strengthened communication, analytical problem solving, escalation handling, and service discipline within a fast-paced digital service system."
+                data-skills="Customer Experience|Problem Solving|SLA Handling|Cross-Cultural Communication"
+                data-link="./webhelp-malaysia/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 06">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 06</span>
+                    <h3>Expanding Into Global Customer Experience</h3>
+                    <p>Customer Service Executive in a global digital support environment.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal-delay"
+                data-node="05"
+                data-year="2021–2023"
+                data-title="Leading Teams & Driving Performance"
+                data-org="AC Cake House (M) Sdn Bhd"
+                data-summary="This leadership phase involved managing outlet operations, supervising teams of up to 10–15 staff, improving staff efficiency through structured training, strengthening service delivery, and making decisions with real operational data."
+                data-skills="Leadership|Operations Strategy|Performance Monitoring|Data-Informed Decisions"
+                data-link="./ac-cake-house/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 05">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 05</span>
+                    <h3>Leading Teams &amp; Driving Performance</h3>
+                    <p>Outlet Manager shaping people, process, service, and performance.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal"
+                data-node="04"
+                data-year="2020–2021"
+                data-title="Moving Into Operations Management"
+                data-org="AC Cake House (M) Sdn Bhd"
+                data-summary="This role introduced operations-side decision making through outlet coordination, inventory monitoring, internal reporting, and organisational planning, building stronger visibility into how business systems are managed behind the scenes."
+                data-skills="Operational Coordination|Inventory Monitoring|Business Reporting|Organisational Management"
+                data-link="./ac-cake-house/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 04">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 04</span>
+                    <h3>Moving Into Operations Management</h3>
+                    <p>Administrative &amp; Operations Manager with first exposure to business decisions.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal-delay"
+                data-node="03"
+                data-year="2018–2021"
+                data-title="Learning Business From the Ground Up"
+                data-org="AC Cake House (M) Sdn Bhd"
+                data-summary="Progressing through baker, cake decorator, and customer service responsibilities provided hands-on exposure to production, service delivery, quality control, and the way multiple functions work together inside a successful business operation."
+                data-skills="Team Collaboration|Operational Awareness|Product Quality Control|Time Management"
+                data-link="./ac-cake-house/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 03">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 03</span>
+                    <h3>Learning Business From the Ground Up</h3>
+                    <p>Operational roles across service, production, and quality-focused execution.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal"
+                data-node="02"
+                data-year="2018–2020"
+                data-title="Building a Business Foundation"
+                data-org="UCSI University"
+                data-summary="Pursuing a Diploma in Management built structured understanding across marketing, finance, operations, logistics, entrepreneurship, business law, and organisational decision making while strengthening strategic thinking and business analysis."
+                data-skills="Strategic Thinking|Business Analysis|Communication|Problem Solving"
+                data-link="./ucsi-university/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 02">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 02</span>
+                    <h3>Building a Business Foundation</h3>
+                    <p>Diploma in Management focused on business structure and decision making.</p>
+                  </span>
+                </button>
+              </article>
+
+              <article
+                class="journey-node-card reveal-delay-2"
+                data-node="01"
+                data-year="2017"
+                data-title="First Step Into the Working World"
+                data-org="AC Cake House (M) Sdn Bhd"
+                data-summary="The journey began in retail and food service, working as cashier and customer service staff, handling transactions, supporting customers, and learning early how service quality directly shapes customer experience."
+                data-skills="Customer Service|POS Operations|Retail Workflow|Communication"
+                data-link="./ac-cake-house/index.html"
+                data-link-label="Read Full Story"
+              >
+                <button class="journey-node-trigger" type="button" aria-label="Open Node 01">
+                  <span class="journey-node-connector"></span>
+                  <span class="journey-node-core">
+                    <span class="journey-node-core-ring"></span>
+                    <span class="journey-node-core-dot"></span>
+                  </span>
+                  <span class="journey-node-content">
+                    <span class="journey-node-version">Node 01</span>
+                    <h3>First Step Into the Working World</h3>
+                    <p>Cashier and customer service exposure to real-world operations from day one.</p>
+                  </span>
+                </button>
+              </article>
+            </div>
           </div>
         </div>
 
-        <div class="engine-connectors" aria-hidden="true">
-          <span class="connector connector-a"></span>
-          <span class="connector connector-b"></span>
-          <span class="connector connector-c"></span>
-          <span class="connector connector-d"></span>
+        <aside class="glass-card journey-insight-panel reveal-delay-2" id="journeyInsightPanel">
+          <p class="journey-section-label">Active Insight</p>
+
+          <div class="journey-insight-meta">
+            <span class="journey-insight-node" id="insightNode">Node 08</span>
+            <span class="journey-insight-year" id="insightYear">Present</span>
+          </div>
+
+          <h2 id="insightTitle">Building a Data-Driven Future</h2>
+          <p class="journey-insight-organisation" id="insightOrg">Career Direction</p>
+
+          <p class="journey-insight-summary" id="insightSummary">
+            Today, the journey combines real business experience, leadership exposure,
+            and technical data analytics training to build solutions that improve
+            decision-making and create meaningful impact.
+          </p>
+
+          <div class="journey-insight-tags" id="insightTags">
+            <span class="journey-tag">Data Strategy</span>
+            <span class="journey-tag">Analytical Thinking</span>
+            <span class="journey-tag">Decision Support</span>
+            <span class="journey-tag">Future Direction</span>
+          </div>
+
+          <div class="journey-insight-actions">
+            <a class="journey-readmore-button" id="insightLink" href="./asia-pacific-university/index.html">
+              Read Full Story
+            </a>
+          </div>
+
+          <div class="journey-organisation-map">
+            <p class="journey-map-label">Jump Destinations</p>
+
+            <div class="journey-map-grid">
+              <a href="./ac-cake-house/index.html" class="journey-map-card">
+                <strong>AC Cake House</strong>
+                <span>Nodes 01, 03, 04, 05</span>
+              </a>
+
+              <a href="./ucsi-university/index.html" class="journey-map-card">
+                <strong>UCSI University</strong>
+                <span>Node 02</span>
+              </a>
+
+              <a href="./webhelp-malaysia/index.html" class="journey-map-card">
+                <strong>Webhelp Malaysia</strong>
+                <span>Node 06</span>
+              </a>
+
+              <a href="./asia-pacific-university/index.html" class="journey-map-card">
+                <strong>Asia Pacific University</strong>
+                <span>Nodes 07, 08</span>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="journey-mini-metrics reveal">
+        <div class="glass-card journey-mini-metric">
+          <strong>8</strong>
+          <span>connected career nodes</span>
+        </div>
+
+        <div class="glass-card journey-mini-metric">
+          <strong>4</strong>
+          <span>full organisation story pages</span>
+        </div>
+
+        <div class="glass-card journey-mini-metric">
+          <strong>2</strong>
+          <span>worlds combined: business + technology</span>
         </div>
       </section>
 
-      <section class="journey-metrics-grid reveal-delay-2">
-        <div class="glass-card metric-panel">
-          <strong>+15%</strong>
-          <span>Staff efficiency improvement</span>
-        </div>
-
-        <div class="glass-card metric-panel">
-          <strong>+20%</strong>
-          <span>Customer satisfaction growth</span>
-        </div>
-
-        <div class="glass-card metric-panel">
-          <strong>+25%</strong>
-          <span>Revenue increase</span>
-        </div>
-
-        <div class="glass-card metric-panel">
-          <strong>-20%</strong>
-          <span>Inventory waste reduction</span>
-        </div>
-
-        <div class="glass-card metric-panel">
-          <strong>-12%</strong>
-          <span>Operational cost reduction</span>
-        </div>
-      </section>
-
-      <section class="glass-card block-card journey-summary-card reveal">
-        <p class="journey-section-label">Navigation Logic</p>
-        <h2>Overview first. Full phase detail on demand.</h2>
+      <section class="glass-card journey-bottom-note reveal-delay">
+        <p class="journey-section-label">System Logic</p>
+        <h2>Not just a timeline — a progression engine.</h2>
         <p>
-          The Journey page functions as a high-level decision interface. Each node
-          leads to a dedicated page where that phase is explained through role,
-          environment, responsibilities, measurable impact, and key learning.
+          The Journey page is designed as a living signal spine. Each node captures a
+          shift in responsibility, perspective, and capability, while the linked detail
+          pages provide the deeper organisational context behind the transition.
         </p>
       </section>
     </section>
