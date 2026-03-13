@@ -1,40 +1,38 @@
 console.log("Experience page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
+  const revealElements = document.querySelectorAll(
+    ".reveal, .reveal-delay, .reveal-delay-2"
+  );
 
-const revealElements = document.querySelectorAll(
-".reveal, .reveal-delay, .reveal-delay-2"
-);
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-const observer = new IntersectionObserver(
-(entries) => {
+        let delay = "0s";
 
-entries.forEach((entry) => {
+        if (entry.target.classList.contains("reveal-delay")) {
+          delay = "0.12s";
+        }
 
-if (!entry.isIntersecting) return;
+        if (entry.target.classList.contains("reveal-delay-2")) {
+          delay = "0.22s";
+        }
 
-let delay = "0s";
+        entry.target.style.transition =
+          "opacity 0.8s ease " + delay + ", transform 0.8s ease " + delay;
 
-if (entry.target.classList.contains("reveal-delay")) {
-delay = "0.12s";
-}
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+      });
+    },
+    { threshold: 0.12 }
+  );
 
-if (entry.target.classList.contains("reveal-delay-2")) {
-delay = "0.22s";
-}
-
-entry.target.style.transition =
-`opacity 0.8s ease ${delay}, transform 0.8s ease ${delay}`;
-
-entry.target.style.opacity = "1";
-entry.target.style.transform = "translateY(0)";
-
-});
-
-},
-{ threshold: 0.12 }
-);
-
-revealElements.forEach((el) => observer.observe(el));
-
+  revealElements.forEach(function (element) {
+    observer.observe(element);
+  });
 });
