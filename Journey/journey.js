@@ -134,15 +134,20 @@ document.addEventListener("DOMContentLoaded", function () {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateY = ((mouseX - centerX) / centerX) * 3.6;
-      const rotateX = ((centerY - mouseY) / centerY) * 2.6;
+      const rotateY = ((mouseX - centerX) / centerX) * 3.8;
+      const rotateX = ((centerY - mouseY) / centerY) * 2.8;
 
       machine.style.transform =
         "perspective(1400px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+
+      machine.style.setProperty("--glow-x", mouseX + "px");
+      machine.style.setProperty("--glow-y", mouseY + "px");
     });
 
     machine.addEventListener("mouseleave", function () {
       machine.style.transform = "perspective(1400px) rotateX(0deg) rotateY(0deg)";
+      machine.style.setProperty("--glow-x", "50%");
+      machine.style.setProperty("--glow-y", "50%");
     });
   }
 
@@ -163,10 +168,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const moveX = (x - rect.width / 2) / rect.width;
         const moveY = (y - rect.height / 2) / rect.height;
 
-        const contentShiftX = moveX * 10;
-        const contentShiftY = moveY * 8;
-        const coreShiftX = moveX * 6;
-        const coreShiftY = moveY * 6;
+        const contentShiftX = moveX * 12;
+        const contentShiftY = moveY * 9;
+        const coreShiftX = moveX * 7;
+        const coreShiftY = moveY * 7;
 
         content.style.transform =
           "translate(" + contentShiftX + "px, " + contentShiftY + "px)";
@@ -189,9 +194,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function autoActivateOnScroll() {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          if (entry.intersectionRatio >= 0.55) {
+            setActiveNode(entry.target);
+          }
+        });
+      },
+      {
+        threshold: [0.55, 0.7, 0.9]
+      }
+    );
+
+    nodeCards.forEach(function (card) {
+      observer.observe(card);
+    });
+  }
+
   runRevealObserver();
   wireNodeInteractions();
   enableMachineTilt();
   enableMagneticNodes();
   activateDefaultNode();
+  autoActivateOnScroll();
 });
