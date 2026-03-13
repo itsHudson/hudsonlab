@@ -71,7 +71,7 @@
       <section class="glass-card journey-map-section reveal-delay">
         <div class="journey-map-head">
           <div>
-            <p class="journey-section-label">Career Path Visualization</p>
+            <p class="journey-section-label">Career Navigation System</p>
             <h2>A growth path shaped by business, leadership, and technology</h2>
           </div>
 
@@ -83,14 +83,30 @@
 
         <div class="journey-map-layout">
           <div class="journey-path-panel">
+            <div class="journey-path-toolbar">
+              <span class="journey-toolbar-chip">Navigation Layer</span>
+              <span class="journey-toolbar-chip journey-toolbar-chip-soft">Decision Route Active</span>
+            </div>
+
             <div class="journey-path-canvas" id="journeyPathCanvas">
+              <div class="journey-canvas-glow journey-canvas-glow-a"></div>
+              <div class="journey-canvas-glow journey-canvas-glow-b"></div>
+              <div class="journey-grid-overlay"></div>
+
               <svg class="journey-svg" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="journeyPathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="rgba(255,122,24,0.18)"></stop>
-                    <stop offset="50%" stop-color="rgba(255,122,24,0.82)"></stop>
-                    <stop offset="100%" stop-color="rgba(255,179,71,0.35)"></stop>
+                    <stop offset="0%" stop-color="#ff7a18"></stop>
+                    <stop offset="50%" stop-color="#ff9b3d"></stop>
+                    <stop offset="100%" stop-color="#ffcc73"></stop>
                   </linearGradient>
+
+                  <linearGradient id="journeyAuxGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="rgba(255,122,24,0.10)"></stop>
+                    <stop offset="50%" stop-color="rgba(255,122,24,0.34)"></stop>
+                    <stop offset="100%" stop-color="rgba(255,179,71,0.08)"></stop>
+                  </linearGradient>
+
                   <filter id="journeyGlow">
                     <feGaussianBlur stdDeviation="8" result="blur"></feGaussianBlur>
                     <feMerge>
@@ -109,42 +125,67 @@
                   class="journey-path-line"
                   d="M 90 650 C 210 590, 250 520, 340 480 C 430 440, 500 420, 590 360 C 700 285, 790 255, 900 190 C 1000 130, 1080 92, 1130 72"
                 ></path>
+
+                <path
+                  class="journey-path-aux"
+                  d="M 125 610 C 225 560, 310 528, 392 470"
+                ></path>
+
+                <path
+                  class="journey-path-aux"
+                  d="M 620 350 C 710 315, 800 250, 878 198"
+                ></path>
               </svg>
 
-              <button class="journey-node active" data-stage="retail" style="left: 7.5%; top: 79%;">
+              <div class="journey-route-badge journey-route-badge-start">
+                <span class="journey-route-badge-title">Start</span>
+                <span class="journey-route-badge-text">Retail Foundation</span>
+              </div>
+
+              <div class="journey-route-badge journey-route-badge-end">
+                <span class="journey-route-badge-title">Current Vector</span>
+                <span class="journey-route-badge-text">Data &amp; Systems</span>
+              </div>
+
+              <button class="journey-node active" data-stage="retail" style="left: 7.5%; top: 79%;" type="button">
                 <span class="journey-node-ring"></span>
                 <span class="journey-node-core"></span>
+                <span class="journey-node-pulse"></span>
                 <span class="journey-node-label">2017 · Retail Start</span>
               </button>
 
-              <button class="journey-node" data-stage="ucsi" style="left: 28%; top: 57%;">
+              <button class="journey-node" data-stage="ucsi" style="left: 28%; top: 57%;" type="button">
                 <span class="journey-node-ring"></span>
                 <span class="journey-node-core"></span>
+                <span class="journey-node-pulse"></span>
                 <span class="journey-node-label">2018–2020 · UCSI</span>
               </button>
 
-              <button class="journey-node" data-stage="management" style="left: 49%; top: 42%;">
+              <button class="journey-node" data-stage="management" style="left: 49%; top: 42%;" type="button">
                 <span class="journey-node-ring"></span>
                 <span class="journey-node-core"></span>
+                <span class="journey-node-pulse"></span>
                 <span class="journey-node-label">2020–2023 · Leadership</span>
               </button>
 
-              <button class="journey-node" data-stage="webhelp" style="left: 74%; top: 23%;">
+              <button class="journey-node" data-stage="webhelp" style="left: 74%; top: 23%;" type="button">
                 <span class="journey-node-ring"></span>
                 <span class="journey-node-core"></span>
+                <span class="journey-node-pulse"></span>
                 <span class="journey-node-label">2023 · Webhelp</span>
               </button>
 
-              <button class="journey-node" data-stage="apu" style="left: 94%; top: 8%;">
+              <button class="journey-node" data-stage="apu" style="left: 94%; top: 8%;" type="button">
                 <span class="journey-node-ring"></span>
                 <span class="journey-node-core"></span>
+                <span class="journey-node-pulse"></span>
                 <span class="journey-node-label">2024–Present · APU</span>
               </button>
             </div>
 
             <div class="journey-path-footer">
               <p>
-                The path moves from business operations and service environments
+                The route moves from business operations and service environments
                 toward a more technical future built around analytics, software,
                 and systems-oriented thinking.
               </p>
