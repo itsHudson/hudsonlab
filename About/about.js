@@ -3,7 +3,7 @@ console.log("About page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  initAboutJourneyAnimation();
+  initAboutRoadAnimation();
 });
 
 function initAboutReveal() {
@@ -92,39 +92,48 @@ function initAboutFloatingOrbs() {
   injectAboutOrbKeyframes();
 }
 
-function initAboutJourneyAnimation() {
-  const path = document.getElementById("aboutJourneyPath");
+function initAboutRoadAnimation() {
+  const roadOuter = document.getElementById("aboutRoadOuter");
+  const roadCenter = document.getElementById("aboutRoadCenter");
 
-  if (!path) {
+  if (!roadOuter || !roadCenter) {
     return;
   }
 
-  const pathLength = path.getTotalLength();
+  const outerLength = roadOuter.getTotalLength();
+  const centerLength = roadCenter.getTotalLength();
 
-  path.style.strokeDasharray = pathLength + " " + pathLength;
-  path.style.strokeDashoffset = pathLength;
+  roadOuter.style.strokeDasharray = outerLength + " " + outerLength;
+  roadOuter.style.strokeDashoffset = outerLength;
 
-  function updatePathProgress() {
+  roadCenter.style.strokeDasharray = "14 16, " + centerLength;
+  roadCenter.style.strokeDashoffset = centerLength;
+
+  function updateRoadProgress() {
     const scrollTop = window.scrollY || window.pageYOffset;
     const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
 
     if (documentHeight <= 0) {
-      path.style.strokeDashoffset = "0";
+      roadOuter.style.strokeDashoffset = "0";
+      roadCenter.style.strokeDashoffset = "0";
       return;
     }
 
     const progress = Math.min(Math.max(scrollTop / documentHeight, 0), 1);
-    const drawAmount = pathLength * (1 - progress * 1.12);
+    const outerDraw = outerLength * (1 - progress * 1.12);
+    const centerDraw = centerLength * (1 - progress * 1.12);
 
-    path.style.strokeDashoffset = Math.max(drawAmount, 0);
+    roadOuter.style.strokeDashoffset = Math.max(outerDraw, 0);
+    roadCenter.style.strokeDashoffset = Math.max(centerDraw, 0);
 
-    const translateY = Math.min(scrollTop * 0.03, 24);
-    path.style.transform = "translateY(" + translateY + "px)";
+    const translateY = Math.min(scrollTop * 0.03, 26);
+    roadOuter.style.transform = "translateY(" + translateY + "px)";
+    roadCenter.style.transform = "translateY(" + translateY + "px)";
   }
 
-  updatePathProgress();
-  window.addEventListener("scroll", updatePathProgress, { passive: true });
-  window.addEventListener("resize", updatePathProgress);
+  updateRoadProgress();
+  window.addEventListener("scroll", updateRoadProgress, { passive: true });
+  window.addEventListener("resize", updateRoadProgress);
 }
 
 function injectAboutOrbKeyframes() {
