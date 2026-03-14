@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initReveal();
   initImageParallax();
   initSystemField();
+  initAboutTyping();
 });
 
 function initReveal() {
@@ -89,5 +90,62 @@ function initSystemField() {
 
   window.createAboutSystemField({
     canvas: canvas
+  });
+}
+
+function initAboutTyping() {
+  const typedTarget = document.getElementById("aboutTypedText");
+  if (!typedTarget) {
+    return;
+  }
+
+  const phrases = [
+    "clarity.",
+    "structure.",
+    "system thinking.",
+    "direction."
+  ];
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let timeoutId = null;
+
+  function typeLoop() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (!isDeleting) {
+      charIndex += 1;
+      typedTarget.textContent = currentPhrase.slice(0, charIndex);
+
+      if (charIndex === currentPhrase.length) {
+        isDeleting = true;
+        timeoutId = window.setTimeout(typeLoop, 1200);
+        return;
+      }
+
+      timeoutId = window.setTimeout(typeLoop, 70);
+      return;
+    }
+
+    charIndex -= 1;
+    typedTarget.textContent = currentPhrase.slice(0, charIndex);
+
+    if (charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      timeoutId = window.setTimeout(typeLoop, 260);
+      return;
+    }
+
+    timeoutId = window.setTimeout(typeLoop, 38);
+  }
+
+  typeLoop();
+
+  window.addEventListener("beforeunload", function () {
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
   });
 }
