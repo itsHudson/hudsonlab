@@ -27,125 +27,170 @@
         </h1>
 
         <p class="page-subtitle about-main-subtitle">
-          This page traces how I think, what drives my direction, and why I care
+          This page traces how I think, what shapes my direction, and why I care
           about structure, momentum, and building work that carries both clarity
           and intent.
         </p>
       </div>
     </section>
 
-    <section class="about-journey-road">
-      <svg
-        class="about-road-svg"
-        viewBox="0 0 1200 2850"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <!-- Road body -->
-        <path
-          id="aboutRoadOuter"
-          class="about-road-outer"
-          d="M820,120
-             C960,220 980,430 760,520
-             C500,620 330,780 400,970
-             C470,1160 840,1185 930,1370
-             C1020,1560 760,1690 560,1785
-             C350,1885 260,2080 430,2215
-             C610,2355 930,2385 895,2580
-             C870,2710 710,2780 560,2830"
-        />
-        <!-- Road center dashed line -->
-        <path
-          id="aboutRoadCenter"
-          class="about-road-center"
-          d="M820,120
-             C960,220 980,430 760,520
-             C500,620 330,780 400,970
-             C470,1160 840,1185 930,1370
-             C1020,1560 760,1690 560,1785
-             C350,1885 260,2080 430,2215
-             C610,2355 930,2385 895,2580
-             C870,2710 710,2780 560,2830"
-        />
-      </svg>
+    <section class="about-road-layout">
+      <!-- ROAD CORRIDOR -->
+      <div class="about-road-corridor" aria-hidden="true">
+        <svg
+          class="about-road-svg"
+          viewBox="0 0 360 2600"
+          preserveAspectRatio="none"
+        >
+          <!-- road body -->
+          <path
+            id="aboutRoadBody"
+            class="about-road-body"
+            d="M238,40
+               C300,130 300,270 216,355
+               C132,438 82,555 112,688
+               C140,808 264,874 278,1006
+               C292,1140 186,1228 142,1362
+               C104,1476 124,1614 216,1704
+               C306,1793 314,1922 230,2016
+               C154,2102 106,2215 142,2330
+               C168,2412 204,2478 244,2550"
+          />
 
-      <span class="about-road-node about-road-node-1"></span>
-      <span class="about-road-node about-road-node-2"></span>
-      <span class="about-road-node about-road-node-3"></span>
-      <span class="about-road-node about-road-node-4"></span>
-      <span class="about-road-node about-road-node-5"></span>
+          <!-- road edges -->
+          <path
+            id="aboutRoadEdgeLeft"
+            class="about-road-edge"
+            d="M222,50
+               C280,136 280,268 200,347
+               C121,427 67,549 96,689
+               C123,819 247,882 261,1009
+               C275,1135 172,1222 127,1358
+               C89,1474 109,1622 202,1716
+               C289,1804 296,1918 215,2008
+               C140,2092 90,2213 127,2334
+               C150,2412 186,2480 226,2558"
+          />
+          <path
+            id="aboutRoadEdgeRight"
+            class="about-road-edge"
+            d="M254,30
+               C320,124 320,272 232,363
+               C143,449 97,561 128,687
+               C157,797 281,866 295,1003
+               C309,1145 200,1234 157,1366
+               C119,1478 139,1606 230,1692
+               C323,1782 332,1926 245,2024
+               C168,2112 122,2217 157,2326
+               C186,2412 222,2476 262,2542"
+          />
 
-      <!-- Node 1 -->
-      <section class="about-road-section about-road-section-right reveal">
-        <div class="about-road-media about-road-media-portrait">
-          <div class="about-road-image-shell">
-            <span class="about-image-kicker">Strategic Identity</span>
-            <img src="../Images/ProfileHUDSOnPixar.png" alt="Hudson Chia portrait" class="about-road-image" />
+          <!-- center dashed line -->
+          <path
+            id="aboutRoadCenter"
+            class="about-road-center"
+            d="M238,40
+               C300,130 300,270 216,355
+               C132,438 82,555 112,688
+               C140,808 264,874 278,1006
+               C292,1140 186,1228 142,1362
+               C104,1476 124,1614 216,1704
+               C306,1793 314,1922 230,2016
+               C154,2102 106,2215 142,2330
+               C168,2412 204,2478 244,2550"
+          />
+        </svg>
+
+        <span class="about-road-node about-road-node-1"></span>
+        <span class="about-road-node about-road-node-2"></span>
+        <span class="about-road-node about-road-node-3"></span>
+        <span class="about-road-node about-road-node-4"></span>
+        <span class="about-road-node about-road-node-5"></span>
+      </div>
+
+      <!-- ROW 1 -->
+      <section class="about-row about-row-1 reveal">
+        <div class="about-side about-side-left">
+          <div class="about-photo-panel about-photo-panel-large">
+            <span class="about-panel-kicker">Strategic Identity</span>
+            <img
+              src="../Images/ProfileHUDSOnPixar.png"
+              alt="Hudson Chia portrait"
+              class="about-photo-image about-photo-image-portrait"
+            />
           </div>
         </div>
 
-        <div class="about-road-content">
-          <span class="about-road-label">Node 01</span>
-          <h2>I am drawn to clarity, not noise.</h2>
+        <div class="about-side about-side-right">
+          <div class="about-copy-block">
+            <span class="about-node-label">Node 01</span>
+            <h2>I am drawn to clarity, not noise.</h2>
 
-          <p>
-            I am a Computer Science student who naturally gravitates toward work
-            that feels organised, intentional, and well-directed. What interests
-            me is not only what technology can do, but how it can be shaped into
-            something clear, useful, and meaningful.
-          </p>
+            <p>
+              I am a Computer Science student who naturally gravitates toward work
+              that feels organised, intentional, and well-directed. What interests
+              me is not only what technology can do, but how it can be shaped into
+              something clear, useful, and meaningful.
+            </p>
 
-          <p>
-            I am most engaged when I can take complexity, structure it with
-            purpose, and move it toward a result that feels deliberate rather than
-            accidental.
-          </p>
+            <p>
+              I am most engaged when I can take complexity, structure it with
+              purpose, and move it toward a result that feels deliberate rather
+              than accidental.
+            </p>
 
-          <div class="about-road-meta">
-            <strong>HUDSON CHIA</strong>
-            <span>Computer Science · Systems Thinking · Creative Direction</span>
+            <div class="about-inline-meta">
+              <strong>HUDSON CHIA</strong>
+              <span>Computer Science · Systems Thinking · Creative Direction</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Node 2 -->
-      <section class="about-road-section about-road-section-left reveal-delay">
-        <div class="about-road-content">
-          <span class="about-road-label">Node 02</span>
-          <h2>I think in systems, not fragments.</h2>
+      <!-- ROW 2 -->
+      <section class="about-row about-row-2 reveal-delay">
+        <div class="about-side about-side-left">
+          <div class="about-copy-block">
+            <span class="about-node-label">Node 02</span>
+            <h2>I think in systems, not fragments.</h2>
 
-          <p>
-            I tend to look at relationships between parts instead of viewing each
-            piece in isolation. I like understanding how structure shapes clarity,
-            how direction influences outcomes, and how a well-designed system can
-            make complexity feel manageable.
-          </p>
+            <p>
+              I tend to look at relationships between parts instead of viewing
+              each piece in isolation. I like understanding how structure shapes
+              clarity, how direction influences outcomes, and how a well-designed
+              system can make complexity feel manageable.
+            </p>
 
-          <div class="about-road-traits">
-            <div class="about-road-trait">
-              <strong>Strategic Thinking</strong>
-              <span>Seeing beyond the task to the larger structure.</span>
-            </div>
+            <div class="about-trait-list">
+              <div class="about-trait-item">
+                <strong>Strategic Thinking</strong>
+                <span>Seeing beyond the task to the larger structure.</span>
+              </div>
 
-            <div class="about-road-trait">
-              <strong>Organised Execution</strong>
-              <span>Turning ideas into practical progress with control.</span>
-            </div>
+              <div class="about-trait-item">
+                <strong>Organised Execution</strong>
+                <span>Turning ideas into practical progress with control.</span>
+              </div>
 
-            <div class="about-road-trait">
-              <strong>Intentional Design</strong>
-              <span>Believing presentation matters because clarity matters.</span>
+              <div class="about-trait-item">
+                <strong>Intentional Design</strong>
+                <span>Believing presentation matters because clarity matters.</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="about-road-media about-road-media-entj">
-          <div class="about-road-image-shell about-road-image-shell-small">
-            <span class="about-image-kicker">Personality Signal</span>
-            <img src="../Images/MBTI_ENTJ.png" alt="ENTJ personality profile" class="about-road-image about-road-image-entj" />
+        <div class="about-side about-side-right">
+          <div class="about-photo-panel about-photo-panel-small">
+            <span class="about-panel-kicker">Personality Signal</span>
+            <img
+              src="../Images/MBTI_ENTJ.png"
+              alt="ENTJ personality profile"
+              class="about-photo-image about-photo-image-entj"
+            />
           </div>
 
-          <div class="about-road-note">
+          <div class="about-floating-text">
             <span class="about-note-label">ENTJ</span>
             <p>
               Structured, decisive, and forward-looking — a mindset connected to
@@ -155,84 +200,102 @@
         </div>
       </section>
 
-      <!-- Node 3 -->
-      <section class="about-road-section about-road-section-right reveal-delay-2">
-        <div class="about-road-media about-road-media-manifesto">
-          <div class="about-floating-note">
-            <span class="about-note-label">Core Belief</span>
-            <h3>My approach to good work</h3>
-
-            <ul>
-              <li>Good systems reduce confusion.</li>
-              <li>Good structure creates confidence.</li>
-              <li>Good design makes intention visible.</li>
-              <li>Good execution gives ideas real weight.</li>
-            </ul>
+      <!-- ROW 3 -->
+      <section class="about-row about-row-3 reveal-delay-2">
+        <div class="about-side about-side-left">
+          <div class="about-photo-panel about-photo-panel-sample">
+            <span class="about-panel-kicker">Visual Marker</span>
+            <img
+              src="../Images/ABO_Sample.png"
+              alt="Sample visual for About page"
+              class="about-photo-image about-photo-image-sample"
+            />
           </div>
         </div>
 
-        <div class="about-road-content">
-          <span class="about-road-label">Node 03</span>
-          <h2>Execution matters more than appearance alone.</h2>
+        <div class="about-side about-side-right">
+          <div class="about-copy-block">
+            <span class="about-node-label">Node 03</span>
+            <h2>Execution matters more than appearance alone.</h2>
 
-          <p>
-            I care about work that does more than look polished. To me, quality is
-            also logical, readable, and dependable. Whether it is a system, a
-            digital experience, or a structured idea, I want the result to feel
-            considered from the inside out.
-          </p>
+            <p>
+              I care about work that does more than look polished. To me, quality
+              is also logical, readable, and dependable. Whether it is a system, a
+              digital experience, or a structured idea, I want the result to feel
+              considered from the inside out.
+            </p>
 
-          <blockquote class="about-road-quote">
-            “Technology is not only about function. It is also about how clearly
-            an idea can be expressed through structure.”
-          </blockquote>
+            <div class="about-floating-text about-floating-text-compact">
+              <span class="about-note-label">Core Belief</span>
+              <p>
+                Good systems reduce confusion. Good structure creates confidence.
+                Good design makes intention visible. Good execution gives ideas
+                real weight.
+              </p>
+            </div>
+
+            <blockquote class="about-quote-block">
+              “Technology is not only about function. It is also about how clearly
+              an idea can be expressed through structure.”
+            </blockquote>
+          </div>
         </div>
       </section>
 
-      <!-- Node 4 -->
-      <section class="about-road-section about-road-section-left reveal">
-        <div class="about-road-content">
-          <span class="about-road-label">Node 04</span>
-          <h2>I value direction, discipline, and momentum.</h2>
+      <!-- ROW 4 -->
+      <section class="about-row about-row-4 reveal">
+        <div class="about-side about-side-left">
+          <div class="about-copy-block">
+            <span class="about-node-label">Node 04</span>
+            <h2>I value direction, discipline, and momentum.</h2>
 
-          <p>
-            I work best when there is a clear reason behind what is being built. I
-            enjoy refining ideas, taking initiative, and moving work forward with
-            discipline. I care about building with purpose, progress, and long-term
-            value in mind.
-          </p>
+            <p>
+              I work best when there is a clear reason behind what is being built.
+              I enjoy refining ideas, taking initiative, and moving work forward
+              with discipline. I care about building with purpose, progress, and
+              long-term value in mind.
+            </p>
 
-          <div class="about-road-strength-grid">
-            <div class="about-road-strength">
-              <span class="about-strength-number">01</span>
-              <h3>Analytical</h3>
-              <p>I like turning complexity into something clearer and more workable.</p>
-            </div>
+            <div class="about-strength-list">
+              <div class="about-strength-item">
+                <span class="about-strength-number">01</span>
+                <strong>Analytical</strong>
+                <p>I like turning complexity into something clearer and more workable.</p>
+              </div>
 
-            <div class="about-road-strength">
-              <span class="about-strength-number">02</span>
-              <h3>Decisive</h3>
-              <p>I prefer movement, structure, and action that carries intent.</p>
-            </div>
+              <div class="about-strength-item">
+                <span class="about-strength-number">02</span>
+                <strong>Decisive</strong>
+                <p>I prefer movement, structure, and action that carries intent.</p>
+              </div>
 
-            <div class="about-road-strength">
-              <span class="about-strength-number">03</span>
-              <h3>Disciplined</h3>
-              <p>I value consistency, refinement, and strong execution standards.</p>
-            </div>
+              <div class="about-strength-item">
+                <span class="about-strength-number">03</span>
+                <strong>Disciplined</strong>
+                <p>I value consistency, refinement, and strong execution standards.</p>
+              </div>
 
-            <div class="about-road-strength">
-              <span class="about-strength-number">04</span>
-              <h3>Forward-Looking</h3>
-              <p>I am motivated by growth, direction, and meaningful progress.</p>
+              <div class="about-strength-item">
+                <span class="about-strength-number">04</span>
+                <strong>Forward-Looking</strong>
+                <p>I am motivated by growth, direction, and meaningful progress.</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="about-road-media about-road-media-direction">
-          <div class="about-floating-note about-floating-note-wide">
+        <div class="about-side about-side-right">
+          <div class="about-photo-panel about-photo-panel-sample">
+            <span class="about-panel-kicker">Journey Marker</span>
+            <img
+              src="../Images/ABO_Sample.png"
+              alt="Sample visual for About page"
+              class="about-photo-image about-photo-image-sample"
+            />
+          </div>
+
+          <div class="about-floating-text">
             <span class="about-note-label">Direction</span>
-            <h3>From learning tools to shaping systems</h3>
             <p>
               My path is not only about acquiring knowledge. It is about learning
               how to organise technology, design, and execution into work that
@@ -242,36 +305,46 @@
         </div>
       </section>
 
-      <!-- Node 5 -->
-      <section class="about-road-section about-road-section-right reveal-delay">
-        <div class="about-road-media about-road-media-future">
-          <div class="about-floating-note about-floating-note-soft">
-            <span class="about-note-label">Future Direction</span>
-            <h3>Building toward meaningful impact</h3>
-            <p>
-              I want to contribute through software, systems thinking, and refined
-              execution — creating work that feels useful, clear, and worth
-              remembering.
-            </p>
+      <!-- ROW 5 -->
+      <section class="about-row about-row-5 reveal-delay">
+        <div class="about-side about-side-left">
+          <div class="about-photo-panel about-photo-panel-sample">
+            <span class="about-panel-kicker">Future Marker</span>
+            <img
+              src="../Images/ABO_Sample.png"
+              alt="Sample visual for About page"
+              class="about-photo-image about-photo-image-sample"
+            />
           </div>
         </div>
 
-        <div class="about-road-content">
-          <span class="about-road-label">Node 05</span>
-          <h2>I am building toward work that leaves a strong impression.</h2>
+        <div class="about-side about-side-right">
+          <div class="about-copy-block">
+            <span class="about-node-label">Node 05</span>
+            <h2>I am building toward work that leaves a strong impression.</h2>
 
-          <p>
-            My long-term direction is not simply to become technically capable. I
-            want to create work that reflects clarity, strategic thinking, and
-            deliberate execution. I want what I build to carry both usefulness and
-            identity.
-          </p>
+            <p>
+              My long-term direction is not simply to become technically capable.
+              I want to create work that reflects clarity, strategic thinking, and
+              deliberate execution. I want what I build to carry both usefulness
+              and identity.
+            </p>
 
-          <p>
-            More than anything, I am building toward a future where software,
-            systems, design awareness, and disciplined thinking come together to
-            form work with lasting value and a recognisable point of view.
-          </p>
+            <p>
+              More than anything, I am building toward a future where software,
+              systems, design awareness, and disciplined thinking come together to
+              form work with lasting value and a recognisable point of view.
+            </p>
+
+            <div class="about-floating-text about-floating-text-compact">
+              <span class="about-note-label">Future Direction</span>
+              <p>
+                I want to contribute through software, systems thinking, and
+                refined execution — creating work that feels useful, clear, and
+                worth remembering.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </section>

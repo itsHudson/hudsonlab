@@ -93,41 +93,57 @@ function initAboutFloatingOrbs() {
 }
 
 function initAboutRoadAnimation() {
-  const roadOuter = document.getElementById("aboutRoadOuter");
+  const roadBody = document.getElementById("aboutRoadBody");
+  const roadLeft = document.getElementById("aboutRoadEdgeLeft");
+  const roadRight = document.getElementById("aboutRoadEdgeRight");
   const roadCenter = document.getElementById("aboutRoadCenter");
 
-  if (!roadOuter || !roadCenter) {
+  if (!roadBody || !roadLeft || !roadRight || !roadCenter) {
     return;
   }
 
-  const outerLength = roadOuter.getTotalLength();
-  const centerLength = roadCenter.getTotalLength();
+  const lengthBody = roadBody.getTotalLength();
+  const lengthLeft = roadLeft.getTotalLength();
+  const lengthRight = roadRight.getTotalLength();
+  const lengthCenter = roadCenter.getTotalLength();
 
-  roadOuter.style.strokeDasharray = outerLength + " " + outerLength;
-  roadOuter.style.strokeDashoffset = outerLength;
+  roadBody.style.strokeDasharray = lengthBody + " " + lengthBody;
+  roadBody.style.strokeDashoffset = lengthBody;
 
-  roadCenter.style.strokeDasharray = "14 16, " + centerLength;
-  roadCenter.style.strokeDashoffset = centerLength;
+  roadLeft.style.strokeDasharray = lengthLeft + " " + lengthLeft;
+  roadLeft.style.strokeDashoffset = lengthLeft;
+
+  roadRight.style.strokeDasharray = lengthRight + " " + lengthRight;
+  roadRight.style.strokeDashoffset = lengthRight;
+
+  roadCenter.style.strokeDasharray = "18 18, " + lengthCenter;
+  roadCenter.style.strokeDashoffset = lengthCenter;
 
   function updateRoadProgress() {
     const scrollTop = window.scrollY || window.pageYOffset;
     const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
 
     if (documentHeight <= 0) {
-      roadOuter.style.strokeDashoffset = "0";
+      roadBody.style.strokeDashoffset = "0";
+      roadLeft.style.strokeDashoffset = "0";
+      roadRight.style.strokeDashoffset = "0";
       roadCenter.style.strokeDashoffset = "0";
       return;
     }
 
     const progress = Math.min(Math.max(scrollTop / documentHeight, 0), 1);
-    const outerDraw = outerLength * (1 - progress * 1.12);
-    const centerDraw = centerLength * (1 - progress * 1.12);
+    const multiplier = 1.08;
 
-    roadOuter.style.strokeDashoffset = Math.max(outerDraw, 0);
-    roadCenter.style.strokeDashoffset = Math.max(centerDraw, 0);
+    roadBody.style.strokeDashoffset = Math.max(lengthBody * (1 - progress * multiplier), 0);
+    roadLeft.style.strokeDashoffset = Math.max(lengthLeft * (1 - progress * multiplier), 0);
+    roadRight.style.strokeDashoffset = Math.max(lengthRight * (1 - progress * multiplier), 0);
+    roadCenter.style.strokeDashoffset = Math.max(lengthCenter * (1 - progress * multiplier), 0);
 
-    const translateY = Math.min(scrollTop * 0.03, 26);
-    roadOuter.style.transform = "translateY(" + translateY + "px)";
+    const translateY = Math.min(scrollTop * 0.025, 24);
+
+    roadBody.style.transform = "translateY(" + translateY + "px)";
+    roadLeft.style.transform = "translateY(" + translateY + "px)";
+    roadRight.style.transform = "translateY(" + translateY + "px)";
     roadCenter.style.transform = "translateY(" + translateY + "px)";
   }
 
