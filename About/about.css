@@ -384,12 +384,12 @@ body[data-page="about"]::after {
 .segment {
   position: relative;
   z-index: 1;
-  height: 240px;
+  height: 280px;
 }
 
 .segment-rail {
   position: absolute;
-  inset: 0;
+  inset: 0 4% 0 4%;
   z-index: 1;
   pointer-events: none;
 }
@@ -399,22 +399,22 @@ body[data-page="about"]::after {
   height: 100%;
   display: block;
   overflow: visible;
-  filter: drop-shadow(0 8px 12px rgba(86, 61, 34, 0.08));
+  filter: drop-shadow(0 10px 14px rgba(86, 61, 34, 0.10));
 }
 
 .rail-left,
 .rail-right {
   fill: none;
   stroke: #665646;
-  stroke-width: 6;
+  stroke-width: 7;
   stroke-linecap: round;
 }
 
 .rail-sleepers line {
   stroke: #9b774f;
-  stroke-width: 7;
+  stroke-width: 8;
   stroke-linecap: round;
-  opacity: 0.92;
+  opacity: 0.94;
 }
 
 /* reveal for segments */
@@ -534,7 +534,7 @@ body[data-page="about"]::after {
   }
 
   .segment {
-    height: 150px;
+    height: 170px;
   }
 
   .station-entj::before {
@@ -594,7 +594,7 @@ body[data-page="about"]::after {
   }
 
   .segment {
-    height: 120px;
+    height: 130px;
   }
 
   .station-note {
