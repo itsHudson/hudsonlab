@@ -116,7 +116,7 @@ function initAboutRoadAnimation() {
   roadRight.style.strokeDasharray = lengthRight + " " + lengthRight;
   roadRight.style.strokeDashoffset = lengthRight;
 
-  roadCenter.style.strokeDasharray = "18 18, " + lengthCenter;
+  roadCenter.style.strokeDasharray = "20 20, " + lengthCenter;
   roadCenter.style.strokeDashoffset = lengthCenter;
 
   function updateRoadProgress() {
@@ -139,7 +139,7 @@ function initAboutRoadAnimation() {
     roadRight.style.strokeDashoffset = Math.max(lengthRight * (1 - progress * multiplier), 0);
     roadCenter.style.strokeDashoffset = Math.max(lengthCenter * (1 - progress * multiplier), 0);
 
-    const translateY = Math.min(scrollTop * 0.025, 24);
+    const translateY = Math.min(scrollTop * 0.02, 22);
 
     roadBody.style.transform = "translateY(" + translateY + "px)";
     roadLeft.style.transform = "translateY(" + translateY + "px)";
