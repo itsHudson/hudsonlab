@@ -8,8 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
 function initializeRevealMotion() {
   const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
+  if (!("IntersectionObserver" in window)) {
+    revealElements.forEach(function (element) {
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver(
-    function (entries) {
+    function (entries, observerInstance) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) {
           return;
@@ -29,6 +37,8 @@ function initializeRevealMotion() {
           "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
+
+        observerInstance.unobserve(entry.target);
       });
     },
     { threshold: 0.12 }
@@ -690,6 +700,7 @@ function initializeTechnologyCompass() {
   const orbitNodes = document.getElementById("orbitNodes");
   const orbitShell = document.getElementById("orbitShell");
   const particleLayer = document.getElementById("particleLayer");
+  const orbitConnectionSvg = document.getElementById("orbitConnectionSvg");
   const coreLabel = document.getElementById("coreLabel");
   const orbitCore = document.getElementById("orbitCore");
 
@@ -784,6 +795,33 @@ function initializeTechnologyCompass() {
       dot.style.setProperty("--radius", particle.radius + "px");
       dot.style.setProperty("--ring-rotation", ringRotation[particle.ring] + "deg");
       particleLayer.appendChild(dot);
+    });
+  }
+
+  function renderConnections() {
+    if (!orbitConnectionSvg) {
+      return;
+    }
+
+    const shellRect = orbitShell.getBoundingClientRect();
+    const centerX = shellRect.width / 2;
+    const centerY = shellRect.height / 2;
+
+    orbitConnectionSvg.innerHTML = "";
+
+    techOrder.forEach(function (item) {
+      const angle = (item.angle + ringRotation[item.ring]) * (Math.PI / 180);
+      const x = centerX + Math.sin(angle) * item.radius;
+      const y = centerY - Math.cos(angle) * item.radius;
+
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", centerX.toString());
+      line.setAttribute("y1", centerY.toString());
+      line.setAttribute("x2", x.toString());
+      line.setAttribute("y2", y.toString());
+      line.setAttribute("class", currentSkillKey === item.key ? "orbit-connection-line active" : "orbit-connection-line");
+
+      orbitConnectionSvg.appendChild(line);
     });
   }
 
@@ -902,6 +940,7 @@ function initializeTechnologyCompass() {
     });
 
     orbitShell.classList.toggle("focus-mode", currentSkillKey !== null);
+    renderConnections();
   }
 
   function applyRingRotations() {
@@ -914,6 +953,8 @@ function initializeTechnologyCompass() {
       const ring = particle.dataset.ring;
       particle.style.setProperty("--ring-rotation", ringRotation[ring] + "deg");
     });
+
+    renderConnections();
   }
 
   function stepParticles() {
@@ -1084,6 +1125,10 @@ function initializeTechnologyCompass() {
   orbitCore.addEventListener("click", function (event) {
     event.stopPropagation();
     clearActiveSkill();
+  });
+
+  window.addEventListener("resize", function () {
+    renderConnections();
   });
 
   createOrbitNodes();
