@@ -9,24 +9,28 @@
   <link rel="stylesheet" href="about.css" />
 </head>
 <body data-page="about">
+  <!-- ABOUT PAGE BACKGROUND VARIANT -->
+  <div class="about-bg-orbit"></div>
+  <div class="about-bg-noise"></div>
+  <div class="about-bg-dots"></div>
 
   <div id="header"></div>
 
   <main class="page-shell">
-    <span class="small-chip">About</span>
+    <span class="small-chip reveal">About</span>
 
-    <h1 class="page-title">
+    <h1 class="page-title reveal-delay">
       A Personal Direction Shaped by Clarity, Structure, and Intent
     </h1>
 
-    <p class="page-subtitle">
+    <p class="page-subtitle reveal-delay-2">
       This page is not simply a biography. It is a curated view of the mindset,
       values, and perspective that shape how I approach technology, design,
       and the kind of professional future I want to build.
     </p>
 
     <section class="about-stage">
-      <div class="glass-card about-editorial-band reveal">
+      <section class="about-editorial-band glass-card reveal">
         <div class="about-editorial-copy">
           <p class="about-section-label">Personal Perspective</p>
 
@@ -39,17 +43,21 @@
           </p>
         </div>
 
-        <div class="about-editorial-quote">
+        <div class="about-editorial-quote about-float-soft">
           <p>
             “Technology, to me, is not only about function.
             It is also about how clearly an idea can be expressed through structure.”
           </p>
         </div>
-      </div>
+      </section>
 
-      <section class="content-grid-2 glass-card block-card reveal-delay about-hero-block">
-        <div class="about-transparent-panel">
-          <img src="../Images/ProfileHUDSOnPixar.png" alt="Hudson Chia" class="about-transparent-image" />
+      <section class="content-grid-2 glass-card block-card reveal-delay about-hero-block about-parallax-card">
+        <div class="about-transparent-panel about-parallax-media">
+          <img
+            src="../Images/ProfileHUDSOnPixar.png"
+            alt="Hudson Chia"
+            class="about-transparent-image"
+          />
         </div>
 
         <div class="about-copy">
@@ -88,7 +96,7 @@
           </p>
 
           <div class="about-traits">
-            <div class="trait-item">
+            <div class="trait-item about-float-soft">
               <strong>Structured Thinking</strong>
               <span>
                 I prefer shaping complexity into something
@@ -96,7 +104,7 @@
               </span>
             </div>
 
-            <div class="trait-item">
+            <div class="trait-item about-float-soft">
               <strong>Execution with Purpose</strong>
               <span>
                 Turning ideas into outcomes matters more to me
@@ -104,7 +112,7 @@
               </span>
             </div>
 
-            <div class="trait-item">
+            <div class="trait-item about-float-soft">
               <strong>Design Awareness</strong>
               <span>
                 Details matter because details shape how quality
