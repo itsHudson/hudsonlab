@@ -1,108 +1,300 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js";
+(function () {
+  "use strict";
 
-const canvas=document.getElementById("aboutSystemCanvas")
+  function createAboutSystemField(options) {
+    if (!options || !options.canvas || typeof THREE === "undefined") {
+      return null;
+    }
 
-const scene=new THREE.Scene()
+    const canvas = options.canvas;
 
-const camera=new THREE.PerspectiveCamera(
-60,
-window.innerWidth/window.innerHeight,
-0.1,
-1000
-)
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      antialias: true,
+      alpha: true
+    });
 
-camera.position.z=18
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+    renderer.setClearColor(0x000000, 0);
 
-const renderer=new THREE.WebGLRenderer({
-canvas,
-alpha:true
-})
+    const scene = new THREE.Scene();
 
-renderer.setSize(window.innerWidth,window.innerHeight)
+    const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 200);
+    camera.position.set(0, 0, 26);
 
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2))
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
+    scene.add(ambientLight);
 
-const POINT_COUNT=180
+    const warmLight = new THREE.PointLight(0xffa45c, 1.1, 120);
+    warmLight.position.set(12, 10, 18);
+    scene.add(warmLight);
 
-const positions=[]
-const velocities=[]
+    const sideLight = new THREE.PointLight(0xffc892, 0.6, 120);
+    sideLight.position.set(-14, -8, 14);
+    scene.add(sideLight);
 
-for(let i=0;i<POINT_COUNT;i++){
+    const group = new THREE.Group();
+    scene.add(group);
 
-positions.push(
-(Math.random()-0.5)*36,
-(Math.random()-0.5)*50,
-(Math.random()-0.5)*14
-)
+    const mouse = {
+      x: 0,
+      y: 0,
+      targetX: 0,
+      targetY: 0
+    };
 
-velocities.push(
-(Math.random()-0.5)*0.01,
-(Math.random()-0.5)*0.01,
-(Math.random()-0.5)*0.004
-)
+    const POINT_COUNT = 180;
+    const bounds = { x: 18, y: 28, z: 10 };
 
-}
+    const positions = [];
+    const velocities = [];
 
-const geometry=new THREE.BufferGeometry()
+    for (let i = 0; i < POINT_COUNT; i++) {
+      positions.push(
+        (Math.random() - 0.5) * bounds.x * 2,
+        (Math.random() - 0.5) * bounds.y * 2,
+        (Math.random() - 0.5) * bounds.z * 2
+      );
 
-geometry.setAttribute(
-"position",
-new THREE.Float32BufferAttribute(positions,3)
-)
+      velocities.push(
+        (Math.random() - 0.5) * 0.010,
+        (Math.random() - 0.5) * 0.010,
+        (Math.random() - 0.5) * 0.004
+      );
+    }
 
-const material=new THREE.PointsMaterial({
+    const particleGeometry = new THREE.BufferGeometry();
+    particleGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(positions.slice(), 3)
+    );
 
-color:0xff9e47,
-size:0.18,
-transparent:true,
-opacity:.75,
-depthWrite:false,
-blending:THREE.AdditiveBlending
+    const particleMaterial = new THREE.PointsMaterial({
+      color: 0xff9e47,
+      size: 0.18,
+      transparent: true,
+      opacity: 0.78,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
 
-})
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    group.add(particles);
 
-const points=new THREE.Points(geometry,material)
+    const maxLineSegments = POINT_COUNT * 8;
+    const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
-scene.add(points)
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    lineGeometry.setDrawRange(0, 0);
 
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0xffb46e,
+      transparent: true,
+      opacity: 0.20
+    });
 
-function animate(){
+    const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+    group.add(lineSegments);
 
-const pos=geometry.attributes.position.array
+    const guideCurve = new THREE.BufferGeometry();
+    guideCurve.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(
+        [
+          -14, 16, -2,
+          -7, 8, -1,
+          -1, 1, 0,
+           6, -8, 1,
+          11, -18, 2
+        ],
+        3
+      )
+    );
 
-for(let i=0;i<POINT_COUNT;i++){
+    const guideMaterial = new THREE.LineBasicMaterial({
+      color: 0xff9a3d,
+      transparent: true,
+      opacity: 0.08
+    });
 
-pos[i*3]+=velocities[i*3]
-pos[i*3+1]+=velocities[i*3+1]
-pos[i*3+2]+=velocities[i*3+2]
+    const guideLine = new THREE.Line(guideCurve, guideMaterial);
+    guideLine.rotation.z = -0.12;
+    group.add(guideLine);
 
-}
+    const glowGeometry = new THREE.SphereGeometry(3.8, 20, 20);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffb46e,
+      transparent: true,
+      opacity: 0.035
+    });
 
-geometry.attributes.position.needsUpdate=true
+    const glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
+    glowOrb.position.set(8, -4, -1);
+    group.add(glowOrb);
 
-renderer.render(scene,camera)
+    resize();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("scroll", onScroll);
 
-requestAnimationFrame(animate)
+    let scrollOffset = 0;
+    let animationFrameId = requestAnimationFrame(animate);
 
-}
+    function onMouseMove(event) {
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
 
-animate()
+      mouse.targetX = (event.clientX / width - 0.5) * 2;
+      mouse.targetY = (event.clientY / height - 0.5) * 2;
+    }
 
+    function onMouseLeave() {
+      mouse.targetX = 0;
+      mouse.targetY = 0;
+    }
 
-window.addEventListener("scroll",()=>{
+    function onScroll() {
+      scrollOffset = window.scrollY || 0;
+    }
 
-const scrollY=window.scrollY
+    function resize() {
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
 
-camera.position.y=scrollY*-0.002
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
 
-})
+    function updateParticles() {
+      const attr = particleGeometry.getAttribute("position");
+      const array = attr.array;
 
+      for (let i = 0; i < POINT_COUNT; i++) {
+        const idx = i * 3;
 
-window.addEventListener("resize",()=>{
+        array[idx] += velocities[idx];
+        array[idx + 1] += velocities[idx + 1];
+        array[idx + 2] += velocities[idx + 2];
 
-camera.aspect=window.innerWidth/window.innerHeight
-camera.updateProjectionMatrix()
+        if (array[idx] > bounds.x || array[idx] < -bounds.x) {
+          velocities[idx] *= -1;
+        }
+        if (array[idx + 1] > bounds.y || array[idx + 1] < -bounds.y) {
+          velocities[idx + 1] *= -1;
+        }
+        if (array[idx + 2] > bounds.z || array[idx + 2] < -bounds.z) {
+          velocities[idx + 2] *= -1;
+        }
+      }
 
-renderer.setSize(window.innerWidth,window.innerHeight)
+      attr.needsUpdate = true;
+    }
 
-})
+    function updateConnections() {
+      const particleArray = particleGeometry.getAttribute("position").array;
+      let writeIndex = 0;
+      let lineCount = 0;
+
+      for (let i = 0; i < POINT_COUNT; i++) {
+        const ax = particleArray[i * 3];
+        const ay = particleArray[i * 3 + 1];
+        const az = particleArray[i * 3 + 2];
+
+        for (let j = i + 1; j < POINT_COUNT; j++) {
+          const bx = particleArray[j * 3];
+          const by = particleArray[j * 3 + 1];
+          const bz = particleArray[j * 3 + 2];
+
+          const dx = ax - bx;
+          const dy = ay - by;
+          const dz = az - bz;
+          const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+          if (distance < 5.8 && lineCount < maxLineSegments) {
+            linePositions[writeIndex++] = ax;
+            linePositions[writeIndex++] = ay;
+            linePositions[writeIndex++] = az;
+            linePositions[writeIndex++] = bx;
+            linePositions[writeIndex++] = by;
+            linePositions[writeIndex++] = bz;
+            lineCount += 2;
+          }
+        }
+      }
+
+      lineGeometry.setDrawRange(0, lineCount);
+      lineGeometry.attributes.position.needsUpdate = true;
+    }
+
+    function animate() {
+      animationFrameId = requestAnimationFrame(animate);
+
+      mouse.x += (mouse.targetX - mouse.x) * 0.03;
+      mouse.y += (mouse.targetY - mouse.y) * 0.03;
+
+      updateParticles();
+      updateConnections();
+
+      const scrollShift = scrollOffset * -0.0016;
+
+      camera.position.y += ((scrollShift) - camera.position.y) * 0.04;
+
+      group.rotation.y += 0.00035;
+      group.rotation.x += 0.00016;
+
+      group.rotation.y += mouse.x * 0.0025;
+      group.rotation.x += -mouse.y * 0.0018;
+
+      particles.rotation.z += 0.00028;
+      particles.position.x = mouse.x * 0.8;
+      particles.position.y += ((-mouse.y * 0.6) - particles.position.y) * 0.035;
+
+      lineSegments.rotation.z -= 0.00016;
+      lineSegments.position.x += ((mouse.x * 0.55) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * 0.38) - lineSegments.position.y) * 0.03;
+
+      guideLine.position.x += ((mouse.x * 0.34) - guideLine.position.x) * 0.03;
+      guideLine.position.y += ((-mouse.y * 0.22) - guideLine.position.y) * 0.03;
+
+      glowOrb.position.x += ((8 + mouse.x * 1.2) - glowOrb.position.x) * 0.02;
+      glowOrb.position.y += ((-4 - mouse.y * 0.9) - glowOrb.position.y) * 0.02;
+
+      renderer.render(scene, camera);
+    }
+
+    function destroy() {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("scroll", onScroll);
+
+      scene.traverse(function (object) {
+        if (object.geometry) {
+          object.geometry.dispose();
+        }
+
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(function (material) {
+              material.dispose();
+            });
+          } else {
+            object.material.dispose();
+          }
+        }
+      });
+
+      renderer.dispose();
+    }
+
+    return {
+      destroy: destroy
+    };
+  }
+
+  window.createAboutSystemField = createAboutSystemField;
+})();

@@ -1,30 +1,129 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", function () {
+  initReveal();
+  initNodePulse();
+  initImageParallax();
+  initSystemField();
+});
 
-const revealElements=document.querySelectorAll(".reveal")
+function initReveal() {
+  const revealElements = document.querySelectorAll(".reveal");
 
-const observer=new IntersectionObserver(entries=>{
+  if (!("IntersectionObserver" in window)) {
+    revealElements.forEach(function (element) {
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+    });
+    return;
+  }
 
-entries.forEach(entry=>{
+  const observer = new IntersectionObserver(
+    function (entries, observerInstance) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-if(entry.isIntersecting){
+        entry.target.style.transition = "opacity 0.9s ease, transform 0.9s ease";
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+        observerInstance.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.16 }
+  );
 
-entry.target.style.opacity=1
-entry.target.style.transform="translateY(0)"
-
+  revealElements.forEach(function (element) {
+    observer.observe(element);
+  });
 }
 
-})
+function initNodePulse() {
+  const hero = document.querySelector('[data-node-target="hero"]');
+  const identity = document.querySelector('[data-node-target="identity"]');
+  const direction = document.querySelector('[data-node-target="direction"]');
 
-},{threshold:.15})
+  const map = [
+    { section: hero, node: document.querySelector(".direction-node-hero") },
+    { section: identity, node: document.querySelector(".direction-node-identity") },
+    { section: direction, node: document.querySelector(".direction-node-direction") }
+  ];
 
-revealElements.forEach(el=>{
+  if (!("IntersectionObserver" in window)) {
+    return;
+  }
 
-el.style.opacity=0
-el.style.transform="translateY(40px)"
-el.style.transition="all .8s ease"
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-observer.observe(el)
+        const matched = map.find(function (item) {
+          return item.section === entry.target;
+        });
 
-})
+        if (!matched || !matched.node) {
+          return;
+        }
 
-})
+        matched.node.classList.remove("is-active");
+        void matched.node.offsetWidth;
+        matched.node.classList.add("is-active");
+      });
+    },
+    { threshold: 0.28 }
+  );
+
+  map.forEach(function (item) {
+    if (item.section) {
+      observer.observe(item.section);
+    }
+  });
+}
+
+function initImageParallax() {
+  const visuals = document.querySelectorAll(".about-visual");
+
+  visuals.forEach(function (visual) {
+    const image = visual.querySelector(".about-image");
+    if (!image) {
+      return;
+    }
+
+    visual.addEventListener("mousemove", function (event) {
+      const rect = visual.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateY = ((offsetX - centerX) / centerX) * 3.5;
+      const rotateX = -((offsetY - centerY) / centerY) * 3.5;
+
+      image.style.transform =
+        "translateY(-4px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(1.015)";
+    });
+
+    visual.addEventListener("mouseleave", function () {
+      image.style.transform = "";
+    });
+  });
+}
+
+function initSystemField() {
+  if (typeof window.createAboutSystemField !== "function") {
+    console.warn("createAboutSystemField not found.");
+    return;
+  }
+
+  const canvas = document.getElementById("aboutSystemCanvas");
+  if (!canvas) {
+    return;
+  }
+
+  window.createAboutSystemField({
+    canvas: canvas
+  });
+}
