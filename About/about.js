@@ -43,6 +43,11 @@ function initReveal() {
 
 function initImageParallax() {
   const visuals = document.querySelectorAll(".about-visual");
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (!canHover) {
+    return;
+  }
 
   visuals.forEach(function (visual) {
     const image = visual.querySelector(".about-image");
