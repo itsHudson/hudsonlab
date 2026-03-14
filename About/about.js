@@ -1,10 +1,11 @@
-console.log("About V16.2 Node-Connected Railway loaded.");
+console.log("About V17 Full-Page Railway loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  generateRailSleepers();
-  initSegmentReveal();
+  generateFullRouteSleepers();
+  initFullRouteReveal();
+  initRouteNodeSync();
 });
 
 function initAboutReveal() {
@@ -95,77 +96,121 @@ function initAboutFloatingOrbs() {
   injectAboutOrbKeyframes();
 }
 
-function generateRailSleepers() {
-  const configs = [
-    { groupId: "sleepers-01", leftId: "rail-left-01", rightId: "rail-right-01" },
-    { groupId: "sleepers-02", leftId: "rail-left-02", rightId: "rail-right-02" },
-    { groupId: "sleepers-03", leftId: "rail-left-03", rightId: "rail-right-03" },
-    { groupId: "sleepers-04", leftId: "rail-left-04", rightId: "rail-right-04" },
-    { groupId: "sleepers-05", leftId: "rail-left-05", rightId: "rail-right-05" }
-  ];
+function generateFullRouteSleepers() {
+  const leftRail = document.getElementById("routeRailLeft");
+  const rightRail = document.getElementById("routeRailRight");
+  const sleepersGroup = document.getElementById("routeSleepers");
 
-  configs.forEach(function (config) {
-    const leftRail = document.getElementById(config.leftId);
-    const rightRail = document.getElementById(config.rightId);
-    const sleepersGroup = document.getElementById(config.groupId);
+  if (!leftRail || !rightRail || !sleepersGroup) {
+    return;
+  }
 
-    if (!leftRail || !rightRail || !sleepersGroup) {
-      return;
-    }
+  sleepersGroup.innerHTML = "";
 
-    sleepersGroup.innerHTML = "";
+  const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
+  const sleeperCount = 48;
+  const startOffset = totalLength * 0.03;
+  const usableLength = totalLength * 0.94;
+  const spacing = usableLength / (sleeperCount - 1);
 
-    const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
-    const sleeperCount = 16;
-    const startOffset = totalLength * 0.08;
-    const usableLength = totalLength * 0.82;
-    const spacing = usableLength / (sleeperCount - 1);
+  for (let i = 0; i < sleeperCount; i++) {
+    const distance = startOffset + spacing * i;
+    const leftPoint = leftRail.getPointAtLength(distance);
+    const rightPoint = rightRail.getPointAtLength(distance);
 
-    for (let i = 0; i < sleeperCount; i++) {
-      const distance = startOffset + spacing * i;
-      const leftPoint = leftRail.getPointAtLength(distance);
-      const rightPoint = rightRail.getPointAtLength(distance);
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", leftPoint.x.toFixed(2));
+    line.setAttribute("y1", leftPoint.y.toFixed(2));
+    line.setAttribute("x2", rightPoint.x.toFixed(2));
+    line.setAttribute("y2", rightPoint.y.toFixed(2));
 
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      line.setAttribute("x1", leftPoint.x.toFixed(2));
-      line.setAttribute("y1", leftPoint.y.toFixed(2));
-      line.setAttribute("x2", rightPoint.x.toFixed(2));
-      line.setAttribute("y2", rightPoint.y.toFixed(2));
-
-      sleepersGroup.appendChild(line);
-    }
-  });
+    sleepersGroup.appendChild(line);
+  }
 }
 
-function initSegmentReveal() {
-  const segments = document.querySelectorAll(".segment");
+function initFullRouteReveal() {
+  const shell = document.getElementById("journeyShell");
+  const corridor = document.getElementById("routeCorridor");
+  const leftRail = document.getElementById("routeRailLeft");
+  const rightRail = document.getElementById("routeRailRight");
+  const sleepers = document.querySelectorAll("#routeSleepers line");
 
-  if (!("IntersectionObserver" in window)) {
-    segments.forEach(function (segment) {
-      segment.classList.add("visible");
+  if (!shell || !corridor || !leftRail || !rightRail) {
+    return;
+  }
+
+  const corridorLength = corridor.getTotalLength();
+  const leftLength = leftRail.getTotalLength();
+  const rightLength = rightRail.getTotalLength();
+
+  corridor.style.strokeDasharray = corridorLength + " " + corridorLength;
+  corridor.style.strokeDashoffset = corridorLength;
+
+  leftRail.style.strokeDasharray = leftLength + " " + leftLength;
+  leftRail.style.strokeDashoffset = leftLength;
+
+  rightRail.style.strokeDasharray = rightLength + " " + rightLength;
+  rightRail.style.strokeDashoffset = rightLength;
+
+  function updateRouteProgress() {
+    const rect = shell.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    const start = viewportHeight * 0.78;
+    const end = -(rect.height - viewportHeight * 0.22);
+    const rawProgress = (start - rect.top) / (start - end);
+    const progress = clamp(rawProgress, 0, 1);
+
+    corridor.style.strokeDashoffset = corridorLength * (1 - progress);
+    leftRail.style.strokeDashoffset = leftLength * (1 - progress);
+    rightRail.style.strokeDashoffset = rightLength * (1 - progress);
+
+    sleepers.forEach(function (line, index) {
+      const threshold = index / sleepers.length;
+      line.style.opacity = progress >= threshold ? "0.96" : "0";
     });
+  }
+
+  updateRouteProgress();
+  window.addEventListener("scroll", updateRouteProgress, { passive: true });
+  window.addEventListener("resize", updateRouteProgress);
+}
+
+function initRouteNodeSync() {
+  const stations = document.querySelectorAll(".station[data-station]");
+  const routeNodes = document.querySelectorAll(".route-node");
+
+  if (!("IntersectionObserver" in window) || stations.length === 0 || routeNodes.length === 0) {
     return;
   }
 
   const observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
+        const stationId = entry.target.getAttribute("data-station");
+        const matchingNode = document.querySelector('.route-node[data-node="' + stationId + '"]');
+
+        if (!matchingNode) {
+          return;
+        }
+
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
+          matchingNode.classList.add("is-active");
         } else {
-          entry.target.classList.remove("visible");
+          matchingNode.classList.remove("is-active");
         }
       });
     },
-    {
-      root: null,
-      threshold: 0.35
-    }
+    { threshold: 0.42 }
   );
 
-  segments.forEach(function (segment) {
-    observer.observe(segment);
+  stations.forEach(function (station) {
+    observer.observe(station);
   });
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
 }
 
 function injectAboutOrbKeyframes() {

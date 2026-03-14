@@ -37,13 +37,74 @@
       </div>
     </section>
 
-    <section class="journey-shell">
+    <section class="journey-shell" id="journeyShell">
+      <!-- =========================
+           FULL PAGE RAILWAY LAYER
+      ========================== -->
+      <div class="journey-route-layer" aria-hidden="true">
+        <svg
+          class="journey-route-svg"
+          viewBox="0 0 1400 4300"
+          preserveAspectRatio="none"
+        >
+          <!-- thick corridor -->
+          <path
+            id="routeCorridor"
+            class="route-corridor"
+            d="M1025,270
+               C1260,280 1290,610 1075,700
+               C825,805 260,785 210,1030
+               C165,1255 360,1450 675,1490
+               C1010,1535 1275,1665 1245,1905
+               C1215,2150 915,2185 610,2235
+               C285,2290 155,2455 200,2695
+               C240,2915 470,3005 790,3040
+               C1100,3075 1265,3205 1220,3450
+               C1175,3705 825,3770 515,3815"
+          />
+          <path
+            id="routeRailLeft"
+            class="route-rail"
+            d="M1006,286
+               C1234,297 1262,609 1051,689
+               C804,783 282,768 232,1020
+               C186,1251 376,1437 687,1474
+               C1016,1514 1253,1644 1224,1896
+               C1195,2140 900,2167 598,2219
+               C277,2275 176,2446 220,2684
+               C259,2897 485,2984 800,3016
+               C1101,3047 1245,3188 1200,3439
+               C1154,3681 809,3743 501,3796"
+          />
+          <path
+            id="routeRailRight"
+            class="route-rail"
+            d="M1044,252
+               C1286,263 1316,611 1099,711
+               C846,827 238,802 188,1040
+               C144,1260 344,1463 663,1506
+               C1004,1556 1297,1686 1266,1914
+               C1235,2160 930,2204 622,2251
+               C293,2305 134,2464 180,2706
+               C221,2933 455,3026 780,3064
+               C1100,3102 1285,3222 1240,3461
+               C1196,3729 841,3797 529,3834"
+          />
+          <g id="routeSleepers" class="route-sleepers"></g>
+        </svg>
+
+        <span class="route-node route-node-1" data-node="1"></span>
+        <span class="route-node route-node-2" data-node="2"></span>
+        <span class="route-node route-node-3" data-node="3"></span>
+        <span class="route-node route-node-4" data-node="4"></span>
+        <span class="route-node route-node-5" data-node="5"></span>
+        <span class="route-node route-node-6" data-node="6"></span>
+      </div>
+
       <!-- =========================
            Station 01
       ========================== -->
-      <section class="station station-left station-01 reveal">
-        <span class="station-marker station-marker-left" aria-hidden="true"></span>
-
+      <section class="station station-left station-01 reveal" data-station="1">
         <div class="station-cluster">
           <div class="station-visual">
             <div class="visual-panel visual-panel-portrait">
@@ -85,41 +146,9 @@
       </section>
 
       <!-- =========================
-           Segment 01 -> 02
-      ========================== -->
-      <section class="segment segment-right segment-01-02" aria-hidden="true">
-        <span class="segment-anchor segment-anchor-start" aria-hidden="true"></span>
-        <span class="segment-anchor segment-anchor-end" aria-hidden="true"></span>
-
-        <div class="segment-rail">
-          <svg class="segment-svg" viewBox="0 0 1400 420" preserveAspectRatio="none">
-            <path
-              id="rail-left-01"
-              class="rail-left"
-              d="M92,30
-                 C215,12 332,18 455,82
-                 C585,150 700,255 882,315
-                 C1048,370 1188,388 1312,392"
-            />
-            <path
-              id="rail-right-01"
-              class="rail-right"
-              d="M118,10
-                 C242,-8 358,-2 482,62
-                 C613,130 728,236 909,295
-                 C1075,350 1215,368 1338,372"
-            />
-            <g id="sleepers-01" class="rail-sleepers"></g>
-          </svg>
-        </div>
-      </section>
-
-      <!-- =========================
            Station 02
       ========================== -->
-      <section class="station station-right station-02 reveal-delay">
-        <span class="station-marker station-marker-right" aria-hidden="true"></span>
-
+      <section class="station station-right station-02 reveal-delay" data-station="2">
         <div class="station-cluster">
           <div class="station-copy">
             <span class="station-tag">Station 02</span>
@@ -164,41 +193,9 @@
       </section>
 
       <!-- =========================
-           Segment 02 -> 03
-      ========================== -->
-      <section class="segment segment-left segment-02-03" aria-hidden="true">
-        <span class="segment-anchor segment-anchor-start" aria-hidden="true"></span>
-        <span class="segment-anchor segment-anchor-end" aria-hidden="true"></span>
-
-        <div class="segment-rail">
-          <svg class="segment-svg" viewBox="0 0 1400 420" preserveAspectRatio="none">
-            <path
-              id="rail-left-02"
-              class="rail-left"
-              d="M1308,30
-                 C1185,12 1068,18 945,82
-                 C815,150 700,255 518,315
-                 C352,370 212,388 88,392"
-            />
-            <path
-              id="rail-right-02"
-              class="rail-right"
-              d="M1282,10
-                 C1158,-8 1042,-2 918,62
-                 C787,130 672,236 491,295
-                 C325,350 185,368 62,372"
-            />
-            <g id="sleepers-02" class="rail-sleepers"></g>
-          </svg>
-        </div>
-      </section>
-
-      <!-- =========================
            Station 03 / ENTJ
       ========================== -->
-      <section class="station station-left station-03 station-entj reveal-delay-2">
-        <span class="station-marker station-marker-left" aria-hidden="true"></span>
-
+      <section class="station station-left station-03 station-entj reveal-delay-2" data-station="3">
         <div class="station-cluster">
           <div class="station-visual">
             <div class="visual-panel visual-panel-entj">
@@ -248,41 +245,9 @@
       </section>
 
       <!-- =========================
-           Segment 03 -> 04
-      ========================== -->
-      <section class="segment segment-right segment-03-04" aria-hidden="true">
-        <span class="segment-anchor segment-anchor-start" aria-hidden="true"></span>
-        <span class="segment-anchor segment-anchor-end" aria-hidden="true"></span>
-
-        <div class="segment-rail">
-          <svg class="segment-svg" viewBox="0 0 1400 420" preserveAspectRatio="none">
-            <path
-              id="rail-left-03"
-              class="rail-left"
-              d="M92,30
-                 C215,12 332,18 455,82
-                 C585,150 700,255 882,315
-                 C1048,370 1188,388 1312,392"
-            />
-            <path
-              id="rail-right-03"
-              class="rail-right"
-              d="M118,10
-                 C242,-8 358,-2 482,62
-                 C613,130 728,236 909,295
-                 C1075,350 1215,368 1338,372"
-            />
-            <g id="sleepers-03" class="rail-sleepers"></g>
-          </svg>
-        </div>
-      </section>
-
-      <!-- =========================
            Station 04
       ========================== -->
-      <section class="station station-right station-04 reveal">
-        <span class="station-marker station-marker-right" aria-hidden="true"></span>
-
+      <section class="station station-right station-04 reveal" data-station="4">
         <div class="station-cluster">
           <div class="station-copy">
             <span class="station-tag">Station 04</span>
@@ -326,41 +291,9 @@
       </section>
 
       <!-- =========================
-           Segment 04 -> 05
-      ========================== -->
-      <section class="segment segment-left segment-04-05" aria-hidden="true">
-        <span class="segment-anchor segment-anchor-start" aria-hidden="true"></span>
-        <span class="segment-anchor segment-anchor-end" aria-hidden="true"></span>
-
-        <div class="segment-rail">
-          <svg class="segment-svg" viewBox="0 0 1400 420" preserveAspectRatio="none">
-            <path
-              id="rail-left-04"
-              class="rail-left"
-              d="M1308,30
-                 C1185,12 1068,18 945,82
-                 C815,150 700,255 518,315
-                 C352,370 212,388 88,392"
-            />
-            <path
-              id="rail-right-04"
-              class="rail-right"
-              d="M1282,10
-                 C1158,-8 1042,-2 918,62
-                 C787,130 672,236 491,295
-                 C325,350 185,368 62,372"
-            />
-            <g id="sleepers-04" class="rail-sleepers"></g>
-          </svg>
-        </div>
-      </section>
-
-      <!-- =========================
            Station 05
       ========================== -->
-      <section class="station station-left station-05 reveal-delay">
-        <span class="station-marker station-marker-left" aria-hidden="true"></span>
-
+      <section class="station station-left station-05 reveal-delay" data-station="5">
         <div class="station-cluster">
           <div class="station-visual">
             <div class="visual-panel visual-panel-sample">
@@ -402,41 +335,9 @@
       </section>
 
       <!-- =========================
-           Segment 05 -> 06
-      ========================== -->
-      <section class="segment segment-right segment-05-06" aria-hidden="true">
-        <span class="segment-anchor segment-anchor-start" aria-hidden="true"></span>
-        <span class="segment-anchor segment-anchor-end" aria-hidden="true"></span>
-
-        <div class="segment-rail">
-          <svg class="segment-svg" viewBox="0 0 1400 420" preserveAspectRatio="none">
-            <path
-              id="rail-left-05"
-              class="rail-left"
-              d="M92,30
-                 C215,12 332,18 455,82
-                 C585,150 700,255 882,315
-                 C1048,370 1188,388 1312,392"
-            />
-            <path
-              id="rail-right-05"
-              class="rail-right"
-              d="M118,10
-                 C242,-8 358,-2 482,62
-                 C613,130 728,236 909,295
-                 C1075,350 1215,368 1338,372"
-            />
-            <g id="sleepers-05" class="rail-sleepers"></g>
-          </svg>
-        </div>
-      </section>
-
-      <!-- =========================
            Station 06
       ========================== -->
-      <section class="station station-right station-06 reveal-delay-2">
-        <span class="station-marker station-marker-right" aria-hidden="true"></span>
-
+      <section class="station station-right station-06 reveal-delay-2" data-station="6">
         <div class="station-cluster">
           <div class="station-copy">
             <span class="station-tag">Station 06</span>
