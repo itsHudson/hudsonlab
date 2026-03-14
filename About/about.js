@@ -3,6 +3,7 @@ console.log("About page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
+  initAboutPathMotion();
 });
 
 function initAboutReveal() {
@@ -89,6 +90,20 @@ function initAboutFloatingOrbs() {
 
   document.body.appendChild(orbLayer);
   injectAboutOrbKeyframes();
+}
+
+function initAboutPathMotion() {
+  const pathLine = document.querySelector(".about-path-line");
+
+  if (!pathLine) {
+    return;
+  }
+
+  window.addEventListener("scroll", function () {
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const offset = Math.min(scrollTop * 0.04, 24);
+    pathLine.style.transform = "translateX(-50%) translateY(" + offset + "px)";
+  });
 }
 
 function injectAboutOrbKeyframes() {
