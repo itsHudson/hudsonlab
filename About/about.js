@@ -3,7 +3,7 @@ console.log("About page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  initAboutPathMotion();
+  initAboutJourneyAnimation();
 });
 
 function initAboutReveal() {
@@ -92,18 +92,39 @@ function initAboutFloatingOrbs() {
   injectAboutOrbKeyframes();
 }
 
-function initAboutPathMotion() {
-  const pathLine = document.querySelector(".about-path-line");
+function initAboutJourneyAnimation() {
+  const path = document.getElementById("aboutJourneyPath");
 
-  if (!pathLine) {
+  if (!path) {
     return;
   }
 
-  window.addEventListener("scroll", function () {
+  const pathLength = path.getTotalLength();
+
+  path.style.strokeDasharray = pathLength + " " + pathLength;
+  path.style.strokeDashoffset = pathLength;
+
+  function updatePathProgress() {
     const scrollTop = window.scrollY || window.pageYOffset;
-    const offset = Math.min(scrollTop * 0.04, 24);
-    pathLine.style.transform = "translateX(-50%) translateY(" + offset + "px)";
-  });
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (documentHeight <= 0) {
+      path.style.strokeDashoffset = "0";
+      return;
+    }
+
+    const progress = Math.min(Math.max(scrollTop / documentHeight, 0), 1);
+    const drawAmount = pathLength * (1 - progress * 1.12);
+
+    path.style.strokeDashoffset = Math.max(drawAmount, 0);
+
+    const translateY = Math.min(scrollTop * 0.03, 24);
+    path.style.transform = "translateY(" + translateY + "px)";
+  }
+
+  updatePathProgress();
+  window.addEventListener("scroll", updatePathProgress, { passive: true });
+  window.addEventListener("resize", updatePathProgress);
 }
 
 function injectAboutOrbKeyframes() {

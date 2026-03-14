@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="about.css" />
 </head>
 <body data-page="about">
-  <!-- BACKGROUND LAYERS -->
   <div class="about-bg-orbit"></div>
   <div class="about-bg-noise"></div>
   <div class="about-bg-dots"></div>
@@ -18,135 +17,164 @@
   <div id="header"></div>
 
   <main class="page-shell about-page-shell">
-    <section class="about-top-intro reveal">
-      <span class="small-chip">About</span>
+    <section class="about-hero reveal">
+      <div class="about-hero-copy">
+        <span class="small-chip">About</span>
 
-      <h1 class="page-title about-main-title">
-        Strategic by Nature.<br />
-        Structured by Intention.
-      </h1>
+        <h1 class="page-title about-main-title">
+          Strategic by Nature.<br />
+          Directed by Purpose.
+        </h1>
 
-      <p class="page-subtitle about-main-subtitle">
-        This is not just a profile page. It is a curated narrative of how I think,
-        how I work, and the direction I am building toward through technology,
-        systems, and purposeful execution.
-      </p>
+        <p class="page-subtitle about-main-subtitle">
+          This page is a visual narrative of how I think, what shapes my direction,
+          and why I care about structure, clarity, and meaningful execution in the
+          work I choose to build.
+        </p>
+      </div>
     </section>
 
-    <section class="about-story-flow">
-      <div class="about-path-line" aria-hidden="true">
-        <span class="path-dot path-dot-1"></span>
-        <span class="path-dot path-dot-2"></span>
-        <span class="path-dot path-dot-3"></span>
-        <span class="path-dot path-dot-4"></span>
-        <span class="path-dot path-dot-5"></span>
-      </div>
+    <section class="about-journey">
+      <svg
+        class="about-journey-line"
+        viewBox="0 0 1200 2600"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          id="aboutJourneyPath"
+          d="M820,70
+             C980,170 980,360 760,430
+             C520,510 340,640 410,820
+             C470,980 810,1010 900,1180
+             C1010,1385 760,1490 560,1570
+             C340,1660 280,1825 455,1940
+             C625,2050 910,2090 885,2285
+             C865,2420 710,2495 560,2550"
+        />
+      </svg>
 
-      <!-- BLOCK 1 -->
-      <section class="about-feature-row about-feature-row-hero reveal">
-        <div class="about-feature-visual glass-card">
-          <div class="about-visual-glow"></div>
-          <div class="about-portrait-panel">
+      <span class="about-node about-node-1"></span>
+      <span class="about-node about-node-2"></span>
+      <span class="about-node about-node-3"></span>
+      <span class="about-node about-node-4"></span>
+      <span class="about-node about-node-5"></span>
+
+      <!-- Section 1 -->
+      <section class="about-story-block about-story-block-right reveal">
+        <div class="about-story-visual glass-card about-identity-visual">
+          <div class="about-identity-frame">
+            <span class="about-identity-tag">Strategic Identity</span>
+
             <img
               src="../Images/ProfileHUDSOnPixar.png"
               alt="Hudson Chia"
-              class="about-portrait-image"
+              class="about-identity-image"
             />
+
+            <div class="about-identity-meta">
+              <h3>HUDSON CHIA</h3>
+              <p>Computer Science · Systems Thinking · Creative Direction</p>
+            </div>
           </div>
         </div>
 
-        <div class="about-feature-copy glass-card">
-          <p class="about-section-label">Identity</p>
-          <h2>Who I Am</h2>
+        <div class="about-story-copy about-copy-compact">
+          <p class="about-section-label">Node 01</p>
+          <h2>I am drawn to clarity, not noise.</h2>
 
           <p>
-            I am a Computer Science student with a growing interest in building
-            systems that feel clear, structured, and meaningful. I am drawn to
-            technology not only for what it can do, but for how well it can be
-            organised, expressed, and executed with purpose.
+            I am a Computer Science student who is naturally drawn to work that
+            feels structured, intentional, and well-directed. What interests me is
+            not only learning technology, but understanding how technology can be
+            shaped into something useful, refined, and clearly expressed.
           </p>
 
           <p>
-            What drives me most is the process of turning complexity into clarity.
-            I enjoy shaping ideas into usable systems, aligning structure with
-            intent, and creating digital work that feels deliberate rather than
-            accidental.
+            I value ideas that carry direction. I am most engaged when I can take
+            something complex, organise it with purpose, and turn it into an
+            outcome that feels both thoughtful and strong.
           </p>
         </div>
       </section>
 
-      <!-- BLOCK 2 -->
-      <section class="about-feature-row about-feature-row-reverse reveal-delay">
-        <div class="about-feature-copy glass-card">
-          <p class="about-section-label">Mindset</p>
-          <h2>I naturally think in systems, direction, and outcomes.</h2>
+      <!-- Section 2 -->
+      <section class="about-story-block about-story-block-left reveal-delay">
+        <div class="about-story-copy">
+          <p class="about-section-label">Node 02</p>
+          <h2>I think in systems, not fragments.</h2>
 
           <p>
-            I tend to approach work with a strategic lens. I like understanding
-            how parts connect, where value is created, and how structure can
-            improve both clarity and execution. I am most energised by work that
-            has direction, logic, and visible progress.
+            I tend to see relationships between parts rather than isolated pieces.
+            I like understanding how structure affects clarity, how flow shapes
+            experience, and how decisions connect to larger outcomes. This is why
+            I am especially drawn to systems thinking, purposeful design, and work
+            that carries internal logic.
           </p>
 
-          <div class="about-traits about-traits-tight">
-            <div class="trait-item">
+          <div class="about-trait-stack">
+            <div class="about-trait-card">
               <strong>Strategic Thinking</strong>
-              <span>Seeing patterns, direction, and long-term potential.</span>
+              <span>Looking beyond the immediate task to the bigger structure.</span>
             </div>
 
-            <div class="trait-item">
-              <strong>Structured Execution</strong>
-              <span>Turning ideas into organised, practical outcomes.</span>
+            <div class="about-trait-card">
+              <strong>Organised Execution</strong>
+              <span>Turning ideas into practical work with direction and control.</span>
             </div>
 
-            <div class="trait-item">
-              <strong>Leadership Energy</strong>
-              <span>Taking initiative, setting direction, and moving work forward.</span>
+            <div class="about-trait-card">
+              <strong>Intentional Design</strong>
+              <span>Believing that presentation matters because clarity matters.</span>
             </div>
           </div>
         </div>
 
-        <div class="about-feature-visual glass-card about-entj-visual-card">
-          <div class="about-entj-visual-inner">
-            <img src="../Images/MBTI_ENTJ.png" alt="ENTJ personality" class="about-entj-image" />
+        <div class="about-story-visual glass-card about-entj-visual">
+          <div class="about-entj-panel">
+            <img
+              src="../Images/MBTI_ENTJ.png"
+              alt="ENTJ personality profile"
+              class="about-entj-image"
+            />
 
-            <div class="about-personality-caption">
-              <span class="about-mini-label">Personality Profile</span>
+            <div class="about-entj-copy">
+              <span class="about-mini-label">Personality Signal</span>
               <h3>ENTJ</h3>
               <p>
-                A mindset often associated with structure, direction,
-                decision-making, and building toward meaningful impact.
+                Structured, decisive, and future-oriented. A mindset often linked
+                to leadership, direction, and turning vision into execution.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- BLOCK 3 -->
-      <section class="about-feature-row reveal-delay-2">
-        <div class="about-feature-visual glass-card about-manifesto-card">
-          <div class="about-manifesto-content">
-            <p class="about-section-label">Manifesto</p>
-            <h2>What I believe about good work</h2>
+      <!-- Section 3 -->
+      <section class="about-story-block about-story-block-right reveal-delay-2">
+        <div class="about-story-visual glass-card about-manifesto-visual">
+          <div class="about-manifesto-panel">
+            <p class="about-section-label">Core Belief</p>
+            <h3>My approach to good work</h3>
 
             <ul class="about-manifesto-list">
               <li>Good systems reduce confusion.</li>
-              <li>Good structure builds trust.</li>
-              <li>Good design makes clarity visible.</li>
-              <li>Good execution turns intent into impact.</li>
+              <li>Good structure creates confidence.</li>
+              <li>Good design makes intention visible.</li>
+              <li>Good execution gives ideas real weight.</li>
             </ul>
           </div>
         </div>
 
-        <div class="about-feature-copy glass-card">
-          <p class="about-section-label">Perspective</p>
-          <h2>I care about building things that feel deliberate.</h2>
+        <div class="about-story-copy">
+          <p class="about-section-label">Node 03</p>
+          <h2>Execution matters more than appearance alone.</h2>
 
           <p>
-            Whether it is a software project, a digital workflow, or a user-facing
-            experience, I value work that is intentional. To me, quality is not
-            only about functionality. It is also about structure, consistency,
-            readability, and the confidence a system gives to the people using it.
+            I care about work that does more than look polished. To me, quality is
+            not only visual. It is also logical, readable, and dependable. Whether
+            I am working on a system, a digital interface, or a structured idea, I
+            want the result to feel considered from the inside out.
           </p>
 
           <blockquote class="about-inline-quote">
@@ -156,75 +184,91 @@
         </div>
       </section>
 
-      <!-- BLOCK 4 -->
-      <section class="about-feature-row about-feature-row-reverse reveal">
-        <div class="about-feature-copy glass-card">
-          <p class="about-section-label">Strengths</p>
-          <h2>How I tend to contribute</h2>
+      <!-- Section 4 -->
+      <section class="about-story-block about-story-block-left reveal">
+        <div class="about-story-copy">
+          <p class="about-section-label">Node 04</p>
+          <h2>I value direction, discipline, and momentum.</h2>
 
           <p>
-            I work best in environments where I can combine analysis, structure,
-            and execution. I enjoy clarifying direction, improving flow, refining
-            systems, and contributing to work that needs both logic and discipline.
+            I work best when there is a clear sense of purpose behind what is being
+            built. I enjoy taking initiative, refining ideas, and moving work
+            forward with discipline. I am not interested in creating for the sake
+            of appearance alone. I care about building with reason, progress, and
+            long-term value in mind.
           </p>
 
           <div class="about-strength-grid">
             <div class="about-strength-box">
               <span class="about-strength-number">01</span>
               <h3>Analytical</h3>
-              <p>I like breaking down complexity into clear, manageable parts.</p>
+              <p>I enjoy breaking complexity into something clearer and more workable.</p>
             </div>
 
             <div class="about-strength-box">
               <span class="about-strength-number">02</span>
-              <h3>Intentional</h3>
-              <p>I prefer decisions that have reason, direction, and purpose.</p>
+              <h3>Decisive</h3>
+              <p>I prefer movement, structure, and actions that carry intent.</p>
             </div>
 
             <div class="about-strength-box">
               <span class="about-strength-number">03</span>
-              <h3>Execution-Focused</h3>
-              <p>I value progress, follow-through, and turning plans into outcomes.</p>
+              <h3>Disciplined</h3>
+              <p>I value consistency, refinement, and high standards in execution.</p>
             </div>
 
             <div class="about-strength-box">
               <span class="about-strength-number">04</span>
-              <h3>Growth-Oriented</h3>
-              <p>I am motivated by improvement, refinement, and long-term development.</p>
+              <h3>Forward-Looking</h3>
+              <p>I am motivated by growth, direction, and meaningful progress.</p>
             </div>
           </div>
         </div>
 
-        <div class="about-feature-visual glass-card about-direction-visual">
+        <div class="about-story-visual glass-card about-direction-visual">
           <div class="about-direction-panel">
             <span class="about-direction-kicker">Direction</span>
             <h3>From learning tools<br />to shaping systems</h3>
             <p>
-              My journey is not only about learning technologies. It is about
-              understanding how technology, design, structure, and execution can
-              come together to produce work that matters.
+              My path is not only about acquiring knowledge. It is about learning
+              how to organise technology, design, and execution into work that
+              feels intentional, memorable, and effective.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- BLOCK 5 -->
-      <section class="about-full-width-card glass-card reveal-delay">
-        <p class="about-section-label">Future Direction</p>
-        <h2>What I Am Building Toward</h2>
+      <!-- Section 5 -->
+      <section class="about-story-block about-story-block-right reveal-delay">
+        <div class="about-story-visual glass-card about-future-visual">
+          <div class="about-future-panel">
+            <span class="about-mini-label">Future Direction</span>
+            <h3>Building toward meaningful impact</h3>
+            <p>
+              I want to contribute through software, systems thinking, and refined
+              execution — creating work that feels useful, clear, and worth
+              remembering.
+            </p>
+          </div>
+        </div>
 
-        <p>
-          I am building toward a future where I can contribute through software,
-          systems thinking, analytical clarity, and strong execution. My goal is
-          not simply to become technically capable, but to create work that feels
-          refined, useful, and strategically thought through.
-        </p>
+        <div class="about-story-copy">
+          <p class="about-section-label">Node 05</p>
+          <h2>I am building toward work that leaves a strong impression.</h2>
 
-        <p>
-          I want to be recognised for more than technical ability alone. I want to
-          build things that communicate clarity, carry intent, and leave a strong,
-          lasting impression through both function and design.
-        </p>
+          <p>
+            My long-term direction is not simply to become technically capable. I
+            want to create work that reflects clarity, strategic thinking, and
+            deliberate execution. I want what I build to carry both usefulness and
+            identity.
+          </p>
+
+          <p>
+            More than anything, I am building toward a future where I can combine
+            software, systems, design awareness, and disciplined thinking into work
+            that has lasting value and a recognisable point of view.
+          </p>
+        </div>
       </section>
     </section>
   </main>
