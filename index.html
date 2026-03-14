@@ -38,7 +38,7 @@
           <a class="secondary-btn" href="./TechExplorer/explorer.html">Explore the Compass</a>
         </div>
 
-        <div class="home-hero-connector">
+        <div class="home-hero-connector" aria-hidden="true">
           <span class="home-hero-connector-line"></span>
           <span class="home-hero-connector-text">Explore the system</span>
         </div>
@@ -133,5 +133,38 @@
 
   <script src="./js/layout.js"></script>
   <script src="./js/navigation.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var revealItems = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
+
+      if (!("IntersectionObserver" in window)) {
+        revealItems.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries, observerInstance) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            observerInstance.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+      revealItems.forEach(function (item) {
+        observer.observe(item);
+      });
+    });
+  </script>
 </body>
 </html>
