@@ -1,10 +1,10 @@
-console.log("About V13 page loaded.");
+console.log("About V15.3 Industrial Railway loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  initJourneyLineDraw();
-  initStationMarkerSync();
+  generateRailSleepers();
+  initSegmentReveal();
 });
 
 function initAboutReveal() {
@@ -45,7 +45,7 @@ function initAboutReveal() {
         observerInstance.unobserve(entry.target);
       });
     },
-    { threshold: 0.18 }
+    { threshold: 0.16 }
   );
 
   revealElements.forEach(function (element) {
@@ -95,80 +95,71 @@ function initAboutFloatingOrbs() {
   injectAboutOrbKeyframes();
 }
 
-function initJourneyLineDraw() {
-  const leftLine = document.getElementById("aboutJourneyLeft");
-  const rightLine = document.getElementById("aboutJourneyRight");
+function generateRailSleepers() {
+  const configs = [
+    { groupId: "sleepers-01", leftId: "rail-left-01", rightId: "rail-right-01" },
+    { groupId: "sleepers-02", leftId: "rail-left-02", rightId: "rail-right-02" },
+    { groupId: "sleepers-03", leftId: "rail-left-03", rightId: "rail-right-03" },
+    { groupId: "sleepers-04", leftId: "rail-left-04", rightId: "rail-right-04" },
+    { groupId: "sleepers-05", leftId: "rail-left-05", rightId: "rail-right-05" }
+  ];
 
-  if (!leftLine || !rightLine) {
-    return;
-  }
+  configs.forEach(function (config) {
+    const leftRail = document.getElementById(config.leftId);
+    const rightRail = document.getElementById(config.rightId);
+    const sleepersGroup = document.getElementById(config.groupId);
 
-  const leftLength = leftLine.getTotalLength();
-  const rightLength = rightLine.getTotalLength();
-
-  leftLine.style.strokeDasharray = leftLength + " " + leftLength;
-  leftLine.style.strokeDashoffset = leftLength;
-
-  rightLine.style.strokeDasharray = rightLength + " " + rightLength;
-  rightLine.style.strokeDashoffset = rightLength;
-
-  function updateJourneyProgress() {
-    const scrollTop = window.scrollY || window.pageYOffset;
-    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-    if (documentHeight <= 0) {
-      leftLine.style.strokeDashoffset = "0";
-      rightLine.style.strokeDashoffset = "0";
+    if (!leftRail || !rightRail || !sleepersGroup) {
       return;
     }
 
-    const progress = Math.min(Math.max(scrollTop / documentHeight, 0), 1);
-    const multiplier = 1.12;
+    sleepersGroup.innerHTML = "";
 
-    leftLine.style.strokeDashoffset = Math.max(leftLength * (1 - progress * multiplier), 0);
-    rightLine.style.strokeDashoffset = Math.max(rightLength * (1 - progress * multiplier), 0);
+    const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
+    const sleeperCount = 6;
+    const startOffset = totalLength * 0.10;
+    const usableLength = totalLength * 0.78;
+    const spacing = usableLength / (sleeperCount - 1);
 
-    const translateY = Math.min(scrollTop * 0.018, 18);
-    leftLine.style.transform = "translateY(" + translateY + "px)";
-    rightLine.style.transform = "translateY(" + translateY + "px)";
-  }
+    for (let i = 0; i < sleeperCount; i++) {
+      const distance = startOffset + spacing * i;
+      const leftPoint = leftRail.getPointAtLength(distance);
+      const rightPoint = rightRail.getPointAtLength(distance);
 
-  updateJourneyProgress();
-  window.addEventListener("scroll", updateJourneyProgress, { passive: true });
-  window.addEventListener("resize", updateJourneyProgress);
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", leftPoint.x.toFixed(2));
+      line.setAttribute("y1", leftPoint.y.toFixed(2));
+      line.setAttribute("x2", rightPoint.x.toFixed(2));
+      line.setAttribute("y2", rightPoint.y.toFixed(2));
+
+      sleepersGroup.appendChild(line);
+    }
+  });
 }
 
-function initStationMarkerSync() {
-  const stations = document.querySelectorAll(".about-station");
-  const markers = document.querySelectorAll(".about-station-marker");
+function initSegmentReveal() {
+  const segments = document.querySelectorAll(".segment");
 
-  if (!("IntersectionObserver" in window) || stations.length !== markers.length) {
+  if (!("IntersectionObserver" in window)) {
+    segments.forEach(function (segment) {
+      segment.classList.add("visible");
+    });
     return;
   }
 
-  const markerObserver = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
-        const index = Array.prototype.indexOf.call(stations, entry.target);
-
-        if (index === -1) {
-          return;
-        }
-
         if (entry.isIntersecting) {
-          markers[index].classList.add("is-active");
-        } else {
-          markers[index].classList.remove("is-active");
+          entry.target.classList.add("visible");
         }
       });
     },
-    {
-      threshold: 0.35
-    }
+    { threshold: 0.38 }
   );
 
-  stations.forEach(function (station) {
-    markerObserver.observe(station);
+  segments.forEach(function (segment) {
+    observer.observe(segment);
   });
 }
 

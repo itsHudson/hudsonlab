@@ -37,66 +37,27 @@
       </div>
     </section>
 
-    <section class="about-journey-stage">
-      <!-- Minimal Journey Line -->
-      <svg
-        class="about-journey-svg"
-        viewBox="0 0 1400 3900"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          id="aboutJourneyLeft"
-          class="about-journey-line"
-          d="M965,180
-             C1095,330 1085,560 930,700
-             C770,845 505,900 400,1085
-             C315,1235 390,1400 605,1535
-             C810,1660 1095,1715 1145,1935
-             C1190,2140 1045,2310 840,2415
-             C640,2515 405,2585 330,2785
-             C270,2945 360,3115 580,3250
-             C795,3380 1060,3455 1150,3685"
-        />
+    <section class="journey-shell">
+      <!-- =========================
+           Station 01
+      ========================== -->
+      <section class="station station-left station-01 reveal">
+        <span class="station-marker station-marker-left" aria-hidden="true"></span>
 
-        <path
-          id="aboutJourneyRight"
-          class="about-journey-line"
-          d="M1000,155
-             C1130,305 1120,540 965,680
-             C806,825 540,882 435,1065
-             C350,1212 425,1380 640,1515
-             C845,1640 1130,1695 1180,1915
-             C1225,2125 1080,2295 875,2400
-             C675,2498 440,2568 365,2768
-             C305,2925 395,3095 615,3230
-             C830,3360 1095,3438 1185,3668"
-        />
-      </svg>
-
-      <span class="about-station-marker about-station-marker-1"></span>
-      <span class="about-station-marker about-station-marker-2"></span>
-      <span class="about-station-marker about-station-marker-3"></span>
-      <span class="about-station-marker about-station-marker-4"></span>
-      <span class="about-station-marker about-station-marker-5"></span>
-      <span class="about-station-marker about-station-marker-6"></span>
-
-      <!-- Station 01 -->
-      <section class="about-station about-station-right reveal">
-        <div class="about-station-cluster">
-          <div class="about-station-visual">
-            <div class="about-visual-panel about-visual-panel-portrait">
-              <span class="about-panel-kicker">Strategic Identity</span>
+        <div class="station-cluster">
+          <div class="station-visual">
+            <div class="visual-panel visual-panel-portrait">
+              <span class="panel-kicker">Strategic Identity</span>
               <img
                 src="../Images/ProfileHUDSOnPixar.png"
                 alt="Hudson Chia portrait"
-                class="about-station-image about-station-image-portrait"
+                class="station-image station-image-portrait"
               />
             </div>
           </div>
 
-          <div class="about-station-copy">
-            <span class="about-station-label">Station 01</span>
+          <div class="station-copy">
+            <span class="station-tag">Station 01</span>
             <h2>I am drawn to clarity, not noise.</h2>
 
             <p>
@@ -115,7 +76,7 @@
               into systems that make sense.
             </p>
 
-            <div class="about-station-meta">
+            <div class="station-meta">
               <strong>Hudson Chia</strong>
               <span>Computer Science · Systems Thinking · Creative Direction</span>
             </div>
@@ -123,11 +84,28 @@
         </div>
       </section>
 
-      <!-- Station 02 -->
-      <section class="about-station about-station-left reveal-delay">
-        <div class="about-station-cluster">
-          <div class="about-station-copy">
-            <span class="about-station-label">Station 02</span>
+      <!-- =========================
+           Segment 01 -> 02
+      ========================== -->
+      <section class="segment segment-right segment-01-02" aria-hidden="true">
+        <div class="segment-rail">
+          <svg class="segment-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+            <path id="rail-left-01" class="rail-left" d="M170,20 C320,78 500,150 760,238" />
+            <path id="rail-right-01" class="rail-right" d="M195,10 C345,68 525,140 785,228" />
+            <g id="sleepers-01" class="rail-sleepers"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- =========================
+           Station 02
+      ========================== -->
+      <section class="station station-right station-02 reveal-delay">
+        <span class="station-marker station-marker-right" aria-hidden="true"></span>
+
+        <div class="station-cluster">
+          <div class="station-copy">
+            <span class="station-tag">Station 02</span>
             <h2>I think in systems, not fragments.</h2>
 
             <p>
@@ -146,8 +124,8 @@
               sustainability.
             </p>
 
-            <div class="about-station-note">
-              <span class="about-note-label">Mindset</span>
+            <div class="station-note">
+              <span class="note-label">Mindset</span>
               <p>
                 Strategic thinking, organised execution, and intentional design guide
                 the way I approach challenges and build solutions.
@@ -155,38 +133,55 @@
             </div>
           </div>
 
-          <div class="about-station-visual">
-            <div class="about-visual-panel about-visual-panel-small">
-              <span class="about-panel-kicker">Systems Thinking</span>
+          <div class="station-visual">
+            <div class="visual-panel visual-panel-sample">
+              <span class="panel-kicker">Systems Thinking</span>
               <img
                 src="../Images/ABO_Sample.png"
                 alt="Systems thinking visual"
-                class="about-station-image about-station-image-sample"
+                class="station-image station-image-sample"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Station 03 / ENTJ -->
-      <section class="about-station about-station-right about-station-entj reveal-delay-2">
-        <div class="about-station-cluster">
-          <div class="about-station-visual">
-            <div class="about-visual-panel about-visual-panel-entj">
-              <span class="about-panel-kicker">Personality Signal</span>
+      <!-- =========================
+           Segment 02 -> 03
+      ========================== -->
+      <section class="segment segment-left segment-02-03" aria-hidden="true">
+        <div class="segment-rail">
+          <svg class="segment-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+            <path id="rail-left-02" class="rail-left" d="M830,20 C680,78 500,150 240,238" />
+            <path id="rail-right-02" class="rail-right" d="M805,10 C655,68 475,140 215,228" />
+            <g id="sleepers-02" class="rail-sleepers"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- =========================
+           Station 03 / ENTJ
+      ========================== -->
+      <section class="station station-left station-03 station-entj reveal-delay-2">
+        <span class="station-marker station-marker-left" aria-hidden="true"></span>
+
+        <div class="station-cluster">
+          <div class="station-visual">
+            <div class="visual-panel visual-panel-entj">
+              <span class="panel-kicker">Personality Signal</span>
               <img
                 src="../Images/MBTI_ENTJ.png"
                 alt="ENTJ personality profile"
-                class="about-station-image about-station-image-entj"
+                class="station-image station-image-entj"
               />
             </div>
           </div>
 
-          <div class="about-station-copy">
-            <span class="about-station-label">Station 03</span>
+          <div class="station-copy">
+            <span class="station-tag">Station 03</span>
             <h2>Personality Signal — ENTJ</h2>
 
-            <p class="about-entj-highlight">
+            <p class="entj-highlight">
               Strategic · Decisive · Direction-Driven
             </p>
 
@@ -202,8 +197,8 @@
               with confidence and direction.
             </p>
 
-            <div class="about-station-note">
-              <span class="about-note-label">Working Style</span>
+            <div class="station-note">
+              <span class="note-label">Working Style</span>
               <p>
                 Strategic thinking. Structured execution. Decisive action.
                 Leadership mindset.
@@ -218,11 +213,28 @@
         </div>
       </section>
 
-      <!-- Station 04 -->
-      <section class="about-station about-station-left reveal">
-        <div class="about-station-cluster">
-          <div class="about-station-copy">
-            <span class="about-station-label">Station 04</span>
+      <!-- =========================
+           Segment 03 -> 04
+      ========================== -->
+      <section class="segment segment-right segment-03-04" aria-hidden="true">
+        <div class="segment-rail">
+          <svg class="segment-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+            <path id="rail-left-03" class="rail-left" d="M170,20 C320,78 500,150 760,238" />
+            <path id="rail-right-03" class="rail-right" d="M195,10 C345,68 525,140 785,228" />
+            <g id="sleepers-03" class="rail-sleepers"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- =========================
+           Station 04
+      ========================== -->
+      <section class="station station-right station-04 reveal">
+        <span class="station-marker station-marker-right" aria-hidden="true"></span>
+
+        <div class="station-cluster">
+          <div class="station-copy">
+            <span class="station-tag">Station 04</span>
             <h2>Execution matters more than appearance alone.</h2>
 
             <p>
@@ -240,8 +252,8 @@
               structure of an idea in a way that others can easily understand.
             </p>
 
-            <div class="about-station-note">
-              <span class="about-note-label">Core Belief</span>
+            <div class="station-note">
+              <span class="note-label">Core Belief</span>
               <p>
                 Good systems reduce confusion. Good structure builds trust.
                 Good execution gives ideas real weight.
@@ -249,35 +261,52 @@
             </div>
           </div>
 
-          <div class="about-station-visual">
-            <div class="about-visual-panel about-visual-panel-sample">
-              <span class="about-panel-kicker">Execution Philosophy</span>
+          <div class="station-visual">
+            <div class="visual-panel visual-panel-sample">
+              <span class="panel-kicker">Execution Philosophy</span>
               <img
                 src="../Images/ABO_Sample.png"
                 alt="Execution philosophy visual"
-                class="about-station-image about-station-image-sample"
+                class="station-image station-image-sample"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Station 05 -->
-      <section class="about-station about-station-right reveal-delay">
-        <div class="about-station-cluster">
-          <div class="about-station-visual">
-            <div class="about-visual-panel about-visual-panel-sample">
-              <span class="about-panel-kicker">Direction & Discipline</span>
+      <!-- =========================
+           Segment 04 -> 05
+      ========================== -->
+      <section class="segment segment-left segment-04-05" aria-hidden="true">
+        <div class="segment-rail">
+          <svg class="segment-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+            <path id="rail-left-04" class="rail-left" d="M830,20 C680,78 500,150 240,238" />
+            <path id="rail-right-04" class="rail-right" d="M805,10 C655,68 475,140 215,228" />
+            <g id="sleepers-04" class="rail-sleepers"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- =========================
+           Station 05
+      ========================== -->
+      <section class="station station-left station-05 reveal-delay">
+        <span class="station-marker station-marker-left" aria-hidden="true"></span>
+
+        <div class="station-cluster">
+          <div class="station-visual">
+            <div class="visual-panel visual-panel-sample">
+              <span class="panel-kicker">Direction &amp; Discipline</span>
               <img
                 src="../Images/ABO_Sample.png"
                 alt="Direction and discipline visual"
-                class="about-station-image about-station-image-sample"
+                class="station-image station-image-sample"
               />
             </div>
           </div>
 
-          <div class="about-station-copy">
-            <span class="about-station-label">Station 05</span>
+          <div class="station-copy">
+            <span class="station-tag">Station 05</span>
             <h2>I value direction, discipline, and momentum.</h2>
 
             <p>
@@ -294,8 +323,8 @@
               advancement toward a meaningful outcome.
             </p>
 
-            <div class="about-station-note">
-              <span class="about-note-label">Working Style</span>
+            <div class="station-note">
+              <span class="note-label">Working Style</span>
               <p>
                 Analytical. Decisive. Disciplined. Forward-Looking.
               </p>
@@ -304,11 +333,28 @@
         </div>
       </section>
 
-      <!-- Station 06 -->
-      <section class="about-station about-station-left reveal-delay-2">
-        <div class="about-station-cluster">
-          <div class="about-station-copy">
-            <span class="about-station-label">Station 06</span>
+      <!-- =========================
+           Segment 05 -> 06
+      ========================== -->
+      <section class="segment segment-right segment-05-06" aria-hidden="true">
+        <div class="segment-rail">
+          <svg class="segment-svg" viewBox="0 0 1000 260" preserveAspectRatio="none">
+            <path id="rail-left-05" class="rail-left" d="M170,20 C320,78 500,150 760,238" />
+            <path id="rail-right-05" class="rail-right" d="M195,10 C345,68 525,140 785,228" />
+            <g id="sleepers-05" class="rail-sleepers"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- =========================
+           Station 06
+      ========================== -->
+      <section class="station station-right station-06 reveal-delay-2">
+        <span class="station-marker station-marker-right" aria-hidden="true"></span>
+
+        <div class="station-cluster">
+          <div class="station-copy">
+            <span class="station-tag">Station 06</span>
             <h2>I am building toward work that leaves a lasting impression.</h2>
 
             <p>
@@ -325,8 +371,8 @@
               thoughtful and impactful.
             </p>
 
-            <div class="about-station-note">
-              <span class="about-note-label">Future Direction</span>
+            <div class="station-note">
+              <span class="note-label">Future Direction</span>
               <p>
                 I aim to contribute by designing systems and digital experiences that
                 reflect clarity, structured thinking, and purposeful design.
@@ -334,13 +380,13 @@
             </div>
           </div>
 
-          <div class="about-station-visual">
-            <div class="about-visual-panel about-visual-panel-sample">
-              <span class="about-panel-kicker">Future Vision</span>
+          <div class="station-visual">
+            <div class="visual-panel visual-panel-sample">
+              <span class="panel-kicker">Future Vision</span>
               <img
                 src="../Images/ABO_Sample.png"
                 alt="Future vision visual"
-                class="about-station-image about-station-image-sample"
+                class="station-image station-image-sample"
               />
             </div>
           </div>
