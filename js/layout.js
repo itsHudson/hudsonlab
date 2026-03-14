@@ -24,6 +24,24 @@ function getBasePath() {
   return "./";
 }
 
+function applyBasePathToLinks(container, basePath) {
+  if (!container) {
+    return;
+  }
+
+  const pathLinks = container.querySelectorAll("[data-path]");
+
+  pathLinks.forEach(function (link) {
+    const targetPath = link.getAttribute("data-path");
+
+    if (!targetPath) {
+      return;
+    }
+
+    link.setAttribute("href", basePath + targetPath);
+  });
+}
+
 function loadComponent(id, filePath, callback) {
   const target = document.getElementById(id);
 
@@ -44,6 +62,9 @@ function loadComponent(id, filePath, callback) {
     })
     .then(function (data) {
       target.innerHTML = data;
+
+      const basePath = getBasePath();
+      applyBasePathToLinks(target, basePath);
 
       if (typeof callback === "function") {
         callback();
