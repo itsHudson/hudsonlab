@@ -8,7 +8,6 @@
 </head>
 
 <body data-page="home">
-
   <!-- HUDSONLAB BACKGROUND ENGINE -->
   <div class="hudsonlab-bg-grid"></div>
   <div class="cursor-light"></div>
@@ -49,32 +48,32 @@
         </p>
 
         <div class="hero-actions">
-          <button class="primary-btn" onclick="goTo('About/about.html')">
+          <button class="primary-btn magnetic-button" onclick="goTo('About/about.html')">
             View My Story
           </button>
 
-          <button class="secondary-btn" onclick="goTo('TechExplorer/explorer.html')">
+          <button class="secondary-btn magnetic-button" onclick="goTo('TechExplorer/explorer.html')">
             Explore the Compass
           </button>
         </div>
 
         <div class="hero-stats">
-          <div class="glass-card stat-card">
+          <div class="glass-card stat-card reveal-delay">
             <strong>Built Around Systems</strong>
             <span>Structured development and software thinking.</span>
           </div>
 
-          <div class="glass-card stat-card">
+          <div class="glass-card stat-card reveal-delay-2">
             <strong>Defined by Clarity</strong>
             <span>A public identity shaped through discipline and growth.</span>
           </div>
         </div>
       </div>
 
-      <div class="glass-card hero-image-panel reveal-delay">
+      <div class="glass-card hero-image-panel reveal-delay parallax-card">
         <div class="hero-image-glow"></div>
 
-        <div class="visual-image-card hero-image-wrap hero-transparent-wrap">
+        <div class="visual-image-card hero-image-wrap hero-transparent-wrap parallax-media">
           <img src="Images/ProfileHUDSOnPixar.png" alt="Hudson Chia" />
         </div>
 
@@ -86,6 +85,84 @@
           </p>
         </div>
       </div>
+    </section>
+
+    <section class="hero-editorial-strip reveal">
+      <div class="glass-card hero-editorial-card">
+        <div class="editorial-left">
+          <p class="editorial-label">Perspective</p>
+          <h2>
+            Technology is not only what I learn.
+            It is how I express structure.
+          </h2>
+        </div>
+
+        <div class="editorial-right">
+          <p>
+            This space is built to communicate more than information — it reflects
+            the discipline, visual care, and technical direction I want my work
+            to carry.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-links-grid reveal">
+      <button class="glass-card home-link-card magnetic-button" type="button" onclick="goTo('About/about.html')">
+        <div class="home-link-icon">A</div>
+        <h3>About</h3>
+        <p>
+          The perspective, mindset, and personal direction behind the work
+          I want to build.
+        </p>
+        <span>Enter →</span>
+      </button>
+
+      <button class="glass-card home-link-card magnetic-button" type="button" onclick="goTo('TechExplorer/explorer.html')">
+        <div class="home-link-icon">T</div>
+        <h3>Technology Compass</h3>
+        <p>
+          A curated compass of the platforms, tools, and languages
+          behind the work.
+        </p>
+        <span>Enter →</span>
+      </button>
+
+      <button class="glass-card home-link-card magnetic-button" type="button" onclick="goTo('Journey/journey.html')">
+        <div class="home-link-icon">J</div>
+        <h3>Journey</h3>
+        <p>
+          A decision-driven evolution of work, leadership, and technology.
+        </p>
+        <span>Enter →</span>
+      </button>
+
+      <button class="glass-card home-link-card magnetic-button" type="button" onclick="goTo('Education/education.html')">
+        <div class="home-link-icon">E</div>
+        <h3>Education</h3>
+        <p>
+          The academic foundation behind my systems thinking.
+        </p>
+        <span>Enter →</span>
+      </button>
+
+      <button class="glass-card home-link-card magnetic-button" type="button" onclick="goTo('Certifications/certifications.html')">
+        <div class="home-link-icon">C</div>
+        <h3>Credentials</h3>
+        <p>
+          Recognised milestones reflecting consistency and continuous learning.
+        </p>
+        <span>Enter →</span>
+      </button>
+
+      <button class="glass-card home-link-card magnetic-button" type="button" onclick="goTo('Contact/contact.html')">
+        <div class="home-link-icon">+</div>
+        <h3>Connect</h3>
+        <p>
+          A place to begin conversations, collaborations, and future opportunities.
+        </p>
+        <span>Enter →</span>
+      </button>
     </section>
   </main>
 
@@ -103,5 +180,6 @@
 
   <script src="js/navigation.js"></script>
   <script src="js/particles.js"></script>
+  <script src="js/motion.js"></script>
 </body>
 </html>
