@@ -1,4 +1,4 @@
-console.log("About segmented connected railway loaded.");
+console.log("About final segmented connected railway loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
