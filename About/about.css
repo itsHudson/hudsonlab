@@ -286,10 +286,6 @@ body[data-page="about"]::after {
   line-height: 1.85;
 }
 
-.about-float-soft {
-  animation: aboutFloatSoft 6.8s ease-in-out infinite;
-}
-
 .reveal,
 .reveal-delay,
 .reveal-delay-2 {
@@ -348,18 +344,6 @@ body[data-page="about"]::after {
   }
   to {
     transform: rotate(0deg);
-  }
-}
-
-@keyframes aboutFloatSoft {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
   }
 }
 

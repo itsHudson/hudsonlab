@@ -3,7 +3,6 @@ console.log("About page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  initAboutParallax();
 });
 
 function initAboutReveal() {
@@ -89,7 +88,6 @@ function initAboutFloatingOrbs() {
   }
 
   document.body.appendChild(orbLayer);
-
   injectAboutOrbKeyframes();
 }
 
@@ -115,35 +113,4 @@ function injectAboutOrbKeyframes() {
   `;
 
   document.head.appendChild(style);
-}
-
-function initAboutParallax() {
-  const card = document.querySelector(".about-parallax-card");
-  const media = document.querySelector(".about-parallax-media");
-
-  if (!card || !media) {
-    return;
-  }
-
-  card.addEventListener("mousemove", function (event) {
-    const rect = card.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateY = ((x - centerX) / centerX) * 4;
-    const rotateX = ((centerY - y) / centerY) * 4;
-
-    card.style.transform =
-      "perspective(1200px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
-    media.style.transform =
-      "translate3d(" + rotateY * 1.4 + "px, " + (-rotateX * 1.4) + "px, 0)";
-  });
-
-  card.addEventListener("mouseleave", function () {
-    card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
-    media.style.transform = "translate3d(0, 0, 0)";
-  });
 }
