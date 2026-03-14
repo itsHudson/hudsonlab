@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   initReveal();
-  initNodePulse();
   initImageParallax();
   initSystemField();
 });
@@ -34,51 +33,6 @@ function initReveal() {
 
   revealElements.forEach(function (element) {
     observer.observe(element);
-  });
-}
-
-function initNodePulse() {
-  const hero = document.querySelector('[data-node-target="hero"]');
-  const identity = document.querySelector('[data-node-target="identity"]');
-  const direction = document.querySelector('[data-node-target="direction"]');
-
-  const map = [
-    { section: hero, node: document.querySelector(".direction-node-hero") },
-    { section: identity, node: document.querySelector(".direction-node-identity") },
-    { section: direction, node: document.querySelector(".direction-node-direction") }
-  ];
-
-  if (!("IntersectionObserver" in window)) {
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        const matched = map.find(function (item) {
-          return item.section === entry.target;
-        });
-
-        if (!matched || !matched.node) {
-          return;
-        }
-
-        matched.node.classList.remove("is-active");
-        void matched.node.offsetWidth;
-        matched.node.classList.add("is-active");
-      });
-    },
-    { threshold: 0.28 }
-  );
-
-  map.forEach(function (item) {
-    if (item.section) {
-      observer.observe(item.section);
-    }
   });
 }
 
