@@ -1,49 +1,105 @@
-console.log("About page loaded");
+console.log("About page loaded.");
 
-document.addEventListener("DOMContentLoaded",function(){
-
-initReveal();
-
+document.addEventListener("DOMContentLoaded", function () {
+  initAboutReveal();
+  initAboutImageParallax();
+  initAboutThreeVisuals();
 });
 
+function initAboutReveal() {
+  const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
-function initReveal(){
+  if (!("IntersectionObserver" in window)) {
+    revealElements.forEach(function (element) {
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+    });
+    return;
+  }
 
-const elements=document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
+  const observer = new IntersectionObserver(
+    function (entries, observerInstance) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-if(!("IntersectionObserver" in window)){
+        let delay = "0s";
 
-elements.forEach(el=>{
-el.style.opacity=1;
-el.style.transform="translateY(0)";
-});
+        if (entry.target.classList.contains("reveal-delay")) {
+          delay = "0.12s";
+        }
 
-return;
+        if (entry.target.classList.contains("reveal-delay-2")) {
+          delay = "0.22s";
+        }
+
+        entry.target.style.transition =
+          "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+
+        observerInstance.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  revealElements.forEach(function (element) {
+    observer.observe(element);
+  });
 }
 
-const observer=new IntersectionObserver((entries,obs)=>{
+function initAboutImageParallax() {
+  const visuals = document.querySelectorAll(".about-visual");
 
-entries.forEach(entry=>{
+  visuals.forEach(function (visual) {
+    const image = visual.querySelector(".about-image");
+    if (!image) {
+      return;
+    }
 
-if(!entry.isIntersecting)return;
+    visual.addEventListener("mousemove", function (event) {
+      const rect = visual.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
 
-let delay=0;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-if(entry.target.classList.contains("reveal-delay"))delay=.15;
-if(entry.target.classList.contains("reveal-delay-2"))delay=.3;
+      const rotateY = ((offsetX - centerX) / centerX) * 4;
+      const rotateX = -((offsetY - centerY) / centerY) * 4;
 
-entry.target.style.transition=
-`opacity .8s ease ${delay}s, transform .8s ease ${delay}s`;
+      image.style.transform =
+        "translateY(-4px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(1.015)";
+    });
 
-entry.target.style.opacity=1;
-entry.target.style.transform="translateY(0)";
+    visual.addEventListener("mouseleave", function () {
+      image.style.transform = "";
+    });
+  });
+}
 
-obs.unobserve(entry.target);
+function initAboutThreeVisuals() {
+  if (typeof window.createAboutThreeVisual !== "function") {
+    console.warn("about-visual.js not loaded or createAboutThreeVisual missing.");
+    return;
+  }
 
-});
+  const visuals = document.querySelectorAll(".about-visual");
 
-},{threshold:.15});
+  visuals.forEach(function (visual) {
+    const canvas = visual.querySelector(".about-visual-canvas");
+    const visualType = visual.getAttribute("data-visual-type") || "warm-field";
 
-elements.forEach(el=>observer.observe(el));
+    if (!canvas) {
+      return;
+    }
 
+    window.createAboutThreeVisual({
+      container: visual,
+      canvas: canvas,
+      type: visualType
+    });
+  });
 }
