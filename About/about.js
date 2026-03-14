@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initReveal() {
-  const revealElements = document.querySelectorAll(".reveal");
+  const revealElements = document.querySelectorAll(".reveal, .reveal-delay-1");
 
   if (!("IntersectionObserver" in window)) {
     revealElements.forEach(function (element) {
@@ -23,13 +23,17 @@ function initReveal() {
           return;
         }
 
-        entry.target.style.transition = "opacity 0.95s ease, transform 0.95s ease";
+        const isDelayed = entry.target.classList.contains("reveal-delay-1");
+        entry.target.style.transition =
+          "opacity " + (isDelayed ? "1.15s" : "0.95s") + " ease, transform " +
+          (isDelayed ? "1.15s" : "0.95s") + " ease";
+
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
         observerInstance.unobserve(entry.target);
       });
     },
-    { threshold: 0.16 }
+    { threshold: 0.14 }
   );
 
   revealElements.forEach(function (element) {
@@ -42,6 +46,7 @@ function initImageParallax() {
 
   visuals.forEach(function (visual) {
     const image = visual.querySelector(".about-image");
+    const backgroundWord = visual.querySelector(".entj-background-word");
     if (!image) {
       return;
     }
@@ -69,10 +74,20 @@ function initImageParallax() {
         "deg) rotateY(" +
         rotateY +
         "deg) scale(1.02)";
+
+      if (backgroundWord) {
+        const wordX = ((offsetX - centerX) / centerX) * 10;
+        const wordY = ((offsetY - centerY) / centerY) * 8;
+        backgroundWord.style.transform =
+          "rotate(-90deg) translate(" + wordX + "px," + wordY + "px)";
+      }
     });
 
     visual.addEventListener("mouseleave", function () {
       image.style.transform = "";
+      if (backgroundWord) {
+        backgroundWord.style.transform = "rotate(-90deg)";
+      }
     });
   });
 }
@@ -103,7 +118,8 @@ function initAboutTyping() {
     "clarity.",
     "structure.",
     "system thinking.",
-    "direction."
+    "direction.",
+    "intent."
   ];
 
   let phraseIndex = 0;
@@ -124,7 +140,7 @@ function initAboutTyping() {
         return;
       }
 
-      timeoutId = window.setTimeout(typeLoop, 70);
+      timeoutId = window.setTimeout(typeLoop, 62);
       return;
     }
 
@@ -134,11 +150,11 @@ function initAboutTyping() {
     if (charIndex === 0) {
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      timeoutId = window.setTimeout(typeLoop, 260);
+      timeoutId = window.setTimeout(typeLoop, 220);
       return;
     }
 
-    timeoutId = window.setTimeout(typeLoop, 38);
+    timeoutId = window.setTimeout(typeLoop, 34);
   }
 
   typeLoop();
