@@ -3,7 +3,8 @@ console.log("About page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  initAboutRoadAnimation();
+  initRailwaySleepers();
+  initRailwayDrawAnimation();
 });
 
 function initAboutReveal() {
@@ -92,64 +93,95 @@ function initAboutFloatingOrbs() {
   injectAboutOrbKeyframes();
 }
 
-function initAboutRoadAnimation() {
-  const roadBody = document.getElementById("aboutRoadBody");
-  const roadLeft = document.getElementById("aboutRoadEdgeLeft");
-  const roadRight = document.getElementById("aboutRoadEdgeRight");
-  const roadCenter = document.getElementById("aboutRoadCenter");
+function initRailwaySleepers() {
+  const leftRail = document.getElementById("aboutRailLeft");
+  const rightRail = document.getElementById("aboutRailRight");
+  const sleepersGroup = document.getElementById("aboutRailSleepers");
 
-  if (!roadBody || !roadLeft || !roadRight || !roadCenter) {
+  if (!leftRail || !rightRail || !sleepersGroup) {
     return;
   }
 
-  const lengthBody = roadBody.getTotalLength();
-  const lengthLeft = roadLeft.getTotalLength();
-  const lengthRight = roadRight.getTotalLength();
-  const lengthCenter = roadCenter.getTotalLength();
+  sleepersGroup.innerHTML = "";
 
-  roadBody.style.strokeDasharray = lengthBody + " " + lengthBody;
-  roadBody.style.strokeDashoffset = lengthBody;
+  const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
+  const spacing = 42;
 
-  roadLeft.style.strokeDasharray = lengthLeft + " " + lengthLeft;
-  roadLeft.style.strokeDashoffset = lengthLeft;
+  for (let distance = 16; distance < totalLength; distance += spacing) {
+    const leftPoint = leftRail.getPointAtLength(distance);
+    const rightPoint = rightRail.getPointAtLength(distance);
 
-  roadRight.style.strokeDasharray = lengthRight + " " + lengthRight;
-  roadRight.style.strokeDashoffset = lengthRight;
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", leftPoint.x.toFixed(2));
+    line.setAttribute("y1", leftPoint.y.toFixed(2));
+    line.setAttribute("x2", rightPoint.x.toFixed(2));
+    line.setAttribute("y2", rightPoint.y.toFixed(2));
 
-  roadCenter.style.strokeDasharray = "20 20, " + lengthCenter;
-  roadCenter.style.strokeDashoffset = lengthCenter;
+    sleepersGroup.appendChild(line);
+  }
+}
 
-  function updateRoadProgress() {
+function initRailwayDrawAnimation() {
+  const leftRail = document.getElementById("aboutRailLeft");
+  const rightRail = document.getElementById("aboutRailRight");
+  const sleepersGroup = document.getElementById("aboutRailSleepers");
+
+  if (!leftRail || !rightRail || !sleepersGroup) {
+    return;
+  }
+
+  const leftLength = leftRail.getTotalLength();
+  const rightLength = rightRail.getTotalLength();
+
+  leftRail.style.strokeDasharray = leftLength + " " + leftLength;
+  leftRail.style.strokeDashoffset = leftLength;
+
+  rightRail.style.strokeDasharray = rightLength + " " + rightLength;
+  rightRail.style.strokeDashoffset = rightLength;
+
+  const sleepers = sleepersGroup.querySelectorAll("line");
+  sleepers.forEach(function (sleeper) {
+    sleeper.style.opacity = "0";
+    sleeper.style.transition = "opacity 0.25s ease";
+  });
+
+  function updateRailwayProgress() {
     const scrollTop = window.scrollY || window.pageYOffset;
     const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
 
     if (documentHeight <= 0) {
-      roadBody.style.strokeDashoffset = "0";
-      roadLeft.style.strokeDashoffset = "0";
-      roadRight.style.strokeDashoffset = "0";
-      roadCenter.style.strokeDashoffset = "0";
+      leftRail.style.strokeDashoffset = "0";
+      rightRail.style.strokeDashoffset = "0";
+      sleepers.forEach(function (sleeper) {
+        sleeper.style.opacity = "0.92";
+      });
       return;
     }
 
     const progress = Math.min(Math.max(scrollTop / documentHeight, 0), 1);
     const multiplier = 1.08;
 
-    roadBody.style.strokeDashoffset = Math.max(lengthBody * (1 - progress * multiplier), 0);
-    roadLeft.style.strokeDashoffset = Math.max(lengthLeft * (1 - progress * multiplier), 0);
-    roadRight.style.strokeDashoffset = Math.max(lengthRight * (1 - progress * multiplier), 0);
-    roadCenter.style.strokeDashoffset = Math.max(lengthCenter * (1 - progress * multiplier), 0);
+    leftRail.style.strokeDashoffset = Math.max(leftLength * (1 - progress * multiplier), 0);
+    rightRail.style.strokeDashoffset = Math.max(rightLength * (1 - progress * multiplier), 0);
 
-    const translateY = Math.min(scrollTop * 0.02, 22);
+    const visibleCount = Math.floor(sleepers.length * progress * 1.12);
 
-    roadBody.style.transform = "translateY(" + translateY + "px)";
-    roadLeft.style.transform = "translateY(" + translateY + "px)";
-    roadRight.style.transform = "translateY(" + translateY + "px)";
-    roadCenter.style.transform = "translateY(" + translateY + "px)";
+    sleepers.forEach(function (sleeper, index) {
+      sleeper.style.opacity = index <= visibleCount ? "0.92" : "0";
+    });
+
+    const translateY = Math.min(scrollTop * 0.02, 20);
+    leftRail.style.transform = "translateY(" + translateY + "px)";
+    rightRail.style.transform = "translateY(" + translateY + "px)";
+    sleepersGroup.style.transform = "translateY(" + translateY + "px)";
   }
 
-  updateRoadProgress();
-  window.addEventListener("scroll", updateRoadProgress, { passive: true });
-  window.addEventListener("resize", updateRoadProgress);
+  updateRailwayProgress();
+  window.addEventListener("scroll", updateRailwayProgress, { passive: true });
+  window.addEventListener("resize", function () {
+    initRailwaySleepers();
+    updateRailwayProgress();
+  });
 }
 
 function injectAboutOrbKeyframes() {

@@ -35,260 +35,246 @@
     </section>
 
     <section class="about-journey-stage">
-      <!-- FULL PAGE ROAD -->
+      <!-- RAILWAY TRACK -->
       <svg
-        class="about-road-map"
+        class="about-railway-map"
         viewBox="0 0 1400 3400"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        <!-- Road body -->
+        <!-- left rail -->
         <path
-          id="aboutRoadBody"
-          class="about-road-body"
-          d="M930,140
-             C1010,260 1020,430 900,560
-             C760,705 520,760 420,930
-             C340,1065 420,1205 610,1325
-             C785,1435 1040,1490 1080,1670
-             C1115,1825 990,1955 820,2045
-             C650,2135 410,2200 355,2360
-             C305,2505 405,2640 590,2765
-             C765,2885 990,2970 1060,3160"
+          id="aboutRailLeft"
+          class="about-rail-line"
+          d="M900,170
+             C1010,290 1010,450 880,580
+             C730,730 520,785 435,940
+             C365,1068 440,1212 620,1325
+             C795,1435 1025,1495 1070,1675
+             C1110,1830 995,1960 835,2050
+             C660,2148 450,2208 390,2365
+             C342,2488 425,2628 600,2750
+             C780,2875 985,2968 1045,3160"
         />
 
-        <!-- Road edges -->
+        <!-- right rail -->
         <path
-          id="aboutRoadEdgeLeft"
-          class="about-road-edge"
-          d="M910,150
-             C988,266 998,428 878,548
-             C740,690 500,748 400,922
-             C320,1063 401,1216 596,1338
-             C772,1448 1018,1498 1058,1672
-             C1092,1816 973,1940 808,2028
-             C635,2121 395,2187 334,2356
-             C283,2511 385,2653 576,2779
-             C751,2894 972,2978 1038,3168"
-        />
-        <path
-          id="aboutRoadEdgeRight"
-          class="about-road-edge"
-          d="M950,130
-             C1032,254 1042,432 922,572
-             C780,720 540,772 440,938
-             C360,1067 439,1194 624,1312
-             C798,1422 1062,1482 1102,1668
-             C1138,1834 1007,1970 832,2062
-             C665,2149 425,2213 376,2364
-             C327,2499 425,2627 604,2751
-             C779,2876 1008,2962 1082,3152"
+          id="aboutRailRight"
+          class="about-rail-line"
+          d="M940,145
+             C1050,270 1050,435 920,565
+             C772,715 560,772 475,928
+             C405,1058 480,1200 658,1312
+             C833,1422 1060,1482 1105,1668
+             C1145,1840 1032,1978 870,2068
+             C695,2164 490,2224 428,2378
+             C380,2498 462,2615 638,2738
+             C818,2860 1020,2955 1080,3148"
         />
 
-        <!-- Center dashed line -->
-        <path
-          id="aboutRoadCenter"
-          class="about-road-center"
-          d="M930,140
-             C1010,260 1020,430 900,560
-             C760,705 520,760 420,930
-             C340,1065 420,1205 610,1325
-             C785,1435 1040,1490 1080,1670
-             C1115,1825 990,1955 820,2045
-             C650,2135 410,2200 355,2360
-             C305,2505 405,2640 590,2765
-             C765,2885 990,2970 1060,3160"
-        />
+        <!-- sleepers group injected by JS -->
+        <g id="aboutRailSleepers" class="about-rail-sleepers"></g>
       </svg>
 
-      <span class="about-road-node about-road-node-1"></span>
-      <span class="about-road-node about-road-node-2"></span>
-      <span class="about-road-node about-road-node-3"></span>
-      <span class="about-road-node about-road-node-4"></span>
-      <span class="about-road-node about-road-node-5"></span>
+      <span class="about-station-node about-station-node-1"></span>
+      <span class="about-station-node about-station-node-2"></span>
+      <span class="about-station-node about-station-node-3"></span>
+      <span class="about-station-node about-station-node-4"></span>
+      <span class="about-station-node about-station-node-5"></span>
 
       <!-- NODE 01 -->
       <section class="about-node-row about-node-row-right reveal">
-        <div class="about-node-visual">
-          <div class="about-visual-panel about-visual-panel-portrait">
-            <span class="about-panel-kicker">Strategic Identity</span>
-            <img
-              src="../Images/ProfileHUDSOnPixar.png"
-              alt="Hudson Chia portrait"
-              class="about-node-image about-node-image-portrait"
-            />
+        <div class="about-node-cluster">
+          <div class="about-node-visual">
+            <div class="about-visual-panel about-visual-panel-portrait">
+              <span class="about-panel-kicker">Strategic Identity</span>
+              <img
+                src="../Images/ProfileHUDSOnPixar.png"
+                alt="Hudson Chia portrait"
+                class="about-node-image about-node-image-portrait"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="about-node-copy">
-          <span class="about-node-label">Node 01</span>
-          <h2>I am drawn to clarity, not noise.</h2>
+          <div class="about-node-copy">
+            <span class="about-node-label">Node 01</span>
+            <h2>I am drawn to clarity, not noise.</h2>
 
-          <p>
-            I am a Computer Science student who naturally gravitates toward work
-            that feels organised, intentional, and well-directed. What interests
-            me is not only what technology can do, but how it can be shaped into
-            something clear, useful, and meaningful.
-          </p>
+            <p>
+              I am a Computer Science student who naturally gravitates toward work
+              that feels organised, intentional, and well-directed. What interests
+              me is not only what technology can do, but how it can be shaped into
+              something clear, useful, and meaningful.
+            </p>
 
-          <p>
-            I am most engaged when I can take complexity, structure it with
-            purpose, and move it toward a result that feels deliberate rather
-            than accidental.
-          </p>
+            <p>
+              I am most engaged when I can take complexity, structure it with
+              purpose, and move it toward a result that feels deliberate rather
+              than accidental.
+            </p>
 
-          <div class="about-node-meta">
-            <strong>HUDSON CHIA</strong>
-            <span>Computer Science · Systems Thinking · Creative Direction</span>
+            <div class="about-node-meta">
+              <strong>HUDSON CHIA</strong>
+              <span>Computer Science · Systems Thinking · Creative Direction</span>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- NODE 02 -->
       <section class="about-node-row about-node-row-left reveal-delay">
-        <div class="about-node-copy">
-          <span class="about-node-label">Node 02</span>
-          <h2>I think in systems, not fragments.</h2>
+        <div class="about-node-cluster">
+          <div class="about-node-copy">
+            <span class="about-node-label">Node 02</span>
+            <h2>I think in systems, not fragments.</h2>
 
-          <p>
-            I tend to look at relationships between parts instead of viewing each
-            piece in isolation. I like understanding how structure shapes clarity,
-            how direction influences outcomes, and how a well-designed system can
-            make complexity feel manageable.
-          </p>
-
-          <div class="about-node-note">
-            <span class="about-note-label">Mindset</span>
             <p>
-              Strategic thinking, organised execution, and intentional design are
-              the qualities that guide how I approach work and shape decisions.
+              I tend to look at relationships between parts instead of viewing each
+              piece in isolation. I like understanding how structure shapes
+              clarity, how direction influences outcomes, and how a well-designed
+              system can make complexity feel manageable.
             </p>
-          </div>
-        </div>
 
-        <div class="about-node-visual">
-          <div class="about-visual-panel about-visual-panel-small">
-            <span class="about-panel-kicker">Personality Signal</span>
-            <img
-              src="../Images/MBTI_ENTJ.png"
-              alt="ENTJ personality profile"
-              class="about-node-image about-node-image-entj"
-            />
+            <div class="about-node-note">
+              <span class="about-note-label">Mindset</span>
+              <p>
+                Strategic thinking, organised execution, and intentional design are
+                the qualities that guide how I approach work and shape decisions.
+              </p>
+            </div>
+          </div>
+
+          <div class="about-node-visual">
+            <div class="about-visual-panel about-visual-panel-small">
+              <span class="about-panel-kicker">Personality Signal</span>
+              <img
+                src="../Images/MBTI_ENTJ.png"
+                alt="ENTJ personality profile"
+                class="about-node-image about-node-image-entj"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <!-- NODE 03 -->
       <section class="about-node-row about-node-row-right reveal-delay-2">
-        <div class="about-node-visual">
-          <div class="about-visual-panel about-visual-panel-sample">
-            <span class="about-panel-kicker">Visual Marker</span>
-            <img
-              src="../Images/ABO_Sample.png"
-              alt="Sample visual for About page"
-              class="about-node-image about-node-image-sample"
-            />
+        <div class="about-node-cluster">
+          <div class="about-node-visual">
+            <div class="about-visual-panel about-visual-panel-sample">
+              <span class="about-panel-kicker">Visual Marker</span>
+              <img
+                src="../Images/ABO_Sample.png"
+                alt="Sample visual for About page"
+                class="about-node-image about-node-image-sample"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="about-node-copy">
-          <span class="about-node-label">Node 03</span>
-          <h2>Execution matters more than appearance alone.</h2>
+          <div class="about-node-copy">
+            <span class="about-node-label">Node 03</span>
+            <h2>Execution matters more than appearance alone.</h2>
 
-          <p>
-            I care about work that does more than look polished. To me, quality
-            is also logical, readable, and dependable. Whether it is a system, a
-            digital experience, or a structured idea, I want the result to feel
-            considered from the inside out.
-          </p>
-
-          <div class="about-node-note">
-            <span class="about-note-label">Core Belief</span>
             <p>
-              Good systems reduce confusion. Good structure creates confidence.
-              Good design makes intention visible. Good execution gives ideas
-              real weight.
+              I care about work that does more than look polished. To me, quality
+              is also logical, readable, and dependable. Whether it is a system, a
+              digital experience, or a structured idea, I want the result to feel
+              considered from the inside out.
             </p>
-          </div>
 
-          <blockquote class="about-node-quote">
-            “Technology is not only about function. It is also about how clearly
-            an idea can be expressed through structure.”
-          </blockquote>
+            <div class="about-node-note">
+              <span class="about-note-label">Core Belief</span>
+              <p>
+                Good systems reduce confusion. Good structure creates confidence.
+                Good design makes intention visible. Good execution gives ideas
+                real weight.
+              </p>
+            </div>
+
+            <blockquote class="about-node-quote">
+              “Technology is not only about function. It is also about how clearly
+              an idea can be expressed through structure.”
+            </blockquote>
+          </div>
         </div>
       </section>
 
       <!-- NODE 04 -->
       <section class="about-node-row about-node-row-left reveal">
-        <div class="about-node-copy">
-          <span class="about-node-label">Node 04</span>
-          <h2>I value direction, discipline, and momentum.</h2>
+        <div class="about-node-cluster">
+          <div class="about-node-copy">
+            <span class="about-node-label">Node 04</span>
+            <h2>I value direction, discipline, and momentum.</h2>
 
-          <p>
-            I work best when there is a clear reason behind what is being built.
-            I enjoy refining ideas, taking initiative, and moving work forward
-            with discipline. I care about building with purpose, progress, and
-            long-term value in mind.
-          </p>
-
-          <div class="about-node-note">
-            <span class="about-note-label">Direction</span>
             <p>
-              I am motivated by growth, clarity, and meaningful progress. I prefer
-              work that carries movement, purpose, and a strong sense of direction.
+              I work best when there is a clear reason behind what is being built.
+              I enjoy refining ideas, taking initiative, and moving work forward
+              with discipline. I care about building with purpose, progress, and
+              long-term value in mind.
             </p>
-          </div>
-        </div>
 
-        <div class="about-node-visual">
-          <div class="about-visual-panel about-visual-panel-sample">
-            <span class="about-panel-kicker">Journey Marker</span>
-            <img
-              src="../Images/ABO_Sample.png"
-              alt="Sample visual for About page"
-              class="about-node-image about-node-image-sample"
-            />
+            <div class="about-node-note">
+              <span class="about-note-label">Direction</span>
+              <p>
+                I am motivated by growth, clarity, and meaningful progress. I
+                prefer work that carries movement, purpose, and a strong sense of
+                direction.
+              </p>
+            </div>
+          </div>
+
+          <div class="about-node-visual">
+            <div class="about-visual-panel about-visual-panel-sample">
+              <span class="about-panel-kicker">Journey Marker</span>
+              <img
+                src="../Images/ABO_Sample.png"
+                alt="Sample visual for About page"
+                class="about-node-image about-node-image-sample"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <!-- NODE 05 -->
       <section class="about-node-row about-node-row-right reveal-delay">
-        <div class="about-node-visual">
-          <div class="about-visual-panel about-visual-panel-sample">
-            <span class="about-panel-kicker">Future Marker</span>
-            <img
-              src="../Images/ABO_Sample.png"
-              alt="Sample visual for About page"
-              class="about-node-image about-node-image-sample"
-            />
+        <div class="about-node-cluster">
+          <div class="about-node-visual">
+            <div class="about-visual-panel about-visual-panel-sample">
+              <span class="about-panel-kicker">Future Marker</span>
+              <img
+                src="../Images/ABO_Sample.png"
+                alt="Sample visual for About page"
+                class="about-node-image about-node-image-sample"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="about-node-copy">
-          <span class="about-node-label">Node 05</span>
-          <h2>I am building toward work that leaves a strong impression.</h2>
+          <div class="about-node-copy">
+            <span class="about-node-label">Node 05</span>
+            <h2>I am building toward work that leaves a strong impression.</h2>
 
-          <p>
-            My long-term direction is not simply to become technically capable.
-            I want to create work that reflects clarity, strategic thinking, and
-            deliberate execution. I want what I build to carry both usefulness
-            and identity.
-          </p>
-
-          <p>
-            More than anything, I am building toward a future where software,
-            systems, design awareness, and disciplined thinking come together to
-            form work with lasting value and a recognisable point of view.
-          </p>
-
-          <div class="about-node-note">
-            <span class="about-note-label">Future Direction</span>
             <p>
-              I want to contribute through software, systems thinking, and refined
-              execution — creating work that feels useful, clear, and worth
-              remembering.
+              My long-term direction is not simply to become technically capable.
+              I want to create work that reflects clarity, strategic thinking, and
+              deliberate execution. I want what I build to carry both usefulness
+              and identity.
             </p>
+
+            <p>
+              More than anything, I am building toward a future where software,
+              systems, design awareness, and disciplined thinking come together to
+              form work with lasting value and a recognisable point of view.
+            </p>
+
+            <div class="about-node-note">
+              <span class="about-note-label">Future Direction</span>
+              <p>
+                I want to contribute through software, systems thinking, and
+                refined execution — creating work that feels useful, clear, and
+                worth remembering.
+              </p>
+            </div>
           </div>
         </div>
       </section>
