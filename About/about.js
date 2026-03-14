@@ -1,104 +1,49 @@
-console.log("About page loaded.");
+console.log("About page loaded");
 
-document.addEventListener("DOMContentLoaded", function () {
-  initAboutReveal();
-  initAboutParallaxTilt();
-  initSphereMouseMove();
+document.addEventListener("DOMContentLoaded",function(){
+
+initReveal();
+
 });
 
-function initAboutReveal() {
-  const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
-  if (!("IntersectionObserver" in window)) {
-    revealElements.forEach(function (element) {
-      element.style.opacity = "1";
-      element.style.transform = "translateY(0)";
-    });
-    return;
-  }
+function initReveal(){
 
-  const observer = new IntersectionObserver(
-    function (entries, observerInstance) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) {
-          return;
-        }
+const elements=document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
-        let delay = "0s";
+if(!("IntersectionObserver" in window)){
 
-        if (entry.target.classList.contains("reveal-delay")) {
-          delay = "0.12s";
-        }
+elements.forEach(el=>{
+el.style.opacity=1;
+el.style.transform="translateY(0)";
+});
 
-        if (entry.target.classList.contains("reveal-delay-2")) {
-          delay = "0.22s";
-        }
-
-        entry.target.style.transition =
-          "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-
-        observerInstance.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  revealElements.forEach(function (element) {
-    observer.observe(element);
-  });
+return;
 }
 
-function initAboutParallaxTilt() {
-  const frames = document.querySelectorAll(".about-image-frame");
+const observer=new IntersectionObserver((entries,obs)=>{
 
-  frames.forEach(function (frame) {
-    frame.addEventListener("mousemove", function (event) {
-      const rect = frame.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
-      const offsetY = event.clientY - rect.top;
+entries.forEach(entry=>{
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+if(!entry.isIntersecting)return;
 
-      const rotateY = ((offsetX - centerX) / centerX) * 4;
-      const rotateX = -((offsetY - centerY) / centerY) * 4;
+let delay=0;
 
-      frame.style.transform =
-        "translateY(-4px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
-    });
+if(entry.target.classList.contains("reveal-delay"))delay=.15;
+if(entry.target.classList.contains("reveal-delay-2"))delay=.3;
 
-    frame.addEventListener("mouseleave", function () {
-      frame.style.transform = "";
-    });
-  });
-}
+entry.target.style.transition=
+`opacity .8s ease ${delay}s, transform .8s ease ${delay}s`;
 
-function initSphereMouseMove() {
-  const sphere = document.querySelector(".wire-sphere");
-  const panel = document.querySelector(".about-sphere-panel");
+entry.target.style.opacity=1;
+entry.target.style.transform="translateY(0)";
 
-  if (!sphere || !panel) {
-    return;
-  }
+obs.unobserve(entry.target);
 
-  panel.addEventListener("mousemove", function (event) {
-    const rect = panel.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+});
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+},{threshold:.15});
 
-    const rotateY = ((x - centerX) / centerX) * 8;
-    const rotateX = -((y - centerY) / centerY) * 8;
+elements.forEach(el=>observer.observe(el));
 
-    sphere.style.transform =
-      "rotateX(" + (14 + rotateX * 0.35) + "deg) rotateY(" + rotateY + "deg)";
-  });
-
-  panel.addEventListener("mouseleave", function () {
-    sphere.style.transform = "";
-  });
 }
