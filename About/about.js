@@ -1,10 +1,9 @@
-console.log("About final segmented connected railway loaded.");
+console.log("About page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
-  initAboutFloatingOrbs();
-  generateRailSleepers();
-  initSegmentReveal();
+  initAboutParallaxTilt();
+  initSphereMouseMove();
 });
 
 function initAboutReveal() {
@@ -12,9 +11,8 @@ function initAboutReveal() {
 
   if (!("IntersectionObserver" in window)) {
     revealElements.forEach(function (element) {
-      element.classList.add("is-visible");
       element.style.opacity = "1";
-      element.style.transform = "translateY(0) scale(1)";
+      element.style.transform = "translateY(0)";
     });
     return;
   }
@@ -37,15 +35,14 @@ function initAboutReveal() {
         }
 
         entry.target.style.transition =
-          "opacity 0.9s ease " + delay + ", transform 0.9s cubic-bezier(.2,.8,.2,1) " + delay;
+          "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
         entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0) scale(1)";
-        entry.target.classList.add("is-visible");
+        entry.target.style.transform = "translateY(0)";
 
         observerInstance.unobserve(entry.target);
       });
     },
-    { threshold: 0.16 }
+    { threshold: 0.12 }
   );
 
   revealElements.forEach(function (element) {
@@ -53,141 +50,55 @@ function initAboutReveal() {
   });
 }
 
-function initAboutFloatingOrbs() {
-  if (document.querySelector(".about-floating-orbs")) {
-    return;
-  }
+function initAboutParallaxTilt() {
+  const frames = document.querySelectorAll(".about-image-frame");
 
-  const orbLayer = document.createElement("div");
-  orbLayer.className = "about-floating-orbs";
+  frames.forEach(function (frame) {
+    frame.addEventListener("mousemove", function (event) {
+      const rect = frame.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
 
-  orbLayer.style.position = "fixed";
-  orbLayer.style.inset = "0";
-  orbLayer.style.pointerEvents = "none";
-  orbLayer.style.zIndex = "0";
-  orbLayer.style.overflow = "hidden";
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-  for (let i = 0; i < 8; i++) {
-    const orb = document.createElement("span");
-    const size = 14 + Math.random() * 34;
-    const left = Math.random() * 100;
-    const top = Math.random() * 100;
-    const duration = 12 + Math.random() * 10;
-    const delay = Math.random() * 6;
-    const opacity = 0.05 + Math.random() * 0.07;
+      const rotateY = ((offsetX - centerX) / centerX) * 4;
+      const rotateX = -((offsetY - centerY) / centerY) * 4;
 
-    orb.style.position = "absolute";
-    orb.style.width = size + "px";
-    orb.style.height = size + "px";
-    orb.style.left = left + "%";
-    orb.style.top = top + "%";
-    orb.style.borderRadius = "50%";
-    orb.style.background =
-      "radial-gradient(circle, rgba(255,179,71," + opacity + "), rgba(255,122,24,0.02), transparent 70%)";
-    orb.style.filter = "blur(2px)";
-    orb.style.animation =
-      "aboutOrbFloat " + duration + "s ease-in-out " + delay + "s infinite";
-
-    orbLayer.appendChild(orb);
-  }
-
-  document.body.appendChild(orbLayer);
-  injectAboutOrbKeyframes();
-}
-
-function generateRailSleepers() {
-  const configs = [
-    { groupId: "sleepers-01", leftId: "rail-left-01", rightId: "rail-right-01" },
-    { groupId: "sleepers-02", leftId: "rail-left-02", rightId: "rail-right-02" },
-    { groupId: "sleepers-03", leftId: "rail-left-03", rightId: "rail-right-03" },
-    { groupId: "sleepers-04", leftId: "rail-left-04", rightId: "rail-right-04" },
-    { groupId: "sleepers-05", leftId: "rail-left-05", rightId: "rail-right-05" }
-  ];
-
-  configs.forEach(function (config) {
-    const leftRail = document.getElementById(config.leftId);
-    const rightRail = document.getElementById(config.rightId);
-    const sleepersGroup = document.getElementById(config.groupId);
-
-    if (!leftRail || !rightRail || !sleepersGroup) {
-      return;
-    }
-
-    sleepersGroup.innerHTML = "";
-
-    const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
-    const sleeperCount = 14;
-    const startOffset = totalLength * 0.07;
-    const usableLength = totalLength * 0.84;
-    const spacing = usableLength / (sleeperCount - 1);
-
-    for (let i = 0; i < sleeperCount; i++) {
-      const distance = startOffset + spacing * i;
-      const leftPoint = leftRail.getPointAtLength(distance);
-      const rightPoint = rightRail.getPointAtLength(distance);
-
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      line.setAttribute("x1", leftPoint.x.toFixed(2));
-      line.setAttribute("y1", leftPoint.y.toFixed(2));
-      line.setAttribute("x2", rightPoint.x.toFixed(2));
-      line.setAttribute("y2", rightPoint.y.toFixed(2));
-
-      sleepersGroup.appendChild(line);
-    }
-  });
-}
-
-function initSegmentReveal() {
-  const segments = document.querySelectorAll(".segment");
-
-  if (!("IntersectionObserver" in window)) {
-    segments.forEach(function (segment) {
-      segment.classList.add("visible");
+      frame.style.transform =
+        "translateY(-4px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
     });
-    return;
-  }
 
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        } else {
-          entry.target.classList.remove("visible");
-        }
-      });
-    },
-    {
-      root: null,
-      threshold: 0.35
-    }
-  );
-
-  segments.forEach(function (segment) {
-    observer.observe(segment);
+    frame.addEventListener("mouseleave", function () {
+      frame.style.transform = "";
+    });
   });
 }
 
-function injectAboutOrbKeyframes() {
-  if (document.getElementById("about-orb-keyframes")) {
+function initSphereMouseMove() {
+  const sphere = document.querySelector(".wire-sphere");
+  const panel = document.querySelector(".about-sphere-panel");
+
+  if (!sphere || !panel) {
     return;
   }
 
-  const style = document.createElement("style");
-  style.id = "about-orb-keyframes";
-  style.textContent = `
-    @keyframes aboutOrbFloat {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      50% {
-        transform: translate3d(12px, -18px, 0) scale(1.08);
-      }
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-    }
-  `;
+  panel.addEventListener("mousemove", function (event) {
+    const rect = panel.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-  document.head.appendChild(style);
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateY = ((x - centerX) / centerX) * 8;
+    const rotateX = -((y - centerY) / centerY) * 8;
+
+    sphere.style.transform =
+      "rotateX(" + (14 + rotateX * 0.35) + "deg) rotateY(" + rotateY + "deg)";
+  });
+
+  panel.addEventListener("mouseleave", function () {
+    sphere.style.transform = "";
+  });
 }
