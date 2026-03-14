@@ -3,7 +3,7 @@ console.log("About page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutImageParallax();
-  initAboutThreeVisuals();
+  initAboutSystemField();
 });
 
 function initAboutReveal() {
@@ -55,6 +55,7 @@ function initAboutImageParallax() {
 
   visuals.forEach(function (visual) {
     const image = visual.querySelector(".about-image");
+
     if (!image) {
       return;
     }
@@ -80,26 +81,20 @@ function initAboutImageParallax() {
   });
 }
 
-function initAboutThreeVisuals() {
-  if (typeof window.createAboutThreeVisual !== "function") {
-    console.warn("about-visual.js not loaded or createAboutThreeVisual missing.");
+function initAboutSystemField() {
+  if (typeof window.createAboutSystemField !== "function") {
+    console.warn("about-visual.js not loaded or createAboutSystemField missing.");
     return;
   }
 
-  const visuals = document.querySelectorAll(".about-visual");
+  const canvas = document.getElementById("aboutSystemCanvas");
 
-  visuals.forEach(function (visual) {
-    const canvas = visual.querySelector(".about-visual-canvas");
-    const visualType = visual.getAttribute("data-visual-type") || "warm-field";
+  if (!canvas) {
+    return;
+  }
 
-    if (!canvas) {
-      return;
-    }
-
-    window.createAboutThreeVisual({
-      container: visual,
-      canvas: canvas,
-      type: visualType
-    });
+  window.createAboutSystemField({
+    canvas: canvas,
+    mode: "entj-system"
   });
 }

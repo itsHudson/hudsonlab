@@ -1,42 +1,35 @@
 (function () {
   "use strict";
 
-  function createAboutThreeVisual(options) {
-    if (!options || !options.container || !options.canvas || typeof THREE === "undefined") {
+  function createAboutSystemField(options) {
+    if (!options || !options.canvas || typeof THREE === "undefined") {
       return null;
     }
 
-    const container = options.container;
     const canvas = options.canvas;
-    const type = options.type || "warm-field";
-
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       antialias: true,
       alpha: true
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.z = 18;
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
+    camera.position.z = 28;
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffa24c, 1.15, 100);
-    pointLight.position.set(6, 7, 10);
+    const pointLight = new THREE.PointLight(0xffa24c, 0.9, 120);
+    pointLight.position.set(10, 12, 18);
     scene.add(pointLight);
 
     const group = new THREE.Group();
     scene.add(group);
-
-    let particles = null;
-    let lineSegments = null;
-    let wireSphere = null;
 
     const mouse = {
       x: 0,
@@ -47,158 +40,95 @@
 
     const clock = new THREE.Clock();
 
-    setupSceneByType();
-    resize();
+    const pointCount = 110;
+    const positions = [];
+    const velocities = [];
+    const bounds = {
+      x: 18,
+      y: 26,
+      z: 8
+    };
 
-    const resizeObserver = new ResizeObserver(function () {
-      resize();
+    for (let i = 0; i < pointCount; i++) {
+      positions.push(
+        (Math.random() - 0.5) * bounds.x * 2,
+        (Math.random() - 0.5) * bounds.y * 2,
+        (Math.random() - 0.5) * bounds.z * 2
+      );
+
+      velocities.push(
+        (Math.random() - 0.5) * 0.006,
+        (Math.random() - 0.5) * 0.006,
+        (Math.random() - 0.5) * 0.003
+      );
+    }
+
+    const particleGeometry = new THREE.BufferGeometry();
+    particleGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(positions.slice(), 3)
+    );
+
+    const particleMaterial = new THREE.PointsMaterial({
+      color: 0xff9e47,
+      size: 0.12,
+      transparent: true,
+      opacity: 0.52,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
     });
 
-    resizeObserver.observe(container);
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    group.add(particles);
 
-    container.addEventListener("mousemove", onMouseMove);
-    container.addEventListener("mouseleave", onMouseLeave);
+    const maxLineSegments = pointCount * 7;
+    const linePositions = new Float32Array(maxLineSegments * 3 * 2);
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    lineGeometry.setDrawRange(0, 0);
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0xffba74,
+      transparent: true,
+      opacity: 0.08
+    });
+
+    const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+    group.add(lineSegments);
+
+    const guideGeometry = new THREE.BufferGeometry();
+    const guidePositions = new Float32Array([
+      -10, 14, -2,
+      -4, 6, -1,
+      0, -2, 0,
+      7, -10, 1,
+      10, -18, 2
+    ]);
+    guideGeometry.setAttribute("position", new THREE.BufferAttribute(guidePositions, 3));
+
+    const guideMaterial = new THREE.LineBasicMaterial({
+      color: 0xff9a3d,
+      transparent: true,
+      opacity: 0.05
+    });
+
+    const guideLine = new THREE.Line(guideGeometry, guideMaterial);
+    guideLine.rotation.z = -0.1;
+    group.add(guideLine);
+
+    resize();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
 
     let animationFrameId = requestAnimationFrame(animate);
 
-    function setupSceneByType() {
-      if (type === "warm-field") {
-        buildWarmField();
-      } else if (type === "node-network") {
-        buildNodeNetwork();
-      } else {
-        buildWarmField();
-      }
-    }
-
-    function buildWarmField() {
-      const particleCount = 170;
-      const positions = new Float32Array(particleCount * 3);
-      const sizes = new Float32Array(particleCount);
-
-      for (let i = 0; i < particleCount; i++) {
-        const radius = 4.7 + Math.random() * 2.8;
-        const angle = Math.random() * Math.PI * 2;
-        const height = (Math.random() - 0.5) * 5.6;
-
-        positions[i * 3] = Math.cos(angle) * radius * (0.7 + Math.random() * 0.4);
-        positions[i * 3 + 1] = height;
-        positions[i * 3 + 2] = Math.sin(angle) * radius * (0.6 + Math.random() * 0.4);
-
-        sizes[i] = 1 + Math.random() * 1.8;
-      }
-
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
-
-      const material = new THREE.PointsMaterial({
-        color: 0xff9d45,
-        size: 0.12,
-        transparent: true,
-        opacity: 0.72,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending
-      });
-
-      particles = new THREE.Points(geometry, material);
-      group.add(particles);
-
-      const sphereGeometry = new THREE.SphereGeometry(4.6, 22, 22);
-      const wireMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffbf7a,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.12
-      });
-
-      wireSphere = new THREE.Mesh(sphereGeometry, wireMaterial);
-      wireSphere.scale.set(1.15, 0.82, 1.05);
-      group.add(wireSphere);
-    }
-
-    function buildNodeNetwork() {
-      const particleCount = 72;
-      const positions = [];
-      const connectionPositions = [];
-
-      for (let i = 0; i < particleCount; i++) {
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos((Math.random() * 2) - 1);
-        const radius = 4.5 + Math.random() * 1.8;
-
-        const x = radius * Math.sin(phi) * Math.cos(theta);
-        const y = radius * Math.cos(phi) * 0.82;
-        const z = radius * Math.sin(phi) * Math.sin(theta);
-
-        positions.push(x, y, z);
-      }
-
-      for (let i = 0; i < particleCount; i++) {
-        const ax = positions[i * 3];
-        const ay = positions[i * 3 + 1];
-        const az = positions[i * 3 + 2];
-
-        for (let j = i + 1; j < particleCount; j++) {
-          const bx = positions[j * 3];
-          const by = positions[j * 3 + 1];
-          const bz = positions[j * 3 + 2];
-
-          const dx = ax - bx;
-          const dy = ay - by;
-          const dz = az - bz;
-          const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-          if (distance < 2.55) {
-            connectionPositions.push(ax, ay, az, bx, by, bz);
-          }
-        }
-      }
-
-      const pointsGeometry = new THREE.BufferGeometry();
-      pointsGeometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-
-      const pointsMaterial = new THREE.PointsMaterial({
-        color: 0xff8a2d,
-        size: 0.16,
-        transparent: true,
-        opacity: 0.92,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending
-      });
-
-      particles = new THREE.Points(pointsGeometry, pointsMaterial);
-      group.add(particles);
-
-      const lineGeometry = new THREE.BufferGeometry();
-      lineGeometry.setAttribute("position", new THREE.Float32BufferAttribute(connectionPositions, 3));
-
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0xffbb73,
-        transparent: true,
-        opacity: 0.18
-      });
-
-      lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
-      group.add(lineSegments);
-
-      const sphereGeometry = new THREE.SphereGeometry(4.9, 24, 24);
-      const wireMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffa24c,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.10
-      });
-
-      wireSphere = new THREE.Mesh(sphereGeometry, wireMaterial);
-      wireSphere.scale.set(1.08, 0.94, 1.08);
-      group.add(wireSphere);
-    }
-
     function onMouseMove(event) {
-      const rect = container.getBoundingClientRect();
-      mouse.targetX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      mouse.targetY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
+
+      mouse.targetX = (event.clientX / width - 0.5) * 2;
+      mouse.targetY = (event.clientY / height - 0.5) * 2;
     }
 
     function onMouseLeave() {
@@ -207,12 +137,75 @@
     }
 
     function resize() {
-      const width = Math.max(container.clientWidth, 1);
-      const height = Math.max(container.clientHeight, 1);
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
 
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+    }
+
+    function updateParticles() {
+      const positionAttr = particleGeometry.getAttribute("position");
+      const array = positionAttr.array;
+
+      for (let i = 0; i < pointCount; i++) {
+        const index = i * 3;
+
+        array[index] += velocities[index];
+        array[index + 1] += velocities[index + 1];
+        array[index + 2] += velocities[index + 2];
+
+        if (array[index] > bounds.x || array[index] < -bounds.x) {
+          velocities[index] *= -1;
+        }
+
+        if (array[index + 1] > bounds.y || array[index + 1] < -bounds.y) {
+          velocities[index + 1] *= -1;
+        }
+
+        if (array[index + 2] > bounds.z || array[index + 2] < -bounds.z) {
+          velocities[index + 2] *= -1;
+        }
+      }
+
+      positionAttr.needsUpdate = true;
+    }
+
+    function updateConnections() {
+      const particleArray = particleGeometry.getAttribute("position").array;
+      let writeIndex = 0;
+      let lineCount = 0;
+
+      for (let i = 0; i < pointCount; i++) {
+        const ax = particleArray[i * 3];
+        const ay = particleArray[i * 3 + 1];
+        const az = particleArray[i * 3 + 2];
+
+        for (let j = i + 1; j < pointCount; j++) {
+          const bx = particleArray[j * 3];
+          const by = particleArray[j * 3 + 1];
+          const bz = particleArray[j * 3 + 2];
+
+          const dx = ax - bx;
+          const dy = ay - by;
+          const dz = az - bz;
+          const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+          if (distance < 4.9 && lineCount < maxLineSegments) {
+            linePositions[writeIndex++] = ax;
+            linePositions[writeIndex++] = ay;
+            linePositions[writeIndex++] = az;
+            linePositions[writeIndex++] = bx;
+            linePositions[writeIndex++] = by;
+            linePositions[writeIndex++] = bz;
+            lineCount += 2;
+          }
+        }
+      }
+
+      lineGeometry.setDrawRange(0, lineCount);
+      lineGeometry.attributes.position.needsUpdate = true;
     }
 
     function animate() {
@@ -220,51 +213,40 @@
 
       const elapsed = clock.getElapsedTime();
 
-      mouse.x += (mouse.targetX - mouse.x) * 0.045;
-      mouse.y += (mouse.targetY - mouse.y) * 0.045;
+      mouse.x += (mouse.targetX - mouse.x) * 0.03;
+      mouse.y += (mouse.targetY - mouse.y) * 0.03;
 
-      group.rotation.y += 0.0028;
-      group.rotation.x += 0.0012;
+      updateParticles();
+      updateConnections();
 
-      group.rotation.y += mouse.x * 0.012;
-      group.rotation.x += -mouse.y * 0.008;
+      group.rotation.y = mouse.x * 0.08;
+      group.rotation.x = -mouse.y * 0.05;
 
-      if (particles) {
-        particles.rotation.y += type === "warm-field" ? 0.0018 : 0.0012;
-        particles.rotation.x += type === "warm-field" ? 0.0009 : 0.0006;
+      particles.rotation.z += 0.00035;
+      particles.position.y = Math.sin(elapsed * 0.35) * 0.25;
 
-        if (type === "warm-field") {
-          particles.position.y = Math.sin(elapsed * 0.9) * 0.12;
-        }
-      }
+      lineSegments.rotation.z -= 0.00022;
+      lineSegments.position.x = mouse.x * 0.8;
+      lineSegments.position.y = -mouse.y * 0.55;
 
-      if (wireSphere) {
-        wireSphere.rotation.x += 0.002;
-        wireSphere.rotation.z += 0.0013;
-        wireSphere.position.x = mouse.x * 0.35;
-        wireSphere.position.y = -mouse.y * 0.28;
-      }
-
-      if (lineSegments && type === "node-network") {
-        lineSegments.rotation.y -= 0.0011;
-        lineSegments.rotation.x += 0.0008;
-        lineSegments.position.x = mouse.x * 0.25;
-        lineSegments.position.y = -mouse.y * 0.18;
-      }
+      guideLine.position.x = mouse.x * 0.5;
+      guideLine.position.y = -mouse.y * 0.35;
+      guideLine.rotation.z = -0.1 + Math.sin(elapsed * 0.2) * 0.02;
 
       renderer.render(scene, camera);
     }
 
     function destroy() {
       cancelAnimationFrame(animationFrameId);
-      resizeObserver.disconnect();
-      container.removeEventListener("mousemove", onMouseMove);
-      container.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
 
       scene.traverse(function (object) {
         if (object.geometry) {
           object.geometry.dispose();
         }
+
         if (object.material) {
           if (Array.isArray(object.material)) {
             object.material.forEach(function (material) {
@@ -284,5 +266,5 @@
     };
   }
 
-  window.createAboutThreeVisual = createAboutThreeVisual;
+  window.createAboutSystemField = createAboutSystemField;
 })();

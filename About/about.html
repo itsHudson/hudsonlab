@@ -1,137 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | HUDSONLAB</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>About | HUDSONLAB</title>
-
-<link rel="stylesheet" href="../css/global.css">
-<link rel="stylesheet" href="about.css">
-
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="about.css" />
 </head>
-
-
 <body data-page="about">
+  <div class="about-bg-gradient"></div>
+  <div class="about-bg-grid"></div>
+  <div class="about-system-canvas-wrap" aria-hidden="true">
+    <canvas id="aboutSystemCanvas"></canvas>
+  </div>
 
-<div class="about-bg-gradient"></div>
-<div class="about-bg-grid"></div>
+  <div id="header"></div>
 
-<div id="header"></div>
+  <main class="page-shell about-page-shell">
+    <div class="about-direction-grid" aria-hidden="true">
+      <div class="direction-spine"></div>
 
-<main class="page-shell about-page-shell">
+      <span class="direction-node direction-node-hero"></span>
+      <span class="direction-node direction-node-identity"></span>
+      <span class="direction-node direction-node-direction"></span>
 
-<!-- HERO -->
+      <span class="direction-connector direction-connector-identity"></span>
+      <span class="direction-connector direction-connector-direction"></span>
+    </div>
 
-<section class="about-hero reveal">
+    <section class="about-hero reveal">
+      <span class="small-chip">About</span>
 
-<span class="small-chip">About</span>
+      <h1 class="about-title">
+        Technology should not exist without direction.
+      </h1>
 
-<h1 class="about-title">
-Technology should not exist without direction.
-</h1>
+      <p class="about-hero-lines">
+        Structure creates clarity.<br />
+        Clarity creates systems.<br />
+        Strong systems create impact.
+      </p>
 
-<p class="about-hero-lines">
-Structure creates clarity.<br>
-Clarity creates systems.<br>
-And strong systems create meaningful impact.
-</p>
+      <p class="about-intro">
+        I am drawn to technology that is deliberate, structured, and built with purpose.
+        My interest lies not only in learning tools, but in understanding how systems are
+        designed, connected, and refined to create lasting value.
+      </p>
+    </section>
 
-<p class="about-intro">
-I am drawn to technology that is deliberate, structured,
-and built with purpose. My interest lies not only in
-learning tools, but in understanding how systems are
-designed, connected, and refined to create lasting value.
-</p>
+    <section class="about-section about-section-identity reveal-delay">
+      <div class="about-text">
+        <h2>Thinking in Systems, Not Just Solutions</h2>
 
-</section>
+        <p>
+          I approach software and digital design through the lens of systems thinking.
+          Instead of focusing only on features or outputs, I am interested in the structure
+          behind them: how components connect, how workflows scale, and how clarity in
+          architecture leads to stronger results.
+        </p>
 
+        <p>
+          For me, building technology is not simply about writing code. It is about shaping
+          complexity into something understandable, intentional, and useful — something that
+          carries direction, not just function.
+        </p>
+      </div>
 
-<!-- IDENTITY -->
+      <div class="about-visual about-visual-pixar">
+        <div class="about-visual-aura about-visual-aura-pixar"></div>
+        <img
+          src="../Images/ProfileHUDSOnPixar.png"
+          class="about-image about-image-pixar"
+          alt="Hudson profile illustration"
+        />
+      </div>
+    </section>
 
-<section class="about-section reveal-delay">
+    <section class="about-section about-section-direction reveal-delay-2">
+      <div class="about-visual about-visual-entj visual-left">
+        <div class="about-visual-aura about-visual-aura-entj"></div>
+        <img
+          src="../Images/MBTI_ENTJ.png"
+          class="about-image about-image-entj"
+          alt="ENTJ personality illustration"
+        />
+      </div>
 
-<div class="about-text">
+      <div class="about-text">
+        <h2>Driven by Vision, Refined by Discipline</h2>
 
-<h2>Thinking in Systems, Not Just Solutions</h2>
+        <p>
+          My mindset is shaped by the belief that progress requires both direction and
+          execution. I am motivated by challenges that demand structure, strategic thinking,
+          and the ability to turn ideas into working systems.
+        </p>
 
-<p>
-I approach software and digital design through the lens
-of systems thinking. Instead of focusing only on features
-or outputs, I am interested in the structure behind them:
-how components connect, how workflows scale, and how
-clarity in architecture leads to stronger results.
-</p>
+        <p>
+          The ENTJ archetype resonates with how I approach growth: forward-looking, decisive,
+          and constantly refining the path from concept to impact. I want to keep building work
+          that is not only capable, but clear in purpose and strong in design.
+        </p>
+      </div>
+    </section>
+  </main>
 
-<p>
-For me, building technology is not simply about writing
-code. It is about shaping complexity into something that
-is understandable, intentional, and useful.
-</p>
+  <div id="footer"></div>
 
-</div>
-
-<div class="about-visual">
-
-<canvas class="about-visual-canvas"></canvas>
-
-<img src="../Images/ProfileHUDSOnPixar.png"
-class="about-image about-image-pixar">
-
-</div>
-
-</section>
-
-
-
-<!-- ENTJ -->
-
-<section class="about-section about-section-direction reveal-delay-2">
-
-<div class="about-visual visual-left">
-
-<canvas class="about-visual-canvas"></canvas>
-
-<img src="../Images/MBTI_ENTJ.png"
-class="about-image about-image-entj">
-
-</div>
-
-<div class="about-text">
-
-<h2>Driven by Vision, Refined by Discipline</h2>
-
-<p>
-My mindset is shaped by the belief that progress requires
-both direction and execution. I am motivated by challenges
-that demand structure, strategic thinking, and the ability
-to turn ideas into working systems.
-</p>
-
-<p>
-The ENTJ archetype resonates with how I approach growth:
-forward-looking, decisive, and constantly refining the
-path from concept to impact.
-</p>
-
-</div>
-
-</section>
-
-</main>
-
-
-<div id="footer"></div>
-
-<script src="../js/layout.js"></script>
-<script src="../js/navigation.js"></script>
-
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
-<script src="about.js"></script>
-<script src="about-visual.js"></script>
-
+  <script src="../js/layout.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="about-visual.js"></script>
+  <script src="about.js"></script>
 </body>
 </html>
