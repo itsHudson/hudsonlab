@@ -17,7 +17,8 @@ hudsonlab/
 ├── About/
 │   ├── about.html
 │   ├── about.css
-│   └── about.js
+│   ├── about.js
+│   └── about-visual.js
 │
 ├── Certifications/
 │   ├── certifications.html

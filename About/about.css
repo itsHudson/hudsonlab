@@ -21,34 +21,36 @@ body[data-page="about"] {
 .about-bg-base {
   z-index: 0;
   background:
-    linear-gradient(180deg, #fffaf5 0%, #fffdfb 40%, #ffffff 100%);
+    radial-gradient(circle at 18% 10%, rgba(255, 146, 72, 0.08), transparent 26%),
+    radial-gradient(circle at 84% 18%, rgba(255, 200, 150, 0.10), transparent 24%),
+    linear-gradient(180deg, #fffaf5 0%, #fffdfb 42%, #ffffff 100%);
 }
 
 .about-bg-light {
   z-index: 0;
-  filter: blur(40px);
-  opacity: 0.9;
+  filter: blur(56px);
+  opacity: 0.95;
 }
 
 .about-bg-light-left {
   background:
-    radial-gradient(circle at 18% 16%, rgba(255, 122, 24, 0.15), transparent 28%);
+    radial-gradient(circle at 18% 16%, rgba(255, 122, 24, 0.16), transparent 30%);
 }
 
 .about-bg-light-right {
   background:
-    radial-gradient(circle at 86% 24%, rgba(255, 180, 110, 0.14), transparent 26%),
-    radial-gradient(circle at 72% 76%, rgba(255, 122, 24, 0.07), transparent 24%);
+    radial-gradient(circle at 86% 24%, rgba(255, 180, 110, 0.14), transparent 28%),
+    radial-gradient(circle at 72% 76%, rgba(255, 122, 24, 0.08), transparent 26%);
 }
 
 .about-bg-grid {
   z-index: 0;
-  opacity: 0.05;
+  opacity: 0.06;
   background-image:
-    linear-gradient(rgba(255, 122, 24, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 122, 24, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(255, 122, 24, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 122, 24, 0.07) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(circle at center, black 44%, transparent 92%);
+  mask-image: radial-gradient(circle at center, black 48%, transparent 94%);
 }
 
 .about-system-canvas-wrap {
@@ -59,8 +61,8 @@ body[data-page="about"] {
   width: 100%;
   height: 100%;
   display: block;
-  opacity: 0.58;
-  filter: blur(0.15px);
+  opacity: 0.68;
+  filter: blur(0.12px);
 }
 
 /* =========================
@@ -78,25 +80,26 @@ body[data-page="about"] {
 
 .direction-spine {
   position: absolute;
-  top: 110px;
-  bottom: 60px;
+  top: 112px;
+  bottom: 70px;
   left: clamp(8px, 2.8vw, 28px);
-  width: 170px;
+  width: 176px;
   z-index: 1;
   pointer-events: none;
+  opacity: 0.9;
 }
 
 .direction-line {
   position: absolute;
-  top: 74px;
+  top: 78px;
   bottom: 0;
   left: 54px;
-  width: 2px;
+  width: 1px;
   background: linear-gradient(
     180deg,
-    rgba(255, 122, 24, 0.58) 0%,
-    rgba(255, 122, 24, 0.18) 46%,
-    rgba(255, 122, 24, 0.08) 100%
+    rgba(255, 122, 24, 0.50) 0%,
+    rgba(255, 122, 24, 0.18) 48%,
+    rgba(255, 122, 24, 0.06) 100%
   );
 }
 
@@ -108,20 +111,20 @@ body[data-page="about"] {
   border-radius: 50%;
   background: #ff7a18;
   box-shadow:
-    0 0 0 10px rgba(255, 122, 24, 0.12),
-    0 0 30px rgba(255, 122, 24, 0.32);
+    0 0 0 8px rgba(255, 122, 24, 0.10),
+    0 0 24px rgba(255, 122, 24, 0.22);
 }
 
 .direction-node-hero {
-  top: 118px;
+  top: 116px;
 }
 
 .direction-node-identity {
-  top: 690px;
+  top: 732px;
 }
 
 .direction-node-direction {
-  top: 1360px;
+  top: 1408px;
 }
 
 .direction-node.is-active {
@@ -133,19 +136,19 @@ body[data-page="about"] {
   height: 1px;
   background: linear-gradient(
     90deg,
-    rgba(255, 122, 24, 0.28) 0%,
-    rgba(255, 122, 24, 0.08) 100%
+    rgba(255, 122, 24, 0.24) 0%,
+    rgba(255, 122, 24, 0.04) 100%
   );
 }
 
 .direction-connector-identity {
-  top: 696px;
+  top: 738px;
   left: 60px;
-  width: 92px;
+  width: 96px;
 }
 
 .direction-connector-direction {
-  top: 1366px;
+  top: 1414px;
   left: 60px;
   width: 112px;
 }
@@ -154,20 +157,20 @@ body[data-page="about"] {
   0% {
     transform: scale(1);
     box-shadow:
-      0 0 0 10px rgba(255, 122, 24, 0.12),
-      0 0 30px rgba(255, 122, 24, 0.32);
+      0 0 0 8px rgba(255, 122, 24, 0.10),
+      0 0 24px rgba(255, 122, 24, 0.22);
   }
   50% {
-    transform: scale(1.45);
+    transform: scale(1.4);
     box-shadow:
-      0 0 0 18px rgba(255, 122, 24, 0.16),
-      0 0 46px rgba(255, 122, 24, 0.42);
+      0 0 0 16px rgba(255, 122, 24, 0.14),
+      0 0 40px rgba(255, 122, 24, 0.30);
   }
   100% {
     transform: scale(1);
     box-shadow:
-      0 0 0 10px rgba(255, 122, 24, 0.12),
-      0 0 30px rgba(255, 122, 24, 0.32);
+      0 0 0 8px rgba(255, 122, 24, 0.10),
+      0 0 24px rgba(255, 122, 24, 0.22);
   }
 }
 
@@ -178,36 +181,45 @@ body[data-page="about"] {
 .about-hero {
   position: relative;
   z-index: 2;
-  margin-bottom: 160px;
-  max-width: 950px;
-  padding-top: 10px;
+  padding-top: 16px;
+  margin-bottom: 190px;
+  max-width: 980px;
+}
+
+.about-eyebrow {
+  margin: 0 0 22px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ff7a18;
 }
 
 .about-title {
   margin: 0;
-  max-width: 920px;
-  font-size: clamp(3.6rem, 5vw, 5.8rem);
-  line-height: 0.94;
-  letter-spacing: -0.055em;
-  color: #1c1c1c;
+  max-width: 930px;
+  font-size: clamp(3.2rem, 4.8vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: #1b1b1b;
   text-wrap: balance;
 }
 
 .about-hero-lines {
-  margin: 24px 0 0;
-  max-width: 540px;
-  font-size: 1.2rem;
-  line-height: 1.68;
-  letter-spacing: -0.015em;
-  color: #55504c;
+  margin: 28px 0 0;
+  max-width: 560px;
+  font-size: 1.18rem;
+  line-height: 1.7;
+  letter-spacing: -0.016em;
+  color: #504943;
 }
 
 .about-intro {
-  margin: 28px 0 0;
-  max-width: 580px;
-  font-size: 1.03rem;
-  line-height: 1.95;
-  color: #6c6661;
+  margin: 30px 0 0;
+  max-width: 610px;
+  font-size: 1.04rem;
+  line-height: 1.92;
+  color: #67605a;
 }
 
 /* =========================
@@ -217,35 +229,40 @@ body[data-page="about"] {
 .about-section {
   position: relative;
   z-index: 2;
-  margin-top: 120px;
+  margin-top: 144px;
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 72px;
+  gap: 78px;
   align-items: center;
 }
 
-.about-grid.reverse {
-  grid-template-columns: 1fr 1fr;
+.about-section-label {
+  margin: 0 0 16px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #ff7a18;
 }
 
 .about-text h2 {
-  margin: 0 0 18px;
-  max-width: 12ch;
-  font-size: clamp(2.05rem, 2.8vw, 2.8rem);
-  line-height: 1.04;
-  letter-spacing: -0.04em;
+  margin: 0 0 22px;
+  max-width: 14ch;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
   color: #1c1c1c;
 }
 
 .about-text p {
   margin: 0 0 18px;
-  max-width: 520px;
-  font-size: 1.05rem;
-  line-height: 1.92;
-  color: #5d5752;
+  max-width: 560px;
+  font-size: 1.04rem;
+  line-height: 1.95;
+  color: #5b544e;
 }
 
 .about-text p:last-child {
@@ -253,98 +270,165 @@ body[data-page="about"] {
 }
 
 /* =========================
-   VISUALS
+   IDENTITY SIDE
    ========================= */
 
-.about-visual {
+.about-identity-side {
+  display: flex;
+  justify-content: center;
+}
+
+.about-identity-card {
   position: relative;
-  min-height: 460px;
+  width: min(100%, 460px);
+  padding: 34px 30px 32px;
+  border: 1px solid rgba(255, 122, 24, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 18px 40px rgba(28, 28, 28, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.identity-card-line {
+  width: 74px;
+  height: 2px;
+  margin-bottom: 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 122, 24, 0.88) 0%,
+    rgba(255, 180, 110, 0.30) 100%
+  );
+}
+
+.identity-card-label {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff7a18;
+}
+
+.about-identity-card h3 {
+  margin: 0 0 14px;
+  font-size: 1.7rem;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #1f1f1f;
+}
+
+.about-identity-card p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.88;
+  color: #625b55;
+}
+
+/* =========================
+   ENTJ CORE VISUAL
+   ========================= */
+
+.about-grid-direction {
+  align-items: center;
+}
+
+.about-visual-entj-core {
+  position: relative;
+  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
   isolation: isolate;
 }
 
-.about-visual-glow {
+.entj-orbit {
   position: absolute;
   border-radius: 50%;
+  border: 1px solid rgba(255, 122, 24, 0.16);
   pointer-events: none;
-  z-index: 1;
-  filter: blur(24px);
 }
 
-.about-visual-glow-pixar {
-  width: 260px;
-  height: 260px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 122, 24, 0.14) 0%,
-    rgba(255, 180, 110, 0.08) 42%,
-    transparent 76%
-  );
-  transform: translate(18px, 6px);
+.entj-orbit-outer {
+  width: 410px;
+  height: 410px;
+  animation: orbitSpin 22s linear infinite;
 }
 
-.about-visual-glow-entj {
-  width: 320px;
-  height: 320px;
+.entj-orbit-inner {
+  width: 300px;
+  height: 300px;
+  border-color: rgba(255, 180, 110, 0.22);
+  animation: orbitSpinReverse 16s linear infinite;
+}
+
+.entj-glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 180, 110, 0.16) 0%,
-    rgba(255, 122, 24, 0.08) 44%,
-    transparent 78%
+    rgba(255, 122, 24, 0.18) 0%,
+    rgba(255, 180, 110, 0.09) 42%,
+    transparent 74%
   );
-  transform: translate(-8px, 8px);
+  filter: blur(26px);
+  pointer-events: none;
+}
+
+.entj-core-badge {
+  position: absolute;
+  top: 48px;
+  right: 40px;
+  z-index: 4;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 122, 24, 0.15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #ff7a18;
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px rgba(28, 28, 28, 0.05);
 }
 
 .about-image {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: block;
   width: 100%;
   height: auto;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.35s ease, filter 0.35s ease;
   will-change: transform;
 }
 
-.about-image-pixar {
-  max-width: 400px;
-  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.08)) saturate(1.05);
-}
-
 .about-image-entj {
-  max-width: 460px;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.10)) saturate(1.10);
-  animation: floatSlow 8s ease-in-out infinite;
+  max-width: 440px;
+  filter:
+    drop-shadow(0 28px 60px rgba(0, 0, 0, 0.14))
+    saturate(1.08);
+  animation: entjFloat 8s ease-in-out infinite;
 }
 
-.about-visual:hover .about-image-pixar {
-  transform: translateY(-5px) scale(1.015);
-}
-
-.about-visual:hover .about-image-entj {
-  transform: translateY(-7px) scale(1.02);
-}
-
-@keyframes floatSlow {
-  0% {
-    transform: translateY(6px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-  100% {
-    transform: translateY(6px);
-  }
+.about-visual-entj-core:hover .about-image-entj {
+  transform: translateY(-8px) scale(1.02);
 }
 
 /* =========================
    ENTJ SIGNATURE
    ========================= */
 
+.about-direction-copy h2 {
+  max-width: 11ch;
+}
+
 .entj-signature {
-  margin-top: 22px;
-  font-weight: 600;
+  margin-top: 26px;
+  font-weight: 700;
   letter-spacing: 0.02em;
   color: #ff7a18 !important;
 }
@@ -356,6 +440,40 @@ body[data-page="about"] {
 .reveal {
   opacity: 0;
   transform: translateY(38px);
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes entjFloat {
+  0% {
+    transform: translateY(8px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 
 /* =========================
@@ -388,80 +506,135 @@ body[data-page="about"] {
     display: none;
   }
 
-  .about-grid,
-  .about-grid.reverse {
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-
   .about-hero {
-    margin-bottom: 110px;
+    margin-bottom: 120px;
   }
 
   .about-section {
-    margin-top: 88px;
+    margin-top: 96px;
   }
 
-  .about-visual {
-    min-height: 360px;
+  .about-grid,
+  .about-grid-direction {
+    grid-template-columns: 1fr;
+    gap: 42px;
   }
 
+  .about-visual-entj-core {
+    min-height: 460px;
+    order: -1;
+  }
+
+  .about-direction-copy h2,
   .about-text h2 {
     max-width: none;
+  }
+
+  .entj-core-badge {
+    top: 24px;
+    right: 24px;
   }
 }
 
 @media (max-width: 768px) {
   #aboutSystemCanvas {
-    opacity: 0.36;
+    opacity: 0.42;
   }
 
   .about-title {
-    font-size: clamp(2.5rem, 9vw, 4.2rem);
+    font-size: clamp(2.55rem, 9vw, 4rem);
   }
 
   .about-hero-lines {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     line-height: 1.62;
   }
 
   .about-intro,
-  .about-text p {
-    font-size: 0.99rem;
-    line-height: 1.86;
+  .about-text p,
+  .about-identity-card p {
+    font-size: 0.98rem;
+    line-height: 1.84;
   }
 
   .about-text h2 {
-    font-size: 1.9rem;
+    font-size: 1.95rem;
   }
 
-  .about-image-pixar {
-    max-width: 300px;
+  .about-section-label,
+  .about-eyebrow,
+  .identity-card-label {
+    letter-spacing: 0.16em;
+  }
+
+  .about-identity-card {
+    padding: 28px 24px;
+    border-radius: 22px;
+  }
+
+  .about-visual-entj-core {
+    min-height: 360px;
+  }
+
+  .entj-orbit-outer {
+    width: 300px;
+    height: 300px;
+  }
+
+  .entj-orbit-inner {
+    width: 230px;
+    height: 230px;
+  }
+
+  .entj-glow {
+    width: 260px;
+    height: 260px;
   }
 
   .about-image-entj {
-    max-width: 340px;
+    max-width: 300px;
+  }
+
+  .entj-core-badge {
+    font-size: 0.72rem;
+    padding: 8px 12px;
   }
 }
 
 @media (max-width: 520px) {
   .about-hero {
-    margin-bottom: 88px;
+    margin-bottom: 92px;
   }
 
   .about-section {
-    margin-top: 70px;
+    margin-top: 72px;
   }
 
-  .about-visual {
-    min-height: 280px;
+  .about-visual-entj-core {
+    min-height: 300px;
   }
 
-  .about-image-pixar {
-    max-width: 255px;
+  .entj-orbit-outer {
+    width: 252px;
+    height: 252px;
+  }
+
+  .entj-orbit-inner {
+    width: 192px;
+    height: 192px;
+  }
+
+  .entj-glow {
+    width: 210px;
+    height: 210px;
   }
 
   .about-image-entj {
-    max-width: 285px;
+    max-width: 250px;
+  }
+
+  .entj-core-badge {
+    top: 10px;
+    right: 8px;
   }
 }

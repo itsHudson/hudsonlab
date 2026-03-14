@@ -23,7 +23,7 @@ function initReveal() {
           return;
         }
 
-        entry.target.style.transition = "opacity 0.9s ease, transform 0.9s ease";
+        entry.target.style.transition = "opacity 0.95s ease, transform 0.95s ease";
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
         observerInstance.unobserve(entry.target);
@@ -99,11 +99,11 @@ function initImageParallax() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateY = ((offsetX - centerX) / centerX) * 3.5;
-      const rotateX = -((offsetY - centerY) / centerY) * 3.5;
+      const rotateY = ((offsetX - centerX) / centerX) * 4.2;
+      const rotateX = -((offsetY - centerY) / centerY) * 4.2;
 
       image.style.transform =
-        "translateY(-4px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(1.015)";
+        "translateY(-6px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(1.02)";
     });
 
     visual.addEventListener("mouseleave", function () {

@@ -25,11 +25,11 @@
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xffa45c, 1.1, 120);
+    const warmLight = new THREE.PointLight(0xffa45c, 1.15, 120);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xffc892, 0.6, 120);
+    const sideLight = new THREE.PointLight(0xffc892, 0.7, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
@@ -43,7 +43,7 @@
       targetY: 0
     };
 
-    const POINT_COUNT = 180;
+    const POINT_COUNT = 240;
     const bounds = { x: 18, y: 28, z: 10 };
 
     const positions = [];
@@ -73,7 +73,7 @@
       color: 0xff9e47,
       size: 0.18,
       transparent: true,
-      opacity: 0.78,
+      opacity: 0.88,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -81,7 +81,7 @@
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     group.add(particles);
 
-    const maxLineSegments = POINT_COUNT * 8;
+    const maxLineSegments = POINT_COUNT * 10;
     const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
     const lineGeometry = new THREE.BufferGeometry();
@@ -91,7 +91,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb46e,
       transparent: true,
-      opacity: 0.20
+      opacity: 0.28
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -115,7 +115,7 @@
     const guideMaterial = new THREE.LineBasicMaterial({
       color: 0xff9a3d,
       transparent: true,
-      opacity: 0.08
+      opacity: 0.10
     });
 
     const guideLine = new THREE.Line(guideCurve, guideMaterial);
@@ -126,7 +126,7 @@
     const glowMaterial = new THREE.MeshBasicMaterial({
       color: 0xffb46e,
       transparent: true,
-      opacity: 0.035
+      opacity: 0.045
     });
 
     const glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
@@ -213,7 +213,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 5.8 && lineCount < maxLineSegments) {
+          if (distance < 5.9 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -240,27 +240,27 @@
 
       const scrollShift = scrollOffset * -0.0016;
 
-      camera.position.y += ((scrollShift) - camera.position.y) * 0.04;
+      camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.00035;
+      group.rotation.y += 0.00034;
       group.rotation.x += 0.00016;
 
-      group.rotation.y += mouse.x * 0.0025;
+      group.rotation.y += mouse.x * 0.0026;
       group.rotation.x += -mouse.y * 0.0018;
 
-      particles.rotation.z += 0.00028;
-      particles.position.x = mouse.x * 0.8;
-      particles.position.y += ((-mouse.y * 0.6) - particles.position.y) * 0.035;
+      particles.rotation.z += 0.00030;
+      particles.position.x = mouse.x * 0.85;
+      particles.position.y += ((-mouse.y * 0.62) - particles.position.y) * 0.035;
 
       lineSegments.rotation.z -= 0.00016;
-      lineSegments.position.x += ((mouse.x * 0.55) - lineSegments.position.x) * 0.03;
-      lineSegments.position.y += ((-mouse.y * 0.38) - lineSegments.position.y) * 0.03;
+      lineSegments.position.x += ((mouse.x * 0.58) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * 0.40) - lineSegments.position.y) * 0.03;
 
       guideLine.position.x += ((mouse.x * 0.34) - guideLine.position.x) * 0.03;
       guideLine.position.y += ((-mouse.y * 0.22) - guideLine.position.y) * 0.03;
 
-      glowOrb.position.x += ((8 + mouse.x * 1.2) - glowOrb.position.x) * 0.02;
-      glowOrb.position.y += ((-4 - mouse.y * 0.9) - glowOrb.position.y) * 0.02;
+      glowOrb.position.x += ((8 + mouse.x * 1.25) - glowOrb.position.x) * 0.02;
+      glowOrb.position.y += ((-4 - mouse.y * 0.95) - glowOrb.position.y) * 0.02;
 
       renderer.render(scene, camera);
     }
