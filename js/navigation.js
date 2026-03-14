@@ -1,5 +1,10 @@
 function normalizePath(path) {
-  return path.replace(/\/+$/, "").toLowerCase();
+  if (!path) {
+    return "/";
+  }
+
+  const normalized = path.replace(/\/+$/, "").toLowerCase();
+  return normalized === "" ? "/" : normalized;
 }
 
 function setActiveNavigation() {
@@ -7,9 +12,15 @@ function setActiveNavigation() {
   const navLinks = document.querySelectorAll(".top-nav a");
 
   navLinks.forEach(function (link) {
-    const linkPath = normalizePath(
-      new URL(link.href, window.location.origin).pathname
-    );
+    let linkPath = "/";
+
+    try {
+      linkPath = normalizePath(
+        new URL(link.href, window.location.origin).pathname
+      );
+    } catch (error) {
+      console.error("Invalid navigation link:", link, error);
+    }
 
     if (currentPath === linkPath) {
       link.classList.add("active");
