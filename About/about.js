@@ -99,11 +99,21 @@ function initImageParallax() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateY = ((offsetX - centerX) / centerX) * 4.2;
-      const rotateX = -((offsetY - centerY) / centerY) * 4.2;
+      const rotateY = ((offsetX - centerX) / centerX) * 5;
+      const rotateX = -((offsetY - centerY) / centerY) * 5;
+      const translateX = ((offsetX - centerX) / centerX) * 8;
+      const translateY = ((offsetY - centerY) / centerY) * 6;
 
       image.style.transform =
-        "translateY(-6px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(1.02)";
+        "translate3d(" +
+        translateX +
+        "px," +
+        (translateY - 6) +
+        "px,0) rotateX(" +
+        rotateX +
+        "deg) rotateY(" +
+        rotateY +
+        "deg) scale(1.02)";
     });
 
     visual.addEventListener("mouseleave", function () {

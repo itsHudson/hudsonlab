@@ -2,11 +2,10 @@ function getBasePath() {
   const path = window.location.pathname.toLowerCase();
 
   if (
-    path.includes("/journey/retail-foundation/") ||
-    path.includes("/journey/business-education/") ||
-    path.includes("/journey/operations-leadership/") ||
-    path.includes("/journey/global-support/") ||
-    path.includes("/journey/technology-transition/")
+    path.includes("/journey/ac-cake-house/") ||
+    path.includes("/journey/asia-pacific-university/") ||
+    path.includes("/journey/ucsi-university/") ||
+    path.includes("/journey/webhelp-malaysia/")
   ) {
     return "../../";
   }
@@ -14,7 +13,6 @@ function getBasePath() {
   if (
     path.includes("/about/") ||
     path.includes("/techexplorer/") ||
-    path.includes("/experience/") ||
     path.includes("/education/") ||
     path.includes("/certifications/") ||
     path.includes("/contact/") ||
