@@ -47,6 +47,8 @@ function initImageParallax() {
   visuals.forEach(function (visual) {
     const image = visual.querySelector(".about-image");
     const backgroundWord = visual.querySelector(".entj-background-word");
+    const secondaryWord = visual.querySelector(".entj-background-word-secondary");
+
     if (!image) {
       return;
     }
@@ -81,12 +83,22 @@ function initImageParallax() {
         backgroundWord.style.transform =
           "rotate(-90deg) translate(" + wordX + "px," + wordY + "px)";
       }
+
+      if (secondaryWord) {
+        const secondX = ((offsetX - centerX) / centerX) * 6;
+        const secondY = ((offsetY - centerY) / centerY) * 4;
+        secondaryWord.style.transform =
+          "translate(" + secondX + "px," + secondY + "px)";
+      }
     });
 
     visual.addEventListener("mouseleave", function () {
       image.style.transform = "";
       if (backgroundWord) {
         backgroundWord.style.transform = "rotate(-90deg)";
+      }
+      if (secondaryWord) {
+        secondaryWord.style.transform = "";
       }
     });
   });

@@ -14,7 +14,7 @@
       alpha: true
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
@@ -22,14 +22,14 @@
     const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 200);
     camera.position.set(0, 0, 26);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.84);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.88);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0x96592f, 0.8, 120);
+    const warmLight = new THREE.PointLight(0xa06337, 0.92, 120);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xc89462, 0.46, 120);
+    const sideLight = new THREE.PointLight(0xcf9a67, 0.58, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
@@ -43,7 +43,7 @@
       targetY: 0
     };
 
-    const POINT_COUNT = 175;
+    const POINT_COUNT = 205;
     const bounds = { x: 18, y: 28, z: 10 };
 
     const positions = [];
@@ -57,9 +57,9 @@
       );
 
       velocities.push(
-        (Math.random() - 0.5) * 0.0074,
-        (Math.random() - 0.5) * 0.0074,
-        (Math.random() - 0.5) * 0.003
+        (Math.random() - 0.5) * 0.0078,
+        (Math.random() - 0.5) * 0.0078,
+        (Math.random() - 0.5) * 0.0032
       );
     }
 
@@ -70,10 +70,10 @@
     );
 
     const particleMaterial = new THREE.PointsMaterial({
-      color: 0xbc8758,
-      size: 0.14,
+      color: 0xc78d57,
+      size: 0.15,
       transparent: true,
-      opacity: 0.46,
+      opacity: 0.62,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -81,7 +81,7 @@
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     group.add(particles);
 
-    const maxLineSegments = POINT_COUNT * 8;
+    const maxLineSegments = POINT_COUNT * 10;
     const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
     const lineGeometry = new THREE.BufferGeometry();
@@ -89,9 +89,9 @@
     lineGeometry.setDrawRange(0, 0);
 
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x875534,
+      color: 0x94603c,
       transparent: true,
-      opacity: 0.082
+      opacity: 0.14
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -113,20 +113,20 @@
     );
 
     const guideMaterial = new THREE.LineBasicMaterial({
-      color: 0x8a5939,
+      color: 0x8d5a38,
       transparent: true,
-      opacity: 0.032
+      opacity: 0.065
     });
 
     const guideLine = new THREE.Line(guideCurve, guideMaterial);
     guideLine.rotation.z = -0.12;
     group.add(guideLine);
 
-    const glowGeometry = new THREE.SphereGeometry(4, 20, 20);
+    const glowGeometry = new THREE.SphereGeometry(4.2, 20, 20);
     const glowMaterial = new THREE.MeshBasicMaterial({
-      color: 0xc89668,
+      color: 0xd4a170,
       transparent: true,
-      opacity: 0.018
+      opacity: 0.045
     });
 
     const glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
@@ -213,7 +213,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 5.2 && lineCount < maxLineSegments) {
+          if (distance < 5.45 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -238,29 +238,29 @@
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.0011;
+      const scrollShift = scrollOffset * -0.00115;
 
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.00018;
-      group.rotation.x += 0.0001;
+      group.rotation.y += 0.0002;
+      group.rotation.x += 0.00011;
 
-      group.rotation.y += mouse.x * 0.0015;
-      group.rotation.x += -mouse.y * 0.0011;
+      group.rotation.y += mouse.x * 0.0017;
+      group.rotation.x += -mouse.y * 0.0012;
 
-      particles.rotation.z += 0.00016;
-      particles.position.x = mouse.x * 0.56;
-      particles.position.y += ((-mouse.y * 0.4) - particles.position.y) * 0.03;
+      particles.rotation.z += 0.00017;
+      particles.position.x = mouse.x * 0.62;
+      particles.position.y += ((-mouse.y * 0.44) - particles.position.y) * 0.03;
 
-      lineSegments.rotation.z -= 0.00009;
-      lineSegments.position.x += ((mouse.x * 0.36) - lineSegments.position.x) * 0.03;
-      lineSegments.position.y += ((-mouse.y * 0.25) - lineSegments.position.y) * 0.03;
+      lineSegments.rotation.z -= 0.0001;
+      lineSegments.position.x += ((mouse.x * 0.42) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * 0.3) - lineSegments.position.y) * 0.03;
 
-      guideLine.position.x += ((mouse.x * 0.2) - guideLine.position.x) * 0.03;
-      guideLine.position.y += ((-mouse.y * 0.14) - guideLine.position.y) * 0.03;
+      guideLine.position.x += ((mouse.x * 0.24) - guideLine.position.x) * 0.03;
+      guideLine.position.y += ((-mouse.y * 0.18) - guideLine.position.y) * 0.03;
 
-      glowOrb.position.x += ((8 + mouse.x * 0.72) - glowOrb.position.x) * 0.02;
-      glowOrb.position.y += ((-4 - mouse.y * 0.58) - glowOrb.position.y) * 0.02;
+      glowOrb.position.x += ((8 + mouse.x * 0.9) - glowOrb.position.x) * 0.02;
+      glowOrb.position.y += ((-4 - mouse.y * 0.72) - glowOrb.position.y) * 0.02;
 
       renderer.render(scene, camera);
     }
