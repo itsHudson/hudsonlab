@@ -1,4 +1,4 @@
-console.log("About V15.3 Industrial Railway loaded.");
+console.log("About V16.2 Node-Connected Railway loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
@@ -116,9 +116,9 @@ function generateRailSleepers() {
     sleepersGroup.innerHTML = "";
 
     const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
-    const sleeperCount = 6;
-    const startOffset = totalLength * 0.10;
-    const usableLength = totalLength * 0.78;
+    const sleeperCount = 16;
+    const startOffset = totalLength * 0.08;
+    const usableLength = totalLength * 0.82;
     const spacing = usableLength / (sleeperCount - 1);
 
     for (let i = 0; i < sleeperCount; i++) {
@@ -152,10 +152,15 @@ function initSegmentReveal() {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+        } else {
+          entry.target.classList.remove("visible");
         }
       });
     },
-    { threshold: 0.38 }
+    {
+      root: null,
+      threshold: 0.35
+    }
   );
 
   segments.forEach(function (segment) {

@@ -276,15 +276,25 @@ body[data-page="about"]::after {
 .station-marker {
   position: absolute;
   top: 50%;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
+  background: #ff7a2f;
   border-radius: 50%;
-  border: 3px solid var(--accent);
-  background: #ffffff;
-  box-shadow: 0 0 0 6px rgba(255, 122, 24, 0.10);
-  z-index: 2;
+  box-shadow: 0 0 0 6px rgba(255, 122, 47, 0.18);
+  z-index: 6;
   transform: translateY(-50%);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.station-marker::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: -4px;
+  top: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 122, 47, 0.35);
 }
 
 .station-marker-left {
@@ -298,8 +308,8 @@ body[data-page="about"]::after {
 .station.is-visible .station-marker {
   transform: translateY(-50%) scale(1.12);
   box-shadow:
-    0 0 0 6px rgba(255, 122, 24, 0.10),
-    0 0 20px rgba(255, 122, 24, 0.35);
+    0 0 0 6px rgba(255, 122, 47, 0.18),
+    0 0 20px rgba(255, 122, 47, 0.35);
 }
 
 /* =========================
@@ -402,6 +412,50 @@ body[data-page="about"]::after {
   filter: drop-shadow(0 12px 16px rgba(86, 61, 34, 0.12));
 }
 
+/* node-connected anchors */
+.segment-anchor {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ff7a2f;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(255, 122, 47, 0.18);
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segment-anchor::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: -4px;
+  top: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 122, 47, 0.35);
+}
+
+.segment-right .segment-anchor-start {
+  left: 5.8%;
+  top: 9%;
+}
+
+.segment-right .segment-anchor-end {
+  right: 4.2%;
+  bottom: 6%;
+}
+
+.segment-left .segment-anchor-start {
+  right: 5.8%;
+  top: 9%;
+}
+
+.segment-left .segment-anchor-end {
+  left: 4.2%;
+  bottom: 6%;
+}
+
 .rail-left,
 .rail-right {
   fill: none;
@@ -420,8 +474,8 @@ body[data-page="about"]::after {
 /* reveal for segments */
 .segment .rail-left,
 .segment .rail-right {
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
+  stroke-dasharray: 2200;
+  stroke-dashoffset: 2200;
   transition: stroke-dashoffset 1.15s ease;
 }
 
@@ -436,7 +490,7 @@ body[data-page="about"]::after {
 }
 
 .segment.visible .rail-sleepers line {
-  opacity: 0.92;
+  opacity: 0.96;
 }
 
 /* =========================
@@ -529,7 +583,8 @@ body[data-page="about"]::after {
     grid-template-columns: 1fr;
   }
 
-  .station-marker {
+  .station-marker,
+  .segment-anchor {
     display: none;
   }
 
