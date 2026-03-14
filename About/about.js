@@ -1,10 +1,10 @@
-console.log("About page loaded.");
+console.log("About V13 page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initAboutReveal();
   initAboutFloatingOrbs();
-  initRailwaySleepers();
-  initRailwayDrawAnimation();
+  initJourneyLineDraw();
+  initStationMarkerSync();
 });
 
 function initAboutReveal() {
@@ -12,8 +12,9 @@ function initAboutReveal() {
 
   if (!("IntersectionObserver" in window)) {
     revealElements.forEach(function (element) {
+      element.classList.add("is-visible");
       element.style.opacity = "1";
-      element.style.transform = "translateY(0)";
+      element.style.transform = "translateY(0) scale(1)";
     });
     return;
   }
@@ -36,14 +37,15 @@ function initAboutReveal() {
         }
 
         entry.target.style.transition =
-          "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
+          "opacity 0.9s ease " + delay + ", transform 0.9s cubic-bezier(.2,.8,.2,1) " + delay;
         entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
+        entry.target.style.transform = "translateY(0) scale(1)";
+        entry.target.classList.add("is-visible");
 
         observerInstance.unobserve(entry.target);
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.18 }
   );
 
   revealElements.forEach(function (element) {
@@ -93,94 +95,80 @@ function initAboutFloatingOrbs() {
   injectAboutOrbKeyframes();
 }
 
-function initRailwaySleepers() {
-  const leftRail = document.getElementById("aboutRailLeft");
-  const rightRail = document.getElementById("aboutRailRight");
-  const sleepersGroup = document.getElementById("aboutRailSleepers");
+function initJourneyLineDraw() {
+  const leftLine = document.getElementById("aboutJourneyLeft");
+  const rightLine = document.getElementById("aboutJourneyRight");
 
-  if (!leftRail || !rightRail || !sleepersGroup) {
+  if (!leftLine || !rightLine) {
     return;
   }
 
-  sleepersGroup.innerHTML = "";
+  const leftLength = leftLine.getTotalLength();
+  const rightLength = rightLine.getTotalLength();
 
-  const totalLength = Math.min(leftRail.getTotalLength(), rightRail.getTotalLength());
-  const spacing = 42;
+  leftLine.style.strokeDasharray = leftLength + " " + leftLength;
+  leftLine.style.strokeDashoffset = leftLength;
 
-  for (let distance = 16; distance < totalLength; distance += spacing) {
-    const leftPoint = leftRail.getPointAtLength(distance);
-    const rightPoint = rightRail.getPointAtLength(distance);
+  rightLine.style.strokeDasharray = rightLength + " " + rightLength;
+  rightLine.style.strokeDashoffset = rightLength;
 
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", leftPoint.x.toFixed(2));
-    line.setAttribute("y1", leftPoint.y.toFixed(2));
-    line.setAttribute("x2", rightPoint.x.toFixed(2));
-    line.setAttribute("y2", rightPoint.y.toFixed(2));
-
-    sleepersGroup.appendChild(line);
-  }
-}
-
-function initRailwayDrawAnimation() {
-  const leftRail = document.getElementById("aboutRailLeft");
-  const rightRail = document.getElementById("aboutRailRight");
-  const sleepersGroup = document.getElementById("aboutRailSleepers");
-
-  if (!leftRail || !rightRail || !sleepersGroup) {
-    return;
-  }
-
-  const leftLength = leftRail.getTotalLength();
-  const rightLength = rightRail.getTotalLength();
-
-  leftRail.style.strokeDasharray = leftLength + " " + leftLength;
-  leftRail.style.strokeDashoffset = leftLength;
-
-  rightRail.style.strokeDasharray = rightLength + " " + rightLength;
-  rightRail.style.strokeDashoffset = rightLength;
-
-  const sleepers = sleepersGroup.querySelectorAll("line");
-  sleepers.forEach(function (sleeper) {
-    sleeper.style.opacity = "0";
-    sleeper.style.transition = "opacity 0.25s ease";
-  });
-
-  function updateRailwayProgress() {
+  function updateJourneyProgress() {
     const scrollTop = window.scrollY || window.pageYOffset;
     const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
 
     if (documentHeight <= 0) {
-      leftRail.style.strokeDashoffset = "0";
-      rightRail.style.strokeDashoffset = "0";
-      sleepers.forEach(function (sleeper) {
-        sleeper.style.opacity = "0.92";
-      });
+      leftLine.style.strokeDashoffset = "0";
+      rightLine.style.strokeDashoffset = "0";
       return;
     }
 
     const progress = Math.min(Math.max(scrollTop / documentHeight, 0), 1);
-    const multiplier = 1.08;
+    const multiplier = 1.12;
 
-    leftRail.style.strokeDashoffset = Math.max(leftLength * (1 - progress * multiplier), 0);
-    rightRail.style.strokeDashoffset = Math.max(rightLength * (1 - progress * multiplier), 0);
+    leftLine.style.strokeDashoffset = Math.max(leftLength * (1 - progress * multiplier), 0);
+    rightLine.style.strokeDashoffset = Math.max(rightLength * (1 - progress * multiplier), 0);
 
-    const visibleCount = Math.floor(sleepers.length * progress * 1.12);
-
-    sleepers.forEach(function (sleeper, index) {
-      sleeper.style.opacity = index <= visibleCount ? "0.92" : "0";
-    });
-
-    const translateY = Math.min(scrollTop * 0.02, 20);
-    leftRail.style.transform = "translateY(" + translateY + "px)";
-    rightRail.style.transform = "translateY(" + translateY + "px)";
-    sleepersGroup.style.transform = "translateY(" + translateY + "px)";
+    const translateY = Math.min(scrollTop * 0.018, 18);
+    leftLine.style.transform = "translateY(" + translateY + "px)";
+    rightLine.style.transform = "translateY(" + translateY + "px)";
   }
 
-  updateRailwayProgress();
-  window.addEventListener("scroll", updateRailwayProgress, { passive: true });
-  window.addEventListener("resize", function () {
-    initRailwaySleepers();
-    updateRailwayProgress();
+  updateJourneyProgress();
+  window.addEventListener("scroll", updateJourneyProgress, { passive: true });
+  window.addEventListener("resize", updateJourneyProgress);
+}
+
+function initStationMarkerSync() {
+  const stations = document.querySelectorAll(".about-station");
+  const markers = document.querySelectorAll(".about-station-marker");
+
+  if (!("IntersectionObserver" in window) || stations.length !== markers.length) {
+    return;
+  }
+
+  const markerObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        const index = Array.prototype.indexOf.call(stations, entry.target);
+
+        if (index === -1) {
+          return;
+        }
+
+        if (entry.isIntersecting) {
+          markers[index].classList.add("is-active");
+        } else {
+          markers[index].classList.remove("is-active");
+        }
+      });
+    },
+    {
+      threshold: 0.35
+    }
+  );
+
+  stations.forEach(function (station) {
+    markerObserver.observe(station);
   });
 }
 
