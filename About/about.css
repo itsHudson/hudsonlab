@@ -131,127 +131,13 @@ body[data-page="about"]::after {
   letter-spacing: 0.04em;
 }
 
-/* =========================
-   Journey Shell
-========================= */
 .journey-shell {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 92px;
-  padding-bottom: 90px;
-}
-
-.journey-route-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.journey-route-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  overflow: visible;
-  filter: drop-shadow(0 12px 16px rgba(86, 61, 34, 0.12));
-}
-
-/* thick route body */
-.route-corridor {
-  fill: none;
-  stroke: rgba(210, 166, 120, 0.18);
-  stroke-width: 62;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* two rails */
-.route-rail {
-  fill: none;
-  stroke: #665646;
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* sleepers */
-.route-sleepers line {
-  stroke: #9b774f;
-  stroke-width: 9;
-  stroke-linecap: round;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-/* draw / collapse */
-.route-corridor,
-.route-rail {
-  stroke-dasharray: 7000;
-  stroke-dashoffset: 7000;
-}
-
-/* =========================
-   Route Nodes
-========================= */
-.route-node {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  background: #ff7a2f;
-  border-radius: 50%;
-  box-shadow: 0 0 0 6px rgba(255, 122, 47, 0.18);
-  z-index: 4;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.route-node::after {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  left: -4px;
-  top: -4px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 122, 47, 0.35);
-}
-
-.route-node.is-active {
-  transform: scale(1.14);
-  box-shadow:
-    0 0 0 6px rgba(255, 122, 47, 0.18),
-    0 0 22px rgba(255, 122, 47, 0.35);
-}
-
-.route-node-1 {
-  top: 268px;
-  right: 18%;
-}
-
-.route-node-2 {
-  top: 980px;
-  left: 11%;
-}
-
-.route-node-3 {
-  top: 1685px;
-  right: 17.5%;
-}
-
-.route-node-4 {
-  top: 2400px;
-  left: 11%;
-}
-
-.route-node-5 {
-  top: 3115px;
-  right: 17.5%;
-}
-
-.route-node-6 {
-  top: 3820px;
-  left: 11%;
+  gap: 34px;
+  padding-bottom: 70px;
 }
 
 /* =========================
@@ -259,9 +145,9 @@ body[data-page="about"]::after {
 ========================= */
 .station {
   position: relative;
-  z-index: 5;
+  z-index: 3;
   display: flex;
-  min-height: 520px;
+  min-height: 470px;
 }
 
 .station-left {
@@ -279,7 +165,7 @@ body[data-page="about"]::after {
   gap: 34px;
   align-items: center;
   position: relative;
-  z-index: 5;
+  z-index: 4;
 }
 
 .station-right .station-cluster {
@@ -289,7 +175,7 @@ body[data-page="about"]::after {
 .station-visual,
 .station-copy {
   position: relative;
-  z-index: 6;
+  z-index: 5;
 }
 
 .station-copy {
@@ -387,6 +273,45 @@ body[data-page="about"]::after {
   pointer-events: none;
 }
 
+.station-marker {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: #ff7a2f;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(255, 122, 47, 0.18);
+  z-index: 6;
+  transform: translateY(-50%);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.station-marker::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: -4px;
+  top: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 122, 47, 0.35);
+}
+
+.station-marker-left {
+  right: 20%;
+}
+
+.station-marker-right {
+  left: 20%;
+}
+
+.station.is-visible .station-marker {
+  transform: translateY(-50%) scale(1.12);
+  box-shadow:
+    0 0 0 6px rgba(255, 122, 47, 0.18),
+    0 0 20px rgba(255, 122, 47, 0.35);
+}
+
 /* =========================
    Visual Panel
 ========================= */
@@ -464,6 +389,67 @@ body[data-page="about"]::after {
 }
 
 /* =========================
+   Segment
+========================= */
+.segment {
+  position: relative;
+  z-index: 1;
+  height: 340px;
+}
+
+.segment-rail {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.segment-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 12px 16px rgba(86, 61, 34, 0.12));
+}
+
+.rail-left,
+.rail-right {
+  fill: none;
+  stroke: #665646;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.rail-sleepers line {
+  stroke: #9b774f;
+  stroke-width: 9;
+  stroke-linecap: round;
+  opacity: 0.96;
+}
+
+/* reveal only in process area */
+.segment .rail-left,
+.segment .rail-right {
+  stroke-dasharray: 2200;
+  stroke-dashoffset: 2200;
+  transition: stroke-dashoffset 1.1s ease;
+}
+
+.segment .rail-sleepers line {
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.segment.visible .rail-left,
+.segment.visible .rail-right {
+  stroke-dashoffset: 0;
+}
+
+.segment.visible .rail-sleepers line {
+  opacity: 0.96;
+}
+
+/* =========================
    Reveal
 ========================= */
 .reveal,
@@ -523,29 +509,18 @@ body[data-page="about"]::after {
     grid-template-columns: minmax(280px, 410px) minmax(240px, 380px);
   }
 
-  .route-node-1 {
-    right: 15%;
+  .station-marker-left {
+    right: 16%;
   }
 
-  .route-node-3,
-  .route-node-5 {
-    right: 14.5%;
-  }
-
-  .route-node-2,
-  .route-node-4,
-  .route-node-6 {
-    left: 9%;
+  .station-marker-right {
+    left: 16%;
   }
 }
 
 @media (max-width: 1080px) {
   .journey-shell {
-    gap: 36px;
-  }
-
-  .journey-route-layer {
-    display: none;
+    gap: 24px;
   }
 
   .station {
@@ -562,6 +537,14 @@ body[data-page="about"]::after {
   .station-right .station-cluster {
     width: 100%;
     grid-template-columns: 1fr;
+  }
+
+  .station-marker {
+    display: none;
+  }
+
+  .segment {
+    height: 190px;
   }
 
   .station-entj::before {
@@ -618,6 +601,10 @@ body[data-page="about"]::after {
 
   .about-main-subtitle {
     font-size: 0.98rem;
+  }
+
+  .segment {
+    height: 140px;
   }
 
   .station-note {
