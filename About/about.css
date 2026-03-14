@@ -584,6 +584,10 @@ body[data-page="about"] {
     top: 24px;
     right: 24px;
   }
+
+  .about-principles {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -687,4 +691,69 @@ body[data-page="about"] {
     top: 10px;
     right: 8px;
   }
+}
+
+
+.about-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.about-principle-card {
+  position: relative;
+  padding: 18px 16px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 122, 24, 0.12);
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 12px 28px rgba(28, 28, 28, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.about-principle-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10),
+    rgba(255, 122, 24, 0.02),
+    transparent 70%
+  );
+}
+
+.about-principle-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #ff7a18;
+}
+
+.about-principle-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #1f1f1f;
+}
+
+.about-principle-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.72;
+  color: #645d57;
+}
+
+.entj-signature {
+  margin-top: 30px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ff7a18 !important;
 }
