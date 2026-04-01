@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollShift();
   initMagneticButtons();
   initProgressRail();
+  initScrollVariable();
 });
 
 function initReveal() {
@@ -258,7 +259,7 @@ function initScrollShift() {
     elements.forEach(function (element) {
       const rect = element.getBoundingClientRect();
       const centerDistance = rect.top + rect.height / 2 - viewportHeight / 2;
-      const shift = Math.max(-18, Math.min(18, centerDistance * -0.04));
+      const shift = Math.max(-20, Math.min(20, centerDistance * -0.04));
       element.style.transform = "translateY(" + shift + "px)";
     });
 
@@ -346,4 +347,13 @@ function initProgressRail() {
 
   window.addEventListener("resize", updateActiveSection);
   updateActiveSection();
+}
+
+function initScrollVariable() {
+  function updateScrollVar() {
+    document.documentElement.style.setProperty("--scroll", String(window.scrollY || 0));
+  }
+
+  window.addEventListener("scroll", updateScrollVar);
+  updateScrollVar();
 }
