@@ -6,9 +6,9 @@
       return null;
     }
 
-    var canvas = options.canvas;
+    const canvas = options.canvas;
 
-    var renderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       antialias: true,
       alpha: true
@@ -17,39 +17,39 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     renderer.setClearColor(0x000000, 0);
 
-    var scene = new THREE.Scene();
+    const scene = new THREE.Scene();
 
-    var camera = new THREE.PerspectiveCamera(52, 1, 0.1, 200);
+    const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 200);
     camera.position.set(0, 0, 26);
 
-    var ambientLight = new THREE.AmbientLight(0xffffff, 0.88);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.88);
     scene.add(ambientLight);
 
-    var warmLight = new THREE.PointLight(0xa06337, 0.92, 120);
+    const warmLight = new THREE.PointLight(0xff9a38, 0.92, 120);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    var sideLight = new THREE.PointLight(0xcf9a67, 0.58, 120);
+    const sideLight = new THREE.PointLight(0xffc471, 0.58, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
-    var group = new THREE.Group();
+    const group = new THREE.Group();
     scene.add(group);
 
-    var mouse = {
+    const mouse = {
       x: 0,
       y: 0,
       targetX: 0,
       targetY: 0
     };
 
-    var POINT_COUNT = 205;
-    var bounds = { x: 18, y: 28, z: 10 };
+    const POINT_COUNT = 205;
+    const bounds = { x: 18, y: 28, z: 10 };
 
-    var positions = [];
-    var velocities = [];
+    const positions = [];
+    const velocities = [];
 
-    for (var i = 0; i < POINT_COUNT; i++) {
+    for (let i = 0; i < POINT_COUNT; i++) {
       positions.push(
         (Math.random() - 0.5) * bounds.x * 2,
         (Math.random() - 0.5) * bounds.y * 2,
@@ -63,41 +63,41 @@
       );
     }
 
-    var particleGeometry = new THREE.BufferGeometry();
+    const particleGeometry = new THREE.BufferGeometry();
     particleGeometry.setAttribute(
       "position",
       new THREE.Float32BufferAttribute(positions.slice(), 3)
     );
 
-    var particleMaterial = new THREE.PointsMaterial({
-      color: 0xc78d57,
+    const particleMaterial = new THREE.PointsMaterial({
+      color: 0xff9a38,
       size: 0.15,
       transparent: true,
-      opacity: 0.62,
+      opacity: 0.58,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
 
-    var particles = new THREE.Points(particleGeometry, particleMaterial);
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
     group.add(particles);
 
-    var maxLineSegments = POINT_COUNT * 10;
-    var linePositions = new Float32Array(maxLineSegments * 3 * 2);
+    const maxLineSegments = POINT_COUNT * 10;
+    const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
-    var lineGeometry = new THREE.BufferGeometry();
+    const lineGeometry = new THREE.BufferGeometry();
     lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
     lineGeometry.setDrawRange(0, 0);
 
-    var lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x94603c,
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0xffb347,
       transparent: true,
-      opacity: 0.14
+      opacity: 0.13
     });
 
-    var lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+    const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
     group.add(lineSegments);
 
-    var guideCurve = new THREE.BufferGeometry();
+    const guideCurve = new THREE.BufferGeometry();
     guideCurve.setAttribute(
       "position",
       new THREE.Float32BufferAttribute(
@@ -112,40 +112,39 @@
       )
     );
 
-    var guideMaterial = new THREE.LineBasicMaterial({
-      color: 0x8d5a38,
+    const guideMaterial = new THREE.LineBasicMaterial({
+      color: 0xff9330,
       transparent: true,
-      opacity: 0.065
+      opacity: 0.06
     });
 
-    var guideLine = new THREE.Line(guideCurve, guideMaterial);
+    const guideLine = new THREE.Line(guideCurve, guideMaterial);
     guideLine.rotation.z = -0.12;
     group.add(guideLine);
 
-    var glowGeometry = new THREE.SphereGeometry(4.2, 20, 20);
-    var glowMaterial = new THREE.MeshBasicMaterial({
-      color: 0xd4a170,
+    const glowGeometry = new THREE.SphereGeometry(4.2, 20, 20);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffb347,
       transparent: true,
-      opacity: 0.045
+      opacity: 0.04
     });
 
-    var glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
+    const glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
     glowOrb.position.set(8, -4, -1);
     group.add(glowOrb);
 
     resize();
-
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseleave", onMouseLeave);
     window.addEventListener("scroll", onScroll);
 
-    var scrollOffset = 0;
-    var animationFrameId = requestAnimationFrame(animate);
+    let scrollOffset = 0;
+    let animationFrameId = requestAnimationFrame(animate);
 
     function onMouseMove(event) {
-      var width = window.innerWidth || 1;
-      var height = window.innerHeight || 1;
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
 
       mouse.targetX = (event.clientX / width - 0.5) * 2;
       mouse.targetY = (event.clientY / height - 0.5) * 2;
@@ -161,8 +160,8 @@
     }
 
     function resize() {
-      var width = window.innerWidth || 1;
-      var height = window.innerHeight || 1;
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
 
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
@@ -170,11 +169,11 @@
     }
 
     function updateParticles() {
-      var attr = particleGeometry.getAttribute("position");
-      var array = attr.array;
+      const attr = particleGeometry.getAttribute("position");
+      const array = attr.array;
 
-      for (var i = 0; i < POINT_COUNT; i++) {
-        var idx = i * 3;
+      for (let i = 0; i < POINT_COUNT; i++) {
+        const idx = i * 3;
 
         array[idx] += velocities[idx];
         array[idx + 1] += velocities[idx + 1];
@@ -195,24 +194,24 @@
     }
 
     function updateConnections() {
-      var particleArray = particleGeometry.getAttribute("position").array;
-      var writeIndex = 0;
-      var lineCount = 0;
+      const particleArray = particleGeometry.getAttribute("position").array;
+      let writeIndex = 0;
+      let lineCount = 0;
 
-      for (var i = 0; i < POINT_COUNT; i++) {
-        var ax = particleArray[i * 3];
-        var ay = particleArray[i * 3 + 1];
-        var az = particleArray[i * 3 + 2];
+      for (let i = 0; i < POINT_COUNT; i++) {
+        const ax = particleArray[i * 3];
+        const ay = particleArray[i * 3 + 1];
+        const az = particleArray[i * 3 + 2];
 
-        for (var j = i + 1; j < POINT_COUNT; j++) {
-          var bx = particleArray[j * 3];
-          var by = particleArray[j * 3 + 1];
-          var bz = particleArray[j * 3 + 2];
+        for (let j = i + 1; j < POINT_COUNT; j++) {
+          const bx = particleArray[j * 3];
+          const by = particleArray[j * 3 + 1];
+          const bz = particleArray[j * 3 + 2];
 
-          var dx = ax - bx;
-          var dy = ay - by;
-          var dz = az - bz;
-          var distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          const dx = ax - bx;
+          const dy = ay - by;
+          const dz = az - bz;
+          const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
           if (distance < 5.45 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
@@ -239,7 +238,7 @@
       updateParticles();
       updateConnections();
 
-      var scrollShift = scrollOffset * -0.00115;
+      const scrollShift = scrollOffset * -0.00115;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
       group.rotation.y += 0.0002;
@@ -267,7 +266,6 @@
 
     function destroy() {
       cancelAnimationFrame(animationFrameId);
-
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseleave", onMouseLeave);

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initReveal() {
-  var revealElements = document.querySelectorAll(".reveal, .reveal-delay-1");
+  const revealElements = document.querySelectorAll(".reveal, .reveal-delay-1");
 
   if (!("IntersectionObserver" in window)) {
     revealElements.forEach(function (element) {
@@ -16,14 +16,14 @@ function initReveal() {
     return;
   }
 
-  var observer = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     function (entries, observerInstance) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) {
           return;
         }
 
-        var isDelayed = entry.target.classList.contains("reveal-delay-1");
+        const isDelayed = entry.target.classList.contains("reveal-delay-1");
         entry.target.style.transition =
           "opacity " + (isDelayed ? "1.1s" : "0.9s") + " ease, transform " +
           (isDelayed ? "1.1s" : "0.9s") + " ease";
@@ -42,34 +42,34 @@ function initReveal() {
 }
 
 function initImageParallax() {
-  var visuals = document.querySelectorAll(".about-visual");
-  var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const visuals = document.querySelectorAll(".about-visual");
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   if (!canHover) {
     return;
   }
 
   visuals.forEach(function (visual) {
-    var image = visual.querySelector(".about-image");
-    var backgroundWord = visual.querySelector(".entj-background-word");
-    var secondaryWord = visual.querySelector(".entj-background-word-secondary");
+    const image = visual.querySelector(".about-image");
+    const backgroundWord = visual.querySelector(".entj-background-word");
+    const secondaryWord = visual.querySelector(".entj-background-word-secondary");
 
     if (!image) {
       return;
     }
 
     visual.addEventListener("mousemove", function (event) {
-      var rect = visual.getBoundingClientRect();
-      var offsetX = event.clientX - rect.left;
-      var offsetY = event.clientY - rect.top;
+      const rect = visual.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
 
-      var centerX = rect.width / 2;
-      var centerY = rect.height / 2;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-      var rotateY = ((offsetX - centerX) / centerX) * 5;
-      var rotateX = -((offsetY - centerY) / centerY) * 5;
-      var translateX = ((offsetX - centerX) / centerX) * 8;
-      var translateY = ((offsetY - centerY) / centerY) * 6;
+      const rotateY = ((offsetX - centerX) / centerX) * 5;
+      const rotateX = -((offsetY - centerY) / centerY) * 5;
+      const translateX = ((offsetX - centerX) / centerX) * 8;
+      const translateY = ((offsetY - centerY) / centerY) * 6;
 
       image.style.transform =
         "translate3d(" +
@@ -83,15 +83,15 @@ function initImageParallax() {
         "deg) scale(1.02)";
 
       if (backgroundWord) {
-        var wordX = ((offsetX - centerX) / centerX) * 10;
-        var wordY = ((offsetY - centerY) / centerY) * 8;
+        const wordX = ((offsetX - centerX) / centerX) * 10;
+        const wordY = ((offsetY - centerY) / centerY) * 8;
         backgroundWord.style.transform =
           "rotate(-90deg) translate(" + wordX + "px," + wordY + "px)";
       }
 
       if (secondaryWord) {
-        var secondX = ((offsetX - centerX) / centerX) * 6;
-        var secondY = ((offsetY - centerY) / centerY) * 4;
+        const secondX = ((offsetX - centerX) / centerX) * 6;
+        const secondY = ((offsetY - centerY) / centerY) * 4;
         secondaryWord.style.transform =
           "translate(" + secondX + "px," + secondY + "px)";
       }
@@ -114,7 +114,7 @@ function initSystemField() {
     return;
   }
 
-  var canvas = document.getElementById("aboutSystemCanvas");
+  const canvas = document.getElementById("aboutSystemCanvas");
   if (!canvas) {
     return;
   }
@@ -125,26 +125,26 @@ function initSystemField() {
 }
 
 function initAboutTyping() {
-  var typedTarget = document.getElementById("aboutTypedText");
+  const typedTarget = document.getElementById("aboutTypedText");
   if (!typedTarget) {
     return;
   }
 
-  var phrases = [
+  const phrases = [
     "clarity.",
     "structure.",
     "reflection.",
-    "care.",
+    "discipline.",
     "continuous improvement."
   ];
 
-  var phraseIndex = 0;
-  var charIndex = 0;
-  var isDeleting = false;
-  var timeoutId = null;
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let timeoutId = null;
 
   function typeLoop() {
-    var currentPhrase = phrases[phraseIndex];
+    const currentPhrase = phrases[phraseIndex];
 
     if (!isDeleting) {
       charIndex += 1;
