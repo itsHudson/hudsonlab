@@ -23,6 +23,16 @@
   <div id="header"></div>
 
   <main class="page-shell about-page">
+    <div class="about-progress-rail" aria-hidden="true">
+      <span class="about-progress-line"></span>
+      <span class="about-progress-dot is-active" data-target="section-think"></span>
+      <span class="about-progress-dot" data-target="section-learn"></span>
+      <span class="about-progress-dot" data-target="section-work"></span>
+      <span class="about-progress-dot" data-target="section-success"></span>
+      <span class="about-progress-dot" data-target="section-growth"></span>
+      <span class="about-progress-dot" data-target="section-closing"></span>
+    </div>
+
     <section class="about-hero">
       <div class="about-hero-grid">
         <div class="about-hero-main">
@@ -88,7 +98,7 @@
       </div>
     </section>
 
-    <section class="about-section reveal">
+    <section id="section-think" class="about-section reveal about-snap-section">
       <div class="about-grid about-grid-identity">
         <div class="about-text about-scroll-shift">
           <p class="about-section-label">01 · How I Think</p>
@@ -126,11 +136,15 @@
       </div>
     </section>
 
-    <section class="about-section reveal">
+    <section id="section-learn" class="about-section reveal about-snap-section">
       <div class="about-grid about-grid-direction">
         <div class="about-visual about-visual-entj-core">
-          <div class="entj-background-word" aria-hidden="true">ENTJ</div>
-          <div class="entj-background-word entj-background-word-secondary" aria-hidden="true">VISION</div>
+          <div class="entj-background-stack" aria-hidden="true">
+            <div class="entj-background-word entj-word-main">ENTJ</div>
+            <div class="entj-background-word entj-word-side">VISION</div>
+            <div class="entj-background-word entj-word-top">STRATEGY</div>
+          </div>
+
           <div class="entj-orbit entj-orbit-outer"></div>
           <div class="entj-orbit entj-orbit-inner"></div>
           <div class="entj-glow"></div>
@@ -194,7 +208,7 @@
       </div>
     </section>
 
-    <section class="about-section reveal">
+    <section id="section-work" class="about-section reveal about-snap-section">
       <div class="about-grid">
         <div class="about-text about-scroll-shift">
           <p class="about-section-label">03 · How I Work</p>
@@ -241,7 +255,7 @@
       </div>
     </section>
 
-    <section class="about-section reveal">
+    <section id="section-success" class="about-section reveal about-snap-section">
       <div class="about-grid">
         <div class="about-text about-scroll-shift">
           <p class="about-section-label">04 · My View on Success</p>
@@ -294,7 +308,7 @@
       </div>
     </section>
 
-    <section class="about-section reveal">
+    <section id="section-growth" class="about-section reveal about-snap-section">
       <div class="about-grid">
         <div class="about-text about-scroll-shift">
           <p class="about-section-label">05 · Growth & Direction</p>
@@ -330,10 +344,14 @@
       </div>
     </section>
 
-    <section class="about-next-section reveal">
+    <section id="section-closing" class="about-next-section reveal about-snap-section">
       <div class="about-next-card about-float-card">
-        <p class="about-next-label">Closing Note</p>
-        <div class="about-next-grid">
+        <div class="about-next-topline">
+          <span class="about-next-label">Closing Note</span>
+          <span class="about-next-mini-line"></span>
+        </div>
+
+        <div class="about-next-layout">
           <div class="about-next-copy">
             <h2>Still growing, still refining.</h2>
             <p>
@@ -343,7 +361,14 @@
             </p>
           </div>
 
-          <div class="about-next-action">
+          <div class="about-next-side">
+            <div class="about-next-quote">
+              <span class="about-next-quote-mark">01</span>
+              <p>
+                Progress, to me, is not a final state. It is the discipline of refining what has already begun.
+              </p>
+            </div>
+
             <a class="about-secondary-button magnetic-button" href="../TechExplorer/explorer.html">
               Continue to Technology Compass
             </a>

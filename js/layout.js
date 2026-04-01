@@ -79,11 +79,46 @@ function loadComponent(id, filePath, callback) {
     });
 }
 
+function initMobileNavigation() {
+  const toggle = document.querySelector(".nav-toggle");
+  const panel = document.getElementById("mobileNavigation");
+
+  if (!toggle || !panel) {
+    return;
+  }
+
+  toggle.addEventListener("click", function () {
+    const isOpen = panel.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!panel.classList.contains("is-open")) {
+      return;
+    }
+
+    if (panel.contains(event.target) || toggle.contains(event.target)) {
+      return;
+    }
+
+    panel.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  });
+
+  panel.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      panel.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const basePath = getBasePath();
 
   loadComponent("header", basePath + "Components/header.html", function () {
     document.dispatchEvent(new CustomEvent("hudsonlab:headerLoaded"));
+    initMobileNavigation();
   });
 
   loadComponent("footer", basePath + "Components/footer.html");

@@ -9,7 +9,7 @@ function normalizePath(path) {
 
 function setActiveNavigation() {
   const currentPath = normalizePath(window.location.pathname);
-  const navLinks = document.querySelectorAll(".top-nav a");
+  const navLinks = document.querySelectorAll(".top-nav a, .mobile-nav-panel a");
 
   navLinks.forEach(function (link) {
     let linkPath = "/";

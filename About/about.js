@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollGlow();
   initScrollShift();
   initMagneticButtons();
+  initProgressRail();
 });
 
 function initReveal() {
@@ -54,8 +55,9 @@ function initImageParallax() {
 
   visuals.forEach(function (visual) {
     const image = visual.querySelector(".about-image");
-    const backgroundWord = visual.querySelector(".entj-background-word");
-    const secondaryWord = visual.querySelector(".entj-background-word-secondary");
+    const wordMain = visual.querySelector(".entj-word-main");
+    const wordSide = visual.querySelector(".entj-word-side");
+    const wordTop = visual.querySelector(".entj-word-top");
     const pulse1 = visual.querySelector(".entj-pulse-ring-1");
     const pulse2 = visual.querySelector(".entj-pulse-ring-2");
 
@@ -87,18 +89,19 @@ function initImageParallax() {
         rotateY +
         "deg) scale(1.03)";
 
-      if (backgroundWord) {
-        const wordX = ((offsetX - centerX) / centerX) * 10;
-        const wordY = ((offsetY - centerY) / centerY) * 8;
-        backgroundWord.style.transform =
-          "rotate(-90deg) translate(" + wordX + "px," + wordY + "px)";
+      if (wordMain) {
+        wordMain.style.transform =
+          "rotate(-90deg) translate(" + (translateX * 0.9) + "px," + (translateY * 0.7) + "px)";
       }
 
-      if (secondaryWord) {
-        const secondX = ((offsetX - centerX) / centerX) * 8;
-        const secondY = ((offsetY - centerY) / centerY) * 5;
-        secondaryWord.style.transform =
-          "translate(" + secondX + "px," + secondY + "px)";
+      if (wordSide) {
+        wordSide.style.transform =
+          "translate(" + (translateX * 0.55) + "px," + (translateY * 0.3) + "px)";
+      }
+
+      if (wordTop) {
+        wordTop.style.transform =
+          "translate(" + (translateX * 0.2) + "px," + (translateY * 0.18) + "px)";
       }
 
       if (pulse1) {
@@ -115,12 +118,16 @@ function initImageParallax() {
     visual.addEventListener("mouseleave", function () {
       image.style.transform = "";
 
-      if (backgroundWord) {
-        backgroundWord.style.transform = "rotate(-90deg)";
+      if (wordMain) {
+        wordMain.style.transform = "rotate(-90deg)";
       }
 
-      if (secondaryWord) {
-        secondaryWord.style.transform = "";
+      if (wordSide) {
+        wordSide.style.transform = "";
+      }
+
+      if (wordTop) {
+        wordTop.style.transform = "";
       }
 
       if (pulse1) {
@@ -217,8 +224,8 @@ function initScrollGlow() {
 
   function updateGlow() {
     const scrollY = window.scrollY || 0;
-    const moveY = Math.min(60, scrollY * 0.05);
-    const opacity = Math.min(1, 0.9 + scrollY * 0.0002);
+    const moveY = Math.min(70, scrollY * 0.05);
+    const opacity = Math.min(1, 0.88 + scrollY * 0.00018);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -291,4 +298,52 @@ function initMagneticButtons() {
       button.style.transform = "";
     });
   });
+}
+
+function initProgressRail() {
+  const dots = document.querySelectorAll(".about-progress-dot");
+  const sections = document.querySelectorAll(".about-snap-section");
+
+  if (!dots.length || !sections.length) {
+    return;
+  }
+
+  let ticking = false;
+
+  function updateActiveSection() {
+    let currentSectionId = sections[0].id;
+    let smallestDistance = Infinity;
+    const viewportCenter = window.innerHeight / 2;
+
+    sections.forEach(function (section) {
+      const rect = section.getBoundingClientRect();
+      const sectionCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(sectionCenter - viewportCenter);
+
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+        currentSectionId = section.id;
+      }
+    });
+
+    dots.forEach(function (dot) {
+      if (dot.getAttribute("data-target") === currentSectionId) {
+        dot.classList.add("is-active");
+      } else {
+        dot.classList.remove("is-active");
+      }
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(updateActiveSection);
+      ticking = true;
+    }
+  });
+
+  window.addEventListener("resize", updateActiveSection);
+  updateActiveSection();
 }

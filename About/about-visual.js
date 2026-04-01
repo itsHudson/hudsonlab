@@ -25,13 +25,17 @@
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xff8a2a, 1.04, 120);
+    const warmLight = new THREE.PointLight(0xff8a2a, 1.06, 140);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xffc471, 0.72, 120);
+    const sideLight = new THREE.PointLight(0xffc471, 0.76, 140);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
+
+    const deepLight = new THREE.PointLight(0x6b2c0b, 0.4, 180);
+    deepLight.position.set(0, 0, -18);
+    scene.add(deepLight);
 
     const group = new THREE.Group();
     scene.add(group);
@@ -43,7 +47,7 @@
       targetY: 0
     };
 
-    const POINT_COUNT = 250;
+    const POINT_COUNT = 260;
     const bounds = { x: 18, y: 28, z: 10 };
 
     const positions = [];
@@ -57,9 +61,9 @@
       );
 
       velocities.push(
-        (Math.random() - 0.5) * 0.0086,
-        (Math.random() - 0.5) * 0.0086,
-        (Math.random() - 0.5) * 0.0038
+        (Math.random() - 0.5) * 0.0088,
+        (Math.random() - 0.5) * 0.0088,
+        (Math.random() - 0.5) * 0.004
       );
     }
 
@@ -73,7 +77,7 @@
       color: 0xff8f2c,
       size: 0.17,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.84,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -91,7 +95,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.22
+      opacity: 0.24
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -122,11 +126,11 @@
     guideLine.rotation.z = -0.12;
     group.add(guideLine);
 
-    const glowGeometry = new THREE.SphereGeometry(4.8, 24, 24);
+    const glowGeometry = new THREE.SphereGeometry(5, 24, 24);
     const glowMaterial = new THREE.MeshBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.08
+      opacity: 0.09
     });
 
     const glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
@@ -213,7 +217,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 5.9 && lineCount < maxLineSegments) {
+          if (distance < 6.05 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -238,28 +242,28 @@
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.00125;
+      const scrollShift = scrollOffset * -0.0013;
       camera.position.y += (scrollShift - camera.position.y) * 0.05;
 
-      group.rotation.y += 0.00026;
-      group.rotation.x += 0.00015;
+      group.rotation.y += 0.00028;
+      group.rotation.x += 0.00016;
 
-      group.rotation.y += mouse.x * 0.0022;
+      group.rotation.y += mouse.x * 0.0023;
       group.rotation.x += -mouse.y * 0.0015;
 
       particles.rotation.z += 0.00022;
-      particles.position.x = mouse.x * 0.8;
-      particles.position.y += ((-mouse.y * 0.58) - particles.position.y) * 0.04;
+      particles.position.x = mouse.x * 0.84;
+      particles.position.y += ((-mouse.y * 0.6) - particles.position.y) * 0.04;
 
       lineSegments.rotation.z -= 0.00014;
-      lineSegments.position.x += ((mouse.x * 0.52) - lineSegments.position.x) * 0.04;
-      lineSegments.position.y += ((-mouse.y * 0.38) - lineSegments.position.y) * 0.04;
+      lineSegments.position.x += ((mouse.x * 0.54) - lineSegments.position.x) * 0.04;
+      lineSegments.position.y += ((-mouse.y * 0.4) - lineSegments.position.y) * 0.04;
 
-      guideLine.position.x += ((mouse.x * 0.34) - guideLine.position.x) * 0.04;
+      guideLine.position.x += ((mouse.x * 0.36) - guideLine.position.x) * 0.04;
       guideLine.position.y += ((-mouse.y * 0.25) - guideLine.position.y) * 0.04;
 
-      glowOrb.position.x += ((8 + mouse.x * 1.15) - glowOrb.position.x) * 0.025;
-      glowOrb.position.y += ((-4 - mouse.y * 0.9) - glowOrb.position.y) * 0.025;
+      glowOrb.position.x += ((8 + mouse.x * 1.2) - glowOrb.position.x) * 0.025;
+      glowOrb.position.y += ((-4 - mouse.y * 0.94) - glowOrb.position.y) * 0.025;
 
       renderer.render(scene, camera);
     }
