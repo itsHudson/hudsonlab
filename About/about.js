@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initImageParallax();
   initSystemField();
   initAboutTyping();
+  initScrollGlow();
+  initScrollShift();
+  initMagneticButtons();
 });
 
 function initReveal() {
@@ -53,6 +56,8 @@ function initImageParallax() {
     const image = visual.querySelector(".about-image");
     const backgroundWord = visual.querySelector(".entj-background-word");
     const secondaryWord = visual.querySelector(".entj-background-word-secondary");
+    const pulse1 = visual.querySelector(".entj-pulse-ring-1");
+    const pulse2 = visual.querySelector(".entj-pulse-ring-2");
 
     if (!image) {
       return;
@@ -66,10 +71,10 @@ function initImageParallax() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateY = ((offsetX - centerX) / centerX) * 5;
-      const rotateX = -((offsetY - centerY) / centerY) * 5;
-      const translateX = ((offsetX - centerX) / centerX) * 8;
-      const translateY = ((offsetY - centerY) / centerY) * 6;
+      const rotateY = ((offsetX - centerX) / centerX) * 6;
+      const rotateX = -((offsetY - centerY) / centerY) * 6;
+      const translateX = ((offsetX - centerX) / centerX) * 10;
+      const translateY = ((offsetY - centerY) / centerY) * 8;
 
       image.style.transform =
         "translate3d(" +
@@ -80,7 +85,7 @@ function initImageParallax() {
         rotateX +
         "deg) rotateY(" +
         rotateY +
-        "deg) scale(1.02)";
+        "deg) scale(1.03)";
 
       if (backgroundWord) {
         const wordX = ((offsetX - centerX) / centerX) * 10;
@@ -90,20 +95,40 @@ function initImageParallax() {
       }
 
       if (secondaryWord) {
-        const secondX = ((offsetX - centerX) / centerX) * 6;
-        const secondY = ((offsetY - centerY) / centerY) * 4;
+        const secondX = ((offsetX - centerX) / centerX) * 8;
+        const secondY = ((offsetY - centerY) / centerY) * 5;
         secondaryWord.style.transform =
           "translate(" + secondX + "px," + secondY + "px)";
+      }
+
+      if (pulse1) {
+        pulse1.style.transform =
+          "translate(" + (translateX * 0.3) + "px," + (translateY * 0.3) + "px)";
+      }
+
+      if (pulse2) {
+        pulse2.style.transform =
+          "translate(" + (translateX * 0.16) + "px," + (translateY * 0.16) + "px)";
       }
     });
 
     visual.addEventListener("mouseleave", function () {
       image.style.transform = "";
+
       if (backgroundWord) {
         backgroundWord.style.transform = "rotate(-90deg)";
       }
+
       if (secondaryWord) {
         secondaryWord.style.transform = "";
+      }
+
+      if (pulse1) {
+        pulse1.style.transform = "";
+      }
+
+      if (pulse2) {
+        pulse2.style.transform = "";
       }
     });
   });
@@ -156,7 +181,7 @@ function initAboutTyping() {
         return;
       }
 
-      timeoutId = window.setTimeout(typeLoop, 62);
+      timeoutId = window.setTimeout(typeLoop, 58);
       return;
     }
 
@@ -170,7 +195,7 @@ function initAboutTyping() {
       return;
     }
 
-    timeoutId = window.setTimeout(typeLoop, 34);
+    timeoutId = window.setTimeout(typeLoop, 32);
   }
 
   typeLoop();
@@ -179,5 +204,91 @@ function initAboutTyping() {
     if (timeoutId) {
       window.clearTimeout(timeoutId);
     }
+  });
+}
+
+function initScrollGlow() {
+  const glow = document.querySelector(".about-scroll-glow");
+  if (!glow) {
+    return;
+  }
+
+  let ticking = false;
+
+  function updateGlow() {
+    const scrollY = window.scrollY || 0;
+    const moveY = Math.min(60, scrollY * 0.05);
+    const opacity = Math.min(1, 0.9 + scrollY * 0.0002);
+
+    glow.style.transform = "translateY(" + moveY + "px)";
+    glow.style.opacity = String(opacity);
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(updateGlow);
+      ticking = true;
+    }
+  });
+
+  updateGlow();
+}
+
+function initScrollShift() {
+  const elements = document.querySelectorAll(".about-scroll-shift");
+
+  if (!elements.length) {
+    return;
+  }
+
+  let ticking = false;
+
+  function updateShift() {
+    const viewportHeight = window.innerHeight || 1;
+
+    elements.forEach(function (element) {
+      const rect = element.getBoundingClientRect();
+      const centerDistance = rect.top + rect.height / 2 - viewportHeight / 2;
+      const shift = Math.max(-18, Math.min(18, centerDistance * -0.04));
+      element.style.transform = "translateY(" + shift + "px)";
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(updateShift);
+      ticking = true;
+    }
+  });
+
+  window.addEventListener("resize", updateShift);
+  updateShift();
+}
+
+function initMagneticButtons() {
+  const buttons = document.querySelectorAll(".magnetic-button");
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (!canHover || !buttons.length) {
+    return;
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener("mousemove", function (event) {
+      const rect = button.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+
+      button.style.transform =
+        "translate(" + (x * 0.08) + "px," + (y * 0.08) + "px)";
+    });
+
+    button.addEventListener("mouseleave", function () {
+      button.style.transform = "";
+    });
   });
 }
