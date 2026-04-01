@@ -3,33 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | HUDSONLAB</title>
 
+  <!-- ── SEO + Open Graph ── -->
+  <title>About | HUDSONLAB — Systems, Strategy, Execution</title>
+  <meta name="description" content="Hudson builds technology with clarity, structure, and long-term direction — shaping systems that connect ideas, scale with intention, and create meaningful outcomes." />
+  <meta property="og:title"       content="About | HUDSONLAB" />
+  <meta property="og:description" content="Technology without direction creates noise. Hudson turns vision into systems and systems into impact." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="../Images/og-about.png" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <!-- ── Stylesheets ── -->
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="about.css" />
-</head>
-<body data-page="about">
-  <div class="about-bg-base"></div>
-  <div class="about-bg-light about-bg-light-left"></div>
-  <div class="about-bg-light about-bg-light-right"></div>
-  <div class="about-bg-grid"></div>
 
-  <div class="about-system-canvas-wrap" aria-hidden="true">
-    <canvas id="aboutSystemCanvas"></canvas>
+  <!-- ── Three.js: self-hosted preferred; unpkg CDN fallback with defer ── -->
+  <script defer src="../js/vendor/three.min.js"
+          onerror="this.remove(); document.head.insertAdjacentHTML('beforeend',
+            '&lt;script defer src=\'https://unpkg.com/three@0.160.0/build/three.min.js\'&gt;&lt;\/script&gt;')">
+  </script>
+</head>
+
+<!--
+  no-js class: if JS is disabled the CSS opacity:0 on .reveal
+  elements never gets cleared.  The stylesheet targets
+  html:not(.no-js) .reveal so we remove no-js once JS is running.
+-->
+<html class="no-js">
+<body data-page="about">
+
+  <!-- ════════════════════════════════════════
+       CINEMATIC BACKGROUND
+       Wrapper is position:fixed so children
+       can be position:absolute — avoids the
+       iOS Safari scroll-jitter bug that
+       position:fixed children cause.
+  ════════════════════════════════════════ -->
+  <div class="about-bg-stage" aria-hidden="true">
+    <div class="about-bg-base"></div>
+    <div class="about-bg-light about-bg-light-left"></div>
+    <div class="about-bg-light about-bg-light-right"></div>
+    <div class="about-bg-grid"></div>
+    <div class="about-bg-grain"></div>
+    <div class="about-system-canvas-wrap">
+      <canvas id="aboutSystemCanvas"></canvas>
+    </div>
   </div>
 
+  <!-- ════════════════════════════════════════
+       HEADER (injected by layout.js)
+  ════════════════════════════════════════ -->
   <div id="header"></div>
 
+  <!-- ════════════════════════════════════════
+       MAIN
+  ════════════════════════════════════════ -->
   <main class="page-shell about-page">
-    <section class="about-hero reveal">
+
+    <!-- ── HERO ── -->
+    <section class="about-hero reveal" aria-labelledby="about-hero-heading">
       <div class="about-hero-grid">
+
         <div class="about-hero-main">
           <p class="about-eyebrow hero-sequence hero-sequence-1">
-            <span class="about-eyebrow-dot"></span>
+            <span class="about-eyebrow-dot" aria-hidden="true"></span>
             About Hudson
           </p>
 
-          <h1 class="about-title hero-sequence hero-sequence-2">
+          <h1 id="about-hero-heading" class="about-title hero-sequence hero-sequence-2">
             <span class="about-title-line">Technology without</span>
             <span class="about-title-line about-title-line-accent">
               <span class="about-title-accent">direction</span>
@@ -38,16 +79,24 @@
           </h1>
 
           <div class="about-hero-copy-cluster">
+
+            <!--
+              aria-live="polite" announces cycling phrases to
+              screen readers without interrupting other content.
+              aria-label on the wrapper gives context.
+            -->
             <div
               class="about-hero-typed-wrap hero-sequence hero-sequence-3"
-              aria-label="About introduction highlights"
+              aria-label="A rotating list of Hudson's core building principles"
+              aria-live="polite"
+              aria-atomic="true"
             >
-              <span class="about-hero-typed-prefix">I build with</span>
+              <span class="about-hero-typed-prefix" aria-hidden="true">I build with</span>
               <span id="aboutTypedText" class="about-hero-typed-text"></span>
               <span class="about-hero-typed-caret" aria-hidden="true"></span>
             </div>
 
-            <div class="about-hero-statement hero-sequence hero-sequence-4">
+            <div class="about-hero-statement hero-sequence hero-sequence-4" aria-label="Core philosophy">
               <p>Structure turns ideas into systems.</p>
               <p>Systems turn intention into impact.</p>
             </div>
@@ -55,7 +104,8 @@
             <p class="about-intro hero-sequence hero-sequence-5">
               I approach technology through clarity, structure, and long-term direction.
               My interest is not only in building digital tools, but in shaping systems
-              that connect ideas, scale with intention, and create meaningful outcomes.
+              that <a href="../TechExplorer/explorer.html">connect ideas</a>,
+              scale with intention, and create meaningful outcomes.
             </p>
           </div>
 
@@ -66,42 +116,47 @@
           </div>
         </div>
 
-        <aside class="about-hero-side reveal-delay-1">
+        <!--
+          aria-label on <aside> identifies this landmark
+          region for assistive technology.
+        -->
+        <aside
+          class="about-hero-side reveal-delay-1"
+          aria-label="Personal signal — Hudson's core values summary"
+        >
           <div class="about-hero-side-card">
             <p class="about-side-kicker">Personal Signal</p>
-            <h2>Structure first. Noise last.</h2>
+            <h2>Structure first.<br><em>Noise last.</em></h2>
             <p>
               I am drawn to systems, clean direction, and turning complexity into
               something usable, intentional, and real.
             </p>
-
-            <div class="about-hero-tags">
+            <div class="about-hero-tags" aria-label="Core focus areas">
               <span>Systems</span>
               <span>Strategy</span>
               <span>Execution</span>
             </div>
           </div>
         </aside>
+
       </div>
     </section>
 
-    <section class="about-section about-identity reveal">
+    <!-- ── THINKING IN SYSTEMS ── -->
+    <section class="about-section about-identity reveal" aria-labelledby="systems-heading">
       <div class="about-grid about-grid-identity">
+
         <div class="about-text about-identity-copy">
           <p class="about-section-label">Foundation</p>
-
-          <h2>Thinking in Systems</h2>
-
+          <h2 id="systems-heading">Thinking in Systems</h2>
           <p class="about-pull-line">
             I care about how parts connect, not just how outputs look.
           </p>
-
           <p>
             I am naturally drawn to structure, logic, and connected thinking.
             I pay close attention to how parts relate to each other, how decisions
             shape the whole, and how clarity can turn complexity into direction.
           </p>
-
           <p>
             What interests me most is not just the final output, but the system
             behind it — the architecture, reasoning, and design discipline that
@@ -111,7 +166,7 @@
 
         <div class="about-identity-side">
           <div class="about-identity-card">
-            <div class="identity-card-line"></div>
+            <div class="identity-card-line" aria-hidden="true"></div>
             <p class="identity-card-label">System Perspective</p>
             <h3>Clarity creates structure.</h3>
             <p>
@@ -121,104 +176,122 @@
             </p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <section class="about-section about-direction reveal">
+    <!-- ── DRIVEN BY VISION ── -->
+    <section class="about-section about-direction reveal" aria-labelledby="vision-heading">
       <div class="about-grid about-grid-direction">
-        <div class="about-visual about-visual-entj-core">
-          <div class="entj-background-word" aria-hidden="true">ENTJ</div>
-          <div class="entj-background-word entj-background-word-secondary" aria-hidden="true">VISION</div>
+
+        <div class="about-visual about-visual-entj-core" aria-hidden="true">
+          <div class="entj-background-word">ENTJ</div>
+          <div class="entj-background-word entj-background-word-secondary">VISION</div>
           <div class="entj-orbit entj-orbit-outer"></div>
           <div class="entj-orbit entj-orbit-inner"></div>
           <div class="entj-glow"></div>
           <div class="entj-core-wash"></div>
           <div class="entj-side-label">Strategist</div>
-
           <img
             src="../Images/MBTI_ENTJ.png"
             class="about-image about-image-entj"
-            alt="ENTJ personality visual"
+            alt="An illustrated ENTJ-type commander character in a dark suit, pointing a baton — representing Hudson's strategist and systems-builder identity"
+            width="442"
+            height="560"
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
         <div class="about-text about-direction-copy">
           <p class="about-section-label">Core</p>
-
-          <h2>Driven by Vision</h2>
-
+          <h2 id="vision-heading">Driven by Vision</h2>
           <p class="about-pull-line">
             Big ideas matter most when they become structured, usable, and real.
           </p>
-
           <p>
             As an ENTJ, I value strategic thinking, clarity of direction, and
-            disciplined execution. I am most energized when ideas are guided by
+            disciplined execution. I am most energised when ideas are guided by
             purpose and transformed into something structured, usable, and real.
           </p>
-
           <p>
             What resonates with me is the challenge of turning vision into
             systems, and systems into impact — building not only with capability,
             but with control, consistency, and intent.
           </p>
 
-          <div class="about-principles">
-            <div class="about-principle-card">
-              <span class="about-principle-kicker">01</span>
+          <div class="about-principles" role="list" aria-label="Three core principles">
+            <div class="about-principle-card" role="listitem">
+              <span class="about-principle-kicker" aria-hidden="true">01</span>
               <h3>Strategy</h3>
               <p>Direction gives work meaning and keeps decisions aligned.</p>
             </div>
-
-            <div class="about-principle-card">
-              <span class="about-principle-kicker">02</span>
+            <div class="about-principle-card" role="listitem">
+              <span class="about-principle-kicker" aria-hidden="true">02</span>
               <h3>Structure</h3>
               <p>Clear systems turn complexity into something usable and scalable.</p>
             </div>
-
-            <div class="about-principle-card">
-              <span class="about-principle-kicker">03</span>
+            <div class="about-principle-card" role="listitem">
+              <span class="about-principle-kicker" aria-hidden="true">03</span>
               <h3>Execution</h3>
               <p>Ideas matter most when they are carried through with discipline.</p>
             </div>
           </div>
 
-          <p class="entj-signature">
+          <p class="entj-signature" aria-label="Closing statement">
             Strategy defines direction.<br />
             Execution builds reality.
           </p>
         </div>
+
       </div>
     </section>
 
-    <section class="about-next-section reveal">
+    <!-- ── NEXT PAGE ── -->
+    <section class="about-next-section reveal" aria-labelledby="next-page-heading">
       <div class="about-next-card">
         <p class="about-next-label">Next Page</p>
         <div class="about-next-grid">
           <div class="about-next-copy">
-            <h2>Explore Technology Compass</h2>
+            <h2 id="next-page-heading">Explore Technology Compass</h2>
             <p>
               A closer look at the tools, systems, platforms, and technologies
               behind the way I think and build.
             </p>
           </div>
-
           <div class="about-next-action">
-            <a class="about-secondary-button" href="../TechExplorer/explorer.html">
+            <a
+              class="about-secondary-button"
+              href="../TechExplorer/explorer.html"
+              aria-label="Go to Technology Compass page"
+            >
               Go to Technology Compass
             </a>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- ════════════════════════════════════════
+       FOOTER (injected by layout.js)
+  ════════════════════════════════════════ -->
   <div id="footer"></div>
 
-  <script src="../js/layout.js"></script>
-  <script src="../js/navigation.js"></script>
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="about-visual.js"></script>
-  <script src="about.js"></script>
+  <!-- ════════════════════════════════════════
+       SCRIPTS — all deferred / non-blocking
+  ════════════════════════════════════════ -->
+  <script defer src="../js/layout.js"></script>
+  <script defer src="../js/navigation.js"></script>
+  <!--
+    about-visual.js depends on Three.js; Three is loaded
+    with defer above.  Both run after DOM parse completes;
+    about-visual is listed after Three so execution order
+    is correct once the page loads.
+  -->
+  <script defer src="about-visual.js"></script>
+  <script defer src="about.js"></script>
+
 </body>
 </html>
