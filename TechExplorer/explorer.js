@@ -43,13 +43,15 @@ function initializeRevealMotion() {
 function initializeExplorerBackgroundMotion() {
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const radialLayers = document.querySelectorAll(".explorer-bg-radial");
-  const grid = document.querySelector(".explorer-bg-grid");
-  const sweep = document.querySelector(".explorer-bg-sweep");
 
-  if (reduceMotion) {
+  if (reduceMotion || !canHover) {
     return;
   }
+
+  const glowLayers = document.querySelectorAll(".explorer-bg-glow");
+  const atlasLayers = document.querySelectorAll(".explorer-atlas-layer");
+  const coordinateField = document.querySelector(".explorer-coordinate-field");
+  const trails = document.querySelector(".explorer-light-trails");
 
   let currentX = 0;
   let currentY = 0;
@@ -61,20 +63,26 @@ function initializeExplorerBackgroundMotion() {
     currentX += (targetX - currentX) * 0.05;
     currentY += (targetY - currentY) * 0.05;
 
-    radialLayers.forEach(function (layer, index) {
-      const strength = (index + 1) * 7;
+    glowLayers.forEach(function (layer, index) {
+      const strength = (index + 1) * 6;
       layer.style.transform =
         "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
     });
 
-    if (grid) {
-      grid.style.transform =
-        "translate3d(" + (currentX * 6) + "px," + (currentY * 6) + "px,0)";
+    atlasLayers.forEach(function (layer, index) {
+      const strength = (index + 1) * 10;
+      layer.style.transform =
+        "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.7) + "px,0)";
+    });
+
+    if (coordinateField) {
+      coordinateField.style.transform =
+        "translate3d(" + (currentX * 8) + "px," + (currentY * 6) + "px,0)";
     }
 
-    if (sweep) {
-      sweep.style.transform =
-        "translate3d(" + (currentX * 4) + "px," + (currentY * 4) + "px,0) rotate(0deg)";
+    if (trails) {
+      trails.style.transform =
+        "translate3d(" + (currentX * 12) + "px," + (currentY * 8) + "px,0)";
     }
 
     const deltaX = Math.abs(targetX - currentX);
@@ -88,49 +96,26 @@ function initializeExplorerBackgroundMotion() {
     animationFrameId = window.requestAnimationFrame(animate);
   }
 
-  if (canHover) {
-    window.addEventListener("mousemove", function (event) {
-      const width = window.innerWidth || 1;
-      const height = window.innerHeight || 1;
+  window.addEventListener("mousemove", function (event) {
+    const width = window.innerWidth || 1;
+    const height = window.innerHeight || 1;
 
-      targetX = (event.clientX / width - 0.5) * 2;
-      targetY = (event.clientY / height - 0.5) * 2;
+    targetX = (event.clientX / width - 0.5) * 2;
+    targetY = (event.clientY / height - 0.5) * 2;
 
-      if (!animationFrameId) {
-        animationFrameId = window.requestAnimationFrame(animate);
-      }
-    });
-
-    window.addEventListener("mouseleave", function () {
-      targetX = 0;
-      targetY = 0;
-
-      if (!animationFrameId) {
-        animationFrameId = window.requestAnimationFrame(animate);
-      }
-    });
-  }
-
-  let glowTicking = false;
-
-  function updateScrollEffects() {
-    const scrollY = window.scrollY || 0;
-
-    if (sweep) {
-      sweep.style.opacity = String(Math.min(0.32, 0.18 + scrollY * 0.00008));
-    }
-
-    glowTicking = false;
-  }
-
-  window.addEventListener("scroll", function () {
-    if (!glowTicking) {
-      window.requestAnimationFrame(updateScrollEffects);
-      glowTicking = true;
+    if (!animationFrameId) {
+      animationFrameId = window.requestAnimationFrame(animate);
     }
   });
 
-  updateScrollEffects();
+  window.addEventListener("mouseleave", function () {
+    targetX = 0;
+    targetY = 0;
+
+    if (!animationFrameId) {
+      animationFrameId = window.requestAnimationFrame(animate);
+    }
+  });
 }
 
 function initializeTechnologyCompass() {
