@@ -41,9 +41,11 @@
             and what I continue to build.
           </p>
 
-          <div class="about-typewriter hero-sequence hero-sequence-4" aria-live="polite">
-            <span class="about-typewriter-prefix">LIVE SIGNAL</span>
-            <span id="aboutTypewriterText"></span><span class="about-typewriter-caret">|</span>
+          <div class="about-typewriter-wrap hero-sequence hero-sequence-4">
+            <span class="about-typewriter-label">CURRENT MODE</span>
+            <p class="about-typewriter-line" aria-live="polite">
+              <span id="aboutTypewriterText"></span><span class="about-typewriter-caret">|</span>
+            </p>
           </div>
 
           <div class="about-hero-actions hero-sequence hero-sequence-5">
@@ -62,10 +64,12 @@
             <div class="about-composition-orbit about-composition-orbit-outer"></div>
             <div class="about-composition-orbit about-composition-orbit-inner"></div>
             <div class="about-composition-glow"></div>
-            <div class="about-composition-rings" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
+
+            <div class="about-composition-grid" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
             </div>
 
             <div class="about-hero-figure-wrap" id="aboutHeroFigureWrap">
@@ -76,14 +80,6 @@
                 id="aboutHeroFigure"
               />
             </div>
-
-            <div class="about-tech-stream about-tech-stream-1">3D Graphics Libraries — JS</div>
-            <div class="about-tech-stream about-tech-stream-2">2D Graphics / Canvas Libraries — JS</div>
-            <div class="about-tech-stream about-tech-stream-3">Animation Libraries — JS</div>
-            <div class="about-tech-stream about-tech-stream-4">Data Visualization Libraries — JS</div>
-            <div class="about-tech-stream about-tech-stream-5">Mapping / Geospatial Libraries — JS</div>
-            <div class="about-tech-stream about-tech-stream-6">WebGL Libraries — JS</div>
-            <div class="about-tech-stream about-tech-stream-7">AR / VR Libraries — JS</div>
           </div>
         </div>
       </div>
@@ -120,21 +116,36 @@
 
     <section class="about-section about-section-work reveal" id="section-work">
       <div class="about-section-grid about-section-grid-work">
-        <div class="about-section-body about-scroll-shift">
-          <ol class="about-process-list">
-            <li>
+        <div class="about-work-list about-scroll-shift">
+          <article class="about-work-item">
+            <span class="about-work-index">01</span>
+            <div>
               <strong>I break large things into smaller parts</strong>
-              <p>It is easier for me to work well when the pieces are visible and each part has a clear purpose.</p>
-            </li>
-            <li>
+              <p>
+                It is easier for me to work well when the pieces are visible and each part has a clear purpose.
+              </p>
+            </div>
+          </article>
+
+          <article class="about-work-item">
+            <span class="about-work-index">02</span>
+            <div>
               <strong>I build flow before polish</strong>
-              <p>I care about whether the structure works first, because good flow creates stronger results later.</p>
-            </li>
-            <li>
+              <p>
+                I care about whether the structure works first, because good flow creates stronger results later.
+              </p>
+            </div>
+          </article>
+
+          <article class="about-work-item">
+            <span class="about-work-index">03</span>
+            <div>
               <strong>I improve through review</strong>
-              <p>Finishing is not the last step for me. I usually want to look back, tighten the weak parts, and make the work better.</p>
-            </li>
-          </ol>
+              <p>
+                Finishing is not the last step for me. I usually want to look back, tighten the weak parts, and make the work better.
+              </p>
+            </div>
+          </article>
         </div>
 
         <div class="about-section-copy about-scroll-shift">
@@ -175,24 +186,30 @@
           </p>
         </div>
 
-        <div class="about-section-body about-scroll-shift">
-          <ul class="about-focus-list">
-            <li>
-              <span>Direction</span>
-              <strong>Technical growth with structure</strong>
-              <p>I am continuing to strengthen the technical side of how I think and build, especially where systems and analysis meet.</p>
-            </li>
-            <li>
-              <span>Focus</span>
-              <strong>Useful work over decorative work</strong>
-              <p>I want the things I make to do something meaningful, not only look finished on the surface.</p>
-            </li>
-            <li>
-              <span>Mindset</span>
-              <strong>Refinement as a habit</strong>
-              <p>I do not treat progress as one final moment. I see it as something built through repetition, review, and adjustment.</p>
-            </li>
-          </ul>
+        <div class="about-build-grid about-scroll-shift">
+          <div class="about-build-card reveal">
+            <span class="about-build-card-label">Direction</span>
+            <strong>Technical growth with structure</strong>
+            <p>
+              I am continuing to strengthen the technical side of how I think and build, especially where systems and analysis meet.
+            </p>
+          </div>
+
+          <div class="about-build-card reveal">
+            <span class="about-build-card-label">Focus</span>
+            <strong>Useful work over decorative work</strong>
+            <p>
+              I want the things I make to do something meaningful, not only look finished on the surface.
+            </p>
+          </div>
+
+          <div class="about-build-card reveal">
+            <span class="about-build-card-label">Mindset</span>
+            <strong>Refinement as a habit</strong>
+            <p>
+              I do not treat progress as one final moment. I see it as something built through repetition, review, and adjustment.
+            </p>
+          </div>
         </div>
       </div>
     </section>

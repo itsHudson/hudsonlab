@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initHeroCompositionTilt();
   initTypewriter();
   initHeroScrollDriven();
-  initTechStreamsFloat();
 });
 
 function initReveal() {
@@ -62,7 +61,7 @@ function initSystemField() {
     textTargets: [
       "#aboutHeroTitle",
       "#aboutHeroSubtitle",
-      ".about-typewriter",
+      ".about-typewriter-line",
       ".about-section-heading"
     ]
   });
@@ -79,7 +78,7 @@ function initScrollGlow() {
   function updateGlow() {
     const scrollY = window.scrollY || 0;
     const moveY = Math.min(54, scrollY * 0.04);
-    const opacity = Math.min(1, 0.8 + scrollY * 0.00012);
+    const opacity = Math.min(1, 0.8 + scrollY * 0.0001);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -325,38 +324,4 @@ function initHeroScrollDriven() {
 
   window.addEventListener("resize", updateHeroScroll);
   updateHeroScroll();
-}
-
-function initTechStreamsFloat() {
-  const streams = document.querySelectorAll(".about-tech-stream");
-  if (!streams.length) {
-    return;
-  }
-
-  let frame = 0;
-
-  function animateStreams() {
-    frame += 0.018;
-
-    streams.forEach(function (stream, index) {
-      const moveY = Math.sin(frame + index * 0.72) * 7;
-      const moveX = Math.cos(frame + index * 0.48) * 5;
-
-      let baseRotate = 0;
-      if (index === 0) baseRotate = -11;
-      if (index === 1) baseRotate = 12;
-      if (index === 2) baseRotate = -6;
-      if (index === 3) baseRotate = 8;
-      if (index === 4) baseRotate = -8;
-      if (index === 5) baseRotate = 10;
-      if (index === 6) baseRotate = -4;
-
-      stream.style.transform =
-        "translate(" + moveX + "px," + moveY + "px) rotate(" + baseRotate + "deg)";
-    });
-
-    window.requestAnimationFrame(animateStreams);
-  }
-
-  animateStreams();
 }
