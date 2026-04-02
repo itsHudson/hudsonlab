@@ -6,6 +6,7 @@
   <title>HUDSONLAB | Home</title>
 
   <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/home.css" />
 </head>
 <body data-page="home">
   <div class="home-bg-base"></div>
@@ -14,6 +15,7 @@
   <div class="home-bg-glow home-bg-glow-b"></div>
   <div class="home-bg-noise"></div>
   <div class="home-bg-scan"></div>
+  <div class="home-bg-vignette"></div>
 
   <div class="home-system-canvas-wrap" aria-hidden="true">
     <canvas id="homeSystemCanvas"></canvas>
@@ -23,33 +25,60 @@
 
   <main class="page-shell home-shell">
     <section class="home-hero-section reveal">
-      <div class="home-hero-copy">
-        <p class="home-hero-kicker">Personal Brand Portfolio</p>
+      <div class="home-hero-grid">
+        <div class="home-hero-copy">
+          <p class="home-hero-kicker">Personal Brand Portfolio</p>
 
-        <h1 class="home-editorial-title">
-          Designing
-          <span class="home-editorial-dark">Direction.</span><br />
-          <span class="home-editorial-accent">Building</span><br />
-          <span class="home-editorial-accent">Systems.</span>
-        </h1>
+          <h1 class="home-editorial-title" id="homeHeroTitle">
+            Designing
+            <span class="home-editorial-dark">Direction.</span><br />
+            <span class="home-editorial-accent">Building</span><br />
+            <span class="home-editorial-accent">Systems.</span>
+          </h1>
 
-        <p class="home-editorial-meta">
-          HUDSON CHIA · SYSTEMS · SOFTWARE · DATA · ARCHITECTURE
-        </p>
+          <p class="home-editorial-meta">
+            HUDSON CHIA · SYSTEMS · SOFTWARE · DATA · ARCHITECTURE
+          </p>
 
-        <p class="home-editorial-desc">
-          A digital space shaped by systems thinking, technical direction,
-          and a quieter attention to structure, clarity, and long-term design.
-        </p>
+          <p class="home-editorial-desc" id="homeHeroDesc">
+            A digital space shaped by systems thinking, technical direction,
+            and a quieter attention to structure, clarity, and long-term design.
+          </p>
 
-        <div class="hero-actions">
-          <a class="primary-btn magnetic-button" href="./Journey/journey.html">View My Story</a>
-          <a class="secondary-btn magnetic-button" href="./TechExplorer/explorer.html">Explore the Compass</a>
+          <div class="hero-actions">
+            <a class="primary-btn magnetic-button" href="./Journey/journey.html">View My Story</a>
+            <a class="secondary-btn magnetic-button" href="./TechExplorer/explorer.html">Explore the Compass</a>
+          </div>
+
+          <div class="home-hero-connector" aria-hidden="true">
+            <span class="home-hero-connector-line"></span>
+            <span class="home-hero-connector-text">Explore the system</span>
+          </div>
         </div>
 
-        <div class="home-hero-connector" aria-hidden="true">
-          <span class="home-hero-connector-line"></span>
-          <span class="home-hero-connector-text">Enter the system</span>
+        <div class="home-hero-visual reveal-delay" id="homeHeroVisual">
+          <div class="home-visual-shell">
+            <div class="home-visual-ring home-visual-ring-1"></div>
+            <div class="home-visual-ring home-visual-ring-2"></div>
+            <div class="home-visual-ring home-visual-ring-3"></div>
+
+            <div class="home-visual-cross home-visual-cross-h"></div>
+            <div class="home-visual-cross home-visual-cross-v"></div>
+
+            <div class="home-visual-core-glow"></div>
+
+            <div class="home-visual-core">
+              <div class="home-visual-core-pulse home-visual-core-pulse-1"></div>
+              <div class="home-visual-core-pulse home-visual-core-pulse-2"></div>
+              <div class="home-visual-core-inner">
+                <span>HUDSONLAB</span>
+              </div>
+            </div>
+
+            <div class="home-visual-label home-visual-label-top">FORGE</div>
+            <div class="home-visual-label home-visual-label-right">SIGNAL</div>
+            <div class="home-visual-label home-visual-label-bottom">SYSTEM</div>
+          </div>
         </div>
       </div>
     </section>
@@ -143,83 +172,6 @@
   <script src="./js/layout.js"></script>
   <script src="./js/navigation.js"></script>
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="./js/home-visual.js"></script>
-
-  <script>
-    (function () {
-      function initRevealSystem() {
-        const revealItems = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
-
-        if (!("IntersectionObserver" in window)) {
-          revealItems.forEach(function (item) {
-            item.classList.add("is-visible");
-          });
-          return;
-        }
-
-        const observer = new IntersectionObserver(function (entries, obs) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              obs.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.12
-        });
-
-        revealItems.forEach(function (item) {
-          observer.observe(item);
-        });
-      }
-
-      function initMagneticButtons() {
-        const buttons = document.querySelectorAll(".magnetic-button");
-        const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-        if (!canHover) {
-          return;
-        }
-
-        buttons.forEach(function (button) {
-          button.addEventListener("mousemove", function (event) {
-            const rect = button.getBoundingClientRect();
-            const offsetX = event.clientX - rect.left - rect.width / 2;
-            const offsetY = event.clientY - rect.top - rect.height / 2;
-
-            const moveX = offsetX * 0.14;
-            const moveY = offsetY * 0.14;
-
-            button.style.transform = "translate(" + moveX + "px, " + moveY + "px)";
-          });
-
-          button.addEventListener("mouseleave", function () {
-            button.style.transform = "translate(0, 0)";
-          });
-        });
-      }
-
-      function initHomeVisual() {
-        if (typeof window.createHomeVisual !== "function") {
-          return;
-        }
-
-        const canvas = document.getElementById("homeSystemCanvas");
-        if (!canvas) {
-          return;
-        }
-
-        window.__homeVisualInstance = window.createHomeVisual({
-          canvas: canvas
-        });
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        initRevealSystem();
-        initMagneticButtons();
-        initHomeVisual();
-      });
-    })();
-  </script>
+  <script src="./js/home.js"></script>
 </body>
 </html>
