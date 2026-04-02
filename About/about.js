@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollGlow();
   initScrollShift();
   initMagneticButtons();
-  initSignatureTilt();
+  initHeroCompositionTilt();
 });
 
 function initReveal() {
@@ -69,8 +69,8 @@ function initScrollGlow() {
 
   function updateGlow() {
     const scrollY = window.scrollY || 0;
-    const moveY = Math.min(60, scrollY * 0.045);
-    const opacity = Math.min(1, 0.84 + scrollY * 0.00012);
+    const moveY = Math.min(54, scrollY * 0.04);
+    const opacity = Math.min(1, 0.8 + scrollY * 0.0001);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -103,7 +103,7 @@ function initScrollShift() {
     elements.forEach(function (element) {
       const rect = element.getBoundingClientRect();
       const centerDistance = rect.top + rect.height / 2 - viewportHeight / 2;
-      const shift = Math.max(-14, Math.min(14, centerDistance * -0.026));
+      const shift = Math.max(-12, Math.min(12, centerDistance * -0.024));
       element.style.transform = "translateY(" + shift + "px)";
     });
 
@@ -136,7 +136,7 @@ function initMagneticButtons() {
       const y = event.clientY - rect.top - rect.height / 2;
 
       button.style.transform =
-        "translate(" + (x * 0.055) + "px," + (y * 0.055) + "px)";
+        "translate(" + (x * 0.05) + "px," + (y * 0.05) + "px)";
     });
 
     button.addEventListener("mouseleave", function () {
@@ -145,18 +145,20 @@ function initMagneticButtons() {
   });
 }
 
-function initSignatureTilt() {
-  const stage = document.querySelector(".about-signature-stage");
-  const photo = document.querySelector(".about-signature-photo");
-  const photoWrap = document.querySelector(".about-signature-photo-wrap");
-  const primaryNote = document.querySelector(".about-identity-note-primary");
-  const secondaryNote = document.querySelector(".about-identity-note-secondary");
-  const tagRow = document.querySelector(".about-identity-tags");
-  const wordTop = document.querySelector(".about-signature-word-top");
-  const wordSide = document.querySelector(".about-signature-word-side");
-  const wordBottom = document.querySelector(".about-signature-word-bottom");
+function initHeroCompositionTilt() {
+  const stage = document.querySelector(".about-hero-composition");
+  const figure = document.querySelector(".about-hero-figure");
+  const figureWrap = document.querySelector(".about-hero-figure-wrap");
+  const card = document.querySelector(".about-hero-main-card");
+  const nodeTop = document.querySelector(".about-hero-node-top");
+  const nodeLeft = document.querySelector(".about-hero-node-left");
+  const nodeRight = document.querySelector(".about-hero-node-right");
+  const nodeBottom = document.querySelector(".about-hero-node-bottom");
+  const wordTop = document.querySelector(".about-composition-word-top");
+  const wordSide = document.querySelector(".about-composition-word-side");
+  const wordBottom = document.querySelector(".about-composition-word-bottom");
 
-  if (!stage || !photo || !photoWrap) {
+  if (!stage || !figure || !figureWrap) {
     return;
   }
 
@@ -174,12 +176,12 @@ function initSignatureTilt() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateY = ((offsetX - centerX) / centerX) * 7;
-    const rotateX = -((offsetY - centerY) / centerY) * 7;
+    const rotateY = ((offsetX - centerX) / centerX) * 6;
+    const rotateX = -((offsetY - centerY) / centerY) * 6;
     const translateX = ((offsetX - centerX) / centerX) * 10;
     const translateY = ((offsetY - centerY) / centerY) * 8;
 
-    photoWrap.style.transform =
+    figureWrap.style.transform =
       "translate3d(" +
       translateX +
       "px," +
@@ -190,54 +192,72 @@ function initSignatureTilt() {
       rotateY +
       "deg)";
 
-    photo.style.transform =
-      "translate3d(" + (translateX * 0.2) + "px," + (translateY * 0.2) + "px,0) scale(1.02)";
+    figure.style.transform =
+      "translate3d(" + (translateX * 0.18) + "px," + (translateY * 0.18) + "px,0) scale(1.02)";
 
-    if (primaryNote) {
-      primaryNote.style.transform =
-        "translate(" + (translateX * 0.42) + "px," + (translateY * 0.34) + "px)";
+    if (card) {
+      card.style.transform =
+        "translate(" + (translateX * 0.34) + "px," + (translateY * 0.26) + "px)";
     }
 
-    if (secondaryNote) {
-      secondaryNote.style.transform =
-        "translate(" + (translateX * -0.34) + "px," + (translateY * -0.26) + "px)";
+    if (nodeTop) {
+      nodeTop.style.transform =
+        "translateX(-50%) translate(" + (translateX * 0.12) + "px," + (translateY * 0.16) + "px)";
     }
 
-    if (tagRow) {
-      tagRow.style.transform =
-        "translate(" + (translateX * 0.24) + "px," + (translateY * 0.18) + "px)";
+    if (nodeLeft) {
+      nodeLeft.style.transform =
+        "translateY(-50%) translate(" + (translateX * 0.16) + "px," + (translateY * 0.10) + "px)";
+    }
+
+    if (nodeRight) {
+      nodeRight.style.transform =
+        "translateY(-50%) translate(" + (translateX * -0.14) + "px," + (translateY * 0.10) + "px)";
+    }
+
+    if (nodeBottom) {
+      nodeBottom.style.transform =
+        "translateX(-50%) translate(" + (translateX * 0.10) + "px," + (translateY * -0.14) + "px)";
     }
 
     if (wordTop) {
       wordTop.style.transform =
-        "translate(" + (translateX * 0.18) + "px," + (translateY * 0.12) + "px)";
+        "translate(" + (translateX * 0.14) + "px," + (translateY * 0.10) + "px)";
     }
 
     if (wordSide) {
       wordSide.style.transform =
-        "rotate(90deg) translate(" + (translateX * 0.12) + "px," + (translateY * 0.12) + "px)";
+        "rotate(90deg) translate(" + (translateX * 0.10) + "px," + (translateY * 0.12) + "px)";
     }
 
     if (wordBottom) {
       wordBottom.style.transform =
-        "translate(" + (translateX * 0.14) + "px," + (translateY * 0.10) + "px)";
+        "translate(" + (translateX * 0.10) + "px," + (translateY * 0.08) + "px)";
     }
   });
 
   stage.addEventListener("mouseleave", function () {
-    photoWrap.style.transform = "";
-    photo.style.transform = "";
+    figureWrap.style.transform = "";
+    figure.style.transform = "";
 
-    if (primaryNote) {
-      primaryNote.style.transform = "";
+    if (card) {
+      card.style.transform = "";
     }
 
-    if (secondaryNote) {
-      secondaryNote.style.transform = "";
+    if (nodeTop) {
+      nodeTop.style.transform = "translateX(-50%)";
     }
 
-    if (tagRow) {
-      tagRow.style.transform = "";
+    if (nodeLeft) {
+      nodeLeft.style.transform = "translateY(-50%)";
+    }
+
+    if (nodeRight) {
+      nodeRight.style.transform = "translateY(-50%)";
+    }
+
+    if (nodeBottom) {
+      nodeBottom.style.transform = "translateX(-50%)";
     }
 
     if (wordTop) {

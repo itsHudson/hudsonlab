@@ -25,11 +25,11 @@
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xff8a2a, 1.02, 130);
+    const warmLight = new THREE.PointLight(0xff8a2a, 0.92, 130);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xffc471, 0.66, 120);
+    const sideLight = new THREE.PointLight(0xffc471, 0.56, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
@@ -43,7 +43,7 @@
       targetY: 0
     };
 
-    const POINT_COUNT = 128;
+    const POINT_COUNT = 116;
     const bounds = { x: 18, y: 30, z: 10 };
 
     const positions = [];
@@ -57,9 +57,9 @@
       );
 
       velocities.push(
-        (Math.random() - 0.5) * 0.005,
-        (Math.random() - 0.5) * 0.005,
-        (Math.random() - 0.5) * 0.0021
+        (Math.random() - 0.5) * 0.0048,
+        (Math.random() - 0.5) * 0.0048,
+        (Math.random() - 0.5) * 0.002
       );
     }
 
@@ -70,10 +70,10 @@
     );
 
     const particleMaterial = new THREE.PointsMaterial({
-      color: 0xff8f2c,
-      size: 0.15,
+      color: 0xff922c,
+      size: 0.14,
       transparent: true,
-      opacity: 0.48,
+      opacity: 0.42,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -81,7 +81,7 @@
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     group.add(particles);
 
-    const maxLineSegments = POINT_COUNT * 6;
+    const maxLineSegments = POINT_COUNT * 5;
     const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
     const lineGeometry = new THREE.BufferGeometry();
@@ -91,7 +91,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.08
+      opacity: 0.065
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -181,7 +181,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.35 && lineCount < maxLineSegments) {
+          if (distance < 4.15 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -206,22 +206,22 @@
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.00084;
+      const scrollShift = scrollOffset * -0.00078;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.0001;
-      group.rotation.x += 0.00006;
+      group.rotation.y += 0.00009;
+      group.rotation.x += 0.00005;
 
-      group.rotation.y += mouse.x * 0.001;
-      group.rotation.x += -mouse.y * 0.0008;
+      group.rotation.y += mouse.x * 0.0009;
+      group.rotation.x += -mouse.y * 0.0007;
 
       particles.rotation.z += 0.00008;
-      particles.position.x = mouse.x * 0.42;
-      particles.position.y += ((-mouse.y * 0.28) - particles.position.y) * 0.03;
+      particles.position.x = mouse.x * 0.38;
+      particles.position.y += ((-mouse.y * 0.24) - particles.position.y) * 0.03;
 
-      lineSegments.rotation.z -= 0.00005;
-      lineSegments.position.x += ((mouse.x * 0.22) - lineSegments.position.x) * 0.03;
-      lineSegments.position.y += ((-mouse.y * 0.16) - lineSegments.position.y) * 0.03;
+      lineSegments.rotation.z -= 0.00004;
+      lineSegments.position.x += ((mouse.x * 0.20) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * 0.14) - lineSegments.position.y) * 0.03;
 
       renderer.render(scene, camera);
     }
