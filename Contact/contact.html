@@ -10,10 +10,17 @@
   <link rel="stylesheet" href="contact.css" />
 </head>
 <body data-page="contact">
+  <div class="contact-bg-base"></div>
+  <div class="contact-bg-noise"></div>
+  <div class="contact-bg-scan"></div>
+
+  <div class="contact-system-canvas-wrap" aria-hidden="true">
+    <canvas id="contactBgCanvas"></canvas>
+  </div>
 
   <div id="header"></div>
 
-  <main class="page-shell">
+  <main class="page-shell contact-page-shell">
     <span class="small-chip">Connect</span>
 
     <h1 class="page-title">
@@ -27,32 +34,50 @@
     </p>
 
     <section class="contact-grid">
-      <div class="glass-card contact-card">
-        <h3>Email</h3>
-        <p>
+      <article class="glass-card contact-card reveal" data-contact-card="email">
+        <div class="contact-card-signal"></div>
+        <div class="contact-card-inner">
+          <p class="contact-card-label">Direct Channel</p>
+          <h3>Email</h3>
+          <p class="contact-card-copy">
+            The clearest route for thoughtful conversations,
+            project discussions, and professional enquiries.
+          </p>
           <a href="mailto:hudson.officer23@gmail.com">
             hudson.officer23@gmail.com
           </a>
-        </p>
-      </div>
+        </div>
+      </article>
 
-      <div class="glass-card contact-card">
-        <h3>LinkedIn Presence</h3>
-        <p>
+      <article class="glass-card contact-card reveal-delay" data-contact-card="linkedin">
+        <div class="contact-card-signal"></div>
+        <div class="contact-card-inner">
+          <p class="contact-card-label">Professional Presence</p>
+          <h3>LinkedIn Presence</h3>
+          <p class="contact-card-copy">
+            A space for professional visibility, background,
+            and long-form career connection.
+          </p>
           <a href="https://www.linkedin.com/in/hudsonc200/" target="_blank" rel="noopener noreferrer">
             linkedin.com/in/hudsonc200
           </a>
-        </p>
-      </div>
+        </div>
+      </article>
 
-      <div class="glass-card contact-card">
-        <h3>GitHub Profile</h3>
-        <p>
+      <article class="glass-card contact-card reveal-delay-2" data-contact-card="github">
+        <div class="contact-card-signal"></div>
+        <div class="contact-card-inner">
+          <p class="contact-card-label">Code Channel</p>
+          <h3>GitHub Profile</h3>
+          <p class="contact-card-copy">
+            A public layer of repositories, technical work,
+            and evolving implementation.
+          </p>
           <a href="https://github.com/itsHudson" target="_blank" rel="noopener noreferrer">
             github.com/itsHudson
           </a>
-        </p>
-      </div>
+        </div>
+      </article>
     </section>
   </main>
 
@@ -60,6 +85,8 @@
 
   <script src="../js/layout.js"></script>
   <script src="../js/navigation.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="contact-visual.js"></script>
   <script src="contact.js"></script>
 </body>
 </html>
