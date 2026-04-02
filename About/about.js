@@ -74,45 +74,45 @@ function initImageParallax() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateY = ((offsetX - centerX) / centerX) * 6;
-      const rotateX = -((offsetY - centerY) / centerY) * 6;
-      const translateX = ((offsetX - centerX) / centerX) * 10;
-      const translateY = ((offsetY - centerY) / centerY) * 8;
+      const rotateY = ((offsetX - centerX) / centerX) * 5;
+      const rotateX = -((offsetY - centerY) / centerY) * 5;
+      const translateX = ((offsetX - centerX) / centerX) * 8;
+      const translateY = ((offsetY - centerY) / centerY) * 6;
 
       image.style.transform =
         "translate3d(" +
         translateX +
         "px," +
-        (translateY - 6) +
+        (translateY - 4) +
         "px,0) rotateX(" +
         rotateX +
         "deg) rotateY(" +
         rotateY +
-        "deg) scale(1.03)";
+        "deg) scale(1.02)";
 
       if (wordMain) {
         wordMain.style.transform =
-          "rotate(-90deg) translate(" + (translateX * 0.9) + "px," + (translateY * 0.7) + "px)";
+          "rotate(-90deg) translate(" + (translateX * 0.85) + "px," + (translateY * 0.6) + "px)";
       }
 
       if (wordSide) {
         wordSide.style.transform =
-          "translate(" + (translateX * 0.55) + "px," + (translateY * 0.3) + "px)";
+          "translate(" + (translateX * 0.45) + "px," + (translateY * 0.24) + "px)";
       }
 
       if (wordTop) {
         wordTop.style.transform =
-          "translate(" + (translateX * 0.2) + "px," + (translateY * 0.18) + "px)";
+          "translate(" + (translateX * 0.18) + "px," + (translateY * 0.16) + "px)";
       }
 
       if (pulse1) {
         pulse1.style.transform =
-          "translate(" + (translateX * 0.3) + "px," + (translateY * 0.3) + "px)";
+          "translate(" + (translateX * 0.26) + "px," + (translateY * 0.26) + "px)";
       }
 
       if (pulse2) {
         pulse2.style.transform =
-          "translate(" + (translateX * 0.16) + "px," + (translateY * 0.16) + "px)";
+          "translate(" + (translateX * 0.14) + "px," + (translateY * 0.14) + "px)";
       }
     });
 
@@ -225,8 +225,8 @@ function initScrollGlow() {
 
   function updateGlow() {
     const scrollY = window.scrollY || 0;
-    const moveY = Math.min(70, scrollY * 0.05);
-    const opacity = Math.min(1, 0.88 + scrollY * 0.00018);
+    const moveY = Math.min(60, scrollY * 0.045);
+    const opacity = Math.min(1, 0.86 + scrollY * 0.00016);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -259,7 +259,7 @@ function initScrollShift() {
     elements.forEach(function (element) {
       const rect = element.getBoundingClientRect();
       const centerDistance = rect.top + rect.height / 2 - viewportHeight / 2;
-      const shift = Math.max(-20, Math.min(20, centerDistance * -0.04));
+      const shift = Math.max(-16, Math.min(16, centerDistance * -0.035));
       element.style.transform = "translateY(" + shift + "px)";
     });
 
@@ -292,7 +292,7 @@ function initMagneticButtons() {
       const y = event.clientY - rect.top - rect.height / 2;
 
       button.style.transform =
-        "translate(" + (x * 0.08) + "px," + (y * 0.08) + "px)";
+        "translate(" + (x * 0.06) + "px," + (y * 0.06) + "px)";
     });
 
     button.addEventListener("mouseleave", function () {
