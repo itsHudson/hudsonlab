@@ -974,6 +974,10 @@ body[data-page="journey"] {
   transform: translateY(28px);
 }
 
+/* =========================
+   KEYFRAMES
+   ========================= */
+
 @keyframes coreBreath {
   0% {
     opacity: 0.46;
@@ -1094,6 +1098,10 @@ body[data-page="journey"] {
   50% { transform: translate3d(8px, -8px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
+
+/* =========================
+   RESPONSIVE
+   ========================= */
 
 @media (max-width: 1180px) {
   .journey-system-layout {
@@ -1382,8 +1390,7 @@ body[data-page="journey"] {
   .journey-status-dot,
   .journey-grid-line-vertical::after,
   .journey-node-core-ring,
-  .journey-node-core::after,
-  .journey-halo {
+  .journey-node-core::after {
     animation: none !important;
   }
 }
