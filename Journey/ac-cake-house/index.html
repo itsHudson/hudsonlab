@@ -7,271 +7,726 @@
 
   <link rel="stylesheet" href="../../css/global.css" />
   <link rel="stylesheet" href="../detail.css" />
+
+  <style>
+    .acake-page {
+      display: grid;
+      gap: 28px;
+    }
+
+    .acake-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 181, 72, 0.22), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255, 122, 89, 0.16), transparent 26%),
+        linear-gradient(135deg, rgba(14, 18, 32, 0.96), rgba(26, 31, 48, 0.94));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+      display: grid;
+      gap: 26px;
+    }
+
+    .acake-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -80px -100px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 166, 77, 0.24), transparent 68%);
+      pointer-events: none;
+    }
+
+    .acake-hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .acake-kicker-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .acake-kicker {
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(255, 245, 230, 0.92);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .acake-hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .acake-hero-copy h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.1rem, 4vw, 3.35rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .acake-hero-copy p {
+      margin: 0 0 14px;
+      max-width: 64ch;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.9;
+    }
+
+    .acake-hero-panel {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .acake-mini-panel {
+      padding: 18px 18px 16px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .acake-mini-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffb25b;
+    }
+
+    .acake-mini-panel strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.35;
+      color: #fff6ea;
+    }
+
+    .acake-mini-panel span {
+      color: rgba(255,255,255,0.68);
+      line-height: 1.75;
+      font-size: 0.94rem;
+    }
+
+    .acake-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .acake-stat {
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acake-stat strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    .acake-stat span {
+      display: block;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.7;
+      font-size: 0.9rem;
+    }
+
+    .acake-section-head {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .acake-section-head p {
+      margin: 0;
+      color: #ffb25b;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .acake-section-head h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .acake-story-band {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .acake-visual-card {
+      overflow: hidden;
+      padding: 0;
+      min-height: 100%;
+      position: relative;
+    }
+
+    .acake-visual-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      min-height: 420px;
+    }
+
+    .acake-visual-overlay {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(10, 14, 25, 0.74);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acake-visual-overlay strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: #fff4e7;
+    }
+
+    .acake-visual-overlay span {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75;
+      font-size: 0.93rem;
+    }
+
+    .acake-story-card {
+      padding: 28px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 180, 90, 0.14), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acake-story-card p {
+      margin: 0 0 14px;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.95;
+    }
+
+    .acake-contribution-wall {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .acake-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px 20px 18px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+      min-height: 220px;
+    }
+
+    .acake-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(255,178,91,0.95), rgba(255,122,89,0.85));
+      opacity: 0.9;
+    }
+
+    .acake-card.wide { grid-column: span 6; }
+    .acake-card.mid { grid-column: span 4; }
+    .acake-card.small { grid-column: span 3; }
+
+    .acake-card-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #16100a;
+      background: linear-gradient(135deg, #ffd089, #ff9d5c);
+      box-shadow: 0 8px 24px rgba(255, 174, 87, 0.22);
+    }
+
+    .acake-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .acake-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      font-size: 0.94rem;
+    }
+
+    .acake-signal-strip {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .acake-signal-main {
+      padding: 28px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at left center, rgba(255, 153, 86, 0.18), transparent 25%),
+        linear-gradient(135deg, rgba(18,22,35,0.98), rgba(29,34,50,0.94));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acake-signal-main h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .acake-signal-main p {
+      margin: 0;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.95;
+    }
+
+    .acake-signal-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .acake-pill-card {
+      padding: 18px 18px 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acake-pill-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.98rem;
+      color: #fff5ea;
+    }
+
+    .acake-pill-card span {
+      color: rgba(255,255,255,0.68);
+      line-height: 1.72;
+      font-size: 0.92rem;
+    }
+
+    .acake-duo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .acake-list-card,
+    .acake-reflection-card {
+      padding: 26px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .acake-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 12px;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.85;
+    }
+
+    .acake-reflection-card p {
+      margin: 0 0 14px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.95;
+    }
+
+    .acake-reflection-card p:last-child,
+    .acake-story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .acake-hero-grid,
+      .acake-story-band,
+      .acake-signal-strip,
+      .acake-duo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .acake-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .acake-card.wide,
+      .acake-card.mid,
+      .acake-card.small {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .acake-hero,
+      .acake-story-card,
+      .acake-signal-main,
+      .acake-list-card,
+      .acake-reflection-card,
+      .acake-card {
+        padding: 22px 18px;
+      }
+
+      .acake-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .acake-contribution-wall {
+        grid-template-columns: 1fr;
+      }
+
+      .acake-card.wide,
+      .acake-card.mid,
+      .acake-card.small {
+        grid-column: auto;
+      }
+
+      .acake-visual-card img {
+        min-height: 280px;
+      }
+    }
+  </style>
 </head>
 <body data-page="journey">
 
   <div id="header"></div>
 
-  <main class="page-shell detail-shell">
+  <main class="page-shell detail-shell acake-page">
 
     <!-- HERO -->
-    <section class="glass-card detail-hero-card reveal">
-      <div class="detail-hero-meta">
-        <span class="detail-chip">Journey / Professional Experience</span>
-        <span class="detail-chip detail-chip-soft">Dec 2017 - Aug 2023</span>
+    <section class="acake-hero reveal">
+      <div class="acake-hero-top">
+        <div class="acake-kicker-group">
+          <span class="acake-kicker">Journey / Professional Experience</span>
+          <span class="acake-kicker">Dec 2017 - Aug 2023</span>
+          <span class="acake-kicker">Multi-Function Business Exposure</span>
+        </div>
       </div>
 
-      <h1>Australian Cake House / ACake (M) Sdn Bhd</h1>
+      <div class="acake-hero-grid">
+        <div class="acake-hero-copy">
+          <h1>Australian Cake House / ACake (M) Sdn Bhd</h1>
+          <p>
+            This phase of my journey was not shaped by one job title alone. It was built
+            through continuous involvement across support work, store execution, operational
+            coordination, customer communication, documentation, training, and systems-related tasks.
+          </p>
+          <p>
+            Over time, I developed practical exposure to how real business environments function
+            across people, processes, systems, and customers — and how consistency, structure,
+            and teamwork keep operations moving.
+          </p>
+        </div>
 
-      <p>
-        This stage of my journey gave me broad exposure to how a real business operates
-        across multiple functions. Over time, I was involved in administrative support,
-        store-level execution, customer communication, process documentation, team support,
-        and operational coordination across different working contexts.
-      </p>
-
-      <p>
-        Rather than focusing on only one function, this experience helped me understand
-        how people, processes, systems, and customers must work together to keep operations
-        structured, consistent, and scalable.
-      </p>
-    </section>
-
-    <!-- OVERVIEW -->
-    <section class="detail-grid">
-      <div class="detail-stack">
-        <section class="glass-card detail-image-card reveal-delay">
-          <p class="detail-section-label">Visual Context</p>
-          <div class="detail-image-wrap">
-            <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House professional experience visual" />
+        <div class="acake-hero-panel">
+          <div class="acake-mini-panel">
+            <span class="acake-mini-label">Core Character</span>
+            <strong>Structured, adaptive, and support-driven contribution</strong>
+            <span>
+              This experience was about learning through involvement, improving through execution,
+              and understanding how different business components connect in practice.
+            </span>
           </div>
-        </section>
-      </div>
 
-      <div class="detail-stack">
-        <section class="glass-card detail-metrics-card reveal-delay-2">
-          <p class="detail-section-label">Experience Snapshot</p>
-          <h2>Operational exposure built through multi-area contribution</h2>
-
-          <div class="detail-metrics-grid">
-            <div class="detail-metric-box">
-              <strong>5+ Years</strong>
-              <span>Built practical experience across store operations, support work, and structured execution.</span>
-            </div>
-
-            <div class="detail-metric-box">
-              <strong>10 Contribution Areas</strong>
-              <span>Gained exposure across finance, HR, SOPs, customer service, systems, and outlet support.</span>
-            </div>
-
-            <div class="detail-metric-box">
-              <strong>Multi-Outlet Exposure</strong>
-              <span>Learned how operational consistency and system standardization matter across locations.</span>
-            </div>
-
-            <div class="detail-metric-box">
-              <strong>Growth Mindset</strong>
-              <span>Developed through learning, support-based contribution, and real-world problem-solving.</span>
-            </div>
+          <div class="acake-mini-panel">
+            <span class="acake-mini-label">Operational Theme</span>
+            <strong>From daily execution to broader business awareness</strong>
+            <span>
+              Exposure expanded beyond frontline work into documentation, onboarding,
+              customer handling, process support, and outlet readiness.
+            </span>
           </div>
-        </section>
+        </div>
+      </div>
+
+      <div class="acake-stats">
+        <div class="acake-stat">
+          <strong>5+ Years</strong>
+          <span>Built through long-term involvement inside a real operational environment.</span>
+        </div>
+        <div class="acake-stat">
+          <strong>10 Areas</strong>
+          <span>Contributions spanning finance, HR, systems, customers, SOPs, and support.</span>
+        </div>
+        <div class="acake-stat">
+          <strong>Multi-Outlet</strong>
+          <span>Hands-on exposure to operational consistency across different store settings.</span>
+        </div>
+        <div class="acake-stat">
+          <strong>Foundation</strong>
+          <span>A strong base for later business, systems, and technology-oriented thinking.</span>
+        </div>
       </div>
     </section>
 
-    <!-- MAIN STORY -->
+    <!-- STORY BAND -->
+    <section class="acake-story-band">
+      <section class="glass-card acake-visual-card reveal-delay">
+        <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House professional experience visual" />
+        <div class="acake-visual-overlay">
+          <strong>Operational learning in a real business environment</strong>
+          <span>
+            This stage built practical awareness of how execution, coordination, standards,
+            and customer-facing work connect behind daily business operations.
+          </span>
+        </div>
+      </section>
+
+      <section class="acake-story-card reveal-delay-2">
+        <div class="acake-section-head">
+          <p>Professional Experience</p>
+          <h2>Where business understanding became practical</h2>
+        </div>
+
+        <p>
+          During my time with Australian Cake House / ACake (M) Sdn Bhd, I was given the
+          opportunity to contribute across different layers of the business rather than staying
+          within one narrow function. My involvement included support for bookkeeping, recruitment
+          coordination, SOP documentation, internal guides, customer communication, staff training,
+          system setup support, and outlet preparation.
+        </p>
+
+        <p>
+          This made the experience especially meaningful because it showed me that smooth operations
+          depend on much more than daily execution alone. They depend on accurate records, clear
+          workflows, reliable communication, staff readiness, service consistency, and structured systems.
+        </p>
+
+        <p>
+          The result was not only broader exposure, but also a stronger mindset around process clarity,
+          operational discipline, and learning how different parts of a business must work together.
+        </p>
+      </section>
+    </section>
+
+    <!-- CONTRIBUTION WALL -->
     <section class="glass-card detail-content-card reveal">
-      <p class="detail-section-label">Professional Experience</p>
-      <h2>Key contributions across business operations</h2>
+      <div class="acake-section-head">
+        <p>Key Contributions</p>
+        <h2>A bold map of business involvement</h2>
+      </div>
 
-      <p>
-        During my time with Australian Cake House / ACake (M) Sdn Bhd, I had the opportunity
-        to contribute to different parts of the business beyond daily store execution. My
-        involvement gradually expanded into support areas such as bookkeeping assistance,
-        staff onboarding, SOP development, internal documentation, customer communication,
-        basic marketing support, and outlet setup coordination.
-      </p>
+      <div class="acake-contribution-wall">
+        <article class="acake-card wide">
+          <span class="acake-card-index">01</span>
+          <h3>Accounting &amp; Financial Support</h3>
+          <p>
+            Assisted in daily bookkeeping and financial record management, supported sales tracking
+            and reporting processes, and gained hands-on exposure to multi-outlet financial operations
+            while learning the importance of accuracy and consistency in transaction handling.
+          </p>
+        </article>
 
-      <p>
-        This experience was valuable because it showed me how operational effectiveness is
-        not built from one department alone. It depends on accurate records, clear processes,
-        reliable communication, staff readiness, consistent service standards, and practical
-        systems that support daily work.
-      </p>
+        <article class="acake-card mid">
+          <span class="acake-card-index">02</span>
+          <h3>Human Resources &amp; Team Support</h3>
+          <p>
+            Participated in recruitment and interview coordination, contributed to onboarding support,
+            assisted in training new staff, and learned how people management aligns with operational needs.
+          </p>
+        </article>
 
-      <p>
-        Across these responsibilities, I learned how structured thinking, adaptability, and
-        teamwork contribute to smoother operations and better business continuity.
-      </p>
-    </section>
+        <article class="acake-card mid">
+          <span class="acake-card-index">03</span>
+          <h3>Operations &amp; SOP Development</h3>
+          <p>
+            Contributed to creating and refining SOPs for daily operations, order processing,
+            pricing structure, and customer service handling while learning the value of consistency and scalability.
+          </p>
+        </article>
 
-    <!-- CONTRIBUTIONS -->
-    <section class="glass-card detail-content-card reveal">
-      <p class="detail-section-label">Key Contributions</p>
-      <h2>Contribution areas grouped by practical business value</h2>
+        <article class="acake-card small">
+          <span class="acake-card-index">04</span>
+          <h3>Information Guide &amp; Internal Documentation</h3>
+          <p>
+            Assisted in developing internal guides covering company structure, communication channels,
+            and fraud awareness reference materials.
+          </p>
+        </article>
 
-      <div class="detail-metrics-grid">
+        <article class="acake-card small">
+          <span class="acake-card-index">05</span>
+          <h3>Training &amp; Knowledge Sharing</h3>
+          <p>
+            Supported staff training in customer service standards, product knowledge, and POS usage.
+          </p>
+        </article>
 
-        <div class="detail-metric-box">
-          <strong>1. Accounting &amp; Financial Support</strong>
-          <span>
-            Assisted in daily bookkeeping and financial record management, supported sales
-            tracking and basic reporting processes, and gained hands-on exposure to
-            multi-outlet financial operations while learning the importance of accuracy
-            and consistency in transaction handling.
-          </span>
-        </div>
+        <article class="acake-card small">
+          <span class="acake-card-index">06</span>
+          <h3>Customer Experience &amp; Communication</h3>
+          <p>
+            Managed communication through WhatsApp and Facebook Messenger for orders, inquiries,
+            and customer concerns.
+          </p>
+        </article>
 
-        <div class="detail-metric-box">
-          <strong>2. Human Resources &amp; Team Support</strong>
-          <span>
-            Participated in recruitment and interview coordination, contributed to basic
-            interview and onboarding improvements, assisted in training new staff, and
-            learned how people management supports operational needs and team development.
-          </span>
-        </div>
+        <article class="acake-card mid">
+          <span class="acake-card-index">07</span>
+          <h3>Marketing &amp; Customer Engagement</h3>
+          <p>
+            Supported basic marketing and customer engagement efforts, contributed ideas for reach
+            and retention, and learned how operations influence growth and experience.
+          </p>
+        </article>
 
-        <div class="detail-metric-box">
-          <strong>3. Operations &amp; SOP Development</strong>
-          <span>
-            Contributed to creating and refining Standard Operating Procedures (SOPs),
-            including workflow documentation for daily operations, order processing,
-            pricing structure, and customer service handling, while learning the value
-            of process consistency and scalability.
-          </span>
-        </div>
+        <article class="acake-card mid">
+          <span class="acake-card-index">08</span>
+          <h3>System Implementation &amp; Technical Support</h3>
+          <p>
+            Assisted in POS setup and configuration, supported troubleshooting of store-level issues,
+            and gained exposure to how standardised systems improve outlet efficiency.
+          </p>
+        </article>
 
-        <div class="detail-metric-box">
-          <strong>4. Information Guide &amp; Internal Documentation</strong>
-          <span>
-            Assisted in developing internal information guides and SOP references covering
-            company background, organisational structure, communication channels, and fraud
-            awareness guidelines, helping improve information clarity and onboarding support.
-          </span>
-        </div>
+        <article class="acake-card wide">
+          <span class="acake-card-index">09</span>
+          <h3>Outlet Setup &amp; Expansion Support</h3>
+          <p>
+            Participated in new outlet setup and preparation, including staff readiness, system setup,
+            and operational flow preparation. This included support for multiple outlet openings,
+            including shopping mall environments where coordination and launch readiness were critical.
+          </p>
+        </article>
 
-        <div class="detail-metric-box">
-          <strong>5. Training &amp; Knowledge Sharing</strong>
-          <span>
-            Supported staff training in customer service standards, product knowledge,
-            and POS system usage, while sharing practical knowledge to help team members
-            adapt more confidently to operational processes.
-          </span>
-        </div>
-
-        <div class="detail-metric-box">
-          <strong>6. Customer Experience &amp; Communication</strong>
-          <span>
-            Managed customer communication through WhatsApp and Facebook Messenger, and
-            assisted in handling orders, inquiries, complaints, and service concerns while
-            maintaining professionalism and service quality.
-          </span>
-        </div>
-
-        <div class="detail-metric-box">
-          <strong>7. Marketing &amp; Customer Engagement</strong>
-          <span>
-            Supported basic marketing and customer engagement activities, contributed ideas
-            to improve customer reach and retention, and learned how operational decisions
-            influence customer experience and business growth.
-          </span>
-        </div>
-
-        <div class="detail-metric-box">
-          <strong>8. System Implementation &amp; Technical Support</strong>
-          <span>
-            Assisted in POS system setup and configuration, supported troubleshooting of
-            store-level technical issues, and gained exposure to how system standardisation
-            improves efficiency across outlets.
-          </span>
-        </div>
-
-        <div class="detail-metric-box">
-          <strong>9. Outlet Setup &amp; Expansion Support</strong>
-          <span>
-            Participated in new outlet setup and preparation, including staff readiness,
-            system setup, and operational flow preparation, while contributing to smooth
-            launch support for multiple outlet openings, including shopping mall locations.
-          </span>
-        </div>
-
-        <div class="detail-metric-box">
-          <strong>10. Operational Problem-Solving</strong>
-          <span>
-            Assisted in handling real-world operational situations such as customer
-            complaints, equipment-related issues, and unexpected store incidents by
-            following structured response processes and staying calm under pressure.
-          </span>
-        </div>
-
+        <article class="acake-card wide">
+          <span class="acake-card-index">10</span>
+          <h3>Operational Problem-Solving</h3>
+          <p>
+            Assisted in handling real-world operational situations such as customer complaints,
+            equipment-related issues, and unexpected store incidents by following structured response
+            procedures and developing the ability to stay calm and solution-focused under pressure.
+          </p>
+        </article>
       </div>
     </section>
 
-    <!-- SUPPORTING AREAS -->
-    <section class="detail-grid">
-      <div class="detail-stack">
-        <section class="glass-card detail-learning-card reveal-delay">
-          <p class="detail-section-label">What This Experience Strengthened</p>
-          <h2>Practical skills developed through real business involvement</h2>
-
-          <ul class="detail-list">
-            <li>Structured thinking across people, process, system, and service interactions.</li>
-            <li>Administrative and operational support awareness in a multi-function environment.</li>
-            <li>Clearer understanding of SOP design, workflow documentation, and process consistency.</li>
-            <li>Professional communication in customer-facing and internal coordination situations.</li>
-            <li>Staff support, onboarding exposure, and practical team development awareness.</li>
-            <li>Adaptability and problem-solving in fast-moving operational environments.</li>
-          </ul>
-        </section>
+    <!-- SIGNAL STRIP -->
+    <section class="acake-signal-strip reveal">
+      <div class="acake-signal-main">
+        <div class="acake-section-head">
+          <p>Operational Signal</p>
+          <h2>What made this phase powerful was not one task — it was the range</h2>
+        </div>
+        <p>
+          Instead of learning from a single isolated role, I was exposed to how multiple business
+          layers interact in practice. Finance, onboarding, process control, customer communication,
+          systems support, and outlet preparation all contributed to a much more complete understanding
+          of how a business stays organised, responsive, and scalable.
+        </p>
       </div>
 
-      <div class="detail-stack">
-        <section class="glass-card detail-learning-card reveal-delay-2">
-          <p class="detail-section-label">Why This Phase Matters</p>
-          <h2>A strong operational foundation before later business and technology growth</h2>
-
-          <p>
-            This phase matters because it gave me broad exposure to how businesses actually
-            operate behind the scenes. I was able to observe and support how finance, staff,
-            customer service, internal processes, and systems connect in day-to-day execution.
-          </p>
-
-          <p>
-            More importantly, this experience shaped the way I think today. It taught me that
-            effective operations depend on structure, consistency, communication, and teamwork
-            rather than isolated effort from one role alone.
-          </p>
-
-          <p>
-            That foundation later became valuable when moving toward business, systems, and
-            technology-related thinking, because I already understood how real operational
-            environments function under practical constraints.
-          </p>
-        </section>
+      <div class="acake-signal-side">
+        <div class="acake-pill-card">
+          <strong>Process Thinking</strong>
+          <span>Learned to see operational work as connected systems rather than separate tasks.</span>
+        </div>
+        <div class="acake-pill-card">
+          <strong>Execution Discipline</strong>
+          <span>Built through real responsibilities requiring consistency, clarity, and follow-through.</span>
+        </div>
+        <div class="acake-pill-card">
+          <strong>Practical Adaptability</strong>
+          <span>Strengthened by shifting across support, communication, system, and workflow contexts.</span>
+        </div>
       </div>
     </section>
 
-    <!-- REFLECTION -->
-    <section class="glass-card detail-content-card reveal">
-      <p class="detail-section-label">Overall Reflection</p>
-      <h2>What this journey taught me</h2>
+    <!-- FINAL GRID -->
+    <section class="acake-duo-grid">
+      <section class="acake-list-card reveal-delay">
+        <div class="acake-section-head">
+          <p>What This Experience Strengthened</p>
+          <h2>Capabilities built through real involvement</h2>
+        </div>
 
-      <p>
-        Throughout this experience, I was given the opportunity to be involved in different
-        aspects of operations, ranging from administrative support to store-level execution
-        and cross-functional coordination.
-      </p>
+        <ul class="acake-list">
+          <li>Structured thinking across people, process, systems, and customer interactions.</li>
+          <li>Administrative and operational awareness in a multi-function business environment.</li>
+          <li>Better understanding of SOP design, workflow clarity, and process consistency.</li>
+          <li>Professional communication across internal coordination and customer-facing channels.</li>
+          <li>Staff support awareness through onboarding, training, and team development exposure.</li>
+          <li>Calm, practical problem-solving under real operational pressure.</li>
+        </ul>
+      </section>
 
-      <p>
-        Instead of learning from a single function only, I gradually developed an understanding
-        of how different components — people, processes, systems, and customers — work together
-        in a real business environment.
-      </p>
+      <section class="acake-reflection-card reveal-delay-2">
+        <div class="acake-section-head">
+          <p>Overall Reflection</p>
+          <h2>The foundation behind later growth</h2>
+        </div>
 
-      <p>
-        This journey helped me build a strong foundation in structured thinking, adaptability,
-        teamwork, and continuous learning, while also showing me the importance of consistency,
-        clarity, and operational discipline in business.
-      </p>
+        <p>
+          Throughout this experience, I was involved in different aspects of operations, from
+          administrative support to store-level execution and broader coordination work.
+        </p>
+
+        <p>
+          Rather than focusing on one function only, I gradually learned how people, processes,
+          systems, and customers must work together inside a real business environment.
+        </p>
+
+        <p>
+          This journey helped me develop a strong foundation in structured thinking, adaptability,
+          continuous learning, and teamwork — while also showing me why clarity, consistency,
+          and operational discipline matter so much in practice.
+        </p>
+      </section>
     </section>
 
     <div class="detail-back-row reveal">
