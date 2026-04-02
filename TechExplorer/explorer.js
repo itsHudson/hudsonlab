@@ -3,6 +3,7 @@ console.log("Technology Compass page loaded.");
 document.addEventListener("DOMContentLoaded", function () {
   initializeRevealMotion();
   initializeTechnologyCompass();
+  initializeExplorerBackgroundMotion();
 });
 
 function initializeRevealMotion() {
@@ -37,6 +38,99 @@ function initializeRevealMotion() {
   revealElements.forEach(function (element) {
     observer.observe(element);
   });
+}
+
+function initializeExplorerBackgroundMotion() {
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const radialLayers = document.querySelectorAll(".explorer-bg-radial");
+  const grid = document.querySelector(".explorer-bg-grid");
+  const sweep = document.querySelector(".explorer-bg-sweep");
+
+  if (reduceMotion) {
+    return;
+  }
+
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let animationFrameId = null;
+
+  function animate() {
+    currentX += (targetX - currentX) * 0.05;
+    currentY += (targetY - currentY) * 0.05;
+
+    radialLayers.forEach(function (layer, index) {
+      const strength = (index + 1) * 7;
+      layer.style.transform =
+        "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
+    });
+
+    if (grid) {
+      grid.style.transform =
+        "translate3d(" + (currentX * 6) + "px," + (currentY * 6) + "px,0)";
+    }
+
+    if (sweep) {
+      sweep.style.transform =
+        "translate3d(" + (currentX * 4) + "px," + (currentY * 4) + "px,0) rotate(0deg)";
+    }
+
+    const deltaX = Math.abs(targetX - currentX);
+    const deltaY = Math.abs(targetY - currentY);
+
+    if (deltaX < 0.001 && deltaY < 0.001) {
+      animationFrameId = null;
+      return;
+    }
+
+    animationFrameId = window.requestAnimationFrame(animate);
+  }
+
+  if (canHover) {
+    window.addEventListener("mousemove", function (event) {
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
+
+      targetX = (event.clientX / width - 0.5) * 2;
+      targetY = (event.clientY / height - 0.5) * 2;
+
+      if (!animationFrameId) {
+        animationFrameId = window.requestAnimationFrame(animate);
+      }
+    });
+
+    window.addEventListener("mouseleave", function () {
+      targetX = 0;
+      targetY = 0;
+
+      if (!animationFrameId) {
+        animationFrameId = window.requestAnimationFrame(animate);
+      }
+    });
+  }
+
+  let glowTicking = false;
+
+  function updateScrollEffects() {
+    const scrollY = window.scrollY || 0;
+
+    if (sweep) {
+      sweep.style.opacity = String(Math.min(0.32, 0.18 + scrollY * 0.00008));
+    }
+
+    glowTicking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!glowTicking) {
+      window.requestAnimationFrame(updateScrollEffects);
+      glowTicking = true;
+    }
+  });
+
+  updateScrollEffects();
 }
 
 function initializeTechnologyCompass() {
