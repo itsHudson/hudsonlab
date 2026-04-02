@@ -126,6 +126,11 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!canHover) {
+      return;
+    }
+
     machine.addEventListener("mousemove", function (event) {
       const rect = machine.getBoundingClientRect();
       const mouseX = event.clientX - rect.left;
@@ -152,6 +157,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function enableMagneticNodes() {
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!canHover) {
+      return;
+    }
+
     nodeCards.forEach(function (card) {
       const content = card.querySelector(".journey-node-content");
       const core = card.querySelector(".journey-node-core");
@@ -217,10 +227,106 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  function initializeJourneyBackgroundMotion() {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const glowLayers = document.querySelectorAll(".journey-bg-glow");
+    const archiveLayers = document.querySelectorAll(".journey-bg-archive-cards");
+    const signalLines = document.querySelector(".journey-bg-signal-lines");
+
+    if (reduceMotion) {
+      return;
+    }
+
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let animationFrameId = null;
+
+    function animate() {
+      currentX += (targetX - currentX) * 0.05;
+      currentY += (targetY - currentY) * 0.05;
+
+      glowLayers.forEach(function (layer, index) {
+        const strength = (index + 1) * 6;
+        layer.style.transform =
+          "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
+      });
+
+      archiveLayers.forEach(function (layer, index) {
+        const strength = (index + 1) * 4;
+        layer.style.transform =
+          "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
+      });
+
+      if (signalLines) {
+        signalLines.style.transform =
+          "translate3d(" + (currentX * 3) + "px," + (currentY * 3) + "px,0)";
+      }
+
+      const deltaX = Math.abs(targetX - currentX);
+      const deltaY = Math.abs(targetY - currentY);
+
+      if (deltaX < 0.001 && deltaY < 0.001) {
+        animationFrameId = null;
+        return;
+      }
+
+      animationFrameId = window.requestAnimationFrame(animate);
+    }
+
+    if (canHover) {
+      window.addEventListener("mousemove", function (event) {
+        const width = window.innerWidth || 1;
+        const height = window.innerHeight || 1;
+
+        targetX = (event.clientX / width - 0.5) * 2;
+        targetY = (event.clientY / height - 0.5) * 2;
+
+        if (!animationFrameId) {
+          animationFrameId = window.requestAnimationFrame(animate);
+        }
+      });
+
+      window.addEventListener("mouseleave", function () {
+        targetX = 0;
+        targetY = 0;
+
+        if (!animationFrameId) {
+          animationFrameId = window.requestAnimationFrame(animate);
+        }
+      });
+    }
+
+    let scrollTicking = false;
+    const scanLayer = document.querySelector(".journey-bg-scan");
+
+    function updateScrollEffects() {
+      const scrollY = window.scrollY || 0;
+
+      if (scanLayer) {
+        scanLayer.style.opacity = String(Math.min(0.18, 0.08 + scrollY * 0.00008));
+      }
+
+      scrollTicking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(updateScrollEffects);
+        scrollTicking = true;
+      }
+    });
+
+    updateScrollEffects();
+  }
+
   runRevealObserver();
   wireNodeInteractions();
   enableMachineTilt();
   enableMagneticNodes();
   activateDefaultNode();
   autoActivateOnScroll();
+  initializeJourneyBackgroundMotion();
 });
