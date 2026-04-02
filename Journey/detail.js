@@ -1,6 +1,11 @@
 console.log("Journey detail page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
+  initializeDetailReveal();
+  initializeDetailVisual();
+});
+
+function initializeDetailReveal() {
   const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
 
   const observer = new IntersectionObserver(
@@ -33,4 +38,19 @@ document.addEventListener("DOMContentLoaded", function () {
   revealElements.forEach(function (element) {
     observer.observe(element);
   });
-});
+}
+
+function initializeDetailVisual() {
+  if (typeof window.createJourneyDetailVisual !== "function") {
+    return;
+  }
+
+  const canvas = document.getElementById("journeyDetailCanvas");
+  if (!canvas) {
+    return;
+  }
+
+  window.__journeyDetailVisualInstance = window.createJourneyDetailVisual({
+    canvas: canvas
+  });
+}

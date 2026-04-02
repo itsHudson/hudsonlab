@@ -14,6 +14,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const insightTags = document.getElementById("insightTags");
   const insightLink = document.getElementById("insightLink");
 
+  initializeJourneyVisual();
+
+  function initializeJourneyVisual() {
+    if (typeof window.createJourneyVisual !== "function") {
+      return;
+    }
+
+    const canvas = document.getElementById("journeySystemCanvas");
+    if (!canvas) {
+      return;
+    }
+
+    window.__journeyVisualInstance = window.createJourneyVisual({
+      canvas: canvas
+    });
+  }
+
   function runRevealObserver() {
     const observer = new IntersectionObserver(
       function (entries) {
@@ -54,6 +71,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return tag;
   }
 
+  function pushJourneyMode(modeName, extra) {
+    if (
+      window.__journeyVisualInstance &&
+      typeof window.__journeyVisualInstance.setMode === "function"
+    ) {
+      window.__journeyVisualInstance.setMode(modeName, extra || {});
+    }
+  }
+
   function updateInsightPanel(card) {
     const node = card.dataset.node || "";
     const year = card.dataset.year || "";
@@ -77,6 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
     skills.forEach(function (skill) {
       insightTags.appendChild(createTagElement(skill));
     });
+
+    pushJourneyMode("node_active", { node: node });
   }
 
   function setActiveNode(card) {
@@ -109,6 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
             item.classList.add("is-dimmed");
           }
         });
+
+        const hoveredNode = card.dataset.node || "01";
+        pushJourneyMode("hover", { node: hoveredNode });
       });
 
       card.addEventListener("mouseleave", function () {
@@ -117,6 +148,13 @@ document.addEventListener("DOMContentLoaded", function () {
             item.classList.add("is-dimmed");
           }
         });
+
+        const activeCard = document.querySelector(".journey-node-card.is-active");
+        if (activeCard) {
+          pushJourneyMode("node_active", { node: activeCard.dataset.node || "01" });
+        } else {
+          pushJourneyMode("overview");
+        }
       });
     });
   }
@@ -147,12 +185,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
       machine.style.setProperty("--glow-x", mouseX + "px");
       machine.style.setProperty("--glow-y", mouseY + "px");
+
+      pushJourneyMode("machine_tilt", {
+        intensityX: (mouseX - centerX) / centerX,
+        intensityY: (mouseY - centerY) / centerY
+      });
     });
 
     machine.addEventListener("mouseleave", function () {
       machine.style.transform = "perspective(1400px) rotateX(0deg) rotateY(0deg)";
       machine.style.setProperty("--glow-x", "50%");
       machine.style.setProperty("--glow-y", "50%");
+
+      const activeCard = document.querySelector(".journey-node-card.is-active");
+      if (activeCard) {
+        pushJourneyMode("node_active", { node: activeCard.dataset.node || "01" });
+      } else {
+        pushJourneyMode("overview");
+      }
     });
   }
 
@@ -201,6 +251,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (defaultCard) {
       setActiveNode(defaultCard);
+    } else {
+      pushJourneyMode("overview");
     }
   }
 
@@ -227,106 +279,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function initializeJourneyBackgroundMotion() {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const glowLayers = document.querySelectorAll(".journey-bg-glow");
-    const archiveLayers = document.querySelectorAll(".journey-bg-archive-cards");
-    const signalLines = document.querySelector(".journey-bg-signal-lines");
-
-    if (reduceMotion) {
-      return;
-    }
-
-    let currentX = 0;
-    let currentY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let animationFrameId = null;
-
-    function animate() {
-      currentX += (targetX - currentX) * 0.05;
-      currentY += (targetY - currentY) * 0.05;
-
-      glowLayers.forEach(function (layer, index) {
-        const strength = (index + 1) * 6;
-        layer.style.transform =
-          "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
-      });
-
-      archiveLayers.forEach(function (layer, index) {
-        const strength = (index + 1) * 4;
-        layer.style.transform =
-          "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
-      });
-
-      if (signalLines) {
-        signalLines.style.transform =
-          "translate3d(" + (currentX * 3) + "px," + (currentY * 3) + "px,0)";
-      }
-
-      const deltaX = Math.abs(targetX - currentX);
-      const deltaY = Math.abs(targetY - currentY);
-
-      if (deltaX < 0.001 && deltaY < 0.001) {
-        animationFrameId = null;
-        return;
-      }
-
-      animationFrameId = window.requestAnimationFrame(animate);
-    }
-
-    if (canHover) {
-      window.addEventListener("mousemove", function (event) {
-        const width = window.innerWidth || 1;
-        const height = window.innerHeight || 1;
-
-        targetX = (event.clientX / width - 0.5) * 2;
-        targetY = (event.clientY / height - 0.5) * 2;
-
-        if (!animationFrameId) {
-          animationFrameId = window.requestAnimationFrame(animate);
-        }
-      });
-
-      window.addEventListener("mouseleave", function () {
-        targetX = 0;
-        targetY = 0;
-
-        if (!animationFrameId) {
-          animationFrameId = window.requestAnimationFrame(animate);
-        }
-      });
-    }
-
-    let scrollTicking = false;
-    const scanLayer = document.querySelector(".journey-bg-scan");
-
-    function updateScrollEffects() {
-      const scrollY = window.scrollY || 0;
-
-      if (scanLayer) {
-        scanLayer.style.opacity = String(Math.min(0.18, 0.08 + scrollY * 0.00008));
-      }
-
-      scrollTicking = false;
-    }
-
-    window.addEventListener("scroll", function () {
-      if (!scrollTicking) {
-        window.requestAnimationFrame(updateScrollEffects);
-        scrollTicking = true;
-      }
-    });
-
-    updateScrollEffects();
-  }
-
   runRevealObserver();
   wireNodeInteractions();
   enableMachineTilt();
   enableMagneticNodes();
   activateDefaultNode();
   autoActivateOnScroll();
-  initializeJourneyBackgroundMotion();
 });
