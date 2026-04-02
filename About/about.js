@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollGlow();
   initScrollShift();
   initMagneticButtons();
-  initIdentityTilt();
+  initSignatureTilt();
 });
 
 function initReveal() {
@@ -26,9 +26,10 @@ function initReveal() {
         }
 
         const isDelayed = entry.target.classList.contains("reveal-delay-1");
+
         entry.target.style.transition =
-          "opacity " + (isDelayed ? "1.05s" : "0.88s") + " ease, transform " +
-          (isDelayed ? "1.05s" : "0.88s") + " ease";
+          "opacity " + (isDelayed ? "1.05s" : "0.9s") + " ease, transform " +
+          (isDelayed ? "1.05s" : "0.9s") + " ease";
 
         entry.target.style.opacity = "1";
         entry.target.style.transform = "translateY(0)";
@@ -144,13 +145,18 @@ function initMagneticButtons() {
   });
 }
 
-function initIdentityTilt() {
-  const stage = document.querySelector(".about-identity-stage");
-  const core = document.querySelector(".about-identity-core");
-  const wordMain = document.querySelector(".about-identity-word-main");
-  const wordSide = document.querySelector(".about-identity-word-side");
+function initSignatureTilt() {
+  const stage = document.querySelector(".about-signature-stage");
+  const photo = document.querySelector(".about-signature-photo");
+  const photoWrap = document.querySelector(".about-signature-photo-wrap");
+  const primaryNote = document.querySelector(".about-identity-note-primary");
+  const secondaryNote = document.querySelector(".about-identity-note-secondary");
+  const tagRow = document.querySelector(".about-identity-tags");
+  const wordTop = document.querySelector(".about-signature-word-top");
+  const wordSide = document.querySelector(".about-signature-word-side");
+  const wordBottom = document.querySelector(".about-signature-word-bottom");
 
-  if (!stage || !core) {
+  if (!stage || !photo || !photoWrap) {
     return;
   }
 
@@ -173,7 +179,7 @@ function initIdentityTilt() {
     const translateX = ((offsetX - centerX) / centerX) * 10;
     const translateY = ((offsetY - centerY) / centerY) * 8;
 
-    core.style.transform =
+    photoWrap.style.transform =
       "translate3d(" +
       translateX +
       "px," +
@@ -184,26 +190,66 @@ function initIdentityTilt() {
       rotateY +
       "deg)";
 
-    if (wordMain) {
-      wordMain.style.transform =
-        "rotate(-90deg) translate(" + (translateX * 0.7) + "px," + (translateY * 0.5) + "px)";
+    photo.style.transform =
+      "translate3d(" + (translateX * 0.2) + "px," + (translateY * 0.2) + "px,0) scale(1.02)";
+
+    if (primaryNote) {
+      primaryNote.style.transform =
+        "translate(" + (translateX * 0.42) + "px," + (translateY * 0.34) + "px)";
+    }
+
+    if (secondaryNote) {
+      secondaryNote.style.transform =
+        "translate(" + (translateX * -0.34) + "px," + (translateY * -0.26) + "px)";
+    }
+
+    if (tagRow) {
+      tagRow.style.transform =
+        "translate(" + (translateX * 0.24) + "px," + (translateY * 0.18) + "px)";
+    }
+
+    if (wordTop) {
+      wordTop.style.transform =
+        "translate(" + (translateX * 0.18) + "px," + (translateY * 0.12) + "px)";
     }
 
     if (wordSide) {
       wordSide.style.transform =
-        "translate(" + (translateX * 0.36) + "px," + (translateY * 0.24) + "px)";
+        "rotate(90deg) translate(" + (translateX * 0.12) + "px," + (translateY * 0.12) + "px)";
+    }
+
+    if (wordBottom) {
+      wordBottom.style.transform =
+        "translate(" + (translateX * 0.14) + "px," + (translateY * 0.10) + "px)";
     }
   });
 
   stage.addEventListener("mouseleave", function () {
-    core.style.transform = "";
+    photoWrap.style.transform = "";
+    photo.style.transform = "";
 
-    if (wordMain) {
-      wordMain.style.transform = "rotate(-90deg)";
+    if (primaryNote) {
+      primaryNote.style.transform = "";
+    }
+
+    if (secondaryNote) {
+      secondaryNote.style.transform = "";
+    }
+
+    if (tagRow) {
+      tagRow.style.transform = "";
+    }
+
+    if (wordTop) {
+      wordTop.style.transform = "";
     }
 
     if (wordSide) {
-      wordSide.style.transform = "";
+      wordSide.style.transform = "rotate(90deg)";
+    }
+
+    if (wordBottom) {
+      wordBottom.style.transform = "";
     }
   });
 }

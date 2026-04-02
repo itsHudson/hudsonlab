@@ -22,14 +22,14 @@
     const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 220);
     camera.position.set(0, 0, 28);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xff8a2a, 1.0, 130);
+    const warmLight = new THREE.PointLight(0xff8a2a, 1.02, 130);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xffc471, 0.65, 120);
+    const sideLight = new THREE.PointLight(0xffc471, 0.66, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
@@ -43,7 +43,7 @@
       targetY: 0
     };
 
-    const POINT_COUNT = 132;
+    const POINT_COUNT = 128;
     const bounds = { x: 18, y: 30, z: 10 };
 
     const positions = [];
@@ -57,9 +57,9 @@
       );
 
       velocities.push(
-        (Math.random() - 0.5) * 0.0052,
-        (Math.random() - 0.5) * 0.0052,
-        (Math.random() - 0.5) * 0.0022
+        (Math.random() - 0.5) * 0.005,
+        (Math.random() - 0.5) * 0.005,
+        (Math.random() - 0.5) * 0.0021
       );
     }
 
@@ -73,7 +73,7 @@
       color: 0xff8f2c,
       size: 0.15,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.48,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -91,7 +91,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.085
+      opacity: 0.08
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -181,7 +181,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.5 && lineCount < maxLineSegments) {
+          if (distance < 4.35 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -206,10 +206,10 @@
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.00085;
+      const scrollShift = scrollOffset * -0.00084;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.00011;
+      group.rotation.y += 0.0001;
       group.rotation.x += 0.00006;
 
       group.rotation.y += mouse.x * 0.001;
