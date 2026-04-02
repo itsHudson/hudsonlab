@@ -26,11 +26,11 @@
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xff8a2a, 0.92, 130);
+    const warmLight = new THREE.PointLight(0xff8a2a, 0.95, 130);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xffc471, 0.56, 120);
+    const sideLight = new THREE.PointLight(0xffc471, 0.62, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
@@ -48,8 +48,8 @@
     let heroScrollProgress = 0;
     let heroDecompose = 0;
 
-    const POINT_COUNT = 120;
-    const bounds = { x: 18, y: 30, z: 10 };
+    const POINT_COUNT = 150;
+    const bounds = { x: 20, y: 32, z: 10 };
 
     const positions = [];
     const basePositions = [];
@@ -64,9 +64,9 @@
       basePositions.push(px, py, pz);
 
       velocities.push(
-        (Math.random() - 0.5) * 0.0048,
-        (Math.random() - 0.5) * 0.0048,
-        (Math.random() - 0.5) * 0.002
+        (Math.random() - 0.5) * 0.0064,
+        (Math.random() - 0.5) * 0.0064,
+        (Math.random() - 0.5) * 0.0023
       );
     }
 
@@ -78,9 +78,9 @@
 
     const particleMaterial = new THREE.PointsMaterial({
       color: 0xff922c,
-      size: 0.14,
+      size: 0.16,
       transparent: true,
-      opacity: 0.42,
+      opacity: 0.48,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -88,7 +88,7 @@
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     group.add(particles);
 
-    const maxLineSegments = POINT_COUNT * 5;
+    const maxLineSegments = POINT_COUNT * 6;
     const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
     const lineGeometry = new THREE.BufferGeometry();
@@ -98,7 +98,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.065
+      opacity: 0.075
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -195,14 +195,14 @@
           const point = textPoints[i % textPoints.length];
           const dx = point.x - array[idx];
           const dy = point.y - array[idx + 1];
-          array[idx] += dx * 0.0009;
-          array[idx + 1] += dy * 0.0009;
+          array[idx] += dx * 0.001;
+          array[idx + 1] += dy * 0.001;
         }
 
         const baseX = basePositions[idx];
         const baseY = basePositions[idx + 1];
-        array[idx] += (baseX - array[idx]) * 0.0008;
-        array[idx + 1] += (baseY - array[idx + 1]) * 0.0008;
+        array[idx] += (baseX - array[idx]) * 0.0007;
+        array[idx + 1] += (baseY - array[idx + 1]) * 0.0007;
       }
 
       attr.needsUpdate = true;
@@ -228,7 +228,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.15 && lineCount < maxLineSegments) {
+          if (distance < 4.4 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -253,25 +253,25 @@
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.00078;
+      const scrollShift = scrollOffset * -0.00086;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.00009;
-      group.rotation.x += 0.00005;
+      group.rotation.y += 0.00012;
+      group.rotation.x += 0.00007;
 
-      group.rotation.y += mouse.x * 0.0009;
-      group.rotation.x += -mouse.y * 0.0007;
+      group.rotation.y += mouse.x * 0.0011;
+      group.rotation.x += -mouse.y * 0.0008;
 
-      group.position.x += ((mouse.x * 0.8) + heroDecompose * 0.6 - group.position.x) * 0.02;
-      group.position.y += (((-mouse.y * 0.5) + heroScrollProgress * 0.8) - group.position.y) * 0.02;
+      group.position.x += ((mouse.x * 0.95) + heroDecompose * 0.8 - group.position.x) * 0.025;
+      group.position.y += (((-mouse.y * 0.62) + heroScrollProgress * 0.95) - group.position.y) * 0.025;
 
-      particles.rotation.z += 0.00008;
-      particles.position.x = mouse.x * 0.38;
-      particles.position.y += ((-mouse.y * 0.24) - particles.position.y) * 0.03;
+      particles.rotation.z += 0.00011;
+      particles.position.x = mouse.x * 0.48;
+      particles.position.y += ((-mouse.y * 0.32) - particles.position.y) * 0.03;
 
-      lineSegments.rotation.z -= 0.00004;
-      lineSegments.position.x += ((mouse.x * 0.20) - lineSegments.position.x) * 0.03;
-      lineSegments.position.y += ((-mouse.y * 0.14) - lineSegments.position.y) * 0.03;
+      lineSegments.rotation.z -= 0.00005;
+      lineSegments.position.x += ((mouse.x * 0.28) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * 0.20) - lineSegments.position.y) * 0.03;
 
       renderer.render(scene, camera);
     }

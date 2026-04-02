@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initHeroCompositionTilt();
   initTypewriter();
   initHeroScrollDriven();
+  initTechTagsFloat();
 });
 
 function initReveal() {
@@ -324,4 +325,27 @@ function initHeroScrollDriven() {
 
   window.addEventListener("resize", updateHeroScroll);
   updateHeroScroll();
+}
+
+function initTechTagsFloat() {
+  const tags = document.querySelectorAll(".about-tech-tag");
+  if (!tags.length) {
+    return;
+  }
+
+  let frame = 0;
+
+  function animateTags() {
+    frame += 0.02;
+
+    tags.forEach(function (tag, index) {
+      const moveY = Math.sin(frame + index * 0.7) * 6;
+      const moveX = Math.cos(frame + index * 0.5) * 4;
+      tag.style.transform = "translate(" + moveX + "px," + moveY + "px)";
+    });
+
+    window.requestAnimationFrame(animateTags);
+  }
+
+  animateTags();
 }
