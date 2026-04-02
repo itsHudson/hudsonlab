@@ -2,12 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initReveal();
   initImageParallax();
   initSystemField();
-  initAboutTyping();
   initScrollGlow();
   initScrollShift();
   initMagneticButtons();
-  initProgressRail();
-  initScrollVariable();
 });
 
 function initReveal() {
@@ -58,9 +55,6 @@ function initImageParallax() {
     const image = visual.querySelector(".about-image");
     const wordMain = visual.querySelector(".entj-word-main");
     const wordSide = visual.querySelector(".entj-word-side");
-    const wordTop = visual.querySelector(".entj-word-top");
-    const pulse1 = visual.querySelector(".entj-pulse-ring-1");
-    const pulse2 = visual.querySelector(".entj-pulse-ring-2");
 
     if (!image) {
       return;
@@ -92,27 +86,12 @@ function initImageParallax() {
 
       if (wordMain) {
         wordMain.style.transform =
-          "rotate(-90deg) translate(" + (translateX * 0.85) + "px," + (translateY * 0.6) + "px)";
+          "rotate(-90deg) translate(" + (translateX * 0.8) + "px," + (translateY * 0.6) + "px)";
       }
 
       if (wordSide) {
         wordSide.style.transform =
-          "translate(" + (translateX * 0.45) + "px," + (translateY * 0.24) + "px)";
-      }
-
-      if (wordTop) {
-        wordTop.style.transform =
-          "translate(" + (translateX * 0.18) + "px," + (translateY * 0.16) + "px)";
-      }
-
-      if (pulse1) {
-        pulse1.style.transform =
-          "translate(" + (translateX * 0.26) + "px," + (translateY * 0.26) + "px)";
-      }
-
-      if (pulse2) {
-        pulse2.style.transform =
-          "translate(" + (translateX * 0.14) + "px," + (translateY * 0.14) + "px)";
+          "translate(" + (translateX * 0.4) + "px," + (translateY * 0.22) + "px)";
       }
     });
 
@@ -125,18 +104,6 @@ function initImageParallax() {
 
       if (wordSide) {
         wordSide.style.transform = "";
-      }
-
-      if (wordTop) {
-        wordTop.style.transform = "";
-      }
-
-      if (pulse1) {
-        pulse1.style.transform = "";
-      }
-
-      if (pulse2) {
-        pulse2.style.transform = "";
       }
     });
   });
@@ -157,64 +124,6 @@ function initSystemField() {
   });
 }
 
-function initAboutTyping() {
-  const typedTarget = document.getElementById("aboutTypedText");
-  if (!typedTarget) {
-    return;
-  }
-
-  const phrases = [
-    "clarity.",
-    "structure.",
-    "reflection.",
-    "discipline.",
-    "continuous improvement."
-  ];
-
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let timeoutId = null;
-
-  function typeLoop() {
-    const currentPhrase = phrases[phraseIndex];
-
-    if (!isDeleting) {
-      charIndex += 1;
-      typedTarget.textContent = currentPhrase.slice(0, charIndex);
-
-      if (charIndex === currentPhrase.length) {
-        isDeleting = true;
-        timeoutId = window.setTimeout(typeLoop, 1200);
-        return;
-      }
-
-      timeoutId = window.setTimeout(typeLoop, 58);
-      return;
-    }
-
-    charIndex -= 1;
-    typedTarget.textContent = currentPhrase.slice(0, charIndex);
-
-    if (charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      timeoutId = window.setTimeout(typeLoop, 220);
-      return;
-    }
-
-    timeoutId = window.setTimeout(typeLoop, 32);
-  }
-
-  typeLoop();
-
-  window.addEventListener("beforeunload", function () {
-    if (timeoutId) {
-      window.clearTimeout(timeoutId);
-    }
-  });
-}
-
 function initScrollGlow() {
   const glow = document.querySelector(".about-scroll-glow");
   if (!glow) {
@@ -225,8 +134,8 @@ function initScrollGlow() {
 
   function updateGlow() {
     const scrollY = window.scrollY || 0;
-    const moveY = Math.min(60, scrollY * 0.045);
-    const opacity = Math.min(1, 0.86 + scrollY * 0.00016);
+    const moveY = Math.min(58, scrollY * 0.04);
+    const opacity = Math.min(1, 0.84 + scrollY * 0.00014);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -259,7 +168,7 @@ function initScrollShift() {
     elements.forEach(function (element) {
       const rect = element.getBoundingClientRect();
       const centerDistance = rect.top + rect.height / 2 - viewportHeight / 2;
-      const shift = Math.max(-16, Math.min(16, centerDistance * -0.035));
+      const shift = Math.max(-14, Math.min(14, centerDistance * -0.03));
       element.style.transform = "translateY(" + shift + "px)";
     });
 
@@ -299,61 +208,4 @@ function initMagneticButtons() {
       button.style.transform = "";
     });
   });
-}
-
-function initProgressRail() {
-  const dots = document.querySelectorAll(".about-progress-dot");
-  const sections = document.querySelectorAll(".about-snap-section");
-
-  if (!dots.length || !sections.length) {
-    return;
-  }
-
-  let ticking = false;
-
-  function updateActiveSection() {
-    let currentSectionId = sections[0].id;
-    let smallestDistance = Infinity;
-    const viewportCenter = window.innerHeight / 2;
-
-    sections.forEach(function (section) {
-      const rect = section.getBoundingClientRect();
-      const sectionCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(sectionCenter - viewportCenter);
-
-      if (distance < smallestDistance) {
-        smallestDistance = distance;
-        currentSectionId = section.id;
-      }
-    });
-
-    dots.forEach(function (dot) {
-      if (dot.getAttribute("data-target") === currentSectionId) {
-        dot.classList.add("is-active");
-      } else {
-        dot.classList.remove("is-active");
-      }
-    });
-
-    ticking = false;
-  }
-
-  window.addEventListener("scroll", function () {
-    if (!ticking) {
-      window.requestAnimationFrame(updateActiveSection);
-      ticking = true;
-    }
-  });
-
-  window.addEventListener("resize", updateActiveSection);
-  updateActiveSection();
-}
-
-function initScrollVariable() {
-  function updateScrollVar() {
-    document.documentElement.style.setProperty("--scroll", String(window.scrollY || 0));
-  }
-
-  window.addEventListener("scroll", updateScrollVar);
-  updateScrollVar();
 }
