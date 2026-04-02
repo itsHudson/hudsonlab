@@ -150,10 +150,6 @@ function initHeroCompositionTilt() {
   const figure = document.querySelector(".about-hero-figure");
   const figureWrap = document.querySelector(".about-hero-figure-wrap");
   const card = document.querySelector(".about-hero-main-card");
-  const nodeTop = document.querySelector(".about-hero-node-top");
-  const nodeLeft = document.querySelector(".about-hero-node-left");
-  const nodeRight = document.querySelector(".about-hero-node-right");
-  const nodeBottom = document.querySelector(".about-hero-node-bottom");
   const wordTop = document.querySelector(".about-composition-word-top");
   const wordSide = document.querySelector(".about-composition-word-side");
   const wordBottom = document.querySelector(".about-composition-word-bottom");
@@ -197,42 +193,22 @@ function initHeroCompositionTilt() {
 
     if (card) {
       card.style.transform =
-        "translate(" + (translateX * 0.34) + "px," + (translateY * 0.26) + "px)";
-    }
-
-    if (nodeTop) {
-      nodeTop.style.transform =
-        "translateX(-50%) translate(" + (translateX * 0.12) + "px," + (translateY * 0.16) + "px)";
-    }
-
-    if (nodeLeft) {
-      nodeLeft.style.transform =
-        "translateY(-50%) translate(" + (translateX * 0.16) + "px," + (translateY * 0.10) + "px)";
-    }
-
-    if (nodeRight) {
-      nodeRight.style.transform =
-        "translateY(-50%) translate(" + (translateX * -0.14) + "px," + (translateY * 0.10) + "px)";
-    }
-
-    if (nodeBottom) {
-      nodeBottom.style.transform =
-        "translateX(-50%) translate(" + (translateX * 0.10) + "px," + (translateY * -0.14) + "px)";
+        "translate(" + (translateX * 0.22) + "px," + (translateY * 0.18) + "px)";
     }
 
     if (wordTop) {
       wordTop.style.transform =
-        "translate(" + (translateX * 0.14) + "px," + (translateY * 0.10) + "px)";
+        "translate(" + (translateX * 0.12) + "px," + (translateY * 0.08) + "px)";
     }
 
     if (wordSide) {
       wordSide.style.transform =
-        "rotate(90deg) translate(" + (translateX * 0.10) + "px," + (translateY * 0.12) + "px)";
+        "rotate(90deg) translate(" + (translateX * 0.1) + "px," + (translateY * 0.1) + "px)";
     }
 
     if (wordBottom) {
       wordBottom.style.transform =
-        "translate(" + (translateX * 0.10) + "px," + (translateY * 0.08) + "px)";
+        "translate(" + (translateX * 0.1) + "px," + (translateY * 0.08) + "px)";
     }
   });
 
@@ -242,22 +218,6 @@ function initHeroCompositionTilt() {
 
     if (card) {
       card.style.transform = "";
-    }
-
-    if (nodeTop) {
-      nodeTop.style.transform = "translateX(-50%)";
-    }
-
-    if (nodeLeft) {
-      nodeLeft.style.transform = "translateY(-50%)";
-    }
-
-    if (nodeRight) {
-      nodeRight.style.transform = "translateY(-50%)";
-    }
-
-    if (nodeBottom) {
-      nodeBottom.style.transform = "translateX(-50%)";
     }
 
     if (wordTop) {
