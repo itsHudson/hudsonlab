@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Connect | HUDSONLAB</title>
 
   <link rel="stylesheet" href="../css/global.css" />
@@ -11,8 +10,9 @@
 </head>
 <body data-page="contact">
   <div class="contact-bg-base"></div>
+  <div class="contact-bg-grid"></div>
   <div class="contact-bg-noise"></div>
-  <div class="contact-bg-scan"></div>
+  <div class="contact-bg-vignette"></div>
 
   <div class="contact-system-canvas-wrap" aria-hidden="true">
     <canvas id="contactBgCanvas"></canvas>
@@ -21,63 +21,116 @@
   <div id="header"></div>
 
   <main class="page-shell contact-page-shell">
-    <span class="small-chip">Connect</span>
+    <section class="contact-hero reveal">
+      <p class="contact-kicker">
+        <span class="contact-kicker-dot"></span>
+        SIGNAL RELAY
+      </p>
 
-    <h1 class="page-title">
-      Start a Meaningful Conversation
-    </h1>
+      <h1 class="page-title contact-title">
+        Open channel. Clear intent. Meaningful connection.
+      </h1>
 
-    <p class="page-subtitle">
-      Whether for collaboration, professional discussion,
-      or future opportunities, this space is open for
-      meaningful connections and thoughtful conversations.
-    </p>
+      <p class="page-subtitle contact-subtitle">
+        Whether for collaboration, thoughtful discussion, or future opportunities,
+        this page acts as a transmission chamber where conversation begins with clarity.
+      </p>
+    </section>
+
+    <section class="contact-relay-panel reveal-delay">
+      <div class="contact-relay-copy">
+        <p class="contact-panel-label">Relay Architecture</p>
+        <h2>Three channels. One signal source.</h2>
+        <p>
+          Each route is designed for a different kind of connection. Hover a channel
+          to activate its signal path and bring that receiver into focus.
+        </p>
+      </div>
+
+      <div class="contact-relay-meta">
+        <div class="contact-meta-box">
+          <strong>03</strong>
+          <span>active receiver channels</span>
+        </div>
+        <div class="contact-meta-box">
+          <strong>Live</strong>
+          <span>reactive signal field background</span>
+        </div>
+      </div>
+    </section>
 
     <section class="contact-grid">
       <article class="glass-card contact-card reveal" data-contact-card="email">
-        <div class="contact-card-signal"></div>
+        <div class="contact-card-frame"></div>
+        <div class="contact-card-orb"></div>
+
         <div class="contact-card-inner">
           <p class="contact-card-label">Direct Channel</p>
           <h3>Email</h3>
           <p class="contact-card-copy">
-            The clearest route for thoughtful conversations,
-            project discussions, and professional enquiries.
+            The strongest route for project discussions, professional enquiries,
+            and intentional conversation.
           </p>
-          <a href="mailto:hudson.officer23@gmail.com">
+
+          <a class="contact-link" href="mailto:hudson.officer23@gmail.com">
             hudson.officer23@gmail.com
           </a>
         </div>
       </article>
 
       <article class="glass-card contact-card reveal-delay" data-contact-card="linkedin">
-        <div class="contact-card-signal"></div>
+        <div class="contact-card-frame"></div>
+        <div class="contact-card-orb"></div>
+
         <div class="contact-card-inner">
           <p class="contact-card-label">Professional Presence</p>
           <h3>LinkedIn Presence</h3>
           <p class="contact-card-copy">
-            A space for professional visibility, background,
+            A professional surface for visibility, positioning,
             and long-form career connection.
           </p>
-          <a href="https://www.linkedin.com/in/hudsonc200/" target="_blank" rel="noopener noreferrer">
+
+          <a
+            class="contact-link"
+            href="https://www.linkedin.com/in/hudsonc200/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             linkedin.com/in/hudsonc200
           </a>
         </div>
       </article>
 
       <article class="glass-card contact-card reveal-delay-2" data-contact-card="github">
-        <div class="contact-card-signal"></div>
+        <div class="contact-card-frame"></div>
+        <div class="contact-card-orb"></div>
+
         <div class="contact-card-inner">
           <p class="contact-card-label">Code Channel</p>
           <h3>GitHub Profile</h3>
           <p class="contact-card-copy">
-            A public layer of repositories, technical work,
-            and evolving implementation.
+            A public layer of repositories, experiments,
+            and evolving technical implementation.
           </p>
-          <a href="https://github.com/itsHudson" target="_blank" rel="noopener noreferrer">
+
+          <a
+            class="contact-link"
+            href="https://github.com/itsHudson"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             github.com/itsHudson
           </a>
         </div>
       </article>
+    </section>
+
+    <section class="contact-bottom-band reveal-delay-2">
+      <p class="contact-bottom-label">Transmission Logic</p>
+      <p class="contact-bottom-copy">
+        This page is designed as a live contact chamber rather than a static list.
+        The background system responds to channel focus, making each connection route feel intentional.
+      </p>
     </section>
   </main>
 

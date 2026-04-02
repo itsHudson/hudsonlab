@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  function createContactSignalField(options) {
+  function createContactQuantumRelay(options) {
     if (!options || !options.canvas || typeof THREE === "undefined") {
       return null;
     }
@@ -21,21 +21,38 @@
 
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 300);
-    camera.position.set(0, 0, 22);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 400);
+    camera.position.set(0, 0, 24);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.46);
+    scene.add(ambientLight);
+
+    const cyanLight = new THREE.PointLight(0x6ceaff, 2.4, 220);
+    cyanLight.position.set(16, 10, 30);
+    scene.add(cyanLight);
+
+    const violetLight = new THREE.PointLight(0x8f68ff, 2.0, 220);
+    violetLight.position.set(-18, -10, 24);
+    scene.add(violetLight);
+
+    const amberLight = new THREE.PointLight(0xffa248, 1.5, 180);
+    amberLight.position.set(0, 14, 18);
+    scene.add(amberLight);
 
     const masterGroup = new THREE.Group();
     scene.add(masterGroup);
 
-    const shaderGroup = new THREE.Group();
+    const coreGroup = new THREE.Group();
     const particleGroup = new THREE.Group();
-    const ringGroup = new THREE.Group();
-    const nodeGroup = new THREE.Group();
+    const lineGroup = new THREE.Group();
+    const shardGroup = new THREE.Group();
+    const beaconGroup = new THREE.Group();
 
-    masterGroup.add(shaderGroup);
+    masterGroup.add(coreGroup);
     masterGroup.add(particleGroup);
-    masterGroup.add(ringGroup);
-    masterGroup.add(nodeGroup);
+    masterGroup.add(lineGroup);
+    masterGroup.add(shardGroup);
+    masterGroup.add(beaconGroup);
 
     const mouse = {
       x: 0,
@@ -48,100 +65,120 @@
     let currentMode = "overview";
 
     /* =========================
-       SHADER PLANE
+       QUANTUM CORE
        ========================= */
 
-    const shaderUniforms = {
-      uTime: { value: 0 },
-      uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-      uAccentMix: { value: 0.0 },
-      uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
-    };
-
-    const shaderMaterial = new THREE.ShaderMaterial({
+    const coreSphereGeometry = new THREE.IcosahedronGeometry(1.65, 1);
+    const coreSphereMaterial = new THREE.MeshBasicMaterial({
+      color: 0x6ceaff,
+      wireframe: true,
       transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      uniforms: shaderUniforms,
-      vertexShader: `
-        varying vec2 vUv;
-
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec2 vUv;
-
-        uniform float uTime;
-        uniform vec2 uMouse;
-        uniform float uAccentMix;
-        uniform vec2 uResolution;
-
-        float circle(vec2 uv, vec2 center, float radius, float blur) {
-          float d = length(uv - center);
-          return smoothstep(radius + blur, radius, d);
-        }
-
-        float ring(vec2 uv, vec2 center, float radius, float width) {
-          float d = length(uv - center);
-          return smoothstep(radius + width, radius, d) - smoothstep(radius, radius - width, d);
-        }
-
-        void main() {
-          vec2 uv = vUv;
-          vec2 centered = uv - 0.5;
-
-          float t = uTime * 0.22;
-
-          vec2 warped = centered;
-          warped.x += sin((uv.y * 8.0) + t) * 0.03;
-          warped.y += cos((uv.x * 7.0) - t * 1.2) * 0.03;
-
-          float waveA = 0.0;
-          waveA += ring(uv, vec2(0.5, 0.5), 0.16 + sin(t) * 0.01, 0.008);
-          waveA += ring(uv, vec2(0.5, 0.5), 0.28 + cos(t * 0.9) * 0.01, 0.006);
-          waveA += ring(uv, vec2(0.5, 0.5), 0.42 + sin(t * 0.7) * 0.01, 0.004);
-
-          float mouseField = circle(uv, uMouse, 0.16, 0.24);
-          float portal = circle(uv, vec2(0.5, 0.5), 0.20, 0.28);
-          float plasma = 0.0;
-
-          plasma += sin((warped.x * 12.0) + t * 1.4) * 0.5 + 0.5;
-          plasma += cos((warped.y * 15.0) - t * 1.2) * 0.5 + 0.5;
-          plasma += sin((length(centered) * 30.0) - t * 2.0) * 0.5 + 0.5;
-          plasma /= 3.0;
-
-          vec3 cyan = vec3(0.32, 0.92, 1.00);
-          vec3 violet = vec3(0.44, 0.36, 1.00);
-          vec3 amber = vec3(1.00, 0.64, 0.30);
-
-          vec3 color = mix(cyan, violet, plasma * 0.6);
-          color = mix(color, amber, uAccentMix * 0.55);
-
-          float glow = portal * 0.42 + mouseField * 0.28 + waveA * 1.2;
-          glow += plasma * 0.08;
-
-          gl_FragColor = vec4(color * glow, glow * 0.38);
-        }
-      `
+      opacity: 0.34
     });
 
-    const shaderPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(42, 28, 1, 1),
-      shaderMaterial
+    const coreSphere = new THREE.Mesh(coreSphereGeometry, coreSphereMaterial);
+    coreGroup.add(coreSphere);
+
+    const innerSphereGeometry = new THREE.SphereGeometry(0.72, 24, 24);
+    const innerSphereMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.2
+    });
+
+    const innerSphere = new THREE.Mesh(innerSphereGeometry, innerSphereMaterial);
+    coreGroup.add(innerSphere);
+
+    const torusA = new THREE.Mesh(
+      new THREE.TorusGeometry(3.2, 0.06, 18, 200),
+      new THREE.MeshBasicMaterial({
+        color: 0x6ceaff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.22
+      })
     );
-    shaderPlane.position.z = -10;
-    shaderGroup.add(shaderPlane);
+    torusA.rotation.x = 1.18;
+    coreGroup.add(torusA);
+
+    const torusB = new THREE.Mesh(
+      new THREE.TorusGeometry(4.9, 0.05, 18, 200),
+      new THREE.MeshBasicMaterial({
+        color: 0x8f68ff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.18
+      })
+    );
+    torusB.rotation.y = 0.9;
+    torusB.rotation.x = 0.38;
+    coreGroup.add(torusB);
+
+    const torusC = new THREE.Mesh(
+      new THREE.TorusGeometry(6.8, 0.04, 18, 200),
+      new THREE.MeshBasicMaterial({
+        color: 0xffa248,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.10
+      })
+    );
+    torusC.rotation.x = 1.36;
+    torusC.rotation.z = 0.6;
+    coreGroup.add(torusC);
+
+    /* =========================
+       RECEIVER BEACONS
+       ========================= */
+
+    const beaconPositions = [
+      new THREE.Vector3(-8.6, -2.2, 1.4),
+      new THREE.Vector3(0, 5.4, -1.0),
+      new THREE.Vector3(8.8, -2.1, 1.6)
+    ];
+
+    const beaconColors = [0x6ceaff, 0x8f68ff, 0xffa248];
+    const beacons = [];
+
+    beaconPositions.forEach(function (position, index) {
+      const orb = new THREE.Mesh(
+        new THREE.SphereGeometry(0.22, 14, 14),
+        new THREE.MeshBasicMaterial({
+          color: beaconColors[index],
+          transparent: true,
+          opacity: 0.95
+        })
+      );
+      orb.position.copy(position);
+      beaconGroup.add(orb);
+
+      const halo = new THREE.Mesh(
+        new THREE.RingGeometry(0.42, 0.52, 48),
+        new THREE.MeshBasicMaterial({
+          color: beaconColors[index],
+          transparent: true,
+          opacity: 0.26,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      halo.position.copy(position);
+      halo.lookAt(camera.position);
+      beaconGroup.add(halo);
+
+      beacons.push({
+        orb: orb,
+        halo: halo
+      });
+    });
 
     /* =========================
        PARTICLES
        ========================= */
 
-    const POINT_COUNT = window.innerWidth <= 640 ? 240 : 520;
+    const POINT_COUNT = window.innerWidth <= 640 ? 280 : 620;
     const CONNECTION_LIMIT = POINT_COUNT * 6;
-    const BOUNDS = { x: 26, y: 18, z: 16 };
+    const BOUNDS = { x: 22, y: 15, z: 16 };
 
     const positions = new Float32Array(POINT_COUNT * 3);
     const basePositions = new Float32Array(POINT_COUNT * 3);
@@ -151,9 +188,14 @@
     for (let i = 0; i < POINT_COUNT; i++) {
       const i3 = i * 3;
 
-      const px = (Math.random() - 0.5) * BOUNDS.x * 2;
-      const py = (Math.random() - 0.5) * BOUNDS.y * 2;
-      const pz = (Math.random() - 0.5) * BOUNDS.z * 2;
+      const radius = 6 + Math.random() * 13;
+      const angle = Math.random() * Math.PI * 2;
+      const spreadY = (Math.random() - 0.5) * 22;
+      const depth = (Math.random() - 0.5) * BOUNDS.z * 2;
+
+      const px = Math.cos(angle) * radius + (Math.random() - 0.5) * 6;
+      const py = spreadY;
+      const pz = depth;
 
       positions[i3] = px;
       positions[i3 + 1] = py;
@@ -163,24 +205,23 @@
       basePositions[i3 + 1] = py;
       basePositions[i3 + 2] = pz;
 
-      velocities[i3] = (Math.random() - 0.5) * 0.014;
-      velocities[i3 + 1] = (Math.random() - 0.5) * 0.014;
+      velocities[i3] = (Math.random() - 0.5) * 0.016;
+      velocities[i3 + 1] = (Math.random() - 0.5) * 0.016;
       velocities[i3 + 2] = (Math.random() - 0.5) * 0.008;
 
       const mixMode = Math.random();
-
-      if (mixMode < 0.5) {
+      if (mixMode < 0.48) {
         colors[i3] = 0.42;
-        colors[i3 + 1] = 0.93;
+        colors[i3 + 1] = 0.92;
         colors[i3 + 2] = 1.0;
       } else if (mixMode < 0.82) {
-        colors[i3] = 0.44;
-        colors[i3 + 1] = 0.36;
+        colors[i3] = 0.56;
+        colors[i3 + 1] = 0.41;
         colors[i3 + 2] = 1.0;
       } else {
         colors[i3] = 1.0;
         colors[i3 + 1] = 0.66;
-        colors[i3 + 2] = 0.32;
+        colors[i3 + 2] = 0.34;
       }
     }
 
@@ -192,14 +233,14 @@
       size: 0.13,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.86,
+      opacity: 0.88,
       depthWrite: false,
       vertexColors: true,
       blending: THREE.AdditiveBlending
     });
 
-    const particles = new THREE.Points(particleGeometry, particleMaterial);
-    particleGroup.add(particles);
+    const particlePoints = new THREE.Points(particleGeometry, particleMaterial);
+    particleGroup.add(particlePoints);
 
     const linePositions = new Float32Array(CONNECTION_LIMIT * 6);
     const lineColors = new Float32Array(CONNECTION_LIMIT * 6);
@@ -216,103 +257,112 @@
       blending: THREE.AdditiveBlending
     });
 
-    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-    particleGroup.add(lines);
+    const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+    lineGroup.add(lineSegments);
 
     /* =========================
-       SIGNAL RINGS
+       SHARDS
        ========================= */
 
-    const ringConfigs = [
-      { radius: 3.6, color: 0x68e9ff, opacity: 0.22, speed: 0.006 },
-      { radius: 5.4, color: 0x7157ff, opacity: 0.18, speed: -0.0044 },
-      { radius: 7.8, color: 0xffa248, opacity: 0.10, speed: 0.0028 }
+    const shards = [];
+    const shardGeometries = [
+      new THREE.BoxGeometry(0.05, 1.9, 0.72),
+      new THREE.BoxGeometry(0.72, 0.05, 1.9),
+      new THREE.OctahedronGeometry(0.36, 0)
     ];
 
-    const rings = ringConfigs.map(function (config) {
-      const geometry = new THREE.TorusGeometry(config.radius, 0.04, 16, 160);
+    for (let i = 0; i < 18; i++) {
+      const geometry = shardGeometries[i % shardGeometries.length];
       const material = new THREE.MeshBasicMaterial({
-        color: config.color,
+        color: i % 3 === 0 ? 0x6ceaff : i % 3 === 1 ? 0x8f68ff : 0xffa248,
+        wireframe: true,
         transparent: true,
-        opacity: config.opacity,
-        wireframe: true
+        opacity: 0.16
       });
 
       const mesh = new THREE.Mesh(geometry, material);
-      mesh.rotation.x = 1.16;
-      mesh.rotation.y = Math.random() * Math.PI;
-      ringGroup.add(mesh);
+      mesh.position.set(
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 14,
+        (Math.random() - 0.5) * 16
+      );
+      mesh.rotation.set(
+        Math.random() * Math.PI,
+        Math.random() * Math.PI,
+        Math.random() * Math.PI
+      );
+      shardGroup.add(mesh);
 
-      return {
+      shards.push({
         mesh: mesh,
-        speed: config.speed
-      };
-    });
+        driftX: (Math.random() - 0.5) * 0.009,
+        driftY: (Math.random() - 0.5) * 0.009,
+        driftZ: (Math.random() - 0.5) * 0.006,
+        rotX: (Math.random() - 0.5) * 0.018,
+        rotY: (Math.random() - 0.5) * 0.018,
+        rotZ: (Math.random() - 0.5) * 0.018
+      });
+    }
 
     /* =========================
-       GLOW NODES
+       MODES
        ========================= */
-
-    const nodeGeometry = new THREE.SphereGeometry(0.16, 10, 10);
-    const nodeConfigs = [
-      { x: -6.4, y: -2.2, z: 1, color: 0x68e9ff },
-      { x: 0.0, y: 3.2, z: 0, color: 0x7157ff },
-      { x: 6.8, y: -1.8, z: 1.4, color: 0xffa248 }
-    ];
-
-    const nodes = nodeConfigs.map(function (config) {
-      const material = new THREE.MeshBasicMaterial({
-        color: config.color,
-        transparent: true,
-        opacity: 0.9
-      });
-
-      const node = new THREE.Mesh(nodeGeometry, material);
-      node.position.set(config.x, config.y, config.z);
-      nodeGroup.add(node);
-
-      return node;
-    });
-
-    const clock = new THREE.Clock();
-    let animationFrameId = null;
 
     const modeProfiles = {
       overview: {
-        accentMix: 0.12,
-        particleOpacity: 0.84,
-        lineOpacity: 0.16,
-        lineDistance: 2.6,
+        connectionDistance: 2.8,
+        lineOpacity: 0.18,
+        particleOpacity: 0.86,
         ringScale: 1,
-        ringOpacity: 0.18
+        ringOpacityA: 0.22,
+        ringOpacityB: 0.18,
+        ringOpacityC: 0.10,
+        shardOpacity: 0.16,
+        coreGlow: 0.20,
+        activeBeacon: -1
       },
       email: {
-        accentMix: 0.24,
-        particleOpacity: 0.9,
+        connectionDistance: 3.2,
         lineOpacity: 0.24,
-        lineDistance: 3.0,
-        ringScale: 1.06,
-        ringOpacity: 0.22
+        particleOpacity: 0.94,
+        ringScale: 1.05,
+        ringOpacityA: 0.28,
+        ringOpacityB: 0.18,
+        ringOpacityC: 0.10,
+        shardOpacity: 0.20,
+        coreGlow: 0.26,
+        activeBeacon: 0
       },
       linkedin: {
-        accentMix: 0.05,
-        particleOpacity: 0.88,
-        lineOpacity: 0.20,
-        lineDistance: 2.8,
+        connectionDistance: 3.0,
+        lineOpacity: 0.22,
+        particleOpacity: 0.90,
         ringScale: 1.04,
-        ringOpacity: 0.20
+        ringOpacityA: 0.20,
+        ringOpacityB: 0.26,
+        ringOpacityC: 0.12,
+        shardOpacity: 0.18,
+        coreGlow: 0.23,
+        activeBeacon: 1
       },
       github: {
-        accentMix: 0.18,
-        particleOpacity: 0.94,
+        connectionDistance: 3.35,
         lineOpacity: 0.26,
-        lineDistance: 3.1,
+        particleOpacity: 0.96,
         ringScale: 1.08,
-        ringOpacity: 0.24
+        ringOpacityA: 0.20,
+        ringOpacityB: 0.16,
+        ringOpacityC: 0.22,
+        shardOpacity: 0.22,
+        coreGlow: 0.28,
+        activeBeacon: 2
       }
     };
 
     let modeTarget = modeProfiles.overview;
+
+    const clock = new THREE.Clock();
+    let animationFrameId = null;
 
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", onMouseMove);
@@ -326,8 +376,6 @@
       renderer.setSize(window.innerWidth, window.innerHeight, false);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-
-      shaderUniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
     }
 
     function onMouseMove(event) {
@@ -336,17 +384,11 @@
 
       mouse.targetX = (event.clientX / width - 0.5) * 2;
       mouse.targetY = (event.clientY / height - 0.5) * 2;
-
-      shaderUniforms.uMouse.value.set(
-        event.clientX / width,
-        1 - event.clientY / height
-      );
     }
 
     function onMouseLeave() {
       mouse.targetX = 0;
       mouse.targetY = 0;
-      shaderUniforms.uMouse.value.set(0.5, 0.5);
     }
 
     function onScroll() {
@@ -376,12 +418,12 @@
           velocities[i3 + 2] *= -1;
         }
 
-        const pulse = Math.sin(elapsed * 0.5 + i * 0.012) * 0.0024;
-        arr[i3] += pulse;
-        arr[i3 + 1] += pulse * 0.8;
+        const swirl = Math.sin(elapsed * 0.42 + i * 0.011) * 0.0024;
+        arr[i3] += swirl;
+        arr[i3 + 1] += swirl * 0.7;
 
-        arr[i3] += (basePositions[i3] - arr[i3]) * 0.00036;
-        arr[i3 + 1] += (basePositions[i3 + 1] - arr[i3 + 1]) * 0.00036;
+        arr[i3] += (basePositions[i3] - arr[i3]) * 0.00032;
+        arr[i3 + 1] += (basePositions[i3 + 1] - arr[i3 + 1]) * 0.00032;
       }
 
       particleMaterial.opacity += (modeTarget.particleOpacity - particleMaterial.opacity) * 0.05;
@@ -409,7 +451,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < modeTarget.lineDistance && lineCount < CONNECTION_LIMIT) {
+          if (distance < modeTarget.connectionDistance && lineCount < CONNECTION_LIMIT) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -417,14 +459,14 @@
             linePositions[writeIndex++] = by;
             linePositions[writeIndex++] = bz;
 
-            const strength = 1 - distance / modeTarget.lineDistance;
+            const strength = 1 - distance / modeTarget.connectionDistance;
 
             lineColors[colorIndex++] = 0.42 * strength;
-            lineColors[colorIndex++] = 0.93 * strength;
+            lineColors[colorIndex++] = 0.92 * strength;
             lineColors[colorIndex++] = 1.0 * strength;
 
-            lineColors[colorIndex++] = 0.44 * strength;
-            lineColors[colorIndex++] = 0.36 * strength;
+            lineColors[colorIndex++] = 0.56 * strength;
+            lineColors[colorIndex++] = 0.41 * strength;
             lineColors[colorIndex++] = 1.0 * strength;
 
             lineCount += 2;
@@ -438,21 +480,65 @@
       lineGeometry.attributes.color.needsUpdate = true;
     }
 
-    function updateRings() {
-      rings.forEach(function (ring) {
-        ring.mesh.rotation.z += ring.speed;
-        ring.mesh.scale.lerp(
-          new THREE.Vector3(modeTarget.ringScale, modeTarget.ringScale, modeTarget.ringScale),
-          0.05
-        );
-        ring.mesh.material.opacity += (modeTarget.ringOpacity - ring.mesh.material.opacity) * 0.05;
+    function updateCore(elapsed) {
+      coreSphere.rotation.x += 0.0042;
+      coreSphere.rotation.y += 0.0056;
+      coreSphere.rotation.z += 0.0034;
+
+      innerSphere.scale.setScalar(1 + Math.sin(elapsed * 2.2) * 0.08);
+      innerSphereMaterial.opacity += (modeTarget.coreGlow - innerSphereMaterial.opacity) * 0.05;
+
+      const ringScale = modeTarget.ringScale;
+      torusA.scale.lerp(new THREE.Vector3(ringScale, ringScale, ringScale), 0.05);
+      torusB.scale.lerp(new THREE.Vector3(ringScale, ringScale, ringScale), 0.05);
+      torusC.scale.lerp(new THREE.Vector3(ringScale, ringScale, ringScale), 0.05);
+
+      torusA.material.opacity += (modeTarget.ringOpacityA - torusA.material.opacity) * 0.05;
+      torusB.material.opacity += (modeTarget.ringOpacityB - torusB.material.opacity) * 0.05;
+      torusC.material.opacity += (modeTarget.ringOpacityC - torusC.material.opacity) * 0.05;
+
+      torusA.rotation.z += 0.0052;
+      torusB.rotation.y -= 0.0042;
+      torusC.rotation.x += 0.0026;
+    }
+
+    function updateShards() {
+      shards.forEach(function (item) {
+        item.mesh.position.x += item.driftX;
+        item.mesh.position.y += item.driftY;
+        item.mesh.position.z += item.driftZ;
+
+        item.mesh.rotation.x += item.rotX;
+        item.mesh.rotation.y += item.rotY;
+        item.mesh.rotation.z += item.rotZ;
+
+        if (item.mesh.position.x > 13 || item.mesh.position.x < -13) {
+          item.driftX *= -1;
+        }
+
+        if (item.mesh.position.y > 10 || item.mesh.position.y < -10) {
+          item.driftY *= -1;
+        }
+
+        if (item.mesh.position.z > 12 || item.mesh.position.z < -12) {
+          item.driftZ *= -1;
+        }
+
+        item.mesh.material.opacity += (modeTarget.shardOpacity - item.mesh.material.opacity) * 0.05;
       });
     }
 
-    function updateNodes(elapsed) {
-      nodes.forEach(function (node, index) {
-        node.position.z = Math.sin(elapsed * 1.4 + index * 0.8) * 0.8;
-        node.scale.setScalar(1 + Math.sin(elapsed * 2.1 + index) * 0.14);
+    function updateBeacons(elapsed) {
+      beacons.forEach(function (beacon, index) {
+        const isActive = index === modeTarget.activeBeacon;
+        const pulse = 1 + Math.sin(elapsed * 3.0 + index) * 0.12;
+
+        beacon.orb.scale.setScalar(isActive ? pulse * 1.4 : pulse * 0.92);
+        beacon.halo.scale.setScalar(isActive ? 1.22 : 1.0);
+        beacon.halo.lookAt(camera.position);
+
+        beacon.orb.material.opacity += ((isActive ? 1.0 : 0.62) - beacon.orb.material.opacity) * 0.08;
+        beacon.halo.material.opacity += ((isActive ? 0.44 : 0.18) - beacon.halo.material.opacity) * 0.08;
       });
     }
 
@@ -464,25 +550,23 @@
       mouse.x += (mouse.targetX - mouse.x) * 0.045;
       mouse.y += (mouse.targetY - mouse.y) * 0.045;
 
-      shaderUniforms.uTime.value = elapsed;
-      shaderUniforms.uAccentMix.value += (modeTarget.accentMix - shaderUniforms.uAccentMix.value) * 0.04;
-
       updateParticles(elapsed);
       updateConnections();
-      updateRings();
-      updateNodes(elapsed);
+      updateCore(elapsed);
+      updateShards();
+      updateBeacons(elapsed);
 
-      const scrollShift = scrollOffset * -0.0004;
+      const scrollShift = scrollOffset * -0.00035;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      masterGroup.rotation.y += 0.00035;
-      masterGroup.rotation.x += 0.00014;
+      masterGroup.rotation.y += 0.00042;
+      masterGroup.rotation.x += 0.00018;
 
-      masterGroup.rotation.y += mouse.x * 0.0042;
-      masterGroup.rotation.x += -mouse.y * 0.0032;
+      masterGroup.rotation.y += mouse.x * 0.0044;
+      masterGroup.rotation.x += -mouse.y * 0.0034;
 
-      masterGroup.position.x += ((mouse.x * 3.8) - masterGroup.position.x) * 0.04;
-      masterGroup.position.y += (((-mouse.y * 2.8)) - masterGroup.position.y) * 0.04;
+      masterGroup.position.x += ((mouse.x * 3.4) - masterGroup.position.x) * 0.04;
+      masterGroup.position.y += (((-mouse.y * 2.6)) - masterGroup.position.y) * 0.04;
 
       renderer.render(scene, camera);
     }
@@ -524,5 +608,5 @@
     };
   }
 
-  window.createContactSignalField = createContactSignalField;
+  window.createContactQuantumRelay = createContactQuantumRelay;
 })();

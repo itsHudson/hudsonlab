@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   initializeContactReveal();
   initializeContactVisual();
-  initializeContactCardSignals();
+  initializeContactInteractions();
 });
 
 function initializeContactReveal() {
@@ -42,7 +42,7 @@ function initializeContactReveal() {
 }
 
 function initializeContactVisual() {
-  if (typeof window.createContactSignalField !== "function") {
+  if (typeof window.createContactQuantumRelay !== "function") {
     return;
   }
 
@@ -51,12 +51,12 @@ function initializeContactVisual() {
     return;
   }
 
-  window.__contactSignalFieldInstance = window.createContactSignalField({
+  window.__contactQuantumRelayInstance = window.createContactQuantumRelay({
     canvas: canvas
   });
 }
 
-function initializeContactCardSignals() {
+function initializeContactInteractions() {
   const cards = document.querySelectorAll(".contact-card");
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -66,23 +66,42 @@ function initializeContactCardSignals() {
 
   cards.forEach(function (card) {
     card.addEventListener("mouseenter", function () {
-      const mode = card.getAttribute("data-contact-card") || "default";
+      const mode = card.getAttribute("data-contact-card") || "overview";
 
       if (
-        window.__contactSignalFieldInstance &&
-        typeof window.__contactSignalFieldInstance.setMode === "function"
+        window.__contactQuantumRelayInstance &&
+        typeof window.__contactQuantumRelayInstance.setMode === "function"
       ) {
-        window.__contactSignalFieldInstance.setMode(mode);
+        window.__contactQuantumRelayInstance.setMode(mode);
       }
     });
 
     card.addEventListener("mouseleave", function () {
       if (
-        window.__contactSignalFieldInstance &&
-        typeof window.__contactSignalFieldInstance.setMode === "function"
+        window.__contactQuantumRelayInstance &&
+        typeof window.__contactQuantumRelayInstance.setMode === "function"
       ) {
-        window.__contactSignalFieldInstance.setMode("overview");
+        window.__contactQuantumRelayInstance.setMode("overview");
       }
+    });
+
+    card.addEventListener("mousemove", function (event) {
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = -((y - centerY) / centerY) * 5;
+
+      card.style.transform =
+        "translateY(-6px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+    });
+
+    card.addEventListener("mouseleave", function () {
+      card.style.transform = "";
     });
   });
 }

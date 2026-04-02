@@ -10,26 +10,20 @@
 
   <style>
     :root {
-      --bg-0: #05060a;
-      --bg-1: #0a0d14;
-      --bg-2: #121826;
-      --panel: rgba(255, 255, 255, 0.045);
-      --panel-strong: rgba(255, 255, 255, 0.07);
-      --line: rgba(255, 255, 255, 0.08);
-      --line-strong: rgba(255, 255, 255, 0.14);
-      --text: rgba(255, 255, 255, 0.95);
-      --soft: rgba(255, 255, 255, 0.72);
-      --dim: rgba(255, 255, 255, 0.42);
-      --cream: #fff4e7;
-      --gold: #ffbe78;
-      --peach: #ff8d6d;
-      --violet: #8f8cff;
-      --cyan: #69dbff;
-      --shadow: 0 34px 120px rgba(0, 0, 0, 0.42);
-      --radius-xl: 34px;
+      --bg: #07080b;
+      --bg-soft: #0d1015;
+      --panel: rgba(255, 255, 255, 0.035);
+      --line: rgba(255, 255, 255, 0.09);
+      --line-soft: rgba(255, 255, 255, 0.05);
+      --text: #f6f1e9;
+      --text-soft: rgba(246, 241, 233, 0.68);
+      --text-faint: rgba(246, 241, 233, 0.28);
+      --accent: #d7b07a;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+      --radius-xl: 36px;
       --radius-lg: 26px;
-      --radius-md: 20px;
-      --max-w: 1480px;
+      --radius-md: 18px;
+      --max-width: 1480px;
       --progress: 0%;
     }
 
@@ -45,10 +39,9 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(circle at 10% 12%, rgba(255, 190, 120, 0.10), transparent 18%),
-        radial-gradient(circle at 84% 14%, rgba(105, 219, 255, 0.08), transparent 20%),
-        radial-gradient(circle at 72% 74%, rgba(143, 140, 255, 0.08), transparent 20%),
-        linear-gradient(180deg, #05060a 0%, #0a0d14 40%, #101623 100%);
+        radial-gradient(circle at 12% 10%, rgba(215, 176, 122, 0.08), transparent 20%),
+        radial-gradient(circle at 82% 14%, rgba(255, 255, 255, 0.03), transparent 18%),
+        linear-gradient(180deg, #06070a 0%, #0a0c11 42%, #0d1015 100%);
       overflow-x: hidden;
     }
 
@@ -57,160 +50,108 @@
       position: fixed;
       inset: 0 auto auto 0;
       width: var(--progress);
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--peach), var(--cyan));
+      height: 2px;
+      background: linear-gradient(90deg, rgba(215, 176, 122, 0.15), var(--accent), rgba(215, 176, 122, 0.15));
       z-index: 9999;
       pointer-events: none;
-      box-shadow: 0 0 24px rgba(255, 190, 120, 0.3);
     }
 
-    .signature-page {
-      position: relative;
-      width: min(calc(100% - 28px), var(--max-w));
-      margin: 0 auto;
-      padding: 24px 0 42px;
-      display: grid;
-      gap: 22px;
-      isolation: isolate;
-    }
-
-    .ambient-blur {
+    .lux-noise,
+    .lux-grid,
+    #luxCanvas {
       position: fixed;
       inset: 0;
       pointer-events: none;
+    }
+
+    #luxCanvas {
       z-index: -4;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      opacity: 0.38;
     }
 
-    .ambient-blur::before,
-    .ambient-blur::after,
-    .ambient-blur .third {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(110px);
-      opacity: 0.22;
-      animation: floatGlow 18s ease-in-out infinite;
-    }
-
-    .ambient-blur::before {
-      width: 380px;
-      height: 380px;
-      left: -80px;
-      top: 40px;
-      background: rgba(255, 190, 120, 0.32);
-    }
-
-    .ambient-blur::after {
-      width: 420px;
-      height: 420px;
-      right: -100px;
-      top: 120px;
-      background: rgba(105, 219, 255, 0.20);
-      animation-delay: -6s;
-    }
-
-    .ambient-blur .third {
-      width: 360px;
-      height: 360px;
-      left: 38%;
-      bottom: 8%;
-      background: rgba(143, 140, 255, 0.18);
-      animation-delay: -10s;
-    }
-
-    @keyframes floatGlow {
-      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-      50% { transform: translateY(24px) translateX(18px) scale(1.07); }
-    }
-
-    .grid-overlay {
-      position: fixed;
-      inset: 0;
+    .lux-grid {
       z-index: -3;
-      pointer-events: none;
-      opacity: 0.12;
+      opacity: 0.08;
       background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: radial-gradient(circle at center, black 34%, transparent 90%);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 34%, transparent 88%);
     }
 
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
+    .lux-noise {
       z-index: -2;
-      pointer-events: none;
-      opacity: 0.08;
-      background-image: radial-gradient(rgba(255,255,255,0.16) 0.7px, transparent 0.7px);
+      opacity: 0.06;
+      background-image: radial-gradient(rgba(255,255,255,0.18) 0.7px, transparent 0.7px);
       background-size: 8px 8px;
-      mask-image: radial-gradient(circle at center, black 38%, transparent 88%);
+      mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
     }
 
-    canvas#signatureField {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -5;
-      pointer-events: none;
-      opacity: 0.55;
+    .signature-page {
+      width: min(calc(100% - 28px), var(--max-width));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      display: grid;
+      gap: 22px;
+      position: relative;
+      isolation: isolate;
     }
 
-    .panel {
+    .section-shell {
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.022));
-      backdrop-filter: blur(18px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.015));
+      border: 1px solid var(--line-soft);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
     }
 
-    .panel::before {
+    .section-shell::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
         linear-gradient(180deg, rgba(255,255,255,0.04), transparent 24%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 24%);
-      opacity: 0.56;
+        radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 24%);
+      opacity: 0.48;
     }
 
-    .reveal-up {
+    .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.85s ease, transform 0.85s ease;
+      transform: translateY(34px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
-    .reveal-up.is-visible {
+    .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
 
     /* HERO */
     .hero-shell {
-      min-height: 92vh;
-      padding: 26px;
+      min-height: 94vh;
+      padding: 34px 34px 28px;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 20px;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 24px;
       align-items: stretch;
       background:
-        radial-gradient(circle at 12% 18%, rgba(255,190,120,0.12), transparent 24%),
-        radial-gradient(circle at 88% 18%, rgba(105,219,255,0.06), transparent 22%),
-        linear-gradient(135deg, rgba(8,10,16,0.96), rgba(18,23,36,0.94));
+        radial-gradient(circle at 12% 18%, rgba(215,176,122,0.08), transparent 24%),
+        linear-gradient(135deg, rgba(10,12,16,0.96), rgba(15,18,24,0.94));
     }
 
     .hero-left {
-      position: relative;
-      z-index: 1;
       display: grid;
-      grid-template-rows: auto auto auto auto 1fr;
+      grid-template-rows: auto auto auto 1fr auto;
       gap: 18px;
       align-content: start;
+      position: relative;
+      z-index: 1;
     }
 
     .meta-row {
@@ -222,88 +163,85 @@
     .meta-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.76rem;
-      font-weight: 800;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: rgba(246,241,233,0.84);
+      font-size: 0.74rem;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,245,235,0.94);
     }
 
-    .headline-wrap {
+    .hero-copy {
       display: grid;
       gap: 10px;
     }
 
-    .kicker {
-      display: inline-block;
-      color: var(--gold);
+    .hero-kicker {
+      color: var(--accent);
       font-size: 0.78rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .headline {
+    .hero-title {
       margin: 0;
-      max-width: 8ch;
-      font-size: clamp(3.2rem, 8vw, 7.4rem);
-      line-height: 0.86;
-      letter-spacing: -0.095em;
-      color: var(--cream);
+      max-width: 7.5ch;
+      font-size: clamp(3.4rem, 8vw, 8rem);
+      line-height: 0.84;
+      letter-spacing: -0.1em;
       text-wrap: balance;
+      color: var(--text);
     }
 
-    .subline {
+    .hero-subline {
       margin: 0;
-      max-width: 55ch;
-      color: var(--soft);
+      max-width: 50ch;
+      color: var(--text-soft);
       font-size: 1rem;
-      line-height: 1.9;
+      line-height: 1.95;
     }
 
-    .typing-bar {
-      position: relative;
-      overflow: hidden;
-      padding: 18px;
-      border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(255,190,120,0.10), rgba(105,219,255,0.04)),
-        rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+    .signal-line {
       display: flex;
       align-items: center;
-      gap: 12px;
-      min-height: 68px;
+      gap: 14px;
+      min-height: 62px;
+      padding: 16px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(215,176,122,0.08), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.015);
+      overflow: hidden;
+      white-space: nowrap;
     }
 
-    .typing-label {
+    .signal-label {
       flex: 0 0 auto;
-      color: var(--gold);
-      font-size: 0.76rem;
+      color: var(--accent);
+      font-size: 0.74rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .typing-text {
+    .signal-typed {
       min-width: 0;
-      color: var(--cream);
-      font-size: clamp(0.98rem, 2vw, 1.18rem);
+      color: var(--text);
+      font-size: clamp(0.96rem, 2vw, 1.14rem);
       letter-spacing: -0.02em;
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .caret {
+    .signal-caret {
       display: inline-block;
       width: 10px;
-      color: var(--gold);
+      color: var(--accent);
       animation: blink 1s infinite;
     }
 
@@ -312,196 +250,165 @@
       52%, 100% { opacity: 0; }
     }
 
-    .position-card {
-      padding: 22px;
+    .hero-statement {
+      padding: 26px 24px;
       border-radius: 28px;
+      border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 84% 18%, rgba(255,190,120,0.12), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.022));
-      border: 1px solid rgba(255,255,255,0.08);
+        radial-gradient(circle at 82% 18%, rgba(215,176,122,0.08), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      position: relative;
+      overflow: hidden;
     }
 
-    .position-card span {
+    .hero-statement span {
       display: block;
-      margin-bottom: 8px;
-      color: var(--gold);
-      font-size: 0.76rem;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 0.74rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .position-card strong {
+    .hero-statement strong {
       display: block;
       max-width: 15ch;
-      color: var(--cream);
-      font-size: clamp(1.45rem, 2vw, 2.1rem);
+      font-size: clamp(1.5rem, 2vw, 2.2rem);
       line-height: 1.02;
-      letter-spacing: -0.04em;
-    }
-
-    .micro-band {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .micro-card {
-      padding: 18px 16px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      transform-style: preserve-3d;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    }
-
-    .micro-card:hover {
-      border-color: rgba(255,190,120,0.22);
-      background: rgba(255,255,255,0.06);
-    }
-
-    .micro-card strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--cream);
-      font-size: 1rem;
-    }
-
-    .micro-card span {
-      display: block;
-      color: var(--soft);
-      font-size: 0.9rem;
-      line-height: 1.7;
+      letter-spacing: -0.05em;
+      color: var(--text);
     }
 
     .hero-right {
       position: relative;
       z-index: 1;
       display: grid;
+      grid-template-rows: 1fr auto;
       gap: 14px;
       align-content: stretch;
     }
 
-    .hero-display {
+    .hero-frame {
       min-height: 100%;
-      padding: 18px;
-      border-radius: 32px;
-      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      border: 1px solid var(--line);
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 58%),
-        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+        radial-gradient(circle at 50% 40%, rgba(255,255,255,0.02), transparent 54%),
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.014));
+      padding: 20px;
       display: grid;
+      align-content: space-between;
+      gap: 16px;
+    }
+
+    .hero-frame-top {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
       gap: 14px;
     }
 
-    .hero-display-top {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 14px;
-    }
-
-    .duration-card {
+    .hero-year-card {
       min-height: 260px;
-      border-radius: 26px;
-      padding: 16px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-start;
     }
 
-    .duration-card span {
+    .hero-year-card span {
       display: block;
-      color: var(--gold);
-      font-size: 0.78rem;
+      color: var(--accent);
+      font-size: 0.74rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
-    .duration-card strong {
+    .hero-year-card strong {
       display: block;
-      color: var(--cream);
-      font-size: clamp(3rem, 5vw, 5rem);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
       margin-bottom: 10px;
+      font-size: clamp(3rem, 5vw, 5.4rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      color: var(--text);
     }
 
-    .duration-card p {
+    .hero-year-card p {
       margin: 0;
-      color: var(--soft);
-      line-height: 1.7;
+      color: var(--text-soft);
       font-size: 0.92rem;
+      line-height: 1.72;
       max-width: 18ch;
     }
 
-    .value-map {
-      position: relative;
+    .hero-map {
       min-height: 260px;
-      border-radius: 26px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 82% 18%, rgba(255,190,120,0.10), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+        radial-gradient(circle at 82% 18%, rgba(215,176,122,0.08), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.014));
       padding: 16px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .value-map svg {
+    .hero-map svg {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .value-map text {
-      fill: rgba(255,255,255,0.84);
+    .hero-map text {
+      fill: rgba(246,241,233,0.82);
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .value-map .node {
-      fill: rgba(255,255,255,0.05);
+    .hero-map .node {
+      fill: rgba(255,255,255,0.04);
       stroke: rgba(255,255,255,0.12);
       stroke-width: 1.2;
     }
 
-    .value-map .line {
+    .hero-map .line {
       fill: none;
-      stroke-width: 2.3;
+      stroke-width: 2.2;
       stroke-linecap: round;
-      stroke-dasharray: 12 10;
-      animation: moveDash 10s linear infinite;
+      stroke-dasharray: 12 12;
+      animation: dash 10s linear infinite;
     }
 
-    .value-map .gold-line { stroke: rgba(255,190,120,0.7); }
-    .value-map .cyan-line { stroke: rgba(105,219,255,0.62); }
-    .value-map .violet-line { stroke: rgba(143,140,255,0.58); }
+    .hero-map .gold-line { stroke: rgba(215,176,122,0.72); }
+    .hero-map .soft-line { stroke: rgba(255,255,255,0.34); }
 
-    @keyframes moveDash {
+    @keyframes dash {
       to { stroke-dashoffset: -140; }
     }
 
-    .hero-display-bottom {
+    .hero-frame-bottom {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
     .hero-chip {
-      min-height: 118px;
+      min-height: 120px;
+      padding: 16px;
       border-radius: 22px;
-      padding: 14px;
+      border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(105,219,255,0.04)),
-        rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+        linear-gradient(135deg, rgba(215,176,122,0.06), rgba(255,255,255,0.016)),
+        rgba(255,255,255,0.015);
       display: grid;
       align-content: end;
     }
@@ -509,23 +416,23 @@
     .hero-chip strong {
       display: block;
       margin-bottom: 7px;
-      color: var(--cream);
-      font-size: 0.95rem;
+      color: var(--text);
+      font-size: 0.96rem;
       line-height: 1.2;
     }
 
     .hero-chip span {
       display: block;
-      color: var(--soft);
+      color: var(--text-soft);
       font-size: 0.88rem;
-      line-height: 1.62;
+      line-height: 1.64;
     }
 
     .marquee {
       overflow: hidden;
       border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.025);
       padding: 13px 0;
     }
 
@@ -547,53 +454,52 @@
       padding: 10px 14px;
       border-radius: 999px;
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(105,219,255,0.08)),
-        rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--cream);
-      font-size: 0.82rem;
+        linear-gradient(135deg, rgba(215,176,122,0.09), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.015);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 0.81rem;
       font-weight: 700;
       letter-spacing: 0.03em;
     }
 
-    /* CORE VALUE ATLAS */
-    .core-value-stage {
-      padding: 28px;
+    /* MONUMENT */
+    .monument-stage {
+      padding: 34px;
       display: grid;
-      gap: 24px;
+      gap: 26px;
       background:
-        radial-gradient(circle at 12% 18%, rgba(255,190,120,0.10), transparent 22%),
-        radial-gradient(circle at 88% 16%, rgba(105,219,255,0.08), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+        radial-gradient(circle at 12% 18%, rgba(215,176,122,0.08), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.014));
     }
 
-    .core-value-head {
+    .monument-head {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: 0.9fr 1.1fr;
       gap: 18px;
       align-items: end;
     }
 
-    .core-value-head-left span {
+    .monument-head-left span {
       display: inline-block;
       margin-bottom: 10px;
-      color: var(--gold);
-      font-size: 0.78rem;
+      color: var(--accent);
+      font-size: 0.76rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .core-value-head-left h2 {
+    .monument-head-left h2 {
       margin: 0;
-      max-width: 10ch;
-      color: var(--cream);
-      font-size: clamp(2rem, 4vw, 4.4rem);
-      line-height: 0.9;
-      letter-spacing: -0.07em;
+      max-width: 8ch;
+      color: var(--text);
+      font-size: clamp(2.2rem, 4vw, 4.6rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
     }
 
-    .core-value-head-right {
+    .monument-head-right {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -603,302 +509,323 @@
     .value-tag {
       padding: 10px 14px;
       border-radius: 999px;
-      background:
-        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(105,219,255,0.08)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--cream);
-      font-size: 0.78rem;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: var(--text-soft);
+      font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.04em;
     }
 
-    .core-composition {
+    .monument-grid {
       display: grid;
-      grid-template-columns: 0.88fr 1.12fr;
+      grid-template-columns: 0.86fr 1.14fr;
       gap: 18px;
-      align-items: start;
+      align-items: stretch;
     }
 
-    .core-manifesto {
+    .monument-anchor {
       position: sticky;
-      top: 106px;
-      min-height: 660px;
-      padding: 30px;
-      border-radius: 32px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
+      top: 108px;
+      min-height: 700px;
+      padding: 34px 30px;
+      border-radius: 34px;
+      border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 14% 16%, rgba(255,190,120,0.17), transparent 24%),
-        radial-gradient(circle at 84% 84%, rgba(143,140,255,0.10), transparent 24%),
-        linear-gradient(145deg, rgba(10,12,20,0.96), rgba(19,24,37,0.94));
-      box-shadow: 0 28px 90px rgba(0,0,0,0.32);
+        radial-gradient(circle at 16% 14%, rgba(215,176,122,0.12), transparent 24%),
+        linear-gradient(145deg, rgba(10,12,18,0.96), rgba(17,20,28,0.94));
+      overflow: hidden;
     }
 
-    .core-manifesto::after {
+    .monument-anchor::after {
       content: "";
       position: absolute;
-      right: -90px;
-      bottom: -110px;
-      width: 250px;
-      height: 250px;
+      right: -100px;
+      bottom: -120px;
+      width: 280px;
+      height: 280px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.13), transparent 72%);
+      background: radial-gradient(circle, rgba(255,255,255,0.11), transparent 72%);
       pointer-events: none;
     }
 
-    .core-label {
-      position: relative;
-      z-index: 1;
+    .anchor-label {
       display: inline-flex;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--gold);
-      font-size: 0.76rem;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--accent);
+      font-size: 0.74rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-    }
-
-    .core-manifesto h3 {
       position: relative;
       z-index: 1;
-      margin: 22px 0 14px;
-      max-width: 7ch;
-      color: var(--cream);
-      font-size: clamp(2.5rem, 3vw, 3.8rem);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
     }
 
-    .core-manifesto p {
+    .anchor-title {
+      position: relative;
+      z-index: 1;
+      margin: 24px 0 14px;
+      max-width: 6ch;
+      color: var(--text);
+      font-size: clamp(2.7rem, 3.4vw, 4.2rem);
+      line-height: 0.88;
+      letter-spacing: -0.09em;
+    }
+
+    .anchor-copy {
       position: relative;
       z-index: 1;
       margin: 0;
-      max-width: 33ch;
-      color: var(--soft);
+      max-width: 32ch;
+      color: var(--text-soft);
       font-size: 1rem;
-      line-height: 1.9;
+      line-height: 1.95;
     }
 
-    .core-rail {
+    .anchor-rail {
       position: relative;
       z-index: 1;
-      margin-top: 30px;
+      margin-top: 28px;
       display: grid;
       gap: 14px;
     }
 
-    .core-stat {
+    .anchor-stat {
       position: relative;
       padding: 18px 18px 16px;
       border-radius: 22px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
       overflow: hidden;
     }
 
-    .core-stat::before {
+    .anchor-stat::before {
       content: "";
       position: absolute;
       inset: 0 auto auto 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, rgba(255,190,120,0.9), rgba(105,219,255,0.4));
+      background: linear-gradient(90deg, rgba(215,176,122,0.95), rgba(255,255,255,0.18));
     }
 
-    .core-stat strong {
+    .anchor-stat strong {
       display: block;
       margin-bottom: 6px;
-      color: var(--cream);
+      color: var(--text);
       font-size: 1rem;
     }
 
-    .core-stat span {
+    .anchor-stat span {
       display: block;
-      color: var(--soft);
+      color: var(--text-soft);
       font-size: 0.9rem;
-      line-height: 1.62;
+      line-height: 1.64;
     }
 
-    .value-mosaic {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .value-tile {
+    .monument-wall {
       position: relative;
-      overflow: hidden;
-      min-height: 220px;
-      padding: 22px 20px 18px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 980px;
+      border-radius: 34px;
+      border: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
-      box-shadow: 0 18px 54px rgba(0,0,0,0.18);
+        radial-gradient(circle at 82% 18%, rgba(215,176,122,0.06), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      overflow: hidden;
+    }
+
+    .monument-center-mark {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 330px;
+      height: 330px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.12);
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    .monument-center-mark::before,
+    .monument-center-mark::after {
+      content: "";
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.08);
+    }
+
+    .value-card {
+      position: absolute;
+      width: 270px;
+      min-height: 170px;
+      padding: 22px 20px 18px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.018));
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
       transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease,
-        background 0.35s ease;
+        transform 0.45s ease,
+        border-color 0.45s ease,
+        box-shadow 0.45s ease,
+        background 0.45s ease;
       will-change: transform;
       isolation: isolate;
     }
 
-    .value-tile:hover {
-      border-color: rgba(255,190,120,0.24);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.24);
+    .value-card:hover {
+      border-color: rgba(215,176,122,0.28);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.24);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.03));
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
     }
 
-    .value-tile::before {
+    .value-card::before {
       content: "";
       position: absolute;
       inset: 0 auto auto 0;
       width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--peach), var(--cyan));
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), rgba(255,255,255,0.12));
     }
 
-    .value-tile::after {
+    .value-card::after {
       content: attr(data-no);
       position: absolute;
       right: 14px;
       bottom: -8px;
-      color: rgba(255,255,255,0.05);
-      font-size: clamp(4rem, 8vw, 8rem);
+      color: rgba(255,255,255,0.045);
+      font-size: clamp(4rem, 6vw, 7rem);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.08em;
       pointer-events: none;
     }
 
-    .value-spotlight {
+    .card-glow {
       position: absolute;
-      inset: auto;
       width: 180px;
       height: 180px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 72%);
       filter: blur(18px);
-      pointer-events: none;
-      z-index: 0;
+      transform: translate(-50%, -50%);
       opacity: 0;
       transition: opacity 0.3s ease;
-      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .value-tile:hover .value-spotlight {
+    .value-card:hover .card-glow {
       opacity: 1;
     }
 
-    .value-tile-top {
+    .value-card-top {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
     }
 
-    .value-no {
+    .value-card-no {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 40px;
-      height: 40px;
+      min-width: 38px;
+      height: 38px;
       padding: 0 12px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--gold), var(--peach));
-      color: #1a120d;
-      font-size: 0.78rem;
+      background: linear-gradient(135deg, var(--accent), #c79a5d);
+      color: #17120d;
+      font-size: 0.76rem;
       font-weight: 900;
       letter-spacing: 0.04em;
-      box-shadow: 0 10px 26px rgba(255,170,100,0.22);
+      box-shadow: 0 10px 24px rgba(215,176,122,0.2);
     }
 
-    .value-role {
-      color: var(--dim);
-      font-size: 0.72rem;
+    .value-card-role {
+      color: var(--text-faint);
+      font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       text-align: right;
     }
 
-    .value-tile h3 {
+    .value-card h3 {
       position: relative;
       z-index: 1;
       margin: 0 0 10px;
       max-width: 12ch;
-      color: var(--cream);
-      font-size: 1.08rem;
-      line-height: 1.15;
+      color: var(--text);
+      font-size: 1.04rem;
+      line-height: 1.14;
       letter-spacing: -0.03em;
     }
 
-    .value-tile p {
+    .value-card p {
       position: relative;
       z-index: 1;
       margin: 0;
-      max-width: 25ch;
-      color: var(--soft);
+      max-width: 24ch;
+      color: var(--text-soft);
       font-size: 0.9rem;
-      line-height: 1.75;
+      line-height: 1.72;
     }
 
-    .tile-1 { grid-column: span 6; min-height: 270px; }
-    .tile-2 { grid-column: span 3; }
-    .tile-3 { grid-column: span 3; }
-    .tile-4 { grid-column: span 4; }
-    .tile-5 { grid-column: span 4; }
-    .tile-6 { grid-column: span 4; }
-    .tile-7 { grid-column: span 3; }
-    .tile-8 { grid-column: span 3; }
-    .tile-9 { grid-column: span 6; min-height: 255px; }
-    .tile-10 { grid-column: span 12; min-height: 190px; }
+    .card-01 { left: 4.5%; top: 6%; width: 320px; min-height: 200px; }
+    .card-02 { right: 7%; top: 5%; width: 250px; }
+    .card-03 { right: 1.5%; top: 26%; width: 250px; }
+    .card-04 { left: 10%; top: 28%; width: 300px; }
+    .card-05 { left: 31%; top: 14%; width: 240px; }
+    .card-06 { right: 23%; top: 41%; width: 280px; }
+    .card-07 { left: 4%; bottom: 28%; width: 245px; }
+    .card-08 { left: 32%; bottom: 18%; width: 245px; }
+    .card-09 { right: 7%; bottom: 19%; width: 320px; min-height: 200px; }
+    .card-10 { left: 18%; bottom: 4%; width: 62%; min-height: 170px; }
 
     /* STRIP */
     .signature-strip {
-      padding: 20px 24px;
+      padding: 22px 26px;
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap: 18px;
       align-items: center;
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(143,140,255,0.05), rgba(105,219,255,0.05)),
-        rgba(255,255,255,0.03);
+        linear-gradient(135deg, rgba(215,176,122,0.06), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.018);
     }
 
     .signature-strip-left span {
       display: block;
       margin-bottom: 8px;
-      color: var(--gold);
-      font-size: 0.78rem;
+      color: var(--accent);
+      font-size: 0.76rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .signature-strip-left h2 {
       margin: 0;
       max-width: 15ch;
-      color: var(--cream);
-      font-size: clamp(1.5rem, 2.4vw, 2.45rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
+      color: var(--text);
+      font-size: clamp(1.55rem, 2.4vw, 2.55rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
     }
 
     .signature-strip-right {
-      color: var(--soft);
+      color: var(--text-soft);
       font-size: 0.98rem;
-      line-height: 1.84;
+      line-height: 1.88;
     }
 
     /* STORY */
@@ -918,16 +845,16 @@
     .visual-panel img {
       width: 100%;
       height: 100%;
-      min-height: 720px;
+      min-height: 760px;
       object-fit: cover;
       display: block;
-      filter: contrast(1.05) saturate(0.96);
+      filter: contrast(1.05) saturate(0.94);
       transform: scale(1.02);
-      transition: transform 0.9s ease;
+      transition: transform 1s ease;
     }
 
     .visual-panel:hover img {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
     .visual-note {
@@ -935,23 +862,23 @@
       left: 20px;
       right: 20px;
       bottom: 20px;
-      padding: 18px;
+      padding: 20px;
       border-radius: 24px;
       background: rgba(8,10,16,0.72);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
       backdrop-filter: blur(12px);
     }
 
     .visual-note strong {
       display: block;
       margin-bottom: 8px;
-      color: var(--cream);
+      color: var(--text);
       font-size: 0.98rem;
     }
 
     .visual-note span {
       display: block;
-      color: var(--soft);
+      color: var(--text-soft);
       font-size: 0.91rem;
       line-height: 1.75;
     }
@@ -963,33 +890,33 @@
 
     .copy-card,
     .final-card {
-      padding: 26px;
+      padding: 28px;
     }
 
     .section-label {
       display: block;
       margin-bottom: 10px;
-      color: var(--gold);
-      font-size: 0.78rem;
+      color: var(--accent);
+      font-size: 0.76rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .copy-card h2,
     .final-card h2 {
       margin: 0 0 12px;
-      color: var(--cream);
-      font-size: clamp(1.5rem, 2vw, 2.05rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
+      color: var(--text);
+      font-size: clamp(1.5rem, 2vw, 2.1rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
     }
 
     .copy-card p,
     .final-card p {
       margin: 0 0 14px;
-      color: var(--soft);
-      line-height: 1.9;
+      color: var(--text-soft);
+      line-height: 1.92;
     }
 
     .copy-card p:last-child,
@@ -1004,25 +931,25 @@
     }
 
     .triad-card {
-      padding: 18px 16px;
+      padding: 20px 18px;
       border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(105,219,255,0.04)),
-        rgba(255,255,255,0.03);
+        linear-gradient(135deg, rgba(215,176,122,0.05), rgba(255,255,255,0.014)),
+        rgba(255,255,255,0.016);
       transform-style: preserve-3d;
     }
 
     .triad-card strong {
       display: block;
       margin-bottom: 8px;
-      color: var(--cream);
+      color: var(--text);
       font-size: 0.96rem;
     }
 
     .triad-card span {
       display: block;
-      color: var(--soft);
+      color: var(--text-soft);
       font-size: 0.9rem;
       line-height: 1.72;
     }
@@ -1039,12 +966,12 @@
       padding-left: 18px;
       display: grid;
       gap: 12px;
-      color: var(--soft);
+      color: var(--text-soft);
       line-height: 1.84;
     }
 
     .feature-list li::marker {
-      color: var(--gold);
+      color: var(--accent);
     }
 
     .back-row {
@@ -1060,137 +987,141 @@
       padding: 14px 20px;
       border-radius: 999px;
       text-decoration: none;
-      color: var(--cream);
+      color: var(--text);
       font-weight: 700;
       letter-spacing: 0.02em;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.025);
       transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
     .back-link:hover {
       transform: translateY(-3px);
-      border-color: rgba(255,190,120,0.22);
-      background: rgba(255,255,255,0.08);
+      border-color: rgba(215,176,122,0.24);
+      background: rgba(255,255,255,0.045);
     }
 
     @media (max-width: 1220px) {
       .hero-shell,
-      .core-value-head,
-      .core-composition,
+      .monument-head,
+      .monument-grid,
       .signature-strip,
       .story-layout,
       .bottom-grid {
         grid-template-columns: 1fr;
       }
 
-      .core-value-head-right {
+      .monument-head-right {
         justify-content: flex-start;
       }
 
-      .core-manifesto {
+      .monument-anchor {
         position: relative;
         top: auto;
         min-height: auto;
       }
 
-      .visual-panel img {
-        min-height: 460px;
+      .monument-wall {
+        min-height: auto;
+        padding: 16px;
       }
 
-      .headline,
-      .core-value-head-left h2,
-      .core-manifesto h3,
+      .monument-center-mark {
+        display: none;
+      }
+
+      .value-card {
+        position: relative;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        width: auto !important;
+        min-height: 190px !important;
+      }
+
+      .monument-wall {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card-10 {
+        grid-column: 1 / -1;
+      }
+
+      .visual-panel img {
+        min-height: 500px;
+      }
+
+      .hero-title,
+      .monument-head-left h2,
+      .anchor-title,
       .signature-strip-left h2 {
         max-width: none;
       }
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 860px) {
       .micro-band,
-      .hero-display-bottom,
-      .triad {
+      .hero-frame-bottom,
+      .triad,
+      .monument-wall {
         grid-template-columns: 1fr;
       }
 
-      .hero-display-top {
+      .hero-frame-top {
         grid-template-columns: 1fr;
       }
 
-      .tile-1,
-      .tile-2,
-      .tile-3,
-      .tile-4,
-      .tile-5,
-      .tile-6,
-      .tile-7,
-      .tile-8,
-      .tile-9,
-      .tile-10 {
-        grid-column: span 6;
+      .card-10 {
+        grid-column: auto;
       }
     }
 
     @media (max-width: 720px) {
       .signature-page {
-        width: min(calc(100% - 18px), var(--max-w));
+        width: min(calc(100% - 18px), var(--max-width));
         gap: 18px;
         padding-top: 16px;
       }
 
       .hero-shell,
-      .core-value-stage,
+      .monument-stage,
       .copy-card,
       .final-card,
       .signature-strip,
-      .core-manifesto {
+      .monument-anchor {
         padding: 20px 16px;
       }
 
-      .value-mosaic {
-        grid-template-columns: 1fr;
+      .hero-title {
+        font-size: clamp(2.7rem, 14vw, 4.5rem);
       }
 
-      .tile-1,
-      .tile-2,
-      .tile-3,
-      .tile-4,
-      .tile-5,
-      .tile-6,
-      .tile-7,
-      .tile-8,
-      .tile-9,
-      .tile-10 {
-        grid-column: auto;
-      }
-
-      .headline {
-        font-size: clamp(2.6rem, 14vw, 4.4rem);
-      }
-
-      .typing-bar {
+      .signal-line {
         flex-direction: column;
         align-items: flex-start;
       }
 
       .visual-panel img {
-        min-height: 300px;
+        min-height: 320px;
       }
     }
   </style>
 </head>
 <body data-page="journey">
 
-  <canvas id="signatureField"></canvas>
-  <div class="ambient-blur"><div class="third"></div></div>
-  <div class="grid-overlay"></div>
-  <div class="noise-overlay"></div>
+  <canvas id="luxCanvas"></canvas>
+  <div class="ambient-blur"></div>
+  <div class="lux-grid"></div>
+  <div class="lux-noise"></div>
 
   <div id="header"></div>
 
   <main class="page-shell detail-shell signature-page">
 
-    <section class="panel hero-shell reveal-up">
+    <section class="section-shell hero-shell reveal">
       <div class="hero-left">
         <div class="meta-row">
           <span class="meta-pill">Signature Journey</span>
@@ -1198,60 +1129,43 @@
           <span class="meta-pill">Australian Cake House / ACake</span>
         </div>
 
-        <div class="headline-wrap">
-          <span class="kicker">Public-facing value signal</span>
-          <h1 class="headline">Value in Motion.</h1>
+        <div class="hero-copy">
+          <span class="hero-kicker">Public-facing value signal</span>
+          <h1 class="hero-title">Value in Motion.</h1>
         </div>
 
-        <p class="subline">
+        <p class="hero-subline">
           Structured execution, customer-facing precision, systems awareness,
           people support, and operational calm — built through real business environments.
         </p>
 
-        <div class="typing-bar">
-          <span class="typing-label">Signal Feed</span>
-          <div class="typing-text">
-            <span id="typedSignal"></span><span class="caret">|</span>
+        <div class="signal-line">
+          <span class="signal-label">Signal Feed</span>
+          <div class="signal-typed">
+            <span id="typedSignal"></span><span class="signal-caret">|</span>
           </div>
         </div>
 
-        <div class="position-card">
+        <div class="hero-statement">
           <span>Positioning</span>
           <strong>I build clarity where work keeps moving.</strong>
-        </div>
-
-        <div class="micro-band">
-          <article class="micro-card tilt-card">
-            <strong>5+ Years</strong>
-            <span>Live exposure across operations, coordination, service, and support systems.</span>
-          </article>
-
-          <article class="micro-card tilt-card">
-            <strong>10 Core Values</strong>
-            <span>Finance, process, people, systems, launch support, and calm execution.</span>
-          </article>
-
-          <article class="micro-card tilt-card">
-            <strong>Multi-Outlet Mindset</strong>
-            <span>Built around consistency, readiness, adaptability, and scalable discipline.</span>
-          </article>
         </div>
       </div>
 
       <div class="hero-right">
-        <div class="hero-display">
-          <div class="hero-display-top">
-            <div class="duration-card">
+        <div class="hero-frame">
+          <div class="hero-frame-top">
+            <div class="hero-year-card">
               <span>Duration</span>
               <strong>2017 → 2023</strong>
               <p>Long-form growth through real business movement, not isolated tasks.</p>
             </div>
 
-            <div class="value-map">
+            <div class="hero-map">
               <svg viewBox="0 0 520 280" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                 <path class="line gold-line" d="M70 66 C150 30, 210 28, 272 72 S398 136, 458 86" />
-                <path class="line cyan-line" d="M62 218 C150 246, 220 228, 280 176 S396 90, 460 146" />
-                <path class="line violet-line" d="M110 100 C182 152, 256 162, 326 132 S416 72, 454 104" />
+                <path class="line soft-line" d="M62 218 C150 246, 220 228, 280 176 S396 90, 460 146" />
+                <path class="line gold-line" d="M110 100 C182 152, 256 162, 326 132 S416 72, 454 104" />
 
                 <rect class="node" x="24" y="38" rx="18" ry="18" width="102" height="48"></rect>
                 <rect class="node" x="168" y="20" rx="18" ry="18" width="106" height="48"></rect>
@@ -1270,7 +1184,7 @@
             </div>
           </div>
 
-          <div class="hero-display-bottom">
+          <div class="hero-frame-bottom">
             <div class="hero-chip">
               <strong>Operational clarity</strong>
               <span>Seeing work as connected systems instead of separate tasks.</span>
@@ -1316,14 +1230,14 @@
       </div>
     </section>
 
-    <section class="panel core-value-stage reveal-up">
-      <div class="core-value-head">
-        <div class="core-value-head-left">
-          <span>Core Value Atlas</span>
+    <section class="section-shell monument-stage reveal">
+      <div class="monument-head">
+        <div class="monument-head-left">
+          <span>Core Value Monument</span>
           <h2>This is the centre of the story.</h2>
         </div>
 
-        <div class="core-value-head-right">
+        <div class="monument-head-right">
           <span class="value-tag">Operations</span>
           <span class="value-tag">Systems</span>
           <span class="value-tag">People</span>
@@ -1333,130 +1247,132 @@
         </div>
       </div>
 
-      <div class="core-composition">
-        <article class="core-manifesto tilt-card magnetic-card">
-          <span class="core-label">Core Manifesto</span>
-          <h3>Cross-functional operational intelligence</h3>
-          <p>
+      <div class="monument-grid">
+        <article class="monument-anchor tilt-card magnetic-card">
+          <span class="anchor-label">Core Manifesto</span>
+          <h3 class="anchor-title">Cross-functional operational intelligence</h3>
+          <p class="anchor-copy">
             Stronger than a single title. Built through finance support, SOP thinking,
             customer handling, onboarding, systems support, outlet readiness,
             and steady execution under real operational pressure.
           </p>
 
-          <div class="core-rail">
-            <div class="core-stat">
+          <div class="anchor-rail">
+            <div class="anchor-stat">
               <strong>Financial Accuracy</strong>
               <span>Care around records, consistency, and transaction discipline.</span>
             </div>
 
-            <div class="core-stat">
+            <div class="anchor-stat">
               <strong>Process Clarity</strong>
               <span>Turning workflows into more stable, repeatable execution.</span>
             </div>
 
-            <div class="core-stat">
+            <div class="anchor-stat">
               <strong>Operational Readiness</strong>
               <span>Supporting people, systems, and launch conditions together.</span>
             </div>
           </div>
         </article>
 
-        <div class="value-mosaic">
-          <article class="value-tile tile-1 tilt-card magnetic-card" data-no="01">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">01</span>
-              <span class="value-role">Finance</span>
+        <div class="monument-wall">
+          <div class="monument-center-mark"></div>
+
+          <article class="value-card card-01 tilt-card magnetic-card" data-no="01">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">01</span>
+              <span class="value-card-role">Finance</span>
             </div>
             <h3>Financial Accuracy</h3>
             <p>Bookkeeping support, transaction consistency, sales tracking, reporting discipline.</p>
           </article>
 
-          <article class="value-tile tile-2 tilt-card magnetic-card" data-no="02">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">02</span>
-              <span class="value-role">People</span>
+          <article class="value-card card-02 tilt-card magnetic-card" data-no="02">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">02</span>
+              <span class="value-card-role">People</span>
             </div>
             <h3>People &amp; Team Support</h3>
             <p>Recruitment coordination, onboarding support, staff training, team readiness.</p>
           </article>
 
-          <article class="value-tile tile-3 tilt-card magnetic-card" data-no="03">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">03</span>
-              <span class="value-role">Process</span>
+          <article class="value-card card-03 tilt-card magnetic-card" data-no="03">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">03</span>
+              <span class="value-card-role">Process</span>
             </div>
             <h3>Process Design</h3>
             <p>SOP refinement, workflow structure, pricing flow, service consistency.</p>
           </article>
 
-          <article class="value-tile tile-4 tilt-card magnetic-card" data-no="04">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">04</span>
-              <span class="value-role">Knowledge</span>
+          <article class="value-card card-04 tilt-card magnetic-card" data-no="04">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">04</span>
+              <span class="value-card-role">Knowledge</span>
             </div>
             <h3>Internal Knowledge Systems</h3>
             <p>Information guide building, internal reference clarity, fraud awareness communication.</p>
           </article>
 
-          <article class="value-tile tile-5 tilt-card magnetic-card" data-no="05">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">05</span>
-              <span class="value-role">Training</span>
+          <article class="value-card card-05 tilt-card magnetic-card" data-no="05">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">05</span>
+              <span class="value-card-role">Training</span>
             </div>
             <h3>Training Translation</h3>
             <p>Turning practical processes into clearer staff guidance and support.</p>
           </article>
 
-          <article class="value-tile tile-6 tilt-card magnetic-card" data-no="06">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">06</span>
-              <span class="value-role">Service</span>
+          <article class="value-card card-06 tilt-card magnetic-card" data-no="06">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">06</span>
+              <span class="value-card-role">Service</span>
             </div>
             <h3>Customer Interface Control</h3>
             <p>Orders, inquiries, complaints, and service quality across messaging channels.</p>
           </article>
 
-          <article class="value-tile tile-7 tilt-card magnetic-card" data-no="07">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">07</span>
-              <span class="value-role">Growth</span>
+          <article class="value-card card-07 tilt-card magnetic-card" data-no="07">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">07</span>
+              <span class="value-card-role">Growth</span>
             </div>
             <h3>Growth Awareness</h3>
             <p>Customer engagement support and operational impact on business retention.</p>
           </article>
 
-          <article class="value-tile tile-8 tilt-card magnetic-card" data-no="08">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">08</span>
-              <span class="value-role">Systems</span>
+          <article class="value-card card-08 tilt-card magnetic-card" data-no="08">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">08</span>
+              <span class="value-card-role">Systems</span>
             </div>
             <h3>System Readiness</h3>
             <p>POS setup, troubleshooting, and standardisation support across outlets.</p>
           </article>
 
-          <article class="value-tile tile-9 tilt-card magnetic-card" data-no="09">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">09</span>
-              <span class="value-role">Launch</span>
+          <article class="value-card card-09 tilt-card magnetic-card" data-no="09">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">09</span>
+              <span class="value-card-role">Launch</span>
             </div>
             <h3>Launch Support</h3>
             <p>Outlet setup, staff readiness, operational flow preparation, and opening support.</p>
           </article>
 
-          <article class="value-tile tile-10 tilt-card magnetic-card" data-no="10">
-            <span class="value-spotlight"></span>
-            <div class="value-tile-top">
-              <span class="value-no">10</span>
-              <span class="value-role">Pressure</span>
+          <article class="value-card card-10 tilt-card magnetic-card" data-no="10">
+            <span class="card-glow"></span>
+            <div class="value-card-top">
+              <span class="value-card-no">10</span>
+              <span class="value-card-role">Pressure</span>
             </div>
             <h3>Calm Under Pressure</h3>
             <p>Customer issues, equipment issues, unexpected incidents, and structured response.</p>
@@ -1465,7 +1381,7 @@
       </div>
     </section>
 
-    <section class="panel signature-strip reveal-up">
+    <section class="section-shell signature-strip reveal">
       <div class="signature-strip-left">
         <span>Signature Signal</span>
         <h2>Clarity, consistency, and control inside moving environments.</h2>
@@ -1479,7 +1395,7 @@
     </section>
 
     <section class="story-layout">
-      <section class="panel visual-panel reveal-up">
+      <section class="section-shell visual-panel reveal">
         <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House experience visual" />
         <div class="visual-note">
           <strong>Built through real operations, not abstract theory</strong>
@@ -1491,7 +1407,7 @@
       </section>
 
       <div class="story-right">
-        <section class="panel copy-card reveal-up">
+        <section class="section-shell copy-card reveal">
           <span class="section-label">Operational Identity</span>
           <h2>Range over repetition.</h2>
           <p>
@@ -1506,23 +1422,23 @@
         </section>
 
         <div class="triad">
-          <article class="triad-card reveal-up tilt-card">
+          <article class="section-shell triad-card reveal tilt-card">
             <strong>Structured Thinking</strong>
             <span>Seeing business work as connected systems, not isolated tasks.</span>
           </article>
 
-          <article class="triad-card reveal-up tilt-card">
+          <article class="section-shell triad-card reveal tilt-card">
             <strong>Adaptability</strong>
             <span>Moving across service, process, systems, training, and support contexts.</span>
           </article>
 
-          <article class="triad-card reveal-up tilt-card">
+          <article class="section-shell triad-card reveal tilt-card">
             <strong>Operational Discipline</strong>
             <span>Holding consistency, timing, and quality under real pressure.</span>
           </article>
         </div>
 
-        <section class="panel final-card reveal-up">
+        <section class="section-shell final-card reveal">
           <span class="section-label">Reflection</span>
           <h2>A strong operational foundation before the next chapter.</h2>
           <p>
@@ -1535,7 +1451,7 @@
     </section>
 
     <section class="bottom-grid">
-      <section class="panel final-card reveal-up">
+      <section class="section-shell final-card reveal">
         <span class="section-label">What This Strengthened</span>
         <h2>Capabilities worth noticing.</h2>
         <ul class="feature-list">
@@ -1548,7 +1464,7 @@
         </ul>
       </section>
 
-      <section class="panel final-card reveal-up">
+      <section class="section-shell final-card reveal">
         <span class="section-label">Immediate Read</span>
         <h2>What this signals at a glance.</h2>
         <p>
@@ -1562,7 +1478,7 @@
       </section>
     </section>
 
-    <div class="back-row reveal-up">
+    <div class="back-row reveal">
       <a href="../journey.html" class="back-link">← Back to Journey</a>
     </div>
   </main>
@@ -1597,7 +1513,7 @@
       const word = typedWords[wordIndex];
       typedEl.textContent = word.substring(0, charIndex);
 
-      let speed = deleting ? 32 : 56;
+      let speed = deleting ? 32 : 54;
 
       if (!deleting && charIndex < word.length) {
         charIndex++;
@@ -1614,11 +1530,10 @@
 
       setTimeout(runTypewriter, speed);
     }
-
     runTypewriter();
 
     // REVEAL
-    const revealItems = document.querySelectorAll(".reveal-up");
+    const revealItems = document.querySelectorAll(".reveal");
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add("is-visible");
@@ -1629,16 +1544,13 @@
 
     // TILT
     const tiltItems = document.querySelectorAll(".tilt-card");
-
     tiltItems.forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
-        const rotateX = ((y / rect.height) - 0.5) * -7;
-        const rotateY = ((x / rect.width) - 0.5) * 7;
-
+        const rotateX = ((y / rect.height) - 0.5) * -6;
+        const rotateY = ((x / rect.width) - 0.5) * 6;
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
       });
 
@@ -1649,13 +1561,12 @@
 
     // MAGNETIC
     const magneticItems = document.querySelectorAll(".magnetic-card");
-
     magneticItems.forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        card.style.transform = `translate(${x * 0.022}px, ${y * 0.022}px)`;
+        card.style.transform = `translate(${x * 0.018}px, ${y * 0.018}px)`;
       });
 
       card.addEventListener("mouseleave", () => {
@@ -1663,17 +1574,15 @@
       });
     });
 
-    // TILE SPOTLIGHT
-    const valueTiles = document.querySelectorAll(".value-tile");
-    valueTiles.forEach((tile) => {
-      const spot = tile.querySelector(".value-spotlight");
-      tile.addEventListener("mousemove", (e) => {
-        const rect = tile.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        if (spot) {
-          spot.style.left = `${x}px`;
-          spot.style.top = `${y}px`;
+    // SPOTLIGHT
+    const valueCards = document.querySelectorAll(".value-card");
+    valueCards.forEach((card) => {
+      const glow = card.querySelector(".card-glow");
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        if (glow) {
+          glow.style.left = `${e.clientX - rect.left}px`;
+          glow.style.top = `${e.clientY - rect.top}px`;
         }
       });
     });
@@ -1688,9 +1597,21 @@
     window.addEventListener('scroll', updateProgress);
     updateProgress();
 
-    // CANVAS FIELD
-    const canvas = document.getElementById('signatureField');
-    const ctx = canvas.getContext('2d');
+    // PARALLAX DRIFT
+    const driftItems = document.querySelectorAll(".hero-frame, .monument-anchor, .visual-panel");
+    function updateDrift() {
+      const scrollY = window.scrollY;
+      driftItems.forEach((el, index) => {
+        const speed = (index + 1) * 0.012;
+        el.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    }
+    window.addEventListener("scroll", updateDrift, { passive: true });
+    updateDrift();
+
+    // BACKGROUND FIELD
+    const canvas = document.getElementById("luxCanvas");
+    const ctx = canvas.getContext("2d");
     let particles = [];
     let mouse = { x: null, y: null, radius: 120 };
 
@@ -1702,21 +1623,14 @@
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(70, Math.max(28, Math.floor(window.innerWidth / 22)));
+      const count = Math.min(64, Math.max(24, Math.floor(window.innerWidth / 26)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.26,
-        vy: (Math.random() - 0.5) * 0.26,
-        r: Math.random() * 1.7 + 0.6,
-        hue: Math.random() < 0.33 ? 'gold' : Math.random() < 0.66 ? 'cyan' : 'violet'
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        r: Math.random() * 1.5 + 0.5
       }));
-    }
-
-    function getColor(hue, alpha) {
-      if (hue === 'gold') return `rgba(255,190,120,${alpha})`;
-      if (hue === 'cyan') return `rgba(105,219,255,${alpha})`;
-      return `rgba(143,140,255,${alpha})`;
     }
 
     function drawCanvas() {
@@ -1736,14 +1650,14 @@
           const dy = mouse.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius) {
-            p.x -= dx * 0.0026;
-            p.y -= dy * 0.0026;
+            p.x -= dx * 0.002;
+            p.y -= dy * 0.002;
           }
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = getColor(p.hue, 0.22);
+        ctx.fillStyle = "rgba(215,176,122,0.18)";
         ctx.fill();
       }
 
@@ -1754,13 +1668,12 @@
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
+          if (dist < 130) {
+            const alpha = (1 - dist / 130) * 0.045;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            const alpha = (1 - dist / 120) * 0.06;
-            ctx.strokeStyle = 'rgba(255,255,255,' + alpha + ')';
+            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -1770,17 +1683,17 @@
       requestAnimationFrame(drawCanvas);
     }
 
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener("mousemove", (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     });
 
-    window.addEventListener('mouseleave', () => {
+    window.addEventListener("mouseleave", () => {
       mouse.x = null;
       mouse.y = null;
     });
 
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
     drawCanvas();
   </script>
