@@ -9,435 +9,806 @@
   <link rel="stylesheet" href="../detail.css" />
 
   <style>
-    .acake-page {
-      display: grid;
-      gap: 28px;
+    :root {
+      --ac-bg-1: #09090f;
+      --ac-bg-2: #12131d;
+      --ac-bg-3: #1b1d2b;
+      --ac-line: rgba(255,255,255,0.08);
+      --ac-line-strong: rgba(255,255,255,0.14);
+      --ac-text: rgba(255,255,255,0.92);
+      --ac-soft: rgba(255,255,255,0.68);
+      --ac-dim: rgba(255,255,255,0.48);
+      --ac-gold: #ffbe74;
+      --ac-peach: #ff8f6b;
+      --ac-cream: #fff4e8;
+      --ac-shadow: 0 30px 100px rgba(0, 0, 0, 0.42);
     }
 
-    .acake-hero {
-      position: relative;
-      overflow: hidden;
-      padding: 34px;
-      border-radius: 30px;
+    body[data-page="journey"] {
       background:
-        radial-gradient(circle at top right, rgba(255, 181, 72, 0.22), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(255, 122, 89, 0.16), transparent 26%),
-        linear-gradient(135deg, rgba(14, 18, 32, 0.96), rgba(26, 31, 48, 0.94));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+        radial-gradient(circle at 12% 18%, rgba(255, 174, 107, 0.12), transparent 22%),
+        radial-gradient(circle at 85% 12%, rgba(255, 121, 85, 0.10), transparent 18%),
+        radial-gradient(circle at 70% 70%, rgba(255, 190, 116, 0.07), transparent 22%),
+        linear-gradient(180deg, #07070c 0%, #0d0f16 34%, #111420 100%);
+    }
+
+    .acx-shell {
       display: grid;
       gap: 26px;
+      position: relative;
+      isolation: isolate;
     }
 
-    .acake-hero::before {
+    .acx-shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black 48%, transparent 92%);
+      z-index: -1;
+    }
+
+    .acx-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--ac-line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+      box-shadow: var(--ac-shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .acx-hero {
+      min-height: 86vh;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+      align-items: stretch;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 190, 116, 0.17), transparent 24%),
+        radial-gradient(circle at 88% 20%, rgba(255, 143, 107, 0.16), transparent 24%),
+        linear-gradient(135deg, rgba(10,10,17,0.97), rgba(21,24,37,0.94));
+    }
+
+    .acx-hero::before {
       content: "";
       position: absolute;
-      inset: auto -80px -100px auto;
-      width: 280px;
-      height: 280px;
+      right: -120px;
+      top: -100px;
+      width: 360px;
+      height: 360px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 166, 77, 0.24), transparent 68%);
+      background: radial-gradient(circle, rgba(255,190,116,0.18), transparent 66%);
+      filter: blur(8px);
       pointer-events: none;
     }
 
-    .acake-hero-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      align-items: flex-start;
+    .acx-hero::after {
+      content: "";
+      position: absolute;
+      left: -80px;
+      bottom: -120px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,143,107,0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    .acx-left {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 20px;
       position: relative;
       z-index: 1;
     }
 
-    .acake-kicker-group {
+    .acx-top-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .acake-kicker {
-      padding: 9px 14px;
+    .acx-tag {
+      padding: 10px 14px;
       border-radius: 999px;
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      font-weight: 800;
       text-transform: uppercase;
-      font-weight: 700;
-      color: rgba(255, 245, 230, 0.92);
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-    }
-
-    .acake-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 26px;
-      align-items: stretch;
-      position: relative;
-      z-index: 1;
-    }
-
-    .acake-hero-copy h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2.1rem, 4vw, 3.35rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-    }
-
-    .acake-hero-copy p {
-      margin: 0 0 14px;
-      max-width: 64ch;
-      color: rgba(255, 255, 255, 0.72);
-      line-height: 1.9;
-    }
-
-    .acake-hero-panel {
-      display: grid;
-      gap: 14px;
-      align-content: start;
-    }
-
-    .acake-mini-panel {
-      padding: 18px 18px 16px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-
-    .acake-mini-label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.76rem;
-      font-weight: 700;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #ffb25b;
+      color: rgba(255, 245, 235, 0.95);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
     }
 
-    .acake-mini-panel strong {
+    .acx-title-wrap h1 {
+      margin: 0;
+      max-width: 9.5ch;
+      font-size: clamp(3rem, 7vw, 6.1rem);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+      color: var(--ac-cream);
+      text-wrap: balance;
+    }
+
+    .acx-title-sub {
+      margin-top: 14px;
+      max-width: 54ch;
+      color: var(--ac-soft);
+      font-size: 1rem;
+      line-height: 1.95;
+    }
+
+    .acx-scan-row {
+      display: grid;
+      grid-template-columns: 0.74fr 1.26fr;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .acx-big-number {
+      padding: 20px 18px 16px;
+      border-radius: 26px;
+      border: 1px solid var(--ac-line);
+      background: rgba(255,255,255,0.045);
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .acx-big-number strong {
       display: block;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      color: var(--ac-cream);
       margin-bottom: 8px;
-      font-size: 1.02rem;
-      line-height: 1.35;
-      color: #fff6ea;
     }
 
-    .acake-mini-panel span {
-      color: rgba(255,255,255,0.68);
-      line-height: 1.75;
+    .acx-big-number span {
+      color: var(--ac-soft);
+      line-height: 1.7;
       font-size: 0.94rem;
     }
 
-    .acake-stats {
+    .acx-wave {
+      padding: 18px 18px 16px;
+      border-radius: 26px;
+      min-height: 160px;
+      border: 1px solid var(--ac-line);
+      background:
+        radial-gradient(circle at 85% 18%, rgba(255,190,116,0.14), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
+      align-content: end;
+    }
+
+    .acx-wave-graphic {
+      height: 58px;
+      border-radius: 16px;
       position: relative;
-      z-index: 1;
-    }
-
-    .acake-stat {
-      padding: 18px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .acake-stat strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1.2rem;
-      color: #ffffff;
-      letter-spacing: -0.03em;
-    }
-
-    .acake-stat span {
-      display: block;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.7;
-      font-size: 0.9rem;
-    }
-
-    .acake-section-head {
-      display: grid;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .acake-section-head p {
-      margin: 0;
-      color: #ffb25b;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .acake-section-head h2 {
-      margin: 0;
-      font-size: clamp(1.45rem, 2vw, 2rem);
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-    }
-
-    .acake-story-band {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .acake-visual-card {
       overflow: hidden;
-      padding: 0;
-      min-height: 100%;
-      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .acake-visual-card img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      min-height: 420px;
-    }
-
-    .acake-visual-overlay {
+    .acx-wave-graphic::before,
+    .acx-wave-graphic::after {
+      content: "";
       position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(10, 14, 25, 0.74);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.08);
+      inset: auto 0 0 0;
+      height: 100%;
+      background-repeat: repeat-x;
+      background-size: 180px 100%;
+      opacity: 0.95;
     }
 
-    .acake-visual-overlay strong {
+    .acx-wave-graphic::before {
+      background-image:
+        radial-gradient(circle at 20px 60px, transparent 34px, rgba(255,190,116,0.7) 35px, rgba(255,190,116,0.7) 38px, transparent 39px);
+      animation: acxWave 10s linear infinite;
+    }
+
+    .acx-wave-graphic::after {
+      background-image:
+        radial-gradient(circle at 20px -2px, transparent 34px, rgba(255,143,107,0.58) 35px, rgba(255,143,107,0.58) 38px, transparent 39px);
+      animation: acxWave 14s linear infinite reverse;
+    }
+
+    @keyframes acxWave {
+      from { transform: translateX(0); }
+      to { transform: translateX(-180px); }
+    }
+
+    .acx-wave strong {
       display: block;
-      margin-bottom: 8px;
       font-size: 1rem;
-      color: #fff4e7;
+      color: var(--ac-cream);
     }
 
-    .acake-visual-overlay span {
-      color: rgba(255,255,255,0.7);
-      line-height: 1.75;
+    .acx-wave span {
+      color: var(--ac-soft);
+      line-height: 1.72;
       font-size: 0.93rem;
     }
 
-    .acake-story-card {
-      padding: 28px;
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at top right, rgba(255, 180, 90, 0.14), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .acake-story-card p {
-      margin: 0 0 14px;
-      color: rgba(255,255,255,0.74);
-      line-height: 1.95;
-    }
-
-    .acake-contribution-wall {
+    .acx-rail {
       display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .acake-card {
+      gap: 12px;
+      align-content: start;
       position: relative;
-      overflow: hidden;
-      padding: 22px 20px 18px;
-      border-radius: 24px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
-      min-height: 220px;
+      z-index: 1;
     }
 
-    .acake-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(255,178,91,0.95), rgba(255,122,89,0.85));
-      opacity: 0.9;
-    }
-
-    .acake-card.wide { grid-column: span 6; }
-    .acake-card.mid { grid-column: span 4; }
-    .acake-card.small { grid-column: span 3; }
-
-    .acake-card-index {
-      display: inline-flex;
+    .acx-orbit {
+      position: relative;
+      min-height: 100%;
+      display: grid;
       align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      margin-bottom: 14px;
-      font-size: 0.84rem;
-      font-weight: 800;
-      color: #16100a;
-      background: linear-gradient(135deg, #ffd089, #ff9d5c);
-      box-shadow: 0 8px 24px rgba(255, 174, 87, 0.22);
-    }
-
-    .acake-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.02rem;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-    }
-
-    .acake-card p {
-      margin: 0;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.8;
-      font-size: 0.94rem;
-    }
-
-    .acake-signal-strip {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .acake-signal-main {
+      justify-items: center;
       padding: 28px;
-      border-radius: 28px;
+      border-radius: 32px;
       background:
-        radial-gradient(circle at left center, rgba(255, 153, 86, 0.18), transparent 25%),
-        linear-gradient(135deg, rgba(18,22,35,0.98), rgba(29,34,50,0.94));
-      border: 1px solid rgba(255,255,255,0.08);
+        radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--ac-line);
+      overflow: hidden;
     }
 
-    .acake-signal-main h2 {
-      margin: 0 0 12px;
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-    }
-
-    .acake-signal-main p {
-      margin: 0;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.95;
-    }
-
-    .acake-signal-side {
+    .acx-orbit-core {
+      position: relative;
+      width: min(32vw, 360px);
+      aspect-ratio: 1;
+      border-radius: 50%;
       display: grid;
-      gap: 14px;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 46%, transparent 70%);
+      border: 1px solid rgba(255,255,255,0.07);
     }
 
-    .acake-pill-card {
-      padding: 18px 18px 16px;
+    .acx-ring,
+    .acx-ring-two {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.12);
+    }
+
+    .acx-ring {
+      inset: 14%;
+    }
+
+    .acx-ring-two {
+      inset: 0;
+      opacity: 0.7;
+    }
+
+    .acx-core-label {
+      width: 48%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      background:
+        linear-gradient(135deg, rgba(255,190,116,0.16), rgba(255,143,107,0.16)),
+        rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 80px rgba(255, 179, 90, 0.18);
+    }
+
+    .acx-core-label strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--ac-cream);
+    }
+
+    .acx-node {
+      position: absolute;
+      width: 104px;
+      min-height: 104px;
+      padding: 14px 12px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.8rem;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+    }
+
+    .acx-node-1 { top: 4%; left: 50%; transform: translateX(-50%); }
+    .acx-node-2 { top: 22%; right: 2%; }
+    .acx-node-3 { bottom: 14%; right: 10%; }
+    .acx-node-4 { bottom: 4%; left: 50%; transform: translateX(-50%); }
+    .acx-node-5 { bottom: 18%; left: 6%; }
+    .acx-node-6 { top: 20%; left: 2%; }
+
+    .acx-mini-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .acx-mini-box {
+      padding: 14px;
       border-radius: 22px;
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.07);
     }
 
-    .acake-pill-card strong {
+    .acx-mini-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+      color: var(--ac-cream);
+    }
+
+    .acx-mini-box span {
+      color: var(--ac-soft);
+      font-size: 0.84rem;
+      line-height: 1.65;
+    }
+
+    .acx-marquee {
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid var(--ac-line);
+      background: rgba(255,255,255,0.04);
+      padding: 14px 0;
+    }
+
+    .acx-marquee-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      padding-left: 16px;
+      animation: acxMarquee 26s linear infinite;
+    }
+
+    .acx-marquee-pill {
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: var(--ac-cream);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background:
+        linear-gradient(135deg, rgba(255,190,116,0.14), rgba(255,143,107,0.10)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      white-space: nowrap;
+    }
+
+    @keyframes acxMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .acx-grid-main {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+    }
+
+    .acx-image-stack {
+      padding: 0;
+      min-height: 100%;
+      display: grid;
+      overflow: hidden;
+    }
+
+    .acx-image-stack img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 680px;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .acx-image-badge {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      max-width: 260px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(8, 10, 16, 0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .acx-image-badge strong {
       display: block;
       margin-bottom: 8px;
       font-size: 0.98rem;
-      color: #fff5ea;
+      color: var(--ac-cream);
     }
 
-    .acake-pill-card span {
-      color: rgba(255,255,255,0.68);
-      line-height: 1.72;
-      font-size: 0.92rem;
+    .acx-image-badge span {
+      color: var(--ac-soft);
+      font-size: 0.9rem;
+      line-height: 1.75;
     }
 
-    .acake-duo-grid {
+    .acx-grid-right {
+      display: grid;
+      gap: 22px;
+    }
+
+    .acx-intro-card {
+      padding: 28px;
+    }
+
+    .acx-section-label {
+      margin: 0 0 8px;
+      color: var(--ac-gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .acx-intro-card h2,
+    .acx-column-card h2,
+    .acx-final-card h2,
+    .acx-reflection-card h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.55rem, 2vw, 2.15rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      color: var(--ac-cream);
+    }
+
+    .acx-intro-card p,
+    .acx-column-card p,
+    .acx-final-card p,
+    .acx-reflection-card p {
+      margin: 0 0 14px;
+      color: var(--ac-soft);
+      line-height: 1.95;
+    }
+
+    .acx-intro-card p:last-child,
+    .acx-column-card p:last-child,
+    .acx-final-card p:last-child,
+    .acx-reflection-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .acx-statement {
+      padding: 24px 24px 20px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background:
+        radial-gradient(circle at 88% 18%, rgba(255,190,116,0.10), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+    }
+
+    .acx-statement strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ac-cream);
+      font-size: 1.03rem;
+      letter-spacing: -0.02em;
+    }
+
+    .acx-statement span {
+      color: var(--ac-soft);
+      line-height: 1.8;
+      display: block;
+    }
+
+    .acx-columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 22px;
     }
 
-    .acake-list-card,
-    .acake-reflection-card {
+    .acx-column-card {
       padding: 26px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .acake-list {
+    .acx-signal-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .acx-signal-item {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+    }
+
+    .acx-signal-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,190,116,0.28);
+      background: rgba(255,255,255,0.065);
+    }
+
+    .acx-signal-item b {
+      display: grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(255,190,116,0.2), rgba(255,143,107,0.16)),
+        rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--ac-cream);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+
+    .acx-signal-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ac-cream);
+      font-size: 0.96rem;
+      line-height: 1.3;
+    }
+
+    .acx-signal-item span {
+      color: var(--ac-soft);
+      font-size: 0.9rem;
+      line-height: 1.72;
+      display: block;
+    }
+
+    .acx-radar-zone {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .acx-radar-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 210px;
+      padding: 20px 18px 18px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .acx-radar-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(255,190,116,0.22);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.24);
+    }
+
+    .acx-radar-card::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,190,116,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .acx-radar-card.large { grid-column: span 6; }
+    .acx-radar-card.med { grid-column: span 4; }
+    .acx-radar-card.small { grid-column: span 3; }
+
+    .acx-radar-no {
+      display: inline-flex;
+      min-width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #1c130d;
+      background: linear-gradient(135deg, var(--ac-gold), var(--ac-peach));
+      box-shadow: 0 8px 22px rgba(255, 170, 90, 0.22);
+    }
+
+    .acx-radar-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--ac-cream);
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+    }
+
+    .acx-radar-card p {
+      margin: 0;
+      color: var(--ac-soft);
+      font-size: 0.92rem;
+      line-height: 1.82;
+    }
+
+    .acx-bottom-zone {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 22px;
+    }
+
+    .acx-final-card,
+    .acx-reflection-card {
+      padding: 28px;
+      min-height: 100%;
+    }
+
+    .acx-list {
       margin: 0;
       padding-left: 18px;
       display: grid;
       gap: 12px;
-      color: rgba(255,255,255,0.74);
+      color: var(--ac-soft);
       line-height: 1.85;
     }
 
-    .acake-reflection-card p {
-      margin: 0 0 14px;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.95;
+    .acx-list li::marker {
+      color: var(--ac-gold);
     }
 
-    .acake-reflection-card p:last-child,
-    .acake-story-card p:last-child {
-      margin-bottom: 0;
+    .acx-back {
+      display: flex;
+      justify-content: center;
+      padding-top: 4px;
     }
 
-    @media (max-width: 1100px) {
-      .acake-hero-grid,
-      .acake-story-band,
-      .acake-signal-strip,
-      .acake-duo-grid {
+    .acx-back a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      color: var(--ac-cream);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .acx-back a:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,190,116,0.22);
+    }
+
+    @media (max-width: 1220px) {
+      .acx-hero,
+      .acx-grid-main,
+      .acx-bottom-zone {
         grid-template-columns: 1fr;
       }
 
-      .acake-stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .acx-image-stack img {
+        min-height: 460px;
       }
 
-      .acake-card.wide,
-      .acake-card.mid,
-      .acake-card.small {
+      .acx-title-wrap h1 {
+        max-width: none;
+      }
+
+      .acx-hero {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .acx-columns,
+      .acx-mini-strip,
+      .acx-scan-row {
+        grid-template-columns: 1fr;
+      }
+
+      .acx-radar-card.large,
+      .acx-radar-card.med,
+      .acx-radar-card.small {
         grid-column: span 6;
+      }
+
+      .acx-node {
+        width: 92px;
+        min-height: 92px;
+        font-size: 0.75rem;
+      }
+
+      .acx-orbit-core {
+        width: min(78vw, 360px);
       }
     }
 
     @media (max-width: 720px) {
-      .acake-hero,
-      .acake-story-card,
-      .acake-signal-main,
-      .acake-list-card,
-      .acake-reflection-card,
-      .acake-card {
+      .acx-hero,
+      .acx-intro-card,
+      .acx-column-card,
+      .acx-final-card,
+      .acx-reflection-card {
         padding: 22px 18px;
       }
 
-      .acake-stats {
+      .acx-radar-zone {
         grid-template-columns: 1fr;
       }
 
-      .acake-contribution-wall {
-        grid-template-columns: 1fr;
-      }
-
-      .acake-card.wide,
-      .acake-card.mid,
-      .acake-card.small {
+      .acx-radar-card.large,
+      .acx-radar-card.med,
+      .acx-radar-card.small {
         grid-column: auto;
       }
 
-      .acake-visual-card img {
-        min-height: 280px;
+      .acx-orbit {
+        padding: 18px;
+      }
+
+      .acx-node {
+        position: static;
+        width: auto;
+        min-height: auto;
+        padding: 12px 14px;
+      }
+
+      .acx-orbit-core {
+        width: 100%;
+        aspect-ratio: auto;
+        background: none;
+        border: none;
+        gap: 12px;
+        display: grid;
+      }
+
+      .acx-ring,
+      .acx-ring-two,
+      .acx-core-label {
+        position: static;
+        inset: auto;
+      }
+
+      .acx-core-label {
+        width: 100%;
+        aspect-ratio: auto;
+        border-radius: 24px;
+      }
+
+      .acx-image-stack img {
+        min-height: 300px;
+      }
+
+      .acx-title-wrap h1 {
+        font-size: clamp(2.3rem, 14vw, 3.8rem);
+      }
+
+      .acx-marquee-track {
+        animation-duration: 18s;
       }
     }
   </style>
@@ -446,291 +817,320 @@
 
   <div id="header"></div>
 
-  <main class="page-shell detail-shell acake-page">
+  <main class="page-shell detail-shell acx-shell">
 
-    <!-- HERO -->
-    <section class="acake-hero reveal">
-      <div class="acake-hero-top">
-        <div class="acake-kicker-group">
-          <span class="acake-kicker">Journey / Professional Experience</span>
-          <span class="acake-kicker">Dec 2017 - Aug 2023</span>
-          <span class="acake-kicker">Multi-Function Business Exposure</span>
+    <!-- HERO INSTALLATION -->
+    <section class="acx-panel acx-hero reveal">
+      <div class="acx-left">
+        <div class="acx-top-tags">
+          <span class="acx-tag">Journey / Experience Installation</span>
+          <span class="acx-tag">Dec 2017 - Aug 2023</span>
+          <span class="acx-tag">Australian Cake House / ACake</span>
         </div>
-      </div>
 
-      <div class="acake-hero-grid">
-        <div class="acake-hero-copy">
-          <h1>Australian Cake House / ACake (M) Sdn Bhd</h1>
-          <p>
-            This phase of my journey was not shaped by one job title alone. It was built
-            through continuous involvement across support work, store execution, operational
-            coordination, customer communication, documentation, training, and systems-related tasks.
-          </p>
-          <p>
-            Over time, I developed practical exposure to how real business environments function
-            across people, processes, systems, and customers — and how consistency, structure,
-            and teamwork keep operations moving.
+        <div class="acx-title-wrap">
+          <h1>Operations in Motion</h1>
+          <p class="acx-title-sub">
+            This was not one narrow role. It was a long-form experience built through support work,
+            execution, coordination, documentation, communication, training, outlet preparation,
+            and real operational exposure across a live business environment.
           </p>
         </div>
 
-        <div class="acake-hero-panel">
-          <div class="acake-mini-panel">
-            <span class="acake-mini-label">Core Character</span>
-            <strong>Structured, adaptive, and support-driven contribution</strong>
+        <div class="acx-scan-row">
+          <div class="acx-big-number">
+            <strong>10</strong>
             <span>
-              This experience was about learning through involvement, improving through execution,
-              and understanding how different business components connect in practice.
+              contribution zones mapped across finance, people, systems,
+              customers, processes, and operational problem-solving.
             </span>
           </div>
 
-          <div class="acake-mini-panel">
-            <span class="acake-mini-label">Operational Theme</span>
-            <strong>From daily execution to broader business awareness</strong>
+          <div class="acx-wave">
+            <div class="acx-wave-graphic"></div>
+            <strong>Business work is never one straight line.</strong>
             <span>
-              Exposure expanded beyond frontline work into documentation, onboarding,
-              customer handling, process support, and outlet readiness.
+              It moves through people, timing, process, pressure, systems,
+              and service. This page turns that idea into the layout itself.
             </span>
+          </div>
+        </div>
+
+        <div class="acx-mini-strip">
+          <div class="acx-mini-box">
+            <strong>Support-Based Growth</strong>
+            <span>Built through involvement, not exaggerated ownership.</span>
+          </div>
+          <div class="acx-mini-box">
+            <strong>Multi-Outlet Awareness</strong>
+            <span>Practical understanding across different operational contexts.</span>
+          </div>
+          <div class="acx-mini-box">
+            <strong>Structured Mindset</strong>
+            <span>Learned how consistency and clarity hold businesses together.</span>
           </div>
         </div>
       </div>
 
-      <div class="acake-stats">
-        <div class="acake-stat">
-          <strong>5+ Years</strong>
-          <span>Built through long-term involvement inside a real operational environment.</span>
+      <div class="acx-rail">
+        <div class="acx-orbit">
+          <div class="acx-orbit-core">
+            <div class="acx-ring"></div>
+            <div class="acx-ring-two"></div>
+
+            <div class="acx-core-label">
+              <strong>People<br>Processes<br>Systems<br>Customers</strong>
+            </div>
+
+            <div class="acx-node acx-node-1">Accounting &amp;<br>Financial Support</div>
+            <div class="acx-node acx-node-2">HR &amp;<br>Team Support</div>
+            <div class="acx-node acx-node-3">Customer Experience &amp;<br>Communication</div>
+            <div class="acx-node acx-node-4">System Setup &amp;<br>Technical Support</div>
+            <div class="acx-node acx-node-5">Outlet Setup &amp;<br>Expansion Support</div>
+            <div class="acx-node acx-node-6">SOP Development &amp;<br>Documentation</div>
+          </div>
         </div>
-        <div class="acake-stat">
-          <strong>10 Areas</strong>
-          <span>Contributions spanning finance, HR, systems, customers, SOPs, and support.</span>
-        </div>
-        <div class="acake-stat">
-          <strong>Multi-Outlet</strong>
-          <span>Hands-on exposure to operational consistency across different store settings.</span>
-        </div>
-        <div class="acake-stat">
-          <strong>Foundation</strong>
-          <span>A strong base for later business, systems, and technology-oriented thinking.</span>
+
+        <div class="acx-marquee">
+          <div class="acx-marquee-track">
+            <span class="acx-marquee-pill">Bookkeeping Support</span>
+            <span class="acx-marquee-pill">Recruitment Coordination</span>
+            <span class="acx-marquee-pill">SOP Refinement</span>
+            <span class="acx-marquee-pill">Information Guide SOP</span>
+            <span class="acx-marquee-pill">POS Training</span>
+            <span class="acx-marquee-pill">WhatsApp &amp; Messenger Handling</span>
+            <span class="acx-marquee-pill">Marketing Support</span>
+            <span class="acx-marquee-pill">System Standardisation</span>
+            <span class="acx-marquee-pill">Outlet Launch Preparation</span>
+            <span class="acx-marquee-pill">Operational Problem-Solving</span>
+
+            <span class="acx-marquee-pill">Bookkeeping Support</span>
+            <span class="acx-marquee-pill">Recruitment Coordination</span>
+            <span class="acx-marquee-pill">SOP Refinement</span>
+            <span class="acx-marquee-pill">Information Guide SOP</span>
+            <span class="acx-marquee-pill">POS Training</span>
+            <span class="acx-marquee-pill">WhatsApp &amp; Messenger Handling</span>
+            <span class="acx-marquee-pill">Marketing Support</span>
+            <span class="acx-marquee-pill">System Standardisation</span>
+            <span class="acx-marquee-pill">Outlet Launch Preparation</span>
+            <span class="acx-marquee-pill">Operational Problem-Solving</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- STORY BAND -->
-    <section class="acake-story-band">
-      <section class="glass-card acake-visual-card reveal-delay">
+    <!-- VISUAL + STORY -->
+    <section class="acx-grid-main">
+      <section class="acx-panel acx-image-stack reveal-delay">
         <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House professional experience visual" />
-        <div class="acake-visual-overlay">
-          <strong>Operational learning in a real business environment</strong>
+        <div class="acx-image-badge">
+          <strong>Real business exposure before later technology growth</strong>
           <span>
-            This stage built practical awareness of how execution, coordination, standards,
-            and customer-facing work connect behind daily business operations.
+            This stage built practical awareness of how stores, systems, teams,
+            service quality, and daily operations connect behind the scenes.
           </span>
         </div>
       </section>
 
-      <section class="acake-story-card reveal-delay-2">
-        <div class="acake-section-head">
-          <p>Professional Experience</p>
-          <h2>Where business understanding became practical</h2>
+      <div class="acx-grid-right">
+        <section class="acx-panel acx-intro-card reveal">
+          <p class="acx-section-label">Experience Frame</p>
+          <h2>Where practical business understanding became layered, not linear</h2>
+          <p>
+            During my time with Australian Cake House / ACake (M) Sdn Bhd, I had the opportunity
+            to be involved in different operational and support functions rather than being limited
+            to one fixed area. My contributions gradually expanded into bookkeeping support, recruitment
+            coordination, onboarding assistance, SOP development, internal documentation, customer handling,
+            training support, system setup assistance, and outlet preparation.
+          </p>
+          <p>
+            That range mattered because it showed me that business performance is not driven by one task
+            alone. It depends on how records, people, workflows, communication, service, and systems
+            reinforce one another in day-to-day operations.
+          </p>
+        </section>
+
+        <div class="acx-columns">
+          <section class="acx-panel acx-column-card reveal-delay">
+            <p class="acx-section-label">Overall Reflection</p>
+            <h2>Less about title, more about range</h2>
+            <p>
+              Rather than focusing on a single function, I gradually learned how different components —
+              people, processes, systems, and customers — work together inside a real operational environment.
+            </p>
+            <div class="acx-statement">
+              <strong>Core outcome</strong>
+              <span>
+                This journey helped build structured thinking, adaptability, continuous learning,
+                and stronger awareness of consistency, teamwork, and operational discipline.
+              </span>
+            </div>
+          </section>
+
+          <section class="acx-panel acx-column-card reveal-delay-2">
+            <p class="acx-section-label">Why It Matters</p>
+            <h2>The foundation behind later growth</h2>
+            <p>
+              Before business systems, data, or technology thinking became formal, this phase had already
+              introduced me to how organisations work under real constraints, real timing, and real service expectations.
+            </p>
+            <div class="acx-signal-list">
+              <div class="acx-signal-item">
+                <b>01</b>
+                <div>
+                  <strong>Operational clarity</strong>
+                  <span>Understanding how daily work becomes structured execution.</span>
+                </div>
+              </div>
+              <div class="acx-signal-item">
+                <b>02</b>
+                <div>
+                  <strong>Systems awareness</strong>
+                  <span>Seeing how tools and standards support reliability across outlets.</span>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-
-        <p>
-          During my time with Australian Cake House / ACake (M) Sdn Bhd, I was given the
-          opportunity to contribute across different layers of the business rather than staying
-          within one narrow function. My involvement included support for bookkeeping, recruitment
-          coordination, SOP documentation, internal guides, customer communication, staff training,
-          system setup support, and outlet preparation.
-        </p>
-
-        <p>
-          This made the experience especially meaningful because it showed me that smooth operations
-          depend on much more than daily execution alone. They depend on accurate records, clear
-          workflows, reliable communication, staff readiness, service consistency, and structured systems.
-        </p>
-
-        <p>
-          The result was not only broader exposure, but also a stronger mindset around process clarity,
-          operational discipline, and learning how different parts of a business must work together.
-        </p>
-      </section>
+      </div>
     </section>
 
-    <!-- CONTRIBUTION WALL -->
-    <section class="glass-card detail-content-card reveal">
-      <div class="acake-section-head">
-        <p>Key Contributions</p>
-        <h2>A bold map of business involvement</h2>
-      </div>
+    <!-- CONTRIBUTION RADAR -->
+    <section class="acx-panel acx-intro-card reveal">
+      <p class="acx-section-label">Contribution Radar</p>
+      <h2>Ten experience modules — designed like signals, not paragraphs</h2>
 
-      <div class="acake-contribution-wall">
-        <article class="acake-card wide">
-          <span class="acake-card-index">01</span>
+      <div class="acx-radar-zone">
+        <article class="acx-radar-card large">
+          <span class="acx-radar-no">01</span>
           <h3>Accounting &amp; Financial Support</h3>
           <p>
             Assisted in daily bookkeeping and financial record management, supported sales tracking
-            and reporting processes, and gained hands-on exposure to multi-outlet financial operations
-            while learning the importance of accuracy and consistency in transaction handling.
+            and basic reporting processes, gained hands-on exposure to multi-outlet financial operations,
+            and learned the importance of accuracy and consistency in transaction handling.
           </p>
         </article>
 
-        <article class="acake-card mid">
-          <span class="acake-card-index">02</span>
+        <article class="acx-radar-card med">
+          <span class="acx-radar-no">02</span>
           <h3>Human Resources &amp; Team Support</h3>
           <p>
-            Participated in recruitment and interview coordination, contributed to onboarding support,
-            assisted in training new staff, and learned how people management aligns with operational needs.
+            Participated in recruitment and interview coordination, contributed to interview and onboarding
+            improvements, assisted in training new staff, and learned how people management aligns with operational needs.
           </p>
         </article>
 
-        <article class="acake-card mid">
-          <span class="acake-card-index">03</span>
+        <article class="acx-radar-card med">
+          <span class="acx-radar-no">03</span>
           <h3>Operations &amp; SOP Development</h3>
           <p>
-            Contributed to creating and refining SOPs for daily operations, order processing,
-            pricing structure, and customer service handling while learning the value of consistency and scalability.
+            Contributed to creating and refining SOPs for daily operations, order processing, pricing structure,
+            and customer service handling while learning the value of process consistency and scalability.
           </p>
         </article>
 
-        <article class="acake-card small">
-          <span class="acake-card-index">04</span>
+        <article class="acx-radar-card small">
+          <span class="acx-radar-no">04</span>
           <h3>Information Guide &amp; Internal Documentation</h3>
           <p>
-            Assisted in developing internal guides covering company structure, communication channels,
-            and fraud awareness reference materials.
+            Assisted in developing Information Guide SOP content covering company background, internal structure,
+            communication channels, and fraud awareness guidelines.
           </p>
         </article>
 
-        <article class="acake-card small">
-          <span class="acake-card-index">05</span>
+        <article class="acx-radar-card small">
+          <span class="acx-radar-no">05</span>
           <h3>Training &amp; Knowledge Sharing</h3>
           <p>
-            Supported staff training in customer service standards, product knowledge, and POS usage.
+            Supported training in customer service standards, product knowledge,
+            and POS system usage for better staff readiness.
           </p>
         </article>
 
-        <article class="acake-card small">
-          <span class="acake-card-index">06</span>
+        <article class="acx-radar-card small">
+          <span class="acx-radar-no">06</span>
           <h3>Customer Experience &amp; Communication</h3>
           <p>
-            Managed communication through WhatsApp and Facebook Messenger for orders, inquiries,
-            and customer concerns.
+            Managed interactions through WhatsApp and Facebook Messenger while assisting with
+            orders, inquiries, concerns, and complaints.
           </p>
         </article>
 
-        <article class="acake-card mid">
-          <span class="acake-card-index">07</span>
+        <article class="acx-radar-card med">
+          <span class="acx-radar-no">07</span>
           <h3>Marketing &amp; Customer Engagement</h3>
           <p>
-            Supported basic marketing and customer engagement efforts, contributed ideas for reach
-            and retention, and learned how operations influence growth and experience.
+            Supported basic marketing and engagement efforts, contributed ideas to improve customer
+            reach and retention, and learned how operations affect customer growth.
           </p>
         </article>
 
-        <article class="acake-card mid">
-          <span class="acake-card-index">08</span>
+        <article class="acx-radar-card med">
+          <span class="acx-radar-no">08</span>
           <h3>System Implementation &amp; Technical Support</h3>
           <p>
-            Assisted in POS setup and configuration, supported troubleshooting of store-level issues,
-            and gained exposure to how standardised systems improve outlet efficiency.
+            Assisted in POS setup and configuration, supported troubleshooting of store-level technical issues,
+            and gained exposure to system standardisation across outlets.
           </p>
         </article>
 
-        <article class="acake-card wide">
-          <span class="acake-card-index">09</span>
+        <article class="acx-radar-card large">
+          <span class="acx-radar-no">09</span>
           <h3>Outlet Setup &amp; Expansion Support</h3>
           <p>
             Participated in new outlet setup and preparation, including staff readiness, system setup,
-            and operational flow preparation. This included support for multiple outlet openings,
-            including shopping mall environments where coordination and launch readiness were critical.
+            and operational flow preparation. Supported multiple outlet openings, including shopping mall locations,
+            and learned how launch readiness affects operational smoothness.
           </p>
         </article>
 
-        <article class="acake-card wide">
-          <span class="acake-card-index">10</span>
+        <article class="acx-radar-card large">
+          <span class="acx-radar-no">10</span>
           <h3>Operational Problem-Solving</h3>
           <p>
-            Assisted in handling real-world operational situations such as customer complaints,
-            equipment-related issues, and unexpected store incidents by following structured response
-            procedures and developing the ability to stay calm and solution-focused under pressure.
+            Assisted in handling real-world situations such as customer complaints, equipment-related issues,
+            and unexpected store incidents by following structured response procedures and developing a calm,
+            solution-focused mindset under pressure.
           </p>
         </article>
       </div>
     </section>
 
-    <!-- SIGNAL STRIP -->
-    <section class="acake-signal-strip reveal">
-      <div class="acake-signal-main">
-        <div class="acake-section-head">
-          <p>Operational Signal</p>
-          <h2>What made this phase powerful was not one task — it was the range</h2>
-        </div>
-        <p>
-          Instead of learning from a single isolated role, I was exposed to how multiple business
-          layers interact in practice. Finance, onboarding, process control, customer communication,
-          systems support, and outlet preparation all contributed to a much more complete understanding
-          of how a business stays organised, responsive, and scalable.
-        </p>
-      </div>
-
-      <div class="acake-signal-side">
-        <div class="acake-pill-card">
-          <strong>Process Thinking</strong>
-          <span>Learned to see operational work as connected systems rather than separate tasks.</span>
-        </div>
-        <div class="acake-pill-card">
-          <strong>Execution Discipline</strong>
-          <span>Built through real responsibilities requiring consistency, clarity, and follow-through.</span>
-        </div>
-        <div class="acake-pill-card">
-          <strong>Practical Adaptability</strong>
-          <span>Strengthened by shifting across support, communication, system, and workflow contexts.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FINAL GRID -->
-    <section class="acake-duo-grid">
-      <section class="acake-list-card reveal-delay">
-        <div class="acake-section-head">
-          <p>What This Experience Strengthened</p>
-          <h2>Capabilities built through real involvement</h2>
-        </div>
-
-        <ul class="acake-list">
-          <li>Structured thinking across people, process, systems, and customer interactions.</li>
-          <li>Administrative and operational awareness in a multi-function business environment.</li>
-          <li>Better understanding of SOP design, workflow clarity, and process consistency.</li>
+    <!-- FINAL DUO -->
+    <section class="acx-bottom-zone">
+      <section class="acx-panel acx-final-card reveal-delay">
+        <p class="acx-section-label">What This Experience Strengthened</p>
+        <h2>Capabilities formed through real operational involvement</h2>
+        <ul class="acx-list">
+          <li>Structured thinking across people, process, systems, and service interactions.</li>
+          <li>Administrative and operational support awareness in a multi-function environment.</li>
+          <li>Better understanding of SOP design, workflow documentation, and process consistency.</li>
           <li>Professional communication across internal coordination and customer-facing channels.</li>
-          <li>Staff support awareness through onboarding, training, and team development exposure.</li>
-          <li>Calm, practical problem-solving under real operational pressure.</li>
+          <li>Practical team support awareness through recruitment, onboarding, and training exposure.</li>
+          <li>Calm problem-solving and adaptability inside fast-moving business situations.</li>
         </ul>
       </section>
 
-      <section class="acake-reflection-card reveal-delay-2">
-        <div class="acake-section-head">
-          <p>Overall Reflection</p>
-          <h2>The foundation behind later growth</h2>
-        </div>
-
+      <section class="acx-panel acx-reflection-card reveal-delay-2">
+        <p class="acx-section-label">Overall Reflection</p>
+        <h2>A business foundation built before the next chapter</h2>
         <p>
-          Throughout this experience, I was involved in different aspects of operations, from
-          administrative support to store-level execution and broader coordination work.
+          Throughout this experience, I was involved in various aspects of operations, from administrative
+          support to store-level execution and broader coordination work.
         </p>
-
         <p>
-          Rather than focusing on one function only, I gradually learned how people, processes,
-          systems, and customers must work together inside a real business environment.
+          Instead of learning through one function alone, I gradually understood how people, processes,
+          systems, and customers interact in a real business environment.
         </p>
-
         <p>
-          This journey helped me develop a strong foundation in structured thinking, adaptability,
-          continuous learning, and teamwork — while also showing me why clarity, consistency,
-          and operational discipline matter so much in practice.
+          This journey gave me a strong foundation in structured thinking, adaptability, and continuous learning,
+          while helping me understand why consistency, teamwork, and clear operational systems matter so much.
         </p>
       </section>
     </section>
 
-    <div class="detail-back-row reveal">
-      <a href="../journey.html" class="detail-back-link">← Back to Journey</a>
+    <div class="acx-back reveal">
+      <a href="../journey.html">← Back to Journey</a>
     </div>
   </main>
 
