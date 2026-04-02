@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initHeroCompositionTilt();
   initTypewriter();
   initHeroScrollDriven();
-  initTechTagsFloat();
+  initTechStreamsFloat();
 });
 
 function initReveal() {
@@ -79,7 +79,7 @@ function initScrollGlow() {
   function updateGlow() {
     const scrollY = window.scrollY || 0;
     const moveY = Math.min(54, scrollY * 0.04);
-    const opacity = Math.min(1, 0.8 + scrollY * 0.0001);
+    const opacity = Math.min(1, 0.8 + scrollY * 0.00012);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -327,25 +327,36 @@ function initHeroScrollDriven() {
   updateHeroScroll();
 }
 
-function initTechTagsFloat() {
-  const tags = document.querySelectorAll(".about-tech-tag");
-  if (!tags.length) {
+function initTechStreamsFloat() {
+  const streams = document.querySelectorAll(".about-tech-stream");
+  if (!streams.length) {
     return;
   }
 
   let frame = 0;
 
-  function animateTags() {
-    frame += 0.02;
+  function animateStreams() {
+    frame += 0.018;
 
-    tags.forEach(function (tag, index) {
-      const moveY = Math.sin(frame + index * 0.7) * 6;
-      const moveX = Math.cos(frame + index * 0.5) * 4;
-      tag.style.transform = "translate(" + moveX + "px," + moveY + "px)";
+    streams.forEach(function (stream, index) {
+      const moveY = Math.sin(frame + index * 0.72) * 7;
+      const moveX = Math.cos(frame + index * 0.48) * 5;
+
+      let baseRotate = 0;
+      if (index === 0) baseRotate = -11;
+      if (index === 1) baseRotate = 12;
+      if (index === 2) baseRotate = -6;
+      if (index === 3) baseRotate = 8;
+      if (index === 4) baseRotate = -8;
+      if (index === 5) baseRotate = 10;
+      if (index === 6) baseRotate = -4;
+
+      stream.style.transform =
+        "translate(" + moveX + "px," + moveY + "px) rotate(" + baseRotate + "deg)";
     });
 
-    window.requestAnimationFrame(animateTags);
+    window.requestAnimationFrame(animateStreams);
   }
 
-  animateTags();
+  animateStreams();
 }

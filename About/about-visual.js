@@ -20,17 +20,17 @@
 
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 220);
+    const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 240);
     camera.position.set(0, 0, 28);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.92);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.94);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xff8a2a, 0.95, 130);
+    const warmLight = new THREE.PointLight(0xff8a2a, 1.02, 140);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const sideLight = new THREE.PointLight(0xffc471, 0.62, 120);
+    const sideLight = new THREE.PointLight(0xffc471, 0.64, 120);
     sideLight.position.set(-14, -8, 14);
     scene.add(sideLight);
 
@@ -48,12 +48,13 @@
     let heroScrollProgress = 0;
     let heroDecompose = 0;
 
-    const POINT_COUNT = 150;
-    const bounds = { x: 20, y: 32, z: 10 };
+    const POINT_COUNT = 170;
+    const bounds = { x: 20, y: 34, z: 10 };
 
     const positions = [];
     const basePositions = [];
     const velocities = [];
+    const driftOffsets = [];
 
     for (let i = 0; i < POINT_COUNT; i++) {
       const px = (Math.random() - 0.5) * bounds.x * 2;
@@ -64,10 +65,12 @@
       basePositions.push(px, py, pz);
 
       velocities.push(
-        (Math.random() - 0.5) * 0.0064,
-        (Math.random() - 0.5) * 0.0064,
-        (Math.random() - 0.5) * 0.0023
+        (Math.random() - 0.5) * 0.0072,
+        (Math.random() - 0.5) * 0.0072,
+        (Math.random() - 0.5) * 0.0026
       );
+
+      driftOffsets.push(Math.random() * Math.PI * 2);
     }
 
     const particleGeometry = new THREE.BufferGeometry();
@@ -78,9 +81,9 @@
 
     const particleMaterial = new THREE.PointsMaterial({
       color: 0xff922c,
-      size: 0.16,
+      size: 0.17,
       transparent: true,
-      opacity: 0.48,
+      opacity: 0.52,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -88,7 +91,7 @@
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     group.add(particles);
 
-    const maxLineSegments = POINT_COUNT * 6;
+    const maxLineSegments = POINT_COUNT * 7;
     const linePositions = new Float32Array(maxLineSegments * 3 * 2);
 
     const lineGeometry = new THREE.BufferGeometry();
@@ -98,13 +101,14 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.075
+      opacity: 0.08
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
     group.add(lineSegments);
 
     let animationFrameId = null;
+    let time = 0;
 
     resize();
     window.addEventListener("resize", resize);
@@ -179,6 +183,12 @@
         array[idx + 1] += velocities[idx + 1];
         array[idx + 2] += velocities[idx + 2];
 
+        const drift = Math.sin(time * 0.7 + driftOffsets[i]) * 0.016;
+        const swirl = Math.cos(time * 0.55 + driftOffsets[i]) * 0.014;
+
+        array[idx] += drift;
+        array[idx + 1] += swirl;
+
         if (array[idx] > bounds.x || array[idx] < -bounds.x) {
           velocities[idx] *= -1;
         }
@@ -195,14 +205,14 @@
           const point = textPoints[i % textPoints.length];
           const dx = point.x - array[idx];
           const dy = point.y - array[idx + 1];
-          array[idx] += dx * 0.001;
-          array[idx + 1] += dy * 0.001;
+          array[idx] += dx * 0.0011;
+          array[idx + 1] += dy * 0.0011;
         }
 
         const baseX = basePositions[idx];
         const baseY = basePositions[idx + 1];
-        array[idx] += (baseX - array[idx]) * 0.0007;
-        array[idx + 1] += (baseY - array[idx + 1]) * 0.0007;
+        array[idx] += (baseX - array[idx]) * 0.0006;
+        array[idx + 1] += (baseY - array[idx + 1]) * 0.0006;
       }
 
       attr.needsUpdate = true;
@@ -228,7 +238,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.4 && lineCount < maxLineSegments) {
+          if (distance < 4.7 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -246,6 +256,7 @@
 
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
+      time += 0.01;
 
       mouse.x += (mouse.targetX - mouse.x) * 0.03;
       mouse.y += (mouse.targetY - mouse.y) * 0.03;
@@ -253,25 +264,25 @@
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.00086;
+      const scrollShift = scrollOffset * -0.0009;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.00012;
-      group.rotation.x += 0.00007;
+      group.rotation.y += 0.00014;
+      group.rotation.x += 0.00008;
 
-      group.rotation.y += mouse.x * 0.0011;
-      group.rotation.x += -mouse.y * 0.0008;
+      group.rotation.y += mouse.x * 0.0012;
+      group.rotation.x += -mouse.y * 0.00085;
 
-      group.position.x += ((mouse.x * 0.95) + heroDecompose * 0.8 - group.position.x) * 0.025;
-      group.position.y += (((-mouse.y * 0.62) + heroScrollProgress * 0.95) - group.position.y) * 0.025;
+      group.position.x += ((mouse.x * 1.05) + heroDecompose * 0.85 - group.position.x) * 0.025;
+      group.position.y += (((-mouse.y * 0.7) + heroScrollProgress * 1.05) - group.position.y) * 0.025;
 
-      particles.rotation.z += 0.00011;
-      particles.position.x = mouse.x * 0.48;
-      particles.position.y += ((-mouse.y * 0.32) - particles.position.y) * 0.03;
+      particles.rotation.z += 0.00012;
+      particles.position.x = mouse.x * 0.5;
+      particles.position.y += ((-mouse.y * 0.34) - particles.position.y) * 0.03;
 
-      lineSegments.rotation.z -= 0.00005;
-      lineSegments.position.x += ((mouse.x * 0.28) - lineSegments.position.x) * 0.03;
-      lineSegments.position.y += ((-mouse.y * 0.20) - lineSegments.position.y) * 0.03;
+      lineSegments.rotation.z -= 0.00006;
+      lineSegments.position.x += ((mouse.x * 0.30) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * 0.22) - lineSegments.position.y) * 0.03;
 
       renderer.render(scene, camera);
     }

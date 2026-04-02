@@ -26,8 +26,8 @@ body[data-page="about"] {
 .about-bg-base {
   z-index: 0;
   background:
-    radial-gradient(circle at 14% 10%, rgba(255, 146, 44, 0.04), transparent 24%),
-    radial-gradient(circle at 86% 18%, rgba(255, 184, 88, 0.035), transparent 22%),
+    radial-gradient(circle at 14% 10%, rgba(255, 146, 44, 0.045), transparent 24%),
+    radial-gradient(circle at 86% 18%, rgba(255, 184, 88, 0.04), transparent 22%),
     linear-gradient(180deg, #fcf8f3 0%, #f3ece2 100%);
 }
 
@@ -38,20 +38,20 @@ body[data-page="about"] {
 }
 
 .about-bg-light-left {
-  background: radial-gradient(circle at 18% 14%, rgba(255, 134, 32, 0.05), transparent 30%);
+  background: radial-gradient(circle at 18% 14%, rgba(255, 134, 32, 0.06), transparent 30%);
 }
 
 .about-bg-light-right {
   background:
-    radial-gradient(circle at 82% 22%, rgba(255, 184, 82, 0.045), transparent 28%);
+    radial-gradient(circle at 82% 22%, rgba(255, 184, 82, 0.05), transparent 28%);
 }
 
 .about-bg-grid {
   z-index: 0;
-  opacity: 0.022;
+  opacity: 0.024;
   background-image:
-    linear-gradient(rgba(255, 166, 92, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 166, 92, 0.14) 1px, transparent 1px);
+    linear-gradient(rgba(255, 166, 92, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 166, 92, 0.15) 1px, transparent 1px);
   background-size: 74px 74px;
   mask-image: radial-gradient(circle at center, black 56%, transparent 98%);
   animation: aboutGridPulse 12s ease-in-out infinite;
@@ -60,9 +60,9 @@ body[data-page="about"] {
 .about-scroll-glow {
   z-index: 0;
   background:
-    radial-gradient(circle at 50% 16%, rgba(255, 122, 24, 0.035), transparent 30%),
+    radial-gradient(circle at 50% 16%, rgba(255, 122, 24, 0.04), transparent 30%),
     radial-gradient(circle at 50% 84%, rgba(255, 179, 71, 0.03), transparent 34%);
-  opacity: 0.76;
+  opacity: 0.78;
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
@@ -74,8 +74,8 @@ body[data-page="about"] {
   width: 100%;
   height: 100%;
   display: block;
-  opacity: 0.42;
-  filter: contrast(1.05) saturate(1.04);
+  opacity: 0.44;
+  filter: contrast(1.05) saturate(1.05);
 }
 
 /* =========================
@@ -350,17 +350,9 @@ body[data-page="about"] {
   animation: signaturePulse 3.8s ease-in-out infinite;
 }
 
-.about-composition-grid span:nth-child(2n) {
-  animation-delay: 0.35s;
-}
-
-.about-composition-grid span:nth-child(3n) {
-  animation-delay: 0.8s;
-}
-
-.about-composition-grid span:nth-child(4n) {
-  animation-delay: 1.15s;
-}
+.about-composition-grid span:nth-child(2n) { animation-delay: 0.35s; }
+.about-composition-grid span:nth-child(3n) { animation-delay: 0.8s; }
+.about-composition-grid span:nth-child(4n) { animation-delay: 1.15s; }
 
 .about-hero-figure-wrap {
   position: relative;
@@ -404,33 +396,25 @@ body[data-page="about"] {
   will-change: transform;
 }
 
-.about-tech-tag {
+.about-tech-stream {
   position: absolute;
   z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(116, 90, 70, 0.12);
-  box-shadow: 0 14px 26px rgba(58, 41, 27, 0.08);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  line-height: 1;
-  color: #5f4a3d;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  letter-spacing: 0.02em;
+  color: rgba(89, 67, 54, 0.78);
   white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-.about-tech-tag-1 { top: 84px; left: 8px; }
-.about-tech-tag-2 { top: 172px; right: -8px; }
-.about-tech-tag-3 { top: 268px; left: -12px; }
-.about-tech-tag-4 { top: 360px; right: -4px; }
-.about-tech-tag-5 { bottom: 168px; left: 4px; }
-.about-tech-tag-6 { bottom: 86px; right: 22px; }
-.about-tech-tag-7 { bottom: 18px; left: 110px; }
+.about-tech-stream-1 { top: 86px; left: 10px; transform: rotate(-11deg); }
+.about-tech-stream-2 { top: 156px; right: -4px; transform: rotate(12deg); }
+.about-tech-stream-3 { top: 248px; left: -12px; transform: rotate(-6deg); }
+.about-tech-stream-4 { top: 336px; right: -6px; transform: rotate(8deg); }
+.about-tech-stream-5 { bottom: 176px; left: 6px; transform: rotate(-8deg); }
+.about-tech-stream-6 { bottom: 100px; right: 18px; transform: rotate(10deg); }
+.about-tech-stream-7 { bottom: 24px; left: 110px; transform: rotate(-4deg); }
 
 /* =========================
    SECTIONS
@@ -494,21 +478,10 @@ body[data-page="about"] {
   letter-spacing: -0.05em;
 }
 
-.about-heading-think {
-  color: #7a4823;
-}
-
-.about-heading-work {
-  color: #5a473e;
-}
-
-.about-heading-build {
-  color: #8b5329;
-}
-
-.about-heading-closing {
-  color: #6b3d1c;
-}
+.about-heading-think { color: #7a4823; }
+.about-heading-work { color: #5a473e; }
+.about-heading-build { color: #8b5329; }
+.about-heading-closing { color: #6b3d1c; }
 
 .about-highlight-line {
   margin: 0 0 20px;
@@ -729,33 +702,15 @@ body[data-page="about"] {
 }
 
 @keyframes aboutGridPulse {
-  0% {
-    opacity: 0.022;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.04;
-    transform: scale(1.01);
-  }
-  100% {
-    opacity: 0.022;
-    transform: scale(1);
-  }
+  0% { opacity: 0.024; transform: scale(1); }
+  50% { opacity: 0.042; transform: scale(1.01); }
+  100% { opacity: 0.024; transform: scale(1); }
 }
 
 @keyframes signaturePulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.34;
-  }
-  50% {
-    transform: scale(1.14);
-    opacity: 0.72;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0.34;
-  }
+  0% { transform: scale(0.8); opacity: 0.34; }
+  50% { transform: scale(1.14); opacity: 0.72; }
+  100% { transform: scale(0.8); opacity: 0.34; }
 }
 
 @keyframes caretBlink {
@@ -797,8 +752,8 @@ body[data-page="about"] {
     height: 300px;
   }
 
-  .about-tech-tag {
-    font-size: 0.74rem;
+  .about-tech-stream {
+    font-size: 0.76rem;
   }
 }
 
@@ -822,7 +777,7 @@ body[data-page="about"] {
 
 @media (max-width: 640px) {
   #aboutSystemCanvas {
-    opacity: 0.35;
+    opacity: 0.37;
   }
 
   .about-hero {
@@ -879,7 +834,7 @@ body[data-page="about"] {
   }
 
   .about-hero-composition {
-    min-height: 560px;
+    min-height: 600px;
   }
 
   .about-composition-word-top {
@@ -931,13 +886,15 @@ body[data-page="about"] {
     height: 190px;
   }
 
-  .about-tech-tag {
+  .about-tech-stream {
     position: relative;
     inset: auto;
     display: block;
     width: fit-content;
     margin: 8px auto 0;
+    transform: none !important;
     font-size: 0.72rem;
+    text-align: center;
   }
 
   .about-work-item {
