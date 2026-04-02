@@ -8,6 +8,9 @@
 
     const canvas = options.canvas;
     const textTargetSelectors = Array.isArray(options.textTargets) ? options.textTargets : [];
+    const isSmallScreen = window.innerWidth <= 640;
+    const isMediumScreen = window.innerWidth <= 1024;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
@@ -48,7 +51,20 @@
     let heroScrollProgress = 0;
     let heroDecompose = 0;
 
-    const POINT_COUNT = 120;
+    let POINT_COUNT = 120;
+
+    if (isMediumScreen) {
+      POINT_COUNT = 90;
+    }
+
+    if (isSmallScreen) {
+      POINT_COUNT = 60;
+    }
+
+    if (reduceMotion) {
+      POINT_COUNT = 44;
+    }
+
     const bounds = { x: 18, y: 30, z: 10 };
 
     const positions = [];
@@ -64,9 +80,9 @@
       basePositions.push(px, py, pz);
 
       velocities.push(
-        (Math.random() - 0.5) * 0.0048,
-        (Math.random() - 0.5) * 0.0048,
-        (Math.random() - 0.5) * 0.002
+        (Math.random() - 0.5) * (reduceMotion ? 0.0022 : 0.0048),
+        (Math.random() - 0.5) * (reduceMotion ? 0.0022 : 0.0048),
+        (Math.random() - 0.5) * (reduceMotion ? 0.001 : 0.002)
       );
     }
 
@@ -78,9 +94,9 @@
 
     const particleMaterial = new THREE.PointsMaterial({
       color: 0xff922c,
-      size: 0.14,
+      size: isSmallScreen ? 0.18 : 0.14,
       transparent: true,
-      opacity: 0.42,
+      opacity: reduceMotion ? 0.28 : 0.42,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
@@ -98,7 +114,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0xffb347,
       transparent: true,
-      opacity: 0.065
+      opacity: reduceMotion ? 0.04 : 0.065
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -115,6 +131,10 @@
     animationFrameId = requestAnimationFrame(animate);
 
     function onMouseMove(event) {
+      if (reduceMotion) {
+        return;
+      }
+
       const width = window.innerWidth || 1;
       const height = window.innerHeight || 1;
 
@@ -195,14 +215,14 @@
           const point = textPoints[i % textPoints.length];
           const dx = point.x - array[idx];
           const dy = point.y - array[idx + 1];
-          array[idx] += dx * 0.0009;
-          array[idx + 1] += dy * 0.0009;
+          array[idx] += dx * (reduceMotion ? 0.0004 : 0.0009);
+          array[idx + 1] += dy * (reduceMotion ? 0.0004 : 0.0009);
         }
 
         const baseX = basePositions[idx];
         const baseY = basePositions[idx + 1];
-        array[idx] += (baseX - array[idx]) * 0.0008;
-        array[idx + 1] += (baseY - array[idx + 1]) * 0.0008;
+        array[idx] += (baseX - array[idx]) * (reduceMotion ? 0.00045 : 0.0008);
+        array[idx + 1] += (baseY - array[idx + 1]) * (reduceMotion ? 0.00045 : 0.0008);
       }
 
       attr.needsUpdate = true;
@@ -212,6 +232,7 @@
       const particleArray = particleGeometry.getAttribute("position").array;
       let writeIndex = 0;
       let lineCount = 0;
+      const maxDistance = reduceMotion ? 3.4 : 4.15;
 
       for (let i = 0; i < POINT_COUNT; i++) {
         const ax = particleArray[i * 3];
@@ -228,7 +249,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.15 && lineCount < maxLineSegments) {
+          if (distance < maxDistance && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -247,31 +268,33 @@
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
 
-      mouse.x += (mouse.targetX - mouse.x) * 0.03;
-      mouse.y += (mouse.targetY - mouse.y) * 0.03;
+      mouse.x += (mouse.targetX - mouse.x) * (reduceMotion ? 0.015 : 0.03);
+      mouse.y += (mouse.targetY - mouse.y) * (reduceMotion ? 0.015 : 0.03);
 
       updateParticles();
       updateConnections();
 
-      const scrollShift = scrollOffset * -0.00078;
+      const scrollShift = scrollOffset * (reduceMotion ? -0.00036 : -0.00078);
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      group.rotation.y += 0.00009;
-      group.rotation.x += 0.00005;
+      group.rotation.y += reduceMotion ? 0.00003 : 0.00009;
+      group.rotation.x += reduceMotion ? 0.00002 : 0.00005;
 
-      group.rotation.y += mouse.x * 0.0009;
-      group.rotation.x += -mouse.y * 0.0007;
+      if (!reduceMotion) {
+        group.rotation.y += mouse.x * 0.0009;
+        group.rotation.x += -mouse.y * 0.0007;
+      }
 
       group.position.x += ((mouse.x * 0.8) + heroDecompose * 0.6 - group.position.x) * 0.02;
       group.position.y += (((-mouse.y * 0.5) + heroScrollProgress * 0.8) - group.position.y) * 0.02;
 
-      particles.rotation.z += 0.00008;
-      particles.position.x = mouse.x * 0.38;
-      particles.position.y += ((-mouse.y * 0.24) - particles.position.y) * 0.03;
+      particles.rotation.z += reduceMotion ? 0.00003 : 0.00008;
+      particles.position.x = mouse.x * (reduceMotion ? 0.18 : 0.38);
+      particles.position.y += ((-mouse.y * (reduceMotion ? 0.12 : 0.24)) - particles.position.y) * 0.03;
 
-      lineSegments.rotation.z -= 0.00004;
-      lineSegments.position.x += ((mouse.x * 0.20) - lineSegments.position.x) * 0.03;
-      lineSegments.position.y += ((-mouse.y * 0.14) - lineSegments.position.y) * 0.03;
+      lineSegments.rotation.z -= reduceMotion ? 0.00002 : 0.00004;
+      lineSegments.position.x += ((mouse.x * (reduceMotion ? 0.08 : 0.20)) - lineSegments.position.x) * 0.03;
+      lineSegments.position.y += ((-mouse.y * (reduceMotion ? 0.06 : 0.14)) - lineSegments.position.y) * 0.03;
 
       renderer.render(scene, camera);
     }

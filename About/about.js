@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initHeroCompositionTilt();
   initTypewriter();
   initHeroScrollDriven();
+  initBackgroundParallax();
+  initSectionMotionState();
 });
 
 function initReveal() {
@@ -132,8 +134,9 @@ function initScrollShift() {
 function initMagneticButtons() {
   const buttons = document.querySelectorAll(".magnetic-button");
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (!canHover || !buttons.length) {
+  if (!canHover || reduceMotion || !buttons.length) {
     return;
   }
 
@@ -166,8 +169,9 @@ function initHeroCompositionTilt() {
   }
 
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (!canHover) {
+  if (!canHover || reduceMotion) {
     return;
   }
 
@@ -234,6 +238,8 @@ function initHeroCompositionTilt() {
 
 function initTypewriter() {
   const target = document.getElementById("aboutTypewriterText");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   if (!target) {
     return;
   }
@@ -244,6 +250,11 @@ function initTypewriter() {
     "Reviewing, refining, improving.",
     "Turning ideas into stronger systems."
   ];
+
+  if (reduceMotion) {
+    target.textContent = phrases[0];
+    return;
+  }
 
   let phraseIndex = 0;
   let charIndex = 0;
@@ -294,6 +305,12 @@ function initHeroScrollDriven() {
     return;
   }
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion) {
+    return;
+  }
+
   let ticking = false;
 
   function updateHeroScroll() {
@@ -308,7 +325,10 @@ function initHeroScrollDriven() {
       "translate(" + (decompose * -10) + "px," + (decompose * -18) + "px) scale(" + (1 - decompose * 0.035) + ")";
     composition.style.opacity = String(1 - decompose * 0.05);
 
-    if (window.__aboutSystemFieldInstance && typeof window.__aboutSystemFieldInstance.setScrollProgress === "function") {
+    if (
+      window.__aboutSystemFieldInstance &&
+      typeof window.__aboutSystemFieldInstance.setScrollProgress === "function"
+    ) {
       window.__aboutSystemFieldInstance.setScrollProgress(progress, decompose);
     }
 
@@ -324,4 +344,102 @@ function initHeroScrollDriven() {
 
   window.addEventListener("resize", updateHeroScroll);
   updateHeroScroll();
+}
+
+function initBackgroundParallax() {
+  const layers = document.querySelectorAll(".about-bg-parallax, .about-bg-light, .about-bg-grid");
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!layers.length || !canHover || reduceMotion) {
+    return;
+  }
+
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let animationFrameId = null;
+
+  function onMouseMove(event) {
+    const width = window.innerWidth || 1;
+    const height = window.innerHeight || 1;
+
+    targetX = (event.clientX / width - 0.5) * 2;
+    targetY = (event.clientY / height - 0.5) * 2;
+
+    if (!animationFrameId) {
+      animationFrameId = window.requestAnimationFrame(animate);
+    }
+  }
+
+  function animate() {
+    currentX += (targetX - currentX) * 0.06;
+    currentY += (targetY - currentY) * 0.06;
+
+    layers.forEach(function (layer, index) {
+      const strength = (index + 1) * 3.5;
+      const moveX = currentX * strength;
+      const moveY = currentY * strength * 0.8;
+      layer.style.transform = "translate3d(" + moveX + "px," + moveY + "px,0)";
+    });
+
+    const deltaX = Math.abs(targetX - currentX);
+    const deltaY = Math.abs(targetY - currentY);
+
+    if (deltaX < 0.001 && deltaY < 0.001) {
+      animationFrameId = null;
+      return;
+    }
+
+    animationFrameId = window.requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("mousemove", onMouseMove);
+
+  window.addEventListener("mouseleave", function () {
+    targetX = 0;
+    targetY = 0;
+
+    if (!animationFrameId) {
+      animationFrameId = window.requestAnimationFrame(animate);
+    }
+  });
+}
+
+function initSectionMotionState() {
+  const sections = document.querySelectorAll(
+    ".about-hero, .about-section, .about-closing"
+  );
+
+  if (!sections.length) {
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    sections.forEach(function (section) {
+      section.classList.add("is-active");
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-active");
+        } else {
+          entry.target.classList.remove("is-active");
+        }
+      });
+    },
+    {
+      threshold: 0.3,
+      rootMargin: "-8% 0px -8% 0px"
+    }
+  );
+
+  sections.forEach(function (section) {
+    observer.observe(section);
+  });
 }
