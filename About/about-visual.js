@@ -146,22 +146,21 @@
       const points = [];
 
       textTargetSelectors.forEach(function (selector) {
-        const element = document.querySelector(selector);
-        if (!element) {
-          return;
-        }
+        const elements = document.querySelectorAll(selector);
 
-        const rect = element.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > height) {
-          return;
-        }
+        elements.forEach(function (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > height) {
+            return;
+          }
 
-        const centerX = ((rect.left + rect.width / 2) / width - 0.5) * bounds.x * 2;
-        const centerY = -((rect.top + rect.height / 2) / height - 0.5) * bounds.y * 2;
+          const centerX = ((rect.left + rect.width / 2) / width - 0.5) * bounds.x * 2;
+          const centerY = -((rect.top + rect.height / 2) / height - 0.5) * bounds.y * 2;
 
-        points.push({
-          x: centerX,
-          y: centerY
+          points.push({
+            x: centerX,
+            y: centerY
+          });
         });
       });
 
@@ -229,7 +228,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.1 && lineCount < maxLineSegments) {
+          if (distance < 4.15 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;

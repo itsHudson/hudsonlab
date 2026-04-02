@@ -78,7 +78,7 @@ function initScrollGlow() {
   function updateGlow() {
     const scrollY = window.scrollY || 0;
     const moveY = Math.min(54, scrollY * 0.04);
-    const opacity = Math.min(1, 0.78 + scrollY * 0.00012);
+    const opacity = Math.min(1, 0.8 + scrollY * 0.0001);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -157,7 +157,6 @@ function initHeroCompositionTilt() {
   const stage = document.querySelector(".about-hero-composition");
   const figure = document.querySelector(".about-hero-figure");
   const figureWrap = document.querySelector(".about-hero-figure-wrap");
-  const card = document.querySelector(".about-hero-main-card");
   const wordTop = document.querySelector(".about-composition-word-top");
   const wordSide = document.querySelector(".about-composition-word-side");
   const wordBottom = document.querySelector(".about-composition-word-bottom");
@@ -199,11 +198,6 @@ function initHeroCompositionTilt() {
     figure.style.transform =
       "translate3d(" + (translateX * 0.18) + "px," + (translateY * 0.18) + "px,0) scale(1.02)";
 
-    if (card) {
-      card.style.transform =
-        "translate(" + (translateX * 0.18) + "px," + (translateY * 0.14) + "px)";
-    }
-
     if (wordTop) {
       wordTop.style.transform =
         "translate(" + (translateX * 0.12) + "px," + (translateY * 0.08) + "px)";
@@ -223,10 +217,6 @@ function initHeroCompositionTilt() {
   stage.addEventListener("mouseleave", function () {
     figureWrap.style.transform = "";
     figure.style.transform = "";
-
-    if (card) {
-      card.style.transform = "";
-    }
 
     if (wordTop) {
       wordTop.style.transform = "";
@@ -258,37 +248,36 @@ function initTypewriter() {
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  let typingSpeed = 70;
+  let waitMode = false;
 
   function tick() {
     const currentPhrase = phrases[phraseIndex];
 
-    if (!isDeleting) {
+    if (!isDeleting && !waitMode) {
       charIndex += 1;
       target.textContent = currentPhrase.slice(0, charIndex);
 
-      if (charIndex === currentPhrase.length) {
-        isDeleting = true;
-        typingSpeed = 1400;
-      } else {
-        typingSpeed = 65;
+      if (charIndex >= currentPhrase.length) {
+        waitMode = true;
+        window.setTimeout(function () {
+          waitMode = false;
+          isDeleting = true;
+          tick();
+        }, 1200);
+        return;
       }
-    } else {
-      if (typingSpeed === 1400) {
-        typingSpeed = 40;
-      } else {
-        charIndex -= 1;
-        target.textContent = currentPhrase.slice(0, charIndex);
-      }
+    } else if (isDeleting) {
+      charIndex -= 1;
+      target.textContent = currentPhrase.slice(0, charIndex);
 
       if (charIndex <= 0) {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
-        typingSpeed = 260;
       }
     }
 
-    window.setTimeout(tick, typingSpeed);
+    const speed = isDeleting ? 34 : 64;
+    window.setTimeout(tick, speed);
   }
 
   tick();
@@ -298,11 +287,10 @@ function initHeroScrollDriven() {
   const hero = document.getElementById("aboutHero");
   const title = document.getElementById("aboutHeroTitle");
   const subtitle = document.getElementById("aboutHeroSubtitle");
-  const card = document.getElementById("aboutHeroCard");
   const figureWrap = document.getElementById("aboutHeroFigureWrap");
   const composition = document.getElementById("aboutHeroComposition");
 
-  if (!hero || !title || !subtitle || !card || !figureWrap || !composition) {
+  if (!hero || !title || !subtitle || !figureWrap || !composition) {
     return;
   }
 
@@ -311,18 +299,13 @@ function initHeroScrollDriven() {
   function updateHeroScroll() {
     const rect = hero.getBoundingClientRect();
     const viewportHeight = window.innerHeight || 1;
-
     const progress = Math.max(0, Math.min(1, (viewportHeight - rect.top) / (viewportHeight + rect.height)));
     const decompose = Math.max(0, Math.min(1, (window.scrollY || 0) / (hero.offsetHeight * 0.9)));
 
-    title.style.transform =
-      "translateY(" + (decompose * -18) + "px)";
-    subtitle.style.transform =
-      "translateY(" + (decompose * -8) + "px)";
-    card.style.transform =
-      "translate(" + (decompose * 10) + "px," + (decompose * 18) + "px)";
+    title.style.transform = "translateY(" + (decompose * -14) + "px)";
+    subtitle.style.transform = "translateY(" + (decompose * -8) + "px)";
     figureWrap.style.transform =
-      "translate(" + (decompose * -8) + "px," + (decompose * -16) + "px) scale(" + (1 - decompose * 0.03) + ")";
+      "translate(" + (decompose * -10) + "px," + (decompose * -18) + "px) scale(" + (1 - decompose * 0.035) + ")";
     composition.style.opacity = String(1 - decompose * 0.05);
 
     if (window.__aboutSystemFieldInstance && typeof window.__aboutSystemFieldInstance.setScrollProgress === "function") {

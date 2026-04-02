@@ -100,13 +100,13 @@ body[data-page="about"] {
 
 .about-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.94fr) minmax(360px, 1.06fr);
-  gap: 52px;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  gap: 64px;
   align-items: center;
 }
 
 .about-hero-copy {
-  max-width: 700px;
+  max-width: 760px;
 }
 
 .about-kicker {
@@ -132,10 +132,10 @@ body[data-page="about"] {
 
 .about-title {
   margin: 0;
-  max-width: 12ch;
-  font-size: clamp(3.35rem, 5.1vw, 5.25rem);
-  line-height: 1.06;
-  letter-spacing: -0.06em;
+  max-width: 13ch;
+  font-size: clamp(2.85rem, 4.45vw, 4.45rem);
+  line-height: 1.08;
+  letter-spacing: -0.05em;
   color: #17120f;
   text-wrap: balance;
 }
@@ -155,16 +155,16 @@ body[data-page="about"] {
 
 .about-subtitle {
   margin: 26px 0 0;
-  max-width: 56ch;
+  max-width: 54ch;
   font-size: 1.12rem;
-  line-height: 1.95;
+  line-height: 1.96;
   color: #433933;
 }
 
 .about-typewriter-wrap {
-  margin-top: 22px;
+  margin-top: 24px;
   padding: 18px 20px;
-  max-width: 600px;
+  max-width: 560px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.62);
   border: 1px solid rgba(116, 90, 70, 0.10);
@@ -186,8 +186,8 @@ body[data-page="about"] {
 .about-typewriter-line {
   margin: 0;
   min-height: 1.7em;
-  font-size: 1.04rem;
-  line-height: 1.7;
+  font-size: 1.06rem;
+  line-height: 1.72;
   font-weight: 700;
   color: #2b211b;
 }
@@ -365,12 +365,12 @@ body[data-page="about"] {
 .about-hero-figure-wrap {
   position: relative;
   z-index: 2;
-  width: 340px;
-  height: 340px;
+  width: 360px;
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.88;
+  opacity: 0.9;
 }
 
 .about-hero-figure-wrap::before {
@@ -404,79 +404,6 @@ body[data-page="about"] {
   will-change: transform;
 }
 
-.about-hero-main-card {
-  position: absolute;
-  left: 12px;
-  top: 116px;
-  z-index: 10;
-  width: 330px;
-  padding: 30px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
-  border: none;
-}
-
-.about-hero-card-label {
-  margin: 0 0 12px;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #8f5b36;
-}
-
-.about-hero-main-card h2 {
-  margin: 0;
-  font-size: 1.56rem;
-  line-height: 1.18;
-  letter-spacing: -0.04em;
-  color: #1e1712;
-}
-
-.about-hero-card-points {
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.about-hero-card-points li {
-  position: relative;
-  padding: 14px 0 0 18px;
-  font-size: 1rem;
-  line-height: 1.72;
-  color: #4f433b;
-}
-
-.about-hero-card-points li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 1.05em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  transform: translateY(-50%);
-}
-
-/* =========================
-   HERO ANIMATION
-   ========================= */
-
-.hero-sequence {
-  opacity: 0;
-  transform: translateY(26px);
-  animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.hero-sequence-1 { animation-delay: 0.05s; }
-.hero-sequence-2 { animation-delay: 0.16s; }
-.hero-sequence-3 { animation-delay: 0.28s; }
-.hero-sequence-4 { animation-delay: 0.40s; }
-.hero-sequence-5 { animation-delay: 0.52s; }
-.hero-sequence-6 { animation-delay: 0.64s; }
-
 /* =========================
    SECTIONS
    ========================= */
@@ -489,7 +416,7 @@ body[data-page="about"] {
 
 .about-section-grid {
   display: grid;
-  gap: 52px;
+  gap: 56px;
   align-items: center;
 }
 
@@ -534,10 +461,25 @@ body[data-page="about"] {
 .about-section-heading {
   margin: 0;
   max-width: 14ch;
-  font-size: clamp(2.6rem, 3.2vw, 3.35rem);
-  line-height: 1.06;
+  font-size: clamp(2.72rem, 3.35vw, 3.55rem);
+  line-height: 1.08;
   letter-spacing: -0.05em;
-  color: #2b2018;
+}
+
+.about-heading-think {
+  color: #7a4823;
+}
+
+.about-heading-work {
+  color: #5a473e;
+}
+
+.about-heading-build {
+  color: #8b5329;
+}
+
+.about-heading-closing {
+  color: #6b3d1c;
 }
 
 .about-highlight-line {
@@ -559,8 +501,8 @@ body[data-page="about"] {
 .about-build-card p {
   margin: 0 0 18px;
   max-width: 58ch;
-  font-size: 1.04rem;
-  line-height: 1.92;
+  font-size: 1.06rem;
+  line-height: 1.94;
   color: #473c35;
 }
 
@@ -614,15 +556,15 @@ body[data-page="about"] {
 .about-work-item strong {
   display: block;
   margin-bottom: 8px;
-  font-size: 1.12rem;
+  font-size: 1.14rem;
   line-height: 1.24;
   color: #241d18;
 }
 
 .about-work-item p {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.82;
+  font-size: 1.02rem;
+  line-height: 1.84;
   color: #5b4e45;
 }
 
@@ -667,7 +609,7 @@ body[data-page="about"] {
 .about-build-card strong {
   display: block;
   margin-bottom: 10px;
-  font-size: 1.14rem;
+  font-size: 1.16rem;
   line-height: 1.3;
   color: #211914;
 }
@@ -686,7 +628,7 @@ body[data-page="about"] {
 .about-closing-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  gap: 52px;
+  gap: 56px;
   align-items: end;
 }
 
@@ -789,12 +731,8 @@ body[data-page="about"] {
 }
 
 @keyframes caretBlink {
-  0%, 49% {
-    opacity: 1;
-  }
-  50%, 100% {
-    opacity: 0;
-  }
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
 /* =========================
@@ -805,7 +743,7 @@ body[data-page="about"] {
   .about-hero-grid,
   .about-section-grid,
   .about-closing-grid {
-    gap: 38px;
+    gap: 40px;
   }
 
   .about-title {
@@ -824,10 +762,6 @@ body[data-page="about"] {
   .about-composition-orbit-inner {
     width: 336px;
     height: 336px;
-  }
-
-  .about-hero-main-card {
-    width: 296px;
   }
 
   .about-hero-figure-wrap {
@@ -851,17 +785,6 @@ body[data-page="about"] {
 
   .about-closing-action {
     align-items: flex-start;
-  }
-}
-
-@media (max-width: 900px) {
-  .about-title {
-    max-width: none;
-  }
-
-  .about-hero-main-card {
-    left: 8px;
-    top: 114px;
   }
 }
 
@@ -969,25 +892,6 @@ body[data-page="about"] {
   .about-composition-grid span {
     width: 5px;
     height: 5px;
-  }
-
-  .about-hero-main-card {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 18px;
-    padding: 22px 18px;
-    border-radius: 20px;
-  }
-
-  .about-hero-main-card h2 {
-    font-size: 1.16rem;
-  }
-
-  .about-hero-card-points li {
-    font-size: 0.9rem;
   }
 
   .about-hero-figure-wrap {
