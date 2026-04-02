@@ -3,608 +3,520 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AC Cake House | Journey | HUDSONLAB</title>
+  <title>AC Cake House | Signature Journey | HUDSONLAB</title>
 
   <link rel="stylesheet" href="../../css/global.css" />
   <link rel="stylesheet" href="../detail.css" />
 
   <style>
     :root {
-      --ac-bg-1: #09090f;
-      --ac-bg-2: #12131d;
-      --ac-bg-3: #1b1d2b;
-      --ac-line: rgba(255,255,255,0.08);
-      --ac-line-strong: rgba(255,255,255,0.14);
-      --ac-text: rgba(255,255,255,0.92);
-      --ac-soft: rgba(255,255,255,0.68);
-      --ac-dim: rgba(255,255,255,0.48);
-      --ac-gold: #ffbe74;
-      --ac-peach: #ff8f6b;
-      --ac-cream: #fff4e8;
-      --ac-shadow: 0 30px 100px rgba(0, 0, 0, 0.42);
+      --bg-1: #06070b;
+      --bg-2: #0d1018;
+      --bg-3: #151927;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.16);
+      --text: rgba(255,255,255,0.95);
+      --soft: rgba(255,255,255,0.72);
+      --dim: rgba(255,255,255,0.48);
+      --gold: #ffbe78;
+      --peach: #ff8d6d;
+      --violet: #8d8cff;
+      --cyan: #65d6ff;
+      --cream: #fff5ea;
+      --shadow: 0 40px 120px rgba(0,0,0,0.5);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 20px;
+      --max: 1440px;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body[data-page="journey"] {
+      margin: 0;
+      color: var(--text);
       background:
-        radial-gradient(circle at 12% 18%, rgba(255, 174, 107, 0.12), transparent 22%),
-        radial-gradient(circle at 85% 12%, rgba(255, 121, 85, 0.10), transparent 18%),
-        radial-gradient(circle at 70% 70%, rgba(255, 190, 116, 0.07), transparent 22%),
-        linear-gradient(180deg, #07070c 0%, #0d0f16 34%, #111420 100%);
+        radial-gradient(circle at 12% 12%, rgba(255,190,120,0.12), transparent 18%),
+        radial-gradient(circle at 82% 14%, rgba(101,214,255,0.08), transparent 22%),
+        radial-gradient(circle at 72% 72%, rgba(141,140,255,0.09), transparent 22%),
+        linear-gradient(180deg, #05060a 0%, #0b0e15 36%, #101421 100%);
+      overflow-x: hidden;
     }
 
-    .acx-shell {
-      display: grid;
-      gap: 26px;
+    .signature-page {
       position: relative;
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      padding: 28px 0 40px;
       isolation: isolate;
     }
 
-    .acx-shell::before {
-      content: "";
+    #acCanvas {
       position: fixed;
       inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.95;
       pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: radial-gradient(circle at center, black 48%, transparent 92%);
-      z-index: -1;
     }
 
-    .acx-panel {
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.12) 0.55px, transparent 0.55px);
+      background-size: 8px 8px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+    }
+
+    .panel {
       position: relative;
       overflow: hidden;
-      border-radius: 34px;
-      border: 1px solid var(--ac-line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
-      box-shadow: var(--ac-shadow);
-      backdrop-filter: blur(18px);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
     }
 
-    .acx-hero {
-      min-height: 86vh;
-      padding: 34px;
+    .hero-shell {
+      min-height: 92vh;
+      padding: 28px;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 22px;
       align-items: stretch;
       background:
-        radial-gradient(circle at 12% 18%, rgba(255, 190, 116, 0.17), transparent 24%),
-        radial-gradient(circle at 88% 20%, rgba(255, 143, 107, 0.16), transparent 24%),
-        linear-gradient(135deg, rgba(10,10,17,0.97), rgba(21,24,37,0.94));
+        radial-gradient(circle at 12% 16%, rgba(255,190,120,0.16), transparent 22%),
+        radial-gradient(circle at 90% 20%, rgba(101,214,255,0.10), transparent 24%),
+        linear-gradient(135deg, rgba(8,10,16,0.96), rgba(19,24,37,0.94));
     }
 
-    .acx-hero::before {
+    .hero-shell::before {
       content: "";
       position: absolute;
-      right: -120px;
-      top: -100px;
-      width: 360px;
-      height: 360px;
+      right: -80px;
+      top: -80px;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,190,116,0.18), transparent 66%);
-      filter: blur(8px);
+      background: radial-gradient(circle, rgba(255,190,120,0.18), transparent 70%);
+      filter: blur(18px);
       pointer-events: none;
     }
 
-    .acx-hero::after {
+    .hero-shell::after {
       content: "";
       position: absolute;
-      left: -80px;
+      left: -100px;
       bottom: -120px;
       width: 320px;
       height: 320px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,143,107,0.14), transparent 68%);
+      background: radial-gradient(circle, rgba(141,140,255,0.13), transparent 72%);
+      filter: blur(18px);
       pointer-events: none;
     }
 
-    .acx-left {
+    .hero-left {
       display: grid;
-      grid-template-rows: auto auto 1fr auto;
-      gap: 20px;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 18px;
       position: relative;
       z-index: 1;
     }
 
-    .acx-top-tags {
+    .signature-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .acx-tag {
+    .signature-pill {
       padding: 10px 14px;
       border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(255, 245, 235, 0.95);
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,245,235,0.95);
     }
 
-    .acx-title-wrap h1 {
+    .hero-title-wrap h1 {
       margin: 0;
-      max-width: 9.5ch;
-      font-size: clamp(3rem, 7vw, 6.1rem);
-      line-height: 0.9;
-      letter-spacing: -0.075em;
-      color: var(--ac-cream);
+      max-width: 8.6ch;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      color: var(--cream);
       text-wrap: balance;
     }
 
-    .acx-title-sub {
-      margin-top: 14px;
-      max-width: 54ch;
-      color: var(--ac-soft);
+    .hero-subline {
+      margin: 0;
+      max-width: 56ch;
       font-size: 1rem;
-      line-height: 1.95;
+      line-height: 1.9;
+      color: var(--soft);
     }
 
-    .acx-scan-row {
-      display: grid;
-      grid-template-columns: 0.74fr 1.26fr;
-      gap: 16px;
-      align-items: end;
-    }
-
-    .acx-big-number {
-      padding: 20px 18px 16px;
-      border-radius: 26px;
-      border: 1px solid var(--ac-line);
-      background: rgba(255,255,255,0.045);
-      min-height: 160px;
+    .typed-stage {
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .acx-big-number strong {
-      display: block;
-      font-size: clamp(3rem, 6vw, 5rem);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
-      color: var(--ac-cream);
-      margin-bottom: 8px;
-    }
-
-    .acx-big-number span {
-      color: var(--ac-soft);
-      line-height: 1.7;
-      font-size: 0.94rem;
-    }
-
-    .acx-wave {
-      padding: 18px 18px 16px;
-      border-radius: 26px;
-      min-height: 160px;
-      border: 1px solid var(--ac-line);
-      background:
-        radial-gradient(circle at 85% 18%, rgba(255,190,116,0.14), transparent 22%),
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-      display: grid;
+      align-items: center;
       gap: 12px;
-      align-content: end;
-    }
-
-    .acx-wave-graphic {
-      height: 58px;
-      border-radius: 16px;
-      position: relative;
+      min-height: 62px;
+      padding: 16px 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(101,214,255,0.04)),
+        rgba(255,255,255,0.035);
       overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .acx-wave-graphic::before,
-    .acx-wave-graphic::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 100%;
-      background-repeat: repeat-x;
-      background-size: 180px 100%;
-      opacity: 0.95;
+    .typed-label {
+      flex: 0 0 auto;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
-    .acx-wave-graphic::before {
-      background-image:
-        radial-gradient(circle at 20px 60px, transparent 34px, rgba(255,190,116,0.7) 35px, rgba(255,190,116,0.7) 38px, transparent 39px);
-      animation: acxWave 10s linear infinite;
+    .typed-text-wrap {
+      min-width: 0;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .acx-wave-graphic::after {
-      background-image:
-        radial-gradient(circle at 20px -2px, transparent 34px, rgba(255,143,107,0.58) 35px, rgba(255,143,107,0.58) 38px, transparent 39px);
-      animation: acxWave 14s linear infinite reverse;
+    .typed-caret {
+      display: inline-block;
+      width: 10px;
+      color: var(--gold);
+      animation: blink 1s infinite;
     }
 
-    @keyframes acxWave {
-      from { transform: translateX(0); }
-      to { transform: translateX(-180px); }
+    @keyframes blink {
+      0%, 45% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
 
-    .acx-wave strong {
-      display: block;
-      font-size: 1rem;
-      color: var(--ac-cream);
-    }
-
-    .acx-wave span {
-      color: var(--ac-soft);
-      line-height: 1.72;
-      font-size: 0.93rem;
-    }
-
-    .acx-rail {
+    .micro-grid {
       display: grid;
-      gap: 12px;
-      align-content: start;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .micro-card {
+      padding: 18px 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transform-style: preserve-3d;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .micro-card:hover {
+      border-color: rgba(255,190,120,0.22);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .micro-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: var(--cream);
+    }
+
+    .micro-card span {
+      display: block;
+      color: var(--soft);
+      line-height: 1.7;
+      font-size: 0.9rem;
+    }
+
+    .hero-right {
+      display: grid;
+      gap: 14px;
       position: relative;
       z-index: 1;
     }
 
-    .acx-orbit {
+    .orbital-stage {
       position: relative;
       min-height: 100%;
-      display: grid;
-      align-items: center;
-      justify-items: center;
-      padding: 28px;
       border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 62%),
+        radial-gradient(circle at center, rgba(255,255,255,0.04), transparent 56%),
         linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid var(--ac-line);
       overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 22px;
     }
 
-    .acx-orbit-core {
+    .core-system {
       position: relative;
-      width: min(32vw, 360px);
+      width: min(32vw, 410px);
       aspect-ratio: 1;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 46%, transparent 70%);
-      border: 1px solid rgba(255,255,255,0.07);
     }
 
-    .acx-ring,
-    .acx-ring-two {
+    .ring,
+    .ring-2,
+    .ring-3 {
       position: absolute;
       border-radius: 50%;
       border: 1px dashed rgba(255,255,255,0.12);
+      animation: spin linear infinite;
     }
 
-    .acx-ring {
-      inset: 14%;
-    }
-
-    .acx-ring-two {
+    .ring {
       inset: 0;
-      opacity: 0.7;
+      animation-duration: 24s;
     }
 
-    .acx-core-label {
-      width: 48%;
+    .ring-2 {
+      inset: 13%;
+      animation-duration: 18s;
+      animation-direction: reverse;
+    }
+
+    .ring-3 {
+      inset: 27%;
+      animation-duration: 12s;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .core-center {
+      width: 42%;
       aspect-ratio: 1;
       border-radius: 50%;
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 20px;
+      padding: 16px;
       background:
-        linear-gradient(135deg, rgba(255,190,116,0.16), rgba(255,143,107,0.16)),
+        linear-gradient(135deg, rgba(255,190,120,0.16), rgba(101,214,255,0.12), rgba(141,140,255,0.12)),
         rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 0 80px rgba(255, 179, 90, 0.18);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 0 0 18px rgba(255,255,255,0.02),
+        0 0 80px rgba(255,190,120,0.18);
+      backdrop-filter: blur(12px);
     }
 
-    .acx-core-label strong {
-      display: block;
-      font-size: 1.05rem;
+    .core-center strong {
+      font-size: 1rem;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      color: var(--ac-cream);
+      color: var(--cream);
     }
 
-    .acx-node {
+    .orbit-node {
       position: absolute;
-      width: 104px;
-      min-height: 104px;
-      padding: 14px 12px;
-      border-radius: 22px;
+      width: 110px;
+      min-height: 110px;
+      padding: 12px;
+      border-radius: 24px;
       display: grid;
       place-items: center;
       text-align: center;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       line-height: 1.35;
-      color: rgba(255,255,255,0.8);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+      color: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.2);
+      backdrop-filter: blur(12px);
+      animation: floaty 5.5s ease-in-out infinite;
     }
 
-    .acx-node-1 { top: 4%; left: 50%; transform: translateX(-50%); }
-    .acx-node-2 { top: 22%; right: 2%; }
-    .acx-node-3 { bottom: 14%; right: 10%; }
-    .acx-node-4 { bottom: 4%; left: 50%; transform: translateX(-50%); }
-    .acx-node-5 { bottom: 18%; left: 6%; }
-    .acx-node-6 { top: 20%; left: 2%; }
+    .orbit-node:nth-child(5) { animation-delay: 0.8s; }
+    .orbit-node:nth-child(6) { animation-delay: 1.6s; }
+    .orbit-node:nth-child(7) { animation-delay: 2.2s; }
+    .orbit-node:nth-child(8) { animation-delay: 2.8s; }
+    .orbit-node:nth-child(9) { animation-delay: 3.4s; }
+    .orbit-node:nth-child(10) { animation-delay: 4s; }
 
-    .acx-mini-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
 
-    .acx-mini-box {
-      padding: 14px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
+    .node-1 { top: -2%; left: 50%; transform: translateX(-50%); }
+    .node-2 { top: 18%; right: -2%; }
+    .node-3 { bottom: 18%; right: 2%; }
+    .node-4 { bottom: -2%; left: 50%; transform: translateX(-50%); }
+    .node-5 { bottom: 18%; left: 2%; }
+    .node-6 { top: 18%; left: -2%; }
 
-    .acx-mini-box strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.92rem;
-      color: var(--ac-cream);
-    }
-
-    .acx-mini-box span {
-      color: var(--ac-soft);
-      font-size: 0.84rem;
-      line-height: 1.65;
-    }
-
-    .acx-marquee {
+    .ticker {
       overflow: hidden;
       border-radius: 26px;
-      border: 1px solid var(--ac-line);
+      border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.04);
       padding: 14px 0;
     }
 
-    .acx-marquee-track {
+    .ticker-track {
       display: flex;
-      gap: 12px;
       width: max-content;
+      gap: 12px;
       padding-left: 16px;
-      animation: acxMarquee 26s linear infinite;
+      animation: ticker 22s linear infinite;
     }
 
-    .acx-marquee-pill {
-      padding: 9px 14px;
-      border-radius: 999px;
-      color: var(--ac-cream);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      background:
-        linear-gradient(135deg, rgba(255,190,116,0.14), rgba(255,143,107,0.10)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      white-space: nowrap;
-    }
-
-    @keyframes acxMarquee {
+    @keyframes ticker {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    .acx-grid-main {
+    .ticker-chip {
+      white-space: nowrap;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(101,214,255,0.08)),
+        rgba(255,255,255,0.035);
+      color: var(--cream);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .signature-breaker {
+      padding: 18px 22px;
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
-      gap: 22px;
+      gap: 18px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(141,140,255,0.05), rgba(101,214,255,0.05)),
+        rgba(255,255,255,0.03);
     }
 
-    .acx-image-stack {
-      padding: 0;
-      min-height: 100%;
+    .breaker-left p {
+      margin: 0;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .breaker-left h2 {
+      margin: 8px 0 0;
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--cream);
+    }
+
+    .breaker-right {
+      color: var(--soft);
+      line-height: 1.85;
+      font-size: 0.97rem;
+    }
+
+    .contribution-stage {
+      padding: 24px;
       display: grid;
-      overflow: hidden;
+      gap: 20px;
     }
 
-    .acx-image-stack img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      min-height: 680px;
-      filter: saturate(0.95) contrast(1.02);
-    }
-
-    .acx-image-badge {
-      position: absolute;
-      left: 22px;
-      bottom: 22px;
-      max-width: 260px;
-      padding: 18px;
-      border-radius: 24px;
-      background: rgba(8, 10, 16, 0.72);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(14px);
-    }
-
-    .acx-image-badge strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.98rem;
-      color: var(--ac-cream);
-    }
-
-    .acx-image-badge span {
-      color: var(--ac-soft);
-      font-size: 0.9rem;
-      line-height: 1.75;
-    }
-
-    .acx-grid-right {
+    .section-head {
       display: grid;
-      gap: 22px;
+      gap: 8px;
     }
 
-    .acx-intro-card {
-      padding: 28px;
-    }
-
-    .acx-section-label {
-      margin: 0 0 8px;
-      color: var(--ac-gold);
+    .section-head p {
+      margin: 0;
+      color: var(--gold);
       font-size: 0.78rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
-    .acx-intro-card h2,
-    .acx-column-card h2,
-    .acx-final-card h2,
-    .acx-reflection-card h2 {
-      margin: 0 0 14px;
-      font-size: clamp(1.55rem, 2vw, 2.15rem);
-      line-height: 1.02;
-      letter-spacing: -0.045em;
-      color: var(--ac-cream);
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      color: var(--cream);
     }
 
-    .acx-intro-card p,
-    .acx-column-card p,
-    .acx-final-card p,
-    .acx-reflection-card p {
-      margin: 0 0 14px;
-      color: var(--ac-soft);
-      line-height: 1.95;
-    }
-
-    .acx-intro-card p:last-child,
-    .acx-column-card p:last-child,
-    .acx-final-card p:last-child,
-    .acx-reflection-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    .acx-statement {
-      padding: 24px 24px 20px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.09);
-      background:
-        radial-gradient(circle at 88% 18%, rgba(255,190,116,0.10), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-    }
-
-    .acx-statement strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--ac-cream);
-      font-size: 1.03rem;
-      letter-spacing: -0.02em;
-    }
-
-    .acx-statement span {
-      color: var(--ac-soft);
+    .section-head span {
+      color: var(--soft);
       line-height: 1.8;
-      display: block;
+      max-width: 60ch;
     }
 
-    .acx-columns {
+    .module-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    .acx-column-card {
-      padding: 26px;
-    }
-
-    .acx-signal-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .acx-signal-item {
-      display: grid;
-      grid-template-columns: 50px 1fr;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
-    }
-
-    .acx-signal-item:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,190,116,0.28);
-      background: rgba(255,255,255,0.065);
-    }
-
-    .acx-signal-item b {
-      display: grid;
-      place-items: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      background:
-        linear-gradient(135deg, rgba(255,190,116,0.2), rgba(255,143,107,0.16)),
-        rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--ac-cream);
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-    }
-
-    .acx-signal-item strong {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--ac-cream);
-      font-size: 0.96rem;
-      line-height: 1.3;
-    }
-
-    .acx-signal-item span {
-      color: var(--ac-soft);
-      font-size: 0.9rem;
-      line-height: 1.72;
-      display: block;
-    }
-
-    .acx-radar-zone {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .acx-radar-card {
+    .module-card {
       position: relative;
       overflow: hidden;
-      min-height: 210px;
+      min-height: 180px;
       padding: 20px 18px 18px;
       border-radius: 28px;
       border: 1px solid rgba(255,255,255,0.08);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
-      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      transform-style: preserve-3d;
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.18);
     }
 
-    .acx-radar-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      border-color: rgba(255,190,116,0.22);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.24);
+    .module-card:hover {
+      border-color: rgba(255,190,120,0.22);
+      box-shadow: 0 26px 80px rgba(0,0,0,0.26);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
     }
 
-    .acx-radar-card::after {
+    .module-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--peach), var(--cyan));
+      opacity: 0.95;
+    }
+
+    .module-card::after {
       content: "";
       position: absolute;
       right: -40px;
@@ -612,525 +524,623 @@
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,190,116,0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
       pointer-events: none;
     }
 
-    .acx-radar-card.large { grid-column: span 6; }
-    .acx-radar-card.med { grid-column: span 4; }
-    .acx-radar-card.small { grid-column: span 3; }
+    .module-card.large { grid-column: span 6; }
+    .module-card.medium { grid-column: span 4; }
+    .module-card.small { grid-column: span 3; }
 
-    .acx-radar-no {
+    .module-no {
       display: inline-flex;
-      min-width: 38px;
-      height: 38px;
       align-items: center;
       justify-content: center;
-      padding: 0 10px;
-      border-radius: 999px;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 12px;
       margin-bottom: 14px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #1c130d;
-      background: linear-gradient(135deg, var(--ac-gold), var(--ac-peach));
-      box-shadow: 0 8px 22px rgba(255, 170, 90, 0.22);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--peach));
+      color: #1b130e;
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      box-shadow: 0 10px 26px rgba(255,170,100,0.22);
     }
 
-    .acx-radar-card h3 {
+    .module-card h3 {
       margin: 0 0 10px;
       font-size: 1rem;
-      color: var(--ac-cream);
-      line-height: 1.28;
-      letter-spacing: -0.025em;
+      line-height: 1.26;
+      letter-spacing: -0.02em;
+      color: var(--cream);
     }
 
-    .acx-radar-card p {
+    .module-card p {
       margin: 0;
-      color: var(--ac-soft);
+      color: var(--soft);
       font-size: 0.92rem;
-      line-height: 1.82;
+      line-height: 1.78;
     }
 
-    .acx-bottom-zone {
+    .side-by-side {
       display: grid;
-      grid-template-columns: 1.02fr 0.98fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 22px;
     }
 
-    .acx-final-card,
-    .acx-reflection-card {
-      padding: 28px;
+    .visual-tower {
+      padding: 0;
+      overflow: hidden;
       min-height: 100%;
+      display: grid;
     }
 
-    .acx-list {
+    .visual-tower img {
+      width: 100%;
+      height: 100%;
+      min-height: 680px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) saturate(0.96);
+    }
+
+    .visual-overlay-card {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(8,10,16,0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .visual-overlay-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cream);
+      font-size: 0.98rem;
+    }
+
+    .visual-overlay-card span {
+      color: var(--soft);
+      line-height: 1.75;
+      font-size: 0.91rem;
+    }
+
+    .insight-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .insight-card,
+    .final-card {
+      padding: 26px;
+    }
+
+    .insight-card h2,
+    .final-card h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+      color: var(--cream);
+    }
+
+    .insight-card p,
+    .final-card p {
+      margin: 0 0 14px;
+      color: var(--soft);
+      line-height: 1.9;
+    }
+
+    .insight-card p:last-child,
+    .final-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .signal-box {
+      padding: 18px 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(101,214,255,0.04)),
+        rgba(255,255,255,0.03);
+    }
+
+    .signal-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cream);
+      font-size: 0.96rem;
+    }
+
+    .signal-box span {
+      display: block;
+      color: var(--soft);
+      line-height: 1.72;
+      font-size: 0.9rem;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .feature-list {
       margin: 0;
       padding-left: 18px;
       display: grid;
       gap: 12px;
-      color: var(--ac-soft);
+      color: var(--soft);
       line-height: 1.85;
     }
 
-    .acx-list li::marker {
-      color: var(--ac-gold);
+    .feature-list li::marker {
+      color: var(--gold);
     }
 
-    .acx-back {
+    .back-row {
       display: flex;
       justify-content: center;
       padding-top: 4px;
     }
 
-    .acx-back a {
+    .back-link-signature {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 13px 18px;
+      padding: 14px 20px;
       border-radius: 999px;
-      color: var(--ac-cream);
+      color: var(--cream);
       text-decoration: none;
       font-weight: 700;
       letter-spacing: 0.02em;
-      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
       transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
 
-    .acx-back a:hover {
+    .back-link-signature:hover {
       transform: translateY(-3px);
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,190,116,0.22);
+      border-color: rgba(255,190,120,0.22);
+      background: rgba(255,255,255,0.08);
     }
 
-    @media (max-width: 1220px) {
-      .acx-hero,
-      .acx-grid-main,
-      .acx-bottom-zone {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1200px) {
+      .hero-shell,
+      .side-by-side,
+      .signature-breaker,
+      .bottom-grid {
         grid-template-columns: 1fr;
       }
 
-      .acx-image-stack img {
-        min-height: 460px;
+      .visual-tower img {
+        min-height: 420px;
       }
 
-      .acx-title-wrap h1 {
+      .hero-title-wrap h1 {
         max-width: none;
-      }
-
-      .acx-hero {
-        min-height: auto;
       }
     }
 
     @media (max-width: 980px) {
-      .acx-columns,
-      .acx-mini-strip,
-      .acx-scan-row {
+      .micro-grid,
+      .signal-row {
         grid-template-columns: 1fr;
       }
 
-      .acx-radar-card.large,
-      .acx-radar-card.med,
-      .acx-radar-card.small {
+      .module-card.large,
+      .module-card.medium,
+      .module-card.small {
         grid-column: span 6;
       }
 
-      .acx-node {
-        width: 92px;
-        min-height: 92px;
-        font-size: 0.75rem;
-      }
-
-      .acx-orbit-core {
-        width: min(78vw, 360px);
+      .core-system {
+        width: min(82vw, 420px);
       }
     }
 
     @media (max-width: 720px) {
-      .acx-hero,
-      .acx-intro-card,
-      .acx-column-card,
-      .acx-final-card,
-      .acx-reflection-card {
-        padding: 22px 18px;
+      .signature-page {
+        width: min(calc(100% - 20px), var(--max));
+        gap: 18px;
+        padding-top: 18px;
       }
 
-      .acx-radar-zone {
+      .hero-shell,
+      .contribution-stage,
+      .insight-card,
+      .final-card {
+        padding: 20px 16px;
+      }
+
+      .module-grid {
         grid-template-columns: 1fr;
       }
 
-      .acx-radar-card.large,
-      .acx-radar-card.med,
-      .acx-radar-card.small {
+      .module-card.large,
+      .module-card.medium,
+      .module-card.small {
         grid-column: auto;
       }
 
-      .acx-orbit {
+      .core-system {
+        width: 100%;
+        aspect-ratio: auto;
+        min-height: auto;
+        display: grid;
+        gap: 12px;
+      }
+
+      .ring,
+      .ring-2,
+      .ring-3 {
+        display: none;
+      }
+
+      .core-center,
+      .orbit-node {
+        position: static;
+        width: 100%;
+        min-height: auto;
+        transform: none !important;
+      }
+
+      .core-center {
+        aspect-ratio: auto;
+        border-radius: 26px;
         padding: 18px;
       }
 
-      .acx-node {
-        position: static;
-        width: auto;
-        min-height: auto;
-        padding: 12px 14px;
+      .hero-title-wrap h1 {
+        font-size: clamp(2.6rem, 14vw, 4.2rem);
       }
 
-      .acx-orbit-core {
-        width: 100%;
-        aspect-ratio: auto;
-        background: none;
-        border: none;
-        gap: 12px;
-        display: grid;
+      .typed-stage {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .acx-ring,
-      .acx-ring-two,
-      .acx-core-label {
-        position: static;
-        inset: auto;
-      }
-
-      .acx-core-label {
-        width: 100%;
-        aspect-ratio: auto;
-        border-radius: 24px;
-      }
-
-      .acx-image-stack img {
+      .visual-tower img {
         min-height: 300px;
-      }
-
-      .acx-title-wrap h1 {
-        font-size: clamp(2.3rem, 14vw, 3.8rem);
-      }
-
-      .acx-marquee-track {
-        animation-duration: 18s;
       }
     }
   </style>
 </head>
 <body data-page="journey">
 
+  <canvas id="acCanvas"></canvas>
+  <div class="noise-overlay"></div>
+
   <div id="header"></div>
 
-  <main class="page-shell detail-shell acx-shell">
+  <main class="page-shell detail-shell signature-page">
 
-    <!-- HERO INSTALLATION -->
-    <section class="acx-panel acx-hero reveal">
-      <div class="acx-left">
-        <div class="acx-top-tags">
-          <span class="acx-tag">Journey / Experience Installation</span>
-          <span class="acx-tag">Dec 2017 - Aug 2023</span>
-          <span class="acx-tag">Australian Cake House / ACake</span>
+    <!-- HERO -->
+    <section class="panel hero-shell reveal-up">
+      <div class="hero-left">
+        <div class="signature-meta">
+          <span class="signature-pill">Signature Page</span>
+          <span class="signature-pill">Dec 2017 - Aug 2023</span>
+          <span class="signature-pill">Australian Cake House / ACake</span>
         </div>
 
-        <div class="acx-title-wrap">
-          <h1>Operations in Motion</h1>
-          <p class="acx-title-sub">
-            This was not one narrow role. It was a long-form experience built through support work,
-            execution, coordination, documentation, communication, training, outlet preparation,
-            and real operational exposure across a live business environment.
-          </p>
+        <div class="hero-title-wrap">
+          <h1>Operations, but Cinematic.</h1>
         </div>
 
-        <div class="acx-scan-row">
-          <div class="acx-big-number">
-            <strong>10</strong>
-            <span>
-              contribution zones mapped across finance, people, systems,
-              customers, processes, and operational problem-solving.
-            </span>
-          </div>
+        <p class="hero-subline">
+          A premium experience page built to show range, systems thinking, motion,
+          execution, and design maturity — without drowning the screen in long text.
+        </p>
 
-          <div class="acx-wave">
-            <div class="acx-wave-graphic"></div>
-            <strong>Business work is never one straight line.</strong>
-            <span>
-              It moves through people, timing, process, pressure, systems,
-              and service. This page turns that idea into the layout itself.
-            </span>
+        <div class="typed-stage">
+          <span class="typed-label">Signal Feed</span>
+          <div class="typed-text-wrap">
+            <span id="typedText"></span><span class="typed-caret">|</span>
           </div>
         </div>
 
-        <div class="acx-mini-strip">
-          <div class="acx-mini-box">
-            <strong>Support-Based Growth</strong>
-            <span>Built through involvement, not exaggerated ownership.</span>
-          </div>
-          <div class="acx-mini-box">
-            <strong>Multi-Outlet Awareness</strong>
-            <span>Practical understanding across different operational contexts.</span>
-          </div>
-          <div class="acx-mini-box">
-            <strong>Structured Mindset</strong>
-            <span>Learned how consistency and clarity hold businesses together.</span>
-          </div>
+        <div class="micro-grid">
+          <article class="micro-card tilt-card">
+            <strong>5+ Years</strong>
+            <span>Long-form exposure across real business operations and multi-function support.</span>
+          </article>
+
+          <article class="micro-card tilt-card">
+            <strong>10 Modules</strong>
+            <span>Finance, HR, SOPs, systems, customer handling, onboarding, marketing, and more.</span>
+          </article>
+
+          <article class="micro-card tilt-card">
+            <strong>Brand + Tech</strong>
+            <span>Presented like a signature digital showcase, not a boring experience page.</span>
+          </article>
         </div>
       </div>
 
-      <div class="acx-rail">
-        <div class="acx-orbit">
-          <div class="acx-orbit-core">
-            <div class="acx-ring"></div>
-            <div class="acx-ring-two"></div>
+      <div class="hero-right">
+        <div class="orbital-stage panel-inner">
+          <div class="core-system">
+            <div class="ring"></div>
+            <div class="ring-2"></div>
+            <div class="ring-3"></div>
 
-            <div class="acx-core-label">
-              <strong>People<br>Processes<br>Systems<br>Customers</strong>
+            <div class="core-center">
+              <strong>People<br>Process<br>System<br>Customer</strong>
             </div>
 
-            <div class="acx-node acx-node-1">Accounting &amp;<br>Financial Support</div>
-            <div class="acx-node acx-node-2">HR &amp;<br>Team Support</div>
-            <div class="acx-node acx-node-3">Customer Experience &amp;<br>Communication</div>
-            <div class="acx-node acx-node-4">System Setup &amp;<br>Technical Support</div>
-            <div class="acx-node acx-node-5">Outlet Setup &amp;<br>Expansion Support</div>
-            <div class="acx-node acx-node-6">SOP Development &amp;<br>Documentation</div>
+            <div class="orbit-node node-1">Accounting &amp;<br>Financial</div>
+            <div class="orbit-node node-2">HR &amp;<br>Team Support</div>
+            <div class="orbit-node node-3">Customer<br>Experience</div>
+            <div class="orbit-node node-4">System &amp;<br>Technical</div>
+            <div class="orbit-node node-5">Outlet Setup &amp;<br>Expansion</div>
+            <div class="orbit-node node-6">SOP &amp;<br>Documentation</div>
           </div>
         </div>
 
-        <div class="acx-marquee">
-          <div class="acx-marquee-track">
-            <span class="acx-marquee-pill">Bookkeeping Support</span>
-            <span class="acx-marquee-pill">Recruitment Coordination</span>
-            <span class="acx-marquee-pill">SOP Refinement</span>
-            <span class="acx-marquee-pill">Information Guide SOP</span>
-            <span class="acx-marquee-pill">POS Training</span>
-            <span class="acx-marquee-pill">WhatsApp &amp; Messenger Handling</span>
-            <span class="acx-marquee-pill">Marketing Support</span>
-            <span class="acx-marquee-pill">System Standardisation</span>
-            <span class="acx-marquee-pill">Outlet Launch Preparation</span>
-            <span class="acx-marquee-pill">Operational Problem-Solving</span>
+        <div class="ticker">
+          <div class="ticker-track">
+            <span class="ticker-chip">Bookkeeping Support</span>
+            <span class="ticker-chip">Recruitment Coordination</span>
+            <span class="ticker-chip">Onboarding Improvement</span>
+            <span class="ticker-chip">SOP Development</span>
+            <span class="ticker-chip">Information Guide SOP</span>
+            <span class="ticker-chip">Training &amp; Knowledge Sharing</span>
+            <span class="ticker-chip">WhatsApp &amp; Messenger Handling</span>
+            <span class="ticker-chip">POS System Support</span>
+            <span class="ticker-chip">Outlet Setup</span>
+            <span class="ticker-chip">Operational Problem-Solving</span>
 
-            <span class="acx-marquee-pill">Bookkeeping Support</span>
-            <span class="acx-marquee-pill">Recruitment Coordination</span>
-            <span class="acx-marquee-pill">SOP Refinement</span>
-            <span class="acx-marquee-pill">Information Guide SOP</span>
-            <span class="acx-marquee-pill">POS Training</span>
-            <span class="acx-marquee-pill">WhatsApp &amp; Messenger Handling</span>
-            <span class="acx-marquee-pill">Marketing Support</span>
-            <span class="acx-marquee-pill">System Standardisation</span>
-            <span class="acx-marquee-pill">Outlet Launch Preparation</span>
-            <span class="acx-marquee-pill">Operational Problem-Solving</span>
+            <span class="ticker-chip">Bookkeeping Support</span>
+            <span class="ticker-chip">Recruitment Coordination</span>
+            <span class="ticker-chip">Onboarding Improvement</span>
+            <span class="ticker-chip">SOP Development</span>
+            <span class="ticker-chip">Information Guide SOP</span>
+            <span class="ticker-chip">Training &amp; Knowledge Sharing</span>
+            <span class="ticker-chip">WhatsApp &amp; Messenger Handling</span>
+            <span class="ticker-chip">POS System Support</span>
+            <span class="ticker-chip">Outlet Setup</span>
+            <span class="ticker-chip">Operational Problem-Solving</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VISUAL + STORY -->
-    <section class="acx-grid-main">
-      <section class="acx-panel acx-image-stack reveal-delay">
-        <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House professional experience visual" />
-        <div class="acx-image-badge">
-          <strong>Real business exposure before later technology growth</strong>
+    <!-- BREAKER -->
+    <section class="panel signature-breaker reveal-up">
+      <div class="breaker-left">
+        <p>Design Positioning</p>
+        <h2>Not a resume block.  
+        A branded experience system.</h2>
+      </div>
+
+      <div class="breaker-right">
+        This page is designed to make the recruiter pause. It turns operational experience
+        into something visual, structured, technical, and memorable — showing not just
+        what you did, but how you think.
+      </div>
+    </section>
+
+    <!-- CONTRIBUTION MODULES -->
+    <section class="panel contribution-stage reveal-up">
+      <div class="section-head">
+        <p>Contribution Modules</p>
+        <h2>Short, sharp, visual.</h2>
+        <span>
+          You said you prefer showing categories instead of forcing people to read long walls of text.
+          So this section behaves more like a modular signal board.
+        </span>
+      </div>
+
+      <div class="module-grid">
+        <article class="module-card large tilt-card">
+          <span class="module-no">01</span>
+          <h3>Accounting &amp; Financial Support</h3>
+          <p>
+            Assisted in bookkeeping, sales tracking, and basic reporting while learning
+            the importance of transaction accuracy and consistency across multi-outlet operations.
+          </p>
+        </article>
+
+        <article class="module-card medium tilt-card">
+          <span class="module-no">02</span>
+          <h3>Human Resources &amp; Team Support</h3>
+          <p>
+            Participated in recruitment coordination, onboarding support, staff training,
+            and team development alignment with operational needs.
+          </p>
+        </article>
+
+        <article class="module-card medium tilt-card">
+          <span class="module-no">03</span>
+          <h3>Operations &amp; SOP Development</h3>
+          <p>
+            Contributed to workflow documentation for daily operations, order handling,
+            pricing structure, and service consistency.
+          </p>
+        </article>
+
+        <article class="module-card small tilt-card">
+          <span class="module-no">04</span>
+          <h3>Information Guide &amp; Internal Documentation</h3>
+          <p>
+            Helped create clear reference materials covering company structure,
+            communication channels, and fraud awareness.
+          </p>
+        </article>
+
+        <article class="module-card small tilt-card">
+          <span class="module-no">05</span>
+          <h3>Training &amp; Knowledge Sharing</h3>
+          <p>
+            Supported practical training in customer service, product knowledge,
+            and POS system usage.
+          </p>
+        </article>
+
+        <article class="module-card small tilt-card">
+          <span class="module-no">06</span>
+          <h3>Customer Experience &amp; Communication</h3>
+          <p>
+            Managed orders, inquiries, complaints, and service conversations
+            through WhatsApp and Facebook Messenger.
+          </p>
+        </article>
+
+        <article class="module-card medium tilt-card">
+          <span class="module-no">07</span>
+          <h3>Marketing &amp; Customer Engagement</h3>
+          <p>
+            Supported basic engagement initiatives and contributed ideas
+            to improve customer reach and retention.
+          </p>
+        </article>
+
+        <article class="module-card medium tilt-card">
+          <span class="module-no">08</span>
+          <h3>System Implementation &amp; Technical Support</h3>
+          <p>
+            Assisted in POS setup, troubleshooting, and outlet-level
+            system standardisation support.
+          </p>
+        </article>
+
+        <article class="module-card large tilt-card">
+          <span class="module-no">09</span>
+          <h3>Outlet Setup &amp; Expansion Support</h3>
+          <p>
+            Participated in new outlet preparation including staff readiness,
+            operational flow support, system setup, and launch coordination.
+          </p>
+        </article>
+
+        <article class="module-card large tilt-card">
+          <span class="module-no">10</span>
+          <h3>Operational Problem-Solving</h3>
+          <p>
+            Assisted in handling customer complaints, equipment issues,
+            and unexpected incidents with a calm, process-aware approach.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- STORY + IMAGE -->
+    <section class="side-by-side">
+      <section class="panel visual-tower reveal-up">
+        <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House experience visual" />
+        <div class="visual-overlay-card">
+          <strong>Where practical business awareness was built</strong>
           <span>
-            This stage built practical awareness of how stores, systems, teams,
-            service quality, and daily operations connect behind the scenes.
+            This phase created the real-world foundation behind later business, systems,
+            and technology-oriented growth.
           </span>
         </div>
       </section>
 
-      <div class="acx-grid-right">
-        <section class="acx-panel acx-intro-card reveal">
-          <p class="acx-section-label">Experience Frame</p>
-          <h2>Where practical business understanding became layered, not linear</h2>
+      <div class="insight-stack">
+        <section class="panel insight-card reveal-up">
+          <p class="section-head p">Experience Frame</p>
+          <h2>Range over repetition.</h2>
           <p>
-            During my time with Australian Cake House / ACake (M) Sdn Bhd, I had the opportunity
-            to be involved in different operational and support functions rather than being limited
-            to one fixed area. My contributions gradually expanded into bookkeeping support, recruitment
-            coordination, onboarding assistance, SOP development, internal documentation, customer handling,
-            training support, system setup assistance, and outlet preparation.
+            This journey was valuable because it was never limited to one function.
+            It exposed me to how records, people, workflows, customers, and systems
+            must move together for operations to stay stable and scalable.
           </p>
           <p>
-            That range mattered because it showed me that business performance is not driven by one task
-            alone. It depends on how records, people, workflows, communication, service, and systems
-            reinforce one another in day-to-day operations.
+            Instead of overselling ownership, this page highlights something stronger:
+            support-driven contribution, structured thinking, and real operational awareness.
           </p>
         </section>
 
-        <div class="acx-columns">
-          <section class="acx-panel acx-column-card reveal-delay">
-            <p class="acx-section-label">Overall Reflection</p>
-            <h2>Less about title, more about range</h2>
-            <p>
-              Rather than focusing on a single function, I gradually learned how different components —
-              people, processes, systems, and customers — work together inside a real operational environment.
-            </p>
-            <div class="acx-statement">
-              <strong>Core outcome</strong>
-              <span>
-                This journey helped build structured thinking, adaptability, continuous learning,
-                and stronger awareness of consistency, teamwork, and operational discipline.
-              </span>
-            </div>
-          </section>
+        <div class="signal-row">
+          <article class="signal-box reveal-up tilt-card">
+            <strong>Structured Thinking</strong>
+            <span>Seeing business work as connected systems, not isolated tasks.</span>
+          </article>
 
-          <section class="acx-panel acx-column-card reveal-delay-2">
-            <p class="acx-section-label">Why It Matters</p>
-            <h2>The foundation behind later growth</h2>
-            <p>
-              Before business systems, data, or technology thinking became formal, this phase had already
-              introduced me to how organisations work under real constraints, real timing, and real service expectations.
-            </p>
-            <div class="acx-signal-list">
-              <div class="acx-signal-item">
-                <b>01</b>
-                <div>
-                  <strong>Operational clarity</strong>
-                  <span>Understanding how daily work becomes structured execution.</span>
-                </div>
-              </div>
-              <div class="acx-signal-item">
-                <b>02</b>
-                <div>
-                  <strong>Systems awareness</strong>
-                  <span>Seeing how tools and standards support reliability across outlets.</span>
-                </div>
-              </div>
-            </div>
-          </section>
+          <article class="signal-box reveal-up tilt-card">
+            <strong>Adaptability</strong>
+            <span>Moving across service, process, systems, training, and support contexts.</span>
+          </article>
+
+          <article class="signal-box reveal-up tilt-card">
+            <strong>Operational Discipline</strong>
+            <span>Learning why consistency and teamwork matter under real pressure.</span>
+          </article>
         </div>
+
+        <section class="panel final-card reveal-up">
+          <p class="section-head p">Overall Reflection</p>
+          <h2>A strong operational foundation before the next chapter.</h2>
+          <p>
+            Throughout this experience, I had the opportunity to be involved in multiple
+            aspects of operations — from administrative support to store-level execution,
+            customer communication, systems support, and broader coordination.
+          </p>
+          <p>
+            That range helped me build a stronger mindset around clarity, process,
+            teamwork, adaptability, and continuous learning.
+          </p>
+        </section>
       </div>
     </section>
 
-    <!-- CONTRIBUTION RADAR -->
-    <section class="acx-panel acx-intro-card reveal">
-      <p class="acx-section-label">Contribution Radar</p>
-      <h2>Ten experience modules — designed like signals, not paragraphs</h2>
-
-      <div class="acx-radar-zone">
-        <article class="acx-radar-card large">
-          <span class="acx-radar-no">01</span>
-          <h3>Accounting &amp; Financial Support</h3>
-          <p>
-            Assisted in daily bookkeeping and financial record management, supported sales tracking
-            and basic reporting processes, gained hands-on exposure to multi-outlet financial operations,
-            and learned the importance of accuracy and consistency in transaction handling.
-          </p>
-        </article>
-
-        <article class="acx-radar-card med">
-          <span class="acx-radar-no">02</span>
-          <h3>Human Resources &amp; Team Support</h3>
-          <p>
-            Participated in recruitment and interview coordination, contributed to interview and onboarding
-            improvements, assisted in training new staff, and learned how people management aligns with operational needs.
-          </p>
-        </article>
-
-        <article class="acx-radar-card med">
-          <span class="acx-radar-no">03</span>
-          <h3>Operations &amp; SOP Development</h3>
-          <p>
-            Contributed to creating and refining SOPs for daily operations, order processing, pricing structure,
-            and customer service handling while learning the value of process consistency and scalability.
-          </p>
-        </article>
-
-        <article class="acx-radar-card small">
-          <span class="acx-radar-no">04</span>
-          <h3>Information Guide &amp; Internal Documentation</h3>
-          <p>
-            Assisted in developing Information Guide SOP content covering company background, internal structure,
-            communication channels, and fraud awareness guidelines.
-          </p>
-        </article>
-
-        <article class="acx-radar-card small">
-          <span class="acx-radar-no">05</span>
-          <h3>Training &amp; Knowledge Sharing</h3>
-          <p>
-            Supported training in customer service standards, product knowledge,
-            and POS system usage for better staff readiness.
-          </p>
-        </article>
-
-        <article class="acx-radar-card small">
-          <span class="acx-radar-no">06</span>
-          <h3>Customer Experience &amp; Communication</h3>
-          <p>
-            Managed interactions through WhatsApp and Facebook Messenger while assisting with
-            orders, inquiries, concerns, and complaints.
-          </p>
-        </article>
-
-        <article class="acx-radar-card med">
-          <span class="acx-radar-no">07</span>
-          <h3>Marketing &amp; Customer Engagement</h3>
-          <p>
-            Supported basic marketing and engagement efforts, contributed ideas to improve customer
-            reach and retention, and learned how operations affect customer growth.
-          </p>
-        </article>
-
-        <article class="acx-radar-card med">
-          <span class="acx-radar-no">08</span>
-          <h3>System Implementation &amp; Technical Support</h3>
-          <p>
-            Assisted in POS setup and configuration, supported troubleshooting of store-level technical issues,
-            and gained exposure to system standardisation across outlets.
-          </p>
-        </article>
-
-        <article class="acx-radar-card large">
-          <span class="acx-radar-no">09</span>
-          <h3>Outlet Setup &amp; Expansion Support</h3>
-          <p>
-            Participated in new outlet setup and preparation, including staff readiness, system setup,
-            and operational flow preparation. Supported multiple outlet openings, including shopping mall locations,
-            and learned how launch readiness affects operational smoothness.
-          </p>
-        </article>
-
-        <article class="acx-radar-card large">
-          <span class="acx-radar-no">10</span>
-          <h3>Operational Problem-Solving</h3>
-          <p>
-            Assisted in handling real-world situations such as customer complaints, equipment-related issues,
-            and unexpected store incidents by following structured response procedures and developing a calm,
-            solution-focused mindset under pressure.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- FINAL DUO -->
-    <section class="acx-bottom-zone">
-      <section class="acx-panel acx-final-card reveal-delay">
-        <p class="acx-section-label">What This Experience Strengthened</p>
-        <h2>Capabilities formed through real operational involvement</h2>
-        <ul class="acx-list">
-          <li>Structured thinking across people, process, systems, and service interactions.</li>
-          <li>Administrative and operational support awareness in a multi-function environment.</li>
-          <li>Better understanding of SOP design, workflow documentation, and process consistency.</li>
-          <li>Professional communication across internal coordination and customer-facing channels.</li>
-          <li>Practical team support awareness through recruitment, onboarding, and training exposure.</li>
-          <li>Calm problem-solving and adaptability inside fast-moving business situations.</li>
+    <!-- BOTTOM -->
+    <section class="bottom-grid">
+      <section class="panel final-card reveal-up">
+        <p class="section-head p">What This Strengthened</p>
+        <h2>Capabilities worth noticing.</h2>
+        <ul class="feature-list">
+          <li>Operational awareness across people, process, systems, and service.</li>
+          <li>Workflow clarity through SOP thinking and documentation support.</li>
+          <li>Professional communication in internal and customer-facing situations.</li>
+          <li>Exposure to onboarding, training, and staff support.</li>
+          <li>Calm problem-solving in fast-moving real-world business contexts.</li>
+          <li>A stronger foundation for later business and technology growth.</li>
         </ul>
       </section>
 
-      <section class="acx-panel acx-reflection-card reveal-delay-2">
-        <p class="acx-section-label">Overall Reflection</p>
-        <h2>A business foundation built before the next chapter</h2>
+      <section class="panel final-card reveal-up">
+        <p class="section-head p">Recruiter Read</p>
+        <h2>What this page signals without saying too much.</h2>
         <p>
-          Throughout this experience, I was involved in various aspects of operations, from administrative
-          support to store-level execution and broader coordination work.
+          This is someone who understands operations beyond one title.
+          Someone who can work inside systems, support structure,
+          and think in terms of connected functions.
         </p>
         <p>
-          Instead of learning through one function alone, I gradually understood how people, processes,
-          systems, and customers interact in a real business environment.
-        </p>
-        <p>
-          This journey gave me a strong foundation in structured thinking, adaptability, and continuous learning,
-          while helping me understand why consistency, teamwork, and clear operational systems matter so much.
+          The presentation itself also signals design awareness, digital maturity,
+          and the ability to package experience with intention.
         </p>
       </section>
     </section>
 
-    <div class="acx-back reveal">
-      <a href="../journey.html">← Back to Journey</a>
+    <div class="back-row reveal-up">
+      <a href="../journey.html" class="back-link-signature">← Back to Journey</a>
     </div>
   </main>
 
@@ -1139,5 +1149,173 @@
   <script src="../../js/layout.js"></script>
   <script src="../../js/navigation.js"></script>
   <script src="../detail.js"></script>
+
+  <script>
+    // ---------- TYPEWRITER ----------
+    const typedPhrases = [
+      "Accounting & Financial Support",
+      "Human Resources & Team Support",
+      "Operations & SOP Development",
+      "Information Guide & Internal Documentation",
+      "Training & Knowledge Sharing",
+      "Customer Experience & Communication",
+      "Marketing & Customer Engagement",
+      "System Implementation & Technical Support",
+      "Outlet Setup & Expansion Support",
+      "Operational Problem-Solving"
+    ];
+
+    const typedTextEl = document.getElementById("typedText");
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function runTypewriter() {
+      const currentPhrase = typedPhrases[phraseIndex];
+      const currentText = currentPhrase.substring(0, charIndex);
+      typedTextEl.textContent = currentText;
+
+      let speed = isDeleting ? 35 : 58;
+
+      if (!isDeleting && charIndex < currentPhrase.length) {
+        charIndex++;
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+      } else if (!isDeleting && charIndex === currentPhrase.length) {
+        speed = 1200;
+        isDeleting = true;
+      } else {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % typedPhrases.length;
+        speed = 280;
+      }
+
+      setTimeout(runTypewriter, speed);
+    }
+
+    runTypewriter();
+
+    // ---------- CANVAS BACKGROUND ----------
+    const canvas = document.getElementById("acCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 140 };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+
+      const count = Math.min(95, Math.floor(window.innerWidth / 16));
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          r: Math.random() * 1.8 + 0.8
+        });
+      }
+    }
+
+    function drawCanvas() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+
+        let dxMouse = mouse.x - p.x;
+        let dyMouse = mouse.y - p.y;
+        let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+        if (distMouse < mouse.radius) {
+          p.x -= dxMouse * 0.004;
+          p.y -= dyMouse * 0.004;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.42)";
+        ctx.fill();
+      }
+
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            const alpha = 1 - dist / 130;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.strokeStyle = `rgba(255, 190, 120, ${alpha * 0.12})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(drawCanvas);
+    }
+
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener("mouseleave", () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+
+    resizeCanvas();
+    drawCanvas();
+
+    // ---------- REVEAL ----------
+    const revealItems = document.querySelectorAll(".reveal-up");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    // ---------- 3D TILT ----------
+    const tiltItems = document.querySelectorAll(".tilt-card");
+
+    tiltItems.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateX = ((y / rect.height) - 0.5) * -10;
+        const rotateY = ((x / rect.width) - 0.5) * 10;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+      });
+    });
+  </script>
 </body>
 </html>
