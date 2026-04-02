@@ -11,19 +11,18 @@
   <style>
     :root {
       --bg: #07080b;
-      --bg-soft: #0d1015;
-      --panel: rgba(255, 255, 255, 0.035);
+      --bg-soft: #0c0e12;
+      --panel: rgba(255, 255, 255, 0.03);
       --line: rgba(255, 255, 255, 0.09);
       --line-soft: rgba(255, 255, 255, 0.05);
       --text: #f6f1e9;
-      --text-soft: rgba(246, 241, 233, 0.68);
-      --text-faint: rgba(246, 241, 233, 0.28);
-      --accent: #d7b07a;
+      --text-soft: rgba(246, 241, 233, 0.66);
+      --text-faint: rgba(246, 241, 233, 0.22);
+      --metal: #d4b181;
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
-      --radius-xl: 36px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --max-width: 1480px;
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --max-width: 1520px;
       --progress: 0%;
     }
 
@@ -39,9 +38,9 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 10%, rgba(215, 176, 122, 0.08), transparent 20%),
-        radial-gradient(circle at 82% 14%, rgba(255, 255, 255, 0.03), transparent 18%),
-        linear-gradient(180deg, #06070a 0%, #0a0c11 42%, #0d1015 100%);
+        radial-gradient(circle at 14% 10%, rgba(212, 177, 129, 0.06), transparent 18%),
+        radial-gradient(circle at 84% 16%, rgba(255, 255, 255, 0.025), transparent 20%),
+        linear-gradient(180deg, #050609 0%, #090b10 42%, #0d1015 100%);
       overflow-x: hidden;
     }
 
@@ -51,74 +50,74 @@
       inset: 0 auto auto 0;
       width: var(--progress);
       height: 2px;
-      background: linear-gradient(90deg, rgba(215, 176, 122, 0.15), var(--accent), rgba(215, 176, 122, 0.15));
+      background: linear-gradient(90deg, rgba(212,177,129,0.1), var(--metal), rgba(212,177,129,0.1));
       z-index: 9999;
       pointer-events: none;
     }
 
-    .lux-noise,
-    .lux-grid,
-    #luxCanvas {
+    #fieldCanvas,
+    .grid-overlay,
+    .noise-overlay {
       position: fixed;
       inset: 0;
       pointer-events: none;
     }
 
-    #luxCanvas {
+    #fieldCanvas {
       z-index: -4;
       width: 100%;
       height: 100%;
-      opacity: 0.38;
+      opacity: 0.28;
     }
 
-    .lux-grid {
+    .grid-overlay {
       z-index: -3;
-      opacity: 0.08;
+      opacity: 0.07;
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black 34%, transparent 88%);
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 36%, transparent 88%);
     }
 
-    .lux-noise {
+    .noise-overlay {
       z-index: -2;
-      opacity: 0.06;
+      opacity: 0.045;
       background-image: radial-gradient(rgba(255,255,255,0.18) 0.7px, transparent 0.7px);
       background-size: 8px 8px;
       mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
     }
 
-    .signature-page {
+    .page {
       width: min(calc(100% - 28px), var(--max-width));
       margin: 0 auto;
-      padding: 28px 0 48px;
+      padding: 28px 0 54px;
       display: grid;
       gap: 22px;
       position: relative;
       isolation: isolate;
     }
 
-    .section-shell {
+    .shell {
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-xl);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.015));
       border: 1px solid var(--line-soft);
-      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.012));
       backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
     }
 
-    .section-shell::before {
+    .shell::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 24%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 24%);
-      opacity: 0.48;
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 24%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.035), transparent 24%);
+      opacity: 0.52;
     }
 
     .reveal {
@@ -133,28 +132,28 @@
     }
 
     /* HERO */
-    .hero-shell {
-      min-height: 94vh;
+    .hero {
+      min-height: 96vh;
       padding: 34px 34px 28px;
       display: grid;
-      grid-template-columns: 1.04fr 0.96fr;
+      grid-template-columns: 1.02fr 0.98fr;
       gap: 24px;
       align-items: stretch;
       background:
-        radial-gradient(circle at 12% 18%, rgba(215,176,122,0.08), transparent 24%),
-        linear-gradient(135deg, rgba(10,12,16,0.96), rgba(15,18,24,0.94));
+        radial-gradient(circle at 14% 14%, rgba(212,177,129,0.07), transparent 22%),
+        linear-gradient(135deg, rgba(9,10,14,0.96), rgba(15,18,24,0.94));
     }
 
     .hero-left {
-      display: grid;
-      grid-template-rows: auto auto auto 1fr auto;
-      gap: 18px;
-      align-content: start;
       position: relative;
       z-index: 1;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 18px;
+      align-content: start;
     }
 
-    .meta-row {
+    .meta {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -166,70 +165,70 @@
       padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: rgba(246,241,233,0.84);
-      font-size: 0.74rem;
+      background: rgba(255,255,255,0.024);
+      color: rgba(246,241,233,0.82);
+      font-size: 0.73rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
     .hero-copy {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .hero-kicker {
-      color: var(--accent);
-      font-size: 0.78rem;
+    .kicker {
+      color: var(--metal);
+      font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .hero-title {
+    .title {
       margin: 0;
-      max-width: 7.5ch;
-      font-size: clamp(3.4rem, 8vw, 8rem);
-      line-height: 0.84;
-      letter-spacing: -0.1em;
+      max-width: 7ch;
+      font-size: clamp(3.7rem, 8vw, 8.5rem);
+      line-height: 0.82;
+      letter-spacing: -0.105em;
       text-wrap: balance;
       color: var(--text);
     }
 
-    .hero-subline {
+    .subline {
       margin: 0;
-      max-width: 50ch;
+      max-width: 44ch;
       color: var(--text-soft);
       font-size: 1rem;
       line-height: 1.95;
     }
 
-    .signal-line {
+    .typebar {
       display: flex;
       align-items: center;
       gap: 14px;
-      min-height: 62px;
+      min-height: 60px;
       padding: 16px 18px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(215,176,122,0.08), rgba(255,255,255,0.02)),
-        rgba(255,255,255,0.015);
+        linear-gradient(135deg, rgba(212,177,129,0.06), rgba(255,255,255,0.014)),
+        rgba(255,255,255,0.014);
       overflow: hidden;
       white-space: nowrap;
     }
 
-    .signal-label {
+    .typebar-label {
       flex: 0 0 auto;
-      color: var(--accent);
-      font-size: 0.74rem;
+      color: var(--metal);
+      font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .signal-typed {
+    .typebar-text {
       min-width: 0;
       color: var(--text);
       font-size: clamp(0.96rem, 2vw, 1.14rem);
@@ -238,10 +237,10 @@
       text-overflow: ellipsis;
     }
 
-    .signal-caret {
+    .caret {
       display: inline-block;
       width: 10px;
-      color: var(--accent);
+      color: var(--metal);
       animation: blink 1s infinite;
     }
 
@@ -250,33 +249,17 @@
       52%, 100% { opacity: 0; }
     }
 
-    .hero-statement {
-      padding: 26px 24px;
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(circle at 82% 18%, rgba(215,176,122,0.08), transparent 22%),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      position: relative;
-      overflow: hidden;
+    .hero-assert {
+      align-self: end;
+      padding-top: 18px;
     }
 
-    .hero-statement span {
+    .hero-assert strong {
       display: block;
-      margin-bottom: 10px;
-      color: var(--accent);
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .hero-statement strong {
-      display: block;
-      max-width: 15ch;
-      font-size: clamp(1.5rem, 2vw, 2.2rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
+      max-width: 12ch;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
       color: var(--text);
     }
 
@@ -286,61 +269,59 @@
       display: grid;
       grid-template-rows: 1fr auto;
       gap: 14px;
-      align-content: stretch;
     }
 
-    .hero-frame {
+    .hero-board {
       min-height: 100%;
       border-radius: 30px;
       border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 50% 40%, rgba(255,255,255,0.02), transparent 54%),
-        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.014));
+        radial-gradient(circle at center, rgba(255,255,255,0.02), transparent 56%),
+        linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.01));
       padding: 20px;
       display: grid;
-      align-content: space-between;
-      gap: 16px;
-    }
-
-    .hero-frame-top {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
       gap: 14px;
     }
 
-    .hero-year-card {
-      min-height: 260px;
+    .hero-board-top {
+      display: grid;
+      grid-template-columns: 0.84fr 1.16fr;
+      gap: 14px;
+    }
+
+    .duration {
+      min-height: 270px;
       padding: 18px;
       border-radius: 24px;
       border: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-start;
     }
 
-    .hero-year-card span {
+    .duration span {
       display: block;
-      color: var(--accent);
-      font-size: 0.74rem;
+      color: var(--metal);
+      font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
-    .hero-year-card strong {
+    .duration strong {
       display: block;
       margin-bottom: 10px;
-      font-size: clamp(3rem, 5vw, 5.4rem);
-      line-height: 0.88;
+      font-size: clamp(3rem, 5vw, 5.6rem);
+      line-height: 0.86;
       letter-spacing: -0.08em;
       color: var(--text);
     }
 
-    .hero-year-card p {
+    .duration p {
       margin: 0;
       color: var(--text-soft);
       font-size: 0.92rem;
@@ -348,25 +329,25 @@
       max-width: 18ch;
     }
 
-    .hero-map {
-      min-height: 260px;
+    .constellation {
+      min-height: 270px;
       border-radius: 24px;
       border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 82% 18%, rgba(215,176,122,0.08), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.014));
-      padding: 16px;
+        radial-gradient(circle at 82% 18%, rgba(212,177,129,0.06), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.024), rgba(255,255,255,0.01));
       position: relative;
       overflow: hidden;
+      padding: 16px;
     }
 
-    .hero-map svg {
+    .constellation svg {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .hero-map text {
+    .constellation text {
       fill: rgba(246,241,233,0.82);
       font-size: 12px;
       font-weight: 700;
@@ -374,54 +355,54 @@
       text-transform: uppercase;
     }
 
-    .hero-map .node {
+    .constellation .node {
       fill: rgba(255,255,255,0.04);
       stroke: rgba(255,255,255,0.12);
       stroke-width: 1.2;
     }
 
-    .hero-map .line {
+    .constellation .line {
       fill: none;
-      stroke-width: 2.2;
+      stroke-width: 2;
       stroke-linecap: round;
       stroke-dasharray: 12 12;
       animation: dash 10s linear infinite;
     }
 
-    .hero-map .gold-line { stroke: rgba(215,176,122,0.72); }
-    .hero-map .soft-line { stroke: rgba(255,255,255,0.34); }
+    .constellation .metal-line { stroke: rgba(212,177,129,0.72); }
+    .constellation .soft-line { stroke: rgba(255,255,255,0.26); }
 
     @keyframes dash {
       to { stroke-dashoffset: -140; }
     }
 
-    .hero-frame-bottom {
+    .hero-board-bottom {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
-    .hero-chip {
-      min-height: 120px;
+    .chip {
+      min-height: 118px;
       padding: 16px;
       border-radius: 22px;
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(215,176,122,0.06), rgba(255,255,255,0.016)),
-        rgba(255,255,255,0.015);
+        linear-gradient(135deg, rgba(212,177,129,0.045), rgba(255,255,255,0.012)),
+        rgba(255,255,255,0.012);
       display: grid;
       align-content: end;
     }
 
-    .hero-chip strong {
+    .chip strong {
       display: block;
       margin-bottom: 7px;
       color: var(--text);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
       line-height: 1.2;
     }
 
-    .hero-chip span {
+    .chip span {
       display: block;
       color: var(--text-soft);
       font-size: 0.88rem;
@@ -432,7 +413,7 @@
       overflow: hidden;
       border-radius: 24px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.025);
+      background: rgba(255,255,255,0.016);
       padding: 13px 0;
     }
 
@@ -441,7 +422,7 @@
       gap: 12px;
       width: max-content;
       padding-left: 16px;
-      animation: ticker 22s linear infinite;
+      animation: ticker 24s linear infinite;
     }
 
     @keyframes ticker {
@@ -453,266 +434,180 @@
       white-space: nowrap;
       padding: 10px 14px;
       border-radius: 999px;
-      background:
-        linear-gradient(135deg, rgba(215,176,122,0.09), rgba(255,255,255,0.02)),
-        rgba(255,255,255,0.015);
       border: 1px solid var(--line);
-      color: var(--text);
-      font-size: 0.81rem;
+      background: rgba(255,255,255,0.02);
+      color: var(--text-soft);
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.03em;
     }
 
-    /* MONUMENT */
-    .monument-stage {
+    /* VALUE FIELD */
+    .field-shell {
+      min-height: 1120px;
       padding: 34px;
       display: grid;
-      gap: 26px;
+      grid-template-rows: auto auto 1fr;
+      gap: 24px;
       background:
-        radial-gradient(circle at 12% 18%, rgba(215,176,122,0.08), transparent 22%),
-        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.014));
+        radial-gradient(circle at 14% 16%, rgba(212,177,129,0.06), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.024), rgba(255,255,255,0.012));
     }
 
-    .monument-head {
+    .field-head {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 0.92fr 1.08fr;
       gap: 18px;
       align-items: end;
     }
 
-    .monument-head-left span {
+    .field-head-left span {
       display: inline-block;
       margin-bottom: 10px;
-      color: var(--accent);
+      color: var(--metal);
       font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .monument-head-left h2 {
+    .field-head-left h2 {
       margin: 0;
       max-width: 8ch;
       color: var(--text);
-      font-size: clamp(2.2rem, 4vw, 4.6rem);
+      font-size: clamp(2.3rem, 4vw, 4.8rem);
       line-height: 0.88;
-      letter-spacing: -0.08em;
+      letter-spacing: -0.085em;
     }
 
-    .monument-head-right {
+    .field-head-right {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: flex-end;
     }
 
-    .value-tag {
+    .field-tag {
       padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.016);
       color: var(--text-soft);
       font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.04em;
     }
 
-    .monument-grid {
-      display: grid;
-      grid-template-columns: 0.86fr 1.14fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .monument-anchor {
-      position: sticky;
-      top: 108px;
-      min-height: 700px;
-      padding: 34px 30px;
-      border-radius: 34px;
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(circle at 16% 14%, rgba(215,176,122,0.12), transparent 24%),
-        linear-gradient(145deg, rgba(10,12,18,0.96), rgba(17,20,28,0.94));
-      overflow: hidden;
-    }
-
-    .monument-anchor::after {
-      content: "";
-      position: absolute;
-      right: -100px;
-      bottom: -120px;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.11), transparent 72%);
-      pointer-events: none;
-    }
-
-    .anchor-label {
-      display: inline-flex;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--accent);
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-    }
-
-    .anchor-title {
-      position: relative;
-      z-index: 1;
-      margin: 24px 0 14px;
-      max-width: 6ch;
-      color: var(--text);
-      font-size: clamp(2.7rem, 3.4vw, 4.2rem);
-      line-height: 0.88;
-      letter-spacing: -0.09em;
-    }
-
-    .anchor-copy {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      max-width: 32ch;
+    .field-intro {
+      max-width: 62ch;
       color: var(--text-soft);
-      font-size: 1rem;
-      line-height: 1.95;
-    }
-
-    .anchor-rail {
-      position: relative;
-      z-index: 1;
-      margin-top: 28px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .anchor-stat {
-      position: relative;
-      padding: 18px 18px 16px;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      overflow: hidden;
-    }
-
-    .anchor-stat::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(215,176,122,0.95), rgba(255,255,255,0.18));
-    }
-
-    .anchor-stat strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--text);
+      line-height: 1.9;
       font-size: 1rem;
     }
 
-    .anchor-stat span {
-      display: block;
-      color: var(--text-soft);
-      font-size: 0.9rem;
-      line-height: 1.64;
-    }
-
-    .monument-wall {
+    .value-field {
       position: relative;
-      min-height: 980px;
+      min-height: 860px;
       border-radius: 34px;
       border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 82% 18%, rgba(215,176,122,0.06), transparent 22%),
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.015), transparent 56%),
+        linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));
       overflow: hidden;
     }
 
-    .monument-center-mark {
+    .field-center {
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 330px;
-      height: 330px;
       transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       border: 1px dashed rgba(255,255,255,0.12);
-      opacity: 0.34;
       pointer-events: none;
+      opacity: 0.34;
     }
 
-    .monument-center-mark::before,
-    .monument-center-mark::after {
+    .field-center::before,
+    .field-center::after {
       content: "";
       position: absolute;
-      inset: 16%;
+      inset: 14%;
       border-radius: 50%;
       border: 1px dashed rgba(255,255,255,0.08);
     }
 
-    .value-card {
+    .field-center-label {
       position: absolute;
-      width: 270px;
-      min-height: 170px;
-      padding: 22px 20px 18px;
-      border-radius: 26px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
       border: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.018));
-      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        radial-gradient(circle at 50% 40%, rgba(212,177,129,0.06), transparent 70%),
+        rgba(255,255,255,0.014);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 0 60px rgba(212,177,129,0.05);
+    }
+
+    .field-center-label strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .value-node {
+      position: absolute;
+      width: 260px;
+      min-height: 148px;
+      padding: 22px 20px 18px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012));
+      box-shadow: 0 20px 50px rgba(0,0,0,0.16);
       transition:
         transform 0.45s ease,
         border-color 0.45s ease,
-        box-shadow 0.45s ease,
-        background 0.45s ease;
+        background 0.45s ease,
+        box-shadow 0.45s ease;
       will-change: transform;
       isolation: isolate;
+      cursor: pointer;
     }
 
-    .value-card:hover {
-      border-color: rgba(215,176,122,0.28);
-      box-shadow: 0 28px 80px rgba(0,0,0,0.24);
+    .value-node:hover {
+      border-color: rgba(212,177,129,0.26);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018));
+      box-shadow: 0 28px 80px rgba(0,0,0,0.24);
     }
 
-    .value-card::before {
+    .value-node::before {
       content: "";
       position: absolute;
       inset: 0 auto auto 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent), rgba(255,255,255,0.12));
+      background: linear-gradient(90deg, var(--metal), rgba(255,255,255,0.12));
     }
 
-    .value-card::after {
-      content: attr(data-no);
+    .node-glow {
       position: absolute;
-      right: 14px;
-      bottom: -8px;
-      color: rgba(255,255,255,0.045);
-      font-size: clamp(4rem, 6vw, 7rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -0.08em;
-      pointer-events: none;
-    }
-
-    .card-glow {
-      position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 72%);
-      filter: blur(18px);
+      background: radial-gradient(circle, rgba(255,255,255,0.11), transparent 72%);
+      filter: blur(16px);
       transform: translate(-50%, -50%);
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -720,100 +615,175 @@
       z-index: 0;
     }
 
-    .value-card:hover .card-glow {
+    .value-node:hover .node-glow {
       opacity: 1;
     }
 
-    .value-card-top {
+    .node-top {
       position: relative;
       z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    .value-card-no {
+    .node-no {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 38px;
-      height: 38px;
-      padding: 0 12px;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 11px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), #c79a5d);
-      color: #17120d;
-      font-size: 0.76rem;
+      border: 1px solid rgba(212,177,129,0.26);
+      color: var(--metal);
+      font-size: 0.74rem;
       font-weight: 900;
       letter-spacing: 0.04em;
-      box-shadow: 0 10px 24px rgba(215,176,122,0.2);
+      background: rgba(212,177,129,0.06);
     }
 
-    .value-card-role {
+    .node-role {
       color: var(--text-faint);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-align: right;
     }
 
-    .value-card h3 {
+    .value-node h3 {
       position: relative;
       z-index: 1;
-      margin: 0 0 10px;
-      max-width: 12ch;
+      margin: 0 0 8px;
       color: var(--text);
-      font-size: 1.04rem;
+      font-size: 1.02rem;
       line-height: 1.14;
       letter-spacing: -0.03em;
+      max-width: 12ch;
     }
 
-    .value-card p {
+    .value-node p {
       position: relative;
       z-index: 1;
       margin: 0;
-      max-width: 24ch;
       color: var(--text-soft);
-      font-size: 0.9rem;
-      line-height: 1.72;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      max-width: 23ch;
     }
 
-    .card-01 { left: 4.5%; top: 6%; width: 320px; min-height: 200px; }
-    .card-02 { right: 7%; top: 5%; width: 250px; }
-    .card-03 { right: 1.5%; top: 26%; width: 250px; }
-    .card-04 { left: 10%; top: 28%; width: 300px; }
-    .card-05 { left: 31%; top: 14%; width: 240px; }
-    .card-06 { right: 23%; top: 41%; width: 280px; }
-    .card-07 { left: 4%; bottom: 28%; width: 245px; }
-    .card-08 { left: 32%; bottom: 18%; width: 245px; }
-    .card-09 { right: 7%; bottom: 19%; width: 320px; min-height: 200px; }
-    .card-10 { left: 18%; bottom: 4%; width: 62%; min-height: 170px; }
+    .node-01 { left: 5%; top: 8%; }
+    .node-02 { right: 8%; top: 7%; }
+    .node-03 { right: 2.5%; top: 28%; }
+    .node-04 { left: 8%; top: 30%; }
+    .node-05 { left: 34%; top: 10%; }
+    .node-06 { right: 24%; top: 44%; }
+    .node-07 { left: 6%; bottom: 24%; }
+    .node-08 { left: 33%; bottom: 16%; }
+    .node-09 { right: 8%; bottom: 18%; }
+    .node-10 { left: 20%; bottom: 5%; width: 60%; min-height: 150px; }
+
+    /* OVERLAY */
+    .detail-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 9, 0.72);
+      backdrop-filter: blur(14px);
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      padding: 20px;
+    }
+
+    .detail-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .detail-panel {
+      width: min(760px, 100%);
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.014));
+      box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+      padding: 30px;
+      position: relative;
+    }
+
+    .detail-close {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .detail-meta {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--metal);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .detail-panel h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      color: var(--text);
+      max-width: 12ch;
+    }
+
+    .detail-panel p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.9;
+      font-size: 1rem;
+      max-width: 46ch;
+    }
 
     /* STRIP */
-    .signature-strip {
+    .signal-strip {
       padding: 22px 26px;
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap: 18px;
       align-items: center;
       background:
-        linear-gradient(135deg, rgba(215,176,122,0.06), rgba(255,255,255,0.02)),
-        rgba(255,255,255,0.018);
+        linear-gradient(135deg, rgba(212,177,129,0.05), rgba(255,255,255,0.014)),
+        rgba(255,255,255,0.012);
     }
 
-    .signature-strip-left span {
+    .signal-strip-left span {
       display: block;
       margin-bottom: 8px;
-      color: var(--accent);
+      color: var(--metal);
       font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .signature-strip-left h2 {
+    .signal-strip-left h2 {
       margin: 0;
       max-width: 15ch;
       color: var(--text);
@@ -822,7 +792,7 @@
       letter-spacing: -0.055em;
     }
 
-    .signature-strip-right {
+    .signal-strip-right {
       color: var(--text-soft);
       font-size: 0.98rem;
       line-height: 1.88;
@@ -848,7 +818,7 @@
       min-height: 760px;
       object-fit: cover;
       display: block;
-      filter: contrast(1.05) saturate(0.94);
+      filter: contrast(1.04) saturate(0.92);
       transform: scale(1.02);
       transition: transform 1s ease;
     }
@@ -896,7 +866,7 @@
     .section-label {
       display: block;
       margin-bottom: 10px;
-      color: var(--accent);
+      color: var(--metal);
       font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.1em;
@@ -935,8 +905,8 @@
       border-radius: 24px;
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(215,176,122,0.05), rgba(255,255,255,0.014)),
-        rgba(255,255,255,0.016);
+        linear-gradient(135deg, rgba(212,177,129,0.04), rgba(255,255,255,0.01)),
+        rgba(255,255,255,0.01);
       transform-style: preserve-3d;
     }
 
@@ -971,7 +941,7 @@
     }
 
     .feature-list li::marker {
-      color: var(--accent);
+      color: var(--metal);
     }
 
     .back-row {
@@ -991,62 +961,53 @@
       font-weight: 700;
       letter-spacing: 0.02em;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.025);
+      background: rgba(255,255,255,0.016);
       transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
     .back-link:hover {
       transform: translateY(-3px);
-      border-color: rgba(215,176,122,0.24);
-      background: rgba(255,255,255,0.045);
+      border-color: rgba(212,177,129,0.24);
+      background: rgba(255,255,255,0.03);
     }
 
-    @media (max-width: 1220px) {
-      .hero-shell,
-      .monument-head,
-      .monument-grid,
-      .signature-strip,
+    @media (max-width: 1280px) {
+      .hero,
+      .field-head,
+      .signal-strip,
       .story-layout,
       .bottom-grid {
         grid-template-columns: 1fr;
       }
 
-      .monument-head-right {
+      .field-head-right {
         justify-content: flex-start;
       }
 
-      .monument-anchor {
-        position: relative;
-        top: auto;
-        min-height: auto;
-      }
-
-      .monument-wall {
+      .value-field {
         min-height: auto;
         padding: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
       }
 
-      .monument-center-mark {
+      .field-center,
+      .field-center-label {
         display: none;
       }
 
-      .value-card {
+      .value-node {
         position: relative;
         left: auto !important;
         right: auto !important;
         top: auto !important;
         bottom: auto !important;
         width: auto !important;
-        min-height: 190px !important;
+        min-height: 180px !important;
       }
 
-      .monument-wall {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .card-10 {
+      .node-10 {
         grid-column: 1 / -1;
       }
 
@@ -1054,52 +1015,46 @@
         min-height: 500px;
       }
 
-      .hero-title,
-      .monument-head-left h2,
-      .anchor-title,
-      .signature-strip-left h2 {
+      .title,
+      .field-head-left h2,
+      .signal-strip-left h2 {
         max-width: none;
       }
     }
 
-    @media (max-width: 860px) {
-      .micro-band,
-      .hero-frame-bottom,
+    @media (max-width: 900px) {
+      .hero-board-top,
+      .hero-board-bottom,
       .triad,
-      .monument-wall {
+      .value-field {
         grid-template-columns: 1fr;
       }
 
-      .hero-frame-top {
-        grid-template-columns: 1fr;
-      }
-
-      .card-10 {
+      .node-10 {
         grid-column: auto;
       }
     }
 
     @media (max-width: 720px) {
-      .signature-page {
+      .page {
         width: min(calc(100% - 18px), var(--max-width));
         gap: 18px;
         padding-top: 16px;
       }
 
-      .hero-shell,
-      .monument-stage,
+      .hero,
+      .field-shell,
       .copy-card,
       .final-card,
-      .signature-strip,
-      .monument-anchor {
+      .signal-strip {
         padding: 20px 16px;
       }
 
-      .hero-title {
+      .title {
         font-size: clamp(2.7rem, 14vw, 4.5rem);
       }
 
-      .signal-line {
+      .typebar {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -1112,60 +1067,58 @@
 </head>
 <body data-page="journey">
 
-  <canvas id="luxCanvas"></canvas>
-  <div class="ambient-blur"></div>
-  <div class="lux-grid"></div>
-  <div class="lux-noise"></div>
+  <canvas id="fieldCanvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="noise-overlay"></div>
 
   <div id="header"></div>
 
-  <main class="page-shell detail-shell signature-page">
+  <main class="page-shell detail-shell page">
 
-    <section class="section-shell hero-shell reveal">
+    <section class="shell hero reveal">
       <div class="hero-left">
-        <div class="meta-row">
+        <div class="meta">
           <span class="meta-pill">Signature Journey</span>
           <span class="meta-pill">Dec 2017 - Aug 2023</span>
           <span class="meta-pill">Australian Cake House / ACake</span>
         </div>
 
         <div class="hero-copy">
-          <span class="hero-kicker">Public-facing value signal</span>
-          <h1 class="hero-title">Value in Motion.</h1>
+          <span class="kicker">Public-facing value signal</span>
+          <h1 class="title">I OPERATE INSIDE COMPLEX SYSTEMS.</h1>
         </div>
 
-        <p class="hero-subline">
-          Structured execution, customer-facing precision, systems awareness,
-          people support, and operational calm — built through real business environments.
+        <p class="subline">
+          Finance, people, process, systems, launch, service.
+          Not separate tasks — one connected field of execution.
         </p>
 
-        <div class="signal-line">
-          <span class="signal-label">Signal Feed</span>
-          <div class="signal-typed">
-            <span id="typedSignal"></span><span class="signal-caret">|</span>
+        <div class="typebar">
+          <span class="typebar-label">Signal Feed</span>
+          <div class="typebar-text">
+            <span id="typedSignal"></span><span class="caret">|</span>
           </div>
         </div>
 
-        <div class="hero-statement">
-          <span>Positioning</span>
-          <strong>I build clarity where work keeps moving.</strong>
+        <div class="hero-assert">
+          <strong>Clarity. Control. Calm under pressure.</strong>
         </div>
       </div>
 
       <div class="hero-right">
-        <div class="hero-frame">
-          <div class="hero-frame-top">
-            <div class="hero-year-card">
+        <div class="hero-board">
+          <div class="hero-board-top">
+            <div class="duration">
               <span>Duration</span>
               <strong>2017 → 2023</strong>
               <p>Long-form growth through real business movement, not isolated tasks.</p>
             </div>
 
-            <div class="hero-map">
+            <div class="constellation">
               <svg viewBox="0 0 520 280" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                <path class="line gold-line" d="M70 66 C150 30, 210 28, 272 72 S398 136, 458 86" />
+                <path class="line metal-line" d="M70 66 C150 30, 210 28, 272 72 S398 136, 458 86" />
                 <path class="line soft-line" d="M62 218 C150 246, 220 228, 280 176 S396 90, 460 146" />
-                <path class="line gold-line" d="M110 100 C182 152, 256 162, 326 132 S416 72, 454 104" />
+                <path class="line metal-line" d="M110 100 C182 152, 256 162, 326 132 S416 72, 454 104" />
 
                 <rect class="node" x="24" y="38" rx="18" ry="18" width="102" height="48"></rect>
                 <rect class="node" x="168" y="20" rx="18" ry="18" width="106" height="48"></rect>
@@ -1184,20 +1137,20 @@
             </div>
           </div>
 
-          <div class="hero-frame-bottom">
-            <div class="hero-chip">
+          <div class="hero-board-bottom">
+            <div class="chip">
               <strong>Operational clarity</strong>
-              <span>Seeing work as connected systems instead of separate tasks.</span>
+              <span>Seeing work as a connected system, not separate tasks.</span>
             </div>
 
-            <div class="hero-chip">
+            <div class="chip">
               <strong>Execution discipline</strong>
-              <span>Holding consistency even when environments stay fast and moving.</span>
+              <span>Holding consistency when environments stay fast and moving.</span>
             </div>
 
-            <div class="hero-chip">
+            <div class="chip">
               <strong>Calm structure</strong>
-              <span>Keeping response quality under pressure, change, and daily friction.</span>
+              <span>Keeping response quality under pressure, change, and friction.</span>
             </div>
           </div>
         </div>
@@ -1230,164 +1183,144 @@
       </div>
     </section>
 
-    <section class="section-shell monument-stage reveal">
-      <div class="monument-head">
-        <div class="monument-head-left">
-          <span>Core Value Monument</span>
-          <h2>This is the centre of the story.</h2>
+    <section class="shell field-shell reveal">
+      <div class="field-head">
+        <div class="field-head-left">
+          <span>Core Value Field</span>
+          <h2>Contribution is the structure.</h2>
         </div>
 
-        <div class="monument-head-right">
-          <span class="value-tag">Operations</span>
-          <span class="value-tag">Systems</span>
-          <span class="value-tag">People</span>
-          <span class="value-tag">Execution</span>
-          <span class="value-tag">Service</span>
-          <span class="value-tag">Scale</span>
+        <div class="field-head-right">
+          <span class="field-tag">Operations</span>
+          <span class="field-tag">Systems</span>
+          <span class="field-tag">People</span>
+          <span class="field-tag">Execution</span>
+          <span class="field-tag">Service</span>
+          <span class="field-tag">Scale</span>
         </div>
       </div>
 
-      <div class="monument-grid">
-        <article class="monument-anchor tilt-card magnetic-card">
-          <span class="anchor-label">Core Manifesto</span>
-          <h3 class="anchor-title">Cross-functional operational intelligence</h3>
-          <p class="anchor-copy">
-            Stronger than a single title. Built through finance support, SOP thinking,
-            customer handling, onboarding, systems support, outlet readiness,
-            and steady execution under real operational pressure.
-          </p>
+      <div class="field-intro">
+        Not a list of responsibilities. Not a stack of cards.
+        A single operating field made from ten connected forms of value.
+        Hover a node to feel the system. Click a node to open detail.
+      </div>
 
-          <div class="anchor-rail">
-            <div class="anchor-stat">
-              <strong>Financial Accuracy</strong>
-              <span>Care around records, consistency, and transaction discipline.</span>
-            </div>
+      <div class="value-field" id="valueField">
+        <div class="field-center"></div>
+        <div class="field-center-label">
+          <strong>Cross-functional operational intelligence</strong>
+        </div>
 
-            <div class="anchor-stat">
-              <strong>Process Clarity</strong>
-              <span>Turning workflows into more stable, repeatable execution.</span>
-            </div>
-
-            <div class="anchor-stat">
-              <strong>Operational Readiness</strong>
-              <span>Supporting people, systems, and launch conditions together.</span>
-            </div>
+        <article class="value-node node-01 magnetic-node" data-role="Finance" data-title="Financial Accuracy" data-detail="Assisted in bookkeeping, transaction handling, sales tracking, and reporting support. This built strong discipline around precision, consistency, and record accuracy across daily operations.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">01</span>
+            <span class="node-role">Finance</span>
           </div>
+          <h3>Financial Accuracy</h3>
+          <p>Bookkeeping support, transaction consistency, reporting discipline.</p>
         </article>
 
-        <div class="monument-wall">
-          <div class="monument-center-mark"></div>
+        <article class="value-node node-02 magnetic-node" data-role="People" data-title="People & Team Support" data-detail="Participated in recruitment coordination, onboarding assistance, and staff support. This strengthened awareness of team readiness and how people systems support operational continuity.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">02</span>
+            <span class="node-role">People</span>
+          </div>
+          <h3>People &amp; Team Support</h3>
+          <p>Recruitment, onboarding, staff readiness.</p>
+        </article>
 
-          <article class="value-card card-01 tilt-card magnetic-card" data-no="01">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">01</span>
-              <span class="value-card-role">Finance</span>
-            </div>
-            <h3>Financial Accuracy</h3>
-            <p>Bookkeeping support, transaction consistency, sales tracking, reporting discipline.</p>
-          </article>
+        <article class="value-node node-03 magnetic-node" data-role="Process" data-title="Process Design" data-detail="Contributed to SOP refinement and workflow documentation for operations, pricing, order flow, and service handling. This developed practical process thinking and operational consistency.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">03</span>
+            <span class="node-role">Process</span>
+          </div>
+          <h3>Process Design</h3>
+          <p>SOP refinement, workflow structure, service consistency.</p>
+        </article>
 
-          <article class="value-card card-02 tilt-card magnetic-card" data-no="02">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">02</span>
-              <span class="value-card-role">People</span>
-            </div>
-            <h3>People &amp; Team Support</h3>
-            <p>Recruitment coordination, onboarding support, staff training, team readiness.</p>
-          </article>
+        <article class="value-node node-04 magnetic-node" data-role="Knowledge" data-title="Internal Knowledge Systems" data-detail="Helped build internal guides and reference materials covering company structure, communication channels, and awareness procedures. This improved clarity and transfer of information across the team.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">04</span>
+            <span class="node-role">Knowledge</span>
+          </div>
+          <h3>Internal Knowledge Systems</h3>
+          <p>Information clarity, internal reference, communication structure.</p>
+        </article>
 
-          <article class="value-card card-03 tilt-card magnetic-card" data-no="03">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">03</span>
-              <span class="value-card-role">Process</span>
-            </div>
-            <h3>Process Design</h3>
-            <p>SOP refinement, workflow structure, pricing flow, service consistency.</p>
-          </article>
+        <article class="value-node node-05 magnetic-node" data-role="Training" data-title="Training Translation" data-detail="Supported staff training across customer service, product knowledge, and POS usage. This built the ability to translate operational complexity into usable guidance.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">05</span>
+            <span class="node-role">Training</span>
+          </div>
+          <h3>Training Translation</h3>
+          <p>Turning practical processes into usable guidance.</p>
+        </article>
 
-          <article class="value-card card-04 tilt-card magnetic-card" data-no="04">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">04</span>
-              <span class="value-card-role">Knowledge</span>
-            </div>
-            <h3>Internal Knowledge Systems</h3>
-            <p>Information guide building, internal reference clarity, fraud awareness communication.</p>
-          </article>
+        <article class="value-node node-06 magnetic-node" data-role="Service" data-title="Customer Interface Control" data-detail="Handled orders, inquiries, complaints, and service concerns across messaging channels. This strengthened response quality, professionalism, and customer-facing consistency.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">06</span>
+            <span class="node-role">Service</span>
+          </div>
+          <h3>Customer Interface Control</h3>
+          <p>Orders, inquiries, complaints, service quality.</p>
+        </article>
 
-          <article class="value-card card-05 tilt-card magnetic-card" data-no="05">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">05</span>
-              <span class="value-card-role">Training</span>
-            </div>
-            <h3>Training Translation</h3>
-            <p>Turning practical processes into clearer staff guidance and support.</p>
-          </article>
+        <article class="value-node node-07 magnetic-node" data-role="Growth" data-title="Growth Awareness" data-detail="Supported engagement and retention thinking through customer-facing operational insight. This built awareness of how service execution connects to longer-term business growth.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">07</span>
+            <span class="node-role">Growth</span>
+          </div>
+          <h3>Growth Awareness</h3>
+          <p>Operational impact on engagement and retention.</p>
+        </article>
 
-          <article class="value-card card-06 tilt-card magnetic-card" data-no="06">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">06</span>
-              <span class="value-card-role">Service</span>
-            </div>
-            <h3>Customer Interface Control</h3>
-            <p>Orders, inquiries, complaints, and service quality across messaging channels.</p>
-          </article>
+        <article class="value-node node-08 magnetic-node" data-role="Systems" data-title="System Readiness" data-detail="Supported POS setup, troubleshooting, and standardisation across outlets. This created stronger awareness of how systems support operational flow and consistency.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">08</span>
+            <span class="node-role">Systems</span>
+          </div>
+          <h3>System Readiness</h3>
+          <p>POS setup, troubleshooting, standardisation support.</p>
+        </article>
 
-          <article class="value-card card-07 tilt-card magnetic-card" data-no="07">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">07</span>
-              <span class="value-card-role">Growth</span>
-            </div>
-            <h3>Growth Awareness</h3>
-            <p>Customer engagement support and operational impact on business retention.</p>
-          </article>
+        <article class="value-node node-09 magnetic-node" data-role="Launch" data-title="Launch Support" data-detail="Participated in outlet setup, staff readiness, and operational preparation. This developed awareness of what it takes to move from planning into a smooth live launch.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">09</span>
+            <span class="node-role">Launch</span>
+          </div>
+          <h3>Launch Support</h3>
+          <p>Outlet preparation, readiness, opening support.</p>
+        </article>
 
-          <article class="value-card card-08 tilt-card magnetic-card" data-no="08">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">08</span>
-              <span class="value-card-role">Systems</span>
-            </div>
-            <h3>System Readiness</h3>
-            <p>POS setup, troubleshooting, and standardisation support across outlets.</p>
-          </article>
-
-          <article class="value-card card-09 tilt-card magnetic-card" data-no="09">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">09</span>
-              <span class="value-card-role">Launch</span>
-            </div>
-            <h3>Launch Support</h3>
-            <p>Outlet setup, staff readiness, operational flow preparation, and opening support.</p>
-          </article>
-
-          <article class="value-card card-10 tilt-card magnetic-card" data-no="10">
-            <span class="card-glow"></span>
-            <div class="value-card-top">
-              <span class="value-card-no">10</span>
-              <span class="value-card-role">Pressure</span>
-            </div>
-            <h3>Calm Under Pressure</h3>
-            <p>Customer issues, equipment issues, unexpected incidents, and structured response.</p>
-          </article>
-        </div>
+        <article class="value-node node-10 magnetic-node" data-role="Pressure" data-title="Calm Under Pressure" data-detail="Responded to customer issues, equipment problems, and unexpected incidents through structured action. This built calm judgement and steadier decision-making under operational stress.">
+          <span class="node-glow"></span>
+          <div class="node-top">
+            <span class="node-no">10</span>
+            <span class="node-role">Pressure</span>
+          </div>
+          <h3>Calm Under Pressure</h3>
+          <p>Structured response when operations become unpredictable.</p>
+        </article>
       </div>
     </section>
 
-    <section class="section-shell signature-strip reveal">
-      <div class="signature-strip-left">
+    <section class="shell signal-strip reveal">
+      <div class="signal-strip-left">
         <span>Signature Signal</span>
         <h2>Clarity, consistency, and control inside moving environments.</h2>
       </div>
 
-      <div class="signature-strip-right">
+      <div class="signal-strip-right">
         Finance support, process clarity, customer communication, onboarding,
         systems support, launch readiness, and calm response all point to one thing:
         the ability to work inside complex operations without losing structure.
@@ -1395,7 +1328,7 @@
     </section>
 
     <section class="story-layout">
-      <section class="section-shell visual-panel reveal">
+      <section class="shell visual-panel reveal">
         <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House experience visual" />
         <div class="visual-note">
           <strong>Built through real operations, not abstract theory</strong>
@@ -1407,7 +1340,7 @@
       </section>
 
       <div class="story-right">
-        <section class="section-shell copy-card reveal">
+        <section class="shell copy-card reveal">
           <span class="section-label">Operational Identity</span>
           <h2>Range over repetition.</h2>
           <p>
@@ -1422,23 +1355,23 @@
         </section>
 
         <div class="triad">
-          <article class="section-shell triad-card reveal tilt-card">
+          <article class="shell triad-card reveal tilt-card">
             <strong>Structured Thinking</strong>
             <span>Seeing business work as connected systems, not isolated tasks.</span>
           </article>
 
-          <article class="section-shell triad-card reveal tilt-card">
+          <article class="shell triad-card reveal tilt-card">
             <strong>Adaptability</strong>
             <span>Moving across service, process, systems, training, and support contexts.</span>
           </article>
 
-          <article class="section-shell triad-card reveal tilt-card">
+          <article class="shell triad-card reveal tilt-card">
             <strong>Operational Discipline</strong>
             <span>Holding consistency, timing, and quality under real pressure.</span>
           </article>
         </div>
 
-        <section class="section-shell final-card reveal">
+        <section class="shell final-card reveal">
           <span class="section-label">Reflection</span>
           <h2>A strong operational foundation before the next chapter.</h2>
           <p>
@@ -1451,7 +1384,7 @@
     </section>
 
     <section class="bottom-grid">
-      <section class="section-shell final-card reveal">
+      <section class="shell final-card reveal">
         <span class="section-label">What This Strengthened</span>
         <h2>Capabilities worth noticing.</h2>
         <ul class="feature-list">
@@ -1464,7 +1397,7 @@
         </ul>
       </section>
 
-      <section class="section-shell final-card reveal">
+      <section class="shell final-card reveal">
         <span class="section-label">Immediate Read</span>
         <h2>What this signals at a glance.</h2>
         <p>
@@ -1484,6 +1417,15 @@
   </main>
 
   <div id="footer"></div>
+
+  <div class="detail-overlay" id="detailOverlay" aria-hidden="true">
+    <div class="detail-panel">
+      <button class="detail-close" id="detailClose" aria-label="Close overlay">✕</button>
+      <span class="detail-meta" id="detailMeta">Role</span>
+      <h3 id="detailTitle">Title</h3>
+      <p id="detailText">Detail</p>
+    </div>
+  </div>
 
   <script src="../../js/layout.js"></script>
   <script src="../../js/navigation.js"></script>
@@ -1539,7 +1481,6 @@
         if (entry.isIntersecting) entry.target.classList.add("is-visible");
       });
     }, { threshold: 0.14 });
-
     revealItems.forEach((item) => revealObserver.observe(item));
 
     // TILT
@@ -1549,8 +1490,8 @@
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        const rotateX = ((y / rect.height) - 0.5) * -6;
-        const rotateY = ((x / rect.width) - 0.5) * 6;
+        const rotateX = ((y / rect.height) - 0.5) * -5;
+        const rotateY = ((x / rect.width) - 0.5) * 5;
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
       });
 
@@ -1559,32 +1500,61 @@
       });
     });
 
-    // MAGNETIC
-    const magneticItems = document.querySelectorAll(".magnetic-card");
-    magneticItems.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
+    // MAGNETIC NODES
+    const nodes = document.querySelectorAll(".magnetic-node");
+    nodes.forEach((node) => {
+      node.addEventListener("mousemove", (e) => {
+        const rect = node.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        card.style.transform = `translate(${x * 0.018}px, ${y * 0.018}px)`;
+        node.style.transform = `translate(${x * 0.02}px, ${y * 0.02}px)`;
       });
 
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
+      node.addEventListener("mouseleave", () => {
+        node.style.transform = "";
       });
     });
 
-    // SPOTLIGHT
-    const valueCards = document.querySelectorAll(".value-card");
-    valueCards.forEach((card) => {
-      const glow = card.querySelector(".card-glow");
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
+    // NODE SPOTLIGHT
+    nodes.forEach((node) => {
+      const glow = node.querySelector(".node-glow");
+      node.addEventListener("mousemove", (e) => {
+        const rect = node.getBoundingClientRect();
         if (glow) {
           glow.style.left = `${e.clientX - rect.left}px`;
           glow.style.top = `${e.clientY - rect.top}px`;
         }
       });
+    });
+
+    // DETAIL OVERLAY
+    const overlay = document.getElementById("detailOverlay");
+    const detailMeta = document.getElementById("detailMeta");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailText = document.getElementById("detailText");
+    const detailClose = document.getElementById("detailClose");
+
+    nodes.forEach((node) => {
+      node.addEventListener("click", () => {
+        detailMeta.textContent = node.dataset.role || "";
+        detailTitle.textContent = node.dataset.title || "";
+        detailText.textContent = node.dataset.detail || "";
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    function closeOverlay() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    detailClose.addEventListener("click", closeOverlay);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeOverlay();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeOverlay();
     });
 
     // SCROLL PROGRESS
@@ -1594,26 +1564,14 @@
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       document.documentElement.style.setProperty('--progress', `${progress}%`);
     }
-    window.addEventListener('scroll', updateProgress);
+    window.addEventListener("scroll", updateProgress);
     updateProgress();
 
-    // PARALLAX DRIFT
-    const driftItems = document.querySelectorAll(".hero-frame, .monument-anchor, .visual-panel");
-    function updateDrift() {
-      const scrollY = window.scrollY;
-      driftItems.forEach((el, index) => {
-        const speed = (index + 1) * 0.012;
-        el.style.transform = `translateY(${scrollY * speed}px)`;
-      });
-    }
-    window.addEventListener("scroll", updateDrift, { passive: true });
-    updateDrift();
-
-    // BACKGROUND FIELD
-    const canvas = document.getElementById("luxCanvas");
+    // CANVAS FIELD
+    const canvas = document.getElementById("fieldCanvas");
     const ctx = canvas.getContext("2d");
     let particles = [];
-    let mouse = { x: null, y: null, radius: 120 };
+    let mouse = { x: null, y: null, radius: 110 };
 
     function resizeCanvas() {
       const dpr = window.devicePixelRatio || 1;
@@ -1623,13 +1581,13 @@
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(64, Math.max(24, Math.floor(window.innerWidth / 26)));
+      const count = Math.min(56, Math.max(20, Math.floor(window.innerWidth / 30)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.5 + 0.5
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r: Math.random() * 1.5 + 0.4
       }));
     }
 
@@ -1650,14 +1608,14 @@
           const dy = mouse.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius) {
-            p.x -= dx * 0.002;
-            p.y -= dy * 0.002;
+            p.x -= dx * 0.0018;
+            p.y -= dy * 0.0018;
           }
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(215,176,122,0.18)";
+        ctx.fillStyle = "rgba(212,177,129,0.16)";
         ctx.fill();
       }
 
@@ -1668,8 +1626,8 @@
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.045;
+          if (dist < 120) {
+            const alpha = (1 - dist / 120) * 0.032;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
