@@ -62,7 +62,7 @@ function initSystemField() {
     textTargets: [
       "#aboutHeroTitle",
       "#aboutHeroSubtitle",
-      ".about-typewriter-line",
+      ".about-typewriter",
       ".about-section-heading"
     ]
   });
