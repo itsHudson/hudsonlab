@@ -10,24 +10,26 @@
 
   <style>
     :root {
-      --bg-1: #05060a;
-      --bg-2: #0b0e15;
-      --bg-3: #111622;
-      --line: rgba(255,255,255,0.08);
-      --line-strong: rgba(255,255,255,0.16);
-      --text: rgba(255,255,255,0.95);
-      --soft: rgba(255,255,255,0.72);
-      --dim: rgba(255,255,255,0.48);
+      --bg-0: #05060a;
+      --bg-1: #0a0d14;
+      --bg-2: #111624;
+      --panel: rgba(255, 255, 255, 0.05);
+      --panel-strong: rgba(255, 255, 255, 0.08);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: rgba(255, 255, 255, 0.95);
+      --soft: rgba(255, 255, 255, 0.72);
+      --dim: rgba(255, 255, 255, 0.46);
+      --cream: #fff4e8;
       --gold: #ffbe78;
       --peach: #ff8d6d;
-      --violet: #8d8cff;
-      --cyan: #65d6ff;
-      --cream: #fff5ea;
-      --shadow: 0 40px 120px rgba(0,0,0,0.5);
+      --violet: #8c8cff;
+      --cyan: #6bd8ff;
+      --shadow: 0 36px 120px rgba(0, 0, 0, 0.42);
       --radius-xl: 34px;
       --radius-lg: 26px;
       --radius-md: 20px;
-      --max: 1440px;
+      --max-w: 1440px;
     }
 
     * {
@@ -38,529 +40,574 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 12%, rgba(255,190,120,0.12), transparent 18%),
-        radial-gradient(circle at 82% 14%, rgba(101,214,255,0.08), transparent 22%),
-        radial-gradient(circle at 72% 72%, rgba(141,140,255,0.09), transparent 22%),
-        linear-gradient(180deg, #05060a 0%, #0b0e15 36%, #101421 100%);
+        radial-gradient(circle at 10% 12%, rgba(255, 190, 120, 0.12), transparent 18%),
+        radial-gradient(circle at 85% 14%, rgba(107, 216, 255, 0.08), transparent 22%),
+        radial-gradient(circle at 76% 76%, rgba(140, 140, 255, 0.08), transparent 20%),
+        linear-gradient(180deg, #05060a 0%, #0b0e15 38%, #101522 100%);
       overflow-x: hidden;
     }
 
-    #acCanvas {
+    .ac-signature-page {
+      position: relative;
+      width: min(calc(100% - 28px), var(--max-w));
+      margin: 0 auto;
+      padding: 24px 0 42px;
+      display: grid;
+      gap: 22px;
+      isolation: isolate;
+    }
+
+    .ac-grid-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+    }
+
+    #flowCanvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
-      opacity: 0.95;
+      z-index: -3;
       pointer-events: none;
+      opacity: 0.9;
     }
 
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.18;
-      background-image: radial-gradient(rgba(255,255,255,0.12) 0.55px, transparent 0.55px);
-      background-size: 8px 8px;
-      mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
-    }
-
-    .signature-page {
-      position: relative;
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-      display: grid;
-      gap: 24px;
-      padding: 28px 0 40px;
-      isolation: isolate;
-    }
-
-    .panel {
+    .ac-panel {
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-xl);
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      backdrop-filter: blur(18px);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(20px);
     }
 
-    .hero-shell {
+    .ac-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 24%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.06), transparent 24%);
+      opacity: 0.55;
+    }
+
+    .ac-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .ac-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* HERO */
+    .ac-hero {
       min-height: 92vh;
-      padding: 28px;
+      padding: 26px;
       display: grid;
-      grid-template-columns: 1.02fr 0.98fr;
-      gap: 22px;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 20px;
       align-items: stretch;
       background:
-        radial-gradient(circle at 12% 16%, rgba(255,190,120,0.16), transparent 22%),
-        radial-gradient(circle at 90% 20%, rgba(101,214,255,0.10), transparent 24%),
-        linear-gradient(135deg, rgba(8,10,16,0.96), rgba(19,24,37,0.94));
+        radial-gradient(circle at 12% 18%, rgba(255,190,120,0.14), transparent 24%),
+        radial-gradient(circle at 88% 18%, rgba(107,216,255,0.08), transparent 22%),
+        linear-gradient(135deg, rgba(8,10,16,0.96), rgba(18,23,36,0.94));
     }
 
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      right: -80px;
-      top: -80px;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,190,120,0.18), transparent 70%);
-      filter: blur(18px);
-      pointer-events: none;
-    }
-
-    .hero-shell::after {
-      content: "";
-      position: absolute;
-      left: -100px;
-      bottom: -120px;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(141,140,255,0.13), transparent 72%);
-      filter: blur(18px);
-      pointer-events: none;
-    }
-
-    .hero-left {
+    .ac-hero-left {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-rows: auto auto auto auto 1fr;
       gap: 18px;
-      position: relative;
-      z-index: 1;
+      align-content: start;
     }
 
-    .signature-meta {
+    .ac-meta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .signature-pill {
+    .ac-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
       font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,245,235,0.95);
+      color: rgba(255,245,235,0.94);
     }
 
-    .hero-title-wrap h1 {
+    .ac-headline-wrap {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ac-kicker {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .ac-headline {
       margin: 0;
-      max-width: 8.5ch;
-      font-size: clamp(3.2rem, 8vw, 7rem);
+      max-width: 8ch;
+      font-size: clamp(3.1rem, 8vw, 7rem);
       line-height: 0.88;
-      letter-spacing: -0.08em;
+      letter-spacing: -0.085em;
       color: var(--cream);
       text-wrap: balance;
     }
 
-    .hero-subline {
+    .ac-subline {
       margin: 0;
-      max-width: 56ch;
+      max-width: 52ch;
+      color: var(--soft);
       font-size: 1rem;
       line-height: 1.9;
-      color: var(--soft);
     }
 
-    .typed-stage {
+    .ac-typing-bar {
+      position: relative;
+      overflow: hidden;
+      padding: 18px 18px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.10), rgba(107,216,255,0.05)),
+        rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
       gap: 12px;
-      min-height: 62px;
-      padding: 16px 18px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background:
-        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(101,214,255,0.04)),
-        rgba(255,255,255,0.035);
-      overflow: hidden;
+      min-height: 68px;
     }
 
-    .typed-label {
+    .ac-typing-label {
       flex: 0 0 auto;
-      font-size: 0.78rem;
+      color: var(--gold);
+      font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
     }
 
-    .typed-text-wrap {
+    .ac-typing-text {
       min-width: 0;
-      font-size: clamp(0.95rem, 2vw, 1.15rem);
-      letter-spacing: -0.02em;
       color: var(--cream);
+      font-size: clamp(0.98rem, 2vw, 1.18rem);
+      letter-spacing: -0.02em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .typed-caret {
+    .ac-caret {
       display: inline-block;
       width: 10px;
       color: var(--gold);
-      animation: blink 1s infinite;
+      animation: acBlink 1s infinite;
     }
 
-    @keyframes blink {
-      0%, 45% { opacity: 1; }
-      50%, 100% { opacity: 0; }
+    @keyframes acBlink {
+      0%, 48% { opacity: 1; }
+      52%, 100% { opacity: 0; }
     }
 
-    .value-quote {
-      padding: 20px 22px;
+    .ac-hero-quote {
+      padding: 22px 22px 20px;
       border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(circle at 86% 20%, rgba(255,190,120,0.12), transparent 24%),
+        radial-gradient(circle at 85% 18%, rgba(255,190,120,0.14), transparent 24%),
         linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .value-quote span {
+    .ac-hero-quote span {
       display: block;
-      margin-bottom: 10px;
-      font-size: 0.78rem;
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
     }
 
-    .value-quote strong {
+    .ac-hero-quote strong {
       display: block;
-      max-width: 20ch;
-      font-size: clamp(1.35rem, 2vw, 2rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+      max-width: 16ch;
       color: var(--cream);
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
     }
 
-    .micro-grid {
+    .ac-mini-band {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
-    .micro-card {
+    .ac-mini-card {
       padding: 18px 16px;
       border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
       transform-style: preserve-3d;
       transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
-    .micro-card:hover {
+    .ac-mini-card:hover {
       border-color: rgba(255,190,120,0.22);
       background: rgba(255,255,255,0.06);
     }
 
-    .micro-card strong {
+    .ac-mini-card strong {
       display: block;
       margin-bottom: 8px;
-      font-size: 1rem;
       color: var(--cream);
+      font-size: 1rem;
     }
 
-    .micro-card span {
+    .ac-mini-card span {
       display: block;
       color: var(--soft);
-      line-height: 1.7;
       font-size: 0.9rem;
+      line-height: 1.7;
     }
 
-    .hero-right {
-      display: grid;
-      gap: 14px;
+    .ac-hero-right {
       position: relative;
       z-index: 1;
+      display: grid;
+      gap: 14px;
+      align-content: stretch;
     }
 
-    .orbital-stage {
+    .ac-signature-board {
       position: relative;
       min-height: 100%;
       border-radius: 32px;
       border: 1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.04), transparent 56%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+        radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
       overflow: hidden;
+      padding: 18px;
       display: grid;
-      place-items: center;
-      padding: 22px;
+      gap: 14px;
     }
 
-    .core-system {
-      position: relative;
-      width: min(34vw, 420px);
-      aspect-ratio: 1;
-      border-radius: 50%;
+    .ac-board-top {
       display: grid;
-      place-items: center;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 14px;
     }
 
-    .ring,
-    .ring-2,
-    .ring-3 {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px dashed rgba(255,255,255,0.12);
-      animation: spin linear infinite;
-    }
-
-    .ring {
-      inset: 0;
-      animation-duration: 24s;
-    }
-
-    .ring-2 {
-      inset: 13%;
-      animation-duration: 18s;
-      animation-direction: reverse;
-    }
-
-    .ring-3 {
-      inset: 27%;
-      animation-duration: 12s;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .core-center {
-      width: 42%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      text-align: center;
+    .ac-year-tower {
+      min-height: 250px;
+      border-radius: 26px;
       padding: 16px;
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.16), rgba(101,214,255,0.12), rgba(141,140,255,0.12)),
-        rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow:
-        0 0 0 18px rgba(255,255,255,0.02),
-        0 0 80px rgba(255,190,120,0.18);
-      backdrop-filter: blur(12px);
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
 
-    .core-center strong {
-      font-size: 1rem;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--cream);
-    }
-
-    .orbit-node {
-      position: absolute;
-      width: 112px;
-      min-height: 112px;
-      padding: 12px;
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
-      text-align: center;
+    .ac-year-tower span {
+      display: block;
+      color: var(--gold);
       font-size: 0.78rem;
-      line-height: 1.35;
-      color: rgba(255,255,255,0.82);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 18px 38px rgba(0,0,0,0.2);
-      backdrop-filter: blur(12px);
-      animation: floaty 5.5s ease-in-out infinite;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .orbit-node:nth-child(5) { animation-delay: 0.8s; }
-    .orbit-node:nth-child(6) { animation-delay: 1.6s; }
-    .orbit-node:nth-child(7) { animation-delay: 2.2s; }
-    .orbit-node:nth-child(8) { animation-delay: 2.8s; }
-    .orbit-node:nth-child(9) { animation-delay: 3.4s; }
-    .orbit-node:nth-child(10) { animation-delay: 4s; }
-
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+    .ac-year-tower strong {
+      display: block;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      color: var(--cream);
+      margin-bottom: 10px;
     }
 
-    .node-1 { top: -2%; left: 50%; transform: translateX(-50%); }
-    .node-2 { top: 18%; right: -2%; }
-    .node-3 { bottom: 18%; right: 2%; }
-    .node-4 { bottom: -2%; left: 50%; transform: translateX(-50%); }
-    .node-5 { bottom: 18%; left: 2%; }
-    .node-6 { top: 18%; left: -2%; }
+    .ac-year-tower p {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.7;
+      font-size: 0.92rem;
+      max-width: 18ch;
+    }
 
-    .ticker {
-      overflow: hidden;
+    .ac-flow-map {
+      position: relative;
+      min-height: 250px;
       border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 80% 18%, rgba(255,190,120,0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      padding: 16px;
+    }
+
+    .ac-flow-map svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .ac-flow-map text {
+      fill: rgba(255,255,255,0.82);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .ac-flow-map .node {
+      fill: rgba(255,255,255,0.05);
+      stroke: rgba(255,255,255,0.12);
+      stroke-width: 1.2;
+    }
+
+    .ac-flow-map .line {
+      fill: none;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-dasharray: 10 10;
+      animation: acDash 10s linear infinite;
+    }
+
+    .ac-flow-map .line-gold { stroke: rgba(255,190,120,0.7); }
+    .ac-flow-map .line-cyan { stroke: rgba(107,216,255,0.62); }
+    .ac-flow-map .line-violet { stroke: rgba(140,140,255,0.58); }
+
+    @keyframes acDash {
+      to { stroke-dashoffset: -120; }
+    }
+
+    .ac-board-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .ac-board-chip {
+      min-height: 118px;
+      border-radius: 22px;
+      padding: 14px;
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(107,216,255,0.04)),
+        rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      align-content: end;
+    }
+
+    .ac-board-chip strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--cream);
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .ac-board-chip span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.88rem;
+      line-height: 1.62;
+    }
+
+    .ac-marquee {
+      overflow: hidden;
+      border-radius: 24px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.04);
-      padding: 14px 0;
+      padding: 13px 0;
     }
 
-    .ticker-track {
+    .ac-marquee-track {
       display: flex;
-      width: max-content;
       gap: 12px;
+      width: max-content;
       padding-left: 16px;
-      animation: ticker 22s linear infinite;
+      animation: acTicker 22s linear infinite;
     }
 
-    @keyframes ticker {
+    @keyframes acTicker {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    .ticker-chip {
+    .ac-marquee-pill {
       white-space: nowrap;
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(101,214,255,0.08)),
+        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(107,216,255,0.08)),
         rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
       color: var(--cream);
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.03em;
     }
 
-    .value-architecture {
+    /* VALUE ARCHITECTURE */
+    .ac-value-stage {
       padding: 26px;
       display: grid;
-      gap: 24px;
-      overflow: hidden;
+      gap: 22px;
       background:
         radial-gradient(circle at 12% 18%, rgba(255,190,120,0.10), transparent 22%),
-        radial-gradient(circle at 88% 16%, rgba(101,214,255,0.08), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(107,216,255,0.08), transparent 24%),
         linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
     }
 
-    .value-hero-strip {
+    .ac-value-head {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap: 18px;
       align-items: end;
     }
 
-    .value-kicker {
+    .ac-value-head-left span {
       display: inline-block;
       margin-bottom: 10px;
+      color: var(--gold);
       font-size: 0.78rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
     }
 
-    .value-hero-copy h2 {
+    .ac-value-head-left h2 {
       margin: 0;
       max-width: 11ch;
-      font-size: clamp(2rem, 4vw, 3.8rem);
+      font-size: clamp(2rem, 4vw, 3.9rem);
       line-height: 0.92;
       letter-spacing: -0.06em;
       color: var(--cream);
     }
 
-    .value-hero-tags {
+    .ac-value-head-right {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: flex-end;
-      align-content: flex-end;
     }
 
-    .value-hero-tags span {
+    .ac-value-tag {
       padding: 10px 14px;
       border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(107,216,255,0.08)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--cream);
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: var(--cream);
-      background:
-        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(101,214,255,0.08)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .value-core-layout {
+    .ac-value-layout {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 0.88fr 1.12fr;
       gap: 18px;
       align-items: start;
     }
 
-    .value-core-panel {
+    .ac-value-core {
       position: sticky;
-      top: 110px;
+      top: 106px;
+      min-height: 560px;
       padding: 26px;
-      min-height: 540px;
       border-radius: 32px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(circle at 15% 18%, rgba(255,190,120,0.16), transparent 24%),
-        radial-gradient(circle at 85% 82%, rgba(141,140,255,0.10), transparent 24%),
+        radial-gradient(circle at 16% 18%, rgba(255,190,120,0.16), transparent 24%),
+        radial-gradient(circle at 84% 82%, rgba(140,140,255,0.10), transparent 24%),
         linear-gradient(145deg, rgba(10,12,20,0.96), rgba(19,24,37,0.94));
       box-shadow: 0 28px 90px rgba(0,0,0,0.32);
     }
 
-    .value-core-glow {
+    .ac-value-core::after {
+      content: "";
       position: absolute;
-      inset: auto -80px -100px auto;
+      right: -80px;
+      bottom: -100px;
       width: 240px;
       height: 240px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 72%);
+      background: radial-gradient(circle, rgba(255,255,255,0.13), transparent 72%);
       pointer-events: none;
     }
 
-    .value-core-label {
+    .ac-core-label {
       position: relative;
       z-index: 1;
       display: inline-flex;
       padding: 8px 12px;
       border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gold);
       font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.05);
     }
 
-    .value-core-panel h3 {
+    .ac-value-core h3 {
       position: relative;
       z-index: 1;
       margin: 18px 0 14px;
-      max-width: 10ch;
+      max-width: 9ch;
       font-size: clamp(2rem, 3vw, 3rem);
       line-height: 0.95;
       letter-spacing: -0.06em;
       color: var(--cream);
     }
 
-    .value-core-panel p {
+    .ac-value-core p {
       position: relative;
       z-index: 1;
       margin: 0;
-      max-width: 34ch;
+      max-width: 33ch;
       color: var(--soft);
-      line-height: 1.9;
+      line-height: 1.88;
       font-size: 0.98rem;
     }
 
-    .value-core-stats {
+    .ac-core-rail {
       position: relative;
       z-index: 1;
       margin-top: 28px;
@@ -568,34 +615,34 @@
       gap: 14px;
     }
 
-    .value-core-stats div {
+    .ac-core-stat {
       padding: 16px 16px 14px;
       border-radius: 22px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .value-core-stats strong {
+    .ac-core-stat strong {
       display: block;
       margin-bottom: 6px;
-      font-size: 1rem;
       color: var(--cream);
+      font-size: 1rem;
     }
 
-    .value-core-stats span {
+    .ac-core-stat span {
       display: block;
       color: var(--soft);
       font-size: 0.9rem;
-      line-height: 1.6;
+      line-height: 1.62;
     }
 
-    .value-signal-grid {
+    .ac-signal-grid {
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .value-signal-card {
+    .ac-signal {
       position: relative;
       overflow: hidden;
       min-height: 220px;
@@ -610,16 +657,17 @@
         border-color 0.35s ease,
         box-shadow 0.35s ease,
         background 0.35s ease;
+      will-change: transform;
     }
 
-    .value-signal-card:hover {
+    .ac-signal:hover {
       border-color: rgba(255,190,120,0.24);
       box-shadow: 0 24px 80px rgba(0,0,0,0.24);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.03));
     }
 
-    .value-signal-card::before {
+    .ac-signal::before {
       content: "";
       position: absolute;
       inset: 0 auto auto 0;
@@ -628,7 +676,7 @@
       background: linear-gradient(90deg, var(--gold), var(--peach), var(--cyan));
     }
 
-    .value-signal-card::after {
+    .ac-signal::after {
       content: "";
       position: absolute;
       right: -34px;
@@ -640,7 +688,7 @@
       pointer-events: none;
     }
 
-    .signal-index {
+    .ac-signal-no {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -657,89 +705,86 @@
       box-shadow: 0 10px 26px rgba(255,170,100,0.22);
     }
 
-    .value-signal-card h3 {
+    .ac-signal h3 {
       margin: 0 0 10px;
       max-width: 12ch;
-      font-size: 1.06rem;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
       color: var(--cream);
+      font-size: 1.05rem;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
     }
 
-    .value-signal-card p {
+    .ac-signal p {
       margin: 0;
       max-width: 24ch;
       color: var(--soft);
       font-size: 0.9rem;
-      line-height: 1.75;
+      line-height: 1.74;
     }
 
-    .signal-card-1 { grid-column: span 6; min-height: 250px; }
-    .signal-card-2 { grid-column: span 3; }
-    .signal-card-3 { grid-column: span 3; }
-    .signal-card-4 { grid-column: span 4; }
-    .signal-card-5 { grid-column: span 4; }
-    .signal-card-6 { grid-column: span 4; }
-    .signal-card-7 { grid-column: span 3; }
-    .signal-card-8 { grid-column: span 3; }
-    .signal-card-9 { grid-column: span 6; min-height: 240px; }
-    .signal-card-10 { grid-column: span 12; min-height: 180px; }
+    .ac-signal-1 { grid-column: span 6; min-height: 250px; }
+    .ac-signal-2 { grid-column: span 3; }
+    .ac-signal-3 { grid-column: span 3; }
+    .ac-signal-4 { grid-column: span 4; }
+    .ac-signal-5 { grid-column: span 4; }
+    .ac-signal-6 { grid-column: span 4; }
+    .ac-signal-7 { grid-column: span 3; }
+    .ac-signal-8 { grid-column: span 3; }
+    .ac-signal-9 { grid-column: span 6; min-height: 240px; }
+    .ac-signal-10 { grid-column: span 12; min-height: 178px; }
 
-    .magnetic-card,
-    .tilt-card {
-      will-change: transform;
-    }
-
-    .signature-breaker {
+    /* SIGNATURE STRIP */
+    .ac-strip {
       padding: 20px 24px;
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap: 18px;
       align-items: center;
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(141,140,255,0.05), rgba(101,214,255,0.05)),
+        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(140,140,255,0.05), rgba(107,216,255,0.05)),
         rgba(255,255,255,0.03);
     }
 
-    .breaker-left span {
+    .ac-strip-left span {
       display: block;
       margin-bottom: 8px;
+      color: var(--gold);
       font-size: 0.78rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
     }
 
-    .breaker-left h2 {
+    .ac-strip-left h2 {
       margin: 0;
       max-width: 15ch;
-      font-size: clamp(1.5rem, 2.4vw, 2.35rem);
-      line-height: 1.02;
-      letter-spacing: -0.045em;
       color: var(--cream);
+      font-size: clamp(1.5rem, 2.4vw, 2.35rem);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
     }
 
-    .breaker-right {
+    .ac-strip-right {
       color: var(--soft);
-      line-height: 1.85;
       font-size: 0.98rem;
+      line-height: 1.84;
     }
 
-    .side-by-side {
+    /* STORY */
+    .ac-story-layout {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap: 22px;
     }
 
-    .visual-tower {
+    .ac-visual-panel {
       padding: 0;
       overflow: hidden;
-      min-height: 100%;
       display: grid;
+      min-height: 100%;
     }
 
-    .visual-tower img {
+    .ac-visual-panel img {
       width: 100%;
       height: 100%;
       min-height: 720px;
@@ -748,7 +793,7 @@
       filter: contrast(1.05) saturate(0.96);
     }
 
-    .visual-overlay-card {
+    .ac-visual-note {
       position: absolute;
       left: 20px;
       right: 20px;
@@ -760,273 +805,238 @@
       backdrop-filter: blur(12px);
     }
 
-    .visual-overlay-card strong {
+    .ac-visual-note strong {
       display: block;
       margin-bottom: 8px;
       color: var(--cream);
       font-size: 0.98rem;
     }
 
-    .visual-overlay-card span {
+    .ac-visual-note span {
+      display: block;
       color: var(--soft);
-      line-height: 1.75;
       font-size: 0.91rem;
+      line-height: 1.75;
     }
 
-    .insight-stack {
+    .ac-story-right {
       display: grid;
       gap: 22px;
     }
 
-    .insight-card,
-    .final-card {
+    .ac-copy-card,
+    .ac-final-card {
       padding: 26px;
     }
 
-    .section-kicker {
+    .ac-section-label {
       display: block;
       margin-bottom: 10px;
       color: var(--gold);
       font-size: 0.78rem;
       font-weight: 800;
-      text-transform: uppercase;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .insight-card h2,
-    .final-card h2 {
+    .ac-copy-card h2,
+    .ac-final-card h2 {
       margin: 0 0 12px;
+      color: var(--cream);
       font-size: clamp(1.5rem, 2vw, 2rem);
       line-height: 1.03;
       letter-spacing: -0.045em;
-      color: var(--cream);
     }
 
-    .insight-card p,
-    .final-card p {
+    .ac-copy-card p,
+    .ac-final-card p {
       margin: 0 0 14px;
       color: var(--soft);
       line-height: 1.9;
     }
 
-    .insight-card p:last-child,
-    .final-card p:last-child {
+    .ac-copy-card p:last-child,
+    .ac-final-card p:last-child {
       margin-bottom: 0;
     }
 
-    .signal-row {
+    .ac-triad {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
-    .signal-box {
+    .ac-triad-card {
       padding: 18px 16px;
       border-radius: 24px;
       border: 1px solid rgba(255,255,255,0.08);
       background:
-        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(101,214,255,0.04)),
+        linear-gradient(135deg, rgba(255,190,120,0.08), rgba(107,216,255,0.04)),
         rgba(255,255,255,0.03);
+      transform-style: preserve-3d;
     }
 
-    .signal-box strong {
+    .ac-triad-card strong {
       display: block;
       margin-bottom: 8px;
       color: var(--cream);
       font-size: 0.96rem;
     }
 
-    .signal-box span {
+    .ac-triad-card span {
       display: block;
       color: var(--soft);
-      line-height: 1.72;
       font-size: 0.9rem;
+      line-height: 1.72;
     }
 
-    .bottom-grid {
+    /* BOTTOM */
+    .ac-bottom-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 22px;
     }
 
-    .feature-list {
+    .ac-feature-list {
       margin: 0;
       padding-left: 18px;
       display: grid;
       gap: 12px;
       color: var(--soft);
-      line-height: 1.85;
+      line-height: 1.84;
     }
 
-    .feature-list li::marker {
+    .ac-feature-list li::marker {
       color: var(--gold);
     }
 
-    .back-row {
+    .ac-back-row {
       display: flex;
       justify-content: center;
-      padding-top: 4px;
+      padding-top: 2px;
     }
 
-    .back-link-signature {
+    .ac-back-link {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 14px 20px;
       border-radius: 999px;
-      color: var(--cream);
       text-decoration: none;
+      color: var(--cream);
       font-weight: 700;
       letter-spacing: 0.02em;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.05);
-      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
-    .back-link-signature:hover {
+    .ac-back-link:hover {
       transform: translateY(-3px);
       border-color: rgba(255,190,120,0.22);
       background: rgba(255,255,255,0.08);
     }
 
-    .reveal-up {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal-up.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 1200px) {
-      .hero-shell,
-      .value-hero-strip,
-      .value-core-layout,
-      .signature-breaker,
-      .side-by-side,
-      .bottom-grid {
+    @media (max-width: 1220px) {
+      .ac-hero,
+      .ac-value-head,
+      .ac-value-layout,
+      .ac-strip,
+      .ac-story-layout,
+      .ac-bottom-grid {
         grid-template-columns: 1fr;
       }
 
-      .value-hero-tags {
+      .ac-value-head-right {
         justify-content: flex-start;
       }
 
-      .value-core-panel {
+      .ac-value-core {
         position: relative;
         top: auto;
         min-height: auto;
       }
 
-      .visual-tower img {
+      .ac-visual-panel img {
         min-height: 460px;
       }
 
-      .hero-title-wrap h1,
-      .value-hero-copy h2,
-      .value-core-panel h3,
-      .breaker-left h2 {
+      .ac-headline,
+      .ac-value-head-left h2,
+      .ac-value-core h3,
+      .ac-strip-left h2 {
         max-width: none;
       }
     }
 
     @media (max-width: 980px) {
-      .micro-grid,
-      .signal-row {
+      .ac-mini-band,
+      .ac-board-bottom,
+      .ac-triad {
         grid-template-columns: 1fr;
       }
 
-      .signal-card-1,
-      .signal-card-2,
-      .signal-card-3,
-      .signal-card-4,
-      .signal-card-5,
-      .signal-card-6,
-      .signal-card-7,
-      .signal-card-8,
-      .signal-card-9,
-      .signal-card-10 {
-        grid-column: span 6;
+      .ac-board-top {
+        grid-template-columns: 1fr;
       }
 
-      .core-system {
-        width: min(82vw, 420px);
+      .ac-signal-1,
+      .ac-signal-2,
+      .ac-signal-3,
+      .ac-signal-4,
+      .ac-signal-5,
+      .ac-signal-6,
+      .ac-signal-7,
+      .ac-signal-8,
+      .ac-signal-9,
+      .ac-signal-10 {
+        grid-column: span 6;
       }
     }
 
     @media (max-width: 720px) {
-      .signature-page {
-        width: min(calc(100% - 20px), var(--max));
+      .ac-signature-page {
+        width: min(calc(100% - 18px), var(--max-w));
         gap: 18px;
-        padding-top: 18px;
+        padding-top: 16px;
       }
 
-      .hero-shell,
-      .value-architecture,
-      .insight-card,
-      .final-card,
-      .signature-breaker,
-      .value-core-panel {
+      .ac-hero,
+      .ac-value-stage,
+      .ac-copy-card,
+      .ac-final-card,
+      .ac-strip,
+      .ac-value-core {
         padding: 20px 16px;
       }
 
-      .value-signal-grid {
+      .ac-signal-grid {
         grid-template-columns: 1fr;
       }
 
-      .signal-card-1,
-      .signal-card-2,
-      .signal-card-3,
-      .signal-card-4,
-      .signal-card-5,
-      .signal-card-6,
-      .signal-card-7,
-      .signal-card-8,
-      .signal-card-9,
-      .signal-card-10 {
+      .ac-signal-1,
+      .ac-signal-2,
+      .ac-signal-3,
+      .ac-signal-4,
+      .ac-signal-5,
+      .ac-signal-6,
+      .ac-signal-7,
+      .ac-signal-8,
+      .ac-signal-9,
+      .ac-signal-10 {
         grid-column: auto;
       }
 
-      .core-system {
-        width: 100%;
-        aspect-ratio: auto;
-        min-height: auto;
-        display: grid;
-        gap: 12px;
+      .ac-headline {
+        font-size: clamp(2.6rem, 14vw, 4.3rem);
       }
 
-      .ring,
-      .ring-2,
-      .ring-3 {
-        display: none;
-      }
-
-      .core-center,
-      .orbit-node {
-        position: static;
-        width: 100%;
-        min-height: auto;
-        transform: none !important;
-      }
-
-      .core-center {
-        aspect-ratio: auto;
-        border-radius: 26px;
-        padding: 18px;
-      }
-
-      .hero-title-wrap h1 {
-        font-size: clamp(2.6rem, 14vw, 4.2rem);
-      }
-
-      .typed-stage {
-        align-items: flex-start;
+      .ac-typing-bar {
         flex-direction: column;
+        align-items: flex-start;
       }
 
-      .visual-tower img {
+      .ac-visual-panel img {
         min-height: 300px;
       }
     }
@@ -1034,240 +1044,266 @@
 </head>
 <body data-page="journey">
 
-  <canvas id="acCanvas"></canvas>
-  <div class="noise-overlay"></div>
+  <canvas id="flowCanvas"></canvas>
+  <div class="ac-grid-overlay"></div>
 
   <div id="header"></div>
 
-  <main class="page-shell detail-shell signature-page">
+  <main class="page-shell detail-shell ac-signature-page">
 
-    <!-- HERO -->
-    <section class="panel hero-shell reveal-up">
-      <div class="hero-left">
-        <div class="signature-meta">
-          <span class="signature-pill">Signature Journey</span>
-          <span class="signature-pill">Dec 2017 - Aug 2023</span>
-          <span class="signature-pill">Australian Cake House / ACake</span>
+    <section class="ac-panel ac-hero ac-reveal">
+      <div class="ac-hero-left">
+        <div class="ac-meta-row">
+          <span class="ac-meta-pill">Signature Journey</span>
+          <span class="ac-meta-pill">Dec 2017 - Aug 2023</span>
+          <span class="ac-meta-pill">Australian Cake House / ACake</span>
         </div>
 
-        <div class="hero-title-wrap">
-          <h1>Value in Motion.</h1>
+        <div class="ac-headline-wrap">
+          <span class="ac-kicker">Public-facing value signal</span>
+          <h1 class="ac-headline">Value in Motion.</h1>
         </div>
 
-        <p class="hero-subline">
-          Structured execution, systems awareness, customer-facing precision, people support,
-          and operational calm — shaped through real business environments, not theory alone.
+        <p class="ac-subline">
+          Structured execution, customer-facing precision, systems awareness,
+          people support, and operational calm — built through real business environments.
         </p>
 
-        <div class="typed-stage">
-          <span class="typed-label">Signal Feed</span>
-          <div class="typed-text-wrap">
-            <span id="typedText"></span><span class="typed-caret">|</span>
+        <div class="ac-typing-bar">
+          <span class="ac-typing-label">Signal Feed</span>
+          <div class="ac-typing-text">
+            <span id="typedSignal"></span><span class="ac-caret">|</span>
           </div>
         </div>
 
-        <div class="value-quote">
+        <div class="ac-hero-quote">
           <span>Positioning</span>
-          <strong>I build structure inside moving environments.</strong>
+          <strong>I build clarity where work keeps moving.</strong>
         </div>
 
-        <div class="micro-grid">
-          <article class="micro-card tilt-card">
+        <div class="ac-mini-band">
+          <article class="ac-mini-card ac-tilt">
             <strong>5+ Years</strong>
-            <span>Real operational exposure across store execution, support systems, and people workflows.</span>
+            <span>Live exposure across operations, coordination, service, and support systems.</span>
           </article>
 
-          <article class="micro-card tilt-card">
+          <article class="ac-mini-card ac-tilt">
             <strong>10 Value Zones</strong>
-            <span>Finance, SOPs, onboarding, service, systems, launch support, and problem-solving.</span>
+            <span>Finance, process, people, systems, launch support, and calm execution.</span>
           </article>
 
-          <article class="micro-card tilt-card">
+          <article class="ac-mini-card ac-tilt">
             <strong>Multi-Outlet Mindset</strong>
-            <span>Built around consistency, readiness, scalability, and practical coordination.</span>
+            <span>Built around consistency, readiness, adaptability, and scalable discipline.</span>
           </article>
         </div>
       </div>
 
-      <div class="hero-right">
-        <div class="orbital-stage">
-          <div class="core-system">
-            <div class="ring"></div>
-            <div class="ring-2"></div>
-            <div class="ring-3"></div>
-
-            <div class="core-center">
-              <strong>People<br>Process<br>System<br>Customer</strong>
+      <div class="ac-hero-right">
+        <div class="ac-signature-board">
+          <div class="ac-board-top">
+            <div class="ac-year-tower">
+              <span>Duration</span>
+              <strong>2017 → 2023</strong>
+              <p>Long-form growth through real business movement, not isolated tasks.</p>
             </div>
 
-            <div class="orbit-node node-1">Financial<br>Accuracy</div>
-            <div class="orbit-node node-2">People &amp;<br>Team Support</div>
-            <div class="orbit-node node-3">Customer<br>Interface</div>
-            <div class="orbit-node node-4">System<br>Readiness</div>
-            <div class="orbit-node node-5">Launch<br>Support</div>
-            <div class="orbit-node node-6">Process<br>Design</div>
+            <div class="ac-flow-map">
+              <svg viewBox="0 0 520 280" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <path class="line line-gold" d="M70 66 C150 30, 210 28, 272 72 S398 136, 458 86" />
+                <path class="line line-cyan" d="M62 218 C150 246, 220 228, 280 176 S396 90, 460 146" />
+                <path class="line line-violet" d="M110 100 C182 152, 256 162, 326 132 S416 72, 454 104" />
+
+                <rect class="node" x="24" y="38" rx="18" ry="18" width="102" height="48"></rect>
+                <rect class="node" x="168" y="20" rx="18" ry="18" width="106" height="48"></rect>
+                <rect class="node" x="318" y="54" rx="18" ry="18" width="118" height="48"></rect>
+                <rect class="node" x="66" y="184" rx="18" ry="18" width="118" height="48"></rect>
+                <rect class="node" x="228" y="174" rx="18" ry="18" width="120" height="48"></rect>
+                <rect class="node" x="384" y="160" rx="18" ry="18" width="110" height="48"></rect>
+
+                <text x="75" y="68">Finance</text>
+                <text x="188" y="50">People</text>
+                <text x="347" y="84">Systems</text>
+                <text x="100" y="214">Process</text>
+                <text x="258" y="204">Service</text>
+                <text x="412" y="190">Launch</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="ac-board-bottom">
+            <div class="ac-board-chip">
+              <strong>Operational clarity</strong>
+              <span>Seeing work as connected systems instead of separate tasks.</span>
+            </div>
+
+            <div class="ac-board-chip">
+              <strong>Execution discipline</strong>
+              <span>Holding consistency even when environments stay fast and moving.</span>
+            </div>
+
+            <div class="ac-board-chip">
+              <strong>Calm structure</strong>
+              <span>Keeping response quality under pressure, change, and daily friction.</span>
+            </div>
           </div>
         </div>
 
-        <div class="ticker">
-          <div class="ticker-track">
-            <span class="ticker-chip">Bookkeeping Support</span>
-            <span class="ticker-chip">Recruitment Coordination</span>
-            <span class="ticker-chip">Onboarding Improvement</span>
-            <span class="ticker-chip">SOP Development</span>
-            <span class="ticker-chip">Information Guide SOP</span>
-            <span class="ticker-chip">Training &amp; Knowledge Sharing</span>
-            <span class="ticker-chip">WhatsApp &amp; Messenger Handling</span>
-            <span class="ticker-chip">POS System Support</span>
-            <span class="ticker-chip">Outlet Setup</span>
-            <span class="ticker-chip">Operational Problem-Solving</span>
+        <div class="ac-marquee">
+          <div class="ac-marquee-track">
+            <span class="ac-marquee-pill">Bookkeeping Support</span>
+            <span class="ac-marquee-pill">Recruitment Coordination</span>
+            <span class="ac-marquee-pill">Onboarding Support</span>
+            <span class="ac-marquee-pill">SOP Development</span>
+            <span class="ac-marquee-pill">Information Guide SOP</span>
+            <span class="ac-marquee-pill">Training &amp; Knowledge Sharing</span>
+            <span class="ac-marquee-pill">Customer Communication</span>
+            <span class="ac-marquee-pill">POS Support</span>
+            <span class="ac-marquee-pill">Outlet Setup</span>
+            <span class="ac-marquee-pill">Operational Problem-Solving</span>
 
-            <span class="ticker-chip">Bookkeeping Support</span>
-            <span class="ticker-chip">Recruitment Coordination</span>
-            <span class="ticker-chip">Onboarding Improvement</span>
-            <span class="ticker-chip">SOP Development</span>
-            <span class="ticker-chip">Information Guide SOP</span>
-            <span class="ticker-chip">Training &amp; Knowledge Sharing</span>
-            <span class="ticker-chip">WhatsApp &amp; Messenger Handling</span>
-            <span class="ticker-chip">POS System Support</span>
-            <span class="ticker-chip">Outlet Setup</span>
-            <span class="ticker-chip">Operational Problem-Solving</span>
+            <span class="ac-marquee-pill">Bookkeeping Support</span>
+            <span class="ac-marquee-pill">Recruitment Coordination</span>
+            <span class="ac-marquee-pill">Onboarding Support</span>
+            <span class="ac-marquee-pill">SOP Development</span>
+            <span class="ac-marquee-pill">Information Guide SOP</span>
+            <span class="ac-marquee-pill">Training &amp; Knowledge Sharing</span>
+            <span class="ac-marquee-pill">Customer Communication</span>
+            <span class="ac-marquee-pill">POS Support</span>
+            <span class="ac-marquee-pill">Outlet Setup</span>
+            <span class="ac-marquee-pill">Operational Problem-Solving</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VALUE ARCHITECTURE -->
-    <section class="panel value-architecture reveal-up">
-      <div class="value-hero-strip">
-        <div class="value-hero-copy">
-          <span class="value-kicker">Value Architecture</span>
-          <h2>I create clarity where work keeps moving.</h2>
+    <section class="ac-panel ac-value-stage ac-reveal">
+      <div class="ac-value-head">
+        <div class="ac-value-head-left">
+          <span>Value Architecture</span>
+          <h2>Not one function. A connected value system.</h2>
         </div>
 
-        <div class="value-hero-tags">
-          <span>Operations</span>
-          <span>Systems</span>
-          <span>People</span>
-          <span>Execution</span>
-          <span>Service</span>
-          <span>Scale</span>
+        <div class="ac-value-head-right">
+          <span class="ac-value-tag">Operations</span>
+          <span class="ac-value-tag">Systems</span>
+          <span class="ac-value-tag">People</span>
+          <span class="ac-value-tag">Execution</span>
+          <span class="ac-value-tag">Service</span>
+          <span class="ac-value-tag">Scale</span>
         </div>
       </div>
 
-      <div class="value-core-layout">
-        <article class="value-core-panel tilt-card magnetic-card">
-          <div class="value-core-glow"></div>
-
-          <span class="value-core-label">Core Value</span>
+      <div class="ac-value-layout">
+        <article class="ac-value-core ac-tilt ac-magnetic">
+          <span class="ac-core-label">Core Value</span>
           <h3>Cross-functional operational intelligence</h3>
           <p>
-            Stronger than a single task. Stronger than a single title. Built through finance support,
-            SOP thinking, customer handling, onboarding, systems support, outlet readiness,
-            and real operational pressure.
+            Stronger than a single title. Built through finance support, SOP thinking,
+            customer handling, onboarding, systems support, outlet readiness,
+            and steady execution under real operational pressure.
           </p>
 
-          <div class="value-core-stats">
-            <div>
-              <strong>5+ Years</strong>
-              <span>real operational exposure</span>
+          <div class="ac-core-rail">
+            <div class="ac-core-stat">
+              <strong>Financial Accuracy</strong>
+              <span>Care around records, consistency, and transaction discipline.</span>
             </div>
-            <div>
-              <strong>10 Zones</strong>
-              <span>business contribution areas</span>
+
+            <div class="ac-core-stat">
+              <strong>Process Clarity</strong>
+              <span>Turning workflows into more stable, repeatable execution.</span>
             </div>
-            <div>
-              <strong>Multi-Outlet</strong>
-              <span>execution awareness</span>
+
+            <div class="ac-core-stat">
+              <strong>Operational Readiness</strong>
+              <span>Supporting people, systems, and launch conditions together.</span>
             </div>
           </div>
         </article>
 
-        <div class="value-signal-grid">
-          <article class="value-signal-card signal-card-1 tilt-card magnetic-card">
-            <span class="signal-index">01</span>
+        <div class="ac-signal-grid">
+          <article class="ac-signal ac-signal-1 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">01</span>
             <h3>Financial Accuracy</h3>
             <p>Bookkeeping support, transaction consistency, sales tracking, reporting discipline.</p>
           </article>
 
-          <article class="value-signal-card signal-card-2 tilt-card magnetic-card">
-            <span class="signal-index">02</span>
+          <article class="ac-signal ac-signal-2 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">02</span>
             <h3>People &amp; Team Support</h3>
             <p>Recruitment coordination, onboarding support, staff training, team readiness.</p>
           </article>
 
-          <article class="value-signal-card signal-card-3 tilt-card magnetic-card">
-            <span class="signal-index">03</span>
+          <article class="ac-signal ac-signal-3 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">03</span>
             <h3>Process Design</h3>
             <p>SOP refinement, workflow structure, pricing flow, service consistency.</p>
           </article>
 
-          <article class="value-signal-card signal-card-4 tilt-card magnetic-card">
-            <span class="signal-index">04</span>
+          <article class="ac-signal ac-signal-4 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">04</span>
             <h3>Internal Knowledge Systems</h3>
             <p>Information guide building, internal reference clarity, fraud awareness communication.</p>
           </article>
 
-          <article class="value-signal-card signal-card-5 tilt-card magnetic-card">
-            <span class="signal-index">05</span>
+          <article class="ac-signal ac-signal-5 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">05</span>
             <h3>Training Translation</h3>
-            <p>Turning practical processes into understandable staff guidance.</p>
+            <p>Turning practical processes into clearer staff guidance and support.</p>
           </article>
 
-          <article class="value-signal-card signal-card-6 tilt-card magnetic-card">
-            <span class="signal-index">06</span>
+          <article class="ac-signal ac-signal-6 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">06</span>
             <h3>Customer Interface Control</h3>
-            <p>Orders, inquiries, complaints, service quality across messaging channels.</p>
+            <p>Orders, inquiries, complaints, and service quality across messaging channels.</p>
           </article>
 
-          <article class="value-signal-card signal-card-7 tilt-card magnetic-card">
-            <span class="signal-index">07</span>
+          <article class="ac-signal ac-signal-7 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">07</span>
             <h3>Growth Awareness</h3>
-            <p>Customer engagement support, retention thinking, operational impact on business growth.</p>
+            <p>Customer engagement support and operational impact on business retention.</p>
           </article>
 
-          <article class="value-signal-card signal-card-8 tilt-card magnetic-card">
-            <span class="signal-index">08</span>
+          <article class="ac-signal ac-signal-8 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">08</span>
             <h3>System Readiness</h3>
-            <p>POS setup, troubleshooting, standardisation support across outlets.</p>
+            <p>POS setup, troubleshooting, and standardisation support across outlets.</p>
           </article>
 
-          <article class="value-signal-card signal-card-9 tilt-card magnetic-card">
-            <span class="signal-index">09</span>
+          <article class="ac-signal ac-signal-9 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">09</span>
             <h3>Launch Support</h3>
-            <p>Outlet setup, staff readiness, operational flow preparation, opening support.</p>
+            <p>Outlet setup, staff readiness, operational flow preparation, and opening support.</p>
           </article>
 
-          <article class="value-signal-card signal-card-10 tilt-card magnetic-card">
-            <span class="signal-index">10</span>
+          <article class="ac-signal ac-signal-10 ac-tilt ac-magnetic">
+            <span class="ac-signal-no">10</span>
             <h3>Calm Under Pressure</h3>
-            <p>Customer issues, equipment issues, unexpected incidents, structured response.</p>
+            <p>Customer issues, equipment issues, unexpected incidents, and structured response.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- BREAKER -->
-    <section class="panel signature-breaker reveal-up">
-      <div class="breaker-left">
+    <section class="ac-panel ac-strip ac-reveal">
+      <div class="ac-strip-left">
         <span>Signature Signal</span>
-        <h2>Not one function.  
-        A connected value system.</h2>
+        <h2>Clarity, consistency, and control inside moving environments.</h2>
       </div>
 
-      <div class="breaker-right">
-        Finance support, process clarity, customer communication, onboarding, systems support,
-        launch readiness, and problem-solving all point to one thing: the ability to work inside
-        moving environments without losing structure.
+      <div class="ac-strip-right">
+        Finance support, process clarity, customer communication, onboarding,
+        systems support, launch readiness, and calm response all point to one thing:
+        the ability to work inside complex operations without losing structure.
       </div>
     </section>
 
-    <!-- STORY + IMAGE -->
-    <section class="side-by-side">
-      <section class="panel visual-tower reveal-up">
+    <section class="ac-story-layout">
+      <section class="ac-panel ac-visual-panel ac-reveal">
         <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House experience visual" />
-        <div class="visual-overlay-card">
-          <strong>Built in real operations, not abstract theory</strong>
+        <div class="ac-visual-note">
+          <strong>Built through real operations, not abstract theory</strong>
           <span>
             A foundation shaped through live execution, practical constraints,
             service expectations, and multi-function coordination.
@@ -1275,56 +1311,55 @@
         </div>
       </section>
 
-      <div class="insight-stack">
-        <section class="panel insight-card reveal-up">
-          <span class="section-kicker">Operational Identity</span>
+      <div class="ac-story-right">
+        <section class="ac-panel ac-copy-card ac-reveal">
+          <span class="ac-section-label">Operational Identity</span>
           <h2>Range over repetition.</h2>
           <p>
-            This journey was valuable because it was never limited to one narrow function.
-            It built awareness of how records, people, workflows, systems, and customer experience
-            reinforce one another in daily business operations.
+            This journey mattered because it was never limited to one narrow role.
+            It built awareness of how records, people, workflows, systems,
+            and customer experience reinforce one another in daily business operations.
           </p>
           <p>
-            The result is a stronger mindset around clarity, consistency, support-driven execution,
-            and structured thinking under pressure.
+            The result is a stronger mindset around clarity, consistency,
+            support-driven execution, and structured thinking under pressure.
           </p>
         </section>
 
-        <div class="signal-row">
-          <article class="signal-box reveal-up tilt-card">
+        <div class="ac-triad">
+          <article class="ac-triad-card ac-reveal ac-tilt">
             <strong>Structured Thinking</strong>
             <span>Seeing business work as connected systems, not isolated tasks.</span>
           </article>
 
-          <article class="signal-box reveal-up tilt-card">
+          <article class="ac-triad-card ac-reveal ac-tilt">
             <strong>Adaptability</strong>
             <span>Moving across service, process, systems, training, and support contexts.</span>
           </article>
 
-          <article class="signal-box reveal-up tilt-card">
+          <article class="ac-triad-card ac-reveal ac-tilt">
             <strong>Operational Discipline</strong>
-            <span>Learning why consistency and teamwork matter under real pressure.</span>
+            <span>Holding consistency, timing, and quality under real pressure.</span>
           </article>
         </div>
 
-        <section class="panel final-card reveal-up">
-          <span class="section-kicker">Reflection</span>
+        <section class="ac-panel ac-final-card ac-reveal">
+          <span class="ac-section-label">Reflection</span>
           <h2>A strong operational foundation before the next chapter.</h2>
           <p>
-            This phase developed practical awareness before later growth in business,
-            systems, and technology-oriented thinking. It shaped how I approach execution,
-            coordination, communication, and scalable process design today.
+            This phase built practical awareness before later growth in business,
+            systems, and technology-oriented thinking. It shaped how I approach
+            execution, coordination, communication, and scalable process design today.
           </p>
         </section>
       </div>
     </section>
 
-    <!-- BOTTOM -->
-    <section class="bottom-grid">
-      <section class="panel final-card reveal-up">
-        <span class="section-kicker">What This Strengthened</span>
+    <section class="ac-bottom-grid">
+      <section class="ac-panel ac-final-card ac-reveal">
+        <span class="ac-section-label">What This Strengthened</span>
         <h2>Capabilities worth noticing.</h2>
-        <ul class="feature-list">
+        <ul class="ac-feature-list">
           <li>Operational awareness across people, process, systems, and service.</li>
           <li>Workflow clarity through SOP thinking and documentation support.</li>
           <li>Professional communication in internal and customer-facing situations.</li>
@@ -1334,12 +1369,12 @@
         </ul>
       </section>
 
-      <section class="panel final-card reveal-up">
-        <span class="section-kicker">Recruiter Read</span>
-        <h2>What this signals immediately.</h2>
+      <section class="ac-panel ac-final-card ac-reveal">
+        <span class="ac-section-label">Immediate Read</span>
+        <h2>What this signals at a glance.</h2>
         <p>
           Someone who understands operations beyond one title. Someone who can support structure,
-          handle movement, and think in terms of connected systems rather than isolated tasks.
+          handle movement, and think in connected systems instead of isolated tasks.
         </p>
         <p>
           The presentation itself also signals design awareness, digital maturity,
@@ -1348,8 +1383,8 @@
       </section>
     </section>
 
-    <div class="back-row reveal-up">
-      <a href="../journey.html" class="back-link-signature">← Back to Journey</a>
+    <div class="ac-back-row ac-reveal">
+      <a href="../journey.html" class="ac-back-link">← Back to Journey</a>
     </div>
   </main>
 
@@ -1360,8 +1395,8 @@
   <script src="../detail.js"></script>
 
   <script>
-    // ---------- TYPEWRITER ----------
-    const typedPhrases = [
+    // TYPEWRITER
+    const acTypedWords = [
       "Financial Accuracy",
       "People & Team Support",
       "Process Design",
@@ -1374,131 +1409,38 @@
       "Calm Under Pressure"
     ];
 
-    const typedTextEl = document.getElementById("typedText");
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+    const acTypedEl = document.getElementById("typedSignal");
+    let acWordIndex = 0;
+    let acCharIndex = 0;
+    let acDeleting = false;
 
-    function runTypewriter() {
-      const currentPhrase = typedPhrases[phraseIndex];
-      const currentText = currentPhrase.substring(0, charIndex);
-      typedTextEl.textContent = currentText;
+    function acRunTypewriter() {
+      const word = acTypedWords[acWordIndex];
+      acTypedEl.textContent = word.substring(0, acCharIndex);
 
-      let speed = isDeleting ? 35 : 58;
+      let speed = acDeleting ? 34 : 56;
 
-      if (!isDeleting && charIndex < currentPhrase.length) {
-        charIndex++;
-      } else if (isDeleting && charIndex > 0) {
-        charIndex--;
-      } else if (!isDeleting && charIndex === currentPhrase.length) {
-        speed = 1200;
-        isDeleting = true;
+      if (!acDeleting && acCharIndex < word.length) {
+        acCharIndex++;
+      } else if (acDeleting && acCharIndex > 0) {
+        acCharIndex--;
+      } else if (!acDeleting && acCharIndex === word.length) {
+        acDeleting = true;
+        speed = 1100;
       } else {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % typedPhrases.length;
-        speed = 280;
+        acDeleting = false;
+        acWordIndex = (acWordIndex + 1) % acTypedWords.length;
+        speed = 240;
       }
 
-      setTimeout(runTypewriter, speed);
+      setTimeout(acRunTypewriter, speed);
     }
 
-    runTypewriter();
+    acRunTypewriter();
 
-    // ---------- CANVAS BACKGROUND ----------
-    const canvas = document.getElementById("acCanvas");
-    const ctx = canvas.getContext("2d");
-    let particles = [];
-    let mouse = { x: null, y: null, radius: 140 };
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * devicePixelRatio;
-      canvas.height = window.innerHeight * devicePixelRatio;
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-
-      const count = Math.min(95, Math.floor(window.innerWidth / 16));
-      particles = [];
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.45,
-          vy: (Math.random() - 0.5) * 0.45,
-          r: Math.random() * 1.8 + 0.8
-        });
-      }
-    }
-
-    function drawCanvas() {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
-
-        if (mouse.x !== null && mouse.y !== null) {
-          let dxMouse = mouse.x - p.x;
-          let dyMouse = mouse.y - p.y;
-          let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-
-          if (distMouse < mouse.radius) {
-            p.x -= dxMouse * 0.004;
-            p.y -= dyMouse * 0.004;
-          }
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.42)";
-        ctx.fill();
-      }
-
-      for (let a = 0; a < particles.length; a++) {
-        for (let b = a + 1; b < particles.length; b++) {
-          const dx = particles[a].x - particles[b].x;
-          const dy = particles[a].y - particles[b].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 130) {
-            const alpha = 1 - dist / 130;
-            ctx.beginPath();
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.strokeStyle = `rgba(255, 190, 120, ${alpha * 0.12})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(drawCanvas);
-    }
-
-    window.addEventListener("mousemove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    window.addEventListener("mouseleave", () => {
-      mouse.x = null;
-      mouse.y = null;
-    });
-
-    window.addEventListener("resize", resizeCanvas);
-
-    resizeCanvas();
-    drawCanvas();
-
-    // ---------- REVEAL ----------
-    const revealItems = document.querySelectorAll(".reveal-up");
-
-    const revealObserver = new IntersectionObserver((entries) => {
+    // REVEAL
+    const acRevealItems = document.querySelectorAll(".ac-reveal");
+    const acRevealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
@@ -1506,19 +1448,19 @@
       });
     }, { threshold: 0.14 });
 
-    revealItems.forEach((item) => revealObserver.observe(item));
+    acRevealItems.forEach((item) => acRevealObserver.observe(item));
 
-    // ---------- 3D TILT ----------
-    const tiltItems = document.querySelectorAll(".tilt-card");
+    // TILT
+    const acTiltItems = document.querySelectorAll(".ac-tilt");
 
-    tiltItems.forEach((card) => {
+    acTiltItems.forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const rotateX = ((y / rect.height) - 0.5) * -10;
-        const rotateY = ((x / rect.width) - 0.5) * 10;
+        const rotateX = ((y / rect.height) - 0.5) * -9;
+        const rotateY = ((x / rect.width) - 0.5) * 9;
 
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
       });
@@ -1528,22 +1470,85 @@
       });
     });
 
-    // ---------- MAGNETIC HOVER ----------
-    const magneticCards = document.querySelectorAll(".magnetic-card");
+    // MAGNETIC
+    const acMagneticItems = document.querySelectorAll(".ac-magnetic");
 
-    magneticCards.forEach((card) => {
+    acMagneticItems.forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        card.style.transform = `translate(${x * 0.035}px, ${y * 0.035}px)`;
+        card.style.transform = `translate(${x * 0.028}px, ${y * 0.028}px)`;
       });
 
       card.addEventListener("mouseleave", () => {
         card.style.transform = "";
       });
     });
+
+    // FLOW CANVAS
+    const acCanvas = document.getElementById("flowCanvas");
+    const acCtx = acCanvas.getContext("2d");
+    let acLines = [];
+
+    function acResizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      acCanvas.width = window.innerWidth * dpr;
+      acCanvas.height = window.innerHeight * dpr;
+      acCanvas.style.width = window.innerWidth + "px";
+      acCanvas.style.height = window.innerHeight + "px";
+      acCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      acLines = [];
+      const count = Math.min(20, Math.max(10, Math.floor(window.innerWidth / 90)));
+
+      for (let i = 0; i < count; i++) {
+        acLines.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          len: 80 + Math.random() * 140,
+          speed: 0.12 + Math.random() * 0.28,
+          alpha: 0.05 + Math.random() * 0.08,
+          angle: Math.random() * Math.PI * 2,
+          hue: i % 3
+        });
+      }
+    }
+
+    function acDrawCanvas() {
+      acCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      acLines.forEach((line) => {
+        line.x += Math.cos(line.angle) * line.speed;
+        line.y += Math.sin(line.angle) * line.speed;
+
+        if (line.x > window.innerWidth + 120) line.x = -120;
+        if (line.x < -120) line.x = window.innerWidth + 120;
+        if (line.y > window.innerHeight + 120) line.y = -120;
+        if (line.y < -120) line.y = window.innerHeight + 120;
+
+        const x2 = line.x + Math.cos(line.angle) * line.len;
+        const y2 = line.y + Math.sin(line.angle) * line.len;
+
+        let color = "255,190,120";
+        if (line.hue === 1) color = "107,216,255";
+        if (line.hue === 2) color = "140,140,255";
+
+        acCtx.beginPath();
+        acCtx.moveTo(line.x, line.y);
+        acCtx.lineTo(x2, y2);
+        acCtx.strokeStyle = `rgba(${color}, ${line.alpha})`;
+        acCtx.lineWidth = 1.2;
+        acCtx.stroke();
+      });
+
+      requestAnimationFrame(acDrawCanvas);
+    }
+
+    window.addEventListener("resize", acResizeCanvas);
+    acResizeCanvas();
+    acDrawCanvas();
   </script>
 </body>
 </html>
