@@ -10,48 +10,15 @@
 </head>
 <body data-page="techexplorer">
   <div class="explorer-bg-base"></div>
+  <div class="explorer-bg-grid"></div>
   <div class="explorer-bg-glow explorer-bg-glow-a"></div>
   <div class="explorer-bg-glow explorer-bg-glow-b"></div>
-  <div class="explorer-bg-glow explorer-bg-glow-c"></div>
+  <div class="explorer-bg-noise"></div>
+  <div class="explorer-bg-scan"></div>
 
-  <div class="explorer-atlas-layer explorer-atlas-layer-a" aria-hidden="true">
-    <span class="atlas-panel atlas-panel-a1"></span>
-    <span class="atlas-panel atlas-panel-a2"></span>
-    <span class="atlas-panel atlas-panel-a3"></span>
+  <div class="explorer-system-canvas-wrap" aria-hidden="true">
+    <canvas id="explorerSystemCanvas"></canvas>
   </div>
-
-  <div class="explorer-atlas-layer explorer-atlas-layer-b" aria-hidden="true">
-    <span class="atlas-panel atlas-panel-b1"></span>
-    <span class="atlas-panel atlas-panel-b2"></span>
-    <span class="atlas-panel atlas-panel-b3"></span>
-  </div>
-
-  <div class="explorer-coordinate-field" aria-hidden="true">
-    <span class="coordinate-dot cd-1"></span>
-    <span class="coordinate-dot cd-2"></span>
-    <span class="coordinate-dot cd-3"></span>
-    <span class="coordinate-dot cd-4"></span>
-    <span class="coordinate-dot cd-5"></span>
-    <span class="coordinate-dot cd-6"></span>
-    <span class="coordinate-dot cd-7"></span>
-    <span class="coordinate-dot cd-8"></span>
-    <span class="coordinate-dot cd-9"></span>
-    <span class="coordinate-dot cd-10"></span>
-
-    <span class="coordinate-link cl-1"></span>
-    <span class="coordinate-link cl-2"></span>
-    <span class="coordinate-link cl-3"></span>
-    <span class="coordinate-link cl-4"></span>
-    <span class="coordinate-link cl-5"></span>
-  </div>
-
-  <div class="explorer-light-trails" aria-hidden="true">
-    <span class="light-trail light-trail-1"></span>
-    <span class="light-trail light-trail-2"></span>
-    <span class="light-trail light-trail-3"></span>
-  </div>
-
-  <div class="explorer-noise-layer"></div>
 
   <div id="header"></div>
 
@@ -140,8 +107,8 @@
 
         <div class="orbit-footer-note">
           <p>
-            Each ring moves at its own rhythm, creating a quieter and more
-            cinematic way to explore the stack behind the work.
+            Each ring moves at its own rhythm, creating a more immersive and
+            command-like way to explore the stack behind the work.
           </p>
         </div>
       </div>
@@ -260,6 +227,8 @@
 
   <script src="../js/layout.js"></script>
   <script src="../js/navigation.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="explorer-visual.js"></script>
   <script src="explorer.js"></script>
 </body>
 </html>

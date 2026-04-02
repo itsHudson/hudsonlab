@@ -2,8 +2,8 @@ console.log("Technology Compass page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
   initializeRevealMotion();
+  initializeExplorerVisual();
   initializeTechnologyCompass();
-  initializeExplorerBackgroundMotion();
 });
 
 function initializeRevealMotion() {
@@ -40,81 +40,18 @@ function initializeRevealMotion() {
   });
 }
 
-function initializeExplorerBackgroundMotion() {
-  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (reduceMotion || !canHover) {
+function initializeExplorerVisual() {
+  if (typeof window.createExplorerVisual !== "function") {
     return;
   }
 
-  const glowLayers = document.querySelectorAll(".explorer-bg-glow");
-  const atlasLayers = document.querySelectorAll(".explorer-atlas-layer");
-  const coordinateField = document.querySelector(".explorer-coordinate-field");
-  const trails = document.querySelector(".explorer-light-trails");
-
-  let currentX = 0;
-  let currentY = 0;
-  let targetX = 0;
-  let targetY = 0;
-  let animationFrameId = null;
-
-  function animate() {
-    currentX += (targetX - currentX) * 0.05;
-    currentY += (targetY - currentY) * 0.05;
-
-    glowLayers.forEach(function (layer, index) {
-      const strength = (index + 1) * 6;
-      layer.style.transform =
-        "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.8) + "px,0)";
-    });
-
-    atlasLayers.forEach(function (layer, index) {
-      const strength = (index + 1) * 10;
-      layer.style.transform =
-        "translate3d(" + (currentX * strength) + "px," + (currentY * strength * 0.7) + "px,0)";
-    });
-
-    if (coordinateField) {
-      coordinateField.style.transform =
-        "translate3d(" + (currentX * 8) + "px," + (currentY * 6) + "px,0)";
-    }
-
-    if (trails) {
-      trails.style.transform =
-        "translate3d(" + (currentX * 12) + "px," + (currentY * 8) + "px,0)";
-    }
-
-    const deltaX = Math.abs(targetX - currentX);
-    const deltaY = Math.abs(targetY - currentY);
-
-    if (deltaX < 0.001 && deltaY < 0.001) {
-      animationFrameId = null;
-      return;
-    }
-
-    animationFrameId = window.requestAnimationFrame(animate);
+  const canvas = document.getElementById("explorerSystemCanvas");
+  if (!canvas) {
+    return;
   }
 
-  window.addEventListener("mousemove", function (event) {
-    const width = window.innerWidth || 1;
-    const height = window.innerHeight || 1;
-
-    targetX = (event.clientX / width - 0.5) * 2;
-    targetY = (event.clientY / height - 0.5) * 2;
-
-    if (!animationFrameId) {
-      animationFrameId = window.requestAnimationFrame(animate);
-    }
-  });
-
-  window.addEventListener("mouseleave", function () {
-    targetX = 0;
-    targetY = 0;
-
-    if (!animationFrameId) {
-      animationFrameId = window.requestAnimationFrame(animate);
-    }
+  window.__explorerVisualInstance = window.createExplorerVisual({
+    canvas: canvas
   });
 }
 
@@ -787,19 +724,8 @@ function initializeTechnologyCompass() {
   const projectFeatures = document.getElementById("projectFeatures");
   const projectThumbPreview = document.getElementById("projectThumbPreview");
 
-  const ringRotation = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0
-  };
-
-  const ringSpeed = {
-    1: 0.035,
-    2: 0.06,
-    3: 0.11,
-    4: -0.028
-  };
+  const ringRotation = { 1: 0, 2: 0, 3: 0, 4: 0 };
+  const ringSpeed = { 1: 0.035, 2: 0.06, 3: 0.11, 4: -0.028 };
 
   const particles = [
     { id: "p1", ring: 1, angle: 18, radius: 105, speed: 0.12, active: true },
@@ -817,6 +743,15 @@ function initializeTechnologyCompass() {
   let autoRotateFrame = null;
   let isPausedByInteraction = false;
   let autoRotateTimeout = null;
+
+  function pushVisualState(mode, extra) {
+    if (
+      window.__explorerVisualInstance &&
+      typeof window.__explorerVisualInstance.setMode === "function"
+    ) {
+      window.__explorerVisualInstance.setMode(mode, extra || {});
+    }
+  }
 
   function createOrbitNodes() {
     orbitNodes.innerHTML = "";
@@ -922,6 +857,7 @@ function initializeTechnologyCompass() {
     });
 
     coreLabel.textContent = "TECH";
+    pushVisualState("overview");
   }
 
   function renderSkill(skillKey) {
@@ -970,6 +906,9 @@ function initializeTechnologyCompass() {
         renderProjectDetail(project);
       }
     });
+
+    const layerName = meta.layer.toLowerCase().replace(" layer", "");
+    pushVisualState(layerName, { skillKey: skillKey });
   }
 
   function updateNodeFocus() {
@@ -1086,6 +1025,7 @@ function initializeTechnologyCompass() {
     startX = clientX;
     startRing3Rotation = ringRotation[3];
     orbitShell.classList.add("dragging");
+    pushVisualState("drag");
   }
 
   function moveDrag(clientX) {
@@ -1110,6 +1050,15 @@ function initializeTechnologyCompass() {
     orbitShell.classList.remove("dragging");
     startInertia();
     pauseAutoRotateTemporarily();
+
+    if (currentSkillKey) {
+      const activeMeta = skillMeta[currentSkillKey];
+      pushVisualState(activeMeta.layer.toLowerCase().replace(" layer", ""), {
+        skillKey: currentSkillKey
+      });
+    } else {
+      pushVisualState("overview");
+    }
   }
 
   orbitShell.addEventListener("mousedown", function (event) {
