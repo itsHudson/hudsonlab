@@ -101,12 +101,12 @@ body[data-page="about"] {
 .about-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.94fr) minmax(360px, 1.06fr);
-  gap: 48px;
+  gap: 52px;
   align-items: center;
 }
 
 .about-hero-copy {
-  max-width: 680px;
+  max-width: 700px;
 }
 
 .about-kicker {
@@ -114,9 +114,9 @@ body[data-page="about"] {
   align-items: center;
   gap: 10px;
   margin: 0 0 18px;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #8f5b36;
 }
@@ -133,16 +133,20 @@ body[data-page="about"] {
 .about-title {
   margin: 0;
   max-width: 12ch;
-  font-size: clamp(3rem, 4.9vw, 4.95rem);
-  line-height: 1.02;
+  font-size: clamp(3.35rem, 5.1vw, 5.25rem);
+  line-height: 1.06;
   letter-spacing: -0.06em;
   color: #17120f;
   text-wrap: balance;
 }
 
+.about-title-line {
+  display: block;
+}
+
 .gradient-text {
   display: block;
-  margin-top: 10px;
+  margin-top: 8px;
   background: var(--about-accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -150,11 +154,48 @@ body[data-page="about"] {
 }
 
 .about-subtitle {
-  margin: 24px 0 0;
-  max-width: 58ch;
-  font-size: 1.04rem;
-  line-height: 1.92;
+  margin: 26px 0 0;
+  max-width: 56ch;
+  font-size: 1.12rem;
+  line-height: 1.95;
   color: #433933;
+}
+
+.about-typewriter-wrap {
+  margin-top: 22px;
+  padding: 18px 20px;
+  max-width: 600px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(116, 90, 70, 0.10);
+  box-shadow: 0 14px 28px rgba(58, 41, 27, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.about-typewriter-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8c5b35;
+}
+
+.about-typewriter-line {
+  margin: 0;
+  min-height: 1.7em;
+  font-size: 1.04rem;
+  line-height: 1.7;
+  font-weight: 700;
+  color: #2b211b;
+}
+
+.about-typewriter-caret {
+  display: inline-block;
+  width: 1ch;
+  animation: caretBlink 1s step-end infinite;
 }
 
 .about-hero-actions {
@@ -166,8 +207,8 @@ body[data-page="about"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  padding: 0 26px;
+  min-height: 58px;
+  padding: 0 28px;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 800;
@@ -211,7 +252,7 @@ body[data-page="about"] {
 
 .about-hero-composition {
   position: relative;
-  min-height: 640px;
+  min-height: 660px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -324,12 +365,12 @@ body[data-page="about"] {
 .about-hero-figure-wrap {
   position: relative;
   z-index: 2;
-  width: 330px;
-  height: 330px;
+  width: 340px;
+  height: 340px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.86;
+  opacity: 0.88;
 }
 
 .about-hero-figure-wrap::before {
@@ -365,20 +406,20 @@ body[data-page="about"] {
 
 .about-hero-main-card {
   position: absolute;
-  left: 18px;
-  top: 132px;
+  left: 12px;
+  top: 116px;
   z-index: 10;
-  width: 310px;
-  padding: 28px;
+  width: 330px;
+  padding: 30px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
   border: none;
 }
 
 .about-hero-card-label {
-  margin: 0 0 10px;
-  font-size: 0.72rem;
+  margin: 0 0 12px;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -387,7 +428,7 @@ body[data-page="about"] {
 
 .about-hero-main-card h2 {
   margin: 0;
-  font-size: 1.36rem;
+  font-size: 1.56rem;
   line-height: 1.18;
   letter-spacing: -0.04em;
   color: #1e1712;
@@ -402,7 +443,7 @@ body[data-page="about"] {
 .about-hero-card-points li {
   position: relative;
   padding: 14px 0 0 18px;
-  font-size: 0.96rem;
+  font-size: 1rem;
   line-height: 1.72;
   color: #4f433b;
 }
@@ -415,7 +456,7 @@ body[data-page="about"] {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--about-accent-gradient);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   transform: translateY(-50%);
 }
 
@@ -432,8 +473,9 @@ body[data-page="about"] {
 .hero-sequence-1 { animation-delay: 0.05s; }
 .hero-sequence-2 { animation-delay: 0.16s; }
 .hero-sequence-3 { animation-delay: 0.28s; }
-.hero-sequence-4 { animation-delay: 0.42s; }
-.hero-sequence-5 { animation-delay: 0.58s; }
+.hero-sequence-4 { animation-delay: 0.40s; }
+.hero-sequence-5 { animation-delay: 0.52s; }
+.hero-sequence-6 { animation-delay: 0.64s; }
 
 /* =========================
    SECTIONS
@@ -447,17 +489,21 @@ body[data-page="about"] {
 
 .about-section-grid {
   display: grid;
-  gap: 48px;
-  align-items: start;
+  gap: 52px;
+  align-items: center;
 }
 
 .about-section-grid-think {
-  grid-template-columns: 0.92fr 1.08fr;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
 }
 
 .about-section-grid-work {
-  grid-template-columns: 1.02fr 0.98fr;
-  align-items: center;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+}
+
+.about-section-grid-build {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
 }
 
 .about-section-intro,
@@ -470,46 +516,41 @@ body[data-page="about"] {
 
 .about-section-number {
   margin: 0 0 12px;
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   font-weight: 800;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   color: #9d6438;
 }
 
 .about-section-label {
   margin: 0 0 14px;
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #84604a;
 }
 
-.about-section-intro h2,
-.about-section-copy h2,
-.about-build-top h2,
-.about-closing-copy h2 {
+.about-section-heading {
   margin: 0;
-  max-width: 13ch;
-  font-size: clamp(2.35rem, 3vw, 3.18rem);
-  line-height: 1.02;
-  letter-spacing: -0.05em;
-  color: #17120f;
-}
-
-.about-section-copy h2,
-.about-build-top h2 {
   max-width: 14ch;
+  font-size: clamp(2.6rem, 3.2vw, 3.35rem);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  color: #2b2018;
 }
 
 .about-highlight-line {
   margin: 0 0 20px;
-  max-width: 32ch;
-  font-size: 1.08rem;
-  line-height: 1.62;
+  max-width: 34ch;
+  font-size: 1.14rem;
+  line-height: 1.64;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #7a4823;
+  background: linear-gradient(135deg, #7a4823, #a3652d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-section-body p,
@@ -518,8 +559,8 @@ body[data-page="about"] {
 .about-build-card p {
   margin: 0 0 18px;
   max-width: 58ch;
-  font-size: 1rem;
-  line-height: 1.9;
+  font-size: 1.04rem;
+  line-height: 1.92;
   color: #473c35;
 }
 
@@ -536,15 +577,15 @@ body[data-page="about"] {
 
 .about-work-list {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .about-work-item {
   display: grid;
-  grid-template-columns: 52px 1fr;
+  grid-template-columns: 56px 1fr;
   gap: 18px;
   align-items: start;
-  padding: 22px 22px;
+  padding: 24px 24px;
   border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 250, 245, 0.66) 100%);
@@ -557,15 +598,15 @@ body[data-page="about"] {
 }
 
 .about-work-index {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: #1b1511;
   color: #ffffff;
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 800;
   box-shadow: 0 10px 22px rgba(27, 21, 17, 0.12);
 }
@@ -573,15 +614,15 @@ body[data-page="about"] {
 .about-work-item strong {
   display: block;
   margin-bottom: 8px;
-  font-size: 1.04rem;
-  line-height: 1.2;
+  font-size: 1.12rem;
+  line-height: 1.24;
   color: #241d18;
 }
 
 .about-work-item p {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.82;
   color: #5b4e45;
 }
 
@@ -591,18 +632,17 @@ body[data-page="about"] {
 
 .about-build-top {
   max-width: 760px;
-  margin-bottom: 28px;
 }
 
 .about-build-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
 .about-build-card {
   height: 100%;
-  padding: 24px 22px 22px;
+  padding: 26px 24px 24px;
   border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 250, 245, 0.68) 100%);
@@ -617,7 +657,7 @@ body[data-page="about"] {
 .about-build-card-label {
   display: block;
   margin-bottom: 10px;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -627,8 +667,8 @@ body[data-page="about"] {
 .about-build-card strong {
   display: block;
   margin-bottom: 10px;
-  font-size: 1.08rem;
-  line-height: 1.28;
+  font-size: 1.14rem;
+  line-height: 1.3;
   color: #211914;
 }
 
@@ -639,28 +679,28 @@ body[data-page="about"] {
 .about-closing {
   position: relative;
   z-index: 2;
-  margin-top: 112px;
+  margin-top: 118px;
   margin-bottom: 92px;
 }
 
 .about-closing-grid {
   display: grid;
-  grid-template-columns: 1.06fr 0.94fr;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  gap: 52px;
   align-items: end;
 }
 
 .about-closing-kicker {
   margin: 0 0 14px;
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #8d5733;
 }
 
-.about-closing-copy h2 {
-  max-width: 11ch;
+.about-closing-copy .about-section-heading {
+  max-width: 12ch;
 }
 
 .about-closing-action {
@@ -672,7 +712,7 @@ body[data-page="about"] {
 .about-closing-quote {
   margin: 0;
   max-width: 40ch;
-  font-size: 1.12rem;
+  font-size: 1.18rem;
   line-height: 1.72;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -748,6 +788,15 @@ body[data-page="about"] {
   }
 }
 
+@keyframes caretBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
 /* =========================
    RESPONSIVE
    ========================= */
@@ -756,15 +805,15 @@ body[data-page="about"] {
   .about-hero-grid,
   .about-section-grid,
   .about-closing-grid {
-    gap: 36px;
+    gap: 38px;
   }
 
   .about-title {
-    font-size: clamp(2.9rem, 5vw, 4.55rem);
+    font-size: clamp(3rem, 5vw, 4.7rem);
   }
 
   .about-hero-composition {
-    min-height: 590px;
+    min-height: 600px;
   }
 
   .about-composition-orbit-outer {
@@ -778,12 +827,12 @@ body[data-page="about"] {
   }
 
   .about-hero-main-card {
-    width: 286px;
+    width: 296px;
   }
 
   .about-hero-figure-wrap {
-    width: 290px;
-    height: 290px;
+    width: 300px;
+    height: 300px;
   }
 }
 
@@ -795,11 +844,8 @@ body[data-page="about"] {
   .about-hero-grid,
   .about-section-grid-think,
   .about-section-grid-work,
+  .about-section-grid-build,
   .about-closing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-build-grid {
     grid-template-columns: 1fr;
   }
 
@@ -838,8 +884,8 @@ body[data-page="about"] {
   }
 
   .about-title {
-    font-size: clamp(2.55rem, 10vw, 3.8rem);
-    line-height: 1;
+    font-size: clamp(2.7rem, 10vw, 4rem);
+    line-height: 1.02;
     letter-spacing: -0.06em;
   }
 
@@ -849,27 +895,32 @@ body[data-page="about"] {
   .about-work-item p,
   .about-build-card p,
   .about-closing-copy p {
-    font-size: 0.97rem;
+    font-size: 0.98rem;
     line-height: 1.82;
   }
 
-  .about-section-intro h2,
-  .about-section-copy h2,
-  .about-build-top h2,
-  .about-closing-copy h2 {
-    font-size: 1.92rem;
-    line-height: 1.02;
+  .about-section-heading {
+    font-size: 2rem;
+    line-height: 1.05;
   }
 
   .about-highlight-line,
   .about-closing-quote {
-    font-size: 1.02rem;
-    line-height: 1.64;
+    font-size: 1.04rem;
+    line-height: 1.66;
   }
 
   .about-primary-button,
   .about-secondary-button {
     width: 100%;
+  }
+
+  .about-typewriter-wrap {
+    padding: 16px;
+  }
+
+  .about-typewriter-line {
+    font-size: 0.96rem;
   }
 
   .about-hero-composition {
@@ -925,18 +976,18 @@ body[data-page="about"] {
     top: auto;
     left: auto;
     width: 100%;
-    max-width: 286px;
+    max-width: 300px;
     margin-bottom: 18px;
-    padding: 20px 18px;
+    padding: 22px 18px;
     border-radius: 20px;
   }
 
   .about-hero-main-card h2 {
-    font-size: 1.12rem;
+    font-size: 1.16rem;
   }
 
   .about-hero-card-points li {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
   }
 
   .about-hero-figure-wrap {

@@ -7,6 +7,7 @@
     }
 
     const canvas = options.canvas;
+    const textTargetSelectors = Array.isArray(options.textTargets) ? options.textTargets : [];
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
@@ -43,18 +44,24 @@
       targetY: 0
     };
 
-    const POINT_COUNT = 116;
+    let scrollOffset = 0;
+    let heroScrollProgress = 0;
+    let heroDecompose = 0;
+
+    const POINT_COUNT = 120;
     const bounds = { x: 18, y: 30, z: 10 };
 
     const positions = [];
+    const basePositions = [];
     const velocities = [];
 
     for (let i = 0; i < POINT_COUNT; i++) {
-      positions.push(
-        (Math.random() - 0.5) * bounds.x * 2,
-        (Math.random() - 0.5) * bounds.y * 2,
-        (Math.random() - 0.5) * bounds.z * 2
-      );
+      const px = (Math.random() - 0.5) * bounds.x * 2;
+      const py = (Math.random() - 0.5) * bounds.y * 2;
+      const pz = (Math.random() - 0.5) * bounds.z * 2;
+
+      positions.push(px, py, pz);
+      basePositions.push(px, py, pz);
 
       velocities.push(
         (Math.random() - 0.5) * 0.0048,
@@ -97,7 +104,6 @@
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
     group.add(lineSegments);
 
-    let scrollOffset = 0;
     let animationFrameId = null;
 
     resize();
@@ -134,9 +140,38 @@
       camera.updateProjectionMatrix();
     }
 
+    function getTextInfluencePoints() {
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
+      const points = [];
+
+      textTargetSelectors.forEach(function (selector) {
+        const element = document.querySelector(selector);
+        if (!element) {
+          return;
+        }
+
+        const rect = element.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > height) {
+          return;
+        }
+
+        const centerX = ((rect.left + rect.width / 2) / width - 0.5) * bounds.x * 2;
+        const centerY = -((rect.top + rect.height / 2) / height - 0.5) * bounds.y * 2;
+
+        points.push({
+          x: centerX,
+          y: centerY
+        });
+      });
+
+      return points;
+    }
+
     function updateParticles() {
       const attr = particleGeometry.getAttribute("position");
       const array = attr.array;
+      const textPoints = getTextInfluencePoints();
 
       for (let i = 0; i < POINT_COUNT; i++) {
         const idx = i * 3;
@@ -156,6 +191,19 @@
         if (array[idx + 2] > bounds.z || array[idx + 2] < -bounds.z) {
           velocities[idx + 2] *= -1;
         }
+
+        if (textPoints.length) {
+          const point = textPoints[i % textPoints.length];
+          const dx = point.x - array[idx];
+          const dy = point.y - array[idx + 1];
+          array[idx] += dx * 0.0009;
+          array[idx + 1] += dy * 0.0009;
+        }
+
+        const baseX = basePositions[idx];
+        const baseY = basePositions[idx + 1];
+        array[idx] += (baseX - array[idx]) * 0.0008;
+        array[idx + 1] += (baseY - array[idx + 1]) * 0.0008;
       }
 
       attr.needsUpdate = true;
@@ -181,7 +229,7 @@
           const dz = az - bz;
           const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-          if (distance < 4.15 && lineCount < maxLineSegments) {
+          if (distance < 4.1 && lineCount < maxLineSegments) {
             linePositions[writeIndex++] = ax;
             linePositions[writeIndex++] = ay;
             linePositions[writeIndex++] = az;
@@ -215,6 +263,9 @@
       group.rotation.y += mouse.x * 0.0009;
       group.rotation.x += -mouse.y * 0.0007;
 
+      group.position.x += ((mouse.x * 0.8) + heroDecompose * 0.6 - group.position.x) * 0.02;
+      group.position.y += (((-mouse.y * 0.5) + heroScrollProgress * 0.8) - group.position.y) * 0.02;
+
       particles.rotation.z += 0.00008;
       particles.position.x = mouse.x * 0.38;
       particles.position.y += ((-mouse.y * 0.24) - particles.position.y) * 0.03;
@@ -224,6 +275,11 @@
       lineSegments.position.y += ((-mouse.y * 0.14) - lineSegments.position.y) * 0.03;
 
       renderer.render(scene, camera);
+    }
+
+    function setScrollProgress(progress, decompose) {
+      heroScrollProgress = progress || 0;
+      heroDecompose = decompose || 0;
     }
 
     function destroy() {
@@ -253,7 +309,8 @@
     }
 
     return {
-      destroy: destroy
+      destroy: destroy,
+      setScrollProgress: setScrollProgress
     };
   }
 

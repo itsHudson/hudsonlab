@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollShift();
   initMagneticButtons();
   initHeroCompositionTilt();
+  initTypewriter();
+  initHeroScrollDriven();
 });
 
 function initReveal() {
@@ -55,7 +57,13 @@ function initSystemField() {
   }
 
   window.__aboutSystemFieldInstance = window.createAboutSystemField({
-    canvas: canvas
+    canvas: canvas,
+    textTargets: [
+      "#aboutHeroTitle",
+      "#aboutHeroSubtitle",
+      ".about-typewriter-line",
+      ".about-section-heading"
+    ]
   });
 }
 
@@ -70,7 +78,7 @@ function initScrollGlow() {
   function updateGlow() {
     const scrollY = window.scrollY || 0;
     const moveY = Math.min(54, scrollY * 0.04);
-    const opacity = Math.min(1, 0.8 + scrollY * 0.0001);
+    const opacity = Math.min(1, 0.78 + scrollY * 0.00012);
 
     glow.style.transform = "translateY(" + moveY + "px)";
     glow.style.opacity = String(opacity);
@@ -103,7 +111,7 @@ function initScrollShift() {
     elements.forEach(function (element) {
       const rect = element.getBoundingClientRect();
       const centerDistance = rect.top + rect.height / 2 - viewportHeight / 2;
-      const shift = Math.max(-12, Math.min(12, centerDistance * -0.024));
+      const shift = Math.max(-14, Math.min(14, centerDistance * -0.024));
       element.style.transform = "translateY(" + shift + "px)";
     });
 
@@ -193,7 +201,7 @@ function initHeroCompositionTilt() {
 
     if (card) {
       card.style.transform =
-        "translate(" + (translateX * 0.22) + "px," + (translateY * 0.18) + "px)";
+        "translate(" + (translateX * 0.18) + "px," + (translateY * 0.14) + "px)";
     }
 
     if (wordTop) {
@@ -203,12 +211,12 @@ function initHeroCompositionTilt() {
 
     if (wordSide) {
       wordSide.style.transform =
-        "rotate(90deg) translate(" + (translateX * 0.1) + "px," + (translateY * 0.1) + "px)";
+        "rotate(90deg) translate(" + (translateX * 0.10) + "px," + (translateY * 0.10) + "px)";
     }
 
     if (wordBottom) {
       wordBottom.style.transform =
-        "translate(" + (translateX * 0.1) + "px," + (translateY * 0.08) + "px)";
+        "translate(" + (translateX * 0.10) + "px," + (translateY * 0.08) + "px)";
     }
   });
 
@@ -232,4 +240,105 @@ function initHeroCompositionTilt() {
       wordBottom.style.transform = "";
     }
   });
+}
+
+function initTypewriter() {
+  const target = document.getElementById("aboutTypewriterText");
+  if (!target) {
+    return;
+  }
+
+  const phrases = [
+    "Breaking complexity into usable parts.",
+    "Building structure before polish.",
+    "Reviewing, refining, improving.",
+    "Turning ideas into stronger systems."
+  ];
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 70;
+
+  function tick() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (!isDeleting) {
+      charIndex += 1;
+      target.textContent = currentPhrase.slice(0, charIndex);
+
+      if (charIndex === currentPhrase.length) {
+        isDeleting = true;
+        typingSpeed = 1400;
+      } else {
+        typingSpeed = 65;
+      }
+    } else {
+      if (typingSpeed === 1400) {
+        typingSpeed = 40;
+      } else {
+        charIndex -= 1;
+        target.textContent = currentPhrase.slice(0, charIndex);
+      }
+
+      if (charIndex <= 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typingSpeed = 260;
+      }
+    }
+
+    window.setTimeout(tick, typingSpeed);
+  }
+
+  tick();
+}
+
+function initHeroScrollDriven() {
+  const hero = document.getElementById("aboutHero");
+  const title = document.getElementById("aboutHeroTitle");
+  const subtitle = document.getElementById("aboutHeroSubtitle");
+  const card = document.getElementById("aboutHeroCard");
+  const figureWrap = document.getElementById("aboutHeroFigureWrap");
+  const composition = document.getElementById("aboutHeroComposition");
+
+  if (!hero || !title || !subtitle || !card || !figureWrap || !composition) {
+    return;
+  }
+
+  let ticking = false;
+
+  function updateHeroScroll() {
+    const rect = hero.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || 1;
+
+    const progress = Math.max(0, Math.min(1, (viewportHeight - rect.top) / (viewportHeight + rect.height)));
+    const decompose = Math.max(0, Math.min(1, (window.scrollY || 0) / (hero.offsetHeight * 0.9)));
+
+    title.style.transform =
+      "translateY(" + (decompose * -18) + "px)";
+    subtitle.style.transform =
+      "translateY(" + (decompose * -8) + "px)";
+    card.style.transform =
+      "translate(" + (decompose * 10) + "px," + (decompose * 18) + "px)";
+    figureWrap.style.transform =
+      "translate(" + (decompose * -8) + "px," + (decompose * -16) + "px) scale(" + (1 - decompose * 0.03) + ")";
+    composition.style.opacity = String(1 - decompose * 0.05);
+
+    if (window.__aboutSystemFieldInstance && typeof window.__aboutSystemFieldInstance.setScrollProgress === "function") {
+      window.__aboutSystemFieldInstance.setScrollProgress(progress, decompose);
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeroScroll);
+      ticking = true;
+    }
+  });
+
+  window.addEventListener("resize", updateHeroScroll);
+  updateHeroScroll();
 }
