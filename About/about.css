@@ -596,6 +596,10 @@ body[data-page="about"] {
   color: #5a5048;
 }
 
+/* =========================
+   BAND SECTION
+   ========================= */
+
 .about-band {
   position: relative;
   z-index: 2;
