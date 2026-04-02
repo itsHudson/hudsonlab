@@ -10,9 +10,9 @@
 
   <style>
     :root {
-      --bg-1: #06070b;
-      --bg-2: #0d1018;
-      --bg-3: #151927;
+      --bg-1: #05060a;
+      --bg-2: #0b0e15;
+      --bg-3: #111622;
       --line: rgba(255,255,255,0.08);
       --line-strong: rgba(255,255,255,0.16);
       --text: rgba(255,255,255,0.95);
@@ -45,16 +45,6 @@
       overflow-x: hidden;
     }
 
-    .signature-page {
-      position: relative;
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-      display: grid;
-      gap: 24px;
-      padding: 28px 0 40px;
-      isolation: isolate;
-    }
-
     #acCanvas {
       position: fixed;
       inset: 0;
@@ -71,10 +61,19 @@
       z-index: -1;
       pointer-events: none;
       opacity: 0.18;
-      background-image:
-        radial-gradient(rgba(255,255,255,0.12) 0.55px, transparent 0.55px);
+      background-image: radial-gradient(rgba(255,255,255,0.12) 0.55px, transparent 0.55px);
       background-size: 8px 8px;
       mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+    }
+
+    .signature-page {
+      position: relative;
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      padding: 28px 0 40px;
+      isolation: isolate;
     }
 
     .panel {
@@ -91,7 +90,7 @@
       min-height: 92vh;
       padding: 28px;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.02fr 0.98fr;
       gap: 22px;
       align-items: stretch;
       background:
@@ -128,7 +127,7 @@
 
     .hero-left {
       display: grid;
-      grid-template-rows: auto auto auto 1fr auto;
+      grid-template-rows: auto auto auto auto 1fr;
       gap: 18px;
       position: relative;
       z-index: 1;
@@ -154,7 +153,7 @@
 
     .hero-title-wrap h1 {
       margin: 0;
-      max-width: 8.6ch;
+      max-width: 8.5ch;
       font-size: clamp(3.2rem, 8vw, 7rem);
       line-height: 0.88;
       letter-spacing: -0.08em;
@@ -215,6 +214,34 @@
       50%, 100% { opacity: 0; }
     }
 
+    .value-quote {
+      padding: 20px 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 86% 20%, rgba(255,190,120,0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+    }
+
+    .value-quote span {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .value-quote strong {
+      display: block;
+      max-width: 20ch;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--cream);
+    }
+
     .micro-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -272,7 +299,7 @@
 
     .core-system {
       position: relative;
-      width: min(32vw, 410px);
+      width: min(34vw, 420px);
       aspect-ratio: 1;
       border-radius: 50%;
       display: grid;
@@ -336,8 +363,8 @@
 
     .orbit-node {
       position: absolute;
-      width: 110px;
-      min-height: 110px;
+      width: 112px;
+      min-height: 112px;
       padding: 12px;
       border-radius: 24px;
       display: grid;
@@ -407,10 +434,266 @@
       letter-spacing: 0.03em;
     }
 
-    .signature-breaker {
-      padding: 18px 22px;
+    .value-architecture {
+      padding: 26px;
+      display: grid;
+      gap: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,190,120,0.10), transparent 22%),
+        radial-gradient(circle at 88% 16%, rgba(101,214,255,0.08), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    }
+
+    .value-hero-strip {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .value-kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .value-hero-copy h2 {
+      margin: 0;
+      max-width: 11ch;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      color: var(--cream);
+    }
+
+    .value-hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      align-content: flex-end;
+    }
+
+    .value-hero-tags span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      background:
+        linear-gradient(135deg, rgba(255,190,120,0.12), rgba(101,214,255,0.08)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .value-core-layout {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .value-core-panel {
+      position: sticky;
+      top: 110px;
+      padding: 26px;
+      min-height: 540px;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 15% 18%, rgba(255,190,120,0.16), transparent 24%),
+        radial-gradient(circle at 85% 82%, rgba(141,140,255,0.10), transparent 24%),
+        linear-gradient(145deg, rgba(10,12,20,0.96), rgba(19,24,37,0.94));
+      box-shadow: 0 28px 90px rgba(0,0,0,0.32);
+    }
+
+    .value-core-glow {
+      position: absolute;
+      inset: auto -80px -100px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 72%);
+      pointer-events: none;
+    }
+
+    .value-core-label {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .value-core-panel h3 {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 14px;
+      max-width: 10ch;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      color: var(--cream);
+    }
+
+    .value-core-panel p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      max-width: 34ch;
+      color: var(--soft);
+      line-height: 1.9;
+      font-size: 0.98rem;
+    }
+
+    .value-core-stats {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .value-core-stats div {
+      padding: 16px 16px 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .value-core-stats strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      color: var(--cream);
+    }
+
+    .value-core-stats span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .value-signal-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .value-signal-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      padding: 20px 18px 18px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+      box-shadow: 0 18px 54px rgba(0,0,0,0.18);
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .value-signal-card:hover {
+      border-color: rgba(255,190,120,0.24);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.24);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.03));
+    }
+
+    .value-signal-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--peach), var(--cyan));
+    }
+
+    .value-signal-card::after {
+      content: "";
+      position: absolute;
+      right: -34px;
+      bottom: -34px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 72%);
+      pointer-events: none;
+    }
+
+    .signal-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--peach));
+      color: #1a120d;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      box-shadow: 0 10px 26px rgba(255,170,100,0.22);
+    }
+
+    .value-signal-card h3 {
+      margin: 0 0 10px;
+      max-width: 12ch;
+      font-size: 1.06rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--cream);
+    }
+
+    .value-signal-card p {
+      margin: 0;
+      max-width: 24ch;
+      color: var(--soft);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+
+    .signal-card-1 { grid-column: span 6; min-height: 250px; }
+    .signal-card-2 { grid-column: span 3; }
+    .signal-card-3 { grid-column: span 3; }
+    .signal-card-4 { grid-column: span 4; }
+    .signal-card-5 { grid-column: span 4; }
+    .signal-card-6 { grid-column: span 4; }
+    .signal-card-7 { grid-column: span 3; }
+    .signal-card-8 { grid-column: span 3; }
+    .signal-card-9 { grid-column: span 6; min-height: 240px; }
+    .signal-card-10 { grid-column: span 12; min-height: 180px; }
+
+    .magnetic-card,
+    .tilt-card {
+      will-change: transform;
+    }
+
+    .signature-breaker {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 18px;
       align-items: center;
       background:
@@ -418,150 +701,29 @@
         rgba(255,255,255,0.03);
     }
 
-    .breaker-left p {
-      margin: 0;
-      font-size: 0.8rem;
+    .breaker-left span {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 800;
       color: var(--gold);
     }
 
     .breaker-left h2 {
-      margin: 8px 0 0;
-      font-size: clamp(1.4rem, 2vw, 2rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+      margin: 0;
+      max-width: 15ch;
+      font-size: clamp(1.5rem, 2.4vw, 2.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
       color: var(--cream);
     }
 
     .breaker-right {
       color: var(--soft);
       line-height: 1.85;
-      font-size: 0.97rem;
-    }
-
-    .contribution-stage {
-      padding: 24px;
-      display: grid;
-      gap: 20px;
-    }
-
-    .section-head {
-      display: grid;
-      gap: 8px;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--gold);
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      color: var(--cream);
-    }
-
-    .section-head span {
-      color: var(--soft);
-      line-height: 1.8;
-      max-width: 60ch;
-    }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .module-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 180px;
-      padding: 20px 18px 18px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
-      transform-style: preserve-3d;
-      transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease,
-        background 0.3s ease;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.18);
-    }
-
-    .module-card:hover {
-      border-color: rgba(255,190,120,0.22);
-      box-shadow: 0 26px 80px rgba(0,0,0,0.26);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-    }
-
-    .module-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--peach), var(--cyan));
-      opacity: 0.95;
-    }
-
-    .module-card::after {
-      content: "";
-      position: absolute;
-      right: -40px;
-      bottom: -40px;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
-      pointer-events: none;
-    }
-
-    .module-card.large { grid-column: span 6; }
-    .module-card.medium { grid-column: span 4; }
-    .module-card.small { grid-column: span 3; }
-
-    .module-no {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 42px;
-      height: 42px;
-      padding: 0 12px;
-      margin-bottom: 14px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--gold), var(--peach));
-      color: #1b130e;
-      font-size: 0.8rem;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      box-shadow: 0 10px 26px rgba(255,170,100,0.22);
-    }
-
-    .module-card h3 {
-      margin: 0 0 10px;
-      font-size: 1rem;
-      line-height: 1.26;
-      letter-spacing: -0.02em;
-      color: var(--cream);
-    }
-
-    .module-card p {
-      margin: 0;
-      color: var(--soft);
-      font-size: 0.92rem;
-      line-height: 1.78;
+      font-size: 0.98rem;
     }
 
     .side-by-side {
@@ -580,7 +742,7 @@
     .visual-tower img {
       width: 100%;
       height: 100%;
-      min-height: 680px;
+      min-height: 720px;
       object-fit: cover;
       display: block;
       filter: contrast(1.05) saturate(0.96);
@@ -619,6 +781,16 @@
     .insight-card,
     .final-card {
       padding: 26px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .insight-card h2,
@@ -730,17 +902,32 @@
 
     @media (max-width: 1200px) {
       .hero-shell,
-      .side-by-side,
+      .value-hero-strip,
+      .value-core-layout,
       .signature-breaker,
+      .side-by-side,
       .bottom-grid {
         grid-template-columns: 1fr;
       }
 
-      .visual-tower img {
-        min-height: 420px;
+      .value-hero-tags {
+        justify-content: flex-start;
       }
 
-      .hero-title-wrap h1 {
+      .value-core-panel {
+        position: relative;
+        top: auto;
+        min-height: auto;
+      }
+
+      .visual-tower img {
+        min-height: 460px;
+      }
+
+      .hero-title-wrap h1,
+      .value-hero-copy h2,
+      .value-core-panel h3,
+      .breaker-left h2 {
         max-width: none;
       }
     }
@@ -751,9 +938,16 @@
         grid-template-columns: 1fr;
       }
 
-      .module-card.large,
-      .module-card.medium,
-      .module-card.small {
+      .signal-card-1,
+      .signal-card-2,
+      .signal-card-3,
+      .signal-card-4,
+      .signal-card-5,
+      .signal-card-6,
+      .signal-card-7,
+      .signal-card-8,
+      .signal-card-9,
+      .signal-card-10 {
         grid-column: span 6;
       }
 
@@ -770,19 +964,28 @@
       }
 
       .hero-shell,
-      .contribution-stage,
+      .value-architecture,
       .insight-card,
-      .final-card {
+      .final-card,
+      .signature-breaker,
+      .value-core-panel {
         padding: 20px 16px;
       }
 
-      .module-grid {
+      .value-signal-grid {
         grid-template-columns: 1fr;
       }
 
-      .module-card.large,
-      .module-card.medium,
-      .module-card.small {
+      .signal-card-1,
+      .signal-card-2,
+      .signal-card-3,
+      .signal-card-4,
+      .signal-card-5,
+      .signal-card-6,
+      .signal-card-7,
+      .signal-card-8,
+      .signal-card-9,
+      .signal-card-10 {
         grid-column: auto;
       }
 
@@ -842,18 +1045,18 @@
     <section class="panel hero-shell reveal-up">
       <div class="hero-left">
         <div class="signature-meta">
-          <span class="signature-pill">Signature Page</span>
+          <span class="signature-pill">Signature Journey</span>
           <span class="signature-pill">Dec 2017 - Aug 2023</span>
           <span class="signature-pill">Australian Cake House / ACake</span>
         </div>
 
         <div class="hero-title-wrap">
-          <h1>Operations, but Cinematic.</h1>
+          <h1>Value in Motion.</h1>
         </div>
 
         <p class="hero-subline">
-          A premium experience page built to show range, systems thinking, motion,
-          execution, and design maturity — without drowning the screen in long text.
+          Structured execution, systems awareness, customer-facing precision, people support,
+          and operational calm — shaped through real business environments, not theory alone.
         </p>
 
         <div class="typed-stage">
@@ -863,26 +1066,31 @@
           </div>
         </div>
 
+        <div class="value-quote">
+          <span>Positioning</span>
+          <strong>I build structure inside moving environments.</strong>
+        </div>
+
         <div class="micro-grid">
           <article class="micro-card tilt-card">
             <strong>5+ Years</strong>
-            <span>Long-form exposure across real business operations and multi-function support.</span>
+            <span>Real operational exposure across store execution, support systems, and people workflows.</span>
           </article>
 
           <article class="micro-card tilt-card">
-            <strong>10 Modules</strong>
-            <span>Finance, HR, SOPs, systems, customer handling, onboarding, marketing, and more.</span>
+            <strong>10 Value Zones</strong>
+            <span>Finance, SOPs, onboarding, service, systems, launch support, and problem-solving.</span>
           </article>
 
           <article class="micro-card tilt-card">
-            <strong>Brand + Tech</strong>
-            <span>Presented like a signature digital showcase, not a boring experience page.</span>
+            <strong>Multi-Outlet Mindset</strong>
+            <span>Built around consistency, readiness, scalability, and practical coordination.</span>
           </article>
         </div>
       </div>
 
       <div class="hero-right">
-        <div class="orbital-stage panel-inner">
+        <div class="orbital-stage">
           <div class="core-system">
             <div class="ring"></div>
             <div class="ring-2"></div>
@@ -892,12 +1100,12 @@
               <strong>People<br>Process<br>System<br>Customer</strong>
             </div>
 
-            <div class="orbit-node node-1">Accounting &amp;<br>Financial</div>
-            <div class="orbit-node node-2">HR &amp;<br>Team Support</div>
-            <div class="orbit-node node-3">Customer<br>Experience</div>
-            <div class="orbit-node node-4">System &amp;<br>Technical</div>
-            <div class="orbit-node node-5">Outlet Setup &amp;<br>Expansion</div>
-            <div class="orbit-node node-6">SOP &amp;<br>Documentation</div>
+            <div class="orbit-node node-1">Financial<br>Accuracy</div>
+            <div class="orbit-node node-2">People &amp;<br>Team Support</div>
+            <div class="orbit-node node-3">Customer<br>Interface</div>
+            <div class="orbit-node node-4">System<br>Readiness</div>
+            <div class="orbit-node node-5">Launch<br>Support</div>
+            <div class="orbit-node node-6">Process<br>Design</div>
           </div>
         </div>
 
@@ -929,122 +1137,128 @@
       </div>
     </section>
 
-    <!-- BREAKER -->
-    <section class="panel signature-breaker reveal-up">
-      <div class="breaker-left">
-        <p>Design Positioning</p>
-        <h2>Not a resume block.  
-        A branded experience system.</h2>
+    <!-- VALUE ARCHITECTURE -->
+    <section class="panel value-architecture reveal-up">
+      <div class="value-hero-strip">
+        <div class="value-hero-copy">
+          <span class="value-kicker">Value Architecture</span>
+          <h2>I create clarity where work keeps moving.</h2>
+        </div>
+
+        <div class="value-hero-tags">
+          <span>Operations</span>
+          <span>Systems</span>
+          <span>People</span>
+          <span>Execution</span>
+          <span>Service</span>
+          <span>Scale</span>
+        </div>
       </div>
 
-      <div class="breaker-right">
-        This page is designed to make the recruiter pause. It turns operational experience
-        into something visual, structured, technical, and memorable — showing not just
-        what you did, but how you think.
+      <div class="value-core-layout">
+        <article class="value-core-panel tilt-card magnetic-card">
+          <div class="value-core-glow"></div>
+
+          <span class="value-core-label">Core Value</span>
+          <h3>Cross-functional operational intelligence</h3>
+          <p>
+            Stronger than a single task. Stronger than a single title. Built through finance support,
+            SOP thinking, customer handling, onboarding, systems support, outlet readiness,
+            and real operational pressure.
+          </p>
+
+          <div class="value-core-stats">
+            <div>
+              <strong>5+ Years</strong>
+              <span>real operational exposure</span>
+            </div>
+            <div>
+              <strong>10 Zones</strong>
+              <span>business contribution areas</span>
+            </div>
+            <div>
+              <strong>Multi-Outlet</strong>
+              <span>execution awareness</span>
+            </div>
+          </div>
+        </article>
+
+        <div class="value-signal-grid">
+          <article class="value-signal-card signal-card-1 tilt-card magnetic-card">
+            <span class="signal-index">01</span>
+            <h3>Financial Accuracy</h3>
+            <p>Bookkeeping support, transaction consistency, sales tracking, reporting discipline.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-2 tilt-card magnetic-card">
+            <span class="signal-index">02</span>
+            <h3>People &amp; Team Support</h3>
+            <p>Recruitment coordination, onboarding support, staff training, team readiness.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-3 tilt-card magnetic-card">
+            <span class="signal-index">03</span>
+            <h3>Process Design</h3>
+            <p>SOP refinement, workflow structure, pricing flow, service consistency.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-4 tilt-card magnetic-card">
+            <span class="signal-index">04</span>
+            <h3>Internal Knowledge Systems</h3>
+            <p>Information guide building, internal reference clarity, fraud awareness communication.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-5 tilt-card magnetic-card">
+            <span class="signal-index">05</span>
+            <h3>Training Translation</h3>
+            <p>Turning practical processes into understandable staff guidance.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-6 tilt-card magnetic-card">
+            <span class="signal-index">06</span>
+            <h3>Customer Interface Control</h3>
+            <p>Orders, inquiries, complaints, service quality across messaging channels.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-7 tilt-card magnetic-card">
+            <span class="signal-index">07</span>
+            <h3>Growth Awareness</h3>
+            <p>Customer engagement support, retention thinking, operational impact on business growth.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-8 tilt-card magnetic-card">
+            <span class="signal-index">08</span>
+            <h3>System Readiness</h3>
+            <p>POS setup, troubleshooting, standardisation support across outlets.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-9 tilt-card magnetic-card">
+            <span class="signal-index">09</span>
+            <h3>Launch Support</h3>
+            <p>Outlet setup, staff readiness, operational flow preparation, opening support.</p>
+          </article>
+
+          <article class="value-signal-card signal-card-10 tilt-card magnetic-card">
+            <span class="signal-index">10</span>
+            <h3>Calm Under Pressure</h3>
+            <p>Customer issues, equipment issues, unexpected incidents, structured response.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- CONTRIBUTION MODULES -->
-    <section class="panel contribution-stage reveal-up">
-      <div class="section-head">
-        <p>Contribution Modules</p>
-        <h2>Short, sharp, visual.</h2>
-        <span>
-          You said you prefer showing categories instead of forcing people to read long walls of text.
-          So this section behaves more like a modular signal board.
-        </span>
+    <!-- BREAKER -->
+    <section class="panel signature-breaker reveal-up">
+      <div class="breaker-left">
+        <span>Signature Signal</span>
+        <h2>Not one function.  
+        A connected value system.</h2>
       </div>
 
-      <div class="module-grid">
-        <article class="module-card large tilt-card">
-          <span class="module-no">01</span>
-          <h3>Accounting &amp; Financial Support</h3>
-          <p>
-            Assisted in bookkeeping, sales tracking, and basic reporting while learning
-            the importance of transaction accuracy and consistency across multi-outlet operations.
-          </p>
-        </article>
-
-        <article class="module-card medium tilt-card">
-          <span class="module-no">02</span>
-          <h3>Human Resources &amp; Team Support</h3>
-          <p>
-            Participated in recruitment coordination, onboarding support, staff training,
-            and team development alignment with operational needs.
-          </p>
-        </article>
-
-        <article class="module-card medium tilt-card">
-          <span class="module-no">03</span>
-          <h3>Operations &amp; SOP Development</h3>
-          <p>
-            Contributed to workflow documentation for daily operations, order handling,
-            pricing structure, and service consistency.
-          </p>
-        </article>
-
-        <article class="module-card small tilt-card">
-          <span class="module-no">04</span>
-          <h3>Information Guide &amp; Internal Documentation</h3>
-          <p>
-            Helped create clear reference materials covering company structure,
-            communication channels, and fraud awareness.
-          </p>
-        </article>
-
-        <article class="module-card small tilt-card">
-          <span class="module-no">05</span>
-          <h3>Training &amp; Knowledge Sharing</h3>
-          <p>
-            Supported practical training in customer service, product knowledge,
-            and POS system usage.
-          </p>
-        </article>
-
-        <article class="module-card small tilt-card">
-          <span class="module-no">06</span>
-          <h3>Customer Experience &amp; Communication</h3>
-          <p>
-            Managed orders, inquiries, complaints, and service conversations
-            through WhatsApp and Facebook Messenger.
-          </p>
-        </article>
-
-        <article class="module-card medium tilt-card">
-          <span class="module-no">07</span>
-          <h3>Marketing &amp; Customer Engagement</h3>
-          <p>
-            Supported basic engagement initiatives and contributed ideas
-            to improve customer reach and retention.
-          </p>
-        </article>
-
-        <article class="module-card medium tilt-card">
-          <span class="module-no">08</span>
-          <h3>System Implementation &amp; Technical Support</h3>
-          <p>
-            Assisted in POS setup, troubleshooting, and outlet-level
-            system standardisation support.
-          </p>
-        </article>
-
-        <article class="module-card large tilt-card">
-          <span class="module-no">09</span>
-          <h3>Outlet Setup &amp; Expansion Support</h3>
-          <p>
-            Participated in new outlet preparation including staff readiness,
-            operational flow support, system setup, and launch coordination.
-          </p>
-        </article>
-
-        <article class="module-card large tilt-card">
-          <span class="module-no">10</span>
-          <h3>Operational Problem-Solving</h3>
-          <p>
-            Assisted in handling customer complaints, equipment issues,
-            and unexpected incidents with a calm, process-aware approach.
-          </p>
-        </article>
+      <div class="breaker-right">
+        Finance support, process clarity, customer communication, onboarding, systems support,
+        launch readiness, and problem-solving all point to one thing: the ability to work inside
+        moving environments without losing structure.
       </div>
     </section>
 
@@ -1053,26 +1267,26 @@
       <section class="panel visual-tower reveal-up">
         <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House experience visual" />
         <div class="visual-overlay-card">
-          <strong>Where practical business awareness was built</strong>
+          <strong>Built in real operations, not abstract theory</strong>
           <span>
-            This phase created the real-world foundation behind later business, systems,
-            and technology-oriented growth.
+            A foundation shaped through live execution, practical constraints,
+            service expectations, and multi-function coordination.
           </span>
         </div>
       </section>
 
       <div class="insight-stack">
         <section class="panel insight-card reveal-up">
-          <p class="section-head p">Experience Frame</p>
+          <span class="section-kicker">Operational Identity</span>
           <h2>Range over repetition.</h2>
           <p>
-            This journey was valuable because it was never limited to one function.
-            It exposed me to how records, people, workflows, customers, and systems
-            must move together for operations to stay stable and scalable.
+            This journey was valuable because it was never limited to one narrow function.
+            It built awareness of how records, people, workflows, systems, and customer experience
+            reinforce one another in daily business operations.
           </p>
           <p>
-            Instead of overselling ownership, this page highlights something stronger:
-            support-driven contribution, structured thinking, and real operational awareness.
+            The result is a stronger mindset around clarity, consistency, support-driven execution,
+            and structured thinking under pressure.
           </p>
         </section>
 
@@ -1094,16 +1308,12 @@
         </div>
 
         <section class="panel final-card reveal-up">
-          <p class="section-head p">Overall Reflection</p>
+          <span class="section-kicker">Reflection</span>
           <h2>A strong operational foundation before the next chapter.</h2>
           <p>
-            Throughout this experience, I had the opportunity to be involved in multiple
-            aspects of operations — from administrative support to store-level execution,
-            customer communication, systems support, and broader coordination.
-          </p>
-          <p>
-            That range helped me build a stronger mindset around clarity, process,
-            teamwork, adaptability, and continuous learning.
+            This phase developed practical awareness before later growth in business,
+            systems, and technology-oriented thinking. It shaped how I approach execution,
+            coordination, communication, and scalable process design today.
           </p>
         </section>
       </div>
@@ -1112,7 +1322,7 @@
     <!-- BOTTOM -->
     <section class="bottom-grid">
       <section class="panel final-card reveal-up">
-        <p class="section-head p">What This Strengthened</p>
+        <span class="section-kicker">What This Strengthened</span>
         <h2>Capabilities worth noticing.</h2>
         <ul class="feature-list">
           <li>Operational awareness across people, process, systems, and service.</li>
@@ -1125,12 +1335,11 @@
       </section>
 
       <section class="panel final-card reveal-up">
-        <p class="section-head p">Recruiter Read</p>
-        <h2>What this page signals without saying too much.</h2>
+        <span class="section-kicker">Recruiter Read</span>
+        <h2>What this signals immediately.</h2>
         <p>
-          This is someone who understands operations beyond one title.
-          Someone who can work inside systems, support structure,
-          and think in terms of connected functions.
+          Someone who understands operations beyond one title. Someone who can support structure,
+          handle movement, and think in terms of connected systems rather than isolated tasks.
         </p>
         <p>
           The presentation itself also signals design awareness, digital maturity,
@@ -1153,16 +1362,16 @@
   <script>
     // ---------- TYPEWRITER ----------
     const typedPhrases = [
-      "Accounting & Financial Support",
-      "Human Resources & Team Support",
-      "Operations & SOP Development",
-      "Information Guide & Internal Documentation",
-      "Training & Knowledge Sharing",
-      "Customer Experience & Communication",
-      "Marketing & Customer Engagement",
-      "System Implementation & Technical Support",
-      "Outlet Setup & Expansion Support",
-      "Operational Problem-Solving"
+      "Financial Accuracy",
+      "People & Team Support",
+      "Process Design",
+      "Internal Knowledge Systems",
+      "Training Translation",
+      "Customer Interface Control",
+      "Growth Awareness",
+      "System Readiness",
+      "Launch Support",
+      "Calm Under Pressure"
     ];
 
     const typedTextEl = document.getElementById("typedText");
@@ -1233,13 +1442,15 @@
         if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
         if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
 
-        let dxMouse = mouse.x - p.x;
-        let dyMouse = mouse.y - p.y;
-        let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+        if (mouse.x !== null && mouse.y !== null) {
+          let dxMouse = mouse.x - p.x;
+          let dyMouse = mouse.y - p.y;
+          let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
 
-        if (distMouse < mouse.radius) {
-          p.x -= dxMouse * 0.004;
-          p.y -= dyMouse * 0.004;
+          if (distMouse < mouse.radius) {
+            p.x -= dxMouse * 0.004;
+            p.y -= dyMouse * 0.004;
+          }
         }
 
         ctx.beginPath();
@@ -1314,6 +1525,23 @@
 
       card.addEventListener("mouseleave", () => {
         card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+      });
+    });
+
+    // ---------- MAGNETIC HOVER ----------
+    const magneticCards = document.querySelectorAll(".magnetic-card");
+
+    magneticCards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        card.style.transform = `translate(${x * 0.035}px, ${y * 0.035}px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
       });
     });
   </script>
