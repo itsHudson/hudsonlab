@@ -10,24 +10,47 @@
 
   <style>
     :root {
-      --bg: #07080b;
-      --bg-soft: #0d1015;
-      --panel: rgba(255, 255, 255, 0.022);
-      --panel-2: rgba(255, 255, 255, 0.038);
+      --bg: #06070a;
+      --bg-soft: #0b0d12;
+      --bg-elevated: #11141b;
+      --panel: rgba(255, 255, 255, 0.028);
+      --panel-2: rgba(255, 255, 255, 0.04);
+      --panel-3: rgba(255, 255, 255, 0.06);
       --line: rgba(255, 255, 255, 0.08);
-      --line-soft: rgba(255, 255, 255, 0.04);
+      --line-soft: rgba(255, 255, 255, 0.05);
+      --line-strong: rgba(255, 255, 255, 0.12);
       --text: #f5efe7;
-      --text-soft: rgba(245, 239, 231, 0.68);
-      --text-faint: rgba(245, 239, 231, 0.18);
+      --text-soft: rgba(245, 239, 231, 0.7);
+      --text-faint: rgba(245, 239, 231, 0.4);
+      --text-dim: rgba(245, 239, 231, 0.18);
       --metal: #d0ae80;
       --metal-soft: rgba(208, 174, 128, 0.16);
-      --success: #c8d5c0;
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
-      --max-width: 1560px;
+      --metal-line: rgba(208, 174, 128, 0.24);
+      --success: #c7d2be;
+      --success-soft: rgba(199, 210, 190, 0.16);
+
+      --radius-2xl: 34px;
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.34);
+      --shadow-md: 0 16px 48px rgba(0, 0, 0, 0.24);
+
+      --max-width: 1580px;
       --progress: 0%;
+
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-14: 56px;
+      --space-16: 64px;
     }
 
     * {
@@ -42,10 +65,13 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 10%, rgba(208, 174, 128, 0.06), transparent 18%),
-        radial-gradient(circle at 84% 14%, rgba(255,255,255,0.02), transparent 18%),
-        linear-gradient(180deg, #06070a 0%, #0a0c10 42%, #0d1015 100%);
+        radial-gradient(circle at 14% 10%, rgba(208, 174, 128, 0.06), transparent 18%),
+        radial-gradient(circle at 82% 12%, rgba(255,255,255,0.025), transparent 18%),
+        linear-gradient(180deg, #050609 0%, #090b0f 36%, #0d1016 100%);
       overflow-x: hidden;
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     body::before {
@@ -54,7 +80,7 @@
       inset: 0 auto auto 0;
       width: var(--progress);
       height: 2px;
-      background: linear-gradient(90deg, rgba(208,174,128,0.08), var(--metal), rgba(208,174,128,0.08));
+      background: linear-gradient(90deg, rgba(208,174,128,0.02), var(--metal), rgba(208,174,128,0.02));
       z-index: 9999;
       pointer-events: none;
     }
@@ -71,31 +97,31 @@
       z-index: -4;
       width: 100%;
       height: 100%;
-      opacity: 0.14;
+      opacity: 0.12;
     }
 
     .grid-overlay {
       z-index: -3;
       opacity: 0.05;
       background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
       background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black 36%, transparent 90%);
+      mask-image: radial-gradient(circle at center, black 32%, transparent 88%);
     }
 
     .noise-overlay {
       z-index: -2;
       opacity: 0.03;
-      background-image: radial-gradient(rgba(255,255,255,0.14) 0.7px, transparent 0.7px);
-      background-size: 9px 9px;
-      mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+      background-image: radial-gradient(rgba(255,255,255,0.16) 0.7px, transparent 0.7px);
+      background-size: 10px 10px;
+      mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
     }
 
     .page {
       width: min(calc(100% - 28px), var(--max-width));
       margin: 0 auto;
-      padding: 18px 0 52px;
+      padding: 18px 0 60px;
       display: grid;
       gap: 20px;
       position: relative;
@@ -105,12 +131,12 @@
     .app-shell {
       position: relative;
       overflow: hidden;
+      border-radius: var(--radius-2xl);
       border: 1px solid var(--line-soft);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.016), rgba(255,255,255,0.008));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-      border-radius: var(--radius-xl);
+        linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.008));
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(18px);
     }
 
     .app-shell::before {
@@ -119,9 +145,9 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.03), transparent 20%);
-      opacity: 0.5;
+        linear-gradient(180deg, rgba(255,255,255,0.016), transparent 16%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.028), transparent 18%);
+      opacity: 0.72;
     }
 
     .panel {
@@ -130,7 +156,8 @@
       border-radius: var(--radius-lg);
       border: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.01));
+        linear-gradient(180deg, rgba(255,255,255,0.026), rgba(255,255,255,0.012));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.025);
     }
 
     .panel::before {
@@ -139,14 +166,14 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.018), transparent 20%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.02), transparent 18%);
-      opacity: 0.42;
+        linear-gradient(180deg, rgba(255,255,255,0.012), transparent 22%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.016), transparent 20%);
+      opacity: 0.7;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
+      transform: translateY(26px);
       transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
@@ -156,11 +183,22 @@
     }
 
     .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       color: var(--metal);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 16px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--metal), transparent);
+      flex: 0 0 auto;
     }
 
     .meta-pills {
@@ -172,25 +210,34 @@
     .meta-pill {
       display: inline-flex;
       align-items: center;
-      padding: 10px 14px;
+      min-height: 36px;
+      padding: 0 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.014);
-      color: rgba(245,239,231,0.82);
-      font-size: 0.72rem;
+      background: rgba(255,255,255,0.012);
+      color: rgba(245,239,231,0.78);
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    /* TOPBAR */
+    .section-copy {
+      color: var(--text-soft);
+      line-height: 1.82;
+      font-size: 0.95rem;
+    }
+
+    /* MASTER TOPBAR */
     .topbar {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      gap: 18px;
+      gap: 16px;
       align-items: center;
+      min-height: 78px;
       padding: 18px 22px;
-      min-height: 76px;
+      border-bottom: 1px solid var(--line-soft);
     }
 
     .brand {
@@ -200,11 +247,11 @@
     }
 
     .brand-mark {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--metal);
-      box-shadow: 0 0 18px rgba(208,174,128,0.25);
+      box-shadow: 0 0 18px rgba(208,174,128,0.3);
       flex: 0 0 auto;
     }
 
@@ -215,15 +262,15 @@
 
     .brand-copy strong {
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
 
     .brand-copy span {
-      color: var(--text-faint);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
@@ -236,83 +283,206 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.012);
-      color: var(--text-soft);
-      font-size: 0.76rem;
-      letter-spacing: 0.05em;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--metal);
-      box-shadow: 0 0 14px rgba(208,174,128,0.22);
-      flex: 0 0 auto;
-    }
-
-    .topbar-right {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .system-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 10px 14px;
+      min-height: 38px;
+      padding: 0 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.012);
       color: var(--text-soft);
       font-size: 0.74rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--metal);
+      box-shadow: 0 0 12px rgba(208,174,128,0.32);
+      flex: 0 0 auto;
+    }
+
+    .system-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.012);
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* HERO APP LAYOUT */
+    .hero-shell {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr) 360px;
+      gap: 18px;
+      padding: 18px;
+      align-items: stretch;
+      min-height: calc(100vh - 150px);
+    }
+
+    .rail,
+    .hero-main,
+    .hero-side {
+      min-height: 100%;
+    }
+
+    .rail {
+      padding: 18px;
+      display: grid;
+      align-content: space-between;
+      gap: 16px;
+    }
+
+    .rail-block {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rail-title {
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
-    /* HERO */
-    .hero {
-      padding: 28px 24px 24px;
+    .rail-list {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 20px;
-      min-height: 82vh;
-      align-items: stretch;
+      gap: 8px;
+    }
+
+    .rail-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--text-soft);
+      background: rgba(255,255,255,0.01);
+      transition: 0.25s ease;
+    }
+
+    .rail-item:hover {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.024);
+      color: var(--text);
+      transform: translateX(2px);
+    }
+
+    .rail-item strong {
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .rail-item span {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .rail-note {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--metal-line);
+      background:
+        linear-gradient(180deg, rgba(208,174,128,0.08), rgba(208,174,128,0.025));
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.7;
     }
 
     .hero-main {
       display: grid;
       grid-template-rows: auto auto 1fr auto;
-      gap: 18px;
-      align-content: start;
+      gap: 20px;
+      padding: 26px 26px 22px;
+    }
+
+    .hero-title-wrap {
+      display: grid;
+      gap: 14px;
+      max-width: 980px;
     }
 
     .hero-title {
       margin: 0;
-      max-width: 7ch;
-      font-size: clamp(4rem, 8vw, 8.8rem);
-      line-height: 0.8;
-      letter-spacing: -0.12em;
-      color: var(--text);
+      font-size: clamp(3.8rem, 7.4vw, 8.2rem);
+      line-height: 0.82;
+      letter-spacing: -0.11em;
+      max-width: 8ch;
       text-wrap: balance;
     }
 
     .hero-copy {
-      max-width: 40ch;
+      max-width: 46ch;
       color: var(--text-soft);
       line-height: 1.9;
-      font-size: 1rem;
+      font-size: 0.98rem;
+    }
+
+    .hero-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-self: end;
+    }
+
+    .hero-stat {
+      padding: 16px 16px 14px;
+      min-height: 112px;
+    }
+
+    .hero-stat em {
+      display: block;
+      margin-bottom: 8px;
+      font-style: normal;
+      color: var(--metal);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .hero-stat strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.55rem;
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      margin-bottom: 6px;
+    }
+
+    .hero-stat span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .hero-bottom {
+      display: grid;
+      gap: 16px;
+      align-content: end;
     }
 
     .hero-statement {
-      align-self: end;
-      max-width: 14ch;
+      max-width: 15ch;
       color: var(--text);
-      font-size: clamp(1.35rem, 2vw, 1.95rem);
-      line-height: 1.04;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.5rem, 2vw, 2.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
     }
 
     .signal-bar {
@@ -320,30 +490,30 @@
       align-items: center;
       gap: 14px;
       min-height: 58px;
-      padding: 14px 18px;
-      border-radius: 999px;
+      padding: 0 16px;
+      border-radius: 18px;
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(209,175,130,0.04), rgba(255,255,255,0.008)),
+        linear-gradient(135deg, rgba(209,175,130,0.045), rgba(255,255,255,0.012)),
         rgba(255,255,255,0.008);
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
     }
 
     .signal-label {
-      flex: 0 0 auto;
       color: var(--metal);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      flex: 0 0 auto;
     }
 
     .signal-text {
       min-width: 0;
       color: var(--text);
-      font-size: 1rem;
-      letter-spacing: -0.02em;
+      font-size: 0.95rem;
+      letter-spacing: -0.015em;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -362,174 +532,168 @@
 
     .hero-side {
       display: grid;
-      grid-template-rows: auto auto;
       gap: 14px;
-      align-content: stretch;
+      padding: 0;
+      align-content: start;
     }
 
-    .hero-side-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .hero-side-card {
-      padding: 18px;
-      min-height: 180px;
-    }
-
-    .hero-side-card strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text);
-      font-size: 0.98rem;
-      line-height: 1.2;
-    }
-
-    .hero-side-card p,
-    .hero-side-card span {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: 0.9rem;
-      line-height: 1.72;
-    }
-
-    .mono-value {
-      display: block;
-      margin-top: 10px;
-      color: var(--text);
-      font-size: 3rem;
-      line-height: 0.9;
-      letter-spacing: -0.08em;
-    }
-
-    .hero-summary {
+    .side-card {
       padding: 18px;
       display: grid;
       gap: 14px;
-      min-height: 100%;
     }
 
-    .summary-row {
+    .side-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .side-kpi {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
 
-    .summary-metric {
-      min-height: 112px;
-      padding: 14px;
+    .side-kpi-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.012);
+      border: 1px solid rgba(255,255,255,0.04);
     }
 
-    .summary-metric em {
-      display: block;
-      font-style: normal;
-      color: var(--metal);
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .summary-metric strong {
-      display: block;
-      margin: 0 0 6px;
+    .side-kpi-row strong {
       color: var(--text);
-      font-size: 1.5rem;
-      line-height: 0.95;
-      letter-spacing: -0.06em;
+      font-size: 0.86rem;
+      font-weight: 600;
     }
 
-    .summary-metric span {
-      display: block;
+    .side-kpi-row span {
       color: var(--text-soft);
       font-size: 0.82rem;
-      line-height: 1.55;
     }
 
-    .summary-wide {
-      padding: 18px;
-      min-height: 130px;
+    .side-kpi-row em {
+      font-style: normal;
+      color: var(--metal);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .summary-wide strong {
-      display: block;
-      margin-bottom: 8px;
+    .mono-value {
       color: var(--text);
-      font-size: 0.98rem;
-      line-height: 1.2;
+      font-size: 3.4rem;
+      line-height: 0.86;
+      letter-spacing: -0.1em;
+      font-weight: 700;
     }
 
-    .summary-wide p {
-      margin: 0;
+    .side-copy {
       color: var(--text-soft);
       font-size: 0.9rem;
       line-height: 1.72;
-      max-width: 38ch;
     }
 
-    /* MODULES */
+    .overview-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .overview-box {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.012);
+    }
+
+    .overview-box strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.88rem;
+    }
+
+    .overview-box span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      line-height: 1.65;
+    }
+
+    /* MODULE SECTION */
     .modules {
-      padding: 26px 22px 22px;
+      padding: 24px;
       display: grid;
       gap: 20px;
     }
 
     .modules-head {
       display: grid;
-      grid-template-columns: 0.88fr 1.12fr;
+      grid-template-columns: 0.9fr 1.1fr;
       gap: 18px;
       align-items: end;
     }
 
     .modules-head h2 {
       margin: 10px 0 0;
-      max-width: 9ch;
       color: var(--text);
-      font-size: clamp(2.6rem, 4vw, 5.3rem);
-      line-height: 0.86;
-      letter-spacing: -0.11em;
+      font-size: clamp(2.4rem, 4vw, 4.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.1em;
+      max-width: 8ch;
     }
 
     .modules-copy {
       justify-self: end;
       max-width: 42ch;
       color: var(--text-soft);
-      line-height: 1.9;
+      line-height: 1.85;
+      font-size: 0.96rem;
     }
 
     .module-layout {
       display: grid;
-      grid-template-columns: 0.88fr 1.12fr;
+      grid-template-columns: 340px minmax(0, 1fr);
       gap: 18px;
       align-items: start;
     }
 
     .core-engine {
       position: sticky;
-      top: 22px;
-      padding: 22px;
-      min-height: 620px;
+      top: 20px;
+      padding: 20px;
+      min-height: 680px;
       display: grid;
-      gap: 18px;
       align-content: start;
+      gap: 18px;
     }
 
     .core-engine h3 {
       margin: 0;
-      max-width: 7ch;
       color: var(--text);
-      font-size: clamp(2.3rem, 3vw, 3.9rem);
+      font-size: clamp(2rem, 2.7vw, 3.6rem);
       line-height: 0.9;
       letter-spacing: -0.09em;
+      max-width: 8ch;
     }
 
     .core-engine p {
       margin: 0;
-      max-width: 30ch;
       color: var(--text-soft);
-      line-height: 1.9;
+      line-height: 1.84;
+      font-size: 0.94rem;
+      max-width: 31ch;
     }
 
     .core-stats {
@@ -540,53 +704,58 @@
 
     .core-stat {
       padding: 16px;
-      min-height: 96px;
+      min-height: 108px;
     }
 
     .core-stat em {
       display: block;
+      margin-bottom: 8px;
       font-style: normal;
       color: var(--metal);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.11em;
       text-transform: uppercase;
-      margin-bottom: 8px;
     }
 
     .core-stat strong {
       display: block;
       margin-bottom: 6px;
       color: var(--text);
-      font-size: 0.96rem;
+      font-size: 0.94rem;
+      line-height: 1.2;
     }
 
     .core-stat span {
       display: block;
       color: var(--text-soft);
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       line-height: 1.62;
     }
 
     .module-surface {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      grid-auto-rows: minmax(130px, auto);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-auto-rows: minmax(142px, auto);
       gap: 14px;
     }
 
     .module-card {
-      padding: 18px 18px 16px;
-      min-height: 160px;
       position: relative;
-      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      padding: 18px 18px 16px;
+      min-height: 168px;
+      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+      display: grid;
+      align-content: start;
+      gap: 8px;
     }
 
     .module-card:hover {
       transform: translateY(-4px);
       border-color: rgba(209,175,130,0.24);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
+        linear-gradient(180deg, rgba(255,255,255,0.034), rgba(255,255,255,0.014));
+      box-shadow: 0 16px 40px rgba(0,0,0,0.2);
     }
 
     .module-card::after {
@@ -594,8 +763,8 @@
       position: absolute;
       right: 14px;
       bottom: 8px;
-      color: var(--text-faint);
-      font-size: 2.5rem;
+      color: var(--text-dim);
+      font-size: 2.4rem;
       line-height: 1;
       letter-spacing: -0.08em;
       font-weight: 700;
@@ -607,55 +776,68 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 2px;
     }
 
     .module-role {
       color: var(--metal);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .module-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--success);
+      font-size: 0.66rem;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .module-status {
-      color: var(--success);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .module-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px rgba(199,210,190,0.24);
+      flex: 0 0 auto;
     }
 
     .module-card h3 {
-      margin: 0 0 8px;
+      margin: 0;
       color: var(--text);
-      font-size: 1.08rem;
-      line-height: 1.12;
+      font-size: 1rem;
+      line-height: 1.14;
       letter-spacing: -0.03em;
-      max-width: 12ch;
+      max-width: 15ch;
     }
 
     .module-card p {
       margin: 0;
       color: var(--text-soft);
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       line-height: 1.7;
-      max-width: 24ch;
+      max-width: 28ch;
     }
 
-    .module-a { grid-column: span 3; grid-row: span 2; min-height: 220px; }
-    .module-b { grid-column: span 3; }
-    .module-c { grid-column: span 2; }
-    .module-d { grid-column: span 2; }
-    .module-e { grid-column: span 2; }
-    .module-f { grid-column: span 2; }
-    .module-g { grid-column: span 2; }
-    .module-h { grid-column: span 2; }
-    .module-i { grid-column: span 6; min-height: 140px; }
+    .module-a { grid-column: span 6; grid-row: span 2; min-height: 240px; }
+    .module-b { grid-column: span 6; }
+    .module-c { grid-column: span 4; }
+    .module-d { grid-column: span 4; }
+    .module-e { grid-column: span 4; }
+    .module-f { grid-column: span 4; }
+    .module-g { grid-column: span 4; }
+    .module-h { grid-column: span 4; }
+    .module-i { grid-column: span 12; min-height: 150px; }
 
     /* STRIP */
     .signal-strip {
-      padding: 22px 24px;
+      padding: 24px;
       display: grid;
       grid-template-columns: 0.94fr 1.06fr;
       gap: 18px;
@@ -665,20 +847,21 @@
     .signal-strip h2 {
       margin: 10px 0 0;
       color: var(--text);
-      font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+      font-size: clamp(1.8rem, 2.2vw, 2.6rem);
       line-height: 0.96;
       letter-spacing: -0.065em;
       max-width: 14ch;
     }
 
     .signal-strip-copy {
-      color: var(--text-soft);
-      line-height: 1.9;
-      max-width: 44ch;
       justify-self: end;
+      max-width: 44ch;
+      color: var(--text-soft);
+      line-height: 1.85;
+      font-size: 0.95rem;
     }
 
-    /* PROOF + CLOSING */
+    /* PROOF */
     .proof {
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
@@ -694,22 +877,22 @@
 
     .poster-panel {
       min-height: 100%;
-      border-radius: 26px;
+      border-radius: 28px;
       border: 1px solid var(--line);
       background:
-        radial-gradient(circle at 30% 30%, rgba(209,175,130,0.06), transparent 28%),
+        radial-gradient(circle at 30% 30%, rgba(209,175,130,0.06), transparent 26%),
         linear-gradient(180deg, rgba(255,255,255,0.024), rgba(255,255,255,0.008));
       position: relative;
       overflow: hidden;
-      padding: 24px;
+      padding: 26px;
       display: grid;
       align-content: space-between;
       gap: 20px;
     }
 
     .poster-number {
-      color: var(--text-faint);
-      font-size: clamp(4rem, 9vw, 8.5rem);
+      color: var(--text-dim);
+      font-size: clamp(4.2rem, 9vw, 8rem);
       line-height: 0.84;
       letter-spacing: -0.1em;
       font-weight: 700;
@@ -718,27 +901,27 @@
     .poster-copy {
       display: grid;
       gap: 10px;
-      max-width: 22ch;
+      max-width: 23ch;
     }
 
     .poster-copy strong {
       color: var(--text);
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       line-height: 1;
       letter-spacing: -0.05em;
     }
 
     .poster-copy span {
       color: var(--text-soft);
-      line-height: 1.8;
-      font-size: 0.95rem;
+      line-height: 1.82;
+      font-size: 0.94rem;
     }
 
     .poster-word {
       position: absolute;
       right: -10px;
       bottom: -10px;
-      color: rgba(245,239,231,0.06);
+      color: rgba(245,239,231,0.05);
       font-size: clamp(4rem, 8vw, 7rem);
       line-height: 0.84;
       letter-spacing: -0.1em;
@@ -759,7 +942,7 @@
     .copy-shell h2 {
       margin: 10px 0 12px;
       color: var(--text);
-      font-size: clamp(1.7rem, 2vw, 2.3rem);
+      font-size: clamp(1.6rem, 2vw, 2.25rem);
       line-height: 0.98;
       letter-spacing: -0.06em;
     }
@@ -767,7 +950,8 @@
     .copy-shell p {
       margin: 0 0 14px;
       color: var(--text-soft);
-      line-height: 1.9;
+      line-height: 1.84;
+      font-size: 0.95rem;
     }
 
     .copy-shell p:last-child {
@@ -782,20 +966,21 @@
 
     .mini-box {
       padding: 18px 16px;
-      min-height: 132px;
+      min-height: 140px;
     }
 
     .mini-box strong {
       display: block;
       margin-bottom: 8px;
       color: var(--text);
-      font-size: 0.96rem;
+      font-size: 0.94rem;
+      line-height: 1.2;
     }
 
     .mini-box span {
       display: block;
       color: var(--text-soft);
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       line-height: 1.72;
     }
 
@@ -813,6 +998,7 @@
       gap: 12px;
       color: var(--text-soft);
       line-height: 1.84;
+      font-size: 0.94rem;
     }
 
     .feature-list li::marker {
@@ -829,7 +1015,8 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 14px 20px;
+      min-height: 50px;
+      padding: 0 20px;
       border-radius: 999px;
       text-decoration: none;
       color: var(--text);
@@ -846,13 +1033,25 @@
       background: rgba(255,255,255,0.028);
     }
 
-    @media (max-width: 1280px) {
-      .hero,
-      .modules-head,
-      .module-layout,
-      .signal-strip,
+    @media (max-width: 1360px) {
+      .hero-shell {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+
+      .hero-side {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hero-stat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       .proof,
-      .foot-grid {
+      .signal-strip,
+      .foot-grid,
+      .modules-head,
+      .module-layout {
         grid-template-columns: 1fr;
       }
 
@@ -866,17 +1065,22 @@
         top: auto;
         min-height: auto;
       }
-
-      .hero-title,
-      .modules-head h2,
-      .signal-strip h2 {
-        max-width: none;
-      }
     }
 
-    @media (max-width: 980px) {
-      .hero-side-top,
-      .summary-row,
+    @media (max-width: 1100px) {
+      .hero-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        display: none;
+      }
+
+      .hero-side {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat-grid,
       .mini-grid {
         grid-template-columns: 1fr;
       }
@@ -908,16 +1112,38 @@
       }
 
       .topbar,
-      .hero,
+      .hero-shell,
       .modules,
       .signal-strip,
       .proof-visual,
       .copy-shell {
-        padding: 18px 16px;
+        padding: 16px;
+      }
+
+      .topbar {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+
+      .topbar-center,
+      .topbar-right {
+        justify-self: start;
+      }
+
+      .hero-main {
+        padding: 18px;
       }
 
       .hero-title {
         font-size: clamp(3rem, 14vw, 5rem);
+      }
+
+      .hero-stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-bar {
+        min-height: 54px;
       }
     }
   </style>
@@ -954,19 +1180,64 @@
         </div>
       </div>
 
-      <section class="hero">
-        <div class="hero-main">
+      <section class="hero-shell">
+        <aside class="panel rail">
+          <div class="rail-block">
+            <div class="rail-title">System Index</div>
+            <div class="rail-list">
+              <div class="rail-item"><strong>Finance</strong><span>01</span></div>
+              <div class="rail-item"><strong>People</strong><span>02</span></div>
+              <div class="rail-item"><strong>Process</strong><span>03</span></div>
+              <div class="rail-item"><strong>Knowledge</strong><span>04</span></div>
+              <div class="rail-item"><strong>Training</strong><span>05</span></div>
+              <div class="rail-item"><strong>Service</strong><span>06</span></div>
+              <div class="rail-item"><strong>Growth</strong><span>07</span></div>
+              <div class="rail-item"><strong>Systems</strong><span>08</span></div>
+              <div class="rail-item"><strong>Launch</strong><span>09</span></div>
+              <div class="rail-item"><strong>Pressure</strong><span>10</span></div>
+            </div>
+          </div>
+
+          <div class="rail-note">
+            This surface is intentionally structured like an application:
+            controlled hierarchy, clearer alignment, stronger density, and more deliberate module balance.
+          </div>
+        </aside>
+
+        <section class="panel hero-main">
           <div class="meta-pills">
             <span class="meta-pill">Signature Journey</span>
             <span class="meta-pill">Public-facing value signal</span>
             <span class="meta-pill">Australian Cake House / ACake</span>
           </div>
 
-          <h1 class="hero-title">I BUILD STRUCTURE INSIDE CHAOS.</h1>
+          <div class="hero-title-wrap">
+            <span class="eyebrow">Operational Identity</span>
+            <h1 class="hero-title">I BUILD STRUCTURE INSIDE CHAOS.</h1>
+            <div class="hero-copy">
+              Finance, people, process, systems, launch, service.
+              Not separate tasks — one connected field of execution shaped through real operational movement.
+            </div>
+          </div>
 
-          <div class="hero-copy">
-            Finance, people, process, systems, launch, service.
-            Not separate tasks — one connected field of execution.
+          <div class="hero-stat-grid">
+            <section class="panel hero-stat">
+              <em>Zones</em>
+              <strong>10</strong>
+              <span>core operating modules packaged as one structured surface</span>
+            </section>
+
+            <section class="panel hero-stat">
+              <em>Scope</em>
+              <strong>Multi</strong>
+              <span>function, outlet, people, systems, and workflow exposure</span>
+            </section>
+
+            <section class="panel hero-stat">
+              <em>State</em>
+              <strong>Live</strong>
+              <span>built in real business conditions rather than abstract theory</span>
+            </section>
           </div>
 
           <div class="hero-bottom">
@@ -981,54 +1252,64 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <aside class="hero-side">
-          <div class="hero-side-top">
-            <section class="panel hero-side-card">
-              <span class="eyebrow">Profile</span>
-              <strong>Cross-functional operational intelligence</strong>
-              <p>
-                Built through finance, people support, process thinking, customer handling,
-                systems support, and launch readiness.
-              </p>
-            </section>
+          <section class="panel side-card">
+            <div class="side-title">
+              <span>Profile Read</span>
+              <span class="system-badge">Live</span>
+            </div>
+            <div class="side-copy">
+              Cross-functional operational intelligence built through finance support, staff coordination,
+              process design, customer handling, system readiness, and launch execution.
+            </div>
+            <div class="mono-value">5+</div>
+            <div class="side-copy">
+              years of live operational growth across moving business environments.
+            </div>
+          </section>
 
-            <section class="panel hero-side-card">
-              <span class="eyebrow">Duration</span>
-              <span class="mono-value">5+</span>
-              <p>years of live operational growth through real business movement.</p>
-            </section>
-          </div>
+          <section class="panel side-card">
+            <div class="side-title">
+              <span>Output Summary</span>
+            </div>
+            <div class="side-kpi">
+              <div class="side-kpi-row">
+                <em>01</em>
+                <span>Financial Accuracy</span>
+                <strong>Stable</strong>
+              </div>
+              <div class="side-kpi-row">
+                <em>02</em>
+                <span>Process Clarity</span>
+                <strong>Repeatable</strong>
+              </div>
+              <div class="side-kpi-row">
+                <em>03</em>
+                <span>Operational Readiness</span>
+                <strong>Active</strong>
+              </div>
+            </div>
+          </section>
 
-          <section class="panel hero-summary">
-            <section class="panel summary-wide">
-              <span class="eyebrow">Read at a Glance</span>
-              <strong>Someone who can support structure inside complexity.</strong>
-              <p>
-                The signal is not only operational experience, but the ability to organise,
-                package, and present that experience with control.
-              </p>
-            </section>
-
-            <div class="summary-row">
-              <section class="panel summary-metric">
-                <em>Zones</em>
-                <strong>10</strong>
-                <span>core operating modules</span>
-              </section>
-
-              <section class="panel summary-metric">
-                <em>Scope</em>
-                <strong>Multi</strong>
-                <span>function and outlet exposure</span>
-              </section>
-
-              <section class="panel summary-metric">
-                <em>State</em>
-                <strong>Live</strong>
-                <span>real business context</span>
-              </section>
+          <section class="panel side-card">
+            <div class="side-title">
+              <span>Read at a Glance</span>
+            </div>
+            <div class="overview-grid">
+              <div class="overview-box">
+                <strong>Structured Operator</strong>
+                <span>Can organize complexity instead of reacting to it randomly.</span>
+              </div>
+              <div class="overview-box">
+                <strong>System-Aware Support</strong>
+                <span>Understands how records, people, workflows, and service connect.</span>
+              </div>
+              <div class="overview-box">
+                <strong>Control in Motion</strong>
+                <span>Maintains steadiness even when operations become unpredictable.</span>
+              </div>
             </div>
           </section>
         </aside>
@@ -1043,8 +1324,9 @@
         </div>
 
         <div class="modules-copy">
-          A premium system surface that packages the contribution as active modules:
-          not equal-weight boxes, but a clearer hierarchy of operational value.
+          This section is structured like a capability matrix rather than a simple card wall.
+          The hierarchy is more intentional: one larger anchor module, supporting modules,
+          and one consolidated operational layer at the end.
         </div>
       </div>
 
@@ -1055,7 +1337,7 @@
           <p>
             Built through finance support, SOP refinement, onboarding, training,
             customer communication, system readiness, outlet launch support,
-            and steadier response under operational pressure.
+            and calmer response under operational pressure.
           </p>
 
           <div class="core-stats">
@@ -1076,6 +1358,12 @@
               <strong>Operational Readiness</strong>
               <span>Supporting people, systems, and live launch conditions together.</span>
             </section>
+
+            <section class="panel core-stat">
+              <em>System Output</em>
+              <strong>Pressure Control</strong>
+              <span>Holding steadiness when business movement becomes less predictable.</span>
+            </section>
           </div>
         </section>
 
@@ -1086,7 +1374,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>Financial Accuracy</h3>
-            <p>Bookkeeping support, transaction consistency, sales tracking, reporting discipline.</p>
+            <p>Bookkeeping support, transaction consistency, sales tracking, and reporting discipline packaged with operational care.</p>
           </article>
 
           <article class="panel module-card module-b" data-no="02">
@@ -1095,7 +1383,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>People &amp; Team Support</h3>
-            <p>Recruitment coordination, onboarding support, staff training, team readiness.</p>
+            <p>Recruitment coordination, onboarding support, staff training, and team readiness across live working conditions.</p>
           </article>
 
           <article class="panel module-card module-c" data-no="03">
@@ -1104,7 +1392,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>Process Design</h3>
-            <p>SOP refinement, workflow structure, pricing flow, service consistency.</p>
+            <p>SOP refinement, workflow structure, pricing flow, and service consistency.</p>
           </article>
 
           <article class="panel module-card module-d" data-no="04">
@@ -1113,7 +1401,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>Internal Knowledge Systems</h3>
-            <p>Information guide building, internal reference clarity, fraud awareness communication.</p>
+            <p>Information guide building, internal reference clarity, and fraud awareness communication.</p>
           </article>
 
           <article class="panel module-card module-e" data-no="05">
@@ -1122,7 +1410,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>Training Translation</h3>
-            <p>Turning practical processes into clearer staff guidance and support.</p>
+            <p>Turning practical processes into clearer staff guidance and operational support.</p>
           </article>
 
           <article class="panel module-card module-f" data-no="06">
@@ -1131,7 +1419,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>Customer Interface Control</h3>
-            <p>Orders, inquiries, complaints, and service quality across messaging channels.</p>
+            <p>Orders, inquiries, complaints, and service quality handling across messaging channels.</p>
           </article>
 
           <article class="panel module-card module-g" data-no="07">
@@ -1140,7 +1428,7 @@
               <span class="module-status">Active</span>
             </div>
             <h3>Growth Awareness</h3>
-            <p>Customer engagement support and operational impact on business retention.</p>
+            <p>Customer engagement support and operational contribution to retention and continuity.</p>
           </article>
 
           <article class="panel module-card module-h" data-no="08">
@@ -1303,7 +1591,7 @@
       const word = typedWords[wordIndex];
       typedEl.textContent = word.substring(0, charIndex);
 
-      let speed = deleting ? 32 : 54;
+      let speed = deleting ? 30 : 50;
 
       if (!deleting && charIndex < word.length) {
         charIndex++;
@@ -1311,7 +1599,7 @@
         charIndex--;
       } else if (!deleting && charIndex === word.length) {
         deleting = true;
-        speed = 950;
+        speed = 900;
       } else {
         deleting = false;
         wordIndex = (wordIndex + 1) % typedWords.length;
@@ -1336,7 +1624,7 @@
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      document.documentElement.style.setProperty('--progress', `${progress}%`);
+      document.documentElement.style.setProperty("--progress", `${progress}%`);
     }
     window.addEventListener("scroll", updateProgress);
     updateProgress();
@@ -1345,7 +1633,7 @@
     const canvas = document.getElementById("appCanvas");
     const ctx = canvas.getContext("2d");
     let particles = [];
-    let mouse = { x: null, y: null, radius: 85 };
+    let mouse = { x: null, y: null, radius: 90 };
 
     function resizeCanvas() {
       const dpr = window.devicePixelRatio || 1;
@@ -1355,13 +1643,13 @@
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(36, Math.max(12, Math.floor(window.innerWidth / 48)));
+      const count = Math.min(42, Math.max(14, Math.floor(window.innerWidth / 42)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.10,
-        vy: (Math.random() - 0.5) * 0.10,
-        r: Math.random() * 1.1 + 0.35
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: (Math.random() - 0.5) * 0.12,
+        r: Math.random() * 1.2 + 0.35
       }));
     }
 
@@ -1382,8 +1670,8 @@
           const dy = mouse.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius) {
-            p.x -= dx * 0.0009;
-            p.y -= dy * 0.0009;
+            p.x -= dx * 0.001;
+            p.y -= dy * 0.001;
           }
         }
 
@@ -1400,8 +1688,9 @@
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 95) {
-            const alpha = (1 - dist / 95) * 0.012;
+
+          if (dist < 100) {
+            const alpha = (1 - dist / 100) * 0.014;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
