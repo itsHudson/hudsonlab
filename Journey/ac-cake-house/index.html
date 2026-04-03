@@ -11,16 +11,22 @@
   <style>
     :root {
       --bg: #07080b;
-      --bg-soft: #0d0f14;
-      --panel: rgba(255, 255, 255, 0.022);
+      --bg-soft: #0d1015;
+      --panel: rgba(255, 255, 255, 0.03);
+      --panel-2: rgba(255, 255, 255, 0.045);
       --line: rgba(255, 255, 255, 0.08);
       --line-soft: rgba(255, 255, 255, 0.04);
       --text: #f5efe7;
-      --text-soft: rgba(245, 239, 231, 0.66);
-      --text-faint: rgba(245, 239, 231, 0.18);
-      --metal: #d1af82;
-      --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
-      --max-width: 1540px;
+      --text-soft: rgba(245, 239, 231, 0.68);
+      --text-faint: rgba(245, 239, 231, 0.22);
+      --metal: #d0ae80;
+      --metal-soft: rgba(208, 174, 128, 0.16);
+      --success: #c8d5c0;
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+      --max-width: 1560px;
       --progress: 0%;
     }
 
@@ -36,8 +42,8 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(circle at 14% 10%, rgba(209, 175, 130, 0.06), transparent 18%),
-        radial-gradient(circle at 84% 16%, rgba(255,255,255,0.02), transparent 18%),
+        radial-gradient(circle at 12% 10%, rgba(208, 174, 128, 0.06), transparent 18%),
+        radial-gradient(circle at 84% 14%, rgba(255,255,255,0.02), transparent 18%),
         linear-gradient(180deg, #06070a 0%, #0a0c10 42%, #0d1015 100%);
       overflow-x: hidden;
     }
@@ -48,12 +54,12 @@
       inset: 0 auto auto 0;
       width: var(--progress);
       height: 2px;
-      background: linear-gradient(90deg, rgba(209,175,130,0.08), var(--metal), rgba(209,175,130,0.08));
+      background: linear-gradient(90deg, rgba(208,174,128,0.08), var(--metal), rgba(208,174,128,0.08));
       z-index: 9999;
       pointer-events: none;
     }
 
-    #bgCanvas,
+    #appCanvas,
     .grid-overlay,
     .noise-overlay {
       position: fixed;
@@ -61,27 +67,27 @@
       pointer-events: none;
     }
 
-    #bgCanvas {
+    #appCanvas {
       z-index: -4;
       width: 100%;
       height: 100%;
-      opacity: 0.18;
+      opacity: 0.16;
     }
 
     .grid-overlay {
       z-index: -3;
       opacity: 0.05;
       background-image:
-        linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(circle at center, black 34%, transparent 88%);
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 36%, transparent 90%);
     }
 
     .noise-overlay {
       z-index: -2;
-      opacity: 0.035;
-      background-image: radial-gradient(rgba(255,255,255,0.16) 0.7px, transparent 0.7px);
+      opacity: 0.03;
+      background-image: radial-gradient(rgba(255,255,255,0.14) 0.7px, transparent 0.7px);
       background-size: 9px 9px;
       mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
     }
@@ -89,45 +95,72 @@
     .page {
       width: min(calc(100% - 28px), var(--max-width));
       margin: 0 auto;
-      padding: 20px 0 54px;
+      padding: 18px 0 52px;
       display: grid;
-      gap: 22px;
+      gap: 20px;
       position: relative;
       isolation: isolate;
     }
 
-    .shell {
+    .app-shell {
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line-soft);
-      background: linear-gradient(180deg, rgba(255,255,255,0.016), rgba(255,255,255,0.008));
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.016), rgba(255,255,255,0.008));
       box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-xl);
     }
 
-    .shell::before {
+    .app-shell::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 22%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.025), transparent 18%);
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.03), transparent 20%);
       opacity: 0.5;
     }
 
-    .radius-xl { border-radius: 36px; }
-    .radius-lg { border-radius: 26px; }
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.024), rgba(255,255,255,0.01));
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.025), transparent 18%);
+      opacity: 0.45;
+    }
 
     .reveal {
       opacity: 0;
-      transform: translateY(36px);
+      transform: translateY(32px);
       transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .eyebrow {
+      color: var(--metal);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .meta-pills {
@@ -143,103 +176,288 @@
       border-radius: 999px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.014);
-      color: rgba(245,239,231,0.8);
+      color: rgba(245,239,231,0.82);
       font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
-    .eyebrow {
-      color: var(--metal);
+    /* APP TOP BAR */
+    .topbar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 22px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--metal);
+      box-shadow: 0 0 18px rgba(208,174,128,0.25);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-copy span {
+      color: var(--text-faint);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .topbar-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .status-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.012);
+      color: var(--text-soft);
       font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.05em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--metal);
+      box-shadow: 0 0 14px rgba(208,174,128,0.22);
+      flex: 0 0 auto;
+    }
+
+    .topbar-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .system-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.012);
+      color: var(--text-soft);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    /* HERO */
+    /* HERO CONTROL SURFACE */
     .hero {
-      min-height: 100vh;
-      padding: 34px 34px 30px;
+      padding: 22px;
       display: grid;
-      gap: 42px;
-      align-content: space-between;
-      background:
-        radial-gradient(circle at 15% 14%, rgba(209,175,130,0.05), transparent 18%),
-        linear-gradient(135deg, rgba(8,10,14,0.96), rgba(13,16,22,0.94));
+      grid-template-columns: 0.34fr 0.66fr;
+      gap: 18px;
+      min-height: 88vh;
     }
 
-    .hero-top {
+    .hero-side {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: start;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .side-panel {
+      padding: 20px 18px;
+      min-height: 140px;
+    }
+
+    .side-panel strong {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .side-panel span,
+    .side-panel p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.72;
+    }
+
+    .mono-value {
+      display: block;
+      margin-top: 12px;
+      color: var(--text);
+      font-size: 2.5rem;
+      line-height: 0.9;
+      letter-spacing: -0.08em;
     }
 
     .hero-main {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 28px;
-      align-items: end;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
     }
 
-    .hero-title-wrap {
+    .hero-head {
       display: grid;
-      gap: 18px;
+      gap: 10px;
+      align-content: start;
+      padding: 10px 4px 0;
     }
 
     .hero-title {
       margin: 0;
-      font-size: clamp(4.2rem, 10vw, 11rem);
+      max-width: 8ch;
+      font-size: clamp(3.8rem, 8vw, 8.8rem);
       line-height: 0.8;
       letter-spacing: -0.12em;
       color: var(--text);
-      max-width: 6.8ch;
       text-wrap: balance;
     }
 
-    .hero-note {
-      max-width: 18ch;
-      justify-self: end;
-      align-self: end;
+    .hero-copy {
+      max-width: 42ch;
       color: var(--text-soft);
+      line-height: 1.9;
       font-size: 1rem;
-      line-height: 1.92;
-      text-align: left;
+    }
+
+    .hero-engine {
+      min-height: 100%;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .engine-left {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .engine-right {
+      display: grid;
+      gap: 14px;
+      align-content: stretch;
+    }
+
+    .engine-card {
+      padding: 18px;
+      min-height: 150px;
+    }
+
+    .engine-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .engine-card span,
+    .engine-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.68;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric-box {
+      min-height: 112px;
+      padding: 16px;
+    }
+
+    .metric-box em {
+      display: block;
+      font-style: normal;
+      color: var(--metal);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .metric-box strong {
+      display: block;
+      margin: 0 0 6px;
+      color: var(--text);
+      font-size: 1.6rem;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .metric-box span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      line-height: 1.55;
     }
 
     .hero-bottom {
       display: grid;
-      grid-template-columns: 0.86fr 1.14fr;
-      gap: 24px;
+      grid-template-columns: 0.76fr 1.24fr;
+      gap: 18px;
       align-items: end;
     }
 
     .hero-statement {
-      max-width: 30ch;
       color: var(--text);
-      font-size: clamp(1.45rem, 2.1vw, 2rem);
-      line-height: 1.05;
+      font-size: clamp(1.3rem, 2vw, 1.9rem);
+      line-height: 1.04;
       letter-spacing: -0.05em;
+      max-width: 14ch;
+      padding: 0 4px;
     }
 
-    .hero-signal {
+    .signal-bar {
       display: flex;
       align-items: center;
       gap: 14px;
-      min-height: 60px;
-      padding: 16px 18px;
+      min-height: 58px;
+      padding: 14px 18px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background:
         linear-gradient(135deg, rgba(209,175,130,0.04), rgba(255,255,255,0.008)),
         rgba(255,255,255,0.008);
-      overflow: hidden;
       white-space: nowrap;
+      overflow: hidden;
     }
 
-    .hero-signal-label {
+    .signal-label {
       flex: 0 0 auto;
       color: var(--metal);
       font-size: 0.72rem;
@@ -248,10 +466,10 @@
       text-transform: uppercase;
     }
 
-    .hero-signal-text {
+    .signal-text {
       min-width: 0;
       color: var(--text);
-      font-size: clamp(0.96rem, 2vw, 1.12rem);
+      font-size: 1rem;
       letter-spacing: -0.02em;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -269,224 +487,216 @@
       52%, 100% { opacity: 0; }
     }
 
-    /* EDITORIAL STATEMENT */
-    .editorial {
-      min-height: 92vh;
-      padding: 40px 34px;
+    /* VALUE MODULES */
+    .modules {
+      padding: 26px 22px 22px;
       display: grid;
-      grid-template-columns: 0.7fr 1.3fr;
-      gap: 28px;
-      align-items: start;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.012), transparent 56%),
-        linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
-    }
-
-    .editorial-side {
-      display: grid;
-      gap: 16px;
-      align-content: start;
-      position: sticky;
-      top: 28px;
-    }
-
-    .editorial-side p {
-      margin: 0;
-      max-width: 18ch;
-      color: var(--text-soft);
-      line-height: 1.9;
-    }
-
-    .editorial-main {
-      display: grid;
-      gap: 18px;
-      align-content: start;
-    }
-
-    .editorial-line {
-      position: relative;
-      overflow: hidden;
-      font-size: clamp(3.2rem, 8vw, 8rem);
-      line-height: 0.82;
-      letter-spacing: -0.11em;
-      color: var(--text-faint);
-      white-space: nowrap;
-    }
-
-    .editorial-line strong {
-      color: var(--text);
-      font-weight: 700;
-    }
-
-    .editorial-mask {
-      display: inline-block;
-      transform: translateY(108%);
-      transition: transform 1.05s cubic-bezier(.2,.9,.18,1);
-    }
-
-    .editorial-line.is-active .editorial-mask {
-      transform: translateY(0);
-    }
-
-    /* VALUE COMPOSITION */
-    .composition {
-      min-height: 180vh;
-      padding: 40px 34px;
-      display: grid;
-      gap: 30px;
-      background:
-        radial-gradient(circle at 12% 14%, rgba(209,175,130,0.04), transparent 18%),
-        linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));
-    }
-
-    .composition-head {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
       gap: 20px;
+    }
+
+    .modules-head {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 18px;
       align-items: end;
     }
 
-    .composition-head h2 {
+    .modules-head h2 {
       margin: 10px 0 0;
-      max-width: 8ch;
+      max-width: 9ch;
       color: var(--text);
       font-size: clamp(2.4rem, 4vw, 5rem);
       line-height: 0.88;
-      letter-spacing: -0.09em;
+      letter-spacing: -0.1em;
     }
 
-    .composition-copy {
+    .modules-copy {
       justify-self: end;
-      max-width: 40ch;
+      max-width: 42ch;
       color: var(--text-soft);
       line-height: 1.9;
     }
 
-    .composition-stage {
+    .module-grid {
       display: grid;
-      gap: 18vh;
-      padding: 8vh 0 6vh;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+      align-items: start;
     }
 
-    .moment {
+    .core-engine {
+      position: sticky;
+      top: 22px;
+      padding: 22px;
+      min-height: 620px;
       display: grid;
-      grid-template-columns: 0.74fr 1.26fr;
-      gap: 28px;
-      align-items: end;
-      min-height: 28vh;
-      opacity: 0.16;
-      transform: translateY(64px);
-      transition: opacity 0.95s ease, transform 0.95s ease;
-      position: relative;
+      gap: 18px;
+      align-content: start;
     }
 
-    .moment.is-live {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .moment:nth-child(even) {
-      grid-template-columns: 1.26fr 0.74fr;
-    }
-
-    .moment:nth-child(even) .moment-left {
-      order: 2;
-      text-align: right;
-    }
-
-    .moment:nth-child(even) .moment-right {
-      order: 1;
-      justify-self: start;
-    }
-
-    .moment-line {
-      position: absolute;
-      left: 50%;
-      top: -6vh;
-      bottom: -6vh;
-      width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.12), transparent);
-      transform: translateX(-0.5px);
-      pointer-events: none;
-    }
-
-    .moment-no {
-      font-size: clamp(4rem, 8vw, 8.4rem);
-      line-height: 0.84;
+    .core-engine h3 {
+      margin: 0;
+      max-width: 7ch;
+      color: var(--text);
+      font-size: clamp(2.2rem, 3vw, 3.8rem);
+      line-height: 0.9;
       letter-spacing: -0.09em;
-      color: var(--text-faint);
+    }
+
+    .core-engine p {
+      margin: 0;
+      max-width: 30ch;
+      color: var(--text-soft);
+      line-height: 1.9;
+    }
+
+    .core-stats {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .core-stat {
+      padding: 16px;
+      min-height: 96px;
+    }
+
+    .core-stat em {
+      display: block;
+      font-style: normal;
+      color: var(--metal);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
 
-    .moment-role {
-      color: var(--metal);
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .core-stat strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .core-stat span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.62;
+    }
+
+    .module-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .module-card {
+      padding: 18px 18px 16px;
+      min-height: 170px;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(209,175,130,0.24);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
+    }
+
+    .module-card::after {
+      content: attr(data-no);
+      position: absolute;
+      right: 14px;
+      bottom: 8px;
+      color: var(--text-faint);
+      font-size: 2.5rem;
+      line-height: 1;
+      letter-spacing: -0.08em;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .module-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
-    .moment-title {
-      margin: 0;
+    .module-role {
+      color: var(--metal);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .module-status {
+      color: var(--success);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .module-card h3 {
+      margin: 0 0 8px;
       color: var(--text);
-      font-size: clamp(1.9rem, 3vw, 3.4rem);
-      line-height: 0.94;
-      letter-spacing: -0.065em;
-      max-width: 10ch;
+      font-size: 1.08rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 12ch;
     }
 
-    .moment:nth-child(even) .moment-title {
-      margin-left: auto;
-    }
-
-    .moment-copy {
-      max-width: 34ch;
+    .module-card p {
+      margin: 0;
       color: var(--text-soft);
-      line-height: 1.92;
-      font-size: 1rem;
-      justify-self: end;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-width: 24ch;
     }
 
-    .moment:nth-child(even) .moment-copy {
-      justify-self: start;
-    }
-
-    /* CLOSING */
-    .closing {
-      min-height: 70vh;
-      padding: 40px 34px;
+    .module-card.wide {
+      grid-column: 1 / -1;
+      min-height: 150px;
       display: grid;
       align-content: center;
+    }
+
+    /* STRIP */
+    .signal-strip {
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 0.94fr 1.06fr;
       gap: 18px;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(209,175,130,0.035), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
-      text-align: center;
+      align-items: center;
     }
 
-    .closing-title {
-      margin: 0 auto;
-      max-width: 9ch;
+    .signal-strip h2 {
+      margin: 10px 0 0;
       color: var(--text);
-      font-size: clamp(2.8rem, 5vw, 6.4rem);
-      line-height: 0.88;
-      letter-spacing: -0.105em;
+      font-size: clamp(1.7rem, 2.4vw, 2.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      max-width: 15ch;
     }
 
-    .closing-copy {
-      margin: 0 auto;
-      max-width: 42ch;
+    .signal-strip-copy {
       color: var(--text-soft);
-      line-height: 1.95;
-      font-size: 1rem;
+      line-height: 1.9;
+      max-width: 44ch;
+      justify-self: end;
     }
 
     /* SUPPORT */
     .support {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
-      gap: 22px;
+      gap: 18px;
     }
 
     .support-image {
@@ -538,11 +748,11 @@
 
     .support-right {
       display: grid;
-      gap: 22px;
+      gap: 18px;
     }
 
     .copy-shell {
-      padding: 28px;
+      padding: 24px 22px;
     }
 
     .copy-shell h2 {
@@ -556,7 +766,7 @@
     .copy-shell p {
       margin: 0 0 14px;
       color: var(--text-soft);
-      line-height: 1.92;
+      line-height: 1.9;
     }
 
     .copy-shell p:last-child {
@@ -570,12 +780,8 @@
     }
 
     .mini-box {
-      padding: 20px 18px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(135deg, rgba(209,175,130,0.03), rgba(255,255,255,0.006)),
-        rgba(255,255,255,0.006);
+      padding: 18px 16px;
+      min-height: 136px;
     }
 
     .mini-box strong {
@@ -596,7 +802,7 @@
     .foot-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      gap: 18px;
     }
 
     .feature-list {
@@ -639,54 +845,43 @@
       background: rgba(255,255,255,0.028);
     }
 
-    @media (max-width: 1220px) {
-      .hero-main,
-      .hero-bottom,
-      .editorial,
-      .composition-head,
+    @media (max-width: 1280px) {
+      .hero,
+      .modules-head,
+      .module-grid,
+      .signal-strip,
       .support,
       .foot-grid {
         grid-template-columns: 1fr;
       }
 
-      .composition-copy {
+      .modules-copy,
+      .signal-strip-copy {
         justify-self: start;
       }
 
-      .title,
-      .composition-head h2 {
+      .core-engine {
+        position: relative;
+        top: auto;
+        min-height: auto;
+      }
+
+      .hero-title,
+      .modules-head h2,
+      .signal-strip h2 {
         max-width: none;
       }
     }
 
-    @media (max-width: 920px) {
-      .hero-top,
+    @media (max-width: 960px) {
+      .hero-engine,
+      .metric-row,
       .mini-grid {
         grid-template-columns: 1fr;
       }
 
-      .moment,
-      .moment:nth-child(even) {
+      .module-list {
         grid-template-columns: 1fr;
-      }
-
-      .moment:nth-child(even) .moment-left,
-      .moment:nth-child(even) .moment-right {
-        order: initial;
-        text-align: left;
-      }
-
-      .moment:nth-child(even) .moment-title {
-        margin-left: 0;
-      }
-
-      .moment-copy,
-      .moment:nth-child(even) .moment-copy {
-        justify-self: start;
-      }
-
-      .moment-line {
-        display: none;
       }
     }
 
@@ -697,16 +892,16 @@
         padding-top: 16px;
       }
 
+      .topbar,
       .hero,
-      .editorial,
-      .composition,
-      .closing,
+      .modules,
+      .signal-strip,
       .copy-shell {
-        padding: 20px 16px;
+        padding: 18px 16px;
       }
 
-      .title {
-        font-size: clamp(2.8rem, 14vw, 4.8rem);
+      .hero-title {
+        font-size: clamp(3rem, 14vw, 5rem);
       }
 
       .support-image img {
@@ -717,7 +912,7 @@
 </head>
 <body data-page="journey">
 
-  <canvas id="bgCanvas"></canvas>
+  <canvas id="appCanvas"></canvas>
   <div class="grid-overlay"></div>
   <div class="noise-overlay"></div>
 
@@ -725,234 +920,292 @@
 
   <main class="page-shell detail-shell page">
 
-    <section class="glass-shell radius-xl hero reveal">
-      <div class="hero-top">
-        <div class="meta-pills">
-          <span class="meta-pill">Signature Journey</span>
-          <span class="meta-pill">Dec 2017 - Aug 2023</span>
-          <span class="meta-pill">Australian Cake House / ACake</span>
-        </div>
-        <span class="eyebrow">Public-facing value signal</span>
-      </div>
-
-      <div class="hero-main">
-        <div class="hero-title-wrap">
-          <h1 class="hero-title">I BUILD STRUCTURE INSIDE CHAOS.</h1>
-        </div>
-
-        <div class="hero-note">
-          Finance, people, process, systems, launch, service.
-          Not separate tasks — one connected field of execution.
-        </div>
-      </div>
-
-      <div class="hero-bottom">
-        <div class="hero-statement">
-          Clarity. Control. Calm under pressure.
-        </div>
-
-        <div class="hero-signal">
-          <span class="hero-signal-label">Signal Feed</span>
-          <div class="hero-signal-text">
-            <span id="typedSignal"></span><span class="caret">|</span>
+    <section class="app-shell reveal">
+      <div class="topbar">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <div class="brand-copy">
+            <strong>Operational Signature</strong>
+            <span>Application Surface</span>
           </div>
         </div>
+
+        <div class="topbar-center">
+          <div class="status-track">
+            <span class="status-dot"></span>
+            <span>System Active / Public Mode</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="system-badge">ACake / 2017–2023</div>
+        </div>
       </div>
+
+      <section class="hero">
+        <aside class="hero-side">
+          <section class="panel side-panel">
+            <span class="eyebrow">Profile</span>
+            <strong>Cross-functional operational intelligence</strong>
+            <p>
+              Built through finance, people support, process thinking, customer handling,
+              systems support, and launch readiness.
+            </p>
+          </section>
+
+          <section class="panel side-panel">
+            <span class="eyebrow">Duration</span>
+            <span class="mono-value">5+ Years</span>
+            <p>Long-form operational growth through real business movement.</p>
+          </section>
+
+          <section class="panel side-panel">
+            <span class="eyebrow">Mode</span>
+            <strong>Control in motion</strong>
+            <p>
+              Not one narrow role. A connected operating model across pressure, timing, and systems.
+            </p>
+          </section>
+        </aside>
+
+        <div class="hero-main">
+          <div class="hero-head">
+            <div class="meta-pills">
+              <span class="meta-pill">Signature Journey</span>
+              <span class="meta-pill">Public-facing value signal</span>
+              <span class="meta-pill">Australian Cake House / ACake</span>
+            </div>
+
+            <h1 class="hero-title">I BUILD STRUCTURE INSIDE CHAOS.</h1>
+
+            <div class="hero-copy">
+              Finance, people, process, systems, launch, service.
+              Not separate tasks — one connected field of execution.
+            </div>
+          </div>
+
+          <section class="panel hero-engine">
+            <div class="engine-left">
+              <section class="panel engine-card">
+                <span class="eyebrow">Core Value Engine</span>
+                <strong>Clarity where work keeps moving.</strong>
+                <p>
+                  The contribution is not in isolated tasks. The contribution is in how the parts stay aligned
+                  while the environment keeps changing.
+                </p>
+              </section>
+
+              <div class="metric-row">
+                <section class="panel metric-box">
+                  <em>Zones</em>
+                  <strong>10</strong>
+                  <span>core contribution modules</span>
+                </section>
+
+                <section class="panel metric-box">
+                  <em>Scope</em>
+                  <strong>Multi</strong>
+                  <span>function and outlet exposure</span>
+                </section>
+
+                <section class="panel metric-box">
+                  <em>State</em>
+                  <strong>Live</strong>
+                  <span>real operational context</span>
+                </section>
+              </div>
+            </div>
+
+            <div class="engine-right">
+              <section class="panel engine-card">
+                <span class="eyebrow">System Layers</span>
+                <strong>People / Process / System / Service / Launch</strong>
+                <p>
+                  A practical foundation shaped through coordination, consistency, response quality,
+                  and controlled execution under pressure.
+                </p>
+              </section>
+
+              <section class="panel engine-card">
+                <span class="eyebrow">Read at a Glance</span>
+                <strong>Someone who can support structure inside complexity.</strong>
+                <p>
+                  The page itself reads like a premium application surface because that is the actual signal:
+                  system thinking, control logic, and process awareness.
+                </p>
+              </section>
+            </div>
+          </section>
+
+          <div class="hero-bottom">
+            <div class="hero-statement">
+              Clarity. Control. Calm under pressure.
+            </div>
+
+            <div class="signal-bar">
+              <span class="signal-label">Signal Feed</span>
+              <div class="signal-text">
+                <span id="typedSignal"></span><span class="caret">|</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
 
-    <section class="glass-shell radius-xl editorial reveal">
-      <div class="editorial-side">
-        <span class="eyebrow">Identity Statement</span>
-        <p>
-          The value is not in isolated tasks.
-          The value is in how the parts stay aligned while the environment keeps moving.
-        </p>
-      </div>
-
-      <div class="editorial-main">
-        <div class="editorial-line"><span class="editorial-mask">NOT ONE ROLE.</span></div>
-        <div class="editorial-line"><span class="editorial-mask"><strong>ONE OPERATING LOGIC.</strong></span></div>
-        <div class="editorial-line"><span class="editorial-mask">CLARITY / CONTROL / CONTINUITY</span></div>
-      </div>
-    </section>
-
-    <section class="glass-shell radius-xl composition reveal">
-      <div class="composition-head">
+    <section class="app-shell modules reveal">
+      <div class="modules-head">
         <div>
-          <span class="eyebrow">Core Value Composition</span>
-          <h2>Contribution, released in sequence.</h2>
+          <span class="eyebrow">Operating Modules</span>
+          <h2>Contribution as application logic.</h2>
         </div>
 
-        <div class="composition-copy">
-          Not a dashboard. Not a stack of cards. Each fragment enters on its own,
-          with its own weight, timing, and place inside the larger operating structure.
+        <div class="modules-copy">
+          Not a generic dashboard. Not a stack of resume cards.
+          A premium system surface that packages the contribution as active operating modules.
         </div>
       </div>
 
-      <div class="composition-stage">
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">01</div>
-            <div class="moment-role">Finance</div>
-            <h3 class="moment-title">Financial Accuracy</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Assisted in bookkeeping, sales tracking, transaction handling,
-              and reporting support. Precision was not optional — it was structural.
-            </div>
-          </div>
-        </article>
+      <div class="module-grid">
+        <section class="panel core-engine">
+          <span class="eyebrow">Core Engine</span>
+          <h3>Not one title. One operating structure.</h3>
+          <p>
+            Built through finance support, SOP refinement, onboarding, training,
+            customer communication, system readiness, outlet launch support,
+            and steadier response under operational pressure.
+          </p>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">02</div>
-            <div class="moment-role">People</div>
-            <h3 class="moment-title">People &amp; Team Support</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Participated in recruitment, onboarding, and readiness support,
-              building awareness of how people systems hold operations together.
-            </div>
-          </div>
-        </article>
+          <div class="core-stats">
+            <section class="panel core-stat">
+              <em>System Output</em>
+              <strong>Financial Accuracy</strong>
+              <span>Care around records, consistency, and transaction discipline.</span>
+            </section>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">03</div>
-            <div class="moment-role">Process</div>
-            <h3 class="moment-title">Process Design</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Contributed to SOP refinement and workflow structure.
-              Consistency came from process, not chance.
-            </div>
-          </div>
-        </article>
+            <section class="panel core-stat">
+              <em>System Output</em>
+              <strong>Process Clarity</strong>
+              <span>Turning workflows into repeatable and more stable execution.</span>
+            </section>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">04</div>
-            <div class="moment-role">Knowledge</div>
-            <h3 class="moment-title">Internal Knowledge Systems</h3>
+            <section class="panel core-stat">
+              <em>System Output</em>
+              <strong>Operational Readiness</strong>
+              <span>Supporting people, systems, and live launch conditions together.</span>
+            </section>
           </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Helped build internal guides and reference clarity,
-              making information easier to transfer, trust, and use.
-            </div>
-          </div>
-        </article>
+        </section>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">05</div>
-            <div class="moment-role">Training</div>
-            <h3 class="moment-title">Training Translation</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Supported staff learning across customer service, product knowledge,
-              and POS usage by translating complexity into practical guidance.
+        <div class="module-list">
+          <article class="panel module-card" data-no="01">
+            <div class="module-top">
+              <span class="module-role">Finance</span>
+              <span class="module-status">Active</span>
             </div>
-          </div>
-        </article>
+            <h3>Financial Accuracy</h3>
+            <p>Bookkeeping support, transaction consistency, sales tracking, reporting discipline.</p>
+          </article>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">06</div>
-            <div class="moment-role">Service</div>
-            <h3 class="moment-title">Customer Interface Control</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Orders, inquiries, complaints, and service response were not just interactions —
-              they were operational signals.
+          <article class="panel module-card" data-no="02">
+            <div class="module-top">
+              <span class="module-role">People</span>
+              <span class="module-status">Active</span>
             </div>
-          </div>
-        </article>
+            <h3>People &amp; Team Support</h3>
+            <p>Recruitment coordination, onboarding support, staff training, team readiness.</p>
+          </article>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">07</div>
-            <div class="moment-role">Growth</div>
-            <h3 class="moment-title">Growth Awareness</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Supported customer engagement with the understanding
-              that operational quality shapes long-term retention.
+          <article class="panel module-card" data-no="03">
+            <div class="module-top">
+              <span class="module-role">Process</span>
+              <span class="module-status">Active</span>
             </div>
-          </div>
-        </article>
+            <h3>Process Design</h3>
+            <p>SOP refinement, workflow structure, pricing flow, service consistency.</p>
+          </article>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">08</div>
-            <div class="moment-role">Systems</div>
-            <h3 class="moment-title">System Readiness</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Assisted in POS setup, troubleshooting, and standardisation support,
-              building stronger awareness of how systems stabilise daily operations.
+          <article class="panel module-card" data-no="04">
+            <div class="module-top">
+              <span class="module-role">Knowledge</span>
+              <span class="module-status">Active</span>
             </div>
-          </div>
-        </article>
+            <h3>Internal Knowledge Systems</h3>
+            <p>Information guide building, internal reference clarity, fraud awareness communication.</p>
+          </article>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">09</div>
-            <div class="moment-role">Launch</div>
-            <h3 class="moment-title">Launch Support</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Participated in outlet preparation, readiness, and opening support,
-              where execution had to move cleanly from plan to live reality.
+          <article class="panel module-card" data-no="05">
+            <div class="module-top">
+              <span class="module-role">Training</span>
+              <span class="module-status">Active</span>
             </div>
-          </div>
-        </article>
+            <h3>Training Translation</h3>
+            <p>Turning practical processes into clearer staff guidance and support.</p>
+          </article>
 
-        <article class="moment">
-          <div class="moment-line"></div>
-          <div class="moment-left">
-            <div class="moment-no">10</div>
-            <div class="moment-role">Pressure</div>
-            <h3 class="moment-title">Calm Under Pressure</h3>
-          </div>
-          <div class="moment-right">
-            <div class="moment-copy">
-              Customer issues, equipment problems, and unexpected incidents
-              demanded structured judgement instead of reaction.
+          <article class="panel module-card" data-no="06">
+            <div class="module-top">
+              <span class="module-role">Service</span>
+              <span class="module-status">Active</span>
             </div>
-          </div>
-        </article>
+            <h3>Customer Interface Control</h3>
+            <p>Orders, inquiries, complaints, and service quality across messaging channels.</p>
+          </article>
+
+          <article class="panel module-card" data-no="07">
+            <div class="module-top">
+              <span class="module-role">Growth</span>
+              <span class="module-status">Active</span>
+            </div>
+            <h3>Growth Awareness</h3>
+            <p>Customer engagement support and operational impact on business retention.</p>
+          </article>
+
+          <article class="panel module-card" data-no="08">
+            <div class="module-top">
+              <span class="module-role">Systems</span>
+              <span class="module-status">Active</span>
+            </div>
+            <h3>System Readiness</h3>
+            <p>POS setup, troubleshooting, and standardisation support across outlets.</p>
+          </article>
+
+          <article class="panel module-card" data-no="09">
+            <div class="module-top">
+              <span class="module-role">Launch</span>
+              <span class="module-status">Active</span>
+            </div>
+            <h3>Launch Support</h3>
+            <p>Outlet setup, staff readiness, operational flow preparation, and opening support.</p>
+          </article>
+
+          <article class="panel module-card wide" data-no="10">
+            <div class="module-top">
+              <span class="module-role">Pressure</span>
+              <span class="module-status">Active</span>
+            </div>
+            <h3>Calm Under Pressure</h3>
+            <p>Customer issues, equipment issues, unexpected incidents, and structured response under live operational pressure.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="glass-shell radius-xl closing reveal">
-      <span class="eyebrow">Closing Position</span>
-      <h2 class="closing-title">This is not a job description. This is an operating signature.</h2>
-      <p class="closing-copy">
-        A way of working shaped through pressure, movement, structure, and continuity —
-        then carried forward into everything that comes next.
-      </p>
+    <section class="app-shell signal-strip reveal">
+      <div>
+        <span class="eyebrow">Signal Summary</span>
+        <h2>Clarity, consistency, and control inside moving environments.</h2>
+      </div>
+
+      <div class="signal-strip-copy">
+        Finance support, process clarity, customer communication, onboarding,
+        systems support, launch readiness, and calm response all point to one thing:
+        the ability to work inside complex operations without losing structure.
+      </div>
     </section>
 
     <section class="support">
-      <section class="glass-shell radius-xl support-image reveal">
+      <section class="app-shell support-image reveal">
         <img src="../../Images/Work_ACCakeHouse.png" alt="AC Cake House experience visual" />
         <div class="support-note">
           <strong>Built through real operations, not abstract theory</strong>
@@ -963,8 +1216,8 @@
         </div>
       </section>
 
-      <div>
-        <section class="glass-shell radius-xl copy-shell reveal">
+      <div class="support-right">
+        <section class="app-shell copy-shell reveal">
           <span class="eyebrow">Operational Identity</span>
           <h2>Range over repetition.</h2>
           <p>
@@ -978,24 +1231,24 @@
           </p>
         </section>
 
-        <div class="mini-grid" style="margin-top:22px;">
-          <article class="glass-shell radius-lg mini-box reveal">
+        <div class="mini-grid">
+          <article class="panel mini-box reveal">
             <strong>Structured Thinking</strong>
             <span>Seeing business work as connected systems, not isolated tasks.</span>
           </article>
 
-          <article class="glass-shell radius-lg mini-box reveal">
+          <article class="panel mini-box reveal">
             <strong>Adaptability</strong>
             <span>Moving across service, process, systems, training, and support contexts.</span>
           </article>
 
-          <article class="glass-shell radius-lg mini-box reveal">
+          <article class="panel mini-box reveal">
             <strong>Operational Discipline</strong>
             <span>Holding consistency, timing, and quality under real pressure.</span>
           </article>
         </div>
 
-        <section class="glass-shell radius-xl copy-shell reveal" style="margin-top:22px;">
+        <section class="app-shell copy-shell reveal">
           <span class="eyebrow">Reflection</span>
           <h2>A strong operational foundation before the next chapter.</h2>
           <p>
@@ -1008,7 +1261,7 @@
     </section>
 
     <section class="foot-grid">
-      <section class="glass-shell radius-xl copy-shell reveal">
+      <section class="app-shell copy-shell reveal">
         <span class="eyebrow">What This Strengthened</span>
         <h2>Capabilities worth noticing.</h2>
         <ul class="feature-list">
@@ -1021,7 +1274,7 @@
         </ul>
       </section>
 
-      <section class="glass-shell radius-xl copy-shell reveal">
+      <section class="app-shell copy-shell reveal">
         <span class="eyebrow">Immediate Read</span>
         <h2>What this signals at a glance.</h2>
         <p>
@@ -1029,8 +1282,8 @@
           handle movement, and think in connected systems instead of isolated tasks.
         </p>
         <p>
-          The presentation itself also signals design awareness, digital maturity,
-          and the ability to package experience with intention.
+          The interface itself also signals design awareness, system thinking,
+          and the ability to package experience with control and intention.
         </p>
       </section>
     </section>
@@ -1098,24 +1351,6 @@
     }, { threshold: 0.14 });
     revealItems.forEach((item) => revealObserver.observe(item));
 
-    // TYPO REVEAL
-    const editorialRows = document.querySelectorAll(".editorial-line");
-    const editorialObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-active");
-      });
-    }, { threshold: 0.44 });
-    editorialRows.forEach((row) => editorialObserver.observe(row));
-
-    // FRAGMENTS
-    const moments = document.querySelectorAll(".moment");
-    const momentObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-live");
-      });
-    }, { threshold: 0.42 });
-    moments.forEach((item) => momentObserver.observe(item));
-
     // PROGRESS
     function updateProgress() {
       const scrollTop = window.scrollY;
@@ -1127,10 +1362,10 @@
     updateProgress();
 
     // BACKGROUND FIELD
-    const canvas = document.getElementById("bgCanvas");
+    const canvas = document.getElementById("appCanvas");
     const ctx = canvas.getContext("2d");
     let particles = [];
-    let mouse = { x: null, y: null, radius: 90 };
+    let mouse = { x: null, y: null, radius: 85 };
 
     function resizeCanvas() {
       const dpr = window.devicePixelRatio || 1;
@@ -1140,13 +1375,13 @@
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(42, Math.max(16, Math.floor(window.innerWidth / 38)));
+      const count = Math.min(40, Math.max(14, Math.floor(window.innerWidth / 42)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        r: Math.random() * 1.2 + 0.4
+        vx: (Math.random() - 0.5) * 0.11,
+        vy: (Math.random() - 0.5) * 0.11,
+        r: Math.random() * 1.15 + 0.35
       }));
     }
 
@@ -1167,14 +1402,14 @@
           const dy = mouse.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius) {
-            p.x -= dx * 0.001;
-            p.y -= dy * 0.001;
+            p.x -= dx * 0.0009;
+            p.y -= dy * 0.0009;
           }
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(209,175,130,0.14)";
+        ctx.fillStyle = "rgba(209,175,130,0.12)";
         ctx.fill();
       }
 
@@ -1185,8 +1420,8 @@
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 110) {
-            const alpha = (1 - dist / 110) * 0.018;
+          if (dist < 105) {
+            const alpha = (1 - dist / 105) * 0.016;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
