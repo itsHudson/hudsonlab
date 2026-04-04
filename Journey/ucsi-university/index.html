@@ -3,141 +3,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UCSI University | Journey | HUDSONLAB</title>
+  <title>UCSI University Academic Experience</title>
 
   <link rel="stylesheet" href="../../css/global.css" />
   <link rel="stylesheet" href="../detail.css" />
+  <link rel="stylesheet" href="./ucsi-university.css" />
 </head>
-<body data-page="journey">
+<body>
+  <div class="page-bg-base"></div>
+  <div class="page-bg-grid"></div>
+  <div class="page-bg-glow page-bg-glow-a"></div>
+  <div class="page-bg-glow page-bg-glow-b"></div>
+  <div class="page-bg-noise"></div>
+  <div class="page-bg-vignette"></div>
+  <div class="page-system-canvas-wrap">
+    <canvas id="pageSystemCanvas"></canvas>
+  </div>
 
-  <div id="header"></div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">
+          <img
+            src="../../Images/Edu_UCSI.png"
+            alt="UCSI University Logo"
+          />
+        </div>
 
-  <main class="page-shell detail-shell">
-    <section class="glass-card detail-hero-card reveal">
-      <div class="detail-hero-meta">
-        <span class="detail-chip">Journey / Education Page</span>
-        <span class="detail-chip detail-chip-soft">Node 02</span>
+        <div class="brand-copy">
+          <span class="brand-label">UCSI University Academic Experience</span>
+          <span class="brand-title">UCSI University • Diploma in Management</span>
+        </div>
       </div>
 
-      <h1>UCSI University</h1>
-
-      <p>
-        A formal business education phase that strengthened strategic thinking,
-        organisational understanding, and the ability to analyse how businesses
-        operate, plan, and make decisions.
-      </p>
-    </section>
-
-    <section class="detail-grid">
-      <div class="detail-stack">
-        <section class="glass-card detail-image-card reveal-delay">
-          <p class="detail-section-label">Visual Context</p>
-          <div class="detail-image-wrap">
-            <img src="../../Images/Edu_UCSI.png" alt="UCSI University journey visual" />
-          </div>
-        </section>
-
-        <section class="glass-card detail-timeline-card reveal-delay-2">
-          <p class="detail-section-label">Academic Phase</p>
-          <h2>Node 02 — 2018–2020</h2>
-
-          <div class="detail-timeline">
-            <div class="detail-timeline-item">
-              <strong>Programme</strong>
-              <span>Diploma in Management</span>
-            </div>
-
-            <div class="detail-timeline-item">
-              <strong>Focus</strong>
-              <span>Business fundamentals, operations understanding, and strategic thinking.</span>
-            </div>
-
-            <div class="detail-timeline-item">
-              <strong>Impact</strong>
-              <span>Built structured knowledge to complement real work experience.</span>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div class="detail-stack">
-        <section class="glass-card detail-content-card reveal">
-          <p class="detail-section-label">Learning Direction</p>
-          <h2>Building a stronger business foundation</h2>
-
-          <p>
-            While gaining practical work experience, I pursued a Diploma in Management
-            to strengthen my understanding of how organisations operate beyond daily
-            execution. This phase introduced formal business thinking and helped connect
-            real work experience to larger organisational structure.
-          </p>
-
-          <p>
-            The programme covered areas such as business management, marketing,
-            economics, financial accounting, supply chain and logistics, business law,
-            risk management, and entrepreneurship. These subjects provided a clearer
-            view of how decisions are made across functions and how different parts of
-            a business contribute to performance.
-          </p>
-
-          <p>
-            This stage strengthened my ability to think more strategically, analyse
-            problems from a business perspective, and communicate with better structure
-            and clarity.
-          </p>
-        </section>
-
-        <section class="glass-card detail-metrics-card reveal-delay">
-          <p class="detail-section-label">Learning Areas</p>
-          <h2>Core business exposure</h2>
-
-          <div class="detail-metrics-grid">
-            <div class="detail-metric-box">
-              <strong>Business Management</strong>
-              <span>Understanding structure, planning, and organisational roles.</span>
-            </div>
-
-            <div class="detail-metric-box">
-              <strong>Marketing & Economics</strong>
-              <span>Learning market behaviour, value creation, and business positioning.</span>
-            </div>
-
-            <div class="detail-metric-box">
-              <strong>Financial Accounting</strong>
-              <span>Building awareness of reporting, cost, and financial interpretation.</span>
-            </div>
-
-            <div class="detail-metric-box">
-              <strong>Supply Chain & Risk</strong>
-              <span>Exploring business flow, coordination, compliance, and operational risk.</span>
-            </div>
-          </div>
-        </section>
-
-        <section class="glass-card detail-learning-card reveal-delay-2">
-          <p class="detail-section-label">Skills Developed</p>
-          <h2>How this phase strengthened future growth</h2>
-
-          <ul class="detail-list">
-            <li>Improved strategic thinking and business analysis ability.</li>
-            <li>Built stronger understanding of how organisations make decisions.</li>
-            <li>Connected real work experience with academic business concepts.</li>
-            <li>Strengthened communication and structured problem solving.</li>
-            <li>Created a useful bridge between practical operations and later technology study.</li>
-          </ul>
-        </section>
-      </div>
-    </section>
-
-    <div class="detail-back-row reveal">
-      <a href="../journey.html" class="detail-back-link">← Back to Journey</a>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#value">Value</a>
+        <a href="#strengths">Strengths</a>
+        <a href="#archive">Archive</a>
+      </nav>
     </div>
+  </header>
+
+  <main class="page">
+    <section class="section hero" id="overview">
+      <div class="container">
+        <div class="hero-shell">
+          <div class="hero-stage fade-up">
+            <div class="hero-stage-badge">UCSI University</div>
+
+            <div class="hero-image-wrap">
+              <img
+                class="hero-image"
+                src="../../Images/Edu_UCSI.png"
+                alt="UCSI University Visual"
+              />
+            </div>
+          </div>
+
+          <div class="hero-copy fade-up">
+            <div class="hero-kicker">Academic Experience</div>
+
+            <h1 class="hero-main-title">
+              UCSI University
+              <br />
+              <span>Academic Experience</span>
+            </h1>
+
+            <p class="hero-summary">
+              Foundational business education shaped through management, communication,
+              marketing, operations, finance, and a broader understanding of how organizations function.
+            </p>
+
+            <div class="hero-meta-strip">
+              <div class="hero-meta-item">
+                <div class="hero-meta-label">Institution</div>
+                <div class="hero-meta-value">UCSI University</div>
+              </div>
+
+              <div class="hero-meta-item">
+                <div class="hero-meta-label">Programme</div>
+                <div class="hero-meta-value">
+                  Diploma in Management
+                  <span class="hero-meta-subline">May 2018 – May 2020</span>
+                </div>
+              </div>
+
+              <div class="hero-meta-item">
+                <div class="hero-meta-label">Profile Focus</div>
+                <div class="hero-meta-value">Business Foundations, Communication, Management &amp; Operations Understanding</div>
+              </div>
+            </div>
+
+            <div class="hero-token">Broad business foundation</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="value">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <div class="section-kicker">Core Value</div>
+            <h2 class="section-title">What this academic phase reflects</h2>
+          </div>
+
+          <p class="section-text">
+            A concise view of the practical value and business foundation developed through the diploma.
+          </p>
+        </div>
+
+        <div class="value-layout">
+          <article class="value-spotlight fade-up">
+            <div>
+              <div class="value-no">01</div>
+              <h3 class="value-title">A Broad Foundation in Business and Organizational Understanding</h3>
+              <p class="value-copy">
+                Built through exposure to management, marketing, communication, finance,
+                operations, and other foundational subjects that support a more structured understanding of business environments.
+              </p>
+            </div>
+
+            <div class="value-bottom-note">
+              A general academic foundation shaped by business-focused learning, broader organizational awareness, and early exposure to how different functions work together.
+            </div>
+          </article>
+
+          <div class="value-side">
+            <article class="value-side-card fade-up">
+              <div class="value-no">02</div>
+              <h3 class="value-title">Hands-on Growth in Communication, Teamwork &amp; Coordination</h3>
+              <p class="value-copy">
+                Strengthened through presentations, assignments, and team-based academic activities that supported collaboration and clearer communication.
+              </p>
+            </article>
+
+            <article class="value-side-card fade-up">
+              <div class="value-no">03</div>
+              <h3 class="value-title">Strong Foundation in Structured and Practical Thinking</h3>
+              <p class="value-copy">
+                Developed through academic tasks that encouraged practical reasoning and a clearer understanding of how business concepts apply in real-world settings.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="strengths">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <div class="section-kicker">Key Strengths</div>
+            <h2 class="section-title">Core strengths shaped through business studies</h2>
+          </div>
+
+          <p class="section-text">
+            A focused view of the strengths most clearly developed and reinforced throughout the diploma.
+          </p>
+        </div>
+
+        <div class="strength-shell">
+          <article class="strength-spotlight fade-up">
+            <div>
+              <div class="strength-no">Strength 01</div>
+              <h3 class="strength-title">Business Understanding &amp; Functional Awareness</h3>
+              <p class="strength-copy">
+                Built a broader understanding of how organizations operate across management,
+                marketing, finance, communication, and operations-related areas.
+              </p>
+
+              <div class="chip-row">
+                <span class="chip">Business Foundations</span>
+                <span class="chip">Functional Awareness</span>
+                <span class="chip">Organizational View</span>
+              </div>
+            </div>
+
+            <div class="strength-summary-note">
+              A core strength area built around understanding how different business functions
+              connect and support the wider organization.
+            </div>
+          </article>
+
+          <div class="strength-grid">
+            <article class="strength-card fade-up">
+              <div class="strength-no">Strength 02</div>
+              <h3 class="strength-title">Communication &amp; Presentation Skills</h3>
+              <p class="strength-copy">
+                Strengthened communication ability through presentations, assignments, and business-related coursework activities.
+              </p>
+            </article>
+
+            <article class="strength-card fade-up">
+              <div class="strength-no">Strength 03</div>
+              <h3 class="strength-title">Teamwork &amp; Collaboration</h3>
+              <p class="strength-copy">
+                Gained exposure to team-based projects that improved coordination, cooperation, and group-based learning experience.
+              </p>
+            </article>
+
+            <article class="strength-card fade-up">
+              <div class="strength-no">Strength 04</div>
+              <h3 class="strength-title">Structured &amp; Practical Thinking</h3>
+              <p class="strength-copy">
+                Developed a more structured way of approaching problems through foundational business and management learning.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="archive">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <div class="section-kicker">Learning Archive</div>
+            <h2 class="section-title">All 5 learning areas</h2>
+          </div>
+
+          <p class="section-text">
+            A structured overview of the full academic exposure and development areas.
+          </p>
+        </div>
+
+        <div class="archive-shell">
+          <div class="archive-selector-wrap fade-up">
+            <div class="archive-selector">
+              <button class="archive-button active" data-key="focus" type="button">
+                <span class="idx">01</span>
+                <span class="name">Academic Focus</span>
+              </button>
+
+              <button class="archive-button" data-key="business" type="button">
+                <span class="idx">02</span>
+                <span class="name">Business &amp; Functional Understanding</span>
+              </button>
+
+              <button class="archive-button" data-key="communication" type="button">
+                <span class="idx">03</span>
+                <span class="name">Communication &amp; Team-Based Learning</span>
+              </button>
+
+              <button class="archive-button" data-key="thinking" type="button">
+                <span class="idx">04</span>
+                <span class="name">Structured &amp; Practical Thinking</span>
+              </button>
+
+              <button class="archive-button" data-key="reflection" type="button">
+                <span class="idx">05</span>
+                <span class="name">Learning Reflection</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="archive-stage fade-up" id="detailPanel"></div>
+        </div>
+
+        <footer class="footer">
+          <div class="footer-row">
+            <a class="footer-back-link" href="../journey.html">← Back to Journey</a>
+
+            <div class="footer-copy">
+              UCSI University • Diploma in Management
+              <span class="footer-sub">Structured Academic Overview</span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
   </main>
 
-  <div id="footer"></div>
-
-  <script src="../../js/layout.js"></script>
-  <script src="../../js/navigation.js"></script>
-  <script src="../detail.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="./ucsi-university.js"></script>
 </body>
 </html>
