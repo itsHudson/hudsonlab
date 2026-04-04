@@ -3,1579 +3,295 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AC Cake House | Professional Experience | HUDSONLAB</title>
+  <title>AC Cake House Operational Experience</title>
 
   <link rel="stylesheet" href="../../css/global.css" />
   <link rel="stylesheet" href="../detail.css" />
-
-  <style>
-    :root {
-      --bg: #07090c;
-      --bg-soft: #0d1117;
-      --panel: rgba(255, 255, 255, 0.03);
-      --panel-strong: rgba(255, 255, 255, 0.05);
-      --line: rgba(255, 255, 255, 0.08);
-      --line-soft: rgba(255, 255, 255, 0.045);
-
-      --text: #f3efe8;
-      --text-soft: rgba(243, 239, 232, 0.74);
-      --text-faint: rgba(243, 239, 232, 0.38);
-
-      --accent: #c89d69;
-      --accent-soft: rgba(200, 157, 105, 0.14);
-      --success: #c8d2c1;
-
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-
-      --shadow-xl: 0 28px 80px rgba(0, 0, 0, 0.32);
-      --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.18);
-
-      --page-max: 1520px;
-      --progress: 0%;
-
-      --fs-label: 11px;
-      --fs-caption: 12px;
-      --fs-body: 15px;
-      --fs-body-lg: 17px;
-      --fs-title-sm: clamp(1.05rem, 1.2vw, 1.28rem);
-      --fs-title-md: clamp(1.5rem, 2vw, 2.15rem);
-      --fs-title-lg: clamp(2.6rem, 4vw, 4.9rem);
-      --fs-hero: clamp(3rem, 5vw, 5.2rem);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body[data-page="journey"] {
-      margin: 0;
-      color: var(--text);
-      font-family: "Inter", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 14% 12%, rgba(200,157,105,0.08), transparent 18%),
-        radial-gradient(circle at 82% 14%, rgba(255,255,255,0.022), transparent 20%),
-        linear-gradient(180deg, #05070a 0%, #0a0d12 42%, #10151c 100%);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0 auto auto 0;
-      width: var(--progress);
-      height: 2px;
-      background: linear-gradient(90deg, rgba(200,157,105,0.08), var(--accent), rgba(200,157,105,0.08));
-      z-index: 9999;
-      pointer-events: none;
-    }
-
-    #appCanvas,
-    .grid-overlay,
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    #appCanvas {
-      z-index: -4;
-      width: 100%;
-      height: 100%;
-      opacity: 0.05;
-    }
-
-    .grid-overlay {
-      z-index: -3;
-      opacity: 0.035;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(circle at center, black 38%, transparent 92%);
-    }
-
-    .noise-overlay {
-      z-index: -2;
-      opacity: 0.02;
-      background-image: radial-gradient(rgba(255,255,255,0.12) 0.7px, transparent 0.7px);
-      background-size: 10px 10px;
-      mask-image: radial-gradient(circle at center, black 42%, transparent 90%);
-    }
-
-    .page {
-      width: min(calc(100% - 36px), var(--page-max));
-      margin: 0 auto;
-      padding: 18px 0 68px;
-      display: grid;
-      gap: 22px;
-      position: relative;
-      isolation: isolate;
-    }
-
-    .app-shell {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line-soft);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));
-      box-shadow: var(--shadow-xl);
-      backdrop-filter: blur(18px);
-    }
-
-    .app-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.015), transparent 18%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.028), transparent 20%);
-      opacity: 0.5;
-    }
-
-    .panel {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.026), rgba(255,255,255,0.012));
-      box-shadow: var(--shadow-lg);
-    }
-
-    .panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.014), transparent 18%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.02), transparent 18%);
-      opacity: 0.42;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.85s ease, transform 0.85s ease;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: var(--fs-label);
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .topbar {
-      display: grid;
-      grid-template-columns: 280px 1fr auto;
-      gap: 20px;
-      align-items: center;
-      min-height: 78px;
-      padding: 18px 24px;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-mark {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 14px rgba(200,157,105,0.24);
-      flex: 0 0 auto;
-    }
-
-    .brand-copy {
-      display: grid;
-      gap: 2px;
-    }
-
-    .brand-copy strong {
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 650;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-copy span {
-      color: var(--text-faint);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .topbar-center {
-      display: flex;
-      justify-content: center;
-    }
-
-    .status-track,
-    .system-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.012);
-      color: var(--text-soft);
-      font-size: var(--fs-label);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .status-track {
-      gap: 10px;
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(200,157,105,0.22);
-      flex: 0 0 auto;
-    }
-
-    .topbar-right {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
-      gap: 22px;
-      padding: 30px 24px 24px;
-      min-height: 72vh;
-      align-items: stretch;
-    }
-
-    .hero-main {
-      display: grid;
-      grid-template-rows: auto auto auto 1fr auto;
-      gap: 22px;
-      padding: 8px 8px 8px 2px;
-    }
-
-    .meta-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .meta-pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.014);
-      color: rgba(243,239,232,0.82);
-      font-size: var(--fs-label);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero-title {
-      margin: 0;
-      max-width: 10ch;
-      font-size: var(--fs-hero);
-      line-height: 0.9;
-      letter-spacing: -0.075em;
-      color: var(--text);
-      text-wrap: balance;
-    }
-
-    .hero-copy {
-      max-width: 44ch;
-      color: var(--text-soft);
-      font-size: var(--fs-body-lg);
-      line-height: 1.82;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-bottom {
-      margin-top: auto;
-      display: grid;
-      gap: 18px;
-    }
-
-    .hero-statement {
-      max-width: 20ch;
-      color: var(--text);
-      font-size: clamp(1.08rem, 1.5vw, 1.5rem);
-      line-height: 1.06;
-      letter-spacing: -0.04em;
-    }
-
-    .signal-bar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-height: 56px;
-      padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(135deg, rgba(200,157,105,0.05), rgba(255,255,255,0.008)),
-        rgba(255,255,255,0.008);
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    .signal-label {
-      flex: 0 0 auto;
-      color: var(--accent);
-      font-size: var(--fs-label);
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .signal-text {
-      min-width: 0;
-      color: var(--text);
-      font-size: 15px;
-      letter-spacing: -0.01em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .caret {
-      display: inline-block;
-      width: 10px;
-      color: var(--accent);
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 48% { opacity: 1; }
-      52%, 100% { opacity: 0; }
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .company-card {
-      padding: 22px;
-      display: grid;
-      gap: 18px;
-      min-height: 100%;
-    }
-
-    .company-logo-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 110px;
-      padding: 16px 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.008));
-    }
-
-    .company-logo {
-      display: block;
-      max-width: 100%;
-      width: auto;
-      height: auto;
-      max-height: 76px;
-      object-fit: contain;
-      object-position: left center;
-      filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.18));
-    }
-
-    .company-card h2 {
-      margin: 0;
-      color: var(--text);
-      font-size: var(--fs-title-md);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 14ch;
-    }
-
-    .company-card p {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: var(--fs-body);
-      line-height: 1.74;
-      max-width: 36ch;
-    }
-
-    .company-stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .stat-box {
-      padding: 16px;
-      min-height: 112px;
-    }
-
-    .stat-box em {
-      display: block;
-      margin-bottom: 10px;
-      font-style: normal;
-      color: var(--accent);
-      font-size: var(--fs-label);
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .stat-box strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text);
-      font-size: clamp(1.25rem, 2vw, 1.72rem);
-      line-height: 0.92;
-      letter-spacing: -0.06em;
-    }
-
-    .stat-box span {
-      display: block;
-      color: var(--text-soft);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .positioning-note {
-      padding: 18px;
-      min-height: 126px;
-    }
-
-    .positioning-note strong {
-      display: block;
-      margin: 8px 0 10px;
-      color: var(--text);
-      font-size: var(--fs-title-sm);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-    }
-
-    .positioning-note p {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: var(--fs-body);
-      line-height: 1.72;
-    }
-
-    .section-shell {
-      padding: 28px 24px 24px;
-      display: grid;
-      gap: 24px;
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-      gap: 24px;
-      align-items: end;
-    }
-
-    .section-head h2 {
-      margin: 10px 0 0;
-      color: var(--text);
-      font-size: var(--fs-title-lg);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
-      max-width: 8ch;
-    }
-
-    .section-copy {
-      justify-self: end;
-      max-width: 46ch;
-      color: var(--text-soft);
-      font-size: var(--fs-body-lg);
-      line-height: 1.8;
-    }
-
-    .info-layout {
-      display: grid;
-      grid-template-columns: minmax(290px, 0.78fr) minmax(0, 1.22fr);
-      gap: 20px;
-      align-items: start;
-    }
-
-    .info-summary {
-      position: sticky;
-      top: 22px;
-      padding: 22px;
-      display: grid;
-      gap: 18px;
-      min-height: 660px;
-      align-content: start;
-    }
-
-    .info-summary h3 {
-      margin: 0;
-      color: var(--text);
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
-      line-height: 0.93;
-      letter-spacing: -0.075em;
-      max-width: 8ch;
-    }
-
-    .info-summary p {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: var(--fs-body);
-      line-height: 1.76;
-      max-width: 31ch;
-    }
-
-    .summary-stack {
-      display: grid;
-      gap: 12px;
-      margin-top: 4px;
-    }
-
-    .summary-card {
-      padding: 16px;
-      min-height: 102px;
-    }
-
-    .summary-card em {
-      display: block;
-      margin-bottom: 10px;
-      font-style: normal;
-      color: var(--accent);
-      font-size: var(--fs-label);
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .summary-card strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.2;
-    }
-
-    .summary-card span {
-      display: block;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .contrib-grid {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      grid-auto-rows: minmax(164px, auto);
-      gap: 14px;
-    }
-
-    .contrib-card {
-      padding: 20px 20px 18px;
-      min-height: 180px;
-      position: relative;
-      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
-    }
-
-    .contrib-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(200,157,105,0.24);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
-    }
-
-    .contrib-card::after {
-      content: attr(data-no);
-      position: absolute;
-      right: 16px;
-      bottom: 10px;
-      color: rgba(243,239,232,0.08);
-      font-size: clamp(2rem, 3vw, 3rem);
-      line-height: 1;
-      letter-spacing: -0.08em;
-      font-weight: 700;
-      pointer-events: none;
-    }
-
-    .contrib-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .contrib-type,
-    .contrib-state {
-      font-size: var(--fs-label);
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .contrib-type {
-      color: var(--accent);
-    }
-
-    .contrib-state {
-      color: var(--success);
-    }
-
-    .contrib-card h3 {
-      margin: 0 0 8px;
-      color: var(--text);
-      font-size: 1.02rem;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      max-width: 18ch;
-    }
-
-    .contrib-card p {
-      margin: 0 0 12px;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.66;
-      max-width: 34ch;
-    }
-
-    .contrib-list {
-      margin: 0;
-      padding-left: 18px;
-      display: grid;
-      gap: 8px;
-      color: var(--text-soft);
-      font-size: 13px;
-      line-height: 1.58;
-    }
-
-    .contrib-list li::marker {
-      color: var(--accent);
-    }
-
-    .card-a { grid-column: span 6; grid-row: span 2; min-height: 270px; }
-    .card-b { grid-column: span 6; }
-    .card-c { grid-column: span 4; }
-    .card-d { grid-column: span 4; }
-    .card-e { grid-column: span 4; }
-    .card-f { grid-column: span 4; }
-    .card-g { grid-column: span 4; }
-    .card-h { grid-column: span 4; }
-    .card-i { grid-column: span 6; }
-    .card-j { grid-column: span 6; }
-
-    .strip {
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 0.94fr 1.06fr;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .strip h2 {
-      margin: 10px 0 0;
-      color: var(--text);
-      font-size: clamp(1.8rem, 2.4vw, 2.7rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      max-width: 14ch;
-    }
-
-    .strip-copy {
-      justify-self: end;
-      max-width: 46ch;
-      color: var(--text-soft);
-      font-size: var(--fs-body-lg);
-      line-height: 1.8;
-    }
-
-    .reflection {
-      display: grid;
-      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-      gap: 20px;
-    }
-
-    .reflection-visual {
-      padding: 24px;
-      display: grid;
-    }
-
-    .poster-panel {
-      min-height: 100%;
-      border-radius: 26px;
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(circle at 28% 28%, rgba(200,157,105,0.06), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,0.024), rgba(255,255,255,0.008));
-      padding: 26px;
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      gap: 18px;
-      align-content: space-between;
-    }
-
-    .poster-number {
-      color: rgba(243,239,232,0.18);
-      font-size: clamp(4rem, 8vw, 8rem);
-      line-height: 0.84;
-      letter-spacing: -0.09em;
-      font-weight: 700;
-    }
-
-    .poster-copy {
-      display: grid;
-      gap: 10px;
-      max-width: 24ch;
-    }
-
-    .poster-copy strong {
-      color: var(--text);
-      font-size: clamp(1.28rem, 1.8vw, 1.7rem);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .poster-copy span {
-      color: var(--text-soft);
-      font-size: 15px;
-      line-height: 1.74;
-    }
-
-    .poster-word {
-      position: absolute;
-      right: -8px;
-      bottom: -8px;
-      color: rgba(243,239,232,0.05);
-      font-size: clamp(3.8rem, 7vw, 6.4rem);
-      line-height: 0.84;
-      letter-spacing: -0.1em;
-      font-weight: 700;
-      text-align: right;
-      pointer-events: none;
-    }
-
-    .reflection-right {
-      display: grid;
-      gap: 18px;
-    }
-
-    .copy-shell {
-      padding: 24px 22px;
-    }
-
-    .copy-shell h2 {
-      margin: 10px 0 14px;
-      color: var(--text);
-      font-size: var(--fs-title-md);
-      line-height: 0.98;
-      letter-spacing: -0.055em;
-      max-width: 16ch;
-    }
-
-    .copy-shell p {
-      margin: 0 0 14px;
-      color: var(--text-soft);
-      font-size: var(--fs-body);
-      line-height: 1.8;
-      max-width: 56ch;
-    }
-
-    .copy-shell p:last-child {
-      margin-bottom: 0;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .mini-box {
-      padding: 20px 18px;
-      min-height: 148px;
-    }
-
-    .mini-box strong {
-      display: block;
-      margin-bottom: 10px;
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.2;
-    }
-
-    .mini-box span {
-      display: block;
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.68;
-    }
-
-    .foot-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .feature-list {
-      margin: 0;
-      padding-left: 18px;
-      display: grid;
-      gap: 12px;
-      color: var(--text-soft);
-      font-size: var(--fs-body);
-      line-height: 1.8;
-    }
-
-    .feature-list li::marker {
-      color: var(--accent);
-    }
-
-    .back-row {
-      display: flex;
-      justify-content: center;
-      padding-top: 4px;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 0 20px;
-      border-radius: 999px;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.014);
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    }
-
-    .back-link:hover {
-      transform: translateY(-2px);
-      border-color: rgba(200,157,105,0.24);
-      background: rgba(255,255,255,0.028);
-    }
-
-    @media (max-width: 1280px) {
-      .hero,
-      .section-head,
-      .info-layout,
-      .strip,
-      .reflection,
-      .foot-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-copy,
-      .strip-copy {
-        justify-self: start;
-      }
-
-      .info-summary {
-        position: relative;
-        top: auto;
-        min-height: auto;
-      }
-
-      .hero-title,
-      .section-head h2,
-      .strip h2 {
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 980px) {
-      .company-stats,
-      .mini-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contrib-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card-a,
-      .card-b,
-      .card-c,
-      .card-d,
-      .card-e,
-      .card-f,
-      .card-g,
-      .card-h,
-      .card-i,
-      .card-j {
-        grid-column: auto;
-        grid-row: auto;
-        min-height: 180px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .page {
-        width: min(calc(100% - 18px), var(--page-max));
-        gap: 16px;
-        padding-top: 14px;
-      }
-
-      .topbar,
-      .hero,
-      .section-shell,
-      .strip,
-      .reflection-visual,
-      .copy-shell {
-        padding: 18px 16px;
-      }
-
-      .topbar {
-        grid-template-columns: 1fr;
-        justify-items: start;
-        gap: 12px;
-      }
-
-      .hero-title {
-        font-size: clamp(2.7rem, 13vw, 4.6rem);
-      }
-
-      .company-logo-wrap {
-        min-height: 92px;
-      }
-
-      .company-logo {
-        max-height: 58px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="./ac-cake-house.css" />
 </head>
-<body data-page="journey">
+<body>
+  <div class="page-bg-base"></div>
+  <div class="page-bg-grid"></div>
+  <div class="page-bg-glow page-bg-glow-a"></div>
+  <div class="page-bg-glow page-bg-glow-b"></div>
+  <div class="page-bg-noise"></div>
+  <div class="page-bg-vignette"></div>
+  <div class="page-system-canvas-wrap">
+    <canvas id="pageSystemCanvas"></canvas>
+  </div>
 
-  <canvas id="appCanvas"></canvas>
-  <div class="grid-overlay"></div>
-  <div class="noise-overlay"></div>
-
-  <div id="header"></div>
-
-  <main class="page-shell detail-shell page">
-
-    <section class="app-shell reveal">
-      <div class="topbar">
-        <div class="brand">
-          <span class="brand-mark"></span>
-          <div class="brand-copy">
-            <strong>Professional Experience</strong>
-            <span>Corporate Information Surface</span>
-          </div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">
+          <img
+            src="../../Images/Work_ACCakeHouse.png"
+            alt="AC Cake House Logo"
+          />
         </div>
 
-        <div class="topbar-center">
-          <div class="status-track">
-            <span class="status-dot"></span>
-            <span>Public Professional Summary</span>
-          </div>
-        </div>
-
-        <div class="topbar-right">
-          <div class="system-badge">Dec 2017 - Aug 2023</div>
+        <div class="brand-copy">
+          <span class="brand-label">AC Cake House Operational Experience</span>
+          <span class="brand-title">AC Cake House (M) Sdn. Bhd. (Australian Cake House)</span>
         </div>
       </div>
 
-      <section class="hero">
-        <div class="hero-main">
-          <div class="meta-pills">
-            <span class="meta-pill">Australian Cake House / ACake (M) Sdn Bhd</span>
-            <span class="meta-pill">Professional Experience</span>
-            <span class="meta-pill">Public Information</span>
-          </div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#value">Value</a>
+        <a href="#strengths">Strengths</a>
+        <a href="#archive">Archive</a>
+      </nav>
+    </div>
+  </header>
 
-          <h1 class="hero-title">Cross-Functional Operational Experience.</h1>
+  <main class="page">
+    <section class="section hero" id="overview">
+      <div class="container">
+        <div class="hero-shell">
+          <div class="hero-stage fade-up">
+            <div class="hero-stage-badge">AC Cake House</div>
 
-          <div class="hero-copy">
-            A structured overview of contribution areas across accounting, operations,
-            human resources support, training, customer communication, systems support,
-            outlet expansion, and operational problem-solving.
-          </div>
-
-          <div class="hero-bottom">
-            <div class="hero-statement">
-              Professional exposure presented with clarity, realism, and structured hierarchy.
-            </div>
-
-            <div class="signal-bar">
-              <span class="signal-label">Contribution Feed</span>
-              <div class="signal-text">
-                <span id="typedSignal"></span><span class="caret">|</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="hero-side">
-          <section class="panel company-card">
-            <span class="eyebrow">Company Profile</span>
-
-            <div class="company-logo-wrap">
+            <div class="hero-image-wrap">
               <img
-                src="hudsonlab/Images/Work_ACCakeHouse.png"
-                alt="AC Cake House logo"
-                class="company-logo"
+                class="hero-image"
+                src="../../Images/Work_ACCakeHouse.png"
+                alt="AC Cake House Visual"
               />
             </div>
+          </div>
 
-            <h2>Australian Cake House / ACake (M) Sdn Bhd</h2>
+          <div class="hero-copy fade-up">
+            <div class="hero-kicker">Operational Experience</div>
 
-            <p>
-              This experience involved practical participation across multiple operational areas,
-              with emphasis on support, contribution, process exposure, and structured learning
-              in a real multi-outlet business environment.
+            <h1 class="hero-main-title">
+              AC Cake House
+              <br />
+              <span>Operational Experience</span>
+            </h1>
+
+            <p class="hero-summary">
+              Cross-functional operational experience shaped through multi-outlet exposure,
+              structured workflows, systems support, and real-world execution.
             </p>
 
-            <div class="company-stats">
-              <section class="panel stat-box">
-                <em>Duration</em>
-                <strong>5+ Years</strong>
-                <span>December 2017 to August 2023</span>
-              </section>
+            <div class="hero-meta-strip">
+              <div class="hero-meta-item">
+                <div class="hero-meta-label">Company</div>
+                <div class="hero-meta-value">AC Cake House (M) Sdn. Bhd. (Australian Cake House)</div>
+              </div>
 
-              <section class="panel stat-box">
-                <em>Coverage</em>
-                <strong>10 Areas</strong>
-                <span>Organised by business value and contribution type</span>
-              </section>
+              <div class="hero-meta-item">
+                <div class="hero-meta-label">Period</div>
+                <div class="hero-meta-value">Dec 2017 – Aug 2023</div>
+              </div>
 
-              <section class="panel stat-box">
-                <em>Context</em>
-                <strong>Live Ops</strong>
-                <span>Real daily operations across store and support functions</span>
-              </section>
-
-              <section class="panel stat-box">
-                <em>Positioning</em>
-                <strong>Support + Learning</strong>
-                <span>Balanced wording without overstating full ownership</span>
-              </section>
+              <div class="hero-meta-item">
+                <div class="hero-meta-label">Profile Focus</div>
+                <div class="hero-meta-value">Operations, Process Structure, Systems Support &amp; Team Coordination</div>
+              </div>
             </div>
 
-            <section class="panel positioning-note">
-              <span class="eyebrow">Framing Note</span>
-              <strong>Designed to read like professional company information, not a personal manifesto.</strong>
-              <p>
-                The page prioritises public readability, realistic language, stronger alignment,
-                and clearer hierarchy so the information feels credible and professional.
+            <div class="hero-token">Multi-outlet exposure</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="value">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <div class="section-kicker">Core Value</div>
+            <h2 class="section-title">What this experience reflects</h2>
+          </div>
+
+          <p class="section-text">
+            A concise view of the practical value and strengths developed through this experience.
+          </p>
+        </div>
+
+        <div class="value-layout">
+          <article class="value-spotlight fade-up">
+            <div>
+              <div class="value-no">01</div>
+              <h3 class="value-title">Cross-Functional Operational Support</h3>
+              <p class="value-copy">
+                Experience across process documentation, people support, customer-facing execution, and day-to-day operational coordination.
               </p>
-            </section>
-          </section>
-        </aside>
-      </section>
-    </section>
-
-    <section class="app-shell section-shell reveal">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Key Contributions</span>
-          <h2>Grouped by business value.</h2>
-        </div>
-
-        <div class="section-copy">
-          Experience is organised below as value-based contribution categories,
-          making the information easier for public viewers to scan, understand,
-          and interpret in a professional context.
-        </div>
-      </div>
-
-      <div class="info-layout">
-        <section class="panel info-summary">
-          <span class="eyebrow">Overview</span>
-          <h3>Operational support across people, process, systems, and service.</h3>
-          <p>
-            Rather than focusing on one narrow role, the experience developed through participation
-            across finance support, workflow structure, onboarding, training, customer handling,
-            outlet preparation, and technical support in day-to-day operations.
-          </p>
-
-          <div class="summary-stack">
-            <section class="panel summary-card">
-              <em>Finance</em>
-              <strong>Accuracy and transaction discipline</strong>
-              <span>Bookkeeping support, sales tracking, basic reporting, and exposure to multi-outlet financial operations.</span>
-            </section>
-
-            <section class="panel summary-card">
-              <em>People</em>
-              <strong>Staff support and onboarding contribution</strong>
-              <span>Recruitment coordination, interview support, onboarding improvements, and new staff adaptation.</span>
-            </section>
-
-            <section class="panel summary-card">
-              <em>Process</em>
-              <strong>Workflow documentation and SOP thinking</strong>
-              <span>Support for clearer operational guidelines, service consistency, and structured execution.</span>
-            </section>
-
-            <section class="panel summary-card">
-              <em>Systems</em>
-              <strong>Practical technical exposure in operations</strong>
-              <span>POS setup, troubleshooting, and awareness of how systems improve operational efficiency.</span>
-            </section>
-          </div>
-        </section>
-
-        <div class="contrib-grid">
-          <article class="panel contrib-card card-a" data-no="01">
-            <div class="contrib-top">
-              <span class="contrib-type">Accounting & Financial Support</span>
-              <span class="contrib-state">Support Function</span>
             </div>
-            <h3>Accounting and financial support within daily operations</h3>
-            <p>
-              Assisted in bookkeeping, record management, sales tracking,
-              and transaction-related consistency within a real business setting.
-            </p>
-            <ul class="contrib-list">
-              <li>Assisted in daily bookkeeping and financial record management</li>
-              <li>Supported sales tracking and basic reporting processes</li>
-              <li>Gained hands-on exposure to multi-outlet financial operations</li>
-              <li>Learned to maintain accuracy and consistency in transaction handling</li>
-            </ul>
+
+            <div class="value-bottom-note">
+              A broad operational foundation shaped by structured work, practical exposure, and consistency across real business environments.
+            </div>
           </article>
 
-          <article class="panel contrib-card card-b" data-no="02">
-            <div class="contrib-top">
-              <span class="contrib-type">Human Resources & Team Support</span>
-              <span class="contrib-state">Support Function</span>
-            </div>
-            <h3>Human resources and team support</h3>
-            <p>
-              Participated in recruitment coordination, onboarding improvements,
-              and practical team support aligned with operational needs.
-            </p>
-            <ul class="contrib-list">
-              <li>Participated in recruitment and interview coordination</li>
-              <li>Contributed to improving basic interview and onboarding processes</li>
-              <li>Assisted in training new staff and supporting team development</li>
-              <li>Learned to connect people support with operational requirements</li>
-            </ul>
-          </article>
+          <div class="value-side">
+            <article class="value-side-card fade-up">
+              <div class="value-no">02</div>
+              <h3 class="value-title">Hands-on Experience in Systems, Training &amp; Execution</h3>
+              <p class="value-copy">
+                Practical involvement in POS setup, onboarding support, and operational readiness across multiple outlets.
+              </p>
+            </article>
 
-          <article class="panel contrib-card card-c" data-no="03">
-            <div class="contrib-top">
-              <span class="contrib-type">Operations & SOP Development</span>
-              <span class="contrib-state">Process Support</span>
-            </div>
-            <h3>Operations and SOP development</h3>
-            <p>Supported process clarity through workflow documentation and guideline refinement.</p>
-            <ul class="contrib-list">
-              <li>Contributed to creating and refining Standard Operating Procedures</li>
-              <li>Helped document daily operations and order processing workflows</li>
-              <li>Supported pricing structure and customer service handling process</li>
-              <li>Learned the importance of consistency and scalability</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-d" data-no="04">
-            <div class="contrib-top">
-              <span class="contrib-type">Information Guide & Documentation</span>
-              <span class="contrib-state">Internal Clarity</span>
-            </div>
-            <h3>Internal information guide and documentation support</h3>
-            <p>Helped improve internal reference quality and onboarding clarity.</p>
-            <ul class="contrib-list">
-              <li>Assisted in developing Information Guide SOP</li>
-              <li>Included company background and internal communication references</li>
-              <li>Supported fraud awareness and prevention guideline communication</li>
-              <li>Improved access to clearer internal information materials</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-e" data-no="05">
-            <div class="contrib-top">
-              <span class="contrib-type">Training & Knowledge Sharing</span>
-              <span class="contrib-state">Enablement</span>
-            </div>
-            <h3>Training and practical knowledge sharing</h3>
-            <p>Supported staff confidence through clearer guidance and applied knowledge transfer.</p>
-            <ul class="contrib-list">
-              <li>Supported training for customer service standards</li>
-              <li>Assisted with product knowledge on cakes and bakery items</li>
-              <li>Supported POS system usage guidance</li>
-              <li>Learned to explain practical processes in a simpler structured way</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-f" data-no="06">
-            <div class="contrib-top">
-              <span class="contrib-type">Customer Experience & Communication</span>
-              <span class="contrib-state">Frontline Support</span>
-            </div>
-            <h3>Customer communication and service handling</h3>
-            <p>Managed customer-facing communication through messaging channels with service quality in mind.</p>
-            <ul class="contrib-list">
-              <li>Managed customer interactions via WhatsApp and Facebook Messenger</li>
-              <li>Assisted in handling orders and inquiries</li>
-              <li>Supported responses to customer concerns and complaints</li>
-              <li>Learned to maintain professional communication under pressure</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-g" data-no="07">
-            <div class="contrib-top">
-              <span class="contrib-type">Marketing & Engagement</span>
-              <span class="contrib-state">Business Awareness</span>
-            </div>
-            <h3>Marketing and customer engagement support</h3>
-            <p>Contributed to customer reach and retention awareness through basic engagement support.</p>
-            <ul class="contrib-list">
-              <li>Supported execution of basic marketing and customer engagement activities</li>
-              <li>Contributed ideas to improve customer reach and retention</li>
-              <li>Observed how operational decisions affect customer experience</li>
-              <li>Learned how support functions connect to business growth</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-h" data-no="08">
-            <div class="contrib-top">
-              <span class="contrib-type">System Implementation & Technical Support</span>
-              <span class="contrib-state">Technical Exposure</span>
-            </div>
-            <h3>System setup and store-level technical support</h3>
-            <p>Supported practical systems usage and store operations through POS-related assistance.</p>
-            <ul class="contrib-list">
-              <li>Assisted in POS system setup and configuration</li>
-              <li>Supported troubleshooting of store-level technical issues</li>
-              <li>Gained exposure to standardisation across outlets</li>
-              <li>Learned how technology improves operational efficiency</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-i" data-no="09">
-            <div class="contrib-top">
-              <span class="contrib-type">Outlet Setup & Expansion Support</span>
-              <span class="contrib-state">Operational Readiness</span>
-            </div>
-            <h3>Outlet setup and expansion preparation</h3>
-            <p>
-              Participated in preparing new outlets through staff readiness,
-              systems support, and operational flow preparation.
-            </p>
-            <ul class="contrib-list">
-              <li>Participated in new outlet setup and preparation</li>
-              <li>Supported staff readiness and system setup</li>
-              <li>Assisted operational flow preparation before opening</li>
-              <li>Contributed to multiple outlet openings including shopping malls</li>
-            </ul>
-          </article>
-
-          <article class="panel contrib-card card-j" data-no="10">
-            <div class="contrib-top">
-              <span class="contrib-type">Operational Problem-Solving</span>
-              <span class="contrib-state">Real-world Response</span>
-            </div>
-            <h3>Operational problem-solving under pressure</h3>
-            <p>
-              Assisted in responding to real-world store and service issues
-              with a more structured and solution-focused approach.
-            </p>
-            <ul class="contrib-list">
-              <li>Assisted in handling customer complaints</li>
-              <li>Supported responses to equipment-related issues such as refrigeration</li>
-              <li>Contributed to handling unexpected store incidents</li>
-              <li>Developed stronger calmness and response discipline under pressure</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="app-shell strip reveal">
-      <div>
-        <span class="eyebrow">Overall Reflection</span>
-        <h2>Learning through connected operational exposure.</h2>
-      </div>
-
-      <div class="strip-copy">
-        Throughout this experience, involvement extended from administrative support
-        to store-level execution. Instead of learning only one function, the journey
-        built understanding of how people, processes, systems, and customers interact
-        inside a real business environment.
-      </div>
-    </section>
-
-    <section class="reflection">
-      <section class="app-shell reflection-visual reveal">
-        <div class="poster-panel">
-          <div class="poster-number">2017 → 2023</div>
-
-          <div class="poster-copy">
-            <strong>Professional growth through real operations.</strong>
-            <span>
-              A practical foundation built through daily execution, process support,
-              technical exposure, staff coordination, and customer-facing work.
-            </span>
-          </div>
-
-          <div class="poster-word">
-            INFO<br>SURFACE
+            <article class="value-side-card fade-up">
+              <div class="value-no">03</div>
+              <h3 class="value-title">Strong Foundation in Structure, Adaptability &amp; Consistency</h3>
+              <p class="value-copy">
+                Built through real operational environments requiring clear communication, structured work, and reliable support.
+              </p>
+            </article>
           </div>
         </div>
-      </section>
-
-      <div class="reflection-right">
-        <section class="app-shell copy-shell reveal">
-          <span class="eyebrow">Growth Summary</span>
-          <h2>Broader than one role, grounded in operational reality.</h2>
-          <p>
-            This experience helped build structured thinking, adaptability, and practical awareness
-            by creating exposure across multiple business functions rather than a single isolated task area.
-          </p>
-          <p>
-            It also strengthened understanding of consistency, teamwork, process discipline,
-            and the importance of stable execution in fast-moving business conditions.
-          </p>
-        </section>
-
-        <div class="mini-grid">
-          <article class="panel mini-box reveal">
-            <strong>Structured Thinking</strong>
-            <span>Understanding how finance, people, systems, process, and service connect in daily operations.</span>
-          </article>
-
-          <article class="panel mini-box reveal">
-            <strong>Adaptability</strong>
-            <span>Moving across support contexts while learning how to respond clearly and professionally.</span>
-          </article>
-
-          <article class="panel mini-box reveal">
-            <strong>Continuous Learning</strong>
-            <span>Building capability through real execution, observation, and practical contribution.</span>
-          </article>
-        </div>
-
-        <section class="app-shell copy-shell reveal">
-          <span class="eyebrow">Public Read</span>
-          <h2>A clearer and more professional way to present the experience.</h2>
-          <p>
-            This layout is intentionally designed to feel like public company information:
-            more readable, more stable, and more credible than a text-heavy personal narrative.
-          </p>
-        </section>
       </div>
     </section>
 
-    <section class="foot-grid">
-      <section class="app-shell copy-shell reveal">
-        <span class="eyebrow">Capabilities Strengthened</span>
-        <h2>Foundations developed through experience.</h2>
-        <ul class="feature-list">
-          <li>Operational awareness across accounting, people, systems, and customer service.</li>
-          <li>Workflow clarity through SOP thinking and documentation support.</li>
-          <li>Professional communication in internal and customer-facing situations.</li>
-          <li>Exposure to onboarding, training, and team support functions.</li>
-          <li>Hands-on understanding of systems support and outlet readiness.</li>
-          <li>Calmer problem-solving under real business pressure.</li>
-        </ul>
-      </section>
+    <section class="section" id="strengths">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <div class="section-kicker">Key Strengths</div>
+            <h2 class="section-title">Core strengths shaped through real operational experience</h2>
+          </div>
 
-      <section class="app-shell copy-shell reveal">
-        <span class="eyebrow">Immediate Public Interpretation</span>
-        <h2>What this communicates at a glance.</h2>
-        <p>
-          A professional with cross-functional operational exposure, practical support experience,
-          and growing understanding of how business functions work together in real-world execution.
-        </p>
-        <p>
-          The page itself is structured to present the information clearly for public viewing,
-          without making it feel like a long article or overly personal statement.
-        </p>
-      </section>
+          <p class="section-text">
+            A focused view of the strengths most clearly developed and reinforced across the experience.
+          </p>
+        </div>
+
+        <div class="strength-shell">
+          <article class="strength-spotlight fade-up">
+            <div>
+              <div class="strength-no">Strength 01</div>
+              <h3 class="strength-title">Process Improvement &amp; Operational Consistency</h3>
+              <p class="strength-copy">
+                Supported workflow documentation and operational structure to improve clarity,
+                repeatability, and smoother day-to-day execution.
+              </p>
+
+              <div class="chip-row">
+                <span class="chip">SOP Development</span>
+                <span class="chip">Workflow Clarity</span>
+                <span class="chip">Process Consistency</span>
+              </div>
+            </div>
+
+            <div class="strength-summary-note">
+              A core strength area built around documentation discipline, structured execution,
+              and the ability to support clearer operational systems in practice.
+            </div>
+          </article>
+
+          <div class="strength-grid">
+            <article class="strength-card fade-up">
+              <div class="strength-no">Strength 02</div>
+              <h3 class="strength-title">Training Support &amp; Knowledge Transfer</h3>
+              <p class="strength-copy">
+                Supported onboarding, training, and knowledge sharing with clearer communication.
+              </p>
+            </article>
+
+            <article class="strength-card fade-up">
+              <div class="strength-no">Strength 03</div>
+              <h3 class="strength-title">System Support &amp; Operational Readiness</h3>
+              <p class="strength-copy">
+                Assisted with POS setup and troubleshooting while building systems-related awareness.
+              </p>
+            </article>
+
+            <article class="strength-card fade-up">
+              <div class="strength-no">Strength 04</div>
+              <h3 class="strength-title">Issue Resolution &amp; Operational Support</h3>
+              <p class="strength-copy">
+                Supported structured responses to service issues and practical store-level incidents.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <div class="back-row reveal">
-      <a href="../journey.html" class="back-link">← Back to Journey</a>
-    </div>
+    <section class="section" id="archive">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <div class="section-kicker">Contribution Archive</div>
+            <h2 class="section-title">All 10 contribution areas</h2>
+          </div>
+
+          <p class="section-text">
+            A structured overview of the full experience and contribution record.
+          </p>
+        </div>
+
+        <div class="archive-shell">
+          <div class="archive-selector-wrap fade-up">
+            <div class="archive-selector">
+              <button class="archive-button active" data-key="accounting" type="button">
+                <span class="idx">01</span>
+                <span class="name">Accounting &amp; Financial Support</span>
+              </button>
+
+              <button class="archive-button" data-key="hr" type="button">
+                <span class="idx">02</span>
+                <span class="name">Human Resources &amp; Team Support</span>
+              </button>
+
+              <button class="archive-button" data-key="operations" type="button">
+                <span class="idx">03</span>
+                <span class="name">Operations &amp; SOP Development</span>
+              </button>
+
+              <button class="archive-button" data-key="documentation" type="button">
+                <span class="idx">04</span>
+                <span class="name">Information Guide &amp; Internal Documentation</span>
+              </button>
+
+              <button class="archive-button" data-key="training" type="button">
+                <span class="idx">05</span>
+                <span class="name">Training &amp; Knowledge Sharing</span>
+              </button>
+
+              <button class="archive-button" data-key="customer" type="button">
+                <span class="idx">06</span>
+                <span class="name">Customer Experience &amp; Communication</span>
+              </button>
+
+              <button class="archive-button" data-key="marketing" type="button">
+                <span class="idx">07</span>
+                <span class="name">Marketing &amp; Customer Engagement</span>
+              </button>
+
+              <button class="archive-button" data-key="system" type="button">
+                <span class="idx">08</span>
+                <span class="name">System Implementation &amp; Technical Support</span>
+              </button>
+
+              <button class="archive-button" data-key="expansion" type="button">
+                <span class="idx">09</span>
+                <span class="name">Outlet Setup &amp; Expansion Support</span>
+              </button>
+
+              <button class="archive-button" data-key="problem" type="button">
+                <span class="idx">10</span>
+                <span class="name">Operational Problem-Solving</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="archive-stage fade-up" id="detailPanel"></div>
+        </div>
+
+        <footer class="footer">
+          AC Cake House (M) Sdn. Bhd. • Australian Cake House
+          <span class="footer-sub">Structured Experience Overview</span>
+        </footer>
+      </div>
+    </section>
   </main>
 
-  <div id="footer"></div>
-
-  <script src="../../js/layout.js"></script>
-  <script src="../../js/navigation.js"></script>
-  <script src="../detail.js"></script>
-
-  <script>
-    const typedWords = [
-      "Accounting & Financial Support",
-      "Human Resources & Team Support",
-      "Operations & SOP Development",
-      "Training & Knowledge Sharing",
-      "Customer Experience & Communication",
-      "System Implementation & Technical Support",
-      "Outlet Setup & Expansion Support",
-      "Operational Problem-Solving"
-    ];
-
-    const typedEl = document.getElementById("typedSignal");
-    let wordIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-
-    function runTypewriter() {
-      const word = typedWords[wordIndex];
-      typedEl.textContent = word.substring(0, charIndex);
-
-      let speed = deleting ? 32 : 52;
-
-      if (!deleting && charIndex < word.length) {
-        charIndex++;
-      } else if (deleting && charIndex > 0) {
-        charIndex--;
-      } else if (!deleting && charIndex === word.length) {
-        deleting = true;
-        speed = 900;
-      } else {
-        deleting = false;
-        wordIndex = (wordIndex + 1) % typedWords.length;
-        speed = 220;
-      }
-
-      setTimeout(runTypewriter, speed);
-    }
-    runTypewriter();
-
-    const revealItems = document.querySelectorAll(".reveal");
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    }, { threshold: 0.14 });
-    revealItems.forEach((item) => revealObserver.observe(item));
-
-    function updateProgress() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      document.documentElement.style.setProperty("--progress", `${progress}%`);
-    }
-    window.addEventListener("scroll", updateProgress);
-    updateProgress();
-
-    const canvas = document.getElementById("appCanvas");
-    const ctx = canvas.getContext("2d");
-    let particles = [];
-    let mouse = { x: null, y: null, radius: 85 };
-
-    function resizeCanvas() {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const count = Math.min(28, Math.max(10, Math.floor(window.innerWidth / 60)));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.08,
-        vy: (Math.random() - 0.5) * 0.08,
-        r: Math.random() * 1 + 0.3
-      }));
-    }
-
-    function drawCanvas() {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < -10) p.x = window.innerWidth + 10;
-        if (p.x > window.innerWidth + 10) p.x = -10;
-        if (p.y < -10) p.y = window.innerHeight + 10;
-        if (p.y > window.innerHeight + 10) p.y = -10;
-
-        if (mouse.x !== null && mouse.y !== null) {
-          const dx = mouse.x - p.x;
-          const dy = mouse.y - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouse.radius) {
-            p.x -= dx * 0.0007;
-            p.y -= dy * 0.0007;
-          }
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(200,157,105,0.09)";
-        ctx.fill();
-      }
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i];
-          const b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 100) {
-            const alpha = (1 - dist / 100) * 0.01;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(drawCanvas);
-    }
-
-    window.addEventListener("mousemove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    window.addEventListener("mouseleave", () => {
-      mouse.x = null;
-      mouse.y = null;
-    });
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-    drawCanvas();
-  </script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="./ac-cake-house.js"></script>
 </body>
 </html>
