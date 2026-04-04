@@ -561,6 +561,12 @@ img {
   overflow-wrap: normal;
 }
 
+.hero-meta-subline {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-soft);
+}
+
 .hero-token {
   display: inline-flex;
   align-items: center;
