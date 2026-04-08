@@ -1,107 +1,84 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Connect page loaded.");
-
   initializeContactReveal();
+  initializeGatewayCardHover();
   initializeContactVisual();
-  initializeContactInteractions();
 });
 
 function initializeContactReveal() {
-  const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealElements = document.querySelectorAll(".reveal");
 
-  const observer = new IntersectionObserver(
-    function (entries) {
+  if (!revealElements.length) {
+    return;
+  }
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealElements.forEach(function (element) {
+      element.classList.add("is-visible");
+    });
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver(
+    function (entries, observer) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) {
           return;
         }
 
-        let delay = "0s";
-
-        if (entry.target.classList.contains("reveal-delay")) {
-          delay = "0.12s";
-        }
-
-        if (entry.target.classList.contains("reveal-delay-2")) {
-          delay = "0.22s";
-        }
-
-        entry.target.style.transition =
-          "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
-
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.12 }
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    }
   );
 
-  revealElements.forEach(function (element) {
-    observer.observe(element);
+  revealElements.forEach(function (element, index) {
+    element.style.transitionDelay = Math.min(index * 24, 220) + "ms";
+    revealObserver.observe(element);
   });
 }
 
-function initializeContactVisual() {
-  if (typeof window.createContactQuantumRelay !== "function") {
-    return;
-  }
+function initializeGatewayCardHover() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cards = document.querySelectorAll(".gateway-card");
 
-  const canvas = document.getElementById("contactBgCanvas");
-  if (!canvas) {
-    return;
-  }
-
-  window.__contactQuantumRelayInstance = window.createContactQuantumRelay({
-    canvas: canvas
-  });
-}
-
-function initializeContactInteractions() {
-  const cards = document.querySelectorAll(".contact-card");
-  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-  if (!cards.length || !canHover) {
+  if (prefersReducedMotion || !cards.length) {
     return;
   }
 
   cards.forEach(function (card) {
-    card.addEventListener("mouseenter", function () {
-      const mode = card.getAttribute("data-contact-card") || "overview";
-
-      if (
-        window.__contactQuantumRelayInstance &&
-        typeof window.__contactQuantumRelayInstance.setMode === "function"
-      ) {
-        window.__contactQuantumRelayInstance.setMode(mode);
-      }
-    });
-
-    card.addEventListener("mouseleave", function () {
-      if (
-        window.__contactQuantumRelayInstance &&
-        typeof window.__contactQuantumRelayInstance.setMode === "function"
-      ) {
-        window.__contactQuantumRelayInstance.setMode("overview");
-      }
-    });
-
     card.addEventListener("mousemove", function (event) {
       const rect = card.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateY = ((x - centerX) / centerX) * 6;
-      const rotateX = -((y - centerY) / centerY) * 5;
-
-      card.style.transform =
-        "translateY(-6px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+      card.style.setProperty("--mx", x + "%");
+      card.style.setProperty("--my", y + "%");
     });
 
     card.addEventListener("mouseleave", function () {
-      card.style.transform = "";
+      card.style.setProperty("--mx", "50%");
+      card.style.setProperty("--my", "50%");
     });
+  });
+}
+
+function initializeContactVisual() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  if (typeof window.createContactGalaxyBackground !== "function") {
+    return;
+  }
+
+  window.__contactGalaxyBackgroundInstance = window.createContactGalaxyBackground({
+    containerId: "three-bg"
   });
 }

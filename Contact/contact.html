@@ -9,128 +9,196 @@
   <link rel="stylesheet" href="contact.css" />
 </head>
 <body data-page="contact">
-  <div class="contact-bg-base"></div>
-  <div class="contact-bg-grid"></div>
-  <div class="contact-bg-noise"></div>
-  <div class="contact-bg-vignette"></div>
+  <div id="three-bg" aria-hidden="true"></div>
 
-  <div class="contact-system-canvas-wrap" aria-hidden="true">
-    <canvas id="contactBgCanvas"></canvas>
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <div class="signal-arcs" aria-hidden="true"></div>
+  <div class="orbit-fragments" aria-hidden="true"></div>
+
+  <div class="data-trails" aria-hidden="true">
+    <span style="--trail-rotate:-18deg;"></span>
+    <span style="--trail-rotate:10deg;"></span>
+    <span style="--trail-rotate:20deg;"></span>
+    <span style="--trail-rotate:-14deg;"></span>
+  </div>
+
+  <div class="constellation-field" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="data-field" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
   <div id="header"></div>
 
   <main class="page-shell contact-page-shell">
-    <section class="contact-hero reveal">
-      <p class="contact-kicker">
-        <span class="contact-kicker-dot"></span>
-        SIGNAL RELAY
-      </p>
+    <section class="section hero-open reveal" id="connect-hero">
+      <div class="hero-label">Connect</div>
 
-      <h1 class="page-title contact-title">
-        Open channel. Clear intent. Meaningful connection.
-      </h1>
+      <div class="hero-panel">
+        <h1 class="hero-title">
+          Meaningful opportunities<br />
+          begin with the right connection.
+        </h1>
 
-      <p class="page-subtitle contact-subtitle">
-        Whether for collaboration, thoughtful discussion, or future opportunities,
-        this page acts as a transmission chamber where conversation begins with clarity.
-      </p>
-    </section>
-
-    <section class="contact-relay-panel reveal-delay">
-      <div class="contact-relay-copy">
-        <p class="contact-panel-label">Relay Architecture</p>
-        <h2>Three channels. One signal source.</h2>
-        <p>
-          Each route is designed for a different kind of connection. Hover a channel
-          to activate its signal path and bring that receiver into focus.
+        <p class="hero-text">
+          I prefer to connect through structured platforms that reflect both my work and my professional direction, with further details shared naturally when the conversation is relevant.
         </p>
-      </div>
 
-      <div class="contact-relay-meta">
-        <div class="contact-meta-box">
-          <strong>03</strong>
-          <span>active receiver channels</span>
+        <div class="hero-status">
+          <span class="hero-pill">Computer Science</span>
+          <span class="hero-pill">Data Analytics</span>
+          <span class="hero-pill">Open to Connect</span>
+          <span class="hero-pill">Visible Work</span>
         </div>
-        <div class="contact-meta-box">
-          <strong>Live</strong>
-          <span>reactive signal field background</span>
-        </div>
-      </div>
-    </section>
 
-    <section class="contact-grid">
-      <article class="glass-card contact-card reveal" data-contact-card="email">
-        <div class="contact-card-frame"></div>
-        <div class="contact-card-orb"></div>
-
-        <div class="contact-card-inner">
-          <p class="contact-card-label">Direct Channel</p>
-          <h3>Email</h3>
-          <p class="contact-card-copy">
-            The strongest route for project discussions, professional enquiries,
-            and intentional conversation.
-          </p>
-
-          <a class="contact-link" href="mailto:hudson.officer23@gmail.com">
-            hudson.officer23@gmail.com
-          </a>
-        </div>
-      </article>
-
-      <article class="glass-card contact-card reveal-delay" data-contact-card="linkedin">
-        <div class="contact-card-frame"></div>
-        <div class="contact-card-orb"></div>
-
-        <div class="contact-card-inner">
-          <p class="contact-card-label">Professional Presence</p>
-          <h3>LinkedIn Presence</h3>
-          <p class="contact-card-copy">
-            A professional surface for visibility, positioning,
-            and long-form career connection.
-          </p>
-
+        <div class="hero-actions">
           <a
-            class="contact-link"
-            href="https://www.linkedin.com/in/hudsonc200/"
+            class="hero-btn is-primary"
+            href="https://www.linkedin.com/in/hudson1413/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            linkedin.com/in/hudsonc200
+            Connect on LinkedIn
           </a>
-        </div>
-      </article>
-
-      <article class="glass-card contact-card reveal-delay-2" data-contact-card="github">
-        <div class="contact-card-frame"></div>
-        <div class="contact-card-orb"></div>
-
-        <div class="contact-card-inner">
-          <p class="contact-card-label">Code Channel</p>
-          <h3>GitHub Profile</h3>
-          <p class="contact-card-copy">
-            A public layer of repositories, experiments,
-            and evolving technical implementation.
-          </p>
 
           <a
-            class="contact-link"
+            class="hero-btn"
             href="https://github.com/itsHudson"
             target="_blank"
             rel="noopener noreferrer"
           >
-            github.com/itsHudson
+            Explore GitHub
           </a>
         </div>
-      </article>
+      </div>
     </section>
 
-    <section class="contact-bottom-band reveal-delay-2">
-      <p class="contact-bottom-label">Transmission Logic</p>
-      <p class="contact-bottom-copy">
-        This page is designed as a live contact chamber rather than a static list.
-        The background system responds to channel focus, making each connection route feel intentional.
-      </p>
+    <section class="section gateway-section">
+      <div class="gateway-wrap reveal">
+        <div class="gateway-head reveal">
+          <div class="gateway-heading">
+            <small>Connection Gateway</small>
+            <h2>One platform for conversation, one platform for proof.</h2>
+          </div>
+
+          <div class="gateway-badge">Professional Access</div>
+        </div>
+
+        <p class="gateway-guide reveal">
+          This page stays intentional and minimal: LinkedIn is the best place to begin a professional conversation, while GitHub offers a closer look at how I build, think, and grow through technical work.
+        </p>
+
+        <div class="gateway-grid">
+          <article class="gateway-card gateway-card--primary reveal">
+            <div class="gateway-top">
+              <div class="gateway-icon">
+                <img src="../Images/Con_LinkedIn.png" alt="LinkedIn icon" />
+              </div>
+
+              <div class="gateway-meta">
+                <span class="gateway-label">Primary Platform</span>
+                <h3 class="gateway-title">LinkedIn</h3>
+              </div>
+            </div>
+
+            <div class="gateway-divider"></div>
+
+            <p class="gateway-text">
+              Best for professional connection, internship opportunities, and thoughtful conversations in a structured setting.
+            </p>
+
+            <div class="gateway-bottom">
+              <span class="gateway-tag">Conversation First</span>
+              <a
+                class="gateway-link"
+                href="https://www.linkedin.com/in/hudson1413/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open LinkedIn
+              </a>
+            </div>
+          </article>
+
+          <article class="gateway-card gateway-card--ghost reveal">
+            <div class="gateway-top">
+              <div class="gateway-icon">
+                <img src="../Images/Con_GitHub.png" alt="GitHub icon" />
+              </div>
+
+              <div class="gateway-meta">
+                <span class="gateway-label">Technical Proof</span>
+                <h3 class="gateway-title">GitHub</h3>
+              </div>
+            </div>
+
+            <div class="gateway-divider"></div>
+
+            <p class="gateway-text">
+              A closer view of my projects, code structure, and ongoing technical growth through practice, iteration, and visible work.
+            </p>
+
+            <div class="gateway-bottom">
+              <span class="gateway-tag">Work in Progress</span>
+              <a
+                class="gateway-link"
+                href="https://github.com/itsHudson"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section closing-section">
+      <div class="closing-wrap reveal">
+        <div class="closing-copy">
+          <span class="closing-kicker">Next Step</span>
+          <h2 class="closing-title">If the direction resonates, let’s start with the right platform.</h2>
+          <p class="closing-subtext">
+            LinkedIn opens the conversation, GitHub shows the work, and further details can follow when there is alignment.
+          </p>
+        </div>
+
+        <div class="closing-cta-box">
+          <span class="closing-cta-label">Continue from here</span>
+
+          <a
+            class="closing-primary-link"
+            href="https://www.linkedin.com/in/hudson1413/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Connect on LinkedIn
+          </a>
+
+          <a
+            class="closing-secondary-link"
+            href="https://github.com/itsHudson"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View GitHub
+          </a>
+
+          <a class="closing-secondary-link" href="../Journey/journey.html">
+            Back to Journey
+          </a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -138,7 +206,7 @@
 
   <script src="../js/layout.js"></script>
   <script src="../js/navigation.js"></script>
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script src="contact-visual.js"></script>
   <script src="contact.js"></script>
 </body>
