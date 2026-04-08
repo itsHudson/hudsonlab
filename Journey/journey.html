@@ -2,111 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Journey | HUDSONLAB</title>
 
-  <link rel="stylesheet" href="../css/global.css"/>
-  <link rel="stylesheet" href="journey.css"/>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="journey.css" />
 </head>
-
 <body data-page="journey">
-
-  <!-- 🔥 THREE BACKGROUND (保留旧系统) -->
-  <div class="journey-system-canvas-wrap" aria-hidden="true">
-    <canvas id="journeySystemCanvas"></canvas>
-  </div>
-
-  <!-- 🔥 新设计背景 -->
-  <div class="ambient-glow"></div>
-
-  <div class="data-field" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-  </div>
+  <div class="journey-bg-base"></div>
+  <div class="journey-bg-glow journey-bg-glow-a"></div>
+  <div class="journey-bg-glow journey-bg-glow-b"></div>
+  <div class="journey-bg-grid"></div>
+  <div class="journey-bg-noise"></div>
+  <div class="journey-bg-scan"></div>
 
   <div id="header"></div>
 
-  <main class="page-shell">
-
-    <!-- HERO -->
-    <section class="hero-open reveal">
-      <div class="hero-label">Journey</div>
-
-      <div class="hero-title-wrap">
-        <h1 class="hero-title">
-          Direction is rarely found at once. More often, it is built through work.
-        </h1>
-        <p class="hero-quote">
-          This journey moves from structured business experience into a focused path in computer science and data analytics.
-        </p>
-      </div>
+  <main class="page-shell journey-page-shell">
+    <section class="glass-card journey-explore-card reveal">
+      <p class="journey-note-title">How to explore</p>
+      <p class="journey-explore-text">
+        Click a node on the spine to update the live insight panel. The active
+        node highlights the current phase, its key skills, and the destination
+        page where the full story is explained in more detail.
+      </p>
     </section>
-
-    <!-- HEX GRID -->
-    <section class="branch-board reveal">
-
-      <div class="hexagon-grid">
-
-        <div class="hexagon"
-          data-node="01"
-          data-title="AC Cake House"
-          data-year="2017"
-          data-summary="First exposure to business operations and service."
-          data-link="./ac-cake-house/index.html">
-          <h3>AC Cake House</h3>
-        </div>
-
-        <div class="hexagon"
-          data-node="02"
-          data-title="UCSI University"
-          data-year="2018"
-          data-summary="Built business foundation and structured thinking."
-          data-link="./ucsi-university/index.html">
-          <h3>UCSI</h3>
-        </div>
-
-        <div class="hexagon"
-          data-node="03"
-          data-title="Operations"
-          data-year="2020"
-          data-summary="Hands-on operational growth and leadership."
-          data-link="./ac-cake-house/index.html">
-          <h3>Operations</h3>
-        </div>
-
-        <div class="hexagon"
-          data-node="04"
-          data-title="Webhelp Malaysia"
-          data-year="2023"
-          data-summary="Global customer experience and problem solving."
-          data-link="./webhelp-malaysia/index.html">
-          <h3>Webhelp</h3>
-        </div>
-
-        <div class="hexagon"
-          data-node="05"
-          data-title="APU"
-          data-year="2024"
-          data-summary="Transition into Computer Science and Data Analytics."
-          data-link="./asia-pacific-university/index.html">
-          <h3>APU</h3>
-        </div>
-
-      </div>
-
-    </section>
-
   </main>
 
   <div id="footer"></div>
 
-  <!-- JS -->
   <script src="../js/layout.js"></script>
   <script src="../js/navigation.js"></script>
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="journey-visual.js"></script>
   <script src="journey.js"></script>
-
 </body>
 </html>
