@@ -199,3 +199,57 @@ body[data-page="journey"] {
     animation: none !important;
   }
 }
+
+/* =========================
+   MINIMAL MODE
+   Keep colors and JS structure untouched
+   ========================= */
+
+.journey-page-shell {
+  min-height: calc(100vh - 220px);
+  align-content: center;
+}
+
+.journey-system-stage-minimal {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0;
+}
+
+.journey-system-stage-minimal > .journey-intro-note {
+  justify-self: center;
+  width: min(100%, 760px);
+  padding: 28px 30px;
+  border-radius: 28px;
+  background: rgba(255, 166, 86, 0.06);
+  border: 1px solid rgba(255, 166, 86, 0.12);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.journey-system-stage-minimal > .journey-intro-note p:last-child {
+  margin: 0;
+  color: #cad6e2;
+  line-height: 1.9;
+}
+
+.journey-hidden-shell {
+  display: none !important;
+}
+
+@media (max-width: 700px) {
+  .journey-system-stage-minimal > .journey-intro-note {
+    padding: 22px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .journey-system-stage-minimal > .journey-intro-note {
+    padding: 18px;
+    border-radius: 20px;
+  }
+}
