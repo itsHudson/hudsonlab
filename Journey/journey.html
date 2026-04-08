@@ -16,6 +16,10 @@
     <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
+  <div class="journey-system-canvas-wrap" aria-hidden="true">
+    <canvas id="journeySystemCanvas"></canvas>
+  </div>
+
   <div id="header"></div>
 
   <div class="page-shell journey-page-shell">
@@ -25,8 +29,10 @@
 
         <div class="hero-title-wrap">
           <h1 class="hero-title">Direction is rarely found at once. More often, it is built through work.</h1>
+
           <p class="hero-quote">
-            This journey moves from early structure and operational responsibility toward a more focused path in computer science and data analytics.
+            <span id="journeyTypingText"></span>
+            <span class="typing-caret" aria-hidden="true"></span>
           </p>
         </div>
 
@@ -92,6 +98,7 @@
             <div class="hexagon-grid-wrap">
               <div class="hexagon-grid-container">
 
+                <!-- Row 1 -->
                 <div class="hex-row">
                   <div class="hexagon hexagon-support reveal"
                        data-node="discipline"
@@ -185,6 +192,7 @@
                   </div>
                 </div>
 
+                <!-- Row 2 -->
                 <div class="hex-row offset">
                   <div class="hexagon hexagon-support reveal"
                        data-node="execution"
@@ -296,6 +304,7 @@
                   </div>
                 </div>
 
+                <!-- Row 3 -->
                 <div class="hex-row">
                   <div class="hexagon hexagon-support reveal"
                        data-node="transition-choice"
@@ -437,6 +446,8 @@
 
   <script src="../js/layout.js"></script>
   <script src="../js/navigation.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="journey-visual.js"></script>
   <script src="journey.js"></script>
 </body>
 </html>

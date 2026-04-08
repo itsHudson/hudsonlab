@@ -5,11 +5,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const revealElements = document.querySelectorAll(".reveal");
   const hexes = document.querySelectorAll(".hexagon");
 
+  initializeJourneyVisual();
   runReveal(prefersReducedMotion, revealElements);
   enableHexHoverLight(prefersReducedMotion, hexes);
   enableHexEntryAnimation(prefersReducedMotion, hexes);
   enableJourneyHighlight();
+  initializeHeroTyping(prefersReducedMotion);
 });
+
+function initializeJourneyVisual() {
+  if (typeof window.createJourneyVisual !== "function") {
+    return;
+  }
+
+  const canvas = document.getElementById("journeySystemCanvas");
+  if (!canvas) {
+    return;
+  }
+
+  window.__journeyVisualInstance = window.createJourneyVisual({
+    canvas: canvas
+  });
+}
 
 function runReveal(prefersReducedMotion, revealElements) {
   if (!prefersReducedMotion && "IntersectionObserver" in window) {
@@ -119,10 +136,80 @@ function enableJourneyHighlight() {
       const nodeName = node.dataset.node;
       const groupName = node.dataset.group;
       highlightJourney(nodeName, groupName);
+
+      pushJourneyMode("hover", {
+        group: groupName
+      });
     });
 
     node.addEventListener("mouseleave", function () {
       clearJourneyHighlight();
+      pushJourneyMode("overview");
     });
   });
+}
+
+function pushJourneyMode(modeName, extra) {
+  if (
+    window.__journeyVisualInstance &&
+    typeof window.__journeyVisualInstance.setMode === "function"
+  ) {
+    window.__journeyVisualInstance.setMode(modeName, extra || {});
+  }
+}
+
+function initializeHeroTyping(prefersReducedMotion) {
+  const typingTarget = document.getElementById("journeyTypingText");
+  if (!typingTarget) {
+    return;
+  }
+
+  const lines = [
+    "This journey moves from early structure and operational responsibility toward a more focused path in computer science and data analytics.",
+    "Each stage added sharper discipline, stronger execution, and clearer professional direction.",
+    "What began with business and operations is now being rebuilt through systems, projects, and technical growth."
+  ];
+
+  if (prefersReducedMotion) {
+    typingTarget.textContent = lines[0];
+    return;
+  }
+
+  let lineIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingDelay = 34;
+  let pauseDelay = 1500;
+
+  function typeLoop() {
+    const currentLine = lines[lineIndex];
+
+    if (!isDeleting) {
+      charIndex += 1;
+      typingTarget.textContent = currentLine.slice(0, charIndex);
+
+      if (charIndex === currentLine.length) {
+        isDeleting = true;
+        setTimeout(typeLoop, pauseDelay);
+        return;
+      }
+
+      setTimeout(typeLoop, typingDelay);
+      return;
+    }
+
+    charIndex -= 1;
+    typingTarget.textContent = currentLine.slice(0, charIndex);
+
+    if (charIndex === 0) {
+      isDeleting = false;
+      lineIndex = (lineIndex + 1) % lines.length;
+      setTimeout(typeLoop, 340);
+      return;
+    }
+
+    setTimeout(typeLoop, 18);
+  }
+
+  setTimeout(typeLoop, 420);
 }
