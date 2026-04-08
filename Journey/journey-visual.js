@@ -22,85 +22,89 @@
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
-      52,
+      50,
       window.innerWidth / window.innerHeight,
       0.1,
-      260
+      220
     );
-    camera.position.set(0, 0, 34);
+    camera.position.set(0, 0, 32);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.42);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.34);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xffa35c, 1.2, 180);
-    warmLight.position.set(14, 12, 24);
+    const warmLight = new THREE.PointLight(0xffa35c, 0.95, 160);
+    warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const softLight = new THREE.PointLight(0xffd8a8, 0.7, 160);
-    softLight.position.set(-16, -8, 20);
+    const softLight = new THREE.PointLight(0xffd8a8, 0.45, 150);
+    softLight.position.set(-14, -6, 16);
     scene.add(softLight);
 
     const masterGroup = new THREE.Group();
     scene.add(masterGroup);
 
-    const dustGroup = new THREE.Group();
+    const particleGroup = new THREE.Group();
+    const squareGroup = new THREE.Group();
     const lineGroup = new THREE.Group();
-    const ringGroup = new THREE.Group();
 
-    masterGroup.add(dustGroup);
+    masterGroup.add(particleGroup);
+    masterGroup.add(squareGroup);
     masterGroup.add(lineGroup);
-    masterGroup.add(ringGroup);
 
     const isSmallScreen = window.innerWidth <= 700;
-    const DUST_COUNT = isSmallScreen ? 90 : 160;
-    const LINE_LIMIT = DUST_COUNT * 3;
-    const BOUNDS = { x: 24, y: 34, z: 10 };
+    const DOT_COUNT = isSmallScreen ? 70 : 120;
+    const SQUARE_COUNT = isSmallScreen ? 10 : 16;
+    const LINE_LIMIT = 220;
+    const BOUNDS = { x: 24, y: 26, z: 8 };
 
-    const positions = new Float32Array(DUST_COUNT * 3);
-    const basePositions = new Float32Array(DUST_COUNT * 3);
-    const velocities = new Float32Array(DUST_COUNT * 3);
-    const colors = new Float32Array(DUST_COUNT * 3);
+    const dotPositions = new Float32Array(DOT_COUNT * 3);
+    const dotBasePositions = new Float32Array(DOT_COUNT * 3);
+    const dotVelocities = new Float32Array(DOT_COUNT * 3);
+    const dotColors = new Float32Array(DOT_COUNT * 3);
+    const dotSizes = new Float32Array(DOT_COUNT);
 
-    for (let i = 0; i < DUST_COUNT; i++) {
+    for (let i = 0; i < DOT_COUNT; i++) {
       const i3 = i * 3;
 
       const px = (Math.random() - 0.5) * BOUNDS.x * 2;
       const py = (Math.random() - 0.5) * BOUNDS.y * 2;
       const pz = (Math.random() - 0.5) * BOUNDS.z * 2;
 
-      positions[i3] = px;
-      positions[i3 + 1] = py;
-      positions[i3 + 2] = pz;
+      dotPositions[i3] = px;
+      dotPositions[i3 + 1] = py;
+      dotPositions[i3 + 2] = pz;
 
-      basePositions[i3] = px;
-      basePositions[i3 + 1] = py;
-      basePositions[i3 + 2] = pz;
+      dotBasePositions[i3] = px;
+      dotBasePositions[i3 + 1] = py;
+      dotBasePositions[i3 + 2] = pz;
 
-      velocities[i3] = (Math.random() - 0.5) * 0.004;
-      velocities[i3 + 1] = (Math.random() - 0.5) * 0.006;
-      velocities[i3 + 2] = (Math.random() - 0.5) * 0.003;
+      dotVelocities[i3] = (Math.random() - 0.5) * 0.004;
+      dotVelocities[i3 + 1] = (Math.random() - 0.5) * 0.0055;
+      dotVelocities[i3 + 2] = (Math.random() - 0.5) * 0.0025;
 
-      colors[i3] = 1.0;
-      colors[i3 + 1] = 0.76 + Math.random() * 0.08;
-      colors[i3 + 2] = 0.56 + Math.random() * 0.05;
+      dotColors[i3] = 1.0;
+      dotColors[i3 + 1] = 0.77 + Math.random() * 0.08;
+      dotColors[i3 + 2] = 0.52 + Math.random() * 0.05;
+
+      dotSizes[i] = 0.08 + Math.random() * 0.06;
     }
 
-    const dustGeometry = new THREE.BufferGeometry();
-    dustGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    dustGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    const dotGeometry = new THREE.BufferGeometry();
+    dotGeometry.setAttribute("position", new THREE.BufferAttribute(dotPositions, 3));
+    dotGeometry.setAttribute("color", new THREE.BufferAttribute(dotColors, 3));
 
-    const dustMaterial = new THREE.PointsMaterial({
-      size: 0.11,
+    const dotMaterial = new THREE.PointsMaterial({
+      size: 0.10,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.34,
+      opacity: 0.36,
       depthWrite: false,
       vertexColors: true,
       blending: THREE.AdditiveBlending
     });
 
-    const dustPoints = new THREE.Points(dustGeometry, dustMaterial);
-    dustGroup.add(dustPoints);
+    const dots = new THREE.Points(dotGeometry, dotMaterial);
+    particleGroup.add(dots);
 
     const linePositions = new Float32Array(LINE_LIMIT * 6);
     const lineColors = new Float32Array(LINE_LIMIT * 6);
@@ -112,7 +116,7 @@
 
     const lineMaterial = new THREE.LineBasicMaterial({
       transparent: true,
-      opacity: 0.06,
+      opacity: 0.045,
       vertexColors: true,
       blending: THREE.AdditiveBlending
     });
@@ -120,30 +124,39 @@
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
     lineGroup.add(lineSegments);
 
-    const ringConfigs = [
-      { radius: 8.5, color: 0xffa35c, opacity: 0.055, speed: 0.0015, x: 1.0, y: 0.12 },
-      { radius: 13.5, color: 0xffd8a8, opacity: 0.045, speed: -0.0012, x: 0.34, y: 1.0 }
-    ];
+    const squareMeshes = [];
+    const squareGeo = new THREE.PlaneGeometry(0.34, 0.34);
 
-    const rings = ringConfigs.map(function (config) {
-      const geometry = new THREE.TorusGeometry(config.radius, 0.02, 8, 120);
+    for (let i = 0; i < SQUARE_COUNT; i++) {
       const material = new THREE.MeshBasicMaterial({
-        color: config.color,
+        color: i % 4 === 0 ? 0xfff0b3 : 0xffcf63,
         transparent: true,
-        opacity: config.opacity,
-        wireframe: true
+        opacity: 0.84
       });
 
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.rotation.x = config.x;
-      mesh.rotation.y = config.y;
-      ringGroup.add(mesh);
+      const mesh = new THREE.Mesh(squareGeo, material);
+      mesh.position.set(
+        (Math.random() - 0.5) * BOUNDS.x * 2,
+        (Math.random() - 0.5) * BOUNDS.y * 2,
+        (Math.random() - 0.5) * BOUNDS.z * 2
+      );
 
-      return {
+      const scale = 0.5 + Math.random() * 1.1;
+      mesh.scale.set(scale, scale, scale);
+
+      squareGroup.add(mesh);
+
+      squareMeshes.push({
         mesh: mesh,
-        speed: config.speed
-      };
-    });
+        baseX: mesh.position.x,
+        baseY: mesh.position.y,
+        baseZ: mesh.position.z,
+        driftX: (Math.random() - 0.5) * 0.008,
+        driftY: (Math.random() - 0.5) * 0.01,
+        driftZ: (Math.random() - 0.5) * 0.003,
+        pulseSeed: Math.random() * Math.PI * 2
+      });
+    }
 
     const mouse = {
       x: 0,
@@ -158,19 +171,17 @@
 
     const modeProfiles = {
       overview: {
-        dustOpacity: 0.34,
-        lineOpacity: 0.06,
-        lineDistance: 3.8,
-        ringOpacity: 0.05,
-        ringScale: 1,
-        spin: 0.55
+        dotOpacity: 0.36,
+        lineOpacity: 0.045,
+        lineDistance: 4.6,
+        squareOpacity: 0.82,
+        spin: 0.52
       },
       hover: {
-        dustOpacity: 0.42,
-        lineOpacity: 0.085,
-        lineDistance: 4.3,
-        ringOpacity: 0.07,
-        ringScale: 1.03,
+        dotOpacity: 0.48,
+        lineOpacity: 0.075,
+        lineDistance: 5.2,
+        squareOpacity: 0.98,
         spin: 0.72
       }
     };
@@ -208,53 +219,53 @@
       scrollOffset = window.scrollY || 0;
     }
 
-    function updateDust(elapsed) {
-      const positionAttr = dustGeometry.getAttribute("position");
+    function updateDots(elapsed) {
+      const positionAttr = dotGeometry.getAttribute("position");
       const arr = positionAttr.array;
 
-      for (let i = 0; i < DUST_COUNT; i++) {
+      for (let i = 0; i < DOT_COUNT; i++) {
         const i3 = i * 3;
 
-        arr[i3] += velocities[i3];
-        arr[i3 + 1] += velocities[i3 + 1];
-        arr[i3 + 2] += velocities[i3 + 2];
+        arr[i3] += dotVelocities[i3];
+        arr[i3 + 1] += dotVelocities[i3 + 1];
+        arr[i3 + 2] += dotVelocities[i3 + 2];
 
         if (arr[i3] > BOUNDS.x || arr[i3] < -BOUNDS.x) {
-          velocities[i3] *= -1;
+          dotVelocities[i3] *= -1;
         }
 
         if (arr[i3 + 1] > BOUNDS.y || arr[i3 + 1] < -BOUNDS.y) {
-          velocities[i3 + 1] *= -1;
+          dotVelocities[i3 + 1] *= -1;
         }
 
         if (arr[i3 + 2] > BOUNDS.z || arr[i3 + 2] < -BOUNDS.z) {
-          velocities[i3 + 2] *= -1;
+          dotVelocities[i3 + 2] *= -1;
         }
 
-        const wave = Math.sin(elapsed * 0.24 + i * 0.02) * 0.0014 * modeTarget.spin;
+        const wave = Math.sin(elapsed * 0.3 + i * 0.18) * 0.0012 * modeTarget.spin;
         arr[i3] += wave;
-        arr[i3 + 1] += wave * 0.6;
+        arr[i3 + 1] += wave * 0.7;
 
-        arr[i3] += (basePositions[i3] - arr[i3]) * 0.00055;
-        arr[i3 + 1] += (basePositions[i3 + 1] - arr[i3 + 1]) * 0.00055;
+        arr[i3] += (dotBasePositions[i3] - arr[i3]) * 0.00055;
+        arr[i3 + 1] += (dotBasePositions[i3 + 1] - arr[i3 + 1]) * 0.00055;
       }
 
-      dustMaterial.opacity += (modeTarget.dustOpacity - dustMaterial.opacity) * 0.05;
+      dotMaterial.opacity += (modeTarget.dotOpacity - dotMaterial.opacity) * 0.05;
       positionAttr.needsUpdate = true;
     }
 
     function updateConnections() {
-      const particleArray = dustGeometry.getAttribute("position").array;
+      const particleArray = dotGeometry.getAttribute("position").array;
       let writeIndex = 0;
       let colorIndex = 0;
       let lineCount = 0;
 
-      for (let i = 0; i < DUST_COUNT; i++) {
+      for (let i = 0; i < DOT_COUNT; i++) {
         const ax = particleArray[i * 3];
         const ay = particleArray[i * 3 + 1];
         const az = particleArray[i * 3 + 2];
 
-        for (let j = i + 1; j < DUST_COUNT; j++) {
+        for (let j = i + 1; j < DOT_COUNT; j++) {
           const bx = particleArray[j * 3];
           const by = particleArray[j * 3 + 1];
           const bz = particleArray[j * 3 + 2];
@@ -274,13 +285,13 @@
 
             const strength = 1 - distance / modeTarget.lineDistance;
 
-            lineColors[colorIndex++] = 1.0 * strength;
-            lineColors[colorIndex++] = 0.72 * strength;
-            lineColors[colorIndex++] = 0.52 * strength;
+            lineColors[colorIndex++] = 0.95 * strength;
+            lineColors[colorIndex++] = 0.66 * strength;
+            lineColors[colorIndex++] = 0.42 * strength;
 
-            lineColors[colorIndex++] = 1.0 * strength;
-            lineColors[colorIndex++] = 0.84 * strength;
-            lineColors[colorIndex++] = 0.70 * strength;
+            lineColors[colorIndex++] = 0.95 * strength;
+            lineColors[colorIndex++] = 0.74 * strength;
+            lineColors[colorIndex++] = 0.50 * strength;
 
             lineCount += 2;
           }
@@ -293,14 +304,28 @@
       lineGeometry.attributes.color.needsUpdate = true;
     }
 
-    function updateRings() {
-      rings.forEach(function (ring) {
-        ring.mesh.material.opacity += (modeTarget.ringOpacity - ring.mesh.material.opacity) * 0.05;
-        ring.mesh.scale.lerp(
-          new THREE.Vector3(modeTarget.ringScale, modeTarget.ringScale, modeTarget.ringScale),
-          0.04
-        );
-        ring.mesh.rotation.z += ring.speed * modeTarget.spin;
+    function updateSquares(elapsed) {
+      squareMeshes.forEach(function (item, index) {
+        const pulse = 0.84 + Math.sin(elapsed * 0.9 + item.pulseSeed) * 0.16;
+
+        item.mesh.position.x += item.driftX * modeTarget.spin;
+        item.mesh.position.y += item.driftY * modeTarget.spin;
+        item.mesh.position.z += item.driftZ * modeTarget.spin;
+
+        if (item.mesh.position.x > BOUNDS.x || item.mesh.position.x < -BOUNDS.x) {
+          item.driftX *= -1;
+        }
+
+        if (item.mesh.position.y > BOUNDS.y || item.mesh.position.y < -BOUNDS.y) {
+          item.driftY *= -1;
+        }
+
+        if (item.mesh.position.z > BOUNDS.z || item.mesh.position.z < -BOUNDS.z) {
+          item.driftZ *= -1;
+        }
+
+        item.mesh.rotation.z += 0.0012 + index * 0.00003;
+        item.mesh.material.opacity += ((modeTarget.squareOpacity * pulse) - item.mesh.material.opacity) * 0.05;
       });
     }
 
@@ -312,24 +337,24 @@
       mouse.x += (mouse.targetX - mouse.x) * 0.035;
       mouse.y += (mouse.targetY - mouse.y) * 0.035;
 
-      updateDust(elapsed);
+      updateDots(elapsed);
       updateConnections();
-      updateRings();
+      updateSquares(elapsed);
 
-      const scrollShift = scrollOffset * -0.00035;
+      const scrollShift = scrollOffset * -0.00028;
       camera.position.y += (scrollShift - camera.position.y) * 0.04;
 
-      masterGroup.rotation.y += 0.00018 * modeTarget.spin;
-      masterGroup.rotation.x += 0.00008 * modeTarget.spin;
+      masterGroup.rotation.y += 0.00016 * modeTarget.spin;
+      masterGroup.rotation.x += 0.00007 * modeTarget.spin;
 
-      masterGroup.rotation.y += mouse.x * 0.0016;
-      masterGroup.rotation.x += -mouse.y * 0.0012;
+      masterGroup.rotation.y += mouse.x * 0.0014;
+      masterGroup.rotation.x += -mouse.y * 0.0011;
 
-      masterGroup.position.x += ((mouse.x * 2.4) - masterGroup.position.x) * 0.03;
-      masterGroup.position.y += (((-mouse.y * 1.8)) - masterGroup.position.y) * 0.03;
+      masterGroup.position.x += ((mouse.x * 1.9) - masterGroup.position.x) * 0.03;
+      masterGroup.position.y += (((-mouse.y * 1.3)) - masterGroup.position.y) * 0.03;
 
-      dustGroup.rotation.z += 0.00006 * modeTarget.spin;
-      ringGroup.rotation.x += 0.00008 * modeTarget.spin;
+      particleGroup.rotation.z += 0.00005 * modeTarget.spin;
+      squareGroup.rotation.z -= 0.00004 * modeTarget.spin;
 
       renderer.render(scene, camera);
     }
