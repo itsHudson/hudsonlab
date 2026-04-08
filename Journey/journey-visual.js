@@ -14,7 +14,7 @@
       alpha: true
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -25,18 +25,18 @@
       50,
       window.innerWidth / window.innerHeight,
       0.1,
-      220
+      240
     );
     camera.position.set(0, 0, 32);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.34);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.36);
     scene.add(ambientLight);
 
-    const warmLight = new THREE.PointLight(0xffa35c, 0.95, 160);
+    const warmLight = new THREE.PointLight(0xffa35c, 1.08, 170);
     warmLight.position.set(12, 10, 18);
     scene.add(warmLight);
 
-    const softLight = new THREE.PointLight(0xffd8a8, 0.45, 150);
+    const softLight = new THREE.PointLight(0xffd8a8, 0.55, 160);
     softLight.position.set(-14, -6, 16);
     scene.add(softLight);
 
@@ -52,16 +52,15 @@
     masterGroup.add(lineGroup);
 
     const isSmallScreen = window.innerWidth <= 700;
-    const DOT_COUNT = isSmallScreen ? 70 : 120;
-    const SQUARE_COUNT = isSmallScreen ? 10 : 16;
-    const LINE_LIMIT = 220;
+    const DOT_COUNT = isSmallScreen ? 115 : 190;
+    const SQUARE_COUNT = isSmallScreen ? 15 : 24;
+    const LINE_LIMIT = isSmallScreen ? 320 : 520;
     const BOUNDS = { x: 24, y: 26, z: 8 };
 
     const dotPositions = new Float32Array(DOT_COUNT * 3);
     const dotBasePositions = new Float32Array(DOT_COUNT * 3);
     const dotVelocities = new Float32Array(DOT_COUNT * 3);
     const dotColors = new Float32Array(DOT_COUNT * 3);
-    const dotSizes = new Float32Array(DOT_COUNT);
 
     for (let i = 0; i < DOT_COUNT; i++) {
       const i3 = i * 3;
@@ -78,15 +77,13 @@
       dotBasePositions[i3 + 1] = py;
       dotBasePositions[i3 + 2] = pz;
 
-      dotVelocities[i3] = (Math.random() - 0.5) * 0.004;
-      dotVelocities[i3 + 1] = (Math.random() - 0.5) * 0.0055;
-      dotVelocities[i3 + 2] = (Math.random() - 0.5) * 0.0025;
+      dotVelocities[i3] = (Math.random() - 0.5) * 0.0048;
+      dotVelocities[i3 + 1] = (Math.random() - 0.5) * 0.0062;
+      dotVelocities[i3 + 2] = (Math.random() - 0.5) * 0.0028;
 
       dotColors[i3] = 1.0;
       dotColors[i3 + 1] = 0.77 + Math.random() * 0.08;
       dotColors[i3 + 2] = 0.52 + Math.random() * 0.05;
-
-      dotSizes[i] = 0.08 + Math.random() * 0.06;
     }
 
     const dotGeometry = new THREE.BufferGeometry();
@@ -94,10 +91,10 @@
     dotGeometry.setAttribute("color", new THREE.BufferAttribute(dotColors, 3));
 
     const dotMaterial = new THREE.PointsMaterial({
-      size: 0.10,
+      size: 0.11,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.36,
+      opacity: 0.42,
       depthWrite: false,
       vertexColors: true,
       blending: THREE.AdditiveBlending
@@ -116,7 +113,7 @@
 
     const lineMaterial = new THREE.LineBasicMaterial({
       transparent: true,
-      opacity: 0.045,
+      opacity: 0.055,
       vertexColors: true,
       blending: THREE.AdditiveBlending
     });
@@ -131,7 +128,7 @@
       const material = new THREE.MeshBasicMaterial({
         color: i % 4 === 0 ? 0xfff0b3 : 0xffcf63,
         transparent: true,
-        opacity: 0.84
+        opacity: 0.88
       });
 
       const mesh = new THREE.Mesh(squareGeo, material);
@@ -141,19 +138,16 @@
         (Math.random() - 0.5) * BOUNDS.z * 2
       );
 
-      const scale = 0.5 + Math.random() * 1.1;
+      const scale = 0.45 + Math.random() * 1.15;
       mesh.scale.set(scale, scale, scale);
 
       squareGroup.add(mesh);
 
       squareMeshes.push({
         mesh: mesh,
-        baseX: mesh.position.x,
-        baseY: mesh.position.y,
-        baseZ: mesh.position.z,
-        driftX: (Math.random() - 0.5) * 0.008,
-        driftY: (Math.random() - 0.5) * 0.01,
-        driftZ: (Math.random() - 0.5) * 0.003,
+        driftX: (Math.random() - 0.5) * 0.009,
+        driftY: (Math.random() - 0.5) * 0.011,
+        driftZ: (Math.random() - 0.5) * 0.0035,
         pulseSeed: Math.random() * Math.PI * 2
       });
     }
@@ -171,18 +165,18 @@
 
     const modeProfiles = {
       overview: {
-        dotOpacity: 0.36,
-        lineOpacity: 0.045,
-        lineDistance: 4.6,
-        squareOpacity: 0.82,
-        spin: 0.52
+        dotOpacity: 0.42,
+        lineOpacity: 0.055,
+        lineDistance: 4.7,
+        squareOpacity: 0.88,
+        spin: 0.54
       },
       hover: {
-        dotOpacity: 0.48,
-        lineOpacity: 0.075,
-        lineDistance: 5.2,
-        squareOpacity: 0.98,
-        spin: 0.72
+        dotOpacity: 0.56,
+        lineOpacity: 0.085,
+        lineDistance: 5.35,
+        squareOpacity: 1,
+        spin: 0.76
       }
     };
 
@@ -242,9 +236,9 @@
           dotVelocities[i3 + 2] *= -1;
         }
 
-        const wave = Math.sin(elapsed * 0.3 + i * 0.18) * 0.0012 * modeTarget.spin;
+        const wave = Math.sin(elapsed * 0.32 + i * 0.18) * 0.00135 * modeTarget.spin;
         arr[i3] += wave;
-        arr[i3 + 1] += wave * 0.7;
+        arr[i3 + 1] += wave * 0.72;
 
         arr[i3] += (dotBasePositions[i3] - arr[i3]) * 0.00055;
         arr[i3 + 1] += (dotBasePositions[i3 + 1] - arr[i3 + 1]) * 0.00055;
@@ -306,7 +300,7 @@
 
     function updateSquares(elapsed) {
       squareMeshes.forEach(function (item, index) {
-        const pulse = 0.84 + Math.sin(elapsed * 0.9 + item.pulseSeed) * 0.16;
+        const pulse = 0.82 + Math.sin(elapsed * 0.92 + item.pulseSeed) * 0.18;
 
         item.mesh.position.x += item.driftX * modeTarget.spin;
         item.mesh.position.y += item.driftY * modeTarget.spin;
@@ -324,7 +318,7 @@
           item.driftZ *= -1;
         }
 
-        item.mesh.rotation.z += 0.0012 + index * 0.00003;
+        item.mesh.rotation.z += 0.00115 + index * 0.000028;
         item.mesh.material.opacity += ((modeTarget.squareOpacity * pulse) - item.mesh.material.opacity) * 0.05;
       });
     }
@@ -347,11 +341,11 @@
       masterGroup.rotation.y += 0.00016 * modeTarget.spin;
       masterGroup.rotation.x += 0.00007 * modeTarget.spin;
 
-      masterGroup.rotation.y += mouse.x * 0.0014;
+      masterGroup.rotation.y += mouse.x * 0.00145;
       masterGroup.rotation.x += -mouse.y * 0.0011;
 
-      masterGroup.position.x += ((mouse.x * 1.9) - masterGroup.position.x) * 0.03;
-      masterGroup.position.y += (((-mouse.y * 1.3)) - masterGroup.position.y) * 0.03;
+      masterGroup.position.x += ((mouse.x * 1.95) - masterGroup.position.x) * 0.03;
+      masterGroup.position.y += (((-mouse.y * 1.35)) - masterGroup.position.y) * 0.03;
 
       particleGroup.rotation.z += 0.00005 * modeTarget.spin;
       squareGroup.rotation.z -= 0.00004 * modeTarget.spin;

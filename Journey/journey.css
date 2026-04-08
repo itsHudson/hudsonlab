@@ -132,14 +132,14 @@ body[data-page="journey"]::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.34;
+  opacity: 0.40;
 }
 
 #journeySystemCanvas {
   width: 100%;
   height: 100%;
   display: block;
-  filter: saturate(0.92) contrast(1.02);
+  filter: saturate(0.96) contrast(1.03);
 }
 
 .page-shell.journey-page-shell {
@@ -181,7 +181,7 @@ body[data-page="journey"]::before {
 
 .hero-title-wrap {
   position: relative;
-  max-width: 1260px;
+  max-width: 1320px;
   margin-bottom: 28px;
 }
 
@@ -203,11 +203,12 @@ body[data-page="journey"]::before {
 .hero-title {
   position: relative;
   z-index: 1;
-  margin: 0 0 18px;
-  font-size: clamp(3rem, 6vw, 5.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.065em;
-  max-width: 19ch;
+  margin: 0 0 22px;
+  max-width: 17ch;
+  font-size: clamp(2.8rem, 5.6vw, 4.95rem);
+  line-height: 1.08;
+  letter-spacing: -0.068em;
+  text-wrap: balance;
   background: linear-gradient(
     180deg,
     #fff9f1 0%,
@@ -1312,9 +1313,11 @@ body[data-page="journey"]::before {
   }
 
   .hero-title {
-    font-size: 2.45rem;
-    line-height: 1.04;
     margin-bottom: 16px;
+    font-size: 2.22rem;
+    line-height: 1.12;
+    letter-spacing: -0.055em;
+    max-width: 100%;
   }
 
   .hero-quote,
