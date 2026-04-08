@@ -49,14 +49,23 @@ hudsonlab/
 │   │   ├── ac-cake-house.css
 │   │   └── ac-cake-house.js
 │   │
-│   ├── asia-pacific-university/
+│   ├── achievements/
 │   │   └── index.html
+│   │
+│   ├── asia-pacific-university/
+│   │   ├── index.html
+│   │   ├── asia-pacific-university.css
+│   │   └── asia-pacific-university.js
 │   │
 │   ├── ucsi-university/
-│   │   └── index.html
+│   │   ├── index.html
+│   │   ├── ucsi-university.css
+│   │   └── ucsi-university.js
 │   │
 │   └── webhelp-malaysia/
-│       └── index.html
+│       ├── index.html
+│       ├── webhelp-malaysia.css
+│       └── webhelp-malaysia.js
 │
 ├── TechExplorer/
 │   ├── explorer.html
@@ -73,6 +82,8 @@ hudsonlab/
 │   ├── Badge_NALAT.png
 │   ├── Badge_RHSA1.png
 │   ├── Badge_RHSA2.png
+│   ├── Con_GitHub.png
+│   ├── Con_LinkedIn.png
 │   ├── Edu_APU.png
 │   ├── Edu_UCSI.png
 │   ├── JO_Malaysia.png
