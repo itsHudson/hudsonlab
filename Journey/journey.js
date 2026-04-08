@@ -1,288 +1,128 @@
-console.log("Journey system page loaded.");
+console.log("Journey page loaded.");
 
 document.addEventListener("DOMContentLoaded", function () {
-  const revealElements = document.querySelectorAll(".reveal, .reveal-delay, .reveal-delay-2");
-  const nodeCards = document.querySelectorAll(".journey-node-card");
-  const machine = document.getElementById("journeyMachine");
-  const statusText = document.getElementById("journeyStatusText");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealElements = document.querySelectorAll(".reveal");
+  const hexes = document.querySelectorAll(".hexagon");
 
-  const insightNode = document.getElementById("insightNode");
-  const insightYear = document.getElementById("insightYear");
-  const insightTitle = document.getElementById("insightTitle");
-  const insightOrg = document.getElementById("insightOrg");
-  const insightSummary = document.getElementById("insightSummary");
-  const insightTags = document.getElementById("insightTags");
-  const insightLink = document.getElementById("insightLink");
+  runReveal(prefersReducedMotion, revealElements);
+  enableHexHoverLight(prefersReducedMotion, hexes);
+  enableHexEntryAnimation(prefersReducedMotion, hexes);
+  enableJourneyHighlight();
+});
 
-  initializeJourneyVisual();
-
-  function initializeJourneyVisual() {
-    if (typeof window.createJourneyVisual !== "function") {
-      return;
-    }
-
-    const canvas = document.getElementById("journeySystemCanvas");
-    if (!canvas) {
-      return;
-    }
-
-    window.__journeyVisualInstance = window.createJourneyVisual({
-      canvas: canvas
-    });
-  }
-
-  function runRevealObserver() {
-    const observer = new IntersectionObserver(
+function runReveal(prefersReducedMotion, revealElements) {
+  if (!prefersReducedMotion && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) {
             return;
           }
 
-          let delay = "0s";
-
-          if (entry.target.classList.contains("reveal-delay")) {
-            delay = "0.12s";
-          }
-
-          if (entry.target.classList.contains("reveal-delay-2")) {
-            delay = "0.22s";
-          }
-
-          entry.target.style.transition =
-            "opacity 0.85s ease " + delay + ", transform 0.85s ease " + delay;
-
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    revealElements.forEach(function (element) {
-      observer.observe(element);
-    });
-  }
-
-  function createTagElement(label) {
-    const tag = document.createElement("span");
-    tag.className = "journey-tag";
-    tag.textContent = label;
-    return tag;
-  }
-
-  function pushJourneyMode(modeName, extra) {
-    if (
-      window.__journeyVisualInstance &&
-      typeof window.__journeyVisualInstance.setMode === "function"
-    ) {
-      window.__journeyVisualInstance.setMode(modeName, extra || {});
-    }
-  }
-
-  function updateInsightPanel(card) {
-    const node = card.dataset.node || "";
-    const year = card.dataset.year || "";
-    const title = card.dataset.title || "";
-    const org = card.dataset.org || "";
-    const summary = card.dataset.summary || "";
-    const skills = (card.dataset.skills || "").split("|").filter(Boolean);
-    const link = card.dataset.link || "#";
-    const linkLabel = card.dataset.linkLabel || "Read Full Story";
-
-    insightNode.textContent = "Node " + node;
-    insightYear.textContent = year;
-    insightTitle.textContent = title;
-    insightOrg.textContent = org;
-    insightSummary.textContent = summary;
-    insightLink.setAttribute("href", link);
-    insightLink.textContent = linkLabel;
-    statusText.textContent = "Node " + node + " active";
-
-    insightTags.innerHTML = "";
-    skills.forEach(function (skill) {
-      insightTags.appendChild(createTagElement(skill));
-    });
-
-    pushJourneyMode("node_active", { node: node });
-  }
-
-  function setActiveNode(card) {
-    nodeCards.forEach(function (item) {
-      item.classList.remove("is-active");
-      item.classList.add("is-dimmed");
-    });
-
-    card.classList.add("is-active");
-    card.classList.remove("is-dimmed");
-
-    updateInsightPanel(card);
-  }
-
-  function wireNodeInteractions() {
-    nodeCards.forEach(function (card) {
-      const trigger = card.querySelector(".journey-node-trigger");
-
-      if (!trigger) {
-        return;
-      }
-
-      trigger.addEventListener("click", function () {
-        setActiveNode(card);
-      });
-
-      card.addEventListener("mouseenter", function () {
-        nodeCards.forEach(function (item) {
-          if (item !== card && !item.classList.contains("is-active")) {
-            item.classList.add("is-dimmed");
-          }
-        });
-
-        const hoveredNode = card.dataset.node || "01";
-        pushJourneyMode("hover", { node: hoveredNode });
-      });
-
-      card.addEventListener("mouseleave", function () {
-        nodeCards.forEach(function (item) {
-          if (!item.classList.contains("is-active")) {
-            item.classList.add("is-dimmed");
-          }
-        });
-
-        const activeCard = document.querySelector(".journey-node-card.is-active");
-        if (activeCard) {
-          pushJourneyMode("node_active", { node: activeCard.dataset.node || "01" });
-        } else {
-          pushJourneyMode("overview");
-        }
-      });
-    });
-  }
-
-  function enableMachineTilt() {
-    if (!machine) {
-      return;
-    }
-
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!canHover) {
-      return;
-    }
-
-    machine.addEventListener("mousemove", function (event) {
-      const rect = machine.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateY = ((mouseX - centerX) / centerX) * 3.8;
-      const rotateX = ((centerY - mouseY) / centerY) * 2.8;
-
-      machine.style.transform =
-        "perspective(1400px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
-
-      machine.style.setProperty("--glow-x", mouseX + "px");
-      machine.style.setProperty("--glow-y", mouseY + "px");
-
-      pushJourneyMode("machine_tilt", {
-        intensityX: (mouseX - centerX) / centerX,
-        intensityY: (mouseY - centerY) / centerY
-      });
-    });
-
-    machine.addEventListener("mouseleave", function () {
-      machine.style.transform = "perspective(1400px) rotateX(0deg) rotateY(0deg)";
-      machine.style.setProperty("--glow-x", "50%");
-      machine.style.setProperty("--glow-y", "50%");
-
-      const activeCard = document.querySelector(".journey-node-card.is-active");
-      if (activeCard) {
-        pushJourneyMode("node_active", { node: activeCard.dataset.node || "01" });
-      } else {
-        pushJourneyMode("overview");
-      }
-    });
-  }
-
-  function enableMagneticNodes() {
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!canHover) {
-      return;
-    }
-
-    nodeCards.forEach(function (card) {
-      const content = card.querySelector(".journey-node-content");
-      const core = card.querySelector(".journey-node-core");
-
-      if (!content || !core) {
-        return;
-      }
-
-      card.addEventListener("mousemove", function (event) {
-        const rect = card.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        const moveX = (x - rect.width / 2) / rect.width;
-        const moveY = (y - rect.height / 2) / rect.height;
-
-        const contentShiftX = moveX * 12;
-        const contentShiftY = moveY * 9;
-        const coreShiftX = moveX * 7;
-        const coreShiftY = moveY * 7;
-
-        content.style.transform =
-          "translate(" + contentShiftX + "px, " + contentShiftY + "px)";
-        core.style.transform =
-          "translate(" + coreShiftX + "px, " + coreShiftY + "px)";
-      });
-
-      card.addEventListener("mouseleave", function () {
-        content.style.transform = "";
-        core.style.transform = "";
-      });
-    });
-  }
-
-  function activateDefaultNode() {
-    const defaultCard = document.querySelector('.journey-node-card[data-node="01"]');
-
-    if (defaultCard) {
-      setActiveNode(defaultCard);
-    } else {
-      pushJourneyMode("overview");
-    }
-  }
-
-  function autoActivateOnScroll() {
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          if (entry.intersectionRatio >= 0.55) {
-            setActiveNode(entry.target);
-          }
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
         });
       },
       {
-        threshold: [0.55, 0.7, 0.9]
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
       }
     );
 
-    nodeCards.forEach(function (card) {
-      observer.observe(card);
+    revealElements.forEach(function (element, index) {
+      element.style.transitionDelay = Math.min(index * 24, 220) + "ms";
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach(function (element) {
+      element.classList.add("is-visible");
     });
   }
+}
 
-  runRevealObserver();
-  wireNodeInteractions();
-  enableMachineTilt();
-  enableMagneticNodes();
-  activateDefaultNode();
-  autoActivateOnScroll();
-});
+function enableHexHoverLight(prefersReducedMotion, hexes) {
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  hexes.forEach(function (hex) {
+    hex.addEventListener("mousemove", function (event) {
+      const rect = hex.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+      hex.style.setProperty("--mx", x + "%");
+      hex.style.setProperty("--my", y + "%");
+    });
+
+    hex.addEventListener("mouseleave", function () {
+      hex.style.setProperty("--mx", "50%");
+      hex.style.setProperty("--my", "50%");
+    });
+  });
+}
+
+function enableHexEntryAnimation(prefersReducedMotion, hexes) {
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  window.addEventListener("load", function () {
+    hexes.forEach(function (hex, index) {
+      hex.animate(
+        [
+          { transform: "translateY(16px)", opacity: 0 },
+          { transform: "translateY(0)", opacity: 1 }
+        ],
+        {
+          duration: 680,
+          delay: Math.min(index * 28, 500),
+          easing: "cubic-bezier(.22,1,.36,1)",
+          fill: "both"
+        }
+      );
+    });
+  });
+}
+
+function clearJourneyHighlight() {
+  document.querySelectorAll(".hexagon").forEach(function (node) {
+    node.classList.remove("is-dimmed", "is-related");
+  });
+}
+
+function highlightJourney(nodeName, groupName) {
+  const allNodes = document.querySelectorAll(".hexagon");
+
+  allNodes.forEach(function (node) {
+    node.classList.add("is-dimmed");
+  });
+
+  const relatedNodes = new Set();
+
+  allNodes.forEach(function (node) {
+    if (node.dataset.node === nodeName || node.dataset.group === groupName) {
+      relatedNodes.add(node);
+    }
+  });
+
+  relatedNodes.forEach(function (node) {
+    node.classList.remove("is-dimmed");
+    node.classList.add("is-related");
+  });
+}
+
+function enableJourneyHighlight() {
+  document.querySelectorAll(".hexagon[data-node]").forEach(function (node) {
+    node.addEventListener("mouseenter", function () {
+      const nodeName = node.dataset.node;
+      const groupName = node.dataset.group;
+      highlightJourney(nodeName, groupName);
+    });
+
+    node.addEventListener("mouseleave", function () {
+      clearJourneyHighlight();
+    });
+  });
+}
